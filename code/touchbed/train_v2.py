@@ -198,13 +198,14 @@ class TrainerV2:
             self.opt_vf.step(self.vf.backward(vc, gV))
         return {"v_loss": float(np.mean(((V[..., 0] - ret) ** 2)[m])), "entropy": float(H[..., 0][m].mean())}
 
-    def validate(self):
-        """Plateau metric: mean ball-sPCE g_T of the greedy (argmax) policy on fixed validation episodes (no PF)."""
+    def validate(self, greedy: bool = True):
+        """Plateau metric: mean ball-sPCE g_T of the greedy (argmax) policy on fixed validation episodes (no PF).
+        greedy=False gives the sampled-policy value (diagnostic)."""
         rng = stream("val_v2", self.cfg.setname, self.cfg.kappa, self.cfg.tau)
         tot, n = 0.0, 0
         while n < self.cfg.val_episodes:
             b = min(128, self.cfg.val_episodes - n)
-            ro = self.rollout(rng, B=b, greedy=True)
+            ro = self.rollout(rng, B=b, greedy=greedy)
             tot += float(ro["g_T"].sum()); n += b
         return tot / n
 
@@ -224,6 +225,7 @@ class TrainerV2:
                 v = self.validate()
                 vals.append(v)
                 rec["val_ball_spce"] = v
+                rec["val_ball_spce_sampled"] = self.validate(greedy=False)
                 if verbose:
                     print(json.dumps(rec), flush=True)
                 w = cfg.plateau_window
