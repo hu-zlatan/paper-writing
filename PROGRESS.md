@@ -9,7 +9,7 @@
 **Topic:** Amortized, non-myopic active tactile localization (TouchBED)
 **Initialised:** 2026-10-28T07:56:44Z
 **Current version:** v1
-**Latest stage:** Stage 6 KNOWLEDGE_EXTRACT — next: stage 7 SYNTHESIS
+**Latest stage:** Stage 7 SYNTHESIS — next: stage 8 HYPOTHESIS_GEN
 
 ---
 
@@ -142,3 +142,15 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
 - **Decision:** PROCEED → stage 7.
 - **Summary:** Abstract-level evidence cards (fresh sonnet subagent, stage prompt verbatim; identifiers filled by script). Validation: cite_keys/titles identical to the shortlist; no number absent from the source abstract. Main gap signals: all tactile touch-selection work is greedy/one-step and online; learned tactile exploration policies optimize task rewards, not information bounds; policy-based BED has not been evaluated on tactile/robot problems; no per-decision latency reported for touch selection.
 - **Commit:** see git log ("stage 6 KNOWLEDGE_EXTRACT")
+
+---
+
+## Stage 7. SYNTHESIS     [v1]
+
+- **Started:** 2026-10-28T09:28:00Z
+- **Finished:** 2026-10-28T09:40:00Z
+- **Inputs used:** docs/05_knowledge_cards.json; full text of arXiv:2603.21410v1 (WebFetch)
+- **Outputs produced:** docs/06_synthesis.md (7 clusters, 5 falsifiable gaps, ranked opportunities)
+- **Decision:** PROCEED → stage 8.
+- **Summary:** Touch selection in the literature is online and one-step (greedy EIG, Fisher-EIG, submodular surrogates) or heuristic (Zheng 2026: max–min distance on the MAP shape); learned tactile policies use task rewards; policy-based BED is untested on touch. Ranked gaps: (1+2) amortized non-myopic information-bound policy and the myopic vs non-myopic measurement, (3) decision latency, (4) planning for no-contact outcomes inside the policy — core novelty #2 reframed because no-contact evidence in beliefs is prior art (Koval 2015, Zheng 2026), (5) fidelity transfer.
+- **Commit:** see git log ("stage 7 SYNTHESIS")
