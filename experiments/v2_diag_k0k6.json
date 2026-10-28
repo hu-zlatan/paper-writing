@@ -1,0 +1,41 @@
+{
+ "purpose": "EXPLORATORY diagnostics for the v2 stage-15 decision (not a gate check, not confirmatory): learned policy vs G* on 200 validation episodes of S at kappa = 0 (2 new seeds, hp1, E_train 1e5) and kappa = 6 (the 3 superseded pilot seeds); grid evaluation (B8). Purpose: does the G3 (ii) shortfall at kappa = 12 also appear without / with less travel cost?",
+ "jobs": [
+  {
+   "id": "diag_train_S_k0_sd300",
+   "cmd": "python main.py train2 --set S --method spce_total --kappa 0 --tau 4.0 --lr 0.00036339014767503805 --ent-coef 0.00013313139952275948 --batch 128 --critic-lr 0.0014321061677694642 --seed 300 --max-episodes 100000 --budget-minutes 150 --out ../results/v2/diag/k0_sd300 && python main.py eval2 --set S --method spce_total --weights ../results/v2/diag/k0_sd300.npz --kappa 0 --tau 4.0 --split val --start 0 --count 200 --n-eval 2000 --budget-minutes 120 --out ../results/v2/diag/val_S_k0_sd300 && python main.py evalgrid --src ../results/v2/diag/val_S_k0_sd300.jsonl --split val --start 0 --count 200 --out ../results/v2/diag/val_S_k0_sd300_grid"
+  },
+  {
+   "id": "diag_train_S_k0_sd301",
+   "cmd": "python main.py train2 --set S --method spce_total --kappa 0 --tau 4.0 --lr 0.00036339014767503805 --ent-coef 0.00013313139952275948 --batch 128 --critic-lr 0.0014321061677694642 --seed 301 --max-episodes 100000 --budget-minutes 150 --out ../results/v2/diag/k0_sd301 && python main.py eval2 --set S --method spce_total --weights ../results/v2/diag/k0_sd301.npz --kappa 0 --tau 4.0 --split val --start 0 --count 200 --n-eval 2000 --budget-minutes 120 --out ../results/v2/diag/val_S_k0_sd301 && python main.py evalgrid --src ../results/v2/diag/val_S_k0_sd301.jsonl --split val --start 0 --count 200 --out ../results/v2/diag/val_S_k0_sd301_grid"
+  },
+  {
+   "id": "diag_val_S_k6_sd200",
+   "cmd": "python main.py eval2 --set S --method spce_total --weights ../results/v2/g3/pilot_S_k6_sd200.npz --kappa 6 --tau 5.0 --split val --start 0 --count 200 --n-eval 2000 --budget-minutes 120 --out ../results/v2/diag/val_S_k6_sd200 && python main.py evalgrid --src ../results/v2/diag/val_S_k6_sd200.jsonl --split val --start 0 --count 200 --out ../results/v2/diag/val_S_k6_sd200_grid"
+  },
+  {
+   "id": "diag_val_S_k6_sd201",
+   "cmd": "python main.py eval2 --set S --method spce_total --weights ../results/v2/g3/pilot_S_k6_sd201.npz --kappa 6 --tau 5.0 --split val --start 0 --count 200 --n-eval 2000 --budget-minutes 120 --out ../results/v2/diag/val_S_k6_sd201 && python main.py evalgrid --src ../results/v2/diag/val_S_k6_sd201.jsonl --split val --start 0 --count 200 --out ../results/v2/diag/val_S_k6_sd201_grid"
+  },
+  {
+   "id": "diag_val_S_k6_sd202",
+   "cmd": "python main.py eval2 --set S --method spce_total --weights ../results/v2/g3/pilot_S_k6_sd202.npz --kappa 6 --tau 5.0 --split val --start 0 --count 200 --n-eval 2000 --budget-minutes 120 --out ../results/v2/diag/val_S_k6_sd202 && python main.py evalgrid --src ../results/v2/diag/val_S_k6_sd202.jsonl --split val --start 0 --count 200 --out ../results/v2/diag/val_S_k6_sd202_grid"
+  },
+  {
+   "id": "diag_val_S_k0_gstar_sh0",
+   "cmd": "python main.py eval2 --set S --method gstar --kappa 0 --tau 4.0 --split val --start 0 --count 100 --n-eval 2000 --budget-minutes 200 --out ../results/v2/diag/val_S_k0_gstar_sh0 && python main.py evalgrid --src ../results/v2/diag/val_S_k0_gstar_sh0.jsonl --split val --start 0 --count 100 --out ../results/v2/diag/val_S_k0_gstar_sh0_grid"
+  },
+  {
+   "id": "diag_val_S_k0_gstar_sh1",
+   "cmd": "python main.py eval2 --set S --method gstar --kappa 0 --tau 4.0 --split val --start 100 --count 100 --n-eval 2000 --budget-minutes 200 --out ../results/v2/diag/val_S_k0_gstar_sh1 && python main.py evalgrid --src ../results/v2/diag/val_S_k0_gstar_sh1.jsonl --split val --start 0 --count 100 --out ../results/v2/diag/val_S_k0_gstar_sh1_grid"
+  },
+  {
+   "id": "diag_val_S_k6_gstar_sh0",
+   "cmd": "python main.py eval2 --set S --method gstar --kappa 6 --tau 5.0 --split val --start 0 --count 100 --n-eval 2000 --budget-minutes 200 --out ../results/v2/diag/val_S_k6_gstar_sh0 && python main.py evalgrid --src ../results/v2/diag/val_S_k6_gstar_sh0.jsonl --split val --start 0 --count 100 --out ../results/v2/diag/val_S_k6_gstar_sh0_grid"
+  },
+  {
+   "id": "diag_val_S_k6_gstar_sh1",
+   "cmd": "python main.py eval2 --set S --method gstar --kappa 6 --tau 5.0 --split val --start 100 --count 100 --n-eval 2000 --budget-minutes 200 --out ../results/v2/diag/val_S_k6_gstar_sh1 && python main.py evalgrid --src ../results/v2/diag/val_S_k6_gstar_sh1.jsonl --split val --start 0 --count 100 --out ../results/v2/diag/val_S_k6_gstar_sh1_grid"
+  }
+ ]
+}
