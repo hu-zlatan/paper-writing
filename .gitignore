@@ -30,3 +30,6 @@ paper/mypaper/*.synctex.gz
 # secrets
 .env
 *.key
+
+# trained v2 policy weights are small (<1 MB) and needed for evaluation
+!results/v2/**/*.npz
