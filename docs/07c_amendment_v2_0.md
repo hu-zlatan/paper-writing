@@ -128,3 +128,24 @@ Measured grid cost on Actions: G* episodes 2.4 s (A) / 4.6 s (S) per episode; ra
   nats (fail)**. If the grid read-out confirms it, the pre-registered consequence is 𝒜 → 64 × 8 for all methods (once),
   which also invalidates the τ calibration, G2-at-12 and G3 (ii)-at-12 runs made on the 32 × 8 set. This, the G3 (iii)
   failure and G2's refutation of Idea 2 go to the stage-15 gate decision together.
+
+## Status note (2026-10-28, run 4, ~20:10 UTC) — G5 and G3 (ii) on the grid evaluation
+- **G5 (grid, results/v2/12_g5_analysis.json):** G* ≥ random + 10 pp in every cell (A0 0.857/0.167, A6 0.460/0.030,
+  A12 0.407/0.033, S0 0.680/0.273 on the 150 paired episodes available, S6 0.487/0.067, S12 0.440/0.073).
+  Non-degeneracy: **A0 fails** (BI saturation of G* 81.5 % ≥ 50 %; n*(A) = 3 cannot be lowered) → A0 is removed from
+  the primary set (§1.7), reported. All other cells informative.
+  **Flatness fails at both κ:** κ = 6 Δsuccess −2.7 pp (|·| > 2 pp), ΔBI +0.009; κ = 12 Δsuccess +1.3 pp, ΔBI +0.170
+  (> 0.10). Pre-registered consequence: 𝒜 → 64 × 8 for all methods (once) before any main run; τ calibration, G2 and
+  G3 (ii) were run on 32 × 8 and would have to be repeated on the new set.
+- **G3 (ii) (grid, results/v2/12_g3_analysis.json):** at (S, κ = 12, τ = 5.1), 500 validation episodes, seed-mean
+  success **0.204** (0.190 / 0.230 / 0.192) vs G* **0.410** on the same episodes; rule ≥ G* − 5 pp → **FAIL**. The
+  policies execute 2.25–2.59 probes vs G*'s 4.16. Training-objective saturation at the last log 10.2–14.1 % (rule
+  < 10 %; the earlier "8.7–9.9 %" was a mean over training). Pre-registered remedy (E_train 2 × 10⁵) trained
+  (2 seeds plateaued at 1.6–1.7 × 10⁵, one hit the cap); validation ball-sPCE 4.85 / 5.03 / 4.96 vs 4.76 / 4.87 / 4.67
+  before; their grid read-out is running (experiments/v2_g3_remedy_val.json).
+- **Exploratory observation (not pre-registered, labelled):** every pilot policy uses only 4 distinct absolute first
+  angles across 500 episodes (G* uses all 32), i.e. it ignores the random start angle φ0 and pays travel to reach a
+  preferred absolute region (mean travel 0.54–0.63 rad vs G* 0.13). The policy head scores 256 absolute actions from a
+  context of (cos φ_t, sin φ_t, τ_rem/τ), so φ-relative behaviour must be learned through the MLP. This is a candidate
+  root cause for stage 15, not a gate result. Diagnostic runs at κ = 0 and κ = 6 (experiments/v2_diag_k0k6.json) are
+  exploratory only.
