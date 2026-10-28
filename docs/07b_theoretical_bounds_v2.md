@@ -32,7 +32,7 @@ costs that do not depend on the order of actions (modular costs); under both, th
 logarithmic or constant factor of the optimal adaptive policy for coverage-type objectives (Golovin & Krause 2011 — to
 verify). With travel, the cost of an action depends on the previous action (c(a | φ_f)), i.e. the problem becomes an
 adaptive orienteering-type problem, for which ratio-greedy has no constant-factor guarantee even for modular rewards
-(informative path planning literature, e.g. Hollinger & Sukhatme 2014 — to verify). Hence look-ahead *can* help
+(informative path planning: singh2009efficient, JAIR doi:10.1613/jair.2674; hollinger2014sampling, IJRR doi:10.1177/0278364914533443 — verified via OpenAlex). Hence look-ahead *can* help
 when κ is large; v1's null result at κ = 0 is consistent with near-greedy-optimality when costs are modular.
 Nothing here guarantees that it *does* help in our environment — that is what gate G2 measures.
 
