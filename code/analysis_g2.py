@@ -28,7 +28,8 @@ for k in sorted(d):
     out[f"k{k:g}"] = {"n_beliefs": len(la), "G": float(G), "lb95": float(np.quantile(bs, 0.05)), "ub95": float(np.quantile(bs, 0.95)),
                       "abs_gap_nats": float(la.mean() - g.mean()), "mean_v_la": float(la.mean()), "mean_v_greedy": float(g.mean()),
                       "frac_la_differs": float(np.mean([r["a_la"] != r["a_greedy"] for r in rs])),
-                      "mean_steps_before": float(np.mean([r["steps_before"] for r in rs]))}
+                      "mean_steps_before": float(np.mean([r["steps_before"] for r in rs])),
+                      "n_no_budget_left": int(sum(bool(r.get("no_budget_left")) for r in rs))}
     print(k, out[f"k{k:g}"])
 kh = 12.0 if "k12" in out and out["k12"]["n_beliefs"] == 100 else 6.0
 if all(f"k{k:g}" in out for k in (0.0, 2.0, kh)):
