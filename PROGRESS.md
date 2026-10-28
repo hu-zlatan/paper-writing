@@ -9,7 +9,7 @@
 **Topic:** Amortized, non-myopic active tactile localization (TouchBED)
 **Initialised:** 2026-10-28T07:56:44Z
 **Current version:** v1
-**Latest stage:** Stage 13 ITERATIVE_REFINE — next: stage 14 RESULT_ANALYSIS
+**Latest stage:** Stage 14 RESULT_ANALYSIS — next: stage 15 RESEARCH_DECISION
 
 ---
 
@@ -241,3 +241,14 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
 - **Outputs produced:** code/touchbed/pf.py (root-cause fix of the log1p underflow warning); plans/stage_13_iterative_refine_v1.md
 - **Decision:** PROCEED → stage 14.
 - **Summary:** One numerical warning repaired at its root cause (mirrored normal tail); no non-finite results. PF mixing and the failed myopia check are design questions forwarded to stages 14–15.
+
+---
+
+## Stage 14. RESULT_ANALYSIS     [v1]   (pre-run checks)
+
+- **Started:** 2026-10-28T10:47:00Z
+- **Finished:** 2026-10-28T10:52:00Z
+- **Inputs used:** results/v1/12_manipulation_checks.md, results/v1/12_pfcheck_analysis.json, results/v1/checks/*.json, docs/07_hypotheses.md, docs/07c_amendment_v1_1.md
+- **Outputs produced:** results/v1/14_analysis.md (fresh opus subagent + area-chair pass)
+- **Decision:** PROCEED → stage 15.
+- **Summary:** G(S) = −0.033 [−0.054, −0.014] fails; G estimator not validated and run at reduced C/M (undocumented deviation, now flagged); PF at 8k not converged in all 6 cells; confusability per-shape rule broken for A2/A4/A6 and S self-symmetry entries are an artefact; H3 untestable (R_NC(S)=0.03); H1 untested. Main runs remain blocked by the pre-registration.
