@@ -1,0 +1,98 @@
+# Stage 9 · EXPERIMENT_DESIGN [GATE] · v2  (after PIVOT 15 → 8; supersedes docs/08_experiment_plan.yaml for v2)
+# Produced with pipeline/references/stage_prompts/experiment_design.md; {preamble} = "this is iteration v2; previous
+# results showed no measurable look-ahead value when all probes are equally reachable (results/v1/14_analysis.md,
+# results/v1/15_decision.md)"; {hypotheses} = docs/07_hypotheses_v2.md (canonical; section numbers below refer to it).
+# Every number here is a design parameter or a measured cost estimate, not a result.
+
+version: v2
+generated: "2026-10-28"
+hypotheses_doc: docs/07_hypotheses_v2.md
+theory_doc: docs/07b_theoretical_bounds_v2.md
+amendments_inherited: docs/07c_amendment_v1_1.md   # L = 4095, ball information, contact-conditioned PF, costs, deviations A6
+amendment_to_write_before_code: docs/07c_amendment_v2_0.md   # equal stroke time for hits/misses; set-A per-shape confusability rule
+
+objectives:
+  - id: O1
+    hypothesis: H1
+    statement: "Amortized cost-aware ball-information policy (sPCE-total) is non-inferior to cost-aware ball greedy G* on {A,S} x {kappa=0, kappa_hi} (success margin delta_c = min(4 pp, 0.15 x random->G* gap); BI margin epsilon_c) and >= 100x cheaper per decision at the policy's accuracy (greedy ladder, H1b)."
+  - id: O2
+    hypothesis: H2 (gated by G1, G2)
+    statement: "Under travel cost (kappa_hi), sPCE-total beats both G* and sPCE-myopic(rate) on set S by >= 3 pp success (LB > 0) and BI LB > 0; interaction Delta(kappa_hi) - Delta(0) LB > 0; TOST equivalence at kappa = 0 (+-3 pp); mechanism P1-P3. A failed G2 with a validated estimator is recorded as 'refuted in the tested range'."
+
+datasets:
+  - name: shapes_A
+    generator: "code/touchbed/shapes.py::make_set_A(0, 8) (v1, unchanged; per-shape confusability rule amended in 07c_amendment_v2_0)"
+  - name: shapes_S
+    generator: "code/touchbed/shapes.py::make_set_S() (v1, unchanged; self-symmetry entries recomputed in G0)"
+  - name: notch_control
+    generator: "code/touchbed/shapes.py::make_positive_control(); exact two-step values on a 401-point pose grid (G1, H2b-P2)"
+  - name: travel_environment
+    description: "Finger on the 100 mm stand-off circle; action = (target angle phi', offset psi) from a shared 256-action set (32 x 8); cost c(a) = 1 + kappa*|wrap(phi'-phi_t)|/pi strokes; time budget tau_kappa calibrated so G* executes n* in {3,4,5} probes at every kappa; kappa in {0, 2 (G2 only), 6}, one pre-registered escalation to 12 (§1.2)."
+  - name: episode_sets
+    description: "Per (set, kappa) cell: pilot 200 (+100 for G4/G5), validation 500, test 1,000 (power rule may raise to 2,000); test episodes fix (s0, phi0, observation stream) and are shared by all methods."
+
+baselines:
+  - name: random
+    description: "uniform over the feasible part of the action set"
+    tuning_protocol: "none (parameter-free)"
+  - name: coverage
+    description: "max-min distance from predicted MAP contact to previous contacts over feasible actions; ties to lower cost"
+    tuning_protocol: "none beyond the shared action set (v1 C sweep superseded by the fixed 256-action set)"
+  - name: G_star
+    description: "cost-aware ball greedy: argmax EIG_B(a;b)/c(a) on a 2,000-particle online PF, M = 64, all 256 actions"
+    tuning_protocol: "8-rung ladder R0-R7 (N, candidates, M) measured for accuracy and latency; full size R0 is the comparator; flatness check vs a 1,024-action grid (G5)"
+  - name: spce_myopic_rate
+    description: "same network as ours; reward r_t / c(a_t), gamma = 0 (learned analogue of G*)"
+    tuning_protocol: "shares the 4-config PPO search selected on validation ball-sPCE at (S, kappa_hi); same E_train and plateau rule"
+  - name: rollout_planner
+    description: "upper reference: top-16 actions by EIG_B/c, each completed by G* rollouts (rung R3) over the remaining budget"
+    tuning_protocol: "fixed settings (16 screened actions, M = 8, CRN); reported as a reference, not a claim"
+  - name: full_state_greedy
+    description: "v1 objective (full-state EIG / c), ablation row only at (S, kappa_hi)"
+    tuning_protocol: "same N, M, action set as G*"
+
+proposed_methods:
+  - name: spce_total
+    description: "DeepSets history encoder + context (finger angle, remaining time) -> categorical head over the feasibility-masked 256 actions; PPO, gamma = 1, returns-to-go; reward = ball-sPCE increments (L = 4095 contrastive prior samples, J = 16 in-ball samples for the numerator); E_train = 1e5 episodes with plateau rule; one policy per (set, kappa) cell"
+    effective_components:
+      - {id: C1, name: non_myopic_credit_assignment, ablation: A1}
+      - {id: C2, name: ball_information_objective, ablation: A2}
+      - {id: C3, name: no_contact_outcomes_in_policy_input, ablation: A3}
+      - {id: C4, name: amortization (single forward pass vs online PF scoring), ablation: A4}
+
+ablations:
+  - {id: A1, removes: C1, variant: "sPCE-myopic(rate): gamma = 0 with 1/c rate reward", cells: "S x {0, kappa_hi}", seeds: 6}
+  - {id: A2, removes: C2, variant: "full-state sPCE objective (v1/07c A1); and full-state greedy row", cells: "S, kappa_hi", seeds: 3}
+  - {id: A3, removes: C3, variant: "No-NC-input (miss entries removed from the DeepSets sum)", cells: "S, kappa_hi", seeds: 3}
+  - {id: A4, removes: C4, variant: "greedy ladder rungs R0-R7 (accuracy vs latency of online scoring)", cells: "all four primary cells", seeds: 1}
+
+metrics:
+  - {name: success, formula: "identity correct AND translation < 5 mm AND symmetry-folded rotation < 5 deg (MAP identity, refined highest-weight particle)"}
+  - {name: ball_information, formula: "log P_hat(B(s0)|h) - log P(B(s0)), PF masses, floored at 1/(2 N_eval), cap -log P(B(s0)) reported"}
+  - {name: executed_probes, formula: "number of probes executed within tau"}
+  - {name: travel, formula: "sum |wrap(phi'-phi_t)| per episode; BI per unit travel (H2b-P3)"}
+  - {name: decision_latency_ms, formula: "median of 500 timed decisions after 20 warm-ups, y_t received -> a_{t+1} emitted, 1 core, threads = 1; plus multiply-add counts"}
+  - {name: break_even_episodes, formula: "training CPU time / (per-episode G* time - per-episode policy time)"}
+  - {name: statistics, formula: "paired test episodes, seed-averaged; crossed episode x seed bootstrap B = 10,000, one-sided 95% bounds; intersection-union within H1a/H1b/H2a/H2b; Holm for sanity contrasts; TOST for the kappa = 0 control (code/touchbed/stats.py, TOST to be added)"}
+
+pre_run_gates:   # §4 of the hypotheses doc; no main run before G0, G3, G4, G5 pass; G1/G2 do not block H1
+  - {id: G0, rule: "hygiene items (i)-(viii) incl. kappa=0 tau=3 bit-identity test, categorical-head gradient check, ball-EIG/ball-sPCE toy tests"}
+  - {id: G1, rule: "look-ahead estimator recovers the exact notch gap within +-20%; zero-gap bank mean in [-0.01, 0.02], UB < 0.03"}
+  - {id: G2, rule: "G(6) >= 0.10 with LB > 0.05; G(0) <= 0.03; G(0) <= G(2) <= G(6); one escalation to kappa_hi = 12"}
+  - {id: G3, rule: "notch >= 80% of exact optimum; (S, kappa_hi) validation success >= G* - 5 pp with plateau; saturation < 10%"}
+  - {id: G4, rule: "N_eval 32k vs 128k on 600 paired episodes per cell: |dBI| <= 0.05 nats, |dsuccess| <= 1 pp with 95% CI inside +-2 pp; else 10-MH-step kernel"}
+  - {id: G5, rule: "G* >= random + 10 pp per primary cell; flatness <= 2 pp / 0.10 nats; n* and tau calibration; non-degeneracy rule"}
+
+risks:
+  - {risk: "G2 fails (no look-ahead headroom even with travel)", mitigation: "pre-registered fallback: H1 + measured headroom finding; recorded as refuted in tested range"}
+  - {risk: "Evaluation PF not converged (v1 G4 analogue failed at 8k)", mitigation: "G4 at 32k vs 128k; fallback kernel with 10 MH steps"}
+  - {risk: "Policy fails to learn the categorical masked action space", mitigation: "G3 with one cap doubling, then stage 15"}
+  - {risk: "Greedy at 256 candidates too slow for 1,000-episode cells", mitigation: "sharded Actions jobs with time_guard; measured TIME_ESTIMATE before every sweep"}
+  - {risk: "Extended-abstract deadline (2026-12-04) before main runs finish", mitigation: "H1 never downscaled; extended abstract may report gate results + H1 only"}
+
+compute_budget:
+  hardware: "GitHub Actions ubuntu-latest CPU runners (~20 concurrent 2-vCPU jobs, <= 6 h each) + 2-vCPU sandbox for development"
+  pre_run_gates_cpu_hours: 47
+  main_cpu_hours: "121 (H1 + H2) / 99 (fallback)"
+  pilot: "TIME_ESTIMATE pilot before every sweep (main.py pilot)"
+  downscale_order: "ablation seeds -> 2; drop H1b ladder walk; drop full-state greedy row; rollout planner -> 100 episodes; H2 myopic seeds 6 -> 5; H1 primary never reduced"

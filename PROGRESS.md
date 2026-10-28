@@ -9,7 +9,7 @@
 **Topic:** Amortized, non-myopic active tactile localization (TouchBED)
 **Initialised:** 2026-10-28T07:56:44Z
 **Current version:** v2
-**Latest stage:** Stage 8.5 THEORETICAL_BOUNDS [v2] — next: stage 9 EXPERIMENT_DESIGN [v2, GATE]
+**Latest stage:** Stage 9 EXPERIMENT_DESIGN [v2, GATE] — next: stage 10 CODE_GENERATION [v2]
 
 ---
 
@@ -294,3 +294,14 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
 - **Outputs produced:** docs/07b_theoretical_bounds_v2.md; docs/03_supplement_queries.yaml + code/literature/supplement.py + .github/workflows/literature-supplement.yml (targeted OpenAlex lookups for the budgeted-information-gathering references, append-only cite_keys; dispatched)
 - **Decision:** PROCEED → stage 9 (v2).
 - **Summary:** Cost-aware greedy costs O(N·A·(V+M)) per decision vs O(d² + d·A) for the policy; informal argument that order-dependent travel costs turn the problem into an adaptive orienteering-type problem where ratio-greedy loses its guarantees (references pending verification); exact notch enumeration defined as the G1 estimator reference.
+
+---
+
+## Stage 9. EXPERIMENT_DESIGN  [GATE]     [v2]
+
+- **Started:** 2026-10-28T11:22:00Z
+- **Finished:** see commit "stage 9 v2"
+- **Inputs used:** docs/07_hypotheses_v2.md, docs/07b_theoretical_bounds_v2.md, docs/07c_amendment_v1_1.md
+- **Outputs produced:** docs/08_experiment_plan_v2.yaml
+- **Decision:** PROCEED → stage 10 (v2). **GATE auto-approved** (AUTOPILOT §1). Evidence: required keys present; every effective component (non-myopic credit assignment, ball-information objective, no-contact input, amortization) has an ablation; every baseline has a tuning protocol (script check); comparators share the target and the action set; H1 never downscaled; gates G0–G5 block main runs until PF convergence, learnability and comparator strength are shown.
+- **Summary:** v2 = travel-cost action model (κ ∈ {0, 6}, G2 also at 2; one escalation to 12) with probe-matched time budgets, ball-information target for every method, 256 shared discrete actions, G* (cost-aware ball greedy) as comparator, sPCE-myopic(rate) as the credit-assignment ablation. Timeline: code by 11-08, gates by 11-12, main runs 11-12 → 11-18, extended abstract by 12-03.
