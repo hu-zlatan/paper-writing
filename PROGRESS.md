@@ -353,3 +353,19 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
   - **B8 grid reference:** agrees with the heavy 30 + 60 SMC kernel (ΔBI 0.011–0.019) while 32k × 3 MH under-reads BI by
     0.07–0.21 nats; grid sub 4 vs 8 on G* episodes: mean |ΔBI| 0.007. A printing bug in analysis_g4_b5.py (success column
     showed the identity rate) was found and the B8 rationale corrected.
+  - **G2 complete: FAIL after the escalation** — G(0) 0.005, G(2) 0.008, G(6) 0.018, G(12) 0.015 (LB 0.010, UB 0.021;
+    absolute gap 0.04 nats on ≈ 2.7 nats). With G1 passed this is **"Idea 2 refuted in the tested range (κ ≤ 12)"**
+    (§3 gate table); H2 policies are not trained. 15 beliefs whose budget was exhausted before the drawn step crashed
+    the first pass; fixed (recorded as V_LA = V_G* = 0) and re-run.
+  - **B8: grid adopted as the evaluation** (no SMC kernel passes in every cell; grid sub 4 vs 8 self-check passes:
+    mean |ΔBI| 0.004, no flips). Remaining B5 jobs cancelled.
+  - **G5 provisional** (see amendment status note): +10 pp / D ≥ 20 pp hold everywhere; **A0 BI saturation 75 %**
+    (rule < 50 %, n* cannot go lower) and **flatness fails at κ_hi = 12** (Δsuccess +7.7 pp, ΔBI +0.19). Grid
+    re-evaluation of all G5 pilots and flatness runs dispatched (experiments/v2_grid_g5_{gstar,random}.json).
+- **Where to resume (run 4):** stage 12 v2 gates, then the **gate decision → stage 15** (G3 (iii) failed; §4 routes
+  there). Before it: (1) `python code/analysis_b8.py` (grid_ref now complete?) and grid-based G5 numbers from
+  results/v2/grid_g5, grid_g5_flat (write code/analysis_g5.py); (2) G3 (ii) at κ = 12 (results/v2/g3/pilot_S_k12_*):
+  evaluate the 3 seeds + G* on 500 validation episodes (eval2 --split val, then evalgrid) for the "≥ G* − 5 pp" rule
+  and (iv) the ball-sPCE vs BI bias; (3) stage 14/15 with fresh subagents on the complete gate record. Expected
+  stage-15 question: REFINE toward H1 (amortization) with Idea 2 reported as refuted, handling the flatness failure
+  (𝒜 → 64 × 8) and the A0 saturation as pre-registered.
