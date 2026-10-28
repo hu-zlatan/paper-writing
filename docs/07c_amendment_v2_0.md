@@ -107,3 +107,13 @@ exact value of the argmax policy 0.177 / 0.170 / 0.169 nats = 28 % of the exact 
 three choose a vertical first probe (greedy-like; exact greedy 0.174). The pre-registered remedy (E_train doubled to
 2·10⁵) gives the same values. **G3 (iii) fails.** Per §4 this sends the gate to stage 15 with learnability of set-up
 moves as a finding; the routing is decided at the gate decision together with G2, G3 (ii)/(iv), G4 (B8) and G5.
+
+## Status note (2026-10-28, run 3, ~17:15 UTC) — B8 kernel comparison (partial) and B5 cancellation
+On the grid-reference episodes completed so far (A/S × G*: 600 each; A random 300; S random 250), **no SMC kernel
+passes the G4 rule in every cell**: 32k × 3 MH under-reads BI by 0.07–0.18 nats in every cell; 128k × 3 MH and the
+heavy 30 + 60 kernel agree with the grid on BI (|ΔBI| ≤ 0.05; 0.006–0.019 for 30 + 60) but the success criterion's 95 %
+CI (±2 pp) is not met on the random cells by any kernel, because MAP-identity ties and the point-estimate refinement
+make success discontinuous in the posterior approximation. Under B8 the grid therefore becomes the evaluation,
+subject to its own sub 4 vs 8 self-check (G* part: mean |ΔBI| 0.007, no flips outside the tie band; random part
+pending). The remaining B5 jobs (heavy kernels on S) were cancelled because they can no longer change this outcome.
+Measured grid cost on Actions: G* episodes 2.4 s (A) / 4.6 s (S) per episode; random episodes 66 s / 76 s.
