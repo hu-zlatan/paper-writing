@@ -1,0 +1,45 @@
+{
+ "purpose": "G3 (ii) comparator: G* on the 500 validation episodes at (S, kappa_hi = 12, tau = 5.1). The evaluation PF is reduced to 2,000 particles because the read-outs are replaced by the grid evaluation (B8) applied offline to the recorded actions.",
+ "jobs": [
+  {
+   "id": "g3val_S_k12_gstar_sh0",
+   "cmd": "python main.py eval2 --set S --method gstar --kappa 12 --tau 5.1 --split val --start 0 --count 50 --n-eval 2000 --budget-minutes 330 --out ../results/v2/g3_val/S_k12_gstar_sh0"
+  },
+  {
+   "id": "g3val_S_k12_gstar_sh1",
+   "cmd": "python main.py eval2 --set S --method gstar --kappa 12 --tau 5.1 --split val --start 50 --count 50 --n-eval 2000 --budget-minutes 330 --out ../results/v2/g3_val/S_k12_gstar_sh1"
+  },
+  {
+   "id": "g3val_S_k12_gstar_sh2",
+   "cmd": "python main.py eval2 --set S --method gstar --kappa 12 --tau 5.1 --split val --start 100 --count 50 --n-eval 2000 --budget-minutes 330 --out ../results/v2/g3_val/S_k12_gstar_sh2"
+  },
+  {
+   "id": "g3val_S_k12_gstar_sh3",
+   "cmd": "python main.py eval2 --set S --method gstar --kappa 12 --tau 5.1 --split val --start 150 --count 50 --n-eval 2000 --budget-minutes 330 --out ../results/v2/g3_val/S_k12_gstar_sh3"
+  },
+  {
+   "id": "g3val_S_k12_gstar_sh4",
+   "cmd": "python main.py eval2 --set S --method gstar --kappa 12 --tau 5.1 --split val --start 200 --count 50 --n-eval 2000 --budget-minutes 330 --out ../results/v2/g3_val/S_k12_gstar_sh4"
+  },
+  {
+   "id": "g3val_S_k12_gstar_sh5",
+   "cmd": "python main.py eval2 --set S --method gstar --kappa 12 --tau 5.1 --split val --start 250 --count 50 --n-eval 2000 --budget-minutes 330 --out ../results/v2/g3_val/S_k12_gstar_sh5"
+  },
+  {
+   "id": "g3val_S_k12_gstar_sh6",
+   "cmd": "python main.py eval2 --set S --method gstar --kappa 12 --tau 5.1 --split val --start 300 --count 50 --n-eval 2000 --budget-minutes 330 --out ../results/v2/g3_val/S_k12_gstar_sh6"
+  },
+  {
+   "id": "g3val_S_k12_gstar_sh7",
+   "cmd": "python main.py eval2 --set S --method gstar --kappa 12 --tau 5.1 --split val --start 350 --count 50 --n-eval 2000 --budget-minutes 330 --out ../results/v2/g3_val/S_k12_gstar_sh7"
+  },
+  {
+   "id": "g3val_S_k12_gstar_sh8",
+   "cmd": "python main.py eval2 --set S --method gstar --kappa 12 --tau 5.1 --split val --start 400 --count 50 --n-eval 2000 --budget-minutes 330 --out ../results/v2/g3_val/S_k12_gstar_sh8"
+  },
+  {
+   "id": "g3val_S_k12_gstar_sh9",
+   "cmd": "python main.py eval2 --set S --method gstar --kappa 12 --tau 5.1 --split val --start 450 --count 50 --n-eval 2000 --budget-minutes 330 --out ../results/v2/g3_val/S_k12_gstar_sh9"
+  }
+ ]
+}
