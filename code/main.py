@@ -208,6 +208,40 @@ def cmd_eval2(a):
     print(f"EVAL2_DONE n={a.count} wall_s={time.time() - t0:.0f}")
 
 
+def cmd_calib(a):
+    """G5 tau calibration (docs/07_hypotheses_v2.md §1.2): run G* WITHOUT a budget for n* probes on pilot episodes and
+    record the travel time it spends; tau_kappa = n* + mean travel time (rounded to 0.1), then verified with the budget."""
+    from touchbed.evaluate import stream
+    from touchbed.evaluate_v2 import make_states_v2
+    from touchbed.pf import ParticleFilter
+    from touchbed.likelihood import sample_obs
+    from touchbed.policies_v2 import GStar
+    from touchbed.travel import PHI, PSI, TravelState
+    om = ObsModel()
+    lib, prior, eps = make_states_v2(a.set, "pilot", a.start + a.count)
+    os.makedirs(os.path.dirname(os.path.abspath(a.out)), exist_ok=True)
+    with open(a.out + ".jsonl", "w") as f:
+        for i in range(a.start, a.start + a.count):
+            (k0, x0, y0, t0), phi0 = eps[i]
+            key = (a.set, "calib", a.kappa, i)
+            pol = GStar(stream("policy", *key), M=a.M)
+            pf = ParticleFilter(lib, om, prior, a.n_dec, stream("pf_dec", *key))
+            ts = TravelState(phi0, a.kappa, 1e9)
+            orng = stream("obs", *key)
+            travel_time = 0.0
+            for _ in range(a.n_star):
+                c0 = ts.costs()
+                act = pol.act(pf, ts)
+                travel_time += float(c0[act]) - 1.0
+                ts.step(act)
+                obs = tuple(v[0] for v in sample_obs(om, lib, orng, np.array([k0]), x0, y0, t0, float(PHI[act]), float(PSI[act])))
+                pf.update(float(PHI[act]), float(PSI[act]), obs)
+            f.write(json.dumps({"episode": i, "set": a.set, "kappa": a.kappa, "n_star": a.n_star,
+                                "travel_time": travel_time, "travel_rad": ts.travel}) + "\n")
+            f.flush()
+    print("CALIB_DONE")
+
+
 def main():
     ap = argparse.ArgumentParser()
     sub = ap.add_subparsers(dest="cmd", required=True)
@@ -248,8 +282,13 @@ def main():
     e2.add_argument("--M", type=int, default=64); e2.add_argument("--rung-phi", type=int, default=32)
     e2.add_argument("--rung-psi", type=int, default=8); e2.add_argument("--mh-steps", type=int, default=3)
     e2.add_argument("--budget-minutes", type=float, default=330.0); e2.add_argument("--out", required=True)
+    cb = sub.add_parser("calib")
+    cb.add_argument("--set", default="S"); cb.add_argument("--kappa", type=float, default=6.0)
+    cb.add_argument("--n-star", type=int, default=4); cb.add_argument("--start", type=int, default=0)
+    cb.add_argument("--count", type=int, default=50); cb.add_argument("--n-dec", type=int, default=2000)
+    cb.add_argument("--M", type=int, default=64); cb.add_argument("--out", required=True)
     a = ap.parse_args()
-    {"train": cmd_train, "eval": cmd_eval, "pilot": cmd_pilot, "train2": cmd_train2, "eval2": cmd_eval2}[a.cmd](a)
+    {"calib": cmd_calib, "train": cmd_train, "eval": cmd_eval, "pilot": cmd_pilot, "train2": cmd_train2, "eval2": cmd_eval2}[a.cmd](a)
 
 
 if __name__ == "__main__":

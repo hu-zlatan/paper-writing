@@ -1,0 +1,293 @@
+{
+ "purpose": "v2 gate G5 tau calibration (docs/07_hypotheses_v2.md \u00a71.2): G* without budget for n* in {3,4,5} probes on 200 pilot episodes per (set, kappa); tau_kappa = n* + mean travel time. n* itself is fixed from the kappa = 0 G* pilot success (G4 run).",
+ "jobs": [
+  {
+   "id": "calib_A_k2_n3_sh0",
+   "cmd": "python main.py calib --set A --kappa 2 --n-star 3 --start 0 --count 50 --out ../results/v2/calib/A_k2_n3_sh0"
+  },
+  {
+   "id": "calib_A_k2_n3_sh1",
+   "cmd": "python main.py calib --set A --kappa 2 --n-star 3 --start 50 --count 50 --out ../results/v2/calib/A_k2_n3_sh1"
+  },
+  {
+   "id": "calib_A_k2_n3_sh2",
+   "cmd": "python main.py calib --set A --kappa 2 --n-star 3 --start 100 --count 50 --out ../results/v2/calib/A_k2_n3_sh2"
+  },
+  {
+   "id": "calib_A_k2_n3_sh3",
+   "cmd": "python main.py calib --set A --kappa 2 --n-star 3 --start 150 --count 50 --out ../results/v2/calib/A_k2_n3_sh3"
+  },
+  {
+   "id": "calib_A_k2_n4_sh0",
+   "cmd": "python main.py calib --set A --kappa 2 --n-star 4 --start 0 --count 50 --out ../results/v2/calib/A_k2_n4_sh0"
+  },
+  {
+   "id": "calib_A_k2_n4_sh1",
+   "cmd": "python main.py calib --set A --kappa 2 --n-star 4 --start 50 --count 50 --out ../results/v2/calib/A_k2_n4_sh1"
+  },
+  {
+   "id": "calib_A_k2_n4_sh2",
+   "cmd": "python main.py calib --set A --kappa 2 --n-star 4 --start 100 --count 50 --out ../results/v2/calib/A_k2_n4_sh2"
+  },
+  {
+   "id": "calib_A_k2_n4_sh3",
+   "cmd": "python main.py calib --set A --kappa 2 --n-star 4 --start 150 --count 50 --out ../results/v2/calib/A_k2_n4_sh3"
+  },
+  {
+   "id": "calib_A_k2_n5_sh0",
+   "cmd": "python main.py calib --set A --kappa 2 --n-star 5 --start 0 --count 50 --out ../results/v2/calib/A_k2_n5_sh0"
+  },
+  {
+   "id": "calib_A_k2_n5_sh1",
+   "cmd": "python main.py calib --set A --kappa 2 --n-star 5 --start 50 --count 50 --out ../results/v2/calib/A_k2_n5_sh1"
+  },
+  {
+   "id": "calib_A_k2_n5_sh2",
+   "cmd": "python main.py calib --set A --kappa 2 --n-star 5 --start 100 --count 50 --out ../results/v2/calib/A_k2_n5_sh2"
+  },
+  {
+   "id": "calib_A_k2_n5_sh3",
+   "cmd": "python main.py calib --set A --kappa 2 --n-star 5 --start 150 --count 50 --out ../results/v2/calib/A_k2_n5_sh3"
+  },
+  {
+   "id": "calib_A_k6_n3_sh0",
+   "cmd": "python main.py calib --set A --kappa 6 --n-star 3 --start 0 --count 50 --out ../results/v2/calib/A_k6_n3_sh0"
+  },
+  {
+   "id": "calib_A_k6_n3_sh1",
+   "cmd": "python main.py calib --set A --kappa 6 --n-star 3 --start 50 --count 50 --out ../results/v2/calib/A_k6_n3_sh1"
+  },
+  {
+   "id": "calib_A_k6_n3_sh2",
+   "cmd": "python main.py calib --set A --kappa 6 --n-star 3 --start 100 --count 50 --out ../results/v2/calib/A_k6_n3_sh2"
+  },
+  {
+   "id": "calib_A_k6_n3_sh3",
+   "cmd": "python main.py calib --set A --kappa 6 --n-star 3 --start 150 --count 50 --out ../results/v2/calib/A_k6_n3_sh3"
+  },
+  {
+   "id": "calib_A_k6_n4_sh0",
+   "cmd": "python main.py calib --set A --kappa 6 --n-star 4 --start 0 --count 50 --out ../results/v2/calib/A_k6_n4_sh0"
+  },
+  {
+   "id": "calib_A_k6_n4_sh1",
+   "cmd": "python main.py calib --set A --kappa 6 --n-star 4 --start 50 --count 50 --out ../results/v2/calib/A_k6_n4_sh1"
+  },
+  {
+   "id": "calib_A_k6_n4_sh2",
+   "cmd": "python main.py calib --set A --kappa 6 --n-star 4 --start 100 --count 50 --out ../results/v2/calib/A_k6_n4_sh2"
+  },
+  {
+   "id": "calib_A_k6_n4_sh3",
+   "cmd": "python main.py calib --set A --kappa 6 --n-star 4 --start 150 --count 50 --out ../results/v2/calib/A_k6_n4_sh3"
+  },
+  {
+   "id": "calib_A_k6_n5_sh0",
+   "cmd": "python main.py calib --set A --kappa 6 --n-star 5 --start 0 --count 50 --out ../results/v2/calib/A_k6_n5_sh0"
+  },
+  {
+   "id": "calib_A_k6_n5_sh1",
+   "cmd": "python main.py calib --set A --kappa 6 --n-star 5 --start 50 --count 50 --out ../results/v2/calib/A_k6_n5_sh1"
+  },
+  {
+   "id": "calib_A_k6_n5_sh2",
+   "cmd": "python main.py calib --set A --kappa 6 --n-star 5 --start 100 --count 50 --out ../results/v2/calib/A_k6_n5_sh2"
+  },
+  {
+   "id": "calib_A_k6_n5_sh3",
+   "cmd": "python main.py calib --set A --kappa 6 --n-star 5 --start 150 --count 50 --out ../results/v2/calib/A_k6_n5_sh3"
+  },
+  {
+   "id": "calib_A_k12_n3_sh0",
+   "cmd": "python main.py calib --set A --kappa 12 --n-star 3 --start 0 --count 50 --out ../results/v2/calib/A_k12_n3_sh0"
+  },
+  {
+   "id": "calib_A_k12_n3_sh1",
+   "cmd": "python main.py calib --set A --kappa 12 --n-star 3 --start 50 --count 50 --out ../results/v2/calib/A_k12_n3_sh1"
+  },
+  {
+   "id": "calib_A_k12_n3_sh2",
+   "cmd": "python main.py calib --set A --kappa 12 --n-star 3 --start 100 --count 50 --out ../results/v2/calib/A_k12_n3_sh2"
+  },
+  {
+   "id": "calib_A_k12_n3_sh3",
+   "cmd": "python main.py calib --set A --kappa 12 --n-star 3 --start 150 --count 50 --out ../results/v2/calib/A_k12_n3_sh3"
+  },
+  {
+   "id": "calib_A_k12_n4_sh0",
+   "cmd": "python main.py calib --set A --kappa 12 --n-star 4 --start 0 --count 50 --out ../results/v2/calib/A_k12_n4_sh0"
+  },
+  {
+   "id": "calib_A_k12_n4_sh1",
+   "cmd": "python main.py calib --set A --kappa 12 --n-star 4 --start 50 --count 50 --out ../results/v2/calib/A_k12_n4_sh1"
+  },
+  {
+   "id": "calib_A_k12_n4_sh2",
+   "cmd": "python main.py calib --set A --kappa 12 --n-star 4 --start 100 --count 50 --out ../results/v2/calib/A_k12_n4_sh2"
+  },
+  {
+   "id": "calib_A_k12_n4_sh3",
+   "cmd": "python main.py calib --set A --kappa 12 --n-star 4 --start 150 --count 50 --out ../results/v2/calib/A_k12_n4_sh3"
+  },
+  {
+   "id": "calib_A_k12_n5_sh0",
+   "cmd": "python main.py calib --set A --kappa 12 --n-star 5 --start 0 --count 50 --out ../results/v2/calib/A_k12_n5_sh0"
+  },
+  {
+   "id": "calib_A_k12_n5_sh1",
+   "cmd": "python main.py calib --set A --kappa 12 --n-star 5 --start 50 --count 50 --out ../results/v2/calib/A_k12_n5_sh1"
+  },
+  {
+   "id": "calib_A_k12_n5_sh2",
+   "cmd": "python main.py calib --set A --kappa 12 --n-star 5 --start 100 --count 50 --out ../results/v2/calib/A_k12_n5_sh2"
+  },
+  {
+   "id": "calib_A_k12_n5_sh3",
+   "cmd": "python main.py calib --set A --kappa 12 --n-star 5 --start 150 --count 50 --out ../results/v2/calib/A_k12_n5_sh3"
+  },
+  {
+   "id": "calib_S_k2_n3_sh0",
+   "cmd": "python main.py calib --set S --kappa 2 --n-star 3 --start 0 --count 50 --out ../results/v2/calib/S_k2_n3_sh0"
+  },
+  {
+   "id": "calib_S_k2_n3_sh1",
+   "cmd": "python main.py calib --set S --kappa 2 --n-star 3 --start 50 --count 50 --out ../results/v2/calib/S_k2_n3_sh1"
+  },
+  {
+   "id": "calib_S_k2_n3_sh2",
+   "cmd": "python main.py calib --set S --kappa 2 --n-star 3 --start 100 --count 50 --out ../results/v2/calib/S_k2_n3_sh2"
+  },
+  {
+   "id": "calib_S_k2_n3_sh3",
+   "cmd": "python main.py calib --set S --kappa 2 --n-star 3 --start 150 --count 50 --out ../results/v2/calib/S_k2_n3_sh3"
+  },
+  {
+   "id": "calib_S_k2_n4_sh0",
+   "cmd": "python main.py calib --set S --kappa 2 --n-star 4 --start 0 --count 50 --out ../results/v2/calib/S_k2_n4_sh0"
+  },
+  {
+   "id": "calib_S_k2_n4_sh1",
+   "cmd": "python main.py calib --set S --kappa 2 --n-star 4 --start 50 --count 50 --out ../results/v2/calib/S_k2_n4_sh1"
+  },
+  {
+   "id": "calib_S_k2_n4_sh2",
+   "cmd": "python main.py calib --set S --kappa 2 --n-star 4 --start 100 --count 50 --out ../results/v2/calib/S_k2_n4_sh2"
+  },
+  {
+   "id": "calib_S_k2_n4_sh3",
+   "cmd": "python main.py calib --set S --kappa 2 --n-star 4 --start 150 --count 50 --out ../results/v2/calib/S_k2_n4_sh3"
+  },
+  {
+   "id": "calib_S_k2_n5_sh0",
+   "cmd": "python main.py calib --set S --kappa 2 --n-star 5 --start 0 --count 50 --out ../results/v2/calib/S_k2_n5_sh0"
+  },
+  {
+   "id": "calib_S_k2_n5_sh1",
+   "cmd": "python main.py calib --set S --kappa 2 --n-star 5 --start 50 --count 50 --out ../results/v2/calib/S_k2_n5_sh1"
+  },
+  {
+   "id": "calib_S_k2_n5_sh2",
+   "cmd": "python main.py calib --set S --kappa 2 --n-star 5 --start 100 --count 50 --out ../results/v2/calib/S_k2_n5_sh2"
+  },
+  {
+   "id": "calib_S_k2_n5_sh3",
+   "cmd": "python main.py calib --set S --kappa 2 --n-star 5 --start 150 --count 50 --out ../results/v2/calib/S_k2_n5_sh3"
+  },
+  {
+   "id": "calib_S_k6_n3_sh0",
+   "cmd": "python main.py calib --set S --kappa 6 --n-star 3 --start 0 --count 50 --out ../results/v2/calib/S_k6_n3_sh0"
+  },
+  {
+   "id": "calib_S_k6_n3_sh1",
+   "cmd": "python main.py calib --set S --kappa 6 --n-star 3 --start 50 --count 50 --out ../results/v2/calib/S_k6_n3_sh1"
+  },
+  {
+   "id": "calib_S_k6_n3_sh2",
+   "cmd": "python main.py calib --set S --kappa 6 --n-star 3 --start 100 --count 50 --out ../results/v2/calib/S_k6_n3_sh2"
+  },
+  {
+   "id": "calib_S_k6_n3_sh3",
+   "cmd": "python main.py calib --set S --kappa 6 --n-star 3 --start 150 --count 50 --out ../results/v2/calib/S_k6_n3_sh3"
+  },
+  {
+   "id": "calib_S_k6_n4_sh0",
+   "cmd": "python main.py calib --set S --kappa 6 --n-star 4 --start 0 --count 50 --out ../results/v2/calib/S_k6_n4_sh0"
+  },
+  {
+   "id": "calib_S_k6_n4_sh1",
+   "cmd": "python main.py calib --set S --kappa 6 --n-star 4 --start 50 --count 50 --out ../results/v2/calib/S_k6_n4_sh1"
+  },
+  {
+   "id": "calib_S_k6_n4_sh2",
+   "cmd": "python main.py calib --set S --kappa 6 --n-star 4 --start 100 --count 50 --out ../results/v2/calib/S_k6_n4_sh2"
+  },
+  {
+   "id": "calib_S_k6_n4_sh3",
+   "cmd": "python main.py calib --set S --kappa 6 --n-star 4 --start 150 --count 50 --out ../results/v2/calib/S_k6_n4_sh3"
+  },
+  {
+   "id": "calib_S_k6_n5_sh0",
+   "cmd": "python main.py calib --set S --kappa 6 --n-star 5 --start 0 --count 50 --out ../results/v2/calib/S_k6_n5_sh0"
+  },
+  {
+   "id": "calib_S_k6_n5_sh1",
+   "cmd": "python main.py calib --set S --kappa 6 --n-star 5 --start 50 --count 50 --out ../results/v2/calib/S_k6_n5_sh1"
+  },
+  {
+   "id": "calib_S_k6_n5_sh2",
+   "cmd": "python main.py calib --set S --kappa 6 --n-star 5 --start 100 --count 50 --out ../results/v2/calib/S_k6_n5_sh2"
+  },
+  {
+   "id": "calib_S_k6_n5_sh3",
+   "cmd": "python main.py calib --set S --kappa 6 --n-star 5 --start 150 --count 50 --out ../results/v2/calib/S_k6_n5_sh3"
+  },
+  {
+   "id": "calib_S_k12_n3_sh0",
+   "cmd": "python main.py calib --set S --kappa 12 --n-star 3 --start 0 --count 50 --out ../results/v2/calib/S_k12_n3_sh0"
+  },
+  {
+   "id": "calib_S_k12_n3_sh1",
+   "cmd": "python main.py calib --set S --kappa 12 --n-star 3 --start 50 --count 50 --out ../results/v2/calib/S_k12_n3_sh1"
+  },
+  {
+   "id": "calib_S_k12_n3_sh2",
+   "cmd": "python main.py calib --set S --kappa 12 --n-star 3 --start 100 --count 50 --out ../results/v2/calib/S_k12_n3_sh2"
+  },
+  {
+   "id": "calib_S_k12_n3_sh3",
+   "cmd": "python main.py calib --set S --kappa 12 --n-star 3 --start 150 --count 50 --out ../results/v2/calib/S_k12_n3_sh3"
+  },
+  {
+   "id": "calib_S_k12_n4_sh0",
+   "cmd": "python main.py calib --set S --kappa 12 --n-star 4 --start 0 --count 50 --out ../results/v2/calib/S_k12_n4_sh0"
+  },
+  {
+   "id": "calib_S_k12_n4_sh1",
+   "cmd": "python main.py calib --set S --kappa 12 --n-star 4 --start 50 --count 50 --out ../results/v2/calib/S_k12_n4_sh1"
+  },
+  {
+   "id": "calib_S_k12_n4_sh2",
+   "cmd": "python main.py calib --set S --kappa 12 --n-star 4 --start 100 --count 50 --out ../results/v2/calib/S_k12_n4_sh2"
+  },
+  {
+   "id": "calib_S_k12_n4_sh3",
+   "cmd": "python main.py calib --set S --kappa 12 --n-star 4 --start 150 --count 50 --out ../results/v2/calib/S_k12_n4_sh3"
+  },
+  {
+   "id": "calib_S_k12_n5_sh0",
+   "cmd": "python main.py calib --set S --kappa 12 --n-star 5 --start 0 --count 50 --out ../results/v2/calib/S_k12_n5_sh0"
+  },
+  {
+   "id": "calib_S_k12_n5_sh1",
+   "cmd": "python main.py calib --set S --kappa 12 --n-star 5 --start 50 --count 50 --out ../results/v2/calib/S_k12_n5_sh1"
+  },
+  {
+   "id": "calib_S_k12_n5_sh2",
+   "cmd": "python main.py calib --set S --kappa 12 --n-star 5 --start 100 --count 50 --out ../results/v2/calib/S_k12_n5_sh2"
+  },
+  {
+   "id": "calib_S_k12_n5_sh3",
+   "cmd": "python main.py calib --set S --kappa 12 --n-star 5 --start 150 --count 50 --out ../results/v2/calib/S_k12_n5_sh3"
+  }
+ ]
+}
