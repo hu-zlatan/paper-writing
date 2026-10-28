@@ -295,6 +295,34 @@ def cmd_latency(a):
     print(f"LATENCY_DONE decisions={len(recs)}")
 
 
+def cmd_evalgrid(a):
+    """Amendment B8: grid-reference read-outs for recorded episodes (histories rebuilt from actions + obs stream)."""
+    from touchbed.evaluate_v2 import make_states_v2, prior_ball_mass
+    from touchbed.gridpost import AdaptiveGridPosterior, rebuild_history
+    om = ObsModel()
+    recs = [json.loads(l) for l in open(a.src)]
+    recs = [r for r in recs if "episode" in r][a.start:a.start + a.count]
+    os.makedirs(os.path.dirname(os.path.abspath(a.out)), exist_ok=True)
+    t0 = time.time()
+    with open(a.out + ".jsonl", "w") as f:
+        for r in recs:
+            if time.time() - t0 > 0.8 * a.budget_minutes * 60:
+                f.write(json.dumps({"EARLY_STOP_AT_80_PCT_BUDGET": True}) + "\n")
+                break
+            split = r.get("split", a.split)
+            lib, prior, eps = make_states_v2(r["set"], split, r["episode"] + 1)
+            s0, _ = eps[r["episode"]]
+            h = rebuild_history(lib, om, s0, r["actions"], (r["set"], split, r["kappa"], r["tau"], r["episode"]))
+            t1 = time.time()
+            G = AdaptiveGridPosterior(lib, prior, om, h, s0, h_xy=a.h_xy, h_th_deg=a.h_th, sub=a.sub)
+            o = G.readout(s0, prior_ball_mass(lib, prior, s0))
+            o.update({"episode": r["episode"], "set": r["set"], "kappa": r["kappa"], "tau": r["tau"], "method": r["method"],
+                      "actions": r["actions"], "src": os.path.basename(a.src), "grid": [a.h_xy, a.h_th, a.sub],
+                      "n_refined": G.n_refined, "wall_s": time.time() - t1})
+            f.write(json.dumps(o) + "\n"); f.flush()
+    print(f"EVALGRID_DONE wall_s={time.time() - t0:.0f}")
+
+
 def cmd_calib(a):
     """G5 tau calibration (docs/07_hypotheses_v2.md §1.2): run G* WITHOUT a budget for n* probes on pilot episodes and
     record the travel time it spends; tau_kappa = n* + mean travel time (rounded to 0.1), then verified with the budget."""
@@ -397,8 +425,14 @@ def main():
     la.add_argument("--start", type=int, default=0); la.add_argument("--episodes", type=int, default=200)
     la.add_argument("--warmup", type=int, default=20); la.add_argument("--decisions", type=int, default=500)
     la.add_argument("--out", required=True)
+    eg = sub.add_parser("evalgrid")
+    eg.add_argument("--src", required=True); eg.add_argument("--split", default="pilot")
+    eg.add_argument("--start", type=int, default=0); eg.add_argument("--count", type=int, default=50)
+    eg.add_argument("--h-xy", type=float, default=1.0); eg.add_argument("--h-th", type=float, default=2.0)
+    eg.add_argument("--sub", type=int, default=4); eg.add_argument("--budget-minutes", type=float, default=330.0)
+    eg.add_argument("--out", required=True)
     a = ap.parse_args()
-    {"latency": cmd_latency, "trainnotch": cmd_trainnotch, "g2": cmd_g2, "g1": cmd_g1, "calib": cmd_calib, "train": cmd_train, "eval": cmd_eval, "pilot": cmd_pilot, "train2": cmd_train2, "eval2": cmd_eval2}[a.cmd](a)
+    {"evalgrid": cmd_evalgrid, "latency": cmd_latency, "trainnotch": cmd_trainnotch, "g2": cmd_g2, "g1": cmd_g1, "calib": cmd_calib, "train": cmd_train, "eval": cmd_eval, "pilot": cmd_pilot, "train2": cmd_train2, "eval2": cmd_eval2}[a.cmd](a)
 
 
 if __name__ == "__main__":

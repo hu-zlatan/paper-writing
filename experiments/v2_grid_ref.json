@@ -1,0 +1,149 @@
+{
+ "purpose": "Amendment B8: adaptive grid reference (1 mm / 2 deg coarse, x4 refinement) on the first 200 recorded pilot episodes of each kappa = 0 cell (S/A x random/G*), histories rebuilt from the recorded actions.",
+ "jobs": [
+  {
+   "id": "grid_A_k0_random_sh0_0",
+   "cmd": "python main.py evalgrid --src ../results/v2/g4/A_k0_random_N32000_sh0.jsonl --start 0 --count 25 --out ../results/v2/grid_ref/A_k0_random_sh0_0"
+  },
+  {
+   "id": "grid_A_k0_random_sh0_1",
+   "cmd": "python main.py evalgrid --src ../results/v2/g4/A_k0_random_N32000_sh0.jsonl --start 25 --count 25 --out ../results/v2/grid_ref/A_k0_random_sh0_1"
+  },
+  {
+   "id": "grid_A_k0_random_sh1_0",
+   "cmd": "python main.py evalgrid --src ../results/v2/g4/A_k0_random_N32000_sh1.jsonl --start 0 --count 25 --out ../results/v2/grid_ref/A_k0_random_sh1_0"
+  },
+  {
+   "id": "grid_A_k0_random_sh1_1",
+   "cmd": "python main.py evalgrid --src ../results/v2/g4/A_k0_random_N32000_sh1.jsonl --start 25 --count 25 --out ../results/v2/grid_ref/A_k0_random_sh1_1"
+  },
+  {
+   "id": "grid_A_k0_random_sh2_0",
+   "cmd": "python main.py evalgrid --src ../results/v2/g4/A_k0_random_N32000_sh2.jsonl --start 0 --count 25 --out ../results/v2/grid_ref/A_k0_random_sh2_0"
+  },
+  {
+   "id": "grid_A_k0_random_sh2_1",
+   "cmd": "python main.py evalgrid --src ../results/v2/g4/A_k0_random_N32000_sh2.jsonl --start 25 --count 25 --out ../results/v2/grid_ref/A_k0_random_sh2_1"
+  },
+  {
+   "id": "grid_A_k0_random_sh3_0",
+   "cmd": "python main.py evalgrid --src ../results/v2/g4/A_k0_random_N32000_sh3.jsonl --start 0 --count 25 --out ../results/v2/grid_ref/A_k0_random_sh3_0"
+  },
+  {
+   "id": "grid_A_k0_random_sh3_1",
+   "cmd": "python main.py evalgrid --src ../results/v2/g4/A_k0_random_N32000_sh3.jsonl --start 25 --count 25 --out ../results/v2/grid_ref/A_k0_random_sh3_1"
+  },
+  {
+   "id": "grid_A_k0_gstar_sh0_0",
+   "cmd": "python main.py evalgrid --src ../results/v2/g4/A_k0_gstar_N32000_sh0.jsonl --start 0 --count 25 --out ../results/v2/grid_ref/A_k0_gstar_sh0_0"
+  },
+  {
+   "id": "grid_A_k0_gstar_sh0_1",
+   "cmd": "python main.py evalgrid --src ../results/v2/g4/A_k0_gstar_N32000_sh0.jsonl --start 25 --count 25 --out ../results/v2/grid_ref/A_k0_gstar_sh0_1"
+  },
+  {
+   "id": "grid_A_k0_gstar_sh1_0",
+   "cmd": "python main.py evalgrid --src ../results/v2/g4/A_k0_gstar_N32000_sh1.jsonl --start 0 --count 25 --out ../results/v2/grid_ref/A_k0_gstar_sh1_0"
+  },
+  {
+   "id": "grid_A_k0_gstar_sh1_1",
+   "cmd": "python main.py evalgrid --src ../results/v2/g4/A_k0_gstar_N32000_sh1.jsonl --start 25 --count 25 --out ../results/v2/grid_ref/A_k0_gstar_sh1_1"
+  },
+  {
+   "id": "grid_A_k0_gstar_sh2_0",
+   "cmd": "python main.py evalgrid --src ../results/v2/g4/A_k0_gstar_N32000_sh2.jsonl --start 0 --count 25 --out ../results/v2/grid_ref/A_k0_gstar_sh2_0"
+  },
+  {
+   "id": "grid_A_k0_gstar_sh2_1",
+   "cmd": "python main.py evalgrid --src ../results/v2/g4/A_k0_gstar_N32000_sh2.jsonl --start 25 --count 25 --out ../results/v2/grid_ref/A_k0_gstar_sh2_1"
+  },
+  {
+   "id": "grid_A_k0_gstar_sh3_0",
+   "cmd": "python main.py evalgrid --src ../results/v2/g4/A_k0_gstar_N32000_sh3.jsonl --start 0 --count 25 --out ../results/v2/grid_ref/A_k0_gstar_sh3_0"
+  },
+  {
+   "id": "grid_A_k0_gstar_sh3_1",
+   "cmd": "python main.py evalgrid --src ../results/v2/g4/A_k0_gstar_N32000_sh3.jsonl --start 25 --count 25 --out ../results/v2/grid_ref/A_k0_gstar_sh3_1"
+  },
+  {
+   "id": "grid_S_k0_random_sh0_0",
+   "cmd": "python main.py evalgrid --src ../results/v2/g4/S_k0_random_N32000_sh0.jsonl --start 0 --count 25 --out ../results/v2/grid_ref/S_k0_random_sh0_0"
+  },
+  {
+   "id": "grid_S_k0_random_sh0_1",
+   "cmd": "python main.py evalgrid --src ../results/v2/g4/S_k0_random_N32000_sh0.jsonl --start 25 --count 25 --out ../results/v2/grid_ref/S_k0_random_sh0_1"
+  },
+  {
+   "id": "grid_S_k0_random_sh1_0",
+   "cmd": "python main.py evalgrid --src ../results/v2/g4/S_k0_random_N32000_sh1.jsonl --start 0 --count 25 --out ../results/v2/grid_ref/S_k0_random_sh1_0"
+  },
+  {
+   "id": "grid_S_k0_random_sh1_1",
+   "cmd": "python main.py evalgrid --src ../results/v2/g4/S_k0_random_N32000_sh1.jsonl --start 25 --count 25 --out ../results/v2/grid_ref/S_k0_random_sh1_1"
+  },
+  {
+   "id": "grid_S_k0_random_sh2_0",
+   "cmd": "python main.py evalgrid --src ../results/v2/g4/S_k0_random_N32000_sh2.jsonl --start 0 --count 25 --out ../results/v2/grid_ref/S_k0_random_sh2_0"
+  },
+  {
+   "id": "grid_S_k0_random_sh2_1",
+   "cmd": "python main.py evalgrid --src ../results/v2/g4/S_k0_random_N32000_sh2.jsonl --start 25 --count 25 --out ../results/v2/grid_ref/S_k0_random_sh2_1"
+  },
+  {
+   "id": "grid_S_k0_random_sh3_0",
+   "cmd": "python main.py evalgrid --src ../results/v2/g4/S_k0_random_N32000_sh3.jsonl --start 0 --count 25 --out ../results/v2/grid_ref/S_k0_random_sh3_0"
+  },
+  {
+   "id": "grid_S_k0_random_sh3_1",
+   "cmd": "python main.py evalgrid --src ../results/v2/g4/S_k0_random_N32000_sh3.jsonl --start 25 --count 25 --out ../results/v2/grid_ref/S_k0_random_sh3_1"
+  },
+  {
+   "id": "grid_S_k0_gstar_sh0_0",
+   "cmd": "python main.py evalgrid --src ../results/v2/g4/S_k0_gstar_N32000_sh0.jsonl --start 0 --count 25 --out ../results/v2/grid_ref/S_k0_gstar_sh0_0"
+  },
+  {
+   "id": "grid_S_k0_gstar_sh0_1",
+   "cmd": "python main.py evalgrid --src ../results/v2/g4/S_k0_gstar_N32000_sh0.jsonl --start 25 --count 25 --out ../results/v2/grid_ref/S_k0_gstar_sh0_1"
+  },
+  {
+   "id": "grid_S_k0_gstar_sh1_0",
+   "cmd": "python main.py evalgrid --src ../results/v2/g4/S_k0_gstar_N32000_sh1.jsonl --start 0 --count 25 --out ../results/v2/grid_ref/S_k0_gstar_sh1_0"
+  },
+  {
+   "id": "grid_S_k0_gstar_sh1_1",
+   "cmd": "python main.py evalgrid --src ../results/v2/g4/S_k0_gstar_N32000_sh1.jsonl --start 25 --count 25 --out ../results/v2/grid_ref/S_k0_gstar_sh1_1"
+  },
+  {
+   "id": "grid_S_k0_gstar_sh2_0",
+   "cmd": "python main.py evalgrid --src ../results/v2/g4/S_k0_gstar_N32000_sh2.jsonl --start 0 --count 25 --out ../results/v2/grid_ref/S_k0_gstar_sh2_0"
+  },
+  {
+   "id": "grid_S_k0_gstar_sh2_1",
+   "cmd": "python main.py evalgrid --src ../results/v2/g4/S_k0_gstar_N32000_sh2.jsonl --start 25 --count 25 --out ../results/v2/grid_ref/S_k0_gstar_sh2_1"
+  },
+  {
+   "id": "grid_S_k0_gstar_sh3_0",
+   "cmd": "python main.py evalgrid --src ../results/v2/g4/S_k0_gstar_N32000_sh3.jsonl --start 0 --count 25 --out ../results/v2/grid_ref/S_k0_gstar_sh3_0"
+  },
+  {
+   "id": "grid_S_k0_gstar_sh3_1",
+   "cmd": "python main.py evalgrid --src ../results/v2/g4/S_k0_gstar_N32000_sh3.jsonl --start 25 --count 25 --out ../results/v2/grid_ref/S_k0_gstar_sh3_1"
+  },
+  {
+   "id": "gridchk_S_k0_random_sub4",
+   "cmd": "python main.py evalgrid --src ../results/v2/g4/S_k0_random_N32000_sh1.jsonl --start 0 --count 4 --sub 4 --out ../results/v2/grid_check/S_k0_random_sub4"
+  },
+  {
+   "id": "gridchk_S_k0_random_sub8",
+   "cmd": "python main.py evalgrid --src ../results/v2/g4/S_k0_random_N32000_sh1.jsonl --start 0 --count 4 --sub 8 --out ../results/v2/grid_check/S_k0_random_sub8"
+  },
+  {
+   "id": "gridchk_S_k0_gstar_sub4",
+   "cmd": "python main.py evalgrid --src ../results/v2/g4/S_k0_gstar_N32000_sh1.jsonl --start 0 --count 4 --sub 4 --out ../results/v2/grid_check/S_k0_gstar_sub4"
+  },
+  {
+   "id": "gridchk_S_k0_gstar_sub8",
+   "cmd": "python main.py evalgrid --src ../results/v2/g4/S_k0_gstar_N32000_sh1.jsonl --start 0 --count 4 --sub 8 --out ../results/v2/grid_check/S_k0_gstar_sub8"
+  }
+ ]
+}

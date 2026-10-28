@@ -80,6 +80,10 @@ PF floor convention 1/(2·32,000)). Histories are rebuilt exactly from the recor
 adaptive 1/2/4 = full 0.25 mm/0.5° grid = 5.9048 nats (3 MH PF 5.586, 10 MH 5.779, 30 MH 5.879, 128k 5.273).
 **Self-check before use.** Adaptive sub = 4 vs sub = 8 on ≥ 6 pilot episodes (S; random and G*): mean |ΔBI| ≤ 0.02 nats
 and no success flips. Otherwise sub = 8 becomes the reference.
+*Revision (same day, after a first sandbox comparison on S/G* episode 0, recorded here):* sub 4 vs 8 gave ΔBI = 0.008
+but flipped success because the identity posterior is an exact tie (true-identity mass 0.503 vs 0.499); "no success
+flips" is therefore restricted to episodes whose true-identity mass is outside [0.45, 0.55] under both settings; flips
+inside that band are reported. The self-check runs on 8 S pilot episodes (4 random, 4 G*) of shard 1, not shard 0.
 **Kernel selection.** The G4 rule (|ΔBI| ≤ 0.05; |Δsuccess| ≤ 1 pp with 95 % CI inside ±2 pp) is applied to every
 candidate evaluation method against the grid reference on the first 200 recorded pilot episodes of each κ = 0 cell
 (S/A × random/G*), paired: PF 32k × 3 MH (G4), × 10 MH, × 30 MH, r10, r30, the 30 + 60 kernel, and the grid itself at
