@@ -9,7 +9,7 @@
 **Topic:** Amortized, non-myopic active tactile localization (TouchBED)
 **Initialised:** 2026-10-28T07:56:44Z
 **Current version:** v1
-**Latest stage:** Stage 8 HYPOTHESIS_GEN — next: stage 8.5 THEORETICAL_BOUNDS
+**Latest stage:** Stage 8.5 THEORETICAL_BOUNDS — next: stage 9 EXPERIMENT_DESIGN [GATE]
 
 ---
 
@@ -168,3 +168,15 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
 - **Decision:** PROCEED → stage 8.5.
 - **Summary:** Debate by three independent fresh-context opus subagents. Final set: H1a non-inferiority to full greedy PF-EIG + beats random/coverage; H1b ≥100× lower latency at matched accuracy; H1c information objective beats sparse task-reward RL; H2a non-myopic > myopic control on the ambiguous set at small budgets; H2b set-up-move mechanism + analytic positive control; H3 planning for no-contact outcomes; H4 MuJoCo transfer under a measured contact shift; secondary H2c, H5′. Myopic control differs from ours only in credit assignment (γ=0 vs full returns-to-go on identical sPCE increments, L=255), which removes the MI chain-rule confound flagged by the skeptic. Pre-registered paired-episode statistics with crossed bootstrap and Holm correction; manipulation check on a quantitative myopia gap before main runs. Compute estimate ≈ 71 CPU-h.
 - **Commit:** see git log ("stage 8 HYPOTHESIS_GEN")
+
+---
+
+## Stage 8.5. THEORETICAL_BOUNDS     [v1]
+
+- **Started:** 2026-10-28T09:18:00Z
+- **Finished:** see commit time ("stage 8.5 THEORETICAL_BOUNDS")
+- **Inputs used:** docs/07_hypotheses.md
+- **Outputs produced:** docs/07b_theoretical_bounds.md
+- **Decision:** PROCEED → stage 9.
+- **Summary:** Selection cost: greedy PF-EIG O(N·C·(V+M)) per decision vs policy O(d²), independent of belief resolution; training O(E·T·(L+1)·V). No convergence guarantee claimed for PPO (informal only). Key finding: the sPCE bound is capped at log(L+1) = 5.55 nats for L = 255, below the ≈ 8.1 nats needed for the success criterion, so the experiment design must raise L (or use a justified alternative) and measure saturation in the pilot.
+- **Commit:** see git log
