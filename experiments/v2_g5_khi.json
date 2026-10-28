@@ -1,0 +1,149 @@
+{
+ "purpose": "Gate G5 (docs/07_hypotheses_v2.md \u00a71.5, \u00a71.7, \u00a74) at kappa_hi = 6: G* and random on 300 pilot episodes per cell (A tau 3.2, S tau 5.0), and the flatness check G* on the 64x16 grid A+ (S). Actions do not depend on the evaluation posterior, so the 32k x 3 MH read-outs logged here are provisional; the B8-selected evaluation is re-applied offline to the recorded actions.",
+ "jobs": [
+  {
+   "id": "g5_A_k6_random_sh0",
+   "cmd": "python main.py eval2 --set A --method random --kappa 6 --tau 3.2 --split pilot --start 0 --count 50 --n-eval 32000 --budget-minutes 330 --out ../results/v2/g5/A_k6_random_sh0"
+  },
+  {
+   "id": "g5_A_k6_random_sh1",
+   "cmd": "python main.py eval2 --set A --method random --kappa 6 --tau 3.2 --split pilot --start 50 --count 50 --n-eval 32000 --budget-minutes 330 --out ../results/v2/g5/A_k6_random_sh1"
+  },
+  {
+   "id": "g5_A_k6_random_sh2",
+   "cmd": "python main.py eval2 --set A --method random --kappa 6 --tau 3.2 --split pilot --start 100 --count 50 --n-eval 32000 --budget-minutes 330 --out ../results/v2/g5/A_k6_random_sh2"
+  },
+  {
+   "id": "g5_A_k6_random_sh3",
+   "cmd": "python main.py eval2 --set A --method random --kappa 6 --tau 3.2 --split pilot --start 150 --count 50 --n-eval 32000 --budget-minutes 330 --out ../results/v2/g5/A_k6_random_sh3"
+  },
+  {
+   "id": "g5_A_k6_random_sh4",
+   "cmd": "python main.py eval2 --set A --method random --kappa 6 --tau 3.2 --split pilot --start 200 --count 50 --n-eval 32000 --budget-minutes 330 --out ../results/v2/g5/A_k6_random_sh4"
+  },
+  {
+   "id": "g5_A_k6_random_sh5",
+   "cmd": "python main.py eval2 --set A --method random --kappa 6 --tau 3.2 --split pilot --start 250 --count 50 --n-eval 32000 --budget-minutes 330 --out ../results/v2/g5/A_k6_random_sh5"
+  },
+  {
+   "id": "g5_A_k6_gstar_sh0",
+   "cmd": "python main.py eval2 --set A --method gstar --kappa 6 --tau 3.2 --split pilot --start 0 --count 50 --n-eval 32000 --budget-minutes 330 --out ../results/v2/g5/A_k6_gstar_sh0"
+  },
+  {
+   "id": "g5_A_k6_gstar_sh1",
+   "cmd": "python main.py eval2 --set A --method gstar --kappa 6 --tau 3.2 --split pilot --start 50 --count 50 --n-eval 32000 --budget-minutes 330 --out ../results/v2/g5/A_k6_gstar_sh1"
+  },
+  {
+   "id": "g5_A_k6_gstar_sh2",
+   "cmd": "python main.py eval2 --set A --method gstar --kappa 6 --tau 3.2 --split pilot --start 100 --count 50 --n-eval 32000 --budget-minutes 330 --out ../results/v2/g5/A_k6_gstar_sh2"
+  },
+  {
+   "id": "g5_A_k6_gstar_sh3",
+   "cmd": "python main.py eval2 --set A --method gstar --kappa 6 --tau 3.2 --split pilot --start 150 --count 50 --n-eval 32000 --budget-minutes 330 --out ../results/v2/g5/A_k6_gstar_sh3"
+  },
+  {
+   "id": "g5_A_k6_gstar_sh4",
+   "cmd": "python main.py eval2 --set A --method gstar --kappa 6 --tau 3.2 --split pilot --start 200 --count 50 --n-eval 32000 --budget-minutes 330 --out ../results/v2/g5/A_k6_gstar_sh4"
+  },
+  {
+   "id": "g5_A_k6_gstar_sh5",
+   "cmd": "python main.py eval2 --set A --method gstar --kappa 6 --tau 3.2 --split pilot --start 250 --count 50 --n-eval 32000 --budget-minutes 330 --out ../results/v2/g5/A_k6_gstar_sh5"
+  },
+  {
+   "id": "g5_S_k6_random_sh0",
+   "cmd": "python main.py eval2 --set S --method random --kappa 6 --tau 5.0 --split pilot --start 0 --count 50 --n-eval 32000 --budget-minutes 330 --out ../results/v2/g5/S_k6_random_sh0"
+  },
+  {
+   "id": "g5_S_k6_random_sh1",
+   "cmd": "python main.py eval2 --set S --method random --kappa 6 --tau 5.0 --split pilot --start 50 --count 50 --n-eval 32000 --budget-minutes 330 --out ../results/v2/g5/S_k6_random_sh1"
+  },
+  {
+   "id": "g5_S_k6_random_sh2",
+   "cmd": "python main.py eval2 --set S --method random --kappa 6 --tau 5.0 --split pilot --start 100 --count 50 --n-eval 32000 --budget-minutes 330 --out ../results/v2/g5/S_k6_random_sh2"
+  },
+  {
+   "id": "g5_S_k6_random_sh3",
+   "cmd": "python main.py eval2 --set S --method random --kappa 6 --tau 5.0 --split pilot --start 150 --count 50 --n-eval 32000 --budget-minutes 330 --out ../results/v2/g5/S_k6_random_sh3"
+  },
+  {
+   "id": "g5_S_k6_random_sh4",
+   "cmd": "python main.py eval2 --set S --method random --kappa 6 --tau 5.0 --split pilot --start 200 --count 50 --n-eval 32000 --budget-minutes 330 --out ../results/v2/g5/S_k6_random_sh4"
+  },
+  {
+   "id": "g5_S_k6_random_sh5",
+   "cmd": "python main.py eval2 --set S --method random --kappa 6 --tau 5.0 --split pilot --start 250 --count 50 --n-eval 32000 --budget-minutes 330 --out ../results/v2/g5/S_k6_random_sh5"
+  },
+  {
+   "id": "g5_S_k6_gstar_sh0",
+   "cmd": "python main.py eval2 --set S --method gstar --kappa 6 --tau 5.0 --split pilot --start 0 --count 50 --n-eval 32000 --budget-minutes 330 --out ../results/v2/g5/S_k6_gstar_sh0"
+  },
+  {
+   "id": "g5_S_k6_gstar_sh1",
+   "cmd": "python main.py eval2 --set S --method gstar --kappa 6 --tau 5.0 --split pilot --start 50 --count 50 --n-eval 32000 --budget-minutes 330 --out ../results/v2/g5/S_k6_gstar_sh1"
+  },
+  {
+   "id": "g5_S_k6_gstar_sh2",
+   "cmd": "python main.py eval2 --set S --method gstar --kappa 6 --tau 5.0 --split pilot --start 100 --count 50 --n-eval 32000 --budget-minutes 330 --out ../results/v2/g5/S_k6_gstar_sh2"
+  },
+  {
+   "id": "g5_S_k6_gstar_sh3",
+   "cmd": "python main.py eval2 --set S --method gstar --kappa 6 --tau 5.0 --split pilot --start 150 --count 50 --n-eval 32000 --budget-minutes 330 --out ../results/v2/g5/S_k6_gstar_sh3"
+  },
+  {
+   "id": "g5_S_k6_gstar_sh4",
+   "cmd": "python main.py eval2 --set S --method gstar --kappa 6 --tau 5.0 --split pilot --start 200 --count 50 --n-eval 32000 --budget-minutes 330 --out ../results/v2/g5/S_k6_gstar_sh4"
+  },
+  {
+   "id": "g5_S_k6_gstar_sh5",
+   "cmd": "python main.py eval2 --set S --method gstar --kappa 6 --tau 5.0 --split pilot --start 250 --count 50 --n-eval 32000 --budget-minutes 330 --out ../results/v2/g5/S_k6_gstar_sh5"
+  },
+  {
+   "id": "g5flat_S_k6_gstar_fine_sh0",
+   "cmd": "python main.py eval2 --set S --method gstar --kappa 6 --tau 5.0 --split pilot --start 0 --count 25 --n-eval 32000 --grid 64x16 --budget-minutes 330 --out ../results/v2/g5_flat/S_k6_gstar_fine_sh0"
+  },
+  {
+   "id": "g5flat_S_k6_gstar_fine_sh1",
+   "cmd": "python main.py eval2 --set S --method gstar --kappa 6 --tau 5.0 --split pilot --start 25 --count 25 --n-eval 32000 --grid 64x16 --budget-minutes 330 --out ../results/v2/g5_flat/S_k6_gstar_fine_sh1"
+  },
+  {
+   "id": "g5flat_S_k6_gstar_fine_sh2",
+   "cmd": "python main.py eval2 --set S --method gstar --kappa 6 --tau 5.0 --split pilot --start 50 --count 25 --n-eval 32000 --grid 64x16 --budget-minutes 330 --out ../results/v2/g5_flat/S_k6_gstar_fine_sh2"
+  },
+  {
+   "id": "g5flat_S_k6_gstar_fine_sh3",
+   "cmd": "python main.py eval2 --set S --method gstar --kappa 6 --tau 5.0 --split pilot --start 75 --count 25 --n-eval 32000 --grid 64x16 --budget-minutes 330 --out ../results/v2/g5_flat/S_k6_gstar_fine_sh3"
+  },
+  {
+   "id": "g5flat_S_k6_gstar_fine_sh4",
+   "cmd": "python main.py eval2 --set S --method gstar --kappa 6 --tau 5.0 --split pilot --start 100 --count 25 --n-eval 32000 --grid 64x16 --budget-minutes 330 --out ../results/v2/g5_flat/S_k6_gstar_fine_sh4"
+  },
+  {
+   "id": "g5flat_S_k6_gstar_fine_sh5",
+   "cmd": "python main.py eval2 --set S --method gstar --kappa 6 --tau 5.0 --split pilot --start 125 --count 25 --n-eval 32000 --grid 64x16 --budget-minutes 330 --out ../results/v2/g5_flat/S_k6_gstar_fine_sh5"
+  },
+  {
+   "id": "g5flat_S_k6_gstar_fine_sh6",
+   "cmd": "python main.py eval2 --set S --method gstar --kappa 6 --tau 5.0 --split pilot --start 150 --count 25 --n-eval 32000 --grid 64x16 --budget-minutes 330 --out ../results/v2/g5_flat/S_k6_gstar_fine_sh6"
+  },
+  {
+   "id": "g5flat_S_k6_gstar_fine_sh7",
+   "cmd": "python main.py eval2 --set S --method gstar --kappa 6 --tau 5.0 --split pilot --start 175 --count 25 --n-eval 32000 --grid 64x16 --budget-minutes 330 --out ../results/v2/g5_flat/S_k6_gstar_fine_sh7"
+  },
+  {
+   "id": "g5flat_S_k6_gstar_fine_sh8",
+   "cmd": "python main.py eval2 --set S --method gstar --kappa 6 --tau 5.0 --split pilot --start 200 --count 25 --n-eval 32000 --grid 64x16 --budget-minutes 330 --out ../results/v2/g5_flat/S_k6_gstar_fine_sh8"
+  },
+  {
+   "id": "g5flat_S_k6_gstar_fine_sh9",
+   "cmd": "python main.py eval2 --set S --method gstar --kappa 6 --tau 5.0 --split pilot --start 225 --count 25 --n-eval 32000 --grid 64x16 --budget-minutes 330 --out ../results/v2/g5_flat/S_k6_gstar_fine_sh9"
+  },
+  {
+   "id": "g5flat_S_k6_gstar_fine_sh10",
+   "cmd": "python main.py eval2 --set S --method gstar --kappa 6 --tau 5.0 --split pilot --start 250 --count 25 --n-eval 32000 --grid 64x16 --budget-minutes 330 --out ../results/v2/g5_flat/S_k6_gstar_fine_sh10"
+  },
+  {
+   "id": "g5flat_S_k6_gstar_fine_sh11",
+   "cmd": "python main.py eval2 --set S --method gstar --kappa 6 --tau 5.0 --split pilot --start 275 --count 25 --n-eval 32000 --grid 64x16 --budget-minutes 330 --out ../results/v2/g5_flat/S_k6_gstar_fine_sh11"
+  }
+ ]
+}
