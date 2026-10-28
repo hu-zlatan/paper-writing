@@ -1,0 +1,82 @@
+{
+ "k0": {
+  "abs_sd300": {
+   "n": 200,
+   "success": 0.42,
+   "gstar_success": 0.655,
+   "d_success": -0.235,
+   "d_success_ci95": [
+    -0.32,
+    -0.145
+   ],
+   "bi": 6.559999512898007,
+   "gstar_bi": 7.047869839728231,
+   "probes": 4.0,
+   "gstar_probes": 4.0,
+   "distinct_first_phi": 1
+  },
+  "abs_sd301": {
+   "n": 200,
+   "success": 0.405,
+   "gstar_success": 0.655,
+   "d_success": -0.25,
+   "d_success_ci95": [
+    -0.34,
+    -0.16
+   ],
+   "bi": 6.392250195625556,
+   "gstar_bi": 7.047869839728231,
+   "probes": 4.0,
+   "gstar_probes": 4.0,
+   "distinct_first_phi": 2
+  }
+ },
+ "k6": {},
+ "k12": {
+  "abs_sd200": {
+   "n": 500,
+   "success": 0.19,
+   "gstar_success": 0.41,
+   "d_success": -0.22,
+   "d_success_ci95": [
+    -0.268,
+    -0.17
+   ],
+   "bi": 5.099649109346805,
+   "gstar_bi": 6.336746344854269,
+   "probes": 2.362,
+   "gstar_probes": 4.158,
+   "distinct_first_phi": 4
+  },
+  "abs_sd201": {
+   "n": 500,
+   "success": 0.23,
+   "gstar_success": 0.41,
+   "d_success": -0.18,
+   "d_success_ci95": [
+    -0.228,
+    -0.132
+   ],
+   "bi": 5.245577612143335,
+   "gstar_bi": 6.336746344854269,
+   "probes": 2.586,
+   "gstar_probes": 4.158,
+   "distinct_first_phi": 4
+  },
+  "abs_sd202": {
+   "n": 500,
+   "success": 0.192,
+   "gstar_success": 0.41,
+   "d_success": -0.218,
+   "d_success_ci95": [
+    -0.27,
+    -0.168
+   ],
+   "bi": 5.103525133746875,
+   "gstar_bi": 6.336746344854269,
+   "probes": 2.248,
+   "gstar_probes": 4.158,
+   "distinct_first_phi": 4
+  }
+ }
+}

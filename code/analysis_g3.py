@@ -43,6 +43,19 @@ for sd in (200, 201, 202):
             last = h[-1]
             s["last_log"] = {k: last[k] for k in last if not isinstance(last[k], (list, dict))}
     out["seeds"][sd] = s
+out["remedy_2x"] = {}
+for sd in (200, 201, 202):
+    p = load(f"S_k12_2x_sd{sd}_sh*.jsonl")
+    common = sorted(set(p) & set(g))
+    out["remedy_2x"][sd] = {"n_paired": len(common),
+                            "success": float(np.mean([p[e]["success"] for e in common])) if common else None,
+                            "gstar_success_paired": float(np.mean([g[e]["success"] for e in common])) if common else None,
+                            "bi": float(np.mean([p[e]["ball_info"] for e in common])) if common else None,
+                            "probes": float(np.mean([len(p[e]["actions"]) for e in common])) if common else None}
+r = [v for v in out["remedy_2x"].values() if v["n_paired"] == 500]
+if len(r) == 3:
+    out["remedy_seed_mean_success"] = float(np.mean([v["success"] for v in r]))
+    out["remedy_rule_ii_success_pass"] = bool(out["remedy_seed_mean_success"] >= out["gstar"]["success"] - 0.05)
 vals = [s["success"] for s in out["seeds"].values() if s["success"] is not None]
 paired_g = [s["gstar_success_paired"] for s in out["seeds"].values() if s["success"] is not None]
 out["seed_mean_success"] = float(np.mean(vals))
