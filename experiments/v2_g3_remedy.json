@@ -1,0 +1,23 @@
+{
+ "purpose": "G3 pre-registered remedy (docs/07_hypotheses_v2.md \u00a74): E_train cap doubled to 2e5 for the G3 (ii) pilot seeds at (S, kappa = 12), launched because the provisional validation read-out (policy success 0.15-0.17 vs G* 0.41) points to a G3 (ii) failure; the gate itself is decided on the grid read-outs.",
+ "config": {
+  "lr": 0.00036339014767503805,
+  "ent_coef": 0.00013313139952275948,
+  "batch": 128,
+  "critic_lr": 0.0014321061677694642
+ },
+ "jobs": [
+  {
+   "id": "g3ii2x_S_k12_sd200",
+   "cmd": "python main.py train2 --set S --method spce_total --kappa 12 --tau 5.1 --lr 0.00036339014767503805 --ent-coef 0.00013313139952275948 --batch 128 --critic-lr 0.0014321061677694642 --seed 200 --max-episodes 200000 --budget-minutes 330 --out ../results/v2/g3/pilot2x_S_k12_sd200"
+  },
+  {
+   "id": "g3ii2x_S_k12_sd201",
+   "cmd": "python main.py train2 --set S --method spce_total --kappa 12 --tau 5.1 --lr 0.00036339014767503805 --ent-coef 0.00013313139952275948 --batch 128 --critic-lr 0.0014321061677694642 --seed 201 --max-episodes 200000 --budget-minutes 330 --out ../results/v2/g3/pilot2x_S_k12_sd201"
+  },
+  {
+   "id": "g3ii2x_S_k12_sd202",
+   "cmd": "python main.py train2 --set S --method spce_total --kappa 12 --tau 5.1 --lr 0.00036339014767503805 --ent-coef 0.00013313139952275948 --batch 128 --critic-lr 0.0014321061677694642 --seed 202 --max-episodes 200000 --budget-minutes 330 --out ../results/v2/g3/pilot2x_S_k12_sd202"
+  }
+ ]
+}
