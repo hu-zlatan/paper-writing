@@ -9,7 +9,7 @@
 **Topic:** Amortized, non-myopic active tactile localization (TouchBED)
 **Initialised:** 2026-10-28T07:56:44Z
 **Current version:** v1
-**Latest stage:** Stage 9 EXPERIMENT_DESIGN [GATE] — next: stage 10 CODE_GENERATION
+**Latest stage:** Stage 10 CODE_GENERATION (in progress) — resume from plans/stage_10_code_generation.md
 
 ---
 
@@ -192,3 +192,13 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
 - **Decision:** PROCEED → stage 10. **GATE auto-approved** (AUTOPILOT §1). Evidence: all required keys present and every effective component (non-myopic credit assignment, planning for no-contact outcomes, DeepSets encoder, contrastive count L, budget input) has an ablation row (script-checked); every baseline has an equal-effort tuning protocol (12-config search for learned methods, 18-config Pareto sweep for greedy PF-EIG, C sweep for coverage); metrics have formulas; compute is pilot-gated and sharded on GitHub Actions.
 - **Summary:** Deviation D1 — the contrastive count L is chosen by a pre-registered pilot rule from {255, 1023, 4095} because sPCE ≤ log(L+1) (stage 8.5); D2 — if L = 4095, core seeds 10 → 6 before any primary episode count is cut. Side note: the second literature workflow run (40657337558) failed and did not overwrite the stage-4 candidates, so all cite_keys remain those of run 40654783282.
 - **Commit:** see git log
+
+---
+
+## Stage 10. CODE_GENERATION     [v1]   (IN PROGRESS — no Finished timestamp yet)
+
+- **Started:** 2026-10-28T09:21:00Z
+- **Done so far:** code/touchbed/{shapes,geometry,likelihood,pf,policies,evaluate}.py + tests (code/tests, 10 passing): procedurally generated sets A/S/PC, vectorized ray casting, ε-softened observation model, particle filter with resample-move, random / coverage / greedy PF-EIG baselines, episode runner. Dev smoke test in results/v1/dev/pilot0_baselines.md (timing only).
+- **Environment:** PyTorch not installable (download.pytorch.org blocked by the egress proxy; PyPI torch pulls GB-scale CUDA deps) → the policy network and PPO are written in numpy with hand-written backprop (gradient-checked). shapely 2.2 and pytest installed via pip.
+- **Deviation D3 (from docs/07_hypotheses.md §1.3):** primary IG_T estimator is now the SMC-evidence form log p(h|s0) − log Ẑ(h) (no KDE); the KDE version is kept as a diagnostic because it is strongly biased low for broad posteriors. The evidence form is biased high when particles are sparse — to be quantified by the N vs 4N check.
+- **Remaining:** nn.py (numpy DeepSets + backprop + Adam), spce/ppo training with plateau rule and time_guard, learned-policy adapter, stats.py, main.py with pilot TIME_ESTIMATE + results.json, MuJoCo evaluation, numpy2 check, README/requirements.
