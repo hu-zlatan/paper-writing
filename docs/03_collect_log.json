@@ -1,0 +1,475 @@
+{
+ "generated": "2026-10-28T08:09:33Z",
+ "queries": [
+  {
+   "strategy": "core_active_tactile_localization",
+   "query": "active tactile object localization",
+   "source": "openalex",
+   "hits": 25
+  },
+  {
+   "strategy": "core_active_tactile_localization",
+   "query": "active tactile object localization",
+   "source": "arxiv",
+   "error": "https://export.arxiv.org/api/query?search_query=all%3Aactive%20AND%20all%3Atactile%20AND%20all%3Aobject%20AND%20all%3Alocalization&max_results=25&sortBy=relevance failed: HTTP 429"
+  },
+  {
+   "strategy": "core_active_tactile_localization",
+   "query": "active tactile object localization",
+   "source": "semanticscholar",
+   "error": "https://api.semanticscholar.org/graph/v1/paper/search?query=active%20tactile%20object%20localization&limit=25&fields=title,abstract,year,authors,externalIds,citationCount,venue,url failed: HTTP 429"
+  },
+  {
+   "strategy": "core_active_tactile_localization",
+   "query": "touch based object pose estimation",
+   "source": "openalex",
+   "hits": 25
+  },
+  {
+   "strategy": "core_active_tactile_localization",
+   "query": "touch based object pose estimation",
+   "source": "arxiv",
+   "error": "https://export.arxiv.org/api/query?search_query=all%3Atouch%20AND%20all%3Abased%20AND%20all%3Aobject%20AND%20all%3Apose%20AND%20all%3Aestimation&max_results=25&sortBy=relevance failed: HTTP 429"
+  },
+  {
+   "strategy": "core_active_tactile_localization",
+   "query": "touch based object pose estimation",
+   "source": "semanticscholar",
+   "hits": 25
+  },
+  {
+   "strategy": "core_active_tactile_localization",
+   "query": "next best touch localization",
+   "source": "openalex",
+   "hits": 25
+  },
+  {
+   "strategy": "core_active_tactile_localization",
+   "query": "next best touch localization",
+   "source": "arxiv",
+   "error": "https://export.arxiv.org/api/query?search_query=all%3Anext%20AND%20all%3Abest%20AND%20all%3Atouch%20AND%20all%3Alocalization&max_results=25&sortBy=relevance failed: HTTP 429"
+  },
+  {
+   "strategy": "core_active_tactile_localization",
+   "query": "next best touch localization",
+   "source": "semanticscholar",
+   "error": "https://api.semanticscholar.org/graph/v1/paper/search?query=next%20best%20touch%20localization&limit=25&fields=title,abstract,year,authors,externalIds,citationCount,venue,url failed: HTTP 429"
+  },
+  {
+   "strategy": "core_active_tactile_localization",
+   "query": "tactile exploration information gain",
+   "source": "openalex",
+   "hits": 25
+  },
+  {
+   "strategy": "core_active_tactile_localization",
+   "query": "tactile exploration information gain",
+   "source": "arxiv",
+   "error": "https://export.arxiv.org/api/query?search_query=all%3Atactile%20AND%20all%3Aexploration%20AND%20all%3Ainformation%20AND%20all%3Again&max_results=25&sortBy=relevance failed: HTTP 429"
+  },
+  {
+   "strategy": "core_active_tactile_localization",
+   "query": "tactile exploration information gain",
+   "source": "semanticscholar",
+   "error": "https://api.semanticscholar.org/graph/v1/paper/search?query=tactile%20exploration%20information%20gain&limit=25&fields=title,abstract,year,authors,externalIds,citationCount,venue,url failed: HTTP 429"
+  },
+  {
+   "strategy": "core_active_tactile_localization",
+   "query": "active haptic object recognition",
+   "source": "openalex",
+   "hits": 25
+  },
+  {
+   "strategy": "core_active_tactile_localization",
+   "query": "active haptic object recognition",
+   "source": "arxiv",
+   "error": "https://export.arxiv.org/api/query?search_query=all%3Aactive%20AND%20all%3Ahaptic%20AND%20all%3Aobject%20AND%20all%3Arecognition&max_results=25&sortBy=relevance failed: HTTP 429"
+  },
+  {
+   "strategy": "core_active_tactile_localization",
+   "query": "active haptic object recognition",
+   "source": "semanticscholar",
+   "error": "https://api.semanticscholar.org/graph/v1/paper/search?query=active%20haptic%20object%20recognition&limit=25&fields=title,abstract,year,authors,externalIds,citationCount,venue,url failed: HTTP 429"
+  },
+  {
+   "strategy": "tactile_pose_estimation_and_sensing",
+   "query": "tactile in-hand pose estimation",
+   "source": "openalex",
+   "hits": 25
+  },
+  {
+   "strategy": "tactile_pose_estimation_and_sensing",
+   "query": "tactile in-hand pose estimation",
+   "source": "arxiv",
+   "error": "https://export.arxiv.org/api/query?search_query=all%3Atactile%20AND%20all%3Ain-hand%20AND%20all%3Apose%20AND%20all%3Aestimation&max_results=25&sortBy=relevance failed: HTTP 429"
+  },
+  {
+   "strategy": "tactile_pose_estimation_and_sensing",
+   "query": "tactile in-hand pose estimation",
+   "source": "semanticscholar",
+   "hits": 25
+  },
+  {
+   "strategy": "tactile_pose_estimation_and_sensing",
+   "query": "visuotactile object pose tracking",
+   "source": "openalex",
+   "hits": 25
+  },
+  {
+   "strategy": "tactile_pose_estimation_and_sensing",
+   "query": "visuotactile object pose tracking",
+   "source": "arxiv",
+   "error": "https://export.arxiv.org/api/query?search_query=all%3Avisuotactile%20AND%20all%3Aobject%20AND%20all%3Apose%20AND%20all%3Atracking&max_results=25&sortBy=relevance failed: HTTP 429"
+  },
+  {
+   "strategy": "tactile_pose_estimation_and_sensing",
+   "query": "visuotactile object pose tracking",
+   "source": "semanticscholar",
+   "error": "https://api.semanticscholar.org/graph/v1/paper/search?query=visuotactile%20object%20pose%20tracking&limit=25&fields=title,abstract,year,authors,externalIds,citationCount,venue,url failed: HTTP 429"
+  },
+  {
+   "strategy": "tactile_pose_estimation_and_sensing",
+   "query": "tactile shape exploration Gaussian process",
+   "source": "openalex",
+   "hits": 25
+  },
+  {
+   "strategy": "tactile_pose_estimation_and_sensing",
+   "query": "tactile shape exploration Gaussian process",
+   "source": "arxiv",
+   "error": "https://export.arxiv.org/api/query?search_query=all%3Atactile%20AND%20all%3Ashape%20AND%20all%3Aexploration%20AND%20all%3AGaussian%20AND%20all%3Aprocess&max_results=25&sortBy=relevance failed: HTTP 429"
+  },
+  {
+   "strategy": "tactile_pose_estimation_and_sensing",
+   "query": "tactile shape exploration Gaussian process",
+   "source": "semanticscholar",
+   "error": "https://api.semanticscholar.org/graph/v1/paper/search?query=tactile%20shape%20exploration%20Gaussian%20process&limit=25&fields=title,abstract,year,authors,externalIds,citationCount,venue,url failed: HTTP 429"
+  },
+  {
+   "strategy": "tactile_pose_estimation_and_sensing",
+   "query": "contact particle filter localization",
+   "source": "openalex",
+   "hits": 25
+  },
+  {
+   "strategy": "tactile_pose_estimation_and_sensing",
+   "query": "contact particle filter localization",
+   "source": "arxiv",
+   "error": "https://export.arxiv.org/api/query?search_query=all%3Acontact%20AND%20all%3Aparticle%20AND%20all%3Afilter%20AND%20all%3Alocalization&max_results=25&sortBy=relevance failed: HTTP 429"
+  },
+  {
+   "strategy": "tactile_pose_estimation_and_sensing",
+   "query": "contact particle filter localization",
+   "source": "semanticscholar",
+   "error": "https://api.semanticscholar.org/graph/v1/paper/search?query=contact%20particle%20filter%20localization&limit=25&fields=title,abstract,year,authors,externalIds,citationCount,venue,url failed: HTTP 429"
+  },
+  {
+   "strategy": "bayesian_experimental_design",
+   "query": "deep adaptive experimental design",
+   "source": "openalex",
+   "hits": 25
+  },
+  {
+   "strategy": "bayesian_experimental_design",
+   "query": "deep adaptive experimental design",
+   "source": "arxiv",
+   "error": "https://export.arxiv.org/api/query?search_query=all%3Adeep%20AND%20all%3Aadaptive%20AND%20all%3Aexperimental%20AND%20all%3Adesign&max_results=25&sortBy=relevance failed: HTTP 429"
+  },
+  {
+   "strategy": "bayesian_experimental_design",
+   "query": "deep adaptive experimental design",
+   "source": "semanticscholar",
+   "error": "https://api.semanticscholar.org/graph/v1/paper/search?query=deep%20adaptive%20experimental%20design&limit=25&fields=title,abstract,year,authors,externalIds,citationCount,venue,url failed: HTTP 429"
+  },
+  {
+   "strategy": "bayesian_experimental_design",
+   "query": "amortized sequential Bayesian experimental design",
+   "source": "openalex",
+   "hits": 25
+  },
+  {
+   "strategy": "bayesian_experimental_design",
+   "query": "amortized sequential Bayesian experimental design",
+   "source": "arxiv",
+   "error": "https://export.arxiv.org/api/query?search_query=all%3Aamortized%20AND%20all%3Asequential%20AND%20all%3ABayesian%20AND%20all%3Aexperimental%20AND%20all%3Adesign&max_results=25&sortBy=relevance failed: HTTP 429"
+  },
+  {
+   "strategy": "bayesian_experimental_design",
+   "query": "amortized sequential Bayesian experimental design",
+   "source": "semanticscholar",
+   "hits": 25
+  },
+  {
+   "strategy": "bayesian_experimental_design",
+   "query": "expected information gain bounds",
+   "source": "openalex",
+   "hits": 25
+  },
+  {
+   "strategy": "bayesian_experimental_design",
+   "query": "expected information gain bounds",
+   "source": "arxiv",
+   "error": "https://export.arxiv.org/api/query?search_query=all%3Aexpected%20AND%20all%3Ainformation%20AND%20all%3Again%20AND%20all%3Abounds&max_results=25&sortBy=relevance failed: HTTP 429"
+  },
+  {
+   "strategy": "bayesian_experimental_design",
+   "query": "expected information gain bounds",
+   "source": "semanticscholar",
+   "error": "https://api.semanticscholar.org/graph/v1/paper/search?query=expected%20information%20gain%20bounds&limit=25&fields=title,abstract,year,authors,externalIds,citationCount,venue,url failed: HTTP 429"
+  },
+  {
+   "strategy": "bayesian_experimental_design",
+   "query": "reinforcement learning experimental design",
+   "source": "openalex",
+   "hits": 25
+  },
+  {
+   "strategy": "bayesian_experimental_design",
+   "query": "reinforcement learning experimental design",
+   "source": "arxiv",
+   "error": "https://export.arxiv.org/api/query?search_query=all%3Areinforcement%20AND%20all%3Alearning%20AND%20all%3Aexperimental%20AND%20all%3Adesign&max_results=25&sortBy=relevance failed: HTTP 429"
+  },
+  {
+   "strategy": "bayesian_experimental_design",
+   "query": "reinforcement learning experimental design",
+   "source": "semanticscholar",
+   "error": "https://api.semanticscholar.org/graph/v1/paper/search?query=reinforcement%20learning%20experimental%20design&limit=25&fields=title,abstract,year,authors,externalIds,citationCount,venue,url failed: HTTP 429"
+  },
+  {
+   "strategy": "bayesian_experimental_design",
+   "query": "implicit likelihood adaptive design",
+   "source": "openalex",
+   "hits": 25
+  },
+  {
+   "strategy": "bayesian_experimental_design",
+   "query": "implicit likelihood adaptive design",
+   "source": "arxiv",
+   "error": "https://export.arxiv.org/api/query?search_query=all%3Aimplicit%20AND%20all%3Alikelihood%20AND%20all%3Aadaptive%20AND%20all%3Adesign&max_results=25&sortBy=relevance failed: HTTP 429"
+  },
+  {
+   "strategy": "bayesian_experimental_design",
+   "query": "implicit likelihood adaptive design",
+   "source": "semanticscholar",
+   "hits": 25
+  },
+  {
+   "strategy": "active_perception_and_information_gathering",
+   "query": "active perception reinforcement learning",
+   "source": "openalex",
+   "hits": 25
+  },
+  {
+   "strategy": "active_perception_and_information_gathering",
+   "query": "active perception reinforcement learning",
+   "source": "arxiv",
+   "error": "https://export.arxiv.org/api/query?search_query=all%3Aactive%20AND%20all%3Aperception%20AND%20all%3Areinforcement%20AND%20all%3Alearning&max_results=25&sortBy=relevance failed: HTTP 429"
+  },
+  {
+   "strategy": "active_perception_and_information_gathering",
+   "query": "active perception reinforcement learning",
+   "source": "semanticscholar",
+   "error": "https://api.semanticscholar.org/graph/v1/paper/search?query=active%20perception%20reinforcement%20learning&limit=25&fields=title,abstract,year,authors,externalIds,citationCount,venue,url failed: HTTP 429"
+  },
+  {
+   "strategy": "active_perception_and_information_gathering",
+   "query": "informative path planning robotics",
+   "source": "openalex",
+   "hits": 25
+  },
+  {
+   "strategy": "active_perception_and_information_gathering",
+   "query": "informative path planning robotics",
+   "source": "arxiv",
+   "error": "https://export.arxiv.org/api/query?search_query=all%3Ainformative%20AND%20all%3Apath%20AND%20all%3Aplanning%20AND%20all%3Arobotics&max_results=25&sortBy=relevance failed: HTTP 429"
+  },
+  {
+   "strategy": "active_perception_and_information_gathering",
+   "query": "informative path planning robotics",
+   "source": "semanticscholar",
+   "error": "https://api.semanticscholar.org/graph/v1/paper/search?query=informative%20path%20planning%20robotics&limit=25&fields=title,abstract,year,authors,externalIds,citationCount,venue,url failed: HTTP 429"
+  },
+  {
+   "strategy": "active_perception_and_information_gathering",
+   "query": "adaptive submodularity active learning",
+   "source": "openalex",
+   "hits": 25
+  },
+  {
+   "strategy": "active_perception_and_information_gathering",
+   "query": "adaptive submodularity active learning",
+   "source": "arxiv",
+   "error": "https://export.arxiv.org/api/query?search_query=all%3Aadaptive%20AND%20all%3Asubmodularity%20AND%20all%3Aactive%20AND%20all%3Alearning&max_results=25&sortBy=relevance failed: HTTP 429"
+  },
+  {
+   "strategy": "active_perception_and_information_gathering",
+   "query": "adaptive submodularity active learning",
+   "source": "semanticscholar",
+   "error": "https://api.semanticscholar.org/graph/v1/paper/search?query=adaptive%20submodularity%20active%20learning&limit=25&fields=title,abstract,year,authors,externalIds,citationCount,venue,url failed: HTTP 429"
+  },
+  {
+   "strategy": "active_perception_and_information_gathering",
+   "query": "belief space planning manipulation",
+   "source": "openalex",
+   "hits": 25
+  },
+  {
+   "strategy": "active_perception_and_information_gathering",
+   "query": "belief space planning manipulation",
+   "source": "arxiv",
+   "error": "https://export.arxiv.org/api/query?search_query=all%3Abelief%20AND%20all%3Aspace%20AND%20all%3Aplanning%20AND%20all%3Amanipulation&max_results=25&sortBy=relevance failed: HTTP 429"
+  },
+  {
+   "strategy": "active_perception_and_information_gathering",
+   "query": "belief space planning manipulation",
+   "source": "semanticscholar",
+   "error": "https://api.semanticscholar.org/graph/v1/paper/search?query=belief%20space%20planning%20manipulation&limit=25&fields=title,abstract,year,authors,externalIds,citationCount,venue,url failed: HTTP 429"
+  },
+  {
+   "strategy": "dexterous_manipulation_with_touch",
+   "query": "dexterous manipulation tactile feedback",
+   "source": "openalex",
+   "hits": 25
+  },
+  {
+   "strategy": "dexterous_manipulation_with_touch",
+   "query": "dexterous manipulation tactile feedback",
+   "source": "arxiv",
+   "error": "https://export.arxiv.org/api/query?search_query=all%3Adexterous%20AND%20all%3Amanipulation%20AND%20all%3Atactile%20AND%20all%3Afeedback&max_results=25&sortBy=relevance failed: HTTP 429"
+  },
+  {
+   "strategy": "dexterous_manipulation_with_touch",
+   "query": "dexterous manipulation tactile feedback",
+   "source": "semanticscholar",
+   "error": "https://api.semanticscholar.org/graph/v1/paper/search?query=dexterous%20manipulation%20tactile%20feedback&limit=25&fields=title,abstract,year,authors,externalIds,citationCount,venue,url failed: HTTP 429"
+  },
+  {
+   "strategy": "dexterous_manipulation_with_touch",
+   "query": "tactile reinforcement learning manipulation",
+   "source": "openalex",
+   "hits": 25
+  },
+  {
+   "strategy": "dexterous_manipulation_with_touch",
+   "query": "tactile reinforcement learning manipulation",
+   "source": "arxiv",
+   "error": "https://export.arxiv.org/api/query?search_query=all%3Atactile%20AND%20all%3Areinforcement%20AND%20all%3Alearning%20AND%20all%3Amanipulation&max_results=25&sortBy=relevance failed: HTTP 429"
+  },
+  {
+   "strategy": "dexterous_manipulation_with_touch",
+   "query": "tactile reinforcement learning manipulation",
+   "source": "semanticscholar",
+   "error": "https://api.semanticscholar.org/graph/v1/paper/search?query=tactile%20reinforcement%20learning%20manipulation&limit=25&fields=title,abstract,year,authors,externalIds,citationCount,venue,url failed: HTTP 429"
+  },
+  {
+   "strategy": "dexterous_manipulation_with_touch",
+   "query": "tactile simulation benchmark robotics",
+   "source": "openalex",
+   "hits": 25
+  },
+  {
+   "strategy": "dexterous_manipulation_with_touch",
+   "query": "tactile simulation benchmark robotics",
+   "source": "arxiv",
+   "error": "https://export.arxiv.org/api/query?search_query=all%3Atactile%20AND%20all%3Asimulation%20AND%20all%3Abenchmark%20AND%20all%3Arobotics&max_results=25&sortBy=relevance failed: HTTP 429"
+  },
+  {
+   "strategy": "dexterous_manipulation_with_touch",
+   "query": "tactile simulation benchmark robotics",
+   "source": "semanticscholar",
+   "error": "https://api.semanticscholar.org/graph/v1/paper/search?query=tactile%20simulation%20benchmark%20robotics&limit=25&fields=title,abstract,year,authors,externalIds,citationCount,venue,url failed: HTTP 429"
+  },
+  {
+   "strategy": "dexterous_manipulation_with_touch",
+   "query": "blind grasping touch uncertainty",
+   "source": "openalex",
+   "hits": 25
+  },
+  {
+   "strategy": "dexterous_manipulation_with_touch",
+   "query": "blind grasping touch uncertainty",
+   "source": "arxiv",
+   "error": "https://export.arxiv.org/api/query?search_query=all%3Ablind%20AND%20all%3Agrasping%20AND%20all%3Atouch%20AND%20all%3Auncertainty&max_results=25&sortBy=relevance failed: HTTP 429"
+  },
+  {
+   "strategy": "dexterous_manipulation_with_touch",
+   "query": "blind grasping touch uncertainty",
+   "source": "semanticscholar",
+   "error": "https://api.semanticscholar.org/graph/v1/paper/search?query=blind%20grasping%20touch%20uncertainty&limit=25&fields=title,abstract,year,authors,externalIds,citationCount,venue,url failed: HTTP 429"
+  },
+  {
+   "strategy": "seminal",
+   "query": "global localization objects via touch",
+   "source": "openalex",
+   "hits": 25
+  },
+  {
+   "strategy": "seminal",
+   "query": "global localization objects via touch",
+   "source": "arxiv",
+   "error": "https://export.arxiv.org/api/query?search_query=all%3Aglobal%20AND%20all%3Alocalization%20AND%20all%3Aobjects%20AND%20all%3Avia%20AND%20all%3Atouch&max_results=25&sortBy=relevance failed: HTTP 429"
+  },
+  {
+   "strategy": "seminal",
+   "query": "global localization objects via touch",
+   "source": "semanticscholar",
+   "hits": 25
+  },
+  {
+   "strategy": "seminal",
+   "query": "efficient touch based localization submodularity",
+   "source": "openalex",
+   "hits": 25
+  },
+  {
+   "strategy": "seminal",
+   "query": "efficient touch based localization submodularity",
+   "source": "arxiv",
+   "error": "https://export.arxiv.org/api/query?search_query=all%3Aefficient%20AND%20all%3Atouch%20AND%20all%3Abased%20AND%20all%3Alocalization%20AND%20all%3Asubmodularity&max_results=25&sortBy=relevance failed: HTTP 429"
+  },
+  {
+   "strategy": "seminal",
+   "query": "efficient touch based localization submodularity",
+   "source": "semanticscholar",
+   "error": "https://api.semanticscholar.org/graph/v1/paper/search?query=efficient%20touch%20based%20localization%20submodularity&limit=25&fields=title,abstract,year,authors,externalIds,citationCount,venue,url failed: HTTP 429"
+  },
+  {
+   "strategy": "seminal",
+   "query": "next best touch model based localization",
+   "source": "openalex",
+   "hits": 25
+  },
+  {
+   "strategy": "seminal",
+   "query": "next best touch model based localization",
+   "source": "arxiv",
+   "error": "https://export.arxiv.org/api/query?search_query=all%3Anext%20AND%20all%3Abest%20AND%20all%3Atouch%20AND%20all%3Amodel%20AND%20all%3Abased%20AND%20all%3Alocalization&max_results=25&sortBy=relevance failed: HTTP 429"
+  },
+  {
+   "strategy": "seminal",
+   "query": "next best touch model based localization",
+   "source": "semanticscholar",
+   "error": "https://api.semanticscholar.org/graph/v1/paper/search?query=next%20best%20touch%20model%20based%20localization&limit=25&fields=title,abstract,year,authors,externalIds,citationCount,venue,url failed: HTTP 429"
+  },
+  {
+   "strategy": "seminal",
+   "query": "manifold particle filter contact",
+   "source": "openalex",
+   "hits": 25
+  },
+  {
+   "strategy": "seminal",
+   "query": "manifold particle filter contact",
+   "source": "arxiv",
+   "error": "https://export.arxiv.org/api/query?search_query=all%3Amanifold%20AND%20all%3Aparticle%20AND%20all%3Afilter%20AND%20all%3Acontact&max_results=25&sortBy=relevance failed: HTTP 429"
+  },
+  {
+   "strategy": "seminal",
+   "query": "manifold particle filter contact",
+   "source": "semanticscholar",
+   "hits": 25
+  }
+ ],
+ "raw_records": 800,
+ "unique_candidates": 681
+}
