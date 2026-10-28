@@ -68,7 +68,7 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
 ## Stage 1. TOPIC_INIT     [v1]
 
 - **Started:** 2026-10-28T07:59:00Z
-- **Finished:** 2026-10-28T08:20:00Z
+- **Finished:** 2026-10-28T08:07:19Z
 - **Inputs used:** AUTOPILOT.md, pipeline/MEGA_PROMPT.template.md, RESTRICTS.yaml, pipeline/references/stage_prompts/topic_init.md, open issues (none), RSS 2027 CFP, web scan of recent active-tactile papers.
 - **Outputs produced:**
   - docs/00_topic_init.md (SMART goal; sections Topic, Scope, SMART Goal, Constraints, Success Criteria, Generated)
@@ -87,8 +87,8 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
 
 ## Stage 2. PROBLEM_DECOMPOSE     [v1]
 
-- **Started:** 2026-10-28T08:21:00Z
-- **Finished:** 2026-10-28T08:27:00Z
+- **Started:** 2026-10-28T08:07:20Z
+- **Finished:** 2026-10-28T08:07:56Z
 - **Inputs used:** docs/00_topic_init.md, design docs.
 - **Outputs produced:** docs/01_problem_tree.md (6 prioritized sub-questions, 7 risks with mitigations); plans/stage_02_problem_decompose.md
 - **Decision:** PROCEED → stage 3.
@@ -99,8 +99,8 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
 
 ## Stage 3. SEARCH_STRATEGY     [v1]
 
-- **Started:** 2026-10-28T08:28:00Z
-- **Finished:** 2026-10-28T08:33:00Z
+- **Started:** 2026-10-28T08:07:57Z
+- **Finished:** 2026-10-28T08:08:31Z
 - **Inputs used:** docs/01_problem_tree.md
 - **Outputs produced:** docs/02_search_plan.yaml (5 strategies, 22 queries + 4 seminal queries), docs/02_sources.json (4 sources); plans/stage_03_search_strategy.md
 - **Decision:** PROCEED → stage 4.
@@ -111,8 +111,8 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
 
 ## Stage 4. LITERATURE_COLLECT     [v1]
 
-- **Started:** 2026-10-28T08:34:00Z
-- **Finished:** 2026-10-28T08:57:00Z
+- **Started:** 2026-10-28T08:08:32Z
+- **Finished:** 2026-10-28T08:56:35Z
 - **Inputs used:** docs/02_search_plan.yaml
 - **Outputs produced:** code/literature/collect.py, .github/workflows/literature.yml (GitHub Actions; push of the workflow was accepted), docs/03_candidates.jsonl (681 unique real records from 800 raw hits), docs/03_collect_log.json
 - **Decision:** PROCEED → stage 5.
@@ -123,8 +123,8 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
 
 ## Stage 5. LITERATURE_SCREEN  [GATE]     [v1]
 
-- **Started:** 2026-10-28T08:58:00Z
-- **Finished:** 2026-10-28T09:20:00Z
+- **Started:** 2026-10-28T08:56:36Z
+- **Finished:** 2026-10-28T08:58:42Z
 - **Inputs used:** docs/03_candidates.jsonl
 - **Outputs produced:** code/literature/screen.py, code/literature/screen_decisions_v1.py, docs/04_prefiltered.tsv, docs/04_screen_decisions.json, docs/04_shortlist.jsonl (56 papers)
 - **Decision:** PROCEED → stage 6. **GATE auto-approved** (AUTOPILOT §1). Evidence: 56 ≥ 30 entries; all search themes covered; every entry has an OpenAlex/DOI/arXiv identifier; original fields preserved (merge asserts identical titles); year filter applied with 7 explicit seminal exceptions; off-topic matches (human touch neuroscience, touch screens, whisker biology) rejected.
@@ -135,8 +135,8 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
 
 ## Stage 6. KNOWLEDGE_EXTRACT     [v1]
 
-- **Started:** 2026-10-28T09:21:00Z
-- **Finished:** 2026-10-28T09:27:00Z
+- **Started:** 2026-10-28T08:58:43Z
+- **Finished:** 2026-10-28T09:01:13Z
 - **Inputs used:** docs/04_shortlist.jsonl
 - **Outputs produced:** docs/05_knowledge_cards.json (56 cards), code/literature/build_cards_v1.py
 - **Decision:** PROCEED → stage 7.
@@ -147,8 +147,8 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
 
 ## Stage 7. SYNTHESIS     [v1]
 
-- **Started:** 2026-10-28T09:28:00Z
-- **Finished:** 2026-10-28T09:40:00Z
+- **Started:** 2026-10-28T09:01:14Z
+- **Finished:** 2026-10-28T09:02:53Z
 - **Inputs used:** docs/05_knowledge_cards.json; full text of arXiv:2603.21410v1 (WebFetch)
 - **Outputs produced:** docs/06_synthesis.md (7 clusters, 5 falsifiable gaps, ranked opportunities)
 - **Decision:** PROCEED → stage 8.
@@ -157,10 +157,12 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
 
 ---
 
+> Note: timestamps of stages 1–8 were corrected to the git commit times (earlier entries had estimated times).
+
 ## Stage 8. HYPOTHESIS_GEN (multi-agent debate)     [v1]   ← PIVOT target of stage 15
 
-- **Started:** 2026-10-28T09:41:00Z
-- **Finished:** 2026-10-28T10:05:00Z
+- **Started:** 2026-10-28T09:03:00Z
+- **Finished:** 2026-10-28T09:16:55Z
 - **Inputs used:** docs/06_synthesis.md, docs/00_topic_init.md
 - **Outputs produced:** docs/07a_proposer.md, docs/07b_skeptic.md, docs/07_hypotheses.md (canonical)
 - **Decision:** PROCEED → stage 8.5.
