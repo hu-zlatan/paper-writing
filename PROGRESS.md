@@ -369,3 +369,11 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
   and (iv) the ball-sPCE vs BI bias; (3) stage 14/15 with fresh subagents on the complete gate record. Expected
   stage-15 question: REFINE toward H1 (amortization) with Idea 2 reported as refuted, handling the flatness failure
   (𝒜 → 64 × 8) and the A0 saturation as pre-registered.
+  - **G3 (ii) provisional (S, κ = 12):** the 3 pilot seeds execute ≈ 2.4 probes vs G*'s ≈ 4 (they spend the budget on
+    travel); validation success with a 2k-particle read-out 0.15–0.17 vs G* 0.41 on the grid → likely **FAIL**
+    (rule: ≥ G* − 5 pp). Training-objective saturation 8.7–9.9 % (< 10 %, pass). Grid read-outs of the policies and the
+    pre-registered remedy (E_train 2 × 10⁵, experiments/v2_g3_remedy.json) dispatched. Flatness at κ = 12 on the grid
+    (225 eps): Δsuccess +3.1 pp, ΔBI +0.22 → fail confirmed so far.
+- **Run 3 ended ~17:55 UTC.** Actions still running: grid_g5 (random part), grid_g5_flat, grid_g3_val (policies),
+  G3 remedy training, grid_ref (random part). Resume as described above; add the remedy seeds' validation evaluation
+  (eval2 --split val --n-eval 2000, then evalgrid) before the gate decision.
