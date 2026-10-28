@@ -1,0 +1,24 @@
+Traceback (most recent call last):
+  File "/home/runner/work/paper-writing/paper-writing/code/main.py", line 355, in <module>
+    main()
+  File "/home/runner/work/paper-writing/paper-writing/code/main.py", line 351, in main
+    {"g2": cmd_g2, "g1": cmd_g1, "calib": cmd_calib, "train": cmd_train, "eval": cmd_eval, "pilot": cmd_pilot, "train2": cmd_train2, "eval2": cmd_eval2}[a.cmd](a)
+  File "/home/runner/work/paper-writing/paper-writing/code/main.py", line 254, in cmd_g2
+    r = g2_gap(a.set, a.kappa, a.tau, a.n_star, i, C1=a.C1, M_outer=a.M_outer)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/paper-writing/paper-writing/code/touchbed/g2.py", line 43, in g2_gap
+    r = lookahead_gap(prob, np.zeros(n_la), ts, seed=int(rng.integers(1 << 30)), C1=C1, M_outer=M_outer, greedy_M=0)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/paper-writing/paper-writing/code/touchbed/lookahead.py", line 51, in lookahead_gap
+    a_g = int(problem.first_greedy(logw, budget, np.random.default_rng(seed + 1)))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/paper-writing/paper-writing/code/touchbed/g2.py", line 42, in <lambda>
+    prob.first_greedy = lambda logw, budget, r: g_full.act(pf, budget)
+                                                ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/paper-writing/paper-writing/code/touchbed/policies_v2.py", line 65, in act
+    e = ball_eig(pf, PHI[cand], PSI[cand], self.M, self.rng, particles=(pf.k, pf.x, pf.y, pf.th, w), nb=nb)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/paper-writing/paper-writing/code/touchbed/ball.py", line 69, in ball_eig
+    return np.concatenate(out)
+           ^^^^^^^^^^^^^^^^^^^
+ValueError: need at least one array to concatenate
