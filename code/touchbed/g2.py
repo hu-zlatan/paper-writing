@@ -36,6 +36,12 @@ def g2_belief(setname, kappa, tau, n_star, i, n_dec=2000, M=64):
 
 def g2_gap(setname, kappa, tau, n_star, i, n_la=500, C1=32, M_outer=64):
     lib, om, pf, ts, u = g2_belief(setname, kappa, tau, n_star, i)
+    if ts.done() or not ts.feasible().any():
+        # budget exhausted before the drawn step: no decision is left, V_LA = V_G* = 0 (contributes nothing to either
+        # mean in the ratio-of-means G); recorded and counted
+        return {"no_budget_left": True, "v_la": 0.0, "v_greedy": 0.0, "a_la": -1, "a_greedy": -1, "gap_abs": 0.0,
+                "gap_rel": float("nan"), "set": setname, "kappa": kappa, "tau": tau, "n_star": n_star, "index": i,
+                "steps_before": u, "tau_rem": ts.tau_rem}
     rng = stream("g2_la", setname, kappa, i)
     prob = TouchbedProblem.from_pf(pf, n_la, rng)
     g_full = GStar(stream("g2_first", setname, kappa, i), M=64)

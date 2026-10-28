@@ -1,0 +1,25 @@
+{
+ "purpose": "G2 re-run of the beliefs whose jobs crashed: the belief's budget was exhausted before the drawn number of G* steps, so no action was feasible. Such beliefs are now recorded with V_LA = V_G* = 0 (no decision left), which leaves the ratio-of-means G unchanged relative to excluding them.",
+ "jobs": [
+  {
+   "id": "g2fix_S_k6_082",
+   "cmd": "python main.py g2 --set S --kappa 6 --tau 5.0 --n-star 4 --start 82 --count 3 --out ../results/v2/g2/S_k6_082_b"
+  },
+  {
+   "id": "g2fix_S_k6_093",
+   "cmd": "python main.py g2 --set S --kappa 6 --tau 5.0 --n-star 4 --start 93 --count 2 --out ../results/v2/g2/S_k6_093_b"
+  },
+  {
+   "id": "g2fix_S_k12_012",
+   "cmd": "python main.py g2 --set S --kappa 12 --tau 5.1 --n-star 4 --start 12 --count 3 --out ../results/v2/g2/S_k12_012_b"
+  },
+  {
+   "id": "g2fix_S_k12_020",
+   "cmd": "python main.py g2 --set S --kappa 12 --tau 5.1 --n-star 4 --start 20 --count 5 --out ../results/v2/g2/S_k12_020_b"
+  },
+  {
+   "id": "g2fix_S_k12_093",
+   "cmd": "python main.py g2 --set S --kappa 12 --tau 5.1 --n-star 4 --start 93 --count 2 --out ../results/v2/g2/S_k12_093_b"
+  }
+ ]
+}
