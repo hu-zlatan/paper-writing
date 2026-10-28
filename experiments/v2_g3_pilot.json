@@ -1,0 +1,23 @@
+{
+ "purpose": "Gate G3 (ii): 3 pilot seeds of the selected configuration (hp1, amendment B9) at (S, kappa = 6, tau = 5.0); weights kept. Re-run at kappa = 12 if the G2 escalation is used.",
+ "config": {
+  "lr": 0.00036339014767503805,
+  "ent_coef": 0.00013313139952275948,
+  "batch": 128,
+  "critic_lr": 0.0014321061677694642
+ },
+ "jobs": [
+  {
+   "id": "g3ii_S_k6_sd200",
+   "cmd": "python main.py train2 --set S --method spce_total --kappa 6 --tau 5.0 --lr 0.00036339014767503805 --ent-coef 0.00013313139952275948 --batch 128 --critic-lr 0.0014321061677694642 --seed 200 --max-episodes 100000 --budget-minutes 330 --out ../results/v2/g3/pilot_S_k6_sd200"
+  },
+  {
+   "id": "g3ii_S_k6_sd201",
+   "cmd": "python main.py train2 --set S --method spce_total --kappa 6 --tau 5.0 --lr 0.00036339014767503805 --ent-coef 0.00013313139952275948 --batch 128 --critic-lr 0.0014321061677694642 --seed 201 --max-episodes 100000 --budget-minutes 330 --out ../results/v2/g3/pilot_S_k6_sd201"
+  },
+  {
+   "id": "g3ii_S_k6_sd202",
+   "cmd": "python main.py train2 --set S --method spce_total --kappa 6 --tau 5.0 --lr 0.00036339014767503805 --ent-coef 0.00013313139952275948 --batch 128 --critic-lr 0.0014321061677694642 --seed 202 --max-episodes 100000 --budget-minutes 330 --out ../results/v2/g3/pilot_S_k6_sd202"
+  }
+ ]
+}
