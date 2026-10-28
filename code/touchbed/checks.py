@@ -33,17 +33,34 @@ def _iou(p: Polygon, q: Polygon, z) -> float:
     return p.intersection(qq).area / u if u > 0 else 0.0
 
 
+def _sep(ang, sym):
+    return min(abs((ang - g + math.pi) % (2 * math.pi) - math.pi) for g in sym)
+
+
 def pair_confusability(vk, vj, exclude_sym=None, min_sep=math.radians(10)) -> float:
+    """max IoU over (x, y, theta). Pairs: multi-start Nelder-Mead from 36 rotations. Self (exclude_sym given;
+    amendment v2.0 B3): 2-degree rotation grid outside +-min_sep of every symmetry element, then the 3 best grid
+    angles are refined by Nelder-Mead with a penalty that keeps theta outside the excluded neighbourhoods."""
     p, q = Polygon(vk), Polygon(vj)
-    best = 0.0
-    for a0 in np.linspace(0, 2 * math.pi, 36, endpoint=False):
-        if exclude_sym is not None and min(abs((a0 - g + math.pi) % (2 * math.pi) - math.pi) for g in exclude_sym) < min_sep:
-            continue
-        res = minimize(lambda z: -_iou(p, q, z), np.array([0.0, 0.0, a0]), method="Nelder-Mead",
+    if exclude_sym is None:
+        best = 0.0
+        for a0 in np.linspace(0, 2 * math.pi, 36, endpoint=False):
+            res = minimize(lambda z: -_iou(p, q, z), np.array([0.0, 0.0, a0]), method="Nelder-Mead",
+                           options={"xatol": 0.05, "fatol": 1e-4, "maxiter": 200})
+            best = max(best, -res.fun)
+        return best
+    grid = [a for a in np.radians(np.arange(0, 360, 2.0)) if _sep(a, exclude_sym) >= min_sep]
+    if not grid:
+        return 0.0
+    vals = sorted(((_iou(p, q, (0.0, 0.0, a)), a) for a in grid), reverse=True)[:3]
+    best = vals[0][0]
+
+    def obj(z):
+        return 1.0 if _sep(z[2], exclude_sym) < min_sep else -_iou(p, q, z)
+
+    for v, a0 in vals:
+        res = minimize(obj, np.array([0.0, 0.0, a0]), method="Nelder-Mead",
                        options={"xatol": 0.05, "fatol": 1e-4, "maxiter": 200})
-        z = res.x
-        if exclude_sym is not None and min(abs((z[2] - g + math.pi) % (2 * math.pi) - math.pi) for g in exclude_sym) < min_sep:
-            continue
         best = max(best, -res.fun)
     return best
 

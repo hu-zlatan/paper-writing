@@ -13,3 +13,11 @@ Recorded deviations and fixes required by docs/07_hypotheses_v2.md (G0) and resu
   neighbourhoods of the symmetry group, then refine locally within the allowed region; recomputed in G0.
 - **B4 — Ball-sPCE is a surrogate.** The training reward uses a ball-averaged numerator with J = 16 in-ball samples;
   it is not claimed to be a lower bound; its bias against evaluation-PF ball information is measured in G3.
+
+## Status note (2026-10-28, run 2) — G0 (ii) recomputation
+With the B3 search (results/v2/checks/confusability_{S,A}.json): S self-symmetry entries are no longer 0.0
+(S_rect 0.825, S_rtri 0.836, S_hex 0.922, S_trap 0.809; C(S) = 0.971, passes). The stronger self-symmetry search also
+raises set A's self values: C(A) = 0.802, which now **misses the C(A) ≤ 0.80 requirement by 0.002** (per-shape values
+0.755–0.821, all ≤ 0.85). Not resolved in this run. The threshold is not changed after seeing the value; the options
+for the next run are to replace the most self-confusable shape(s) of A with the next shapes from the same seeded
+generator (re-running the v1-comparable baselines on A) or to report A as marginally failing the pre-registered check.
