@@ -1,0 +1,197 @@
+{
+ "purpose": "G4 pre-registered fallback (docs/07_hypotheses_v2.md \u00a74): 32k particles with 10 MH steps per move vs reference 32k x 30 MH steps on the same 600 pilot episodes, random policy, kappa = 0, tau = 4. Launched because the 32k-vs-128k check already fails on ball information for (A, random): +0.13 nats at 128k.",
+ "jobs": [
+  {
+   "id": "g4fb_A_k0_random_mh10_sh0",
+   "cmd": "python main.py eval2 --set A --method random --kappa 0 --tau 4 --split pilot --start 0 --count 50 --n-eval 32000 --mh-steps 10 --budget-minutes 300 --out ../results/v2/g4_fallback/A_k0_random_mh10_sh0"
+  },
+  {
+   "id": "g4fb_A_k0_random_mh10_sh1",
+   "cmd": "python main.py eval2 --set A --method random --kappa 0 --tau 4 --split pilot --start 50 --count 50 --n-eval 32000 --mh-steps 10 --budget-minutes 300 --out ../results/v2/g4_fallback/A_k0_random_mh10_sh1"
+  },
+  {
+   "id": "g4fb_A_k0_random_mh10_sh2",
+   "cmd": "python main.py eval2 --set A --method random --kappa 0 --tau 4 --split pilot --start 100 --count 50 --n-eval 32000 --mh-steps 10 --budget-minutes 300 --out ../results/v2/g4_fallback/A_k0_random_mh10_sh2"
+  },
+  {
+   "id": "g4fb_A_k0_random_mh10_sh3",
+   "cmd": "python main.py eval2 --set A --method random --kappa 0 --tau 4 --split pilot --start 150 --count 50 --n-eval 32000 --mh-steps 10 --budget-minutes 300 --out ../results/v2/g4_fallback/A_k0_random_mh10_sh3"
+  },
+  {
+   "id": "g4fb_A_k0_random_mh10_sh4",
+   "cmd": "python main.py eval2 --set A --method random --kappa 0 --tau 4 --split pilot --start 200 --count 50 --n-eval 32000 --mh-steps 10 --budget-minutes 300 --out ../results/v2/g4_fallback/A_k0_random_mh10_sh4"
+  },
+  {
+   "id": "g4fb_A_k0_random_mh10_sh5",
+   "cmd": "python main.py eval2 --set A --method random --kappa 0 --tau 4 --split pilot --start 250 --count 50 --n-eval 32000 --mh-steps 10 --budget-minutes 300 --out ../results/v2/g4_fallback/A_k0_random_mh10_sh5"
+  },
+  {
+   "id": "g4fb_A_k0_random_mh10_sh6",
+   "cmd": "python main.py eval2 --set A --method random --kappa 0 --tau 4 --split pilot --start 300 --count 50 --n-eval 32000 --mh-steps 10 --budget-minutes 300 --out ../results/v2/g4_fallback/A_k0_random_mh10_sh6"
+  },
+  {
+   "id": "g4fb_A_k0_random_mh10_sh7",
+   "cmd": "python main.py eval2 --set A --method random --kappa 0 --tau 4 --split pilot --start 350 --count 50 --n-eval 32000 --mh-steps 10 --budget-minutes 300 --out ../results/v2/g4_fallback/A_k0_random_mh10_sh7"
+  },
+  {
+   "id": "g4fb_A_k0_random_mh10_sh8",
+   "cmd": "python main.py eval2 --set A --method random --kappa 0 --tau 4 --split pilot --start 400 --count 50 --n-eval 32000 --mh-steps 10 --budget-minutes 300 --out ../results/v2/g4_fallback/A_k0_random_mh10_sh8"
+  },
+  {
+   "id": "g4fb_A_k0_random_mh10_sh9",
+   "cmd": "python main.py eval2 --set A --method random --kappa 0 --tau 4 --split pilot --start 450 --count 50 --n-eval 32000 --mh-steps 10 --budget-minutes 300 --out ../results/v2/g4_fallback/A_k0_random_mh10_sh9"
+  },
+  {
+   "id": "g4fb_A_k0_random_mh10_sh10",
+   "cmd": "python main.py eval2 --set A --method random --kappa 0 --tau 4 --split pilot --start 500 --count 50 --n-eval 32000 --mh-steps 10 --budget-minutes 300 --out ../results/v2/g4_fallback/A_k0_random_mh10_sh10"
+  },
+  {
+   "id": "g4fb_A_k0_random_mh10_sh11",
+   "cmd": "python main.py eval2 --set A --method random --kappa 0 --tau 4 --split pilot --start 550 --count 50 --n-eval 32000 --mh-steps 10 --budget-minutes 300 --out ../results/v2/g4_fallback/A_k0_random_mh10_sh11"
+  },
+  {
+   "id": "g4fb_A_k0_random_mh30_sh0",
+   "cmd": "python main.py eval2 --set A --method random --kappa 0 --tau 4 --split pilot --start 0 --count 50 --n-eval 32000 --mh-steps 30 --budget-minutes 300 --out ../results/v2/g4_fallback/A_k0_random_mh30_sh0"
+  },
+  {
+   "id": "g4fb_A_k0_random_mh30_sh1",
+   "cmd": "python main.py eval2 --set A --method random --kappa 0 --tau 4 --split pilot --start 50 --count 50 --n-eval 32000 --mh-steps 30 --budget-minutes 300 --out ../results/v2/g4_fallback/A_k0_random_mh30_sh1"
+  },
+  {
+   "id": "g4fb_A_k0_random_mh30_sh2",
+   "cmd": "python main.py eval2 --set A --method random --kappa 0 --tau 4 --split pilot --start 100 --count 50 --n-eval 32000 --mh-steps 30 --budget-minutes 300 --out ../results/v2/g4_fallback/A_k0_random_mh30_sh2"
+  },
+  {
+   "id": "g4fb_A_k0_random_mh30_sh3",
+   "cmd": "python main.py eval2 --set A --method random --kappa 0 --tau 4 --split pilot --start 150 --count 50 --n-eval 32000 --mh-steps 30 --budget-minutes 300 --out ../results/v2/g4_fallback/A_k0_random_mh30_sh3"
+  },
+  {
+   "id": "g4fb_A_k0_random_mh30_sh4",
+   "cmd": "python main.py eval2 --set A --method random --kappa 0 --tau 4 --split pilot --start 200 --count 50 --n-eval 32000 --mh-steps 30 --budget-minutes 300 --out ../results/v2/g4_fallback/A_k0_random_mh30_sh4"
+  },
+  {
+   "id": "g4fb_A_k0_random_mh30_sh5",
+   "cmd": "python main.py eval2 --set A --method random --kappa 0 --tau 4 --split pilot --start 250 --count 50 --n-eval 32000 --mh-steps 30 --budget-minutes 300 --out ../results/v2/g4_fallback/A_k0_random_mh30_sh5"
+  },
+  {
+   "id": "g4fb_A_k0_random_mh30_sh6",
+   "cmd": "python main.py eval2 --set A --method random --kappa 0 --tau 4 --split pilot --start 300 --count 50 --n-eval 32000 --mh-steps 30 --budget-minutes 300 --out ../results/v2/g4_fallback/A_k0_random_mh30_sh6"
+  },
+  {
+   "id": "g4fb_A_k0_random_mh30_sh7",
+   "cmd": "python main.py eval2 --set A --method random --kappa 0 --tau 4 --split pilot --start 350 --count 50 --n-eval 32000 --mh-steps 30 --budget-minutes 300 --out ../results/v2/g4_fallback/A_k0_random_mh30_sh7"
+  },
+  {
+   "id": "g4fb_A_k0_random_mh30_sh8",
+   "cmd": "python main.py eval2 --set A --method random --kappa 0 --tau 4 --split pilot --start 400 --count 50 --n-eval 32000 --mh-steps 30 --budget-minutes 300 --out ../results/v2/g4_fallback/A_k0_random_mh30_sh8"
+  },
+  {
+   "id": "g4fb_A_k0_random_mh30_sh9",
+   "cmd": "python main.py eval2 --set A --method random --kappa 0 --tau 4 --split pilot --start 450 --count 50 --n-eval 32000 --mh-steps 30 --budget-minutes 300 --out ../results/v2/g4_fallback/A_k0_random_mh30_sh9"
+  },
+  {
+   "id": "g4fb_A_k0_random_mh30_sh10",
+   "cmd": "python main.py eval2 --set A --method random --kappa 0 --tau 4 --split pilot --start 500 --count 50 --n-eval 32000 --mh-steps 30 --budget-minutes 300 --out ../results/v2/g4_fallback/A_k0_random_mh30_sh10"
+  },
+  {
+   "id": "g4fb_A_k0_random_mh30_sh11",
+   "cmd": "python main.py eval2 --set A --method random --kappa 0 --tau 4 --split pilot --start 550 --count 50 --n-eval 32000 --mh-steps 30 --budget-minutes 300 --out ../results/v2/g4_fallback/A_k0_random_mh30_sh11"
+  },
+  {
+   "id": "g4fb_S_k0_random_mh10_sh0",
+   "cmd": "python main.py eval2 --set S --method random --kappa 0 --tau 4 --split pilot --start 0 --count 50 --n-eval 32000 --mh-steps 10 --budget-minutes 300 --out ../results/v2/g4_fallback/S_k0_random_mh10_sh0"
+  },
+  {
+   "id": "g4fb_S_k0_random_mh10_sh1",
+   "cmd": "python main.py eval2 --set S --method random --kappa 0 --tau 4 --split pilot --start 50 --count 50 --n-eval 32000 --mh-steps 10 --budget-minutes 300 --out ../results/v2/g4_fallback/S_k0_random_mh10_sh1"
+  },
+  {
+   "id": "g4fb_S_k0_random_mh10_sh2",
+   "cmd": "python main.py eval2 --set S --method random --kappa 0 --tau 4 --split pilot --start 100 --count 50 --n-eval 32000 --mh-steps 10 --budget-minutes 300 --out ../results/v2/g4_fallback/S_k0_random_mh10_sh2"
+  },
+  {
+   "id": "g4fb_S_k0_random_mh10_sh3",
+   "cmd": "python main.py eval2 --set S --method random --kappa 0 --tau 4 --split pilot --start 150 --count 50 --n-eval 32000 --mh-steps 10 --budget-minutes 300 --out ../results/v2/g4_fallback/S_k0_random_mh10_sh3"
+  },
+  {
+   "id": "g4fb_S_k0_random_mh10_sh4",
+   "cmd": "python main.py eval2 --set S --method random --kappa 0 --tau 4 --split pilot --start 200 --count 50 --n-eval 32000 --mh-steps 10 --budget-minutes 300 --out ../results/v2/g4_fallback/S_k0_random_mh10_sh4"
+  },
+  {
+   "id": "g4fb_S_k0_random_mh10_sh5",
+   "cmd": "python main.py eval2 --set S --method random --kappa 0 --tau 4 --split pilot --start 250 --count 50 --n-eval 32000 --mh-steps 10 --budget-minutes 300 --out ../results/v2/g4_fallback/S_k0_random_mh10_sh5"
+  },
+  {
+   "id": "g4fb_S_k0_random_mh10_sh6",
+   "cmd": "python main.py eval2 --set S --method random --kappa 0 --tau 4 --split pilot --start 300 --count 50 --n-eval 32000 --mh-steps 10 --budget-minutes 300 --out ../results/v2/g4_fallback/S_k0_random_mh10_sh6"
+  },
+  {
+   "id": "g4fb_S_k0_random_mh10_sh7",
+   "cmd": "python main.py eval2 --set S --method random --kappa 0 --tau 4 --split pilot --start 350 --count 50 --n-eval 32000 --mh-steps 10 --budget-minutes 300 --out ../results/v2/g4_fallback/S_k0_random_mh10_sh7"
+  },
+  {
+   "id": "g4fb_S_k0_random_mh10_sh8",
+   "cmd": "python main.py eval2 --set S --method random --kappa 0 --tau 4 --split pilot --start 400 --count 50 --n-eval 32000 --mh-steps 10 --budget-minutes 300 --out ../results/v2/g4_fallback/S_k0_random_mh10_sh8"
+  },
+  {
+   "id": "g4fb_S_k0_random_mh10_sh9",
+   "cmd": "python main.py eval2 --set S --method random --kappa 0 --tau 4 --split pilot --start 450 --count 50 --n-eval 32000 --mh-steps 10 --budget-minutes 300 --out ../results/v2/g4_fallback/S_k0_random_mh10_sh9"
+  },
+  {
+   "id": "g4fb_S_k0_random_mh10_sh10",
+   "cmd": "python main.py eval2 --set S --method random --kappa 0 --tau 4 --split pilot --start 500 --count 50 --n-eval 32000 --mh-steps 10 --budget-minutes 300 --out ../results/v2/g4_fallback/S_k0_random_mh10_sh10"
+  },
+  {
+   "id": "g4fb_S_k0_random_mh10_sh11",
+   "cmd": "python main.py eval2 --set S --method random --kappa 0 --tau 4 --split pilot --start 550 --count 50 --n-eval 32000 --mh-steps 10 --budget-minutes 300 --out ../results/v2/g4_fallback/S_k0_random_mh10_sh11"
+  },
+  {
+   "id": "g4fb_S_k0_random_mh30_sh0",
+   "cmd": "python main.py eval2 --set S --method random --kappa 0 --tau 4 --split pilot --start 0 --count 50 --n-eval 32000 --mh-steps 30 --budget-minutes 300 --out ../results/v2/g4_fallback/S_k0_random_mh30_sh0"
+  },
+  {
+   "id": "g4fb_S_k0_random_mh30_sh1",
+   "cmd": "python main.py eval2 --set S --method random --kappa 0 --tau 4 --split pilot --start 50 --count 50 --n-eval 32000 --mh-steps 30 --budget-minutes 300 --out ../results/v2/g4_fallback/S_k0_random_mh30_sh1"
+  },
+  {
+   "id": "g4fb_S_k0_random_mh30_sh2",
+   "cmd": "python main.py eval2 --set S --method random --kappa 0 --tau 4 --split pilot --start 100 --count 50 --n-eval 32000 --mh-steps 30 --budget-minutes 300 --out ../results/v2/g4_fallback/S_k0_random_mh30_sh2"
+  },
+  {
+   "id": "g4fb_S_k0_random_mh30_sh3",
+   "cmd": "python main.py eval2 --set S --method random --kappa 0 --tau 4 --split pilot --start 150 --count 50 --n-eval 32000 --mh-steps 30 --budget-minutes 300 --out ../results/v2/g4_fallback/S_k0_random_mh30_sh3"
+  },
+  {
+   "id": "g4fb_S_k0_random_mh30_sh4",
+   "cmd": "python main.py eval2 --set S --method random --kappa 0 --tau 4 --split pilot --start 200 --count 50 --n-eval 32000 --mh-steps 30 --budget-minutes 300 --out ../results/v2/g4_fallback/S_k0_random_mh30_sh4"
+  },
+  {
+   "id": "g4fb_S_k0_random_mh30_sh5",
+   "cmd": "python main.py eval2 --set S --method random --kappa 0 --tau 4 --split pilot --start 250 --count 50 --n-eval 32000 --mh-steps 30 --budget-minutes 300 --out ../results/v2/g4_fallback/S_k0_random_mh30_sh5"
+  },
+  {
+   "id": "g4fb_S_k0_random_mh30_sh6",
+   "cmd": "python main.py eval2 --set S --method random --kappa 0 --tau 4 --split pilot --start 300 --count 50 --n-eval 32000 --mh-steps 30 --budget-minutes 300 --out ../results/v2/g4_fallback/S_k0_random_mh30_sh6"
+  },
+  {
+   "id": "g4fb_S_k0_random_mh30_sh7",
+   "cmd": "python main.py eval2 --set S --method random --kappa 0 --tau 4 --split pilot --start 350 --count 50 --n-eval 32000 --mh-steps 30 --budget-minutes 300 --out ../results/v2/g4_fallback/S_k0_random_mh30_sh7"
+  },
+  {
+   "id": "g4fb_S_k0_random_mh30_sh8",
+   "cmd": "python main.py eval2 --set S --method random --kappa 0 --tau 4 --split pilot --start 400 --count 50 --n-eval 32000 --mh-steps 30 --budget-minutes 300 --out ../results/v2/g4_fallback/S_k0_random_mh30_sh8"
+  },
+  {
+   "id": "g4fb_S_k0_random_mh30_sh9",
+   "cmd": "python main.py eval2 --set S --method random --kappa 0 --tau 4 --split pilot --start 450 --count 50 --n-eval 32000 --mh-steps 30 --budget-minutes 300 --out ../results/v2/g4_fallback/S_k0_random_mh30_sh9"
+  },
+  {
+   "id": "g4fb_S_k0_random_mh30_sh10",
+   "cmd": "python main.py eval2 --set S --method random --kappa 0 --tau 4 --split pilot --start 500 --count 50 --n-eval 32000 --mh-steps 30 --budget-minutes 300 --out ../results/v2/g4_fallback/S_k0_random_mh30_sh10"
+  },
+  {
+   "id": "g4fb_S_k0_random_mh30_sh11",
+   "cmd": "python main.py eval2 --set S --method random --kappa 0 --tau 4 --split pilot --start 550 --count 50 --n-eval 32000 --mh-steps 30 --budget-minutes 300 --out ../results/v2/g4_fallback/S_k0_random_mh30_sh11"
+  }
+ ]
+}
