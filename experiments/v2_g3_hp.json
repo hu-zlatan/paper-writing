@@ -1,0 +1,47 @@
+{
+ "purpose": "Gate G3 (i) (docs/07_hypotheses_v2.md \u00a72.1/\u00a74): 4 PPO configurations (the first 4 of the pre-drawn v1 random configs, experiments/hpsearch_v1.json) x 1 seed (100) at (S, kappa_hi = 6, tau = 5.0), E_train = 1e5; selection on validation ball-sPCE.",
+ "configs": [
+  {
+   "lr": 0.00010376045336106945,
+   "ent_coef": 0.00021789572394966878,
+   "batch": 64,
+   "critic_lr": 0.0003153355560514154
+  },
+  {
+   "lr": 0.00036339014767503805,
+   "ent_coef": 0.00013313139952275948,
+   "batch": 128,
+   "critic_lr": 0.0014321061677694642
+  },
+  {
+   "lr": 0.0004269206511999925,
+   "ent_coef": 0.00023189427277086578,
+   "batch": 128,
+   "critic_lr": 0.0010891217888611413
+  },
+  {
+   "lr": 0.0006527439516965355,
+   "ent_coef": 0.0013668912607673815,
+   "batch": 64,
+   "critic_lr": 0.0006084752349580727
+  }
+ ],
+ "jobs": [
+  {
+   "id": "g3_hp0",
+   "cmd": "python main.py train2 --set S --method spce_total --kappa 6 --tau 5.0 --lr 0.00010376045336106945 --ent-coef 0.00021789572394966878 --batch 64 --critic-lr 0.0003153355560514154 --seed 100 --max-episodes 100000 --budget-minutes 330 --out ../results/v2/g3/hp0_S_k6"
+  },
+  {
+   "id": "g3_hp1",
+   "cmd": "python main.py train2 --set S --method spce_total --kappa 6 --tau 5.0 --lr 0.00036339014767503805 --ent-coef 0.00013313139952275948 --batch 128 --critic-lr 0.0014321061677694642 --seed 100 --max-episodes 100000 --budget-minutes 330 --out ../results/v2/g3/hp1_S_k6"
+  },
+  {
+   "id": "g3_hp2",
+   "cmd": "python main.py train2 --set S --method spce_total --kappa 6 --tau 5.0 --lr 0.0004269206511999925 --ent-coef 0.00023189427277086578 --batch 128 --critic-lr 0.0010891217888611413 --seed 100 --max-episodes 100000 --budget-minutes 330 --out ../results/v2/g3/hp2_S_k6"
+  },
+  {
+   "id": "g3_hp3",
+   "cmd": "python main.py train2 --set S --method spce_total --kappa 6 --tau 5.0 --lr 0.0006527439516965355 --ent-coef 0.0013668912607673815 --batch 64 --critic-lr 0.0006084752349580727 --seed 100 --max-episodes 100000 --budget-minutes 330 --out ../results/v2/g3/hp3_S_k6"
+  }
+ ]
+}
