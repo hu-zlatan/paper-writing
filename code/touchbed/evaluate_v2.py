@@ -47,7 +47,7 @@ def ball_information(pf, s0, prior_mass: float) -> float:
 
 
 def run_episode_v2(policy_factory, lib, prior, om: ObsModel, s0, phi0, kappa, tau, ep_key, n_eval=32000, n_dec=2000,
-                   needs_belief=True, pf_kwargs=None, refine_iters=30):
+                   needs_belief=True, pf_kwargs=None, refine_iters=30, final_mh=0):
     obs_rng = stream("obs", *ep_key)
     pol = policy_factory(stream("policy", *ep_key))
     pf_eval = ParticleFilter(lib, om, prior, n_eval, stream("pf_eval", *ep_key), **(pf_kwargs or {}))
@@ -67,6 +67,7 @@ def run_episode_v2(policy_factory, lib, prior, om: ObsModel, s0, phi0, kappa, ta
         pf_eval.update(phi, psi, obs)
         if pf_dec is not None:
             pf_dec.update(phi, psi, obs)
+    pf_eval.rejuvenate(final_mh)
     out = success(lib, pf_eval.estimate(refine_iters), s0)
     pm = prior_ball_mass(lib, prior, s0)
     out.update({"ball_info": ball_information(pf_eval, s0, pm), "ball_cap": -math.log(pm), "n_probes": ts.n_probes,

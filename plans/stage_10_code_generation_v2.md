@@ -18,3 +18,11 @@ Implement docs/08_experiment_plan_v2.yaml on top of the v1 package (v1 code path
 - Done: amendment v2.0; travel.py (256 actions, costs, feasibility); ball.py (ball membership, ball-EIG on PF beliefs, in-ball sampling) with exact two-hypothesis tests; policies_v2.py (random, coverage, G* incl. ladder subsets and full-state variant); evaluate_v2.py (travel episodes, exact-clip prior ball mass, ball information); train_v2.py (masked categorical DeepSets, ball-sPCE rewards with J in-ball samples, PPO γ=1 / γ=0 rate-myopic, full-state and No-NC-input ablations, validation on ball-sPCE, plateau rule, time guard) with gradient checks; main.py train2 / eval2; TOST in stats.py.
 - Measured on the sandbox: training ≈ 68 ms per episode at L=4095, κ=6, τ=10 (3.3 probes, untrained g_T 3.98 nats, far from the 8.32 cap); G* ≈ 2.3 s per decision at M=32 (N=2000, 256 candidates).
 - Remaining: G0 unit tests (κ=0/τ=3 reproduction of v1, ball-sPCE toy agreement), exact notch reference + G1 look-ahead estimator, rollout planner, τ_κ / n* calibration (G5), latency ladder protocol.
+
+## Run 3 plan (2026-10-28 ~14:00 UTC)
+1. Analyse the finished G4 κ=0 and G4-fallback runs (code/analysis_g4.py, code/analysis_g4_fallback.py).
+2. Both fail → amendment B5 (final rejuvenation of the evaluation PF), written before the re-check; unit test; launch
+   experiments/v2_g4_b5.json on Actions.
+3. Aggregate the G5 τ calibration (results/v2/calib) → n* per set and τ_κ per cell, using the G4 κ=0 G* pilot success
+   for the n* rule (§1.2).
+4. Continue the remaining stage-10 items if time allows (exact notch reference + G1 estimator, set-A C(A) resolution).

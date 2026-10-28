@@ -1,0 +1,314 @@
+{
+ "A_k0_random_fallback_10mh_vs_30mh": {
+  "n_episodes": 600,
+  "reference": [
+   32000,
+   30
+  ],
+  "candidate": [
+   32000,
+   10
+  ],
+  "success": {
+   "mean_candidate": 0.31666666666666665,
+   "mean_reference": 0.3283333333333333,
+   "diff_ref_minus_cand": 0.011666666666666667,
+   "ci95": [
+    -0.005,
+    0.028333333333333332
+   ]
+  },
+  "ball_info": {
+   "mean_candidate": 5.298275830616158,
+   "mean_reference": 5.343603667974323,
+   "diff_ref_minus_cand": 0.04532783735816413,
+   "ci95": [
+    0.02493872788378015,
+    0.06747637330077157
+   ]
+  },
+  "identity_ok": {
+   "mean_candidate": 0.47833333333333333,
+   "mean_reference": 0.485,
+   "diff_ref_minus_cand": 0.006666666666666667,
+   "ci95": [
+    -0.011666666666666667,
+    0.025
+   ]
+  },
+  "passes_G4_rule": false
+ },
+ "A_k0_random_10mh_vs_128k3mh": {
+  "n_episodes": 600,
+  "reference": [
+   128000,
+   3
+  ],
+  "candidate": [
+   32000,
+   10
+  ],
+  "success": {
+   "mean_candidate": 0.31666666666666665,
+   "mean_reference": 0.315,
+   "diff_ref_minus_cand": -0.0016666666666666668,
+   "ci95": [
+    -0.021666666666666667,
+    0.018333333333333333
+   ]
+  },
+  "ball_info": {
+   "mean_candidate": 5.298275830616158,
+   "mean_reference": 5.330958632031711,
+   "diff_ref_minus_cand": 0.032682801415553325,
+   "ci95": [
+    -0.0005765666422152287,
+    0.07015877169576129
+   ]
+  },
+  "identity_ok": {
+   "mean_candidate": 0.47833333333333333,
+   "mean_reference": 0.475,
+   "diff_ref_minus_cand": -0.0033333333333333335,
+   "ci95": [
+    -0.028333333333333332,
+    0.021666666666666667
+   ]
+  },
+  "passes_G4_rule": false
+ },
+ "A_k0_random_30mh_vs_128k3mh": {
+  "n_episodes": 600,
+  "reference": [
+   128000,
+   3
+  ],
+  "candidate": [
+   32000,
+   30
+  ],
+  "success": {
+   "mean_candidate": 0.3283333333333333,
+   "mean_reference": 0.315,
+   "diff_ref_minus_cand": -0.013333333333333334,
+   "ci95": [
+    -0.03333333333333333,
+    0.005
+   ]
+  },
+  "ball_info": {
+   "mean_candidate": 5.343603667974323,
+   "mean_reference": 5.330958632031711,
+   "diff_ref_minus_cand": -0.012645035942610799,
+   "ci95": [
+    -0.03907507124499651,
+    0.01518882802558701
+   ]
+  },
+  "identity_ok": {
+   "mean_candidate": 0.485,
+   "mean_reference": 0.475,
+   "diff_ref_minus_cand": -0.01,
+   "ci95": [
+    -0.03166666666666667,
+    0.011666666666666667
+   ]
+  },
+  "passes_G4_rule": false
+ },
+ "A_k0_random_3mh_vs_10mh_32k": {
+  "n_episodes": 600,
+  "reference": [
+   32000,
+   10
+  ],
+  "candidate": [
+   32000,
+   3
+  ],
+  "success": {
+   "mean_candidate": 0.31166666666666665,
+   "mean_reference": 0.31666666666666665,
+   "diff_ref_minus_cand": 0.005,
+   "ci95": [
+    -0.013333333333333334,
+    0.023333333333333334
+   ]
+  },
+  "ball_info": {
+   "mean_candidate": 5.197778008890842,
+   "mean_reference": 5.298275830616158,
+   "diff_ref_minus_cand": 0.10049782172531563,
+   "ci95": [
+    0.07119671395906038,
+    0.13079833888926382
+   ]
+  },
+  "identity_ok": {
+   "mean_candidate": 0.4633333333333333,
+   "mean_reference": 0.47833333333333333,
+   "diff_ref_minus_cand": 0.015,
+   "ci95": [
+    -0.006666666666666667,
+    0.03666666666666667
+   ]
+  },
+  "passes_G4_rule": false
+ },
+ "S_k0_random_fallback_10mh_vs_30mh": {
+  "n_episodes": 600,
+  "reference": [
+   32000,
+   30
+  ],
+  "candidate": [
+   32000,
+   10
+  ],
+  "success": {
+   "mean_candidate": 0.22,
+   "mean_reference": 0.25666666666666665,
+   "diff_ref_minus_cand": 0.03666666666666667,
+   "ci95": [
+    0.008333333333333333,
+    0.065
+   ]
+  },
+  "ball_info": {
+   "mean_candidate": 5.052241913813541,
+   "mean_reference": 5.091653647124024,
+   "diff_ref_minus_cand": 0.03941173331048273,
+   "ci95": [
+    0.01696167813393909,
+    0.06211964965286903
+   ]
+  },
+  "identity_ok": {
+   "mean_candidate": 0.365,
+   "mean_reference": 0.39,
+   "diff_ref_minus_cand": 0.025,
+   "ci95": [
+    -0.005,
+    0.055
+   ]
+  },
+  "passes_G4_rule": false
+ },
+ "S_k0_random_10mh_vs_128k3mh": {
+  "n_episodes": 600,
+  "reference": [
+   128000,
+   3
+  ],
+  "candidate": [
+   32000,
+   10
+  ],
+  "success": {
+   "mean_candidate": 0.22,
+   "mean_reference": 0.22833333333333333,
+   "diff_ref_minus_cand": 0.008333333333333333,
+   "ci95": [
+    -0.021666666666666667,
+    0.03833333333333333
+   ]
+  },
+  "ball_info": {
+   "mean_candidate": 5.052241913813541,
+   "mean_reference": 5.085078381874891,
+   "diff_ref_minus_cand": 0.03283646806134952,
+   "ci95": [
+    -0.0054958508843492215,
+    0.07320270443750285
+   ]
+  },
+  "identity_ok": {
+   "mean_candidate": 0.365,
+   "mean_reference": 0.365,
+   "diff_ref_minus_cand": 0.0,
+   "ci95": [
+    -0.035,
+    0.035
+   ]
+  },
+  "passes_G4_rule": false
+ },
+ "S_k0_random_30mh_vs_128k3mh": {
+  "n_episodes": 600,
+  "reference": [
+   128000,
+   3
+  ],
+  "candidate": [
+   32000,
+   30
+  ],
+  "success": {
+   "mean_candidate": 0.25666666666666665,
+   "mean_reference": 0.22833333333333333,
+   "diff_ref_minus_cand": -0.028333333333333332,
+   "ci95": [
+    -0.058333333333333334,
+    0.0016666666666666668
+   ]
+  },
+  "ball_info": {
+   "mean_candidate": 5.091653647124024,
+   "mean_reference": 5.085078381874891,
+   "diff_ref_minus_cand": -0.006575265249133202,
+   "ci95": [
+    -0.03777397103451507,
+    0.023830311755775314
+   ]
+  },
+  "identity_ok": {
+   "mean_candidate": 0.39,
+   "mean_reference": 0.365,
+   "diff_ref_minus_cand": -0.025,
+   "ci95": [
+    -0.06,
+    0.008333333333333333
+   ]
+  },
+  "passes_G4_rule": false
+ },
+ "S_k0_random_3mh_vs_10mh_32k": {
+  "n_episodes": 600,
+  "reference": [
+   32000,
+   10
+  ],
+  "candidate": [
+   32000,
+   3
+  ],
+  "success": {
+   "mean_candidate": 0.21,
+   "mean_reference": 0.22,
+   "diff_ref_minus_cand": 0.01,
+   "ci95": [
+    -0.015,
+    0.03333333333333333
+   ]
+  },
+  "ball_info": {
+   "mean_candidate": 4.908094381230343,
+   "mean_reference": 5.052241913813541,
+   "diff_ref_minus_cand": 0.14414753258319934,
+   "ci95": [
+    0.10051155444536104,
+    0.19737777723369607
+   ]
+  },
+  "identity_ok": {
+   "mean_candidate": 0.36666666666666664,
+   "mean_reference": 0.365,
+   "diff_ref_minus_cand": -0.0016666666666666668,
+   "ci95": [
+    -0.03166666666666667,
+    0.02666666666666667
+   ]
+  },
+  "passes_G4_rule": false
+ }
+}

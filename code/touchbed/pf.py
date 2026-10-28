@@ -85,6 +85,19 @@ class ParticleFilter:
         if self.ess() < self.n / 2:
             self._resample_move()
 
+    def rejuvenate(self, steps: int) -> None:
+        """Final rejuvenation (amendment v2.0 B5): one forced systematic resample followed by `steps` posterior-invariant
+        MH moves on the full history. Used only by the evaluation PF after the last probe; steps = 0 is a no-op, so
+        every earlier result is unchanged."""
+        if steps <= 0 or not self.hist:
+            return
+        saved = self.mh_steps
+        self.mh_steps = steps
+        try:
+            self._resample_move()
+        finally:
+            self.mh_steps = saved
+
     def _resample_move(self) -> None:
         self.n_resample += 1
         w = np.exp(self.logw - logsumexp(self.logw))

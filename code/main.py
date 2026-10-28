@@ -199,7 +199,9 @@ def cmd_eval2(a):
                 break
             s0, phi0 = eps[i]
             r = run_episode_v2(fac, lib, prior, om, s0, phi0, a.kappa, a.tau, (a.set, a.split, a.kappa, a.tau, i),
-                               n_eval=a.n_eval, n_dec=a.n_dec, needs_belief=needs, pf_kwargs={"mh_steps": a.mh_steps})
+                               n_eval=a.n_eval, n_dec=a.n_dec, needs_belief=needs, pf_kwargs={"mh_steps": a.mh_steps},
+                               final_mh=a.final_mh)
+            r.update({"final_mh": a.final_mh})
             r.update({"episode": i, "set": a.set, "kappa": a.kappa, "tau": a.tau, "method": a.method,
                       "weights": a.weights, "n_eval": a.n_eval, "n_dec": a.n_dec, "M": a.M,
                       "rung": [a.rung_phi, a.rung_psi], "mh_steps": a.mh_steps})
@@ -281,6 +283,7 @@ def main():
     e2.add_argument("--n-eval", type=int, default=32000); e2.add_argument("--n-dec", type=int, default=2000)
     e2.add_argument("--M", type=int, default=64); e2.add_argument("--rung-phi", type=int, default=32)
     e2.add_argument("--rung-psi", type=int, default=8); e2.add_argument("--mh-steps", type=int, default=3)
+    e2.add_argument("--final-mh", type=int, default=0)
     e2.add_argument("--budget-minutes", type=float, default=330.0); e2.add_argument("--out", required=True)
     cb = sub.add_parser("calib")
     cb.add_argument("--set", default="S"); cb.add_argument("--kappa", type=float, default=6.0)

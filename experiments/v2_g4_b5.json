@@ -1,0 +1,581 @@
+{
+ "purpose": "G4 re-check under amendment v2.0 B5 (final rejuvenation of the evaluation PF): candidates 32k x 3 MH + R in {10,30} final MH steps vs reference 32k x 30 MH + 60 final, kappa=0, tau=4, 600 paired pilot episodes per set x method.",
+ "jobs": [
+  {
+   "id": "g4b5_A_k0_random_r10_sh0",
+   "cmd": "python main.py eval2 --set A --method random --kappa 0 --tau 4 --split pilot --start 0 --count 50 --n-eval 32000 --mh-steps 3 --final-mh 10 --budget-minutes 330 --out ../results/v2/g4_b5/A_k0_random_r10_sh0"
+  },
+  {
+   "id": "g4b5_A_k0_random_r10_sh1",
+   "cmd": "python main.py eval2 --set A --method random --kappa 0 --tau 4 --split pilot --start 50 --count 50 --n-eval 32000 --mh-steps 3 --final-mh 10 --budget-minutes 330 --out ../results/v2/g4_b5/A_k0_random_r10_sh1"
+  },
+  {
+   "id": "g4b5_A_k0_random_r10_sh2",
+   "cmd": "python main.py eval2 --set A --method random --kappa 0 --tau 4 --split pilot --start 100 --count 50 --n-eval 32000 --mh-steps 3 --final-mh 10 --budget-minutes 330 --out ../results/v2/g4_b5/A_k0_random_r10_sh2"
+  },
+  {
+   "id": "g4b5_A_k0_random_r10_sh3",
+   "cmd": "python main.py eval2 --set A --method random --kappa 0 --tau 4 --split pilot --start 150 --count 50 --n-eval 32000 --mh-steps 3 --final-mh 10 --budget-minutes 330 --out ../results/v2/g4_b5/A_k0_random_r10_sh3"
+  },
+  {
+   "id": "g4b5_A_k0_random_r10_sh4",
+   "cmd": "python main.py eval2 --set A --method random --kappa 0 --tau 4 --split pilot --start 200 --count 50 --n-eval 32000 --mh-steps 3 --final-mh 10 --budget-minutes 330 --out ../results/v2/g4_b5/A_k0_random_r10_sh4"
+  },
+  {
+   "id": "g4b5_A_k0_random_r10_sh5",
+   "cmd": "python main.py eval2 --set A --method random --kappa 0 --tau 4 --split pilot --start 250 --count 50 --n-eval 32000 --mh-steps 3 --final-mh 10 --budget-minutes 330 --out ../results/v2/g4_b5/A_k0_random_r10_sh5"
+  },
+  {
+   "id": "g4b5_A_k0_random_r10_sh6",
+   "cmd": "python main.py eval2 --set A --method random --kappa 0 --tau 4 --split pilot --start 300 --count 50 --n-eval 32000 --mh-steps 3 --final-mh 10 --budget-minutes 330 --out ../results/v2/g4_b5/A_k0_random_r10_sh6"
+  },
+  {
+   "id": "g4b5_A_k0_random_r10_sh7",
+   "cmd": "python main.py eval2 --set A --method random --kappa 0 --tau 4 --split pilot --start 350 --count 50 --n-eval 32000 --mh-steps 3 --final-mh 10 --budget-minutes 330 --out ../results/v2/g4_b5/A_k0_random_r10_sh7"
+  },
+  {
+   "id": "g4b5_A_k0_random_r10_sh8",
+   "cmd": "python main.py eval2 --set A --method random --kappa 0 --tau 4 --split pilot --start 400 --count 50 --n-eval 32000 --mh-steps 3 --final-mh 10 --budget-minutes 330 --out ../results/v2/g4_b5/A_k0_random_r10_sh8"
+  },
+  {
+   "id": "g4b5_A_k0_random_r10_sh9",
+   "cmd": "python main.py eval2 --set A --method random --kappa 0 --tau 4 --split pilot --start 450 --count 50 --n-eval 32000 --mh-steps 3 --final-mh 10 --budget-minutes 330 --out ../results/v2/g4_b5/A_k0_random_r10_sh9"
+  },
+  {
+   "id": "g4b5_A_k0_random_r10_sh10",
+   "cmd": "python main.py eval2 --set A --method random --kappa 0 --tau 4 --split pilot --start 500 --count 50 --n-eval 32000 --mh-steps 3 --final-mh 10 --budget-minutes 330 --out ../results/v2/g4_b5/A_k0_random_r10_sh10"
+  },
+  {
+   "id": "g4b5_A_k0_random_r10_sh11",
+   "cmd": "python main.py eval2 --set A --method random --kappa 0 --tau 4 --split pilot --start 550 --count 50 --n-eval 32000 --mh-steps 3 --final-mh 10 --budget-minutes 330 --out ../results/v2/g4_b5/A_k0_random_r10_sh11"
+  },
+  {
+   "id": "g4b5_A_k0_random_r30_sh0",
+   "cmd": "python main.py eval2 --set A --method random --kappa 0 --tau 4 --split pilot --start 0 --count 50 --n-eval 32000 --mh-steps 3 --final-mh 30 --budget-minutes 330 --out ../results/v2/g4_b5/A_k0_random_r30_sh0"
+  },
+  {
+   "id": "g4b5_A_k0_random_r30_sh1",
+   "cmd": "python main.py eval2 --set A --method random --kappa 0 --tau 4 --split pilot --start 50 --count 50 --n-eval 32000 --mh-steps 3 --final-mh 30 --budget-minutes 330 --out ../results/v2/g4_b5/A_k0_random_r30_sh1"
+  },
+  {
+   "id": "g4b5_A_k0_random_r30_sh2",
+   "cmd": "python main.py eval2 --set A --method random --kappa 0 --tau 4 --split pilot --start 100 --count 50 --n-eval 32000 --mh-steps 3 --final-mh 30 --budget-minutes 330 --out ../results/v2/g4_b5/A_k0_random_r30_sh2"
+  },
+  {
+   "id": "g4b5_A_k0_random_r30_sh3",
+   "cmd": "python main.py eval2 --set A --method random --kappa 0 --tau 4 --split pilot --start 150 --count 50 --n-eval 32000 --mh-steps 3 --final-mh 30 --budget-minutes 330 --out ../results/v2/g4_b5/A_k0_random_r30_sh3"
+  },
+  {
+   "id": "g4b5_A_k0_random_r30_sh4",
+   "cmd": "python main.py eval2 --set A --method random --kappa 0 --tau 4 --split pilot --start 200 --count 50 --n-eval 32000 --mh-steps 3 --final-mh 30 --budget-minutes 330 --out ../results/v2/g4_b5/A_k0_random_r30_sh4"
+  },
+  {
+   "id": "g4b5_A_k0_random_r30_sh5",
+   "cmd": "python main.py eval2 --set A --method random --kappa 0 --tau 4 --split pilot --start 250 --count 50 --n-eval 32000 --mh-steps 3 --final-mh 30 --budget-minutes 330 --out ../results/v2/g4_b5/A_k0_random_r30_sh5"
+  },
+  {
+   "id": "g4b5_A_k0_random_r30_sh6",
+   "cmd": "python main.py eval2 --set A --method random --kappa 0 --tau 4 --split pilot --start 300 --count 50 --n-eval 32000 --mh-steps 3 --final-mh 30 --budget-minutes 330 --out ../results/v2/g4_b5/A_k0_random_r30_sh6"
+  },
+  {
+   "id": "g4b5_A_k0_random_r30_sh7",
+   "cmd": "python main.py eval2 --set A --method random --kappa 0 --tau 4 --split pilot --start 350 --count 50 --n-eval 32000 --mh-steps 3 --final-mh 30 --budget-minutes 330 --out ../results/v2/g4_b5/A_k0_random_r30_sh7"
+  },
+  {
+   "id": "g4b5_A_k0_random_r30_sh8",
+   "cmd": "python main.py eval2 --set A --method random --kappa 0 --tau 4 --split pilot --start 400 --count 50 --n-eval 32000 --mh-steps 3 --final-mh 30 --budget-minutes 330 --out ../results/v2/g4_b5/A_k0_random_r30_sh8"
+  },
+  {
+   "id": "g4b5_A_k0_random_r30_sh9",
+   "cmd": "python main.py eval2 --set A --method random --kappa 0 --tau 4 --split pilot --start 450 --count 50 --n-eval 32000 --mh-steps 3 --final-mh 30 --budget-minutes 330 --out ../results/v2/g4_b5/A_k0_random_r30_sh9"
+  },
+  {
+   "id": "g4b5_A_k0_random_r30_sh10",
+   "cmd": "python main.py eval2 --set A --method random --kappa 0 --tau 4 --split pilot --start 500 --count 50 --n-eval 32000 --mh-steps 3 --final-mh 30 --budget-minutes 330 --out ../results/v2/g4_b5/A_k0_random_r30_sh10"
+  },
+  {
+   "id": "g4b5_A_k0_random_r30_sh11",
+   "cmd": "python main.py eval2 --set A --method random --kappa 0 --tau 4 --split pilot --start 550 --count 50 --n-eval 32000 --mh-steps 3 --final-mh 30 --budget-minutes 330 --out ../results/v2/g4_b5/A_k0_random_r30_sh11"
+  },
+  {
+   "id": "g4b5_A_k0_random_ref_sh0",
+   "cmd": "python main.py eval2 --set A --method random --kappa 0 --tau 4 --split pilot --start 0 --count 50 --n-eval 32000 --mh-steps 30 --final-mh 60 --budget-minutes 330 --out ../results/v2/g4_b5/A_k0_random_ref_sh0"
+  },
+  {
+   "id": "g4b5_A_k0_random_ref_sh1",
+   "cmd": "python main.py eval2 --set A --method random --kappa 0 --tau 4 --split pilot --start 50 --count 50 --n-eval 32000 --mh-steps 30 --final-mh 60 --budget-minutes 330 --out ../results/v2/g4_b5/A_k0_random_ref_sh1"
+  },
+  {
+   "id": "g4b5_A_k0_random_ref_sh2",
+   "cmd": "python main.py eval2 --set A --method random --kappa 0 --tau 4 --split pilot --start 100 --count 50 --n-eval 32000 --mh-steps 30 --final-mh 60 --budget-minutes 330 --out ../results/v2/g4_b5/A_k0_random_ref_sh2"
+  },
+  {
+   "id": "g4b5_A_k0_random_ref_sh3",
+   "cmd": "python main.py eval2 --set A --method random --kappa 0 --tau 4 --split pilot --start 150 --count 50 --n-eval 32000 --mh-steps 30 --final-mh 60 --budget-minutes 330 --out ../results/v2/g4_b5/A_k0_random_ref_sh3"
+  },
+  {
+   "id": "g4b5_A_k0_random_ref_sh4",
+   "cmd": "python main.py eval2 --set A --method random --kappa 0 --tau 4 --split pilot --start 200 --count 50 --n-eval 32000 --mh-steps 30 --final-mh 60 --budget-minutes 330 --out ../results/v2/g4_b5/A_k0_random_ref_sh4"
+  },
+  {
+   "id": "g4b5_A_k0_random_ref_sh5",
+   "cmd": "python main.py eval2 --set A --method random --kappa 0 --tau 4 --split pilot --start 250 --count 50 --n-eval 32000 --mh-steps 30 --final-mh 60 --budget-minutes 330 --out ../results/v2/g4_b5/A_k0_random_ref_sh5"
+  },
+  {
+   "id": "g4b5_A_k0_random_ref_sh6",
+   "cmd": "python main.py eval2 --set A --method random --kappa 0 --tau 4 --split pilot --start 300 --count 50 --n-eval 32000 --mh-steps 30 --final-mh 60 --budget-minutes 330 --out ../results/v2/g4_b5/A_k0_random_ref_sh6"
+  },
+  {
+   "id": "g4b5_A_k0_random_ref_sh7",
+   "cmd": "python main.py eval2 --set A --method random --kappa 0 --tau 4 --split pilot --start 350 --count 50 --n-eval 32000 --mh-steps 30 --final-mh 60 --budget-minutes 330 --out ../results/v2/g4_b5/A_k0_random_ref_sh7"
+  },
+  {
+   "id": "g4b5_A_k0_random_ref_sh8",
+   "cmd": "python main.py eval2 --set A --method random --kappa 0 --tau 4 --split pilot --start 400 --count 50 --n-eval 32000 --mh-steps 30 --final-mh 60 --budget-minutes 330 --out ../results/v2/g4_b5/A_k0_random_ref_sh8"
+  },
+  {
+   "id": "g4b5_A_k0_random_ref_sh9",
+   "cmd": "python main.py eval2 --set A --method random --kappa 0 --tau 4 --split pilot --start 450 --count 50 --n-eval 32000 --mh-steps 30 --final-mh 60 --budget-minutes 330 --out ../results/v2/g4_b5/A_k0_random_ref_sh9"
+  },
+  {
+   "id": "g4b5_A_k0_random_ref_sh10",
+   "cmd": "python main.py eval2 --set A --method random --kappa 0 --tau 4 --split pilot --start 500 --count 50 --n-eval 32000 --mh-steps 30 --final-mh 60 --budget-minutes 330 --out ../results/v2/g4_b5/A_k0_random_ref_sh10"
+  },
+  {
+   "id": "g4b5_A_k0_random_ref_sh11",
+   "cmd": "python main.py eval2 --set A --method random --kappa 0 --tau 4 --split pilot --start 550 --count 50 --n-eval 32000 --mh-steps 30 --final-mh 60 --budget-minutes 330 --out ../results/v2/g4_b5/A_k0_random_ref_sh11"
+  },
+  {
+   "id": "g4b5_A_k0_gstar_r10_sh0",
+   "cmd": "python main.py eval2 --set A --method gstar --kappa 0 --tau 4 --split pilot --start 0 --count 50 --n-eval 32000 --mh-steps 3 --final-mh 10 --budget-minutes 330 --out ../results/v2/g4_b5/A_k0_gstar_r10_sh0"
+  },
+  {
+   "id": "g4b5_A_k0_gstar_r10_sh1",
+   "cmd": "python main.py eval2 --set A --method gstar --kappa 0 --tau 4 --split pilot --start 50 --count 50 --n-eval 32000 --mh-steps 3 --final-mh 10 --budget-minutes 330 --out ../results/v2/g4_b5/A_k0_gstar_r10_sh1"
+  },
+  {
+   "id": "g4b5_A_k0_gstar_r10_sh2",
+   "cmd": "python main.py eval2 --set A --method gstar --kappa 0 --tau 4 --split pilot --start 100 --count 50 --n-eval 32000 --mh-steps 3 --final-mh 10 --budget-minutes 330 --out ../results/v2/g4_b5/A_k0_gstar_r10_sh2"
+  },
+  {
+   "id": "g4b5_A_k0_gstar_r10_sh3",
+   "cmd": "python main.py eval2 --set A --method gstar --kappa 0 --tau 4 --split pilot --start 150 --count 50 --n-eval 32000 --mh-steps 3 --final-mh 10 --budget-minutes 330 --out ../results/v2/g4_b5/A_k0_gstar_r10_sh3"
+  },
+  {
+   "id": "g4b5_A_k0_gstar_r10_sh4",
+   "cmd": "python main.py eval2 --set A --method gstar --kappa 0 --tau 4 --split pilot --start 200 --count 50 --n-eval 32000 --mh-steps 3 --final-mh 10 --budget-minutes 330 --out ../results/v2/g4_b5/A_k0_gstar_r10_sh4"
+  },
+  {
+   "id": "g4b5_A_k0_gstar_r10_sh5",
+   "cmd": "python main.py eval2 --set A --method gstar --kappa 0 --tau 4 --split pilot --start 250 --count 50 --n-eval 32000 --mh-steps 3 --final-mh 10 --budget-minutes 330 --out ../results/v2/g4_b5/A_k0_gstar_r10_sh5"
+  },
+  {
+   "id": "g4b5_A_k0_gstar_r10_sh6",
+   "cmd": "python main.py eval2 --set A --method gstar --kappa 0 --tau 4 --split pilot --start 300 --count 50 --n-eval 32000 --mh-steps 3 --final-mh 10 --budget-minutes 330 --out ../results/v2/g4_b5/A_k0_gstar_r10_sh6"
+  },
+  {
+   "id": "g4b5_A_k0_gstar_r10_sh7",
+   "cmd": "python main.py eval2 --set A --method gstar --kappa 0 --tau 4 --split pilot --start 350 --count 50 --n-eval 32000 --mh-steps 3 --final-mh 10 --budget-minutes 330 --out ../results/v2/g4_b5/A_k0_gstar_r10_sh7"
+  },
+  {
+   "id": "g4b5_A_k0_gstar_r10_sh8",
+   "cmd": "python main.py eval2 --set A --method gstar --kappa 0 --tau 4 --split pilot --start 400 --count 50 --n-eval 32000 --mh-steps 3 --final-mh 10 --budget-minutes 330 --out ../results/v2/g4_b5/A_k0_gstar_r10_sh8"
+  },
+  {
+   "id": "g4b5_A_k0_gstar_r10_sh9",
+   "cmd": "python main.py eval2 --set A --method gstar --kappa 0 --tau 4 --split pilot --start 450 --count 50 --n-eval 32000 --mh-steps 3 --final-mh 10 --budget-minutes 330 --out ../results/v2/g4_b5/A_k0_gstar_r10_sh9"
+  },
+  {
+   "id": "g4b5_A_k0_gstar_r10_sh10",
+   "cmd": "python main.py eval2 --set A --method gstar --kappa 0 --tau 4 --split pilot --start 500 --count 50 --n-eval 32000 --mh-steps 3 --final-mh 10 --budget-minutes 330 --out ../results/v2/g4_b5/A_k0_gstar_r10_sh10"
+  },
+  {
+   "id": "g4b5_A_k0_gstar_r10_sh11",
+   "cmd": "python main.py eval2 --set A --method gstar --kappa 0 --tau 4 --split pilot --start 550 --count 50 --n-eval 32000 --mh-steps 3 --final-mh 10 --budget-minutes 330 --out ../results/v2/g4_b5/A_k0_gstar_r10_sh11"
+  },
+  {
+   "id": "g4b5_A_k0_gstar_r30_sh0",
+   "cmd": "python main.py eval2 --set A --method gstar --kappa 0 --tau 4 --split pilot --start 0 --count 50 --n-eval 32000 --mh-steps 3 --final-mh 30 --budget-minutes 330 --out ../results/v2/g4_b5/A_k0_gstar_r30_sh0"
+  },
+  {
+   "id": "g4b5_A_k0_gstar_r30_sh1",
+   "cmd": "python main.py eval2 --set A --method gstar --kappa 0 --tau 4 --split pilot --start 50 --count 50 --n-eval 32000 --mh-steps 3 --final-mh 30 --budget-minutes 330 --out ../results/v2/g4_b5/A_k0_gstar_r30_sh1"
+  },
+  {
+   "id": "g4b5_A_k0_gstar_r30_sh2",
+   "cmd": "python main.py eval2 --set A --method gstar --kappa 0 --tau 4 --split pilot --start 100 --count 50 --n-eval 32000 --mh-steps 3 --final-mh 30 --budget-minutes 330 --out ../results/v2/g4_b5/A_k0_gstar_r30_sh2"
+  },
+  {
+   "id": "g4b5_A_k0_gstar_r30_sh3",
+   "cmd": "python main.py eval2 --set A --method gstar --kappa 0 --tau 4 --split pilot --start 150 --count 50 --n-eval 32000 --mh-steps 3 --final-mh 30 --budget-minutes 330 --out ../results/v2/g4_b5/A_k0_gstar_r30_sh3"
+  },
+  {
+   "id": "g4b5_A_k0_gstar_r30_sh4",
+   "cmd": "python main.py eval2 --set A --method gstar --kappa 0 --tau 4 --split pilot --start 200 --count 50 --n-eval 32000 --mh-steps 3 --final-mh 30 --budget-minutes 330 --out ../results/v2/g4_b5/A_k0_gstar_r30_sh4"
+  },
+  {
+   "id": "g4b5_A_k0_gstar_r30_sh5",
+   "cmd": "python main.py eval2 --set A --method gstar --kappa 0 --tau 4 --split pilot --start 250 --count 50 --n-eval 32000 --mh-steps 3 --final-mh 30 --budget-minutes 330 --out ../results/v2/g4_b5/A_k0_gstar_r30_sh5"
+  },
+  {
+   "id": "g4b5_A_k0_gstar_r30_sh6",
+   "cmd": "python main.py eval2 --set A --method gstar --kappa 0 --tau 4 --split pilot --start 300 --count 50 --n-eval 32000 --mh-steps 3 --final-mh 30 --budget-minutes 330 --out ../results/v2/g4_b5/A_k0_gstar_r30_sh6"
+  },
+  {
+   "id": "g4b5_A_k0_gstar_r30_sh7",
+   "cmd": "python main.py eval2 --set A --method gstar --kappa 0 --tau 4 --split pilot --start 350 --count 50 --n-eval 32000 --mh-steps 3 --final-mh 30 --budget-minutes 330 --out ../results/v2/g4_b5/A_k0_gstar_r30_sh7"
+  },
+  {
+   "id": "g4b5_A_k0_gstar_r30_sh8",
+   "cmd": "python main.py eval2 --set A --method gstar --kappa 0 --tau 4 --split pilot --start 400 --count 50 --n-eval 32000 --mh-steps 3 --final-mh 30 --budget-minutes 330 --out ../results/v2/g4_b5/A_k0_gstar_r30_sh8"
+  },
+  {
+   "id": "g4b5_A_k0_gstar_r30_sh9",
+   "cmd": "python main.py eval2 --set A --method gstar --kappa 0 --tau 4 --split pilot --start 450 --count 50 --n-eval 32000 --mh-steps 3 --final-mh 30 --budget-minutes 330 --out ../results/v2/g4_b5/A_k0_gstar_r30_sh9"
+  },
+  {
+   "id": "g4b5_A_k0_gstar_r30_sh10",
+   "cmd": "python main.py eval2 --set A --method gstar --kappa 0 --tau 4 --split pilot --start 500 --count 50 --n-eval 32000 --mh-steps 3 --final-mh 30 --budget-minutes 330 --out ../results/v2/g4_b5/A_k0_gstar_r30_sh10"
+  },
+  {
+   "id": "g4b5_A_k0_gstar_r30_sh11",
+   "cmd": "python main.py eval2 --set A --method gstar --kappa 0 --tau 4 --split pilot --start 550 --count 50 --n-eval 32000 --mh-steps 3 --final-mh 30 --budget-minutes 330 --out ../results/v2/g4_b5/A_k0_gstar_r30_sh11"
+  },
+  {
+   "id": "g4b5_A_k0_gstar_ref_sh0",
+   "cmd": "python main.py eval2 --set A --method gstar --kappa 0 --tau 4 --split pilot --start 0 --count 50 --n-eval 32000 --mh-steps 30 --final-mh 60 --budget-minutes 330 --out ../results/v2/g4_b5/A_k0_gstar_ref_sh0"
+  },
+  {
+   "id": "g4b5_A_k0_gstar_ref_sh1",
+   "cmd": "python main.py eval2 --set A --method gstar --kappa 0 --tau 4 --split pilot --start 50 --count 50 --n-eval 32000 --mh-steps 30 --final-mh 60 --budget-minutes 330 --out ../results/v2/g4_b5/A_k0_gstar_ref_sh1"
+  },
+  {
+   "id": "g4b5_A_k0_gstar_ref_sh2",
+   "cmd": "python main.py eval2 --set A --method gstar --kappa 0 --tau 4 --split pilot --start 100 --count 50 --n-eval 32000 --mh-steps 30 --final-mh 60 --budget-minutes 330 --out ../results/v2/g4_b5/A_k0_gstar_ref_sh2"
+  },
+  {
+   "id": "g4b5_A_k0_gstar_ref_sh3",
+   "cmd": "python main.py eval2 --set A --method gstar --kappa 0 --tau 4 --split pilot --start 150 --count 50 --n-eval 32000 --mh-steps 30 --final-mh 60 --budget-minutes 330 --out ../results/v2/g4_b5/A_k0_gstar_ref_sh3"
+  },
+  {
+   "id": "g4b5_A_k0_gstar_ref_sh4",
+   "cmd": "python main.py eval2 --set A --method gstar --kappa 0 --tau 4 --split pilot --start 200 --count 50 --n-eval 32000 --mh-steps 30 --final-mh 60 --budget-minutes 330 --out ../results/v2/g4_b5/A_k0_gstar_ref_sh4"
+  },
+  {
+   "id": "g4b5_A_k0_gstar_ref_sh5",
+   "cmd": "python main.py eval2 --set A --method gstar --kappa 0 --tau 4 --split pilot --start 250 --count 50 --n-eval 32000 --mh-steps 30 --final-mh 60 --budget-minutes 330 --out ../results/v2/g4_b5/A_k0_gstar_ref_sh5"
+  },
+  {
+   "id": "g4b5_A_k0_gstar_ref_sh6",
+   "cmd": "python main.py eval2 --set A --method gstar --kappa 0 --tau 4 --split pilot --start 300 --count 50 --n-eval 32000 --mh-steps 30 --final-mh 60 --budget-minutes 330 --out ../results/v2/g4_b5/A_k0_gstar_ref_sh6"
+  },
+  {
+   "id": "g4b5_A_k0_gstar_ref_sh7",
+   "cmd": "python main.py eval2 --set A --method gstar --kappa 0 --tau 4 --split pilot --start 350 --count 50 --n-eval 32000 --mh-steps 30 --final-mh 60 --budget-minutes 330 --out ../results/v2/g4_b5/A_k0_gstar_ref_sh7"
+  },
+  {
+   "id": "g4b5_A_k0_gstar_ref_sh8",
+   "cmd": "python main.py eval2 --set A --method gstar --kappa 0 --tau 4 --split pilot --start 400 --count 50 --n-eval 32000 --mh-steps 30 --final-mh 60 --budget-minutes 330 --out ../results/v2/g4_b5/A_k0_gstar_ref_sh8"
+  },
+  {
+   "id": "g4b5_A_k0_gstar_ref_sh9",
+   "cmd": "python main.py eval2 --set A --method gstar --kappa 0 --tau 4 --split pilot --start 450 --count 50 --n-eval 32000 --mh-steps 30 --final-mh 60 --budget-minutes 330 --out ../results/v2/g4_b5/A_k0_gstar_ref_sh9"
+  },
+  {
+   "id": "g4b5_A_k0_gstar_ref_sh10",
+   "cmd": "python main.py eval2 --set A --method gstar --kappa 0 --tau 4 --split pilot --start 500 --count 50 --n-eval 32000 --mh-steps 30 --final-mh 60 --budget-minutes 330 --out ../results/v2/g4_b5/A_k0_gstar_ref_sh10"
+  },
+  {
+   "id": "g4b5_A_k0_gstar_ref_sh11",
+   "cmd": "python main.py eval2 --set A --method gstar --kappa 0 --tau 4 --split pilot --start 550 --count 50 --n-eval 32000 --mh-steps 30 --final-mh 60 --budget-minutes 330 --out ../results/v2/g4_b5/A_k0_gstar_ref_sh11"
+  },
+  {
+   "id": "g4b5_S_k0_random_r10_sh0",
+   "cmd": "python main.py eval2 --set S --method random --kappa 0 --tau 4 --split pilot --start 0 --count 50 --n-eval 32000 --mh-steps 3 --final-mh 10 --budget-minutes 330 --out ../results/v2/g4_b5/S_k0_random_r10_sh0"
+  },
+  {
+   "id": "g4b5_S_k0_random_r10_sh1",
+   "cmd": "python main.py eval2 --set S --method random --kappa 0 --tau 4 --split pilot --start 50 --count 50 --n-eval 32000 --mh-steps 3 --final-mh 10 --budget-minutes 330 --out ../results/v2/g4_b5/S_k0_random_r10_sh1"
+  },
+  {
+   "id": "g4b5_S_k0_random_r10_sh2",
+   "cmd": "python main.py eval2 --set S --method random --kappa 0 --tau 4 --split pilot --start 100 --count 50 --n-eval 32000 --mh-steps 3 --final-mh 10 --budget-minutes 330 --out ../results/v2/g4_b5/S_k0_random_r10_sh2"
+  },
+  {
+   "id": "g4b5_S_k0_random_r10_sh3",
+   "cmd": "python main.py eval2 --set S --method random --kappa 0 --tau 4 --split pilot --start 150 --count 50 --n-eval 32000 --mh-steps 3 --final-mh 10 --budget-minutes 330 --out ../results/v2/g4_b5/S_k0_random_r10_sh3"
+  },
+  {
+   "id": "g4b5_S_k0_random_r10_sh4",
+   "cmd": "python main.py eval2 --set S --method random --kappa 0 --tau 4 --split pilot --start 200 --count 50 --n-eval 32000 --mh-steps 3 --final-mh 10 --budget-minutes 330 --out ../results/v2/g4_b5/S_k0_random_r10_sh4"
+  },
+  {
+   "id": "g4b5_S_k0_random_r10_sh5",
+   "cmd": "python main.py eval2 --set S --method random --kappa 0 --tau 4 --split pilot --start 250 --count 50 --n-eval 32000 --mh-steps 3 --final-mh 10 --budget-minutes 330 --out ../results/v2/g4_b5/S_k0_random_r10_sh5"
+  },
+  {
+   "id": "g4b5_S_k0_random_r10_sh6",
+   "cmd": "python main.py eval2 --set S --method random --kappa 0 --tau 4 --split pilot --start 300 --count 50 --n-eval 32000 --mh-steps 3 --final-mh 10 --budget-minutes 330 --out ../results/v2/g4_b5/S_k0_random_r10_sh6"
+  },
+  {
+   "id": "g4b5_S_k0_random_r10_sh7",
+   "cmd": "python main.py eval2 --set S --method random --kappa 0 --tau 4 --split pilot --start 350 --count 50 --n-eval 32000 --mh-steps 3 --final-mh 10 --budget-minutes 330 --out ../results/v2/g4_b5/S_k0_random_r10_sh7"
+  },
+  {
+   "id": "g4b5_S_k0_random_r10_sh8",
+   "cmd": "python main.py eval2 --set S --method random --kappa 0 --tau 4 --split pilot --start 400 --count 50 --n-eval 32000 --mh-steps 3 --final-mh 10 --budget-minutes 330 --out ../results/v2/g4_b5/S_k0_random_r10_sh8"
+  },
+  {
+   "id": "g4b5_S_k0_random_r10_sh9",
+   "cmd": "python main.py eval2 --set S --method random --kappa 0 --tau 4 --split pilot --start 450 --count 50 --n-eval 32000 --mh-steps 3 --final-mh 10 --budget-minutes 330 --out ../results/v2/g4_b5/S_k0_random_r10_sh9"
+  },
+  {
+   "id": "g4b5_S_k0_random_r10_sh10",
+   "cmd": "python main.py eval2 --set S --method random --kappa 0 --tau 4 --split pilot --start 500 --count 50 --n-eval 32000 --mh-steps 3 --final-mh 10 --budget-minutes 330 --out ../results/v2/g4_b5/S_k0_random_r10_sh10"
+  },
+  {
+   "id": "g4b5_S_k0_random_r10_sh11",
+   "cmd": "python main.py eval2 --set S --method random --kappa 0 --tau 4 --split pilot --start 550 --count 50 --n-eval 32000 --mh-steps 3 --final-mh 10 --budget-minutes 330 --out ../results/v2/g4_b5/S_k0_random_r10_sh11"
+  },
+  {
+   "id": "g4b5_S_k0_random_r30_sh0",
+   "cmd": "python main.py eval2 --set S --method random --kappa 0 --tau 4 --split pilot --start 0 --count 50 --n-eval 32000 --mh-steps 3 --final-mh 30 --budget-minutes 330 --out ../results/v2/g4_b5/S_k0_random_r30_sh0"
+  },
+  {
+   "id": "g4b5_S_k0_random_r30_sh1",
+   "cmd": "python main.py eval2 --set S --method random --kappa 0 --tau 4 --split pilot --start 50 --count 50 --n-eval 32000 --mh-steps 3 --final-mh 30 --budget-minutes 330 --out ../results/v2/g4_b5/S_k0_random_r30_sh1"
+  },
+  {
+   "id": "g4b5_S_k0_random_r30_sh2",
+   "cmd": "python main.py eval2 --set S --method random --kappa 0 --tau 4 --split pilot --start 100 --count 50 --n-eval 32000 --mh-steps 3 --final-mh 30 --budget-minutes 330 --out ../results/v2/g4_b5/S_k0_random_r30_sh2"
+  },
+  {
+   "id": "g4b5_S_k0_random_r30_sh3",
+   "cmd": "python main.py eval2 --set S --method random --kappa 0 --tau 4 --split pilot --start 150 --count 50 --n-eval 32000 --mh-steps 3 --final-mh 30 --budget-minutes 330 --out ../results/v2/g4_b5/S_k0_random_r30_sh3"
+  },
+  {
+   "id": "g4b5_S_k0_random_r30_sh4",
+   "cmd": "python main.py eval2 --set S --method random --kappa 0 --tau 4 --split pilot --start 200 --count 50 --n-eval 32000 --mh-steps 3 --final-mh 30 --budget-minutes 330 --out ../results/v2/g4_b5/S_k0_random_r30_sh4"
+  },
+  {
+   "id": "g4b5_S_k0_random_r30_sh5",
+   "cmd": "python main.py eval2 --set S --method random --kappa 0 --tau 4 --split pilot --start 250 --count 50 --n-eval 32000 --mh-steps 3 --final-mh 30 --budget-minutes 330 --out ../results/v2/g4_b5/S_k0_random_r30_sh5"
+  },
+  {
+   "id": "g4b5_S_k0_random_r30_sh6",
+   "cmd": "python main.py eval2 --set S --method random --kappa 0 --tau 4 --split pilot --start 300 --count 50 --n-eval 32000 --mh-steps 3 --final-mh 30 --budget-minutes 330 --out ../results/v2/g4_b5/S_k0_random_r30_sh6"
+  },
+  {
+   "id": "g4b5_S_k0_random_r30_sh7",
+   "cmd": "python main.py eval2 --set S --method random --kappa 0 --tau 4 --split pilot --start 350 --count 50 --n-eval 32000 --mh-steps 3 --final-mh 30 --budget-minutes 330 --out ../results/v2/g4_b5/S_k0_random_r30_sh7"
+  },
+  {
+   "id": "g4b5_S_k0_random_r30_sh8",
+   "cmd": "python main.py eval2 --set S --method random --kappa 0 --tau 4 --split pilot --start 400 --count 50 --n-eval 32000 --mh-steps 3 --final-mh 30 --budget-minutes 330 --out ../results/v2/g4_b5/S_k0_random_r30_sh8"
+  },
+  {
+   "id": "g4b5_S_k0_random_r30_sh9",
+   "cmd": "python main.py eval2 --set S --method random --kappa 0 --tau 4 --split pilot --start 450 --count 50 --n-eval 32000 --mh-steps 3 --final-mh 30 --budget-minutes 330 --out ../results/v2/g4_b5/S_k0_random_r30_sh9"
+  },
+  {
+   "id": "g4b5_S_k0_random_r30_sh10",
+   "cmd": "python main.py eval2 --set S --method random --kappa 0 --tau 4 --split pilot --start 500 --count 50 --n-eval 32000 --mh-steps 3 --final-mh 30 --budget-minutes 330 --out ../results/v2/g4_b5/S_k0_random_r30_sh10"
+  },
+  {
+   "id": "g4b5_S_k0_random_r30_sh11",
+   "cmd": "python main.py eval2 --set S --method random --kappa 0 --tau 4 --split pilot --start 550 --count 50 --n-eval 32000 --mh-steps 3 --final-mh 30 --budget-minutes 330 --out ../results/v2/g4_b5/S_k0_random_r30_sh11"
+  },
+  {
+   "id": "g4b5_S_k0_random_ref_sh0",
+   "cmd": "python main.py eval2 --set S --method random --kappa 0 --tau 4 --split pilot --start 0 --count 50 --n-eval 32000 --mh-steps 30 --final-mh 60 --budget-minutes 330 --out ../results/v2/g4_b5/S_k0_random_ref_sh0"
+  },
+  {
+   "id": "g4b5_S_k0_random_ref_sh1",
+   "cmd": "python main.py eval2 --set S --method random --kappa 0 --tau 4 --split pilot --start 50 --count 50 --n-eval 32000 --mh-steps 30 --final-mh 60 --budget-minutes 330 --out ../results/v2/g4_b5/S_k0_random_ref_sh1"
+  },
+  {
+   "id": "g4b5_S_k0_random_ref_sh2",
+   "cmd": "python main.py eval2 --set S --method random --kappa 0 --tau 4 --split pilot --start 100 --count 50 --n-eval 32000 --mh-steps 30 --final-mh 60 --budget-minutes 330 --out ../results/v2/g4_b5/S_k0_random_ref_sh2"
+  },
+  {
+   "id": "g4b5_S_k0_random_ref_sh3",
+   "cmd": "python main.py eval2 --set S --method random --kappa 0 --tau 4 --split pilot --start 150 --count 50 --n-eval 32000 --mh-steps 30 --final-mh 60 --budget-minutes 330 --out ../results/v2/g4_b5/S_k0_random_ref_sh3"
+  },
+  {
+   "id": "g4b5_S_k0_random_ref_sh4",
+   "cmd": "python main.py eval2 --set S --method random --kappa 0 --tau 4 --split pilot --start 200 --count 50 --n-eval 32000 --mh-steps 30 --final-mh 60 --budget-minutes 330 --out ../results/v2/g4_b5/S_k0_random_ref_sh4"
+  },
+  {
+   "id": "g4b5_S_k0_random_ref_sh5",
+   "cmd": "python main.py eval2 --set S --method random --kappa 0 --tau 4 --split pilot --start 250 --count 50 --n-eval 32000 --mh-steps 30 --final-mh 60 --budget-minutes 330 --out ../results/v2/g4_b5/S_k0_random_ref_sh5"
+  },
+  {
+   "id": "g4b5_S_k0_random_ref_sh6",
+   "cmd": "python main.py eval2 --set S --method random --kappa 0 --tau 4 --split pilot --start 300 --count 50 --n-eval 32000 --mh-steps 30 --final-mh 60 --budget-minutes 330 --out ../results/v2/g4_b5/S_k0_random_ref_sh6"
+  },
+  {
+   "id": "g4b5_S_k0_random_ref_sh7",
+   "cmd": "python main.py eval2 --set S --method random --kappa 0 --tau 4 --split pilot --start 350 --count 50 --n-eval 32000 --mh-steps 30 --final-mh 60 --budget-minutes 330 --out ../results/v2/g4_b5/S_k0_random_ref_sh7"
+  },
+  {
+   "id": "g4b5_S_k0_random_ref_sh8",
+   "cmd": "python main.py eval2 --set S --method random --kappa 0 --tau 4 --split pilot --start 400 --count 50 --n-eval 32000 --mh-steps 30 --final-mh 60 --budget-minutes 330 --out ../results/v2/g4_b5/S_k0_random_ref_sh8"
+  },
+  {
+   "id": "g4b5_S_k0_random_ref_sh9",
+   "cmd": "python main.py eval2 --set S --method random --kappa 0 --tau 4 --split pilot --start 450 --count 50 --n-eval 32000 --mh-steps 30 --final-mh 60 --budget-minutes 330 --out ../results/v2/g4_b5/S_k0_random_ref_sh9"
+  },
+  {
+   "id": "g4b5_S_k0_random_ref_sh10",
+   "cmd": "python main.py eval2 --set S --method random --kappa 0 --tau 4 --split pilot --start 500 --count 50 --n-eval 32000 --mh-steps 30 --final-mh 60 --budget-minutes 330 --out ../results/v2/g4_b5/S_k0_random_ref_sh10"
+  },
+  {
+   "id": "g4b5_S_k0_random_ref_sh11",
+   "cmd": "python main.py eval2 --set S --method random --kappa 0 --tau 4 --split pilot --start 550 --count 50 --n-eval 32000 --mh-steps 30 --final-mh 60 --budget-minutes 330 --out ../results/v2/g4_b5/S_k0_random_ref_sh11"
+  },
+  {
+   "id": "g4b5_S_k0_gstar_r10_sh0",
+   "cmd": "python main.py eval2 --set S --method gstar --kappa 0 --tau 4 --split pilot --start 0 --count 50 --n-eval 32000 --mh-steps 3 --final-mh 10 --budget-minutes 330 --out ../results/v2/g4_b5/S_k0_gstar_r10_sh0"
+  },
+  {
+   "id": "g4b5_S_k0_gstar_r10_sh1",
+   "cmd": "python main.py eval2 --set S --method gstar --kappa 0 --tau 4 --split pilot --start 50 --count 50 --n-eval 32000 --mh-steps 3 --final-mh 10 --budget-minutes 330 --out ../results/v2/g4_b5/S_k0_gstar_r10_sh1"
+  },
+  {
+   "id": "g4b5_S_k0_gstar_r10_sh2",
+   "cmd": "python main.py eval2 --set S --method gstar --kappa 0 --tau 4 --split pilot --start 100 --count 50 --n-eval 32000 --mh-steps 3 --final-mh 10 --budget-minutes 330 --out ../results/v2/g4_b5/S_k0_gstar_r10_sh2"
+  },
+  {
+   "id": "g4b5_S_k0_gstar_r10_sh3",
+   "cmd": "python main.py eval2 --set S --method gstar --kappa 0 --tau 4 --split pilot --start 150 --count 50 --n-eval 32000 --mh-steps 3 --final-mh 10 --budget-minutes 330 --out ../results/v2/g4_b5/S_k0_gstar_r10_sh3"
+  },
+  {
+   "id": "g4b5_S_k0_gstar_r10_sh4",
+   "cmd": "python main.py eval2 --set S --method gstar --kappa 0 --tau 4 --split pilot --start 200 --count 50 --n-eval 32000 --mh-steps 3 --final-mh 10 --budget-minutes 330 --out ../results/v2/g4_b5/S_k0_gstar_r10_sh4"
+  },
+  {
+   "id": "g4b5_S_k0_gstar_r10_sh5",
+   "cmd": "python main.py eval2 --set S --method gstar --kappa 0 --tau 4 --split pilot --start 250 --count 50 --n-eval 32000 --mh-steps 3 --final-mh 10 --budget-minutes 330 --out ../results/v2/g4_b5/S_k0_gstar_r10_sh5"
+  },
+  {
+   "id": "g4b5_S_k0_gstar_r10_sh6",
+   "cmd": "python main.py eval2 --set S --method gstar --kappa 0 --tau 4 --split pilot --start 300 --count 50 --n-eval 32000 --mh-steps 3 --final-mh 10 --budget-minutes 330 --out ../results/v2/g4_b5/S_k0_gstar_r10_sh6"
+  },
+  {
+   "id": "g4b5_S_k0_gstar_r10_sh7",
+   "cmd": "python main.py eval2 --set S --method gstar --kappa 0 --tau 4 --split pilot --start 350 --count 50 --n-eval 32000 --mh-steps 3 --final-mh 10 --budget-minutes 330 --out ../results/v2/g4_b5/S_k0_gstar_r10_sh7"
+  },
+  {
+   "id": "g4b5_S_k0_gstar_r10_sh8",
+   "cmd": "python main.py eval2 --set S --method gstar --kappa 0 --tau 4 --split pilot --start 400 --count 50 --n-eval 32000 --mh-steps 3 --final-mh 10 --budget-minutes 330 --out ../results/v2/g4_b5/S_k0_gstar_r10_sh8"
+  },
+  {
+   "id": "g4b5_S_k0_gstar_r10_sh9",
+   "cmd": "python main.py eval2 --set S --method gstar --kappa 0 --tau 4 --split pilot --start 450 --count 50 --n-eval 32000 --mh-steps 3 --final-mh 10 --budget-minutes 330 --out ../results/v2/g4_b5/S_k0_gstar_r10_sh9"
+  },
+  {
+   "id": "g4b5_S_k0_gstar_r10_sh10",
+   "cmd": "python main.py eval2 --set S --method gstar --kappa 0 --tau 4 --split pilot --start 500 --count 50 --n-eval 32000 --mh-steps 3 --final-mh 10 --budget-minutes 330 --out ../results/v2/g4_b5/S_k0_gstar_r10_sh10"
+  },
+  {
+   "id": "g4b5_S_k0_gstar_r10_sh11",
+   "cmd": "python main.py eval2 --set S --method gstar --kappa 0 --tau 4 --split pilot --start 550 --count 50 --n-eval 32000 --mh-steps 3 --final-mh 10 --budget-minutes 330 --out ../results/v2/g4_b5/S_k0_gstar_r10_sh11"
+  },
+  {
+   "id": "g4b5_S_k0_gstar_r30_sh0",
+   "cmd": "python main.py eval2 --set S --method gstar --kappa 0 --tau 4 --split pilot --start 0 --count 50 --n-eval 32000 --mh-steps 3 --final-mh 30 --budget-minutes 330 --out ../results/v2/g4_b5/S_k0_gstar_r30_sh0"
+  },
+  {
+   "id": "g4b5_S_k0_gstar_r30_sh1",
+   "cmd": "python main.py eval2 --set S --method gstar --kappa 0 --tau 4 --split pilot --start 50 --count 50 --n-eval 32000 --mh-steps 3 --final-mh 30 --budget-minutes 330 --out ../results/v2/g4_b5/S_k0_gstar_r30_sh1"
+  },
+  {
+   "id": "g4b5_S_k0_gstar_r30_sh2",
+   "cmd": "python main.py eval2 --set S --method gstar --kappa 0 --tau 4 --split pilot --start 100 --count 50 --n-eval 32000 --mh-steps 3 --final-mh 30 --budget-minutes 330 --out ../results/v2/g4_b5/S_k0_gstar_r30_sh2"
+  },
+  {
+   "id": "g4b5_S_k0_gstar_r30_sh3",
+   "cmd": "python main.py eval2 --set S --method gstar --kappa 0 --tau 4 --split pilot --start 150 --count 50 --n-eval 32000 --mh-steps 3 --final-mh 30 --budget-minutes 330 --out ../results/v2/g4_b5/S_k0_gstar_r30_sh3"
+  },
+  {
+   "id": "g4b5_S_k0_gstar_r30_sh4",
+   "cmd": "python main.py eval2 --set S --method gstar --kappa 0 --tau 4 --split pilot --start 200 --count 50 --n-eval 32000 --mh-steps 3 --final-mh 30 --budget-minutes 330 --out ../results/v2/g4_b5/S_k0_gstar_r30_sh4"
+  },
+  {
+   "id": "g4b5_S_k0_gstar_r30_sh5",
+   "cmd": "python main.py eval2 --set S --method gstar --kappa 0 --tau 4 --split pilot --start 250 --count 50 --n-eval 32000 --mh-steps 3 --final-mh 30 --budget-minutes 330 --out ../results/v2/g4_b5/S_k0_gstar_r30_sh5"
+  },
+  {
+   "id": "g4b5_S_k0_gstar_r30_sh6",
+   "cmd": "python main.py eval2 --set S --method gstar --kappa 0 --tau 4 --split pilot --start 300 --count 50 --n-eval 32000 --mh-steps 3 --final-mh 30 --budget-minutes 330 --out ../results/v2/g4_b5/S_k0_gstar_r30_sh6"
+  },
+  {
+   "id": "g4b5_S_k0_gstar_r30_sh7",
+   "cmd": "python main.py eval2 --set S --method gstar --kappa 0 --tau 4 --split pilot --start 350 --count 50 --n-eval 32000 --mh-steps 3 --final-mh 30 --budget-minutes 330 --out ../results/v2/g4_b5/S_k0_gstar_r30_sh7"
+  },
+  {
+   "id": "g4b5_S_k0_gstar_r30_sh8",
+   "cmd": "python main.py eval2 --set S --method gstar --kappa 0 --tau 4 --split pilot --start 400 --count 50 --n-eval 32000 --mh-steps 3 --final-mh 30 --budget-minutes 330 --out ../results/v2/g4_b5/S_k0_gstar_r30_sh8"
+  },
+  {
+   "id": "g4b5_S_k0_gstar_r30_sh9",
+   "cmd": "python main.py eval2 --set S --method gstar --kappa 0 --tau 4 --split pilot --start 450 --count 50 --n-eval 32000 --mh-steps 3 --final-mh 30 --budget-minutes 330 --out ../results/v2/g4_b5/S_k0_gstar_r30_sh9"
+  },
+  {
+   "id": "g4b5_S_k0_gstar_r30_sh10",
+   "cmd": "python main.py eval2 --set S --method gstar --kappa 0 --tau 4 --split pilot --start 500 --count 50 --n-eval 32000 --mh-steps 3 --final-mh 30 --budget-minutes 330 --out ../results/v2/g4_b5/S_k0_gstar_r30_sh10"
+  },
+  {
+   "id": "g4b5_S_k0_gstar_r30_sh11",
+   "cmd": "python main.py eval2 --set S --method gstar --kappa 0 --tau 4 --split pilot --start 550 --count 50 --n-eval 32000 --mh-steps 3 --final-mh 30 --budget-minutes 330 --out ../results/v2/g4_b5/S_k0_gstar_r30_sh11"
+  },
+  {
+   "id": "g4b5_S_k0_gstar_ref_sh0",
+   "cmd": "python main.py eval2 --set S --method gstar --kappa 0 --tau 4 --split pilot --start 0 --count 50 --n-eval 32000 --mh-steps 30 --final-mh 60 --budget-minutes 330 --out ../results/v2/g4_b5/S_k0_gstar_ref_sh0"
+  },
+  {
+   "id": "g4b5_S_k0_gstar_ref_sh1",
+   "cmd": "python main.py eval2 --set S --method gstar --kappa 0 --tau 4 --split pilot --start 50 --count 50 --n-eval 32000 --mh-steps 30 --final-mh 60 --budget-minutes 330 --out ../results/v2/g4_b5/S_k0_gstar_ref_sh1"
+  },
+  {
+   "id": "g4b5_S_k0_gstar_ref_sh2",
+   "cmd": "python main.py eval2 --set S --method gstar --kappa 0 --tau 4 --split pilot --start 100 --count 50 --n-eval 32000 --mh-steps 30 --final-mh 60 --budget-minutes 330 --out ../results/v2/g4_b5/S_k0_gstar_ref_sh2"
+  },
+  {
+   "id": "g4b5_S_k0_gstar_ref_sh3",
+   "cmd": "python main.py eval2 --set S --method gstar --kappa 0 --tau 4 --split pilot --start 150 --count 50 --n-eval 32000 --mh-steps 30 --final-mh 60 --budget-minutes 330 --out ../results/v2/g4_b5/S_k0_gstar_ref_sh3"
+  },
+  {
+   "id": "g4b5_S_k0_gstar_ref_sh4",
+   "cmd": "python main.py eval2 --set S --method gstar --kappa 0 --tau 4 --split pilot --start 200 --count 50 --n-eval 32000 --mh-steps 30 --final-mh 60 --budget-minutes 330 --out ../results/v2/g4_b5/S_k0_gstar_ref_sh4"
+  },
+  {
+   "id": "g4b5_S_k0_gstar_ref_sh5",
+   "cmd": "python main.py eval2 --set S --method gstar --kappa 0 --tau 4 --split pilot --start 250 --count 50 --n-eval 32000 --mh-steps 30 --final-mh 60 --budget-minutes 330 --out ../results/v2/g4_b5/S_k0_gstar_ref_sh5"
+  },
+  {
+   "id": "g4b5_S_k0_gstar_ref_sh6",
+   "cmd": "python main.py eval2 --set S --method gstar --kappa 0 --tau 4 --split pilot --start 300 --count 50 --n-eval 32000 --mh-steps 30 --final-mh 60 --budget-minutes 330 --out ../results/v2/g4_b5/S_k0_gstar_ref_sh6"
+  },
+  {
+   "id": "g4b5_S_k0_gstar_ref_sh7",
+   "cmd": "python main.py eval2 --set S --method gstar --kappa 0 --tau 4 --split pilot --start 350 --count 50 --n-eval 32000 --mh-steps 30 --final-mh 60 --budget-minutes 330 --out ../results/v2/g4_b5/S_k0_gstar_ref_sh7"
+  },
+  {
+   "id": "g4b5_S_k0_gstar_ref_sh8",
+   "cmd": "python main.py eval2 --set S --method gstar --kappa 0 --tau 4 --split pilot --start 400 --count 50 --n-eval 32000 --mh-steps 30 --final-mh 60 --budget-minutes 330 --out ../results/v2/g4_b5/S_k0_gstar_ref_sh8"
+  },
+  {
+   "id": "g4b5_S_k0_gstar_ref_sh9",
+   "cmd": "python main.py eval2 --set S --method gstar --kappa 0 --tau 4 --split pilot --start 450 --count 50 --n-eval 32000 --mh-steps 30 --final-mh 60 --budget-minutes 330 --out ../results/v2/g4_b5/S_k0_gstar_ref_sh9"
+  },
+  {
+   "id": "g4b5_S_k0_gstar_ref_sh10",
+   "cmd": "python main.py eval2 --set S --method gstar --kappa 0 --tau 4 --split pilot --start 500 --count 50 --n-eval 32000 --mh-steps 30 --final-mh 60 --budget-minutes 330 --out ../results/v2/g4_b5/S_k0_gstar_ref_sh10"
+  },
+  {
+   "id": "g4b5_S_k0_gstar_ref_sh11",
+   "cmd": "python main.py eval2 --set S --method gstar --kappa 0 --tau 4 --split pilot --start 550 --count 50 --n-eval 32000 --mh-steps 30 --final-mh 60 --budget-minutes 330 --out ../results/v2/g4_b5/S_k0_gstar_ref_sh11"
+  }
+ ]
+}

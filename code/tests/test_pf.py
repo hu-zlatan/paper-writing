@@ -67,3 +67,14 @@ def test_contact_proposal_density_integrates_to_one():
     pf.q_beta = 1e-12  # contact component only
     est = np.mean(np.exp(pf._q_logpdf(C, k, x, y, th) - lg))
     assert abs(est - 1.0) < 0.08
+
+
+def test_rejuvenate_zero_is_noop_and_keeps_posterior_support():
+    lib, pf, s0 = run(n=2000, T=4, seed=3)
+    before = (pf.k.copy(), pf.x.copy(), pf.th.copy(), pf.logw.copy())
+    pf.rejuvenate(0)
+    assert all(np.array_equal(a, b) for a, b in zip(before, (pf.k, pf.x, pf.th, pf.logw)))
+    pf.rejuvenate(5)
+    assert np.allclose(pf.logw, -math.log(pf.n))            # forced resample leaves uniform weights
+    assert np.allclose(pf.loglik_hist, pf._hist_loglik(pf.k, pf.x, pf.y, pf.th))  # cached likelihoods stay exact
+    assert pf.mh_steps == 3                                   # path kernel restored
