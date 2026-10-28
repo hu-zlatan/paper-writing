@@ -90,3 +90,11 @@ candidate evaluation method against the grid reference on the first 200 recorded
 coarser settings. The cheapest method that passes in every cell becomes the evaluation for all v2 numbers; κ_hi cells
 are checked the same way when their pilot runs exist. If no SMC kernel passes, the grid is the evaluation and its
 measured cost enters §6 through the downscale order. Thresholds unchanged.
+
+## B9 — G3 (i) selection details (2026-10-28, run 3; written when 2 of the 4 logs had finished)
+- Configurations: the first four of the pre-drawn v1 random configurations (experiments/hpsearch_v1.json), seed 100,
+  (S, κ = 6, τ = 5.0), E_train = 10⁵.
+- Selection metric: the final logged validation ball-sPCE of the argmax policy (500 fixed validation episodes);
+  ties within 0.02 nats go to the lower configuration index. The sampled-policy value is reported, not used.
+- The weights of these four runs were not kept (a .gitignore rule excluded *.npz; fixed afterwards); G3 (ii) retrains
+  the selected configuration with 3 pilot seeds, whose weights are kept.
