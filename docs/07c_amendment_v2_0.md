@@ -39,3 +39,30 @@ R ∈ {10, 30} final. Reference: 32k × 30 MH path + 60 final (heavier than anyt
 that passes in every cell is frozen as the evaluation PF for all v2 numbers. If neither passes, the reference kernel
 itself becomes the evaluation PF and its cost (≈ 3× the §6 estimate) enters §6 through the downscale order; the
 κ_hi cells are checked when the calibration (G5) fixes τ_κ. The thresholds are unchanged.
+
+## B6 — G1 instrument details fixed before the G1 run (2026-10-28, run 3)
+- **Exact notch reference** (`code/touchbed/notch.py`): the v1 H2b-P2 geometry with the informative observation
+  coordinate only (vertical probe → NC or contact height; horizontal probe → contact abscissa), ε-softened as in the
+  main model, 401-point x grid, 71 vertical probes (2 mm spacing over ±70 mm) + 1 horizontal probe. Values are exact
+  enumeration over the grid with trapezoid quadrature over z (0.25 mm, ±6σ; outside that region the posterior is
+  exactly the prior belief). Quadrature check: 0.5 mm / ±6σ and 0.125 mm / ±8σ change V_opt by < 0.002 nats.
+  Exact values at the prior: V_opt = 0.615 nats (horizontal first), V_greedy = 0.174 nats, **exact relative gap 0.717**
+  (the pre-registration's "≈ 0.69 / 0.2 / 0.7" were analytic approximations).
+- **Estimator settings (frozen for G1 and G2)** (`code/touchbed/lookahead.py`): C1 = 32 screened candidates = G*'s own
+  first action + one structured set-up move + 30 uniformly drawn actions; screen with M_outer = 64 CRN outer samples;
+  re-estimate the top 4 plus G*'s action with 4 × 64 = 256 fresh CRN samples; V_LA = max re-estimate (G*'s action
+  included), V_G* = re-estimate of G*'s action; rollouts completed by the Monte-Carlo greedy comparator (M = 64).
+  The structured set-up move is defined generically as **the action of maximal full-state EIG** (it localises the
+  nuisance); on S it is added next to the two pre-registered structured moves (antipodal travel, travel to the region of
+  maximal mode disagreement).
+- **G1 (a)** is computed as the mean of 5 independent estimator runs (seeds) at the prior; pass iff the mean is in
+  [0.8, 1.2] × 0.717 = [0.574, 0.861]; every run is reported.
+- **G1 (b) bank**: beliefs after one horizontal probe on a random true state (fixed seed 2026), two probes left, kept iff
+  the exact relative gap ≤ 0.001, until 100 are found. Pass iff the mean estimated relative gap is in [−0.01, +0.02] and
+  its one-sided 95 % bootstrap UB < 0.03 (as pre-registered).
+
+## B7 — Decision on C(A) = 0.802 (2026-10-28, run 3)
+Set A is kept unchanged and the check is **reported as marginally failed** (0.802 vs ≤ 0.80) in the paper. Reasons:
+v2 uses A only as the low-ambiguity contrast to S for H1 (amortization), where C(A) = 0.80 vs C(S) = 0.97 remains a
+clear separation; replacing shapes after seeing the value would be a post-hoc selection of the object set, and the
+per-shape rule (≤ 0.85, max 0.821) passes. No other rule depends on C(A).

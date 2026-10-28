@@ -28,3 +28,15 @@ def test_eig_two_hypotheses_hit_vs_miss():
     eig0 = eig_candidates(pf, np.array([math.pi / 2]), np.array([0.6]), 4000, np.random.default_rng(2),
                           particles=(k, x, np.array([0.0, 0.0]), th, w))[0]
     assert abs(eig0) < 0.02
+
+
+def test_notch_exact_reference():
+    from touchbed import notch as N
+    T = N._Tables()
+    w = N.prior_belief()
+    e = N.eig_batch(w[None], T)[0]
+    assert abs(e[N.H_ACT]) < 1e-9                 # horizontal probe carries no identity information
+    assert 0.03 < e.max() < 0.11
+    P, pr = N.posteriors(w, 10, T)
+    assert abs(pr.sum() - 1) < 1e-6
+    np.testing.assert_allclose(P.sum(1), 1.0)

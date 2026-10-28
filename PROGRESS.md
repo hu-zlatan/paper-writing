@@ -317,3 +317,16 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
 - **Remaining for stage 10 v2:** G0 unit tests (κ=0/τ=3 v1 reproduction, ball-sPCE toy agreement), exact notch reference + G1 look-ahead estimator, rollout planner, τ_κ/n* calibration script (G5), latency-ladder protocol; then stage 11 (TIME_ESTIMATE on runners) and stage 12 gates.
 - **Run-2 late additions:** G0 (vi) κ=0/τ=3 reproduction test passes (v2 runner == v1 runner given the same actions and streams); G0 (ii) self-symmetry search fixed (amendment B3): C(S)=0.971 passes, **C(A)=0.802 misses ≤ 0.80 by 0.002** (recorded in docs/07c_amendment_v2_0.md, unresolved); `main.py calib` (G5 τ calibration) + experiments/v2_calib.json launched; early G4 κ=0 result for (A, random, 600 episodes): success 0.312 vs 0.315 (32k vs 128k) but ball information +0.13 nats at 128k → fails the 0.05-nat rule, so the pre-registered fallback check (10 vs 30 MH steps at 32k, experiments/v2_g4_fallback_random.json) was launched; dev sanity run shows the sampled policy improving while argmax validation does not yet (results/v2/dev/README.md).
 - **Actions jobs still running at the end of run 2** (their commits land in results/v2/{g4,calib,g4_fallback}/): run 40679933995 (G4 κ=0), run 40680312831 (calibration), and the G4 fallback run. Next run: `python code/analysis_g4.py`, aggregate calibration, then continue stage 10 v2 remaining items.
+- **Run-3 additions (2026-10-28 ~14:00–):**
+  - **G4 as pre-registered: FAIL** in all 4 κ=0 cells on ball information (128k − 32k, 3 MH: +0.06 to +0.18 nats;
+    results/v2/12_g4_analysis.json). **Pre-registered fallback (10 vs 30 MH): FAIL** on success (A +1.1 pp, S +3.7 pp)
+    though ΔBI ≤ 0.05 (results/v2/12_g4_fallback_analysis.json). Diagnostic: 32k × 30 MH ≈ 128k × 3 MH on BI → the
+    error is MCMC mixing. Amendment **B5** (final rejuvenation of the evaluation PF; R ∈ {10, 30} vs a 32k × 30 MH +
+    60 final reference) written before re-checking; experiments/v2_g4_b5.json dispatched (144 jobs → results/v2/g4_b5/).
+  - **G5 calibration aggregated** (results/v2/12_calib_analysis.json, code/analysis_calib.py): n*(A) = 3 (G* success
+    0.96 on 200 pilot eps), n*(S) = 4 (0.665); τ: A 3.3/3.2/3.3, S 4.8/5.0/5.1 at κ = 2/6/12. G* travels little
+    (mean travel time 0.17–1.14). Budget-enforced verification dispatched (experiments/v2_calib_verify.json →
+    results/v2/calib_verify/).
+  - **G1 instrument built** (amendment B6): exact notch reference code/touchbed/notch.py (exact gap 0.717 at the prior),
+    generic look-ahead estimator code/touchbed/lookahead.py, `main.py g1`. Zero-gap bank generation in progress.
+  - **C(A) = 0.802** decided: keep A, report as marginal fail (amendment B7).

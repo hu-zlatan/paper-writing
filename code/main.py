@@ -210,6 +210,37 @@ def cmd_eval2(a):
     print(f"EVAL2_DONE n={a.count} wall_s={time.time() - t0:.0f}")
 
 
+def cmd_g1(a):
+    """Gate G1 (docs/07_hypotheses_v2.md §4, amendment B6): look-ahead estimator on the exact notch control.
+    part a: prior belief, two probes, one estimator run per seed. part b: zero-gap bank beliefs, one probe used."""
+    import numpy as np
+    from touchbed import notch as N
+    from touchbed.lookahead import lookahead_gap
+    P = N.NotchProblem()
+    os.makedirs(os.path.dirname(os.path.abspath(a.out)), exist_ok=True)
+    t0 = time.time()
+    with open(a.out + ".jsonl", "w") as f:
+        if a.part == "a":
+            T = N._Tables()
+            ex = N.two_step(N.prior_belief(), T)
+            exact_rel = (ex["v_opt"] - ex["v_greedy"]) / ex["v_opt"]
+            for sd in range(a.start, a.start + a.count):
+                r = lookahead_gap(P, np.log(N.prior_belief()), 2, seed=1000 + sd, C1=a.C1, M_outer=a.M_outer)
+                r.update({"part": "a", "seed": sd, "exact_v_opt": ex["v_opt"], "exact_v_greedy": ex["v_greedy"],
+                          "exact_gap_rel": exact_rel, "exact_a_opt": ex["a_opt"], "exact_a_greedy": ex["a_greedy"]})
+                f.write(json.dumps(r) + "\n"); f.flush()
+        else:
+            bank = json.load(open(a.bank))["bank"]
+            for i in range(a.start, min(a.start + a.count, len(bank))):
+                b = bank[i]
+                hist = [(int(h[0]), (bool(h[1][0]), float(h[1][1]))) for h in b["history"]]
+                w = N.belief_after(hist)
+                r = lookahead_gap(P, np.log(np.maximum(w, 1e-300)), 2, seed=5000 + i, C1=a.C1, M_outer=a.M_outer)
+                r.update({"part": "b", "index": i, "exact_gap_rel": b["exact_gap_rel"], "exact_v_opt": b["exact_v_opt"]})
+                f.write(json.dumps(r) + "\n"); f.flush()
+    print(f"G1_DONE wall_s={time.time() - t0:.0f}")
+
+
 def cmd_calib(a):
     """G5 tau calibration (docs/07_hypotheses_v2.md §1.2): run G* WITHOUT a budget for n* probes on pilot episodes and
     record the travel time it spends; tau_kappa = n* + mean travel time (rounded to 0.1), then verified with the budget."""
@@ -290,8 +321,13 @@ def main():
     cb.add_argument("--n-star", type=int, default=4); cb.add_argument("--start", type=int, default=0)
     cb.add_argument("--count", type=int, default=50); cb.add_argument("--n-dec", type=int, default=2000)
     cb.add_argument("--M", type=int, default=64); cb.add_argument("--out", required=True)
+    g1 = sub.add_parser("g1")
+    g1.add_argument("--part", default="a"); g1.add_argument("--start", type=int, default=0)
+    g1.add_argument("--count", type=int, default=1); g1.add_argument("--C1", type=int, default=32)
+    g1.add_argument("--M-outer", type=int, default=64); g1.add_argument("--bank", default="../results/v2/g1/bank.json")
+    g1.add_argument("--out", required=True)
     a = ap.parse_args()
-    {"calib": cmd_calib, "train": cmd_train, "eval": cmd_eval, "pilot": cmd_pilot, "train2": cmd_train2, "eval2": cmd_eval2}[a.cmd](a)
+    {"g1": cmd_g1, "calib": cmd_calib, "train": cmd_train, "eval": cmd_eval, "pilot": cmd_pilot, "train2": cmd_train2, "eval2": cmd_eval2}[a.cmd](a)
 
 
 if __name__ == "__main__":
