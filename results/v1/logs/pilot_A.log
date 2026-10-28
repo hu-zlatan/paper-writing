@@ -1,0 +1,5 @@
+/home/runner/work/paper-writing/paper-writing/code/touchbed/pf.py:165: RuntimeWarning: divide by zero encountered in log1p
+  lseg = hi + np.log1p(-np.exp(np.minimum(lo - hi, -1e-300)))
+TIME_ESTIMATE: eval[random] 0.43s per episode (T=5) x 16000 episodes (2 sets x 2000 x 4 budgets) ~ 2.5 CPU-h (scaled to mean T 6.5)
+TIME_ESTIMATE: eval[greedy] 3.70s per episode (T=5) x 16000 episodes (2 sets x 2000 x 4 budgets) ~ 21.4 CPU-h (scaled to mean T 6.5)
+TIME_ESTIMATE: train 28.7 ms per episode (L=4095) x 1e5 episodes x 1 run ~ 0.80 CPU-h per run (+ validation)
