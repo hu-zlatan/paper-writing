@@ -1,0 +1,122 @@
+{
+ "generated": "2026-10-28",
+ "prompt": "pipeline/references/stage_prompts/resource_planning.md (schema {tasks:[{id,name,depends_on,gpu_count,estimated_minutes,priority}], total_gpu_budget, generated})",
+ "pilot_measurements": {
+  "source": "results/v1/logs/pilot_S.log, pilot_A.log (GitHub Actions ubuntu-latest, 2026-10-28)",
+  "TIME_ESTIMATE_lines": [
+   "S: eval random 0.43 s/episode (T=5); eval greedy 3.70 s/episode (T=5); train 28.7 ms/episode at L=4095",
+   "A: eval random 0.68 s/episode (T=5); eval greedy 5.35 s/episode (T=5); train 56.1 ms/episode at L=4095"
+  ],
+  "sandbox_rl_success": "0.08 s/episode with training PF N=500, 2 MH steps"
+ },
+ "total_gpu_budget": 0,
+ "hardware": "CPU only: GitHub Actions ubuntu-latest runners (2 vCPU), up to 20 concurrent jobs, <= 350 min per job",
+ "tasks": [
+  {
+   "id": "T0",
+   "name": "PF convergence check + pilots (experiments/pfcheck_v1.json)",
+   "depends_on": [],
+   "gpu_count": 0,
+   "estimated_minutes": 60,
+   "priority": 1
+  },
+  {
+   "id": "T1",
+   "name": "Hyperparameter search: 12 configs x {spce_total, spce_myopic, rl_success} on S, 1e5 episodes",
+   "depends_on": [
+    "T0"
+   ],
+   "gpu_count": 0,
+   "estimated_minutes": 4320,
+   "priority": 1
+  },
+  {
+   "id": "T2",
+   "name": "Baseline tuning: coverage C in {16,64,256}; greedy 18-config Pareto sweep (validation, 500 episodes, T=5)",
+   "depends_on": [
+    "T0"
+   ],
+   "gpu_count": 0,
+   "estimated_minutes": 1230.0,
+   "priority": 1
+  },
+  {
+   "id": "T3",
+   "name": "Manipulation checks: confusability C(O), myopia gap G(O), R_NC (nested MC, 100-belief banks)",
+   "depends_on": [],
+   "gpu_count": 0,
+   "estimated_minutes": 120,
+   "priority": 1
+  },
+  {
+   "id": "T4",
+   "name": "Main training: sPCE-total + sPCE-myopic, A and S, 6 seeds, selected config",
+   "depends_on": [
+    "T1",
+    "T3"
+   ],
+   "gpu_count": 0,
+   "estimated_minutes": 2160,
+   "priority": 1
+  },
+  {
+   "id": "T5",
+   "name": "Ablations A2a/A2b (5 seeds x 2 sets), A3 concat (3 seeds, S), A4 L in {255,1023} (3 seeds, S), A5 no budget input (3 seeds, S)",
+   "depends_on": [
+    "T1"
+   ],
+   "gpu_count": 0,
+   "estimated_minutes": 2880,
+   "priority": 2
+  },
+  {
+   "id": "T6",
+   "name": "RL-success main (5 seeds x 2 sets)",
+   "depends_on": [
+    "T1"
+   ],
+   "gpu_count": 0,
+   "estimated_minutes": 1500,
+   "priority": 2
+  },
+  {
+   "id": "T7",
+   "name": "Test evaluation: all methods x {A,S} x T in {3,5,8,10} x 2000 episodes (sharded)",
+   "depends_on": [
+    "T2",
+    "T4",
+    "T5",
+    "T6"
+   ],
+   "gpu_count": 0,
+   "estimated_minutes": 4164.0,
+   "priority": 1
+  },
+  {
+   "id": "T8",
+   "name": "MuJoCo transfer (r in {1,4,8} mm, 1000 scenes, T in {3,5,10})",
+   "depends_on": [
+    "T4"
+   ],
+   "gpu_count": 0,
+   "estimated_minutes": 600,
+   "priority": 2
+  },
+  {
+   "id": "T9",
+   "name": "H2b oracle two-step EIG + positive control; H5' A4/A16 runs",
+   "depends_on": [
+    "T4"
+   ],
+   "gpu_count": 0,
+   "estimated_minutes": 600,
+   "priority": 3
+  }
+ ],
+ "scaling_decisions": [
+  "L=4095 (amendment A1) -> core seeds 6 (D2); training cap 1e5 episodes with plateau rule",
+  "conditions > 100 overall -> non-core rows use 3-5 seeds (RESTRICTS scaling rule)",
+  "greedy evaluation is the dominant evaluation cost (~25-30 CPU-h); shards of 100 episodes keep each job < 30 min"
+ ],
+ "total_estimated_cpu_hours": "~150-200 (Actions, ~20 parallel jobs -> ~10-15 h wall-clock spread over several scheduled runs)"
+}

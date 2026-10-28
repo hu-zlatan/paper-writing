@@ -9,7 +9,7 @@
 **Topic:** Amortized, non-myopic active tactile localization (TouchBED)
 **Initialised:** 2026-10-28T07:56:44Z
 **Current version:** v1
-**Latest stage:** Stage 10 CODE_GENERATION — next: stage 11 RESOURCE_PLANNING
+**Latest stage:** Stage 11 RESOURCE_PLANNING — next: stage 12 EXPERIMENT_RUN
 
 ---
 
@@ -208,3 +208,15 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
 - **Finished:** 2026-10-28 (run 2, see commit "stage 10 CODE_GENERATION: complete")
 - **Run-2 additions:** learning sanity pilot (val success 0.14 → 0.48 within 3·10⁴ episodes at L=1023, results/v1/dev/pilot3_learning.md); dated amendment docs/07c_amendment_v1_1.md (A1 L=4095 per the pre-registered D1 rule with seeds 6 and E_train cap 10⁵; A2 ball information co-primary instead of IG_T; A3 contact-conditioned PF; A4 cost re-estimates; A5 GRU variant dropped); stats.py; main.py CLI; per-index episode streams; experiments workflow for Actions. MuJoCo evaluation deferred until H4 work (documented).
 - **Decision:** PROCEED → stage 11.
+
+---
+
+## Stage 11. RESOURCE_PLANNING     [v1]
+
+- **Started:** 2026-10-28T09:56:00Z
+- **Finished:** 2026-10-28T10:10:00Z
+- **Inputs used:** docs/08_experiment_plan.yaml, docs/07c_amendment_v1_1.md, pilot logs from Actions run 40668209040
+- **Outputs produced:** docs/11_schedule.json; experiments/pfcheck_v1.json (launched), experiments/hpsearch_v1.json; MuJoCo probe (code/touchbed/mujoco_eval.py, tested) added at the end of stage 10
+- **Decision:** PROCEED → stage 12.
+- **Summary:** Mandatory pilot ran on the actual runners and printed TIME_ESTIMATE: training 0.8–1.6 CPU-h per run at L=4095, greedy evaluation ≈ 21–31 CPU-h for the full grid. Total ≈ 150–200 CPU-h, feasible with ~20 concurrent GitHub Actions jobs over several runs; seeds per amendment A1 / RESTRICTS scaling rules. rl_success uses a training PF with N=500 / 2 MH steps (0.08 s per episode) to fit the equal 1e5-episode budget.
+- **Commit:** see git log ("stage 11 RESOURCE_PLANNING")

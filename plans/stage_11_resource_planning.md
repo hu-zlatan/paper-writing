@@ -11,3 +11,11 @@ Schedule JSON (tasks, dependencies, CPU estimates, priorities) for all sweeps of
 ## Hard-constraint checks
 - [ ] TIME_ESTIMATE printed by a real pilot before any sweep.
 - [ ] Downscale (not silently exceed) if over budget.
+
+---
+
+## Output Summary
+- Pilot TIME_ESTIMATE on Actions runners (results/v1/logs/pilot_{S,A}.log): training 28.7 / 56.1 ms per episode at L=4095 (S / A) → 0.8–1.6 CPU-h per 1e5-episode run; greedy evaluation 3.7–5.4 s per T=5 episode (≈ 21–31 CPU-h for the full test grid); random 0.4–0.7 s.
+- docs/11_schedule.json: 10 tasks (T0–T9), CPU only, ≈ 150–200 CPU-h total on ~20 concurrent Actions jobs; scaling decisions recorded (seeds 6 for core, 3–5 for non-core, 1e5-episode cap).
+- PF convergence check (T0) results are analysed in stage 12 (they decide N_eval).
+- **Decision:** PROCEED → stage 12.
