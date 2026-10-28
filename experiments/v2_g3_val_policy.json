@@ -1,0 +1,65 @@
+{
+ "purpose": "G3 (ii): the 3 pilot seeds (selected configuration) on the 500 validation episodes at (S, kappa = 12, tau = 5.1); read-outs replaced by the grid evaluation offline.",
+ "jobs": [
+  {
+   "id": "g3val_S_k12_sd200_sh0",
+   "cmd": "python main.py eval2 --set S --method spce_total --weights ../results/v2/g3/pilot_S_k12_sd200.npz --kappa 12 --tau 5.1 --split val --start 0 --count 100 --n-eval 2000 --budget-minutes 330 --out ../results/v2/g3_val/S_k12_sd200_sh0"
+  },
+  {
+   "id": "g3val_S_k12_sd200_sh1",
+   "cmd": "python main.py eval2 --set S --method spce_total --weights ../results/v2/g3/pilot_S_k12_sd200.npz --kappa 12 --tau 5.1 --split val --start 100 --count 100 --n-eval 2000 --budget-minutes 330 --out ../results/v2/g3_val/S_k12_sd200_sh1"
+  },
+  {
+   "id": "g3val_S_k12_sd200_sh2",
+   "cmd": "python main.py eval2 --set S --method spce_total --weights ../results/v2/g3/pilot_S_k12_sd200.npz --kappa 12 --tau 5.1 --split val --start 200 --count 100 --n-eval 2000 --budget-minutes 330 --out ../results/v2/g3_val/S_k12_sd200_sh2"
+  },
+  {
+   "id": "g3val_S_k12_sd200_sh3",
+   "cmd": "python main.py eval2 --set S --method spce_total --weights ../results/v2/g3/pilot_S_k12_sd200.npz --kappa 12 --tau 5.1 --split val --start 300 --count 100 --n-eval 2000 --budget-minutes 330 --out ../results/v2/g3_val/S_k12_sd200_sh3"
+  },
+  {
+   "id": "g3val_S_k12_sd200_sh4",
+   "cmd": "python main.py eval2 --set S --method spce_total --weights ../results/v2/g3/pilot_S_k12_sd200.npz --kappa 12 --tau 5.1 --split val --start 400 --count 100 --n-eval 2000 --budget-minutes 330 --out ../results/v2/g3_val/S_k12_sd200_sh4"
+  },
+  {
+   "id": "g3val_S_k12_sd201_sh0",
+   "cmd": "python main.py eval2 --set S --method spce_total --weights ../results/v2/g3/pilot_S_k12_sd201.npz --kappa 12 --tau 5.1 --split val --start 0 --count 100 --n-eval 2000 --budget-minutes 330 --out ../results/v2/g3_val/S_k12_sd201_sh0"
+  },
+  {
+   "id": "g3val_S_k12_sd201_sh1",
+   "cmd": "python main.py eval2 --set S --method spce_total --weights ../results/v2/g3/pilot_S_k12_sd201.npz --kappa 12 --tau 5.1 --split val --start 100 --count 100 --n-eval 2000 --budget-minutes 330 --out ../results/v2/g3_val/S_k12_sd201_sh1"
+  },
+  {
+   "id": "g3val_S_k12_sd201_sh2",
+   "cmd": "python main.py eval2 --set S --method spce_total --weights ../results/v2/g3/pilot_S_k12_sd201.npz --kappa 12 --tau 5.1 --split val --start 200 --count 100 --n-eval 2000 --budget-minutes 330 --out ../results/v2/g3_val/S_k12_sd201_sh2"
+  },
+  {
+   "id": "g3val_S_k12_sd201_sh3",
+   "cmd": "python main.py eval2 --set S --method spce_total --weights ../results/v2/g3/pilot_S_k12_sd201.npz --kappa 12 --tau 5.1 --split val --start 300 --count 100 --n-eval 2000 --budget-minutes 330 --out ../results/v2/g3_val/S_k12_sd201_sh3"
+  },
+  {
+   "id": "g3val_S_k12_sd201_sh4",
+   "cmd": "python main.py eval2 --set S --method spce_total --weights ../results/v2/g3/pilot_S_k12_sd201.npz --kappa 12 --tau 5.1 --split val --start 400 --count 100 --n-eval 2000 --budget-minutes 330 --out ../results/v2/g3_val/S_k12_sd201_sh4"
+  },
+  {
+   "id": "g3val_S_k12_sd202_sh0",
+   "cmd": "python main.py eval2 --set S --method spce_total --weights ../results/v2/g3/pilot_S_k12_sd202.npz --kappa 12 --tau 5.1 --split val --start 0 --count 100 --n-eval 2000 --budget-minutes 330 --out ../results/v2/g3_val/S_k12_sd202_sh0"
+  },
+  {
+   "id": "g3val_S_k12_sd202_sh1",
+   "cmd": "python main.py eval2 --set S --method spce_total --weights ../results/v2/g3/pilot_S_k12_sd202.npz --kappa 12 --tau 5.1 --split val --start 100 --count 100 --n-eval 2000 --budget-minutes 330 --out ../results/v2/g3_val/S_k12_sd202_sh1"
+  },
+  {
+   "id": "g3val_S_k12_sd202_sh2",
+   "cmd": "python main.py eval2 --set S --method spce_total --weights ../results/v2/g3/pilot_S_k12_sd202.npz --kappa 12 --tau 5.1 --split val --start 200 --count 100 --n-eval 2000 --budget-minutes 330 --out ../results/v2/g3_val/S_k12_sd202_sh2"
+  },
+  {
+   "id": "g3val_S_k12_sd202_sh3",
+   "cmd": "python main.py eval2 --set S --method spce_total --weights ../results/v2/g3/pilot_S_k12_sd202.npz --kappa 12 --tau 5.1 --split val --start 300 --count 100 --n-eval 2000 --budget-minutes 330 --out ../results/v2/g3_val/S_k12_sd202_sh3"
+  },
+  {
+   "id": "g3val_S_k12_sd202_sh4",
+   "cmd": "python main.py eval2 --set S --method spce_total --weights ../results/v2/g3/pilot_S_k12_sd202.npz --kappa 12 --tau 5.1 --split val --start 400 --count 100 --n-eval 2000 --budget-minutes 330 --out ../results/v2/g3_val/S_k12_sd202_sh4"
+  }
+ ]
+}
