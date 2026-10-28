@@ -117,3 +117,14 @@ make success discontinuous in the posterior approximation. Under B8 the grid the
 subject to its own sub 4 vs 8 self-check (G* part: mean |ΔBI| 0.007, no flips outside the tie band; random part
 pending). The remaining B5 jobs (heavy kernels on S) were cancelled because they can no longer change this outcome.
 Measured grid cost on Actions: G* episodes 2.4 s (A) / 4.6 s (S) per episode; random episodes 66 s / 76 s.
+
+## Status note (2026-10-28, run 3, ~17:25 UTC) — G5 provisional (32k × 3 MH read-outs; grid re-evaluation dispatched)
+- G* vs random (300 pilot episodes): A0 (τ 3) 0.837 vs 0.197; A6 0.457 vs 0.037; A12 0.413 vs 0.027; S0 (τ 4, G4 runs)
+  0.645 vs 0.210; S6 0.417 vs 0.033; S12 0.357 vs 0.067 — the +10 pp and D ≥ 20 pp rules hold everywhere.
+- **Non-degeneracy (§1.7) at A0:** success(G*) 0.835 on the first 200 is inside [0.15, 0.90], but **BI saturation of G* is
+  75 %** (≥ 50 %). n*(A) is already 3, the lowest value the n* rule allows, so the rule cannot be applied again; if the
+  grid read-out confirms it, A0 is removed from the primary set (§1.7), reported.
+- **Flatness (§1.5):** at κ = 6, Δsuccess +1.3 pp and ΔBI −0.015 (pass); **at κ_hi = 12, Δsuccess +7.7 pp and ΔBI +0.19
+  nats (fail)**. If the grid read-out confirms it, the pre-registered consequence is 𝒜 → 64 × 8 for all methods (once),
+  which also invalidates the τ calibration, G2-at-12 and G3 (ii)-at-12 runs made on the 32 × 8 set. This, the G3 (iii)
+  failure and G2's refutation of Idea 2 go to the stage-15 gate decision together.
