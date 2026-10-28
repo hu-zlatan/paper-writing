@@ -312,12 +312,17 @@ def cmd_evalgrid(a):
             split = r.get("split", a.split)
             lib, prior, eps = make_states_v2(r["set"], split, r["episode"] + 1)
             s0, _ = eps[r["episode"]]
-            h = rebuild_history(lib, om, s0, r["actions"], (r["set"], split, r["kappa"], r["tau"], r["episode"]))
+            phis = psis = None
+            if r.get("grid", "32x8") != "32x8":
+                from touchbed.travel import action_grid
+                phis, psis = action_grid(*map(int, r["grid"].split("x")))
+            h = rebuild_history(lib, om, s0, r["actions"], (r["set"], split, r["kappa"], r["tau"], r["episode"]), phis, psis)
             t1 = time.time()
             G = AdaptiveGridPosterior(lib, prior, om, h, s0, h_xy=a.h_xy, h_th_deg=a.h_th, sub=a.sub)
             o = G.readout(s0, prior_ball_mass(lib, prior, s0))
             o.update({"episode": r["episode"], "set": r["set"], "kappa": r["kappa"], "tau": r["tau"], "method": r["method"],
                       "actions": r["actions"], "src": os.path.basename(a.src), "grid": [a.h_xy, a.h_th, a.sub],
+                      "action_grid": r.get("grid", "32x8"),
                       "n_refined": G.n_refined, "wall_s": time.time() - t1})
             f.write(json.dumps(o) + "\n"); f.flush()
     print(f"EVALGRID_DONE wall_s={time.time() - t0:.0f}")
@@ -341,7 +346,11 @@ def cmd_evalpf(a):
             lib, prior, eps = make_states_v2(r["set"], split, r["episode"] + 1)
             s0, _ = eps[r["episode"]]
             key = (r["set"], split, r["kappa"], r["tau"], r["episode"])
-            h = rebuild_history(lib, om, s0, r["actions"], key)
+            phis = psis = None
+            if r.get("grid", "32x8") != "32x8":
+                from touchbed.travel import action_grid
+                phis, psis = action_grid(*map(int, r["grid"].split("x")))
+            h = rebuild_history(lib, om, s0, r["actions"], key, phis, psis)
             t1 = time.time()
             pf = ParticleFilter(lib, om, prior, a.n_eval, stream("pf_eval", *key), mh_steps=a.mh_steps)
             for phi, psi, obs in h:
