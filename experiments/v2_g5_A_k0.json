@@ -1,0 +1,53 @@
+{
+ "purpose": "Gate G5 / non-degeneracy (\u00a71.7) for the A kappa = 0 cell at the frozen tau = n*(A) = 3 (the G4 runs used tau = 4). Actions recorded; evaluation re-applied under B8.",
+ "jobs": [
+  {
+   "id": "g5_A_k0_random_sh0",
+   "cmd": "python main.py eval2 --set A --method random --kappa 0 --tau 3 --split pilot --start 0 --count 50 --n-eval 32000 --budget-minutes 330 --out ../results/v2/g5/A_k0_random_sh0"
+  },
+  {
+   "id": "g5_A_k0_random_sh1",
+   "cmd": "python main.py eval2 --set A --method random --kappa 0 --tau 3 --split pilot --start 50 --count 50 --n-eval 32000 --budget-minutes 330 --out ../results/v2/g5/A_k0_random_sh1"
+  },
+  {
+   "id": "g5_A_k0_random_sh2",
+   "cmd": "python main.py eval2 --set A --method random --kappa 0 --tau 3 --split pilot --start 100 --count 50 --n-eval 32000 --budget-minutes 330 --out ../results/v2/g5/A_k0_random_sh2"
+  },
+  {
+   "id": "g5_A_k0_random_sh3",
+   "cmd": "python main.py eval2 --set A --method random --kappa 0 --tau 3 --split pilot --start 150 --count 50 --n-eval 32000 --budget-minutes 330 --out ../results/v2/g5/A_k0_random_sh3"
+  },
+  {
+   "id": "g5_A_k0_random_sh4",
+   "cmd": "python main.py eval2 --set A --method random --kappa 0 --tau 3 --split pilot --start 200 --count 50 --n-eval 32000 --budget-minutes 330 --out ../results/v2/g5/A_k0_random_sh4"
+  },
+  {
+   "id": "g5_A_k0_random_sh5",
+   "cmd": "python main.py eval2 --set A --method random --kappa 0 --tau 3 --split pilot --start 250 --count 50 --n-eval 32000 --budget-minutes 330 --out ../results/v2/g5/A_k0_random_sh5"
+  },
+  {
+   "id": "g5_A_k0_gstar_sh0",
+   "cmd": "python main.py eval2 --set A --method gstar --kappa 0 --tau 3 --split pilot --start 0 --count 50 --n-eval 32000 --budget-minutes 330 --out ../results/v2/g5/A_k0_gstar_sh0"
+  },
+  {
+   "id": "g5_A_k0_gstar_sh1",
+   "cmd": "python main.py eval2 --set A --method gstar --kappa 0 --tau 3 --split pilot --start 50 --count 50 --n-eval 32000 --budget-minutes 330 --out ../results/v2/g5/A_k0_gstar_sh1"
+  },
+  {
+   "id": "g5_A_k0_gstar_sh2",
+   "cmd": "python main.py eval2 --set A --method gstar --kappa 0 --tau 3 --split pilot --start 100 --count 50 --n-eval 32000 --budget-minutes 330 --out ../results/v2/g5/A_k0_gstar_sh2"
+  },
+  {
+   "id": "g5_A_k0_gstar_sh3",
+   "cmd": "python main.py eval2 --set A --method gstar --kappa 0 --tau 3 --split pilot --start 150 --count 50 --n-eval 32000 --budget-minutes 330 --out ../results/v2/g5/A_k0_gstar_sh3"
+  },
+  {
+   "id": "g5_A_k0_gstar_sh4",
+   "cmd": "python main.py eval2 --set A --method gstar --kappa 0 --tau 3 --split pilot --start 200 --count 50 --n-eval 32000 --budget-minutes 330 --out ../results/v2/g5/A_k0_gstar_sh4"
+  },
+  {
+   "id": "g5_A_k0_gstar_sh5",
+   "cmd": "python main.py eval2 --set A --method gstar --kappa 0 --tau 3 --split pilot --start 250 --count 50 --n-eval 32000 --budget-minutes 330 --out ../results/v2/g5/A_k0_gstar_sh5"
+  }
+ ]
+}
