@@ -41,3 +41,20 @@ for s in ("A", "S"):
     out["tau"][f"{s}_k0"] = {"n_star": n_star, "tau": float(n_star)}
 print(json.dumps(out, indent=1))
 json.dump(out, open(os.path.join(base, "12_calib_analysis.json"), "w"), indent=1)
+
+# budget-enforced verification (results/v2/calib_verify): mean executed probes within n* +- 0.3
+ver = {}
+for f in glob.glob(os.path.join(base, "calib_verify", "*.jsonl")):
+    cell = os.path.basename(f).rsplit("_sh", 1)[0]
+    for line in open(f):
+        r = json.loads(line)
+        if "episode" in r:
+            ver.setdefault(cell, []).append(r["n_probes"])
+out["verify"] = {}
+for cell, v in sorted(ver.items()):
+    s, rest = cell.split("_k")
+    n_star = out["n_star"][s]["n_star"]
+    m = float(np.mean(v))
+    out["verify"][cell] = {"n_episodes": len(v), "mean_probes": m, "n_star": n_star, "passes": bool(abs(m - n_star) <= 0.3)}
+    print(cell, len(v), round(m, 3), "PASS" if abs(m - n_star) <= 0.3 else "FAIL")
+json.dump(out, open(os.path.join(base, "12_calib_analysis.json"), "w"), indent=1)

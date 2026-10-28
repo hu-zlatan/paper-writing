@@ -106,5 +106,43 @@
    "n_star": 4,
    "tau": 4.0
   }
+ },
+ "verify": {
+  "A_k12_tau3.3": {
+   "n_episodes": 200,
+   "mean_probes": 2.85,
+   "n_star": 3,
+   "passes": true
+  },
+  "A_k2_tau3.3": {
+   "n_episodes": 200,
+   "mean_probes": 2.745,
+   "n_star": 3,
+   "passes": true
+  },
+  "A_k6_tau3.2": {
+   "n_episodes": 200,
+   "mean_probes": 2.97,
+   "n_star": 3,
+   "passes": true
+  },
+  "S_k12_tau5.1": {
+   "n_episodes": 200,
+   "mean_probes": 4.1,
+   "n_star": 4,
+   "passes": true
+  },
+  "S_k2_tau4.8": {
+   "n_episodes": 200,
+   "mean_probes": 3.885,
+   "n_star": 4,
+   "passes": true
+  },
+  "S_k6_tau5.0": {
+   "n_episodes": 200,
+   "mean_probes": 3.95,
+   "n_star": 4,
+   "passes": true
+  }
  }
 }

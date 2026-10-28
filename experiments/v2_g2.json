@@ -1,0 +1,245 @@
+{
+ "purpose": "Gate G2 (docs/07_hypotheses_v2.md \u00a74, amendment B6): look-ahead headroom over G* on 100 G*-reached beliefs per kappa in {0,2,6} on S, frozen n*=4 and tau (results/v2/12_calib_analysis.json). Interpreted only if G1 passes.",
+ "jobs": [
+  {
+   "id": "g2_S_k0_000",
+   "cmd": "python main.py g2 --set S --kappa 0 --tau 4.0 --n-star 4 --start 0 --count 5 --out ../results/v2/g2/S_k0_000"
+  },
+  {
+   "id": "g2_S_k0_005",
+   "cmd": "python main.py g2 --set S --kappa 0 --tau 4.0 --n-star 4 --start 5 --count 5 --out ../results/v2/g2/S_k0_005"
+  },
+  {
+   "id": "g2_S_k0_010",
+   "cmd": "python main.py g2 --set S --kappa 0 --tau 4.0 --n-star 4 --start 10 --count 5 --out ../results/v2/g2/S_k0_010"
+  },
+  {
+   "id": "g2_S_k0_015",
+   "cmd": "python main.py g2 --set S --kappa 0 --tau 4.0 --n-star 4 --start 15 --count 5 --out ../results/v2/g2/S_k0_015"
+  },
+  {
+   "id": "g2_S_k0_020",
+   "cmd": "python main.py g2 --set S --kappa 0 --tau 4.0 --n-star 4 --start 20 --count 5 --out ../results/v2/g2/S_k0_020"
+  },
+  {
+   "id": "g2_S_k0_025",
+   "cmd": "python main.py g2 --set S --kappa 0 --tau 4.0 --n-star 4 --start 25 --count 5 --out ../results/v2/g2/S_k0_025"
+  },
+  {
+   "id": "g2_S_k0_030",
+   "cmd": "python main.py g2 --set S --kappa 0 --tau 4.0 --n-star 4 --start 30 --count 5 --out ../results/v2/g2/S_k0_030"
+  },
+  {
+   "id": "g2_S_k0_035",
+   "cmd": "python main.py g2 --set S --kappa 0 --tau 4.0 --n-star 4 --start 35 --count 5 --out ../results/v2/g2/S_k0_035"
+  },
+  {
+   "id": "g2_S_k0_040",
+   "cmd": "python main.py g2 --set S --kappa 0 --tau 4.0 --n-star 4 --start 40 --count 5 --out ../results/v2/g2/S_k0_040"
+  },
+  {
+   "id": "g2_S_k0_045",
+   "cmd": "python main.py g2 --set S --kappa 0 --tau 4.0 --n-star 4 --start 45 --count 5 --out ../results/v2/g2/S_k0_045"
+  },
+  {
+   "id": "g2_S_k0_050",
+   "cmd": "python main.py g2 --set S --kappa 0 --tau 4.0 --n-star 4 --start 50 --count 5 --out ../results/v2/g2/S_k0_050"
+  },
+  {
+   "id": "g2_S_k0_055",
+   "cmd": "python main.py g2 --set S --kappa 0 --tau 4.0 --n-star 4 --start 55 --count 5 --out ../results/v2/g2/S_k0_055"
+  },
+  {
+   "id": "g2_S_k0_060",
+   "cmd": "python main.py g2 --set S --kappa 0 --tau 4.0 --n-star 4 --start 60 --count 5 --out ../results/v2/g2/S_k0_060"
+  },
+  {
+   "id": "g2_S_k0_065",
+   "cmd": "python main.py g2 --set S --kappa 0 --tau 4.0 --n-star 4 --start 65 --count 5 --out ../results/v2/g2/S_k0_065"
+  },
+  {
+   "id": "g2_S_k0_070",
+   "cmd": "python main.py g2 --set S --kappa 0 --tau 4.0 --n-star 4 --start 70 --count 5 --out ../results/v2/g2/S_k0_070"
+  },
+  {
+   "id": "g2_S_k0_075",
+   "cmd": "python main.py g2 --set S --kappa 0 --tau 4.0 --n-star 4 --start 75 --count 5 --out ../results/v2/g2/S_k0_075"
+  },
+  {
+   "id": "g2_S_k0_080",
+   "cmd": "python main.py g2 --set S --kappa 0 --tau 4.0 --n-star 4 --start 80 --count 5 --out ../results/v2/g2/S_k0_080"
+  },
+  {
+   "id": "g2_S_k0_085",
+   "cmd": "python main.py g2 --set S --kappa 0 --tau 4.0 --n-star 4 --start 85 --count 5 --out ../results/v2/g2/S_k0_085"
+  },
+  {
+   "id": "g2_S_k0_090",
+   "cmd": "python main.py g2 --set S --kappa 0 --tau 4.0 --n-star 4 --start 90 --count 5 --out ../results/v2/g2/S_k0_090"
+  },
+  {
+   "id": "g2_S_k0_095",
+   "cmd": "python main.py g2 --set S --kappa 0 --tau 4.0 --n-star 4 --start 95 --count 5 --out ../results/v2/g2/S_k0_095"
+  },
+  {
+   "id": "g2_S_k2_000",
+   "cmd": "python main.py g2 --set S --kappa 2 --tau 4.8 --n-star 4 --start 0 --count 5 --out ../results/v2/g2/S_k2_000"
+  },
+  {
+   "id": "g2_S_k2_005",
+   "cmd": "python main.py g2 --set S --kappa 2 --tau 4.8 --n-star 4 --start 5 --count 5 --out ../results/v2/g2/S_k2_005"
+  },
+  {
+   "id": "g2_S_k2_010",
+   "cmd": "python main.py g2 --set S --kappa 2 --tau 4.8 --n-star 4 --start 10 --count 5 --out ../results/v2/g2/S_k2_010"
+  },
+  {
+   "id": "g2_S_k2_015",
+   "cmd": "python main.py g2 --set S --kappa 2 --tau 4.8 --n-star 4 --start 15 --count 5 --out ../results/v2/g2/S_k2_015"
+  },
+  {
+   "id": "g2_S_k2_020",
+   "cmd": "python main.py g2 --set S --kappa 2 --tau 4.8 --n-star 4 --start 20 --count 5 --out ../results/v2/g2/S_k2_020"
+  },
+  {
+   "id": "g2_S_k2_025",
+   "cmd": "python main.py g2 --set S --kappa 2 --tau 4.8 --n-star 4 --start 25 --count 5 --out ../results/v2/g2/S_k2_025"
+  },
+  {
+   "id": "g2_S_k2_030",
+   "cmd": "python main.py g2 --set S --kappa 2 --tau 4.8 --n-star 4 --start 30 --count 5 --out ../results/v2/g2/S_k2_030"
+  },
+  {
+   "id": "g2_S_k2_035",
+   "cmd": "python main.py g2 --set S --kappa 2 --tau 4.8 --n-star 4 --start 35 --count 5 --out ../results/v2/g2/S_k2_035"
+  },
+  {
+   "id": "g2_S_k2_040",
+   "cmd": "python main.py g2 --set S --kappa 2 --tau 4.8 --n-star 4 --start 40 --count 5 --out ../results/v2/g2/S_k2_040"
+  },
+  {
+   "id": "g2_S_k2_045",
+   "cmd": "python main.py g2 --set S --kappa 2 --tau 4.8 --n-star 4 --start 45 --count 5 --out ../results/v2/g2/S_k2_045"
+  },
+  {
+   "id": "g2_S_k2_050",
+   "cmd": "python main.py g2 --set S --kappa 2 --tau 4.8 --n-star 4 --start 50 --count 5 --out ../results/v2/g2/S_k2_050"
+  },
+  {
+   "id": "g2_S_k2_055",
+   "cmd": "python main.py g2 --set S --kappa 2 --tau 4.8 --n-star 4 --start 55 --count 5 --out ../results/v2/g2/S_k2_055"
+  },
+  {
+   "id": "g2_S_k2_060",
+   "cmd": "python main.py g2 --set S --kappa 2 --tau 4.8 --n-star 4 --start 60 --count 5 --out ../results/v2/g2/S_k2_060"
+  },
+  {
+   "id": "g2_S_k2_065",
+   "cmd": "python main.py g2 --set S --kappa 2 --tau 4.8 --n-star 4 --start 65 --count 5 --out ../results/v2/g2/S_k2_065"
+  },
+  {
+   "id": "g2_S_k2_070",
+   "cmd": "python main.py g2 --set S --kappa 2 --tau 4.8 --n-star 4 --start 70 --count 5 --out ../results/v2/g2/S_k2_070"
+  },
+  {
+   "id": "g2_S_k2_075",
+   "cmd": "python main.py g2 --set S --kappa 2 --tau 4.8 --n-star 4 --start 75 --count 5 --out ../results/v2/g2/S_k2_075"
+  },
+  {
+   "id": "g2_S_k2_080",
+   "cmd": "python main.py g2 --set S --kappa 2 --tau 4.8 --n-star 4 --start 80 --count 5 --out ../results/v2/g2/S_k2_080"
+  },
+  {
+   "id": "g2_S_k2_085",
+   "cmd": "python main.py g2 --set S --kappa 2 --tau 4.8 --n-star 4 --start 85 --count 5 --out ../results/v2/g2/S_k2_085"
+  },
+  {
+   "id": "g2_S_k2_090",
+   "cmd": "python main.py g2 --set S --kappa 2 --tau 4.8 --n-star 4 --start 90 --count 5 --out ../results/v2/g2/S_k2_090"
+  },
+  {
+   "id": "g2_S_k2_095",
+   "cmd": "python main.py g2 --set S --kappa 2 --tau 4.8 --n-star 4 --start 95 --count 5 --out ../results/v2/g2/S_k2_095"
+  },
+  {
+   "id": "g2_S_k6_000",
+   "cmd": "python main.py g2 --set S --kappa 6 --tau 5.0 --n-star 4 --start 0 --count 5 --out ../results/v2/g2/S_k6_000"
+  },
+  {
+   "id": "g2_S_k6_005",
+   "cmd": "python main.py g2 --set S --kappa 6 --tau 5.0 --n-star 4 --start 5 --count 5 --out ../results/v2/g2/S_k6_005"
+  },
+  {
+   "id": "g2_S_k6_010",
+   "cmd": "python main.py g2 --set S --kappa 6 --tau 5.0 --n-star 4 --start 10 --count 5 --out ../results/v2/g2/S_k6_010"
+  },
+  {
+   "id": "g2_S_k6_015",
+   "cmd": "python main.py g2 --set S --kappa 6 --tau 5.0 --n-star 4 --start 15 --count 5 --out ../results/v2/g2/S_k6_015"
+  },
+  {
+   "id": "g2_S_k6_020",
+   "cmd": "python main.py g2 --set S --kappa 6 --tau 5.0 --n-star 4 --start 20 --count 5 --out ../results/v2/g2/S_k6_020"
+  },
+  {
+   "id": "g2_S_k6_025",
+   "cmd": "python main.py g2 --set S --kappa 6 --tau 5.0 --n-star 4 --start 25 --count 5 --out ../results/v2/g2/S_k6_025"
+  },
+  {
+   "id": "g2_S_k6_030",
+   "cmd": "python main.py g2 --set S --kappa 6 --tau 5.0 --n-star 4 --start 30 --count 5 --out ../results/v2/g2/S_k6_030"
+  },
+  {
+   "id": "g2_S_k6_035",
+   "cmd": "python main.py g2 --set S --kappa 6 --tau 5.0 --n-star 4 --start 35 --count 5 --out ../results/v2/g2/S_k6_035"
+  },
+  {
+   "id": "g2_S_k6_040",
+   "cmd": "python main.py g2 --set S --kappa 6 --tau 5.0 --n-star 4 --start 40 --count 5 --out ../results/v2/g2/S_k6_040"
+  },
+  {
+   "id": "g2_S_k6_045",
+   "cmd": "python main.py g2 --set S --kappa 6 --tau 5.0 --n-star 4 --start 45 --count 5 --out ../results/v2/g2/S_k6_045"
+  },
+  {
+   "id": "g2_S_k6_050",
+   "cmd": "python main.py g2 --set S --kappa 6 --tau 5.0 --n-star 4 --start 50 --count 5 --out ../results/v2/g2/S_k6_050"
+  },
+  {
+   "id": "g2_S_k6_055",
+   "cmd": "python main.py g2 --set S --kappa 6 --tau 5.0 --n-star 4 --start 55 --count 5 --out ../results/v2/g2/S_k6_055"
+  },
+  {
+   "id": "g2_S_k6_060",
+   "cmd": "python main.py g2 --set S --kappa 6 --tau 5.0 --n-star 4 --start 60 --count 5 --out ../results/v2/g2/S_k6_060"
+  },
+  {
+   "id": "g2_S_k6_065",
+   "cmd": "python main.py g2 --set S --kappa 6 --tau 5.0 --n-star 4 --start 65 --count 5 --out ../results/v2/g2/S_k6_065"
+  },
+  {
+   "id": "g2_S_k6_070",
+   "cmd": "python main.py g2 --set S --kappa 6 --tau 5.0 --n-star 4 --start 70 --count 5 --out ../results/v2/g2/S_k6_070"
+  },
+  {
+   "id": "g2_S_k6_075",
+   "cmd": "python main.py g2 --set S --kappa 6 --tau 5.0 --n-star 4 --start 75 --count 5 --out ../results/v2/g2/S_k6_075"
+  },
+  {
+   "id": "g2_S_k6_080",
+   "cmd": "python main.py g2 --set S --kappa 6 --tau 5.0 --n-star 4 --start 80 --count 5 --out ../results/v2/g2/S_k6_080"
+  },
+  {
+   "id": "g2_S_k6_085",
+   "cmd": "python main.py g2 --set S --kappa 6 --tau 5.0 --n-star 4 --start 85 --count 5 --out ../results/v2/g2/S_k6_085"
+  },
+  {
+   "id": "g2_S_k6_090",
+   "cmd": "python main.py g2 --set S --kappa 6 --tau 5.0 --n-star 4 --start 90 --count 5 --out ../results/v2/g2/S_k6_090"
+  },
+  {
+   "id": "g2_S_k6_095",
+   "cmd": "python main.py g2 --set S --kappa 6 --tau 5.0 --n-star 4 --start 95 --count 5 --out ../results/v2/g2/S_k6_095"
+  }
+ ]
+}

@@ -1,0 +1,45 @@
+{
+ "purpose": "Gate G1 (b) (amendment B6): look-ahead estimator on the 100-belief exact-zero-gap notch bank (results/v2/g1/bank.json).",
+ "jobs": [
+  {
+   "id": "g1b_0",
+   "cmd": "python main.py g1 --part b --start 0 --count 10 --out ../results/v2/g1/b_000"
+  },
+  {
+   "id": "g1b_10",
+   "cmd": "python main.py g1 --part b --start 10 --count 10 --out ../results/v2/g1/b_010"
+  },
+  {
+   "id": "g1b_20",
+   "cmd": "python main.py g1 --part b --start 20 --count 10 --out ../results/v2/g1/b_020"
+  },
+  {
+   "id": "g1b_30",
+   "cmd": "python main.py g1 --part b --start 30 --count 10 --out ../results/v2/g1/b_030"
+  },
+  {
+   "id": "g1b_40",
+   "cmd": "python main.py g1 --part b --start 40 --count 10 --out ../results/v2/g1/b_040"
+  },
+  {
+   "id": "g1b_50",
+   "cmd": "python main.py g1 --part b --start 50 --count 10 --out ../results/v2/g1/b_050"
+  },
+  {
+   "id": "g1b_60",
+   "cmd": "python main.py g1 --part b --start 60 --count 10 --out ../results/v2/g1/b_060"
+  },
+  {
+   "id": "g1b_70",
+   "cmd": "python main.py g1 --part b --start 70 --count 10 --out ../results/v2/g1/b_070"
+  },
+  {
+   "id": "g1b_80",
+   "cmd": "python main.py g1 --part b --start 80 --count 10 --out ../results/v2/g1/b_080"
+  },
+  {
+   "id": "g1b_90",
+   "cmd": "python main.py g1 --part b --start 90 --count 10 --out ../results/v2/g1/b_090"
+  }
+ ]
+}
