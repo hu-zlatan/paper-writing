@@ -9,7 +9,7 @@
 **Topic:** Amortized, non-myopic active tactile localization (TouchBED)
 **Initialised:** 2026-10-28T07:56:44Z
 **Current version:** v1
-**Latest stage:** Stage 3 SEARCH_STRATEGY — next: stage 4 LITERATURE_COLLECT
+**Latest stage:** Stage 5 LITERATURE_SCREEN — next: stage 6 KNOWLEDGE_EXTRACT
 
 ---
 
@@ -106,3 +106,27 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
 - **Decision:** PROCEED → stage 4.
 - **Summary:** Strategies cover direct active-tactile localization, tactile pose estimation/sensing, Bayesian experimental design (DAD, EIG bounds, RL-BED), active perception/information gathering (submodularity, belief-space planning), and dexterous manipulation with touch. Pre-2018 seminal touch-localization work is collected separately without the year filter.
 - **Commit:** see git log ("stage 3 SEARCH_STRATEGY")
+
+---
+
+## Stage 4. LITERATURE_COLLECT     [v1]
+
+- **Started:** 2026-10-28T08:34:00Z
+- **Finished:** 2026-10-28T08:57:00Z
+- **Inputs used:** docs/02_search_plan.yaml
+- **Outputs produced:** code/literature/collect.py, .github/workflows/literature.yml (GitHub Actions; push of the workflow was accepted), docs/03_candidates.jsonl (681 unique real records from 800 raw hits), docs/03_collect_log.json
+- **Decision:** PROCEED → stage 5.
+- **Summary:** Real-API collection on GitHub Actions. OpenAlex answered all 26 queries; arXiv (all) and Semantic Scholar (20/26) were rate-limited (HTTP 429) on shared runner IPs — logged, not hidden. cite_keys generated once here and treated as immutable. Collector hardened (time budget, failing-source skip) and the workflow now only re-runs when the search plan changes.
+- **Commit:** fa5bf90 (Actions) + this stage commit
+
+---
+
+## Stage 5. LITERATURE_SCREEN  [GATE]     [v1]
+
+- **Started:** 2026-10-28T08:58:00Z
+- **Finished:** 2026-10-28T09:20:00Z
+- **Inputs used:** docs/03_candidates.jsonl
+- **Outputs produced:** code/literature/screen.py, code/literature/screen_decisions_v1.py, docs/04_prefiltered.tsv, docs/04_screen_decisions.json, docs/04_shortlist.jsonl (56 papers)
+- **Decision:** PROCEED → stage 6. **GATE auto-approved** (AUTOPILOT §1). Evidence: 56 ≥ 30 entries; all search themes covered; every entry has an OpenAlex/DOI/arXiv identifier; original fields preserved (merge asserts identical titles); year filter applied with 7 explicit seminal exceptions; off-topic matches (human touch neuroscience, touch screens, whisker biology) rejected.
+- **Summary:** The screen surfaced a near precursor — Zheng et al. 2026 (arXiv:2603.21410) — that already uses contact + free-space evidence for joint class/pose belief with greedy next-touch selection; together with Koval et al. 2015 this means negative information alone is not a novelty. Core novelty #2 must be reframed in stage 7/8 (risk R5 partly realized). Also: RL-DAD (Lim et al. 2022) already does policy-based BED for non-differentiable simulators, so the contribution is the tactile formulation, its analysis (myopic vs non-myopic, amortization cost), and transfer evidence.
+- **Commit:** see git log ("stage 5 LITERATURE_SCREEN")

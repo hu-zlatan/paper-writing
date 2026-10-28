@@ -1,0 +1,407 @@
+{
+ "prompt": "pipeline/references/stage_prompts/literature_screen.md",
+ "keep_rule": "relevance>=0.6 & quality>=0.5; context-only entries (relevance 0.55) flagged",
+ "seminal_pre_2018_exceptions": [
+  "chen2015submodular",
+  "hebert2013next",
+  "javdani2012efficient",
+  "koval2015pose",
+  "manuelli2016localizing",
+  "petrovskaya2011global",
+  "vien2015touch"
+ ],
+ "shortlist": [
+  {
+   "title": "Bayesian Active Object Recognition and 6D Pose Estimation from Multimodal Contact Sensing",
+   "cite_key": "zheng2026bayesian",
+   "relevance_score": 1.0,
+   "quality_score": 0.7,
+   "keep_reason": "Closest prior work: joint class+6D pose belief with contact and free-space evidence, greedy informative next touch via particle filter; our baseline family and the reason negative information alone is not novel."
+  },
+  {
+   "title": "A Bayesian Framework for Active Tactile Object Recognition, Pose Estimation and Shape Transfer Learning",
+   "cite_key": "zheng2024bayesian",
+   "relevance_score": 0.95,
+   "quality_score": 0.65,
+   "keep_reason": "Active tactile recognition + pose with customized particle filter; exploration heuristic based on global shape estimate."
+  },
+  {
+   "title": "Active Tactile Exploration for Rigid Body Pose and Shape Estimation",
+   "cite_key": "gordon2026active",
+   "relevance_score": 0.95,
+   "quality_score": 0.8,
+   "keep_reason": "Active tactile pose/shape estimation with Fisher-information EIG; local and myopic — key contrast for non-myopic global EIG."
+  },
+  {
+   "title": "Efficient Touch Based Localization through Submodularity",
+   "cite_key": "javdani2012efficient",
+   "relevance_score": 0.95,
+   "quality_score": 0.8,
+   "keep_reason": "Seminal: touch localization via (adaptive) submodularity — theoretical justification of greedy selection we must confront."
+  },
+  {
+   "title": "The next best touch for model-based localization",
+   "cite_key": "hebert2013next",
+   "relevance_score": 0.95,
+   "quality_score": 0.75,
+   "keep_reason": "Seminal next-best-touch for model-based localization (greedy information criterion)."
+  },
+  {
+   "title": "Global Localization of Objects via Touch",
+   "cite_key": "petrovskaya2011global",
+   "relevance_score": 0.9,
+   "quality_score": 0.85,
+   "keep_reason": "Seminal Bayesian global localization of objects via touch (T-RO)."
+  },
+  {
+   "title": "Touch based POMDP manipulation via sequential submodular optimization",
+   "cite_key": "vien2015touch",
+   "relevance_score": 0.85,
+   "quality_score": 0.6,
+   "keep_reason": "Touch-based POMDP manipulation via sequential submodular optimization."
+  },
+  {
+   "title": "TACTFUL: Tactile-Driven Exploration For Object Localization and Identification in Confined Environments",
+   "cite_key": "kamtikar2026tactful",
+   "relevance_score": 0.85,
+   "quality_score": 0.6,
+   "keep_reason": "RL tactile exploration for object localization and identification (no information objective)."
+  },
+  {
+   "title": "Reinforcement Learning Based Tactile Sensing for Active Point Cloud Acquisition, Recognition and Localization",
+   "cite_key": "riou2024reinforcement",
+   "relevance_score": 0.9,
+   "quality_score": 0.7,
+   "keep_reason": "RL active tactile point acquisition with recognition + localization rewards — learned policy baseline family."
+  },
+  {
+   "title": "Seeing By Haptic Glance: Reinforcement Learning Based 3d Object Recognition",
+   "cite_key": "riou2021seeing",
+   "relevance_score": 0.75,
+   "quality_score": 0.55,
+   "keep_reason": "Haptic glance: RL-based 3D recognition from few contacts."
+  },
+  {
+   "title": "Learning When to Stop: Efficient Active Tactile Perception with Deep Reinforcement Learning",
+   "cite_key": "niemann2024when",
+   "relevance_score": 0.8,
+   "quality_score": 0.65,
+   "keep_reason": "Deep-RL active tactile perception deciding where to glance and when to stop (IROS 2024)."
+  },
+  {
+   "title": "Tactile MNIST: Benchmarking Active Tactile Perception",
+   "cite_key": "schneider2025tactile",
+   "relevance_score": 0.9,
+   "quality_score": 0.7,
+   "keep_reason": "Tactile MNIST benchmark for active tactile perception (localization/classification) — possible evaluation reference."
+  },
+  {
+   "title": "TANDEM3D: Active Tactile Exploration for 3D Object Recognition",
+   "cite_key": "xu2023tandem3d",
+   "relevance_score": 0.8,
+   "quality_score": 0.7,
+   "keep_reason": "TANDEM3D: active tactile exploration for 3D object recognition (ICRA 2023)."
+  },
+  {
+   "title": "Active Visuo-Tactile Interactive Robotic Perception for Accurate Object Pose Estimation in Dense Clutter",
+   "cite_key": "murali2022active",
+   "relevance_score": 0.75,
+   "quality_score": 0.7,
+   "keep_reason": "Active visuo-tactile pose estimation in clutter (RA-L)."
+  },
+  {
+   "title": "Shared visuo-tactile interactive perception for robust object pose estimation",
+   "cite_key": "murali2024shared",
+   "relevance_score": 0.7,
+   "quality_score": 0.75,
+   "keep_reason": "Shared visuo-tactile interactive perception for pose estimation (IJRR 2025)."
+  },
+  {
+   "title": "Active Tactile Exploration Based on Cost-Aware Information Gain Maximization",
+   "cite_key": "ottenhaus2018active",
+   "relevance_score": 0.75,
+   "quality_score": 0.55,
+   "keep_reason": "Active tactile exploration via cost-aware information gain maximization."
+  },
+  {
+   "title": "AcTExplore: Active Tactile Exploration of Unknown Objects",
+   "cite_key": "shahidzadeh2023actexplore",
+   "relevance_score": 0.7,
+   "quality_score": 0.6,
+   "keep_reason": "AcTExplore: RL active tactile exploration of unknown objects."
+  },
+  {
+   "title": "Learning efficient haptic shape exploration with a rigid tactile sensor array",
+   "cite_key": "fleer2020efficient",
+   "relevance_score": 0.7,
+   "quality_score": 0.6,
+   "keep_reason": "Learning efficient haptic exploration with a tactile array (learned exploration policy)."
+  },
+  {
+   "title": "TactoFind: A Tactile Only System for Object Retrieval",
+   "cite_key": "pai2023tactofind",
+   "relevance_score": 0.65,
+   "quality_score": 0.65,
+   "keep_reason": "Tactile-only object retrieval with exploration under uncertainty (ICRA 2023)."
+  },
+  {
+   "title": "MultiSCOPE: Disambiguating In-Hand Object Poses with Proprioception and Tactile Feedback",
+   "cite_key": "sipos2023multiscope",
+   "relevance_score": 0.8,
+   "quality_score": 0.7,
+   "keep_reason": "RSS 2023: disambiguating in-hand pose with sequential contacts/proprioception — same venue, related problem."
+  },
+  {
+   "title": "Belief-Driven Tactile Exploration for Vision-Free Plug–Socket Insertion",
+   "cite_key": "kuster2026belief",
+   "relevance_score": 0.65,
+   "quality_score": 0.6,
+   "keep_reason": "Belief-driven tactile exploration for vision-free insertion (RA-L 2026)."
+  },
+  {
+   "title": "Manipulation in the Blind: Motion Planning for Manipulation under Uncertainty using Contacts",
+   "cite_key": "saleem2026manipulation",
+   "relevance_score": 0.6,
+   "quality_score": 0.55,
+   "keep_reason": "Planning manipulation under uncertainty using contacts (thesis-level, motion planning in the blind)."
+  },
+  {
+   "title": "Pose estimation for planar contact manipulation with manifold particle filters",
+   "cite_key": "koval2015pose",
+   "relevance_score": 0.85,
+   "quality_score": 0.85,
+   "keep_reason": "Manifold particle filter: contact vs no-contact observations in pose estimation (IJRR) — negative information precedent."
+  },
+  {
+   "title": "Contact-based in-hand pose estimation using Bayesian state estimation and particle filtering",
+   "cite_key": "drigalski2020contact",
+   "relevance_score": 0.75,
+   "quality_score": 0.65,
+   "keep_reason": "Contact-based in-hand pose estimation with Bayesian state estimation and particle filtering."
+  },
+  {
+   "title": "Localizing external contact using proprioceptive sensors: The Contact Particle Filter",
+   "cite_key": "manuelli2016localizing",
+   "relevance_score": 0.65,
+   "quality_score": 0.75,
+   "keep_reason": "Contact Particle Filter (seminal contact localization)."
+  },
+  {
+   "title": "Tac2Pose: Tactile object pose estimation from the first touch",
+   "cite_key": "bauza2023tac2pose",
+   "relevance_score": 0.8,
+   "quality_score": 0.85,
+   "keep_reason": "Tac2Pose: tactile pose estimation from first touch for known objects (IJRR) — known-object setting."
+  },
+  {
+   "title": "Learning Bayes Filter Models for Tactile Localization",
+   "cite_key": "kelestemur2020bayes",
+   "relevance_score": 0.7,
+   "quality_score": 0.6,
+   "keep_reason": "Learned Bayes filter models for tactile localization."
+  },
+  {
+   "title": "TacLoc: Global Tactile Localization on Objects from a Registration Perspective",
+   "cite_key": "zirui2026tacloc",
+   "relevance_score": 0.65,
+   "quality_score": 0.55,
+   "keep_reason": "Global tactile localization on objects by registration."
+  },
+  {
+   "title": "You Only Touch Once: 6-DoF Object Pose Estimation from Single Tactile Contact",
+   "cite_key": "ye2026you",
+   "relevance_score": 0.65,
+   "quality_score": 0.55,
+   "keep_reason": "6-DoF pose from a single tactile contact."
+  },
+  {
+   "title": "In-Hand Object Pose Tracking via Contact Feedback and GPU-Accelerated Robotic Simulation",
+   "cite_key": "liang2020hand",
+   "relevance_score": 0.65,
+   "quality_score": 0.65,
+   "keep_reason": "In-hand pose tracking via contact feedback and simulation-based particle filtering."
+  },
+  {
+   "title": "Learning a State Estimator for Tactile In-Hand Manipulation",
+   "cite_key": "rostel2022state",
+   "relevance_score": 0.6,
+   "quality_score": 0.6,
+   "keep_reason": "Learned state estimator for tactile in-hand manipulation."
+  },
+  {
+   "title": "Learning Tactile Models for Factor Graph-based Estimation",
+   "cite_key": "sodhi2021tactile",
+   "relevance_score": 0.6,
+   "quality_score": 0.7,
+   "keep_reason": "Learning tactile models for factor-graph pose estimation (ICRA 2021)."
+  },
+  {
+   "title": "Tactile SLAM: Real-time inference of shape and pose from planar pushing",
+   "cite_key": "suresh2021tactile",
+   "relevance_score": 0.6,
+   "quality_score": 0.7,
+   "keep_reason": "Tactile SLAM: real-time shape and pose from planar pushing (ICRA 2021)."
+  },
+  {
+   "title": "NeuralFeels with neural fields: Visuotactile perception for in-hand manipulation",
+   "cite_key": "suresh2024neuralfeels",
+   "relevance_score": 0.6,
+   "quality_score": 0.9,
+   "keep_reason": "NeuralFeels: visuotactile neural-field perception for in-hand manipulation (Science Robotics)."
+  },
+  {
+   "title": "Multifidelity Sampling for Fast Bayesian Shape Estimation With Tactile Exploration",
+   "cite_key": "yang2019multifidelity",
+   "relevance_score": 0.6,
+   "quality_score": 0.6,
+   "keep_reason": "Optimal touch sampling for fast Bayesian shape estimation."
+  },
+  {
+   "title": "Object shape estimation and modeling, based on sparse Gaussian process implicit surfaces, combining visual data and tactile exploration",
+   "cite_key": "gandler2020object",
+   "relevance_score": 0.55,
+   "quality_score": 0.65,
+   "keep_reason": "Sparse GPIS shape estimation from visual+tactile data (kept for shape-uncertainty discussion)."
+  },
+  {
+   "title": "Deep Adaptive Design: Amortizing Sequential Bayesian Experimental Design",
+   "cite_key": "foster2021deep",
+   "relevance_score": 1.0,
+   "quality_score": 0.9,
+   "keep_reason": "DAD: amortized policy-based sequential BED with sPCE bound (ICML 2021) — core method foundation."
+  },
+  {
+   "title": "Implicit Deep Adaptive Design: Policy-Based Experimental Design without Likelihoods",
+   "cite_key": "ivanova2021implicit",
+   "relevance_score": 0.9,
+   "quality_score": 0.85,
+   "keep_reason": "iDAD: policy-based BED without likelihoods (NeurIPS 2021)."
+  },
+  {
+   "title": "Optimizing Sequential Experimental Design with Deep Reinforcement Learning",
+   "cite_key": "blau2022optimizing",
+   "relevance_score": 0.95,
+   "quality_score": 0.85,
+   "keep_reason": "RL formulation of sequential BED with sPCE-based rewards (ICML 2022) — our training formulation."
+  },
+  {
+   "title": "Policy-Based Bayesian Experimental Design for Non-Differentiable Implicit Models",
+   "cite_key": "vincent2022policy",
+   "relevance_score": 0.9,
+   "quality_score": 0.7,
+   "keep_reason": "RL-DAD: policy-based BED for non-differentiable implicit models (contact is non-differentiable)."
+  },
+  {
+   "title": "Step-DAD: Semi-Amortized Policy-Based Bayesian Experimental Design",
+   "cite_key": "hedman2025step",
+   "relevance_score": 0.85,
+   "quality_score": 0.85,
+   "keep_reason": "Step-DAD: semi-amortized policy-based BED (ICML 2025) — test-time refinement alternative."
+  },
+  {
+   "title": "Modern Bayesian Experimental Design",
+   "cite_key": "rainforth2024modern",
+   "relevance_score": 0.85,
+   "quality_score": 0.9,
+   "keep_reason": "Modern BED review (Statistical Science) — notation and EIG bounds."
+  },
+  {
+   "title": "Sequential Bayesian Experimental Design for Implicit Models via Mutual Information",
+   "cite_key": "kleinegesse2020sequential",
+   "relevance_score": 0.65,
+   "quality_score": 0.65,
+   "keep_reason": "Sequential BED for implicit models via mutual information."
+  },
+  {
+   "title": "Nesting Particle Filters for Experimental Design in Dynamical Systems",
+   "cite_key": "iqbal2024nesting",
+   "relevance_score": 0.6,
+   "quality_score": 0.6,
+   "keep_reason": "Nested particle filters for BED in dynamical systems (amortized policy with SMC)."
+  },
+  {
+   "title": "Recursive Nested Filtering for Efficient Amortized Bayesian Experimental Design",
+   "cite_key": "iqbal2024recursive",
+   "relevance_score": 0.6,
+   "quality_score": 0.6,
+   "keep_reason": "Recursive nested filtering for amortized sequential BED."
+  },
+  {
+   "title": "ALINE: Joint Amortization for Bayesian Inference and Active Data Acquisition",
+   "cite_key": "huang2026aline",
+   "relevance_score": 0.65,
+   "quality_score": 0.6,
+   "keep_reason": "Joint amortization of inference and active data acquisition."
+  },
+  {
+   "title": "Sequential Bayesian experimental designs via reinforcement learning",
+   "cite_key": "asano2022sequential",
+   "relevance_score": 0.55,
+   "quality_score": 0.5,
+   "keep_reason": "Sequential BED via RL (applied to non-EIG objectives)."
+  },
+  {
+   "title": "Reinforcement Learning based Sequential and Robust Bayesian Optimal Experimental Design",
+   "cite_key": "shen2023reinforcement",
+   "relevance_score": 0.55,
+   "quality_score": 0.55,
+   "keep_reason": "RL-based sequential and robust Bayesian OED."
+  },
+  {
+   "title": "Submodular Surrogates for Value of Information",
+   "cite_key": "chen2015submodular",
+   "relevance_score": 0.7,
+   "quality_score": 0.7,
+   "keep_reason": "Submodular surrogates for value of information (AAAI) — when greedy information gathering is near-optimal."
+  },
+  {
+   "title": "Adaptivity in Adaptive Submodularity",
+   "cite_key": "esfandiari2019adaptivity",
+   "relevance_score": 0.55,
+   "quality_score": 0.6,
+   "keep_reason": "Adaptivity gaps in adaptive submodularity — theory for myopic vs adaptive policies."
+  },
+  {
+   "title": "Active Haptic Perception in Robots: A Review",
+   "cite_key": "seminara2019active",
+   "relevance_score": 0.7,
+   "quality_score": 0.6,
+   "keep_reason": "Review: active haptic perception in robots."
+  },
+  {
+   "title": "Visuo-haptic object perception for robots: an overview",
+   "cite_key": "navarroguerrero2023visuo",
+   "relevance_score": 0.6,
+   "quality_score": 0.7,
+   "keep_reason": "Overview: visuo-haptic object perception for robots (Autonomous Robots)."
+  },
+  {
+   "title": "Leveraging symmetry detection to speed up haptic object exploration in robots",
+   "cite_key": "bonzini2022leveraging",
+   "relevance_score": 0.6,
+   "quality_score": 0.5,
+   "keep_reason": "Symmetry detection to speed up haptic exploration — symmetric objects cause ambiguity."
+  },
+  {
+   "title": "More Than a Feeling: Learning to Grasp and Regrasp Using Vision and Touch",
+   "cite_key": "calandra2018more",
+   "relevance_score": 0.55,
+   "quality_score": 0.85,
+   "keep_reason": "Vision+touch grasping/regrasping (RA-L) — motivation for touch in manipulation."
+  },
+  {
+   "title": "General In-Hand Object Rotation with Vision and Touch",
+   "cite_key": "qi2023general",
+   "relevance_score": 0.55,
+   "quality_score": 0.8,
+   "keep_reason": "General in-hand rotation with vision and touch (CoRL) — dexterous manipulation context."
+  },
+  {
+   "title": "Tactile Gym 2.0: Sim-to-Real Deep Reinforcement Learning for Comparing Low-Cost High-Resolution Robot Touch",
+   "cite_key": "lin2022tactile",
+   "relevance_score": 0.55,
+   "quality_score": 0.7,
+   "keep_reason": "Tactile Gym 2.0: sim-to-real RL with tactile sensors — simulation context."
+  }
+ ]
+}

@@ -6,9 +6,7 @@ on:
   push:
     branches: [main]
     paths:
-      - docs/02_search_plan.yaml
-      - code/literature/collect.py
-      - .github/workflows/literature.yml
+      - docs/02_search_plan.yaml   # re-collect only when the search plan changes (keeps cite_keys stable)
 permissions:
   contents: write
 concurrency:
