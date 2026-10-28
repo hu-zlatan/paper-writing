@@ -341,3 +341,15 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
     reference; on S/random ep. 0 it equals the full fine grid (5.905) while PF kernels give 5.27–5.88. Grid-vs-kernel
     comparison on 200 pilot episodes per κ=0 cell dispatched (experiments/v2_grid_ref.json). No main run before G4
     passes under B8.
+  - **G1 (b): PASS** (100 zero-gap beliefs: mean 0.0025, UB 0.0037) → **G1 PASS**.
+  - **G2:** G(0) = 0.005, G(2) = 0.008, G(6) = 0.017 (95/100 beliefs; LB 0.011, UB 0.024) → magnitude fails, ordering
+    holds → the pre-registered escalation κ_hi = 12 is used (κ_hi = 12 replaces 6 in every κ_hi cell and in G3).
+    G(12) = 0.015 on 90/100 beliefs (UB 0.022) → heading to **Idea 2 refuted in the tested range (κ ≤ 12)**.
+  - **G3 (i):** hp1 selected (final val ball-sPCE 5.592). **G3 (iii) notch: FAIL** (28 % of the exact optimum, all
+    seeds greedy-like; remedy 2× E_train unchanged) → per §4 the gate routes to stage 15 at the gate decision.
+    G3 (ii) at κ = 12 dispatched (experiments/v2_khi12.json; the κ = 6 pilot seeds are superseded).
+  - **G5 (provisional, 3-MH read-outs):** κ = 6: A G* 0.457 vs random 0.037, S 0.417 vs 0.033; flatness S κ6:
+    Δsuccess +1.3 pp, ΔBI −0.015 (pass). Re-run at κ = 12 dispatched; A κ = 0 at τ = 3 dispatched.
+  - **B8 grid reference:** agrees with the heavy 30 + 60 SMC kernel (ΔBI 0.011–0.019) while 32k × 3 MH under-reads BI by
+    0.07–0.21 nats; grid sub 4 vs 8 on G* episodes: mean |ΔBI| 0.007. A printing bug in analysis_g4_b5.py (success column
+    showed the identity rate) was found and the B8 rationale corrected.
