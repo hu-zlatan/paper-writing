@@ -63,11 +63,11 @@
  },
  "remedy_2x": {
   "200": {
-   "n_paired": 400,
-   "success": 0.2225,
-   "gstar_success_paired": 0.4175,
-   "bi": 5.329124327000037,
-   "probes": 2.5325
+   "n_paired": 500,
+   "success": 0.224,
+   "gstar_success_paired": 0.41,
+   "bi": 5.318637731392616,
+   "probes": 2.554
   },
   "201": {
    "n_paired": 500,
@@ -84,6 +84,8 @@
    "probes": 2.426
   }
  },
+ "remedy_seed_mean_success": 0.24333333333333332,
+ "remedy_rule_ii_success_pass": false,
  "seed_mean_success": 0.20400000000000004,
  "gstar_success_paired_mean": 0.41,
  "rule_ii_success_pass": false
