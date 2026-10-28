@@ -8,8 +8,8 @@
 **Target venue:** RSS 2027 — Stage 1 extended abstract 2026-12-04 23:59 AoE; Stage 2 full paper (invited) 2027-04-16 23:59 AoE (verified 2026-10-28 at https://roboticsconference.org/information/cfp/)
 **Topic:** Amortized, non-myopic active tactile localization (TouchBED)
 **Initialised:** 2026-10-28T07:56:44Z
-**Current version:** v2
-**Latest stage:** Stage 12 EXPERIMENT_RUN [v2] gates (G3 failed → stage 15 after the remedy read-out) — see the run-4 section at the end
+**Current version:** v3
+**Latest stage:** LOOP MARKER v2 → v3 (PIVOT from stage 15 → stage 8); next: Stage 8 HYPOTHESIS_GEN [v3]
 
 ---
 
@@ -395,3 +395,63 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
     (experiments/v2_diag_k0k6.json → results/v2/diag/).
   - Recorded in docs/07c_amendment_v2_0.md (status note run 4) and plans/stage_12_experiment_run_v2.md.
 - **Decision:** G3 failed (iii and ii) → per §4 the gate goes to **stage 15** (via 13 → 14) once the remedy read-out is in.
+- **Remedy read-out (run 4):** remedy seeds 0.243 seed-mean vs G* 0.410 → **G3 (ii) FAIL after the one remedy** (results/v2/12_g3_analysis.json).
+- **Exploratory diagnostics (results/v2/12_diag_analysis.json, labelled):** the absolute-head policy is also 23.5–25 pp
+  below G* at κ = 0 (equal probe counts) and 13.5–19.5 pp at κ = 6 → the shortfall is a learnability problem, not
+  travel-specific. A finger-relative dev head (touchbed/relframe.py, exploratory) reaches 0.305 vs G* 0.440 at κ = 12
+  (seed 400; 2 more seeds running).
+- **Commit:** see git log ("stage 12 v2", "G3 remedy read-out complete").
+
+---
+
+## Stage 13. ITERATIVE_REFINE     [v2]
+
+- **Started / Finished:** 2026-10-28 run 4 (~20:20 UTC)
+- **Outputs:** plans/stage_13_iterative_refine_v2.md; tests/test_train_v2.py (0·(−inf) in a test helper fixed at the root).
+- **Summary:** numpy2 check clean, 26 → 30 tests pass; no open runtime bug in the Actions logs (all earlier warnings /
+  tracebacks traced to fixed code or cancelled inputs). No iterative_improve before stage 15 (would be post-hoc).
+- **Decision:** PROCEED → stage 14.
+
+---
+
+## Stage 14. RESULT_ANALYSIS     [v2]
+
+- **Finished:** 2026-10-28 run 4 (~21:30 UTC)
+- **Outputs:** results/v2/14_analysis.md (fresh opus analyst, template verbatim; second fresh opus area-chair pass with
+  4 in-place [AC-corrected] fixes and a 17-row unsupported-claims table)
+- **Summary:** G1 pass; G2 fail after escalation (G(12) = 0.0146, UB 0.0208); G3 fail (S12 0.204 / remedy 0.243 vs
+  ≥ 0.360; notch 27.9 % of optimum); G4 fail as pre-registered (grid adopted, B8); G5: G* ≫ random, A0 degenerate,
+  flatness fails (→ 64 × 8). Integrity items to fix in v3: B5 note sign (+0.007 vs JSON −0.0066), G4/B8 note figures,
+  G5 S0 cell n = 150, notch / hp-selection files have no producing script, G3 (iv) missing.
+
+---
+
+## Stage 15. RESEARCH_DECISION     [v2]
+
+- **Finished:** 2026-10-28 run 4 (~21:45 UTC)
+- **Outputs:** results/v2/15_decision.md (fresh opus subagent, template with REFINE augmentation verbatim)
+- **Decision:** **PIVOT → 8.**
+- **Summary:** Idea 2 refuted by its own pre-registered rule (G1 pass, G2 fail); the pre-registered H1 learner failed
+  G3 after its one remedy, and no main run was allowed. v3 direction: (C1) the validated look-ahead headroom over
+  cost-aware greedy is small — re-measured once on the 64 × 8 action set; (H1′) a finger-relative policy *distilled from
+  G** (DAgger on G*'s score vectors) is non-inferior to G* at ≥ 100× lower per-decision cost; RL on the information
+  objective stays as a comparator row. Amendment v3.0 must freeze 64 × 8, the grid evaluator, cells (S0, S12, A12) and
+  the distillation recipe before any run. Learnability gate by 11-12 (student ≥ G* − 5 pp and ≥ G* − 0.30 nats at S12,
+  one remedy by 11-14); if it fails, the extended abstract becomes the pre-registered fallback (headroom measurement +
+  negative learnability results). If the v3 stage-15 decision is not PROCEED, escalate to the owner before a third loop.
+
+---
+
+## LOOP MARKER — PIVOT from stage 15 → stage 8     [version v2 → v3]
+
+- **Reason:** see results/v2/14_analysis.md and results/v2/15_decision.md (G2 refutes Idea 2 in the tested range; G3
+  learnability failure of the pre-registered H1 learner after the one remedy).
+- **Snapshot taken:** results/v2/ (all v2 artefacts stay there unchanged); no paper files yet. docs/07_hypotheses_v2.md,
+  docs/07c_amendment_v2_0.md and docs/08_experiment_plan_v2.yaml remain as the v2 record; v3 writes
+  docs/07_hypotheses_v3.md, docs/07c_amendment_v3_0.md, docs/08_experiment_plan_v3.yaml and results/v3/.
+- **Next stage:** 8 HYPOTHESIS_GEN
+- **Resuming under version:** v3
+- **Still valid for v3:** code/touchbed (geometry, likelihood, travel model, G*, grid evaluator, lookahead estimator +
+  notch reference, numpy PPO, relframe dev head), literature (docs/03–06 + supplement), G1-validated estimator, G5
+  calibration (to be redone on 64 × 8), measured costs.
+- **Loop count:** 2 of RESTRICTS loops.max_refine_cycles = 3 used (v1 → v2, v2 → v3).
