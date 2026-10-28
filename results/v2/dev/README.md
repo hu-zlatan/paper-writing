@@ -7,3 +7,9 @@
   validation value falls (3.17 → 2.75). Deterministic (argmax) evaluation of a high-entropy categorical policy may
   understate the learned policy early in training; to be checked in G3 with the sampled-policy diagnostic now logged
   (`val_ball_spce_sampled`). Any switch to sampled evaluation must be pre-registered (amendment) before G3 runs.
+
+- Notch-control learner (code/touchbed/train_notch.py) dev check, sandbox, run 3, default PPO settings (lr 3e-4,
+  ent 1e-3, batch 128, seed 0, 1e5 episodes, ≈ 25 s): the argmax policy converges to a vertical first probe; exact
+  value 0.179 nats vs exact greedy 0.174 and exact optimum 0.615 (29 % of the optimum; the G3 (iii) rule needs ≥ 80 %).
+  Not a gate result: G3 (iii) runs with the configuration selected in G3 (i), 3 seeds. Logged here so the gate outcome
+  cannot be tuned after the fact.

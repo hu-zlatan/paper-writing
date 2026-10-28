@@ -256,6 +256,15 @@ def cmd_g2(a):
     print(f"G2_DONE wall_s={time.time() - t0:.0f}")
 
 
+def cmd_trainnotch(a):
+    """G3 (iii) / H2b-P2: PPO on the exact notch control; exact value of the learned argmax policy."""
+    from touchbed.train_notch import NotchTrainer
+    os.makedirs(os.path.dirname(os.path.abspath(a.out)), exist_ok=True)
+    tr = NotchTrainer(method=a.method, seed=a.seed, lr=a.lr, critic_lr=a.critic_lr, ent_coef=a.ent_coef, batch=a.batch)
+    f = tr.train(max_episodes=a.max_episodes, log_path=a.out + ".json")
+    print("TRAINNOTCH_DONE", json.dumps(f, default=float))
+
+
 def cmd_calib(a):
     """G5 tau calibration (docs/07_hypotheses_v2.md §1.2): run G* WITHOUT a budget for n* probes on pilot episodes and
     record the travel time it spends; tau_kappa = n* + mean travel time (rounded to 0.1), then verified with the budget."""
@@ -347,8 +356,13 @@ def main():
     g2.add_argument("--start", type=int, default=0); g2.add_argument("--count", type=int, default=5)
     g2.add_argument("--C1", type=int, default=32); g2.add_argument("--M-outer", type=int, default=64)
     g2.add_argument("--budget-minutes", type=float, default=330.0); g2.add_argument("--out", required=True)
+    tn = sub.add_parser("trainnotch")
+    tn.add_argument("--method", default="spce_total"); tn.add_argument("--seed", type=int, default=0)
+    tn.add_argument("--lr", type=float, default=3e-4); tn.add_argument("--critic-lr", type=float, default=1e-3)
+    tn.add_argument("--ent-coef", type=float, default=1e-3); tn.add_argument("--batch", type=int, default=128)
+    tn.add_argument("--max-episodes", type=int, default=100_000); tn.add_argument("--out", required=True)
     a = ap.parse_args()
-    {"g2": cmd_g2, "g1": cmd_g1, "calib": cmd_calib, "train": cmd_train, "eval": cmd_eval, "pilot": cmd_pilot, "train2": cmd_train2, "eval2": cmd_eval2}[a.cmd](a)
+    {"trainnotch": cmd_trainnotch, "g2": cmd_g2, "g1": cmd_g1, "calib": cmd_calib, "train": cmd_train, "eval": cmd_eval, "pilot": cmd_pilot, "train2": cmd_train2, "eval2": cmd_eval2}[a.cmd](a)
 
 
 if __name__ == "__main__":
