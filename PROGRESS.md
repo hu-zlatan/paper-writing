@@ -9,7 +9,7 @@
 **Topic:** Amortized, non-myopic active tactile localization (TouchBED)
 **Initialised:** 2026-10-28T07:56:44Z
 **Current version:** v2
-**Latest stage:** Stage 9 EXPERIMENT_DESIGN [v2, GATE] — next: stage 10 CODE_GENERATION [v2]
+**Latest stage:** Stage 10 CODE_GENERATION [v2] (in progress) — resume from plans/stage_10_code_generation_v2.md
 
 ---
 
@@ -305,3 +305,13 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
 - **Outputs produced:** docs/08_experiment_plan_v2.yaml
 - **Decision:** PROCEED → stage 10 (v2). **GATE auto-approved** (AUTOPILOT §1). Evidence: required keys present; every effective component (non-myopic credit assignment, ball-information objective, no-contact input, amortization) has an ablation; every baseline has a tuning protocol (script check); comparators share the target and the action set; H1 never downscaled; gates G0–G5 block main runs until PF convergence, learnability and comparator strength are shown.
 - **Summary:** v2 = travel-cost action model (κ ∈ {0, 6}, G2 also at 2; one escalation to 12) with probe-matched time budgets, ball-information target for every method, 256 shared discrete actions, G* (cost-aware ball greedy) as comparator, sPCE-myopic(rate) as the credit-assignment ablation. Timeline: code by 11-08, gates by 11-12, main runs 11-12 → 11-18, extended abstract by 12-03.
+
+---
+
+## Stage 10. CODE_GENERATION     [v2]   (IN PROGRESS — no Finished timestamp yet)
+
+- **Started:** 2026-10-28T11:20:00Z
+- **Done so far:** docs/07c_amendment_v2_0.md; code/touchbed/{travel,ball,policies_v2,evaluate_v2,train_v2}.py; main.py train2 / eval2; stats.tost; tests (23 passing, incl. exact two-hypothesis ball-EIG, categorical-head and masked-softmax gradient checks, budget accounting).
+- **Measured:** training ≈ 68 ms/episode (sandbox, L=4095, κ=6, τ=10, 3.3 probes; untrained ball-sPCE 3.98 nats vs cap 8.32); G* ≈ 2.3 s/decision at M=32.
+- **Started early (labelled):** gate G4, κ = 0 part (experiments/v2_g4_k0.json; random and G* at τ=4, N_eval 32k vs 128k, 600 pilot episodes per set × method) on GitHub Actions — it exercises only the unchanged evaluation PF. Outputs will land in results/v2/g4/ (logs in results/v1/logs/ — the workflow's log folder name is version-agnostic).
+- **Remaining for stage 10 v2:** G0 unit tests (κ=0/τ=3 v1 reproduction, ball-sPCE toy agreement), exact notch reference + G1 look-ahead estimator, rollout planner, τ_κ/n* calibration script (G5), latency-ladder protocol; then stage 11 (TIME_ESTIMATE on runners) and stage 12 gates.
