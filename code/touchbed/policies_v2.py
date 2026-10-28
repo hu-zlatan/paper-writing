@@ -50,9 +50,10 @@ class GStar:
     """argmax over feasible candidates of EIG_B(a; b) / c(a) (ball target) or full-state EIG / c (target='state')."""
     name = "gstar"
 
-    def __init__(self, rng, M: int = 64, subset=None, target: str = "ball"):
+    def __init__(self, rng, M: int = 64, subset=None, target: str = "ball", actions=None):
         self.rng, self.M, self.target = rng, M, target
-        self.subset = np.arange(A) if subset is None else np.asarray(subset)
+        self.phis, self.psis = (PHI, PSI) if actions is None else actions
+        self.subset = np.arange(len(self.phis)) if subset is None else np.asarray(subset)
 
     def act(self, pf, ts):
         feas = ts.feasible()
@@ -62,9 +63,9 @@ class GStar:
         if self.target == "ball":
             w = pf.weights()
             nb = neighbours(pf.lib, pf.k, pf.x, pf.y, pf.th)
-            e = ball_eig(pf, PHI[cand], PSI[cand], self.M, self.rng, particles=(pf.k, pf.x, pf.y, pf.th, w), nb=nb)
+            e = ball_eig(pf, self.phis[cand], self.psis[cand], self.M, self.rng, particles=(pf.k, pf.x, pf.y, pf.th, w), nb=nb)
         else:
-            e = eig_candidates(pf, PHI[cand], PSI[cand], self.M, self.rng)
+            e = eig_candidates(pf, self.phis[cand], self.psis[cand], self.M, self.rng)
         score = e / ts.costs()[cand]
         j = int(np.argmax(score))
         self.last_score = float(score[j])

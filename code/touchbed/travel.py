@@ -15,6 +15,17 @@ PSI = np.tile(PSI_GRID, N_PHI)
 A = N_PHI * N_PSI
 
 
+def action_grid(n_phi: int = N_PHI, n_psi: int = N_PSI):
+    """(PHI, PSI) arrays of an n_phi x n_psi grid (index = i_phi * n_psi + i_psi). (32, 8) is the shared set A;
+    (64, 16) is the 4x finer flatness-check grid A+ (phi' every 5.625 deg, psi in -37.5..37.5 deg every 5 deg)."""
+    if (n_phi, n_psi) == (N_PHI, N_PSI):
+        return PHI, PSI
+    pg = np.arange(n_phi) * (2 * math.pi / n_phi)
+    step = 80.0 / n_psi
+    sg = np.deg2rad(-40.0 + step / 2 + step * np.arange(n_psi))
+    return np.repeat(pg, n_psi), np.tile(sg, n_phi)
+
+
 def wrap(a):
     return (np.asarray(a) + np.pi) % (2 * np.pi) - np.pi
 
@@ -31,13 +42,16 @@ def cost(phi_t: float, kappa: float) -> np.ndarray:
 
 
 class TravelState:
-    def __init__(self, phi0: float, kappa: float, tau: float):
+    def __init__(self, phi0: float, kappa: float, tau: float, phis=None):
         self.phi, self.kappa, self.tau_rem, self.tau = float(phi0), float(kappa), float(tau), float(tau)
+        self.phis = PHI if phis is None else np.asarray(phis)
         self.travel = 0.0
         self.n_probes = 0
 
     def costs(self) -> np.ndarray:
-        return cost(self.phi, self.kappa)
+        if self.phis is PHI:
+            return cost(self.phi, self.kappa)
+        return 1.0 + self.kappa * np.abs(wrap(self.phis - self.phi)) / math.pi
 
     def feasible(self) -> np.ndarray:
         return self.costs() <= self.tau_rem + 1e-12
@@ -48,8 +62,8 @@ class TravelState:
     def step(self, a: int) -> float:
         c = float(self.costs()[a])
         assert c <= self.tau_rem + 1e-12, "infeasible action"
-        self.travel += abs(float(wrap(PHI[a] - self.phi)))
+        self.travel += abs(float(wrap(self.phis[a] - self.phi)))
         self.tau_rem -= c
-        self.phi = float(PHI[a])
+        self.phi = float(self.phis[a])
         self.n_probes += 1
         return c

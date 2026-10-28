@@ -47,12 +47,13 @@ def ball_information(pf, s0, prior_mass: float) -> float:
 
 
 def run_episode_v2(policy_factory, lib, prior, om: ObsModel, s0, phi0, kappa, tau, ep_key, n_eval=32000, n_dec=2000,
-                   needs_belief=True, pf_kwargs=None, refine_iters=30, final_mh=0):
+                   needs_belief=True, pf_kwargs=None, refine_iters=30, final_mh=0, actions=None):
     obs_rng = stream("obs", *ep_key)
     pol = policy_factory(stream("policy", *ep_key))
     pf_eval = ParticleFilter(lib, om, prior, n_eval, stream("pf_eval", *ep_key), **(pf_kwargs or {}))
     pf_dec = ParticleFilter(lib, om, prior, n_dec, stream("pf_dec", *ep_key)) if needs_belief else None
-    ts = TravelState(phi0, kappa, tau)
+    phis, psis = (PHI, PSI) if actions is None else actions
+    ts = TravelState(phi0, kappa, tau, phis=phis)
     lat = []
     k0, x0, y0, t0 = s0
     actions = []
@@ -62,7 +63,7 @@ def run_episode_v2(policy_factory, lib, prior, om: ObsModel, s0, phi0, kappa, ta
         lat.append(time.perf_counter() - t_start)
         ts.step(a)
         actions.append(a)
-        phi, psi = float(PHI[a]), float(PSI[a])
+        phi, psi = float(phis[a]), float(psis[a])
         obs = tuple(v[0] for v in sample_obs(om, lib, obs_rng, np.array([k0]), x0, y0, t0, phi, psi))
         pf_eval.update(phi, psi, obs)
         if pf_dec is not None:
