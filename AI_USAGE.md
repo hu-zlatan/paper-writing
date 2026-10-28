@@ -16,3 +16,5 @@ Recommendation for the owner: disclose in the submission that the research and m
 ## Scope of AI involvement
 
 Kept current as the pipeline progresses: which artifacts were AI-generated, which were checked or edited by the owner, and which tools produced them.
+
+- 2026-10-28 (run 1, stages 1–10 partial): topic, venue choice, MEGA_PROMPT.md, design docs, search plan, screening decisions, synthesis, theory notes, experiment plan and all code in `code/` written by Claude (scheduled run). Literature metadata come from the OpenAlex API (GitHub Actions run 40654783282). Knowledge cards (stage 6) and the stage-8 hypothesis debate were produced by fresh-context Claude subagents (sonnet for cards; opus for proposer / skeptic / methodologist). Nothing has been checked or edited by the owner yet.
