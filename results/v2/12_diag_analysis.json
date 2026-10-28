@@ -123,6 +123,21 @@
    "probes": 2.248,
    "gstar_probes": 4.158,
    "distinct_first_phi": 4
+  },
+  "rel_sd400": {
+   "n": 200,
+   "success": 0.305,
+   "gstar_success": 0.44,
+   "d_success": -0.135,
+   "d_success_ci95": [
+    -0.21,
+    -0.065
+   ],
+   "bi": 5.789229633788471,
+   "gstar_bi": 6.380471785784231,
+   "probes": 3.0,
+   "gstar_probes": 4.175,
+   "distinct_first_phi": 32
   }
  }
 }
