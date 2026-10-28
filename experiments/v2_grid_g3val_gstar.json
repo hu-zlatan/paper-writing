@@ -1,0 +1,45 @@
+{
+ "purpose": "Grid evaluation (B8) of G* on the G3 (ii) validation episodes.",
+ "jobs": [
+  {
+   "id": "grid_g3val_S_k12_gstar_sh0",
+   "cmd": "python main.py evalgrid --src ../results/v2/g3_val/S_k12_gstar_sh0.jsonl --split val --count 50 --out ../results/v2/grid_g3_val/S_k12_gstar_sh0"
+  },
+  {
+   "id": "grid_g3val_S_k12_gstar_sh1",
+   "cmd": "python main.py evalgrid --src ../results/v2/g3_val/S_k12_gstar_sh1.jsonl --split val --count 50 --out ../results/v2/grid_g3_val/S_k12_gstar_sh1"
+  },
+  {
+   "id": "grid_g3val_S_k12_gstar_sh2",
+   "cmd": "python main.py evalgrid --src ../results/v2/g3_val/S_k12_gstar_sh2.jsonl --split val --count 50 --out ../results/v2/grid_g3_val/S_k12_gstar_sh2"
+  },
+  {
+   "id": "grid_g3val_S_k12_gstar_sh3",
+   "cmd": "python main.py evalgrid --src ../results/v2/g3_val/S_k12_gstar_sh3.jsonl --split val --count 50 --out ../results/v2/grid_g3_val/S_k12_gstar_sh3"
+  },
+  {
+   "id": "grid_g3val_S_k12_gstar_sh4",
+   "cmd": "python main.py evalgrid --src ../results/v2/g3_val/S_k12_gstar_sh4.jsonl --split val --count 50 --out ../results/v2/grid_g3_val/S_k12_gstar_sh4"
+  },
+  {
+   "id": "grid_g3val_S_k12_gstar_sh5",
+   "cmd": "python main.py evalgrid --src ../results/v2/g3_val/S_k12_gstar_sh5.jsonl --split val --count 50 --out ../results/v2/grid_g3_val/S_k12_gstar_sh5"
+  },
+  {
+   "id": "grid_g3val_S_k12_gstar_sh6",
+   "cmd": "python main.py evalgrid --src ../results/v2/g3_val/S_k12_gstar_sh6.jsonl --split val --count 50 --out ../results/v2/grid_g3_val/S_k12_gstar_sh6"
+  },
+  {
+   "id": "grid_g3val_S_k12_gstar_sh7",
+   "cmd": "python main.py evalgrid --src ../results/v2/g3_val/S_k12_gstar_sh7.jsonl --split val --count 50 --out ../results/v2/grid_g3_val/S_k12_gstar_sh7"
+  },
+  {
+   "id": "grid_g3val_S_k12_gstar_sh8",
+   "cmd": "python main.py evalgrid --src ../results/v2/g3_val/S_k12_gstar_sh8.jsonl --split val --count 50 --out ../results/v2/grid_g3_val/S_k12_gstar_sh8"
+  },
+  {
+   "id": "grid_g3val_S_k12_gstar_sh9",
+   "cmd": "python main.py evalgrid --src ../results/v2/g3_val/S_k12_gstar_sh9.jsonl --split val --count 50 --out ../results/v2/grid_g3_val/S_k12_gstar_sh9"
+  }
+ ]
+}
