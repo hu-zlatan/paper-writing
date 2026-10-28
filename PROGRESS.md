@@ -9,7 +9,7 @@
 **Topic:** Amortized, non-myopic active tactile localization (TouchBED)
 **Initialised:** 2026-10-28T07:56:44Z
 **Current version:** v3
-**Latest stage:** LOOP MARKER v2 → v3 (PIVOT from stage 15 → stage 8); next: Stage 8 HYPOTHESIS_GEN [v3]
+**Latest stage:** Stage 8 HYPOTHESIS_GEN [v3] done → next: Stage 8.5 THEORETICAL_BOUNDS [v3], then amendment v3.0 + stage 9 (see the end of this file)
 
 ---
 
@@ -455,3 +455,33 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
   notch reference, numpy PPO, relframe dev head), literature (docs/03–06 + supplement), G1-validated estimator, G5
   calibration (to be redone on 64 × 8), measured costs.
 - **Loop count:** 2 of RESTRICTS loops.max_refine_cycles = 3 used (v1 → v2, v2 → v3).
+
+---
+
+## Stage 8. HYPOTHESIS_GEN (multi-agent debate)     [v3]
+
+- **Started:** 2026-10-28T22:00:00Z (run 4)
+- **Finished:** 2026-10-28T23:00:00Z approx. (see commit "stage 8 v3 HYPOTHESIS_GEN")
+- **Inputs used:** docs/06_synthesis.md, results/v2/14_analysis.md, results/v2/15_decision.md, docs/07_hypotheses_v2.md,
+  results/v2/12_diag_analysis.json (exploratory)
+- **Outputs produced:** docs/07a_proposer_v3.md, docs/07b_skeptic_v3.md, docs/07_hypotheses_v3.md (canonical; three
+  fresh opus subagents, template prompts verbatim); plans/stage_08_hypothesis_gen_v3.md
+- **Decision:** PROCEED → stage 8.5 (v3).
+- **Summary:** Two core ideas. **Idea A / H1:** a belief-free, finger-relative student distilled from G* by DAgger on
+  G*'s score vectors (512-action 64 × 8 set) is non-inferior to G* in every informative cell of {S0, S12, A12}
+  (success LB > −δ_c ≤ 4 pp, BI LB > −ε_c, ≥ 4/5 seeds) — H1a; at ≥ 100× lower per-decision cost against the best of a
+  27-point greedy grid (particles × candidates × outcome samples; belief update vs scoring time measured) — H1b; and the
+  best of three non-random heuristics must fall outside the margin (else "flat task", learning claim dropped) — H1c.
+  H1-fb (top-16 proposal + G* re-scoring, ≥ 10× measured latency ratio, random-16 control). **H2** (mechanism): student
+  vs retrained RL on RL's own ball-sPCE objective (LB > +0.10 nats), with label-fit and belief-input controls before any
+  "encoder is the limit" sentence. **Idea B / H3:** validated one-step look-ahead headroom over G* on 64 × 8 has UB < 0.03
+  (kill if LB > 0.05). Gates G0′ (11-05) … D3 learnability (11-12, one remedy by 11-14) with D3 tied to the test's own
+  margin; pre-written outcome table incl. a characterisation-paper fallback. Compute ≈ 260–300 CPU-h (public repo →
+  standard GitHub-hosted runners are free; concurrency ~20 jobs). Skeptic novelty threats to verify: Choudhury et al.
+  RSS 2017 (arXiv:1705.07834), Nguyen et al. arXiv:2405.15031; no prior greedy-EIG distillation for tactile
+  localisation found in a limited search. Exploratory finger-relative RL seeds (0.305/0.365/0.290 vs G* 0.440 at S12)
+  are context only.
+- **Where to resume (run 5):** stage 8.5 v3 (cost model of student vs greedy grid; verify the novelty references),
+  then write docs/07c_amendment_v3_0.md freezing everything listed in 07_hypotheses_v3 §6.1 *before* any v3 run, then
+  stage 9 v3 (docs/08_experiment_plan_v3.yaml, gate auto-approval with evidence), then stage 10 v3 code (64 × 8 action
+  set, DAgger trainer, heuristics, greedy grid, latency split).
