@@ -1,0 +1,157 @@
+{
+ "A_k0_gstar_b5_r10": {
+  "n_episodes": 200,
+  "success": {
+   "mean_cand": 0.96,
+   "mean_grid": 0.97,
+   "diff_grid_minus_cand": 0.01,
+   "ci95": [
+    -0.01,
+    0.03
+   ]
+  },
+  "ball_info": {
+   "mean_cand": 8.118454270685309,
+   "mean_grid": 8.187089726782117,
+   "diff_grid_minus_cand": 0.06863545609680904,
+   "ci95": [
+    0.024245559823765084,
+    0.12276459189603829
+   ]
+  },
+  "identity_ok": {
+   "mean_cand": 0.975,
+   "mean_grid": 0.985,
+   "diff_grid_minus_cand": 0.01,
+   "ci95": [
+    -0.01,
+    0.03
+   ]
+  },
+  "passes_G4_rule": false
+ },
+ "A_k0_gstar_b5_r30": {
+  "n_episodes": 200,
+  "success": {
+   "mean_cand": 0.96,
+   "mean_grid": 0.97,
+   "diff_grid_minus_cand": 0.01,
+   "ci95": [
+    -0.01,
+    0.03
+   ]
+  },
+  "ball_info": {
+   "mean_cand": 8.125460189300117,
+   "mean_grid": 8.187089726782117,
+   "diff_grid_minus_cand": 0.06162953748200154,
+   "ci95": [
+    0.020303443932048682,
+    0.11154057982376879
+   ]
+  },
+  "identity_ok": {
+   "mean_cand": 0.975,
+   "mean_grid": 0.985,
+   "diff_grid_minus_cand": 0.01,
+   "ci95": [
+    -0.01,
+    0.03
+   ]
+  },
+  "passes_G4_rule": false
+ },
+ "A_k0_gstar_b5_ref": {
+  "n_episodes": 100,
+  "success": {
+   "mean_cand": 0.96,
+   "mean_grid": 0.97,
+   "diff_grid_minus_cand": 0.01,
+   "ci95": [
+    0.0,
+    0.03
+   ]
+  },
+  "ball_info": {
+   "mean_cand": 8.136450050083829,
+   "mean_grid": 8.149821363038392,
+   "diff_grid_minus_cand": 0.013371312954560989,
+   "ci95": [
+    -0.0008366897131907573,
+    0.034362264760005395
+   ]
+  },
+  "identity_ok": {
+   "mean_cand": 0.98,
+   "mean_grid": 0.99,
+   "diff_grid_minus_cand": 0.01,
+   "ci95": [
+    0.0,
+    0.03
+   ]
+  },
+  "passes_G4_rule": false
+ },
+ "A_k0_gstar_pf128k_3mh": {
+  "n_episodes": 200,
+  "success": {
+   "mean_cand": 0.965,
+   "mean_grid": 0.97,
+   "diff_grid_minus_cand": 0.005,
+   "ci95": [
+    -0.01,
+    0.02
+   ]
+  },
+  "ball_info": {
+   "mean_cand": 8.16959657582607,
+   "mean_grid": 8.187089726782117,
+   "diff_grid_minus_cand": 0.017493150956046675,
+   "ci95": [
+    -0.007842443363083667,
+    0.051605881067349944
+   ]
+  },
+  "identity_ok": {
+   "mean_cand": 0.98,
+   "mean_grid": 0.985,
+   "diff_grid_minus_cand": 0.005,
+   "ci95": [
+    -0.01,
+    0.02
+   ]
+  },
+  "passes_G4_rule": true
+ },
+ "A_k0_gstar_pf32k_3mh": {
+  "n_episodes": 200,
+  "success": {
+   "mean_cand": 0.96,
+   "mean_grid": 0.97,
+   "diff_grid_minus_cand": 0.01,
+   "ci95": [
+    -0.01,
+    0.03
+   ]
+  },
+  "ball_info": {
+   "mean_cand": 8.11433188299161,
+   "mean_grid": 8.187089726782117,
+   "diff_grid_minus_cand": 0.07275784379050908,
+   "ci95": [
+    0.026628096521612046,
+    0.1293932821263242
+   ]
+  },
+  "identity_ok": {
+   "mean_cand": 0.975,
+   "mean_grid": 0.985,
+   "diff_grid_minus_cand": 0.01,
+   "ci95": [
+    -0.01,
+    0.03
+   ]
+  },
+  "passes_G4_rule": false
+ }
+}
