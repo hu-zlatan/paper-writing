@@ -66,3 +66,23 @@ Set A is kept unchanged and the check is **reported as marginally failed** (0.80
 v2 uses A only as the low-ambiguity contrast to S for H1 (amortization), where C(A) = 0.80 vs C(S) = 0.97 remains a
 clear separation; replacing shapes after seeing the value would be a post-hoc selection of the object set, and the
 per-shape rule (≤ 0.85, max 0.821) passes. No other rule depends on C(A).
+
+## B8 — Grid reference for the evaluation posterior (2026-10-28, run 3; before any grid-vs-kernel comparison)
+**Why.** Partial B5 data (A, random, 600 episodes) show r10 and r30 still differ from the 32k × 30 MH + 60 reference
+by +0.12 / +0.08 nats BI, and success with final rejuvenation is ≈ 0.47 vs ≈ 0.31 with 3 MH: every SMC kernel moves
+the numbers and none of them can validate itself. Decisions never read the evaluation posterior, which only has to
+represent p(s | h_T) for a short, fixed history (≤ 5 probes), so a deterministic reference is possible.
+**Reference.** `touchbed/gridpost.py::AdaptiveGridPosterior`: uniform-prior grid over (k, x, y, θ), coarse cells 1 mm ×
+1 mm × 2° evaluated everywhere; every coarse cell within 25 nats of the maximum (dilated by one cell) is subdivided
+4 × 4 × 4 (0.25 mm, 0.5°). Same likelihood code, same read-outs (MAP identity, Nelder–Mead pose refinement, ball mass,
+PF floor convention 1/(2·32,000)). Histories are rebuilt exactly from the recorded actions and the observation stream
+(checked: the rebuilt history reproduces the recorded PF ball information bit-for-bit). Check on S/random episode 0:
+adaptive 1/2/4 = full 0.25 mm/0.5° grid = 5.9048 nats (3 MH PF 5.586, 10 MH 5.779, 30 MH 5.879, 128k 5.273).
+**Self-check before use.** Adaptive sub = 4 vs sub = 8 on ≥ 6 pilot episodes (S; random and G*): mean |ΔBI| ≤ 0.02 nats
+and no success flips. Otherwise sub = 8 becomes the reference.
+**Kernel selection.** The G4 rule (|ΔBI| ≤ 0.05; |Δsuccess| ≤ 1 pp with 95 % CI inside ±2 pp) is applied to every
+candidate evaluation method against the grid reference on the first 200 recorded pilot episodes of each κ = 0 cell
+(S/A × random/G*), paired: PF 32k × 3 MH (G4), × 10 MH, × 30 MH, r10, r30, the 30 + 60 kernel, and the grid itself at
+coarser settings. The cheapest method that passes in every cell becomes the evaluation for all v2 numbers; κ_hi cells
+are checked the same way when their pilot runs exist. If no SMC kernel passes, the grid is the evaluation and its
+measured cost enters §6 through the downscale order. Thresholds unchanged.
