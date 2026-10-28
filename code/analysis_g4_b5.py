@@ -39,7 +39,7 @@ for s, k, m in cells:
         res["ci_only_fails"] = bool(not res["passes_G4_rule"] and abs(res["ball_info"]["diff_ref_minus_cand"]) <= 0.05
                                     and abs(res["success"]["diff_ref_minus_cand"]) <= 0.01)
         out[f"{s}_k{k:g}_{m}_{cand}"] = res
-        print(f"{s} k{k:g} {m:6s} {cand} n={len(eps)} succ {b.mean():.3f}/{a.mean():.3f} "
+        print(f"{s} k{k:g} {m:6s} {cand} n={len(eps)} succ {res['success']['mean_cand']:.3f}/{res['success']['mean_ref']:.3f} "
               f"dS={res['success']['diff_ref_minus_cand']:+.3f} {np.round(res['success']['ci95'], 3)} "
               f"dBI={res['ball_info']['diff_ref_minus_cand']:+.3f} {np.round(res['ball_info']['ci95'], 3)} "
               + ("PASS" if res["passes_G4_rule"] else ("FAIL(CI only)" if res["ci_only_fails"] else "FAIL")))

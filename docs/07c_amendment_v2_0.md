@@ -69,8 +69,10 @@ per-shape rule (≤ 0.85, max 0.821) passes. No other rule depends on C(A).
 
 ## B8 — Grid reference for the evaluation posterior (2026-10-28, run 3; before any grid-vs-kernel comparison)
 **Why.** Partial B5 data (A, random, 600 episodes) show r10 and r30 still differ from the 32k × 30 MH + 60 reference
-by +0.12 / +0.08 nats BI, and success with final rejuvenation is ≈ 0.47 vs ≈ 0.31 with 3 MH: every SMC kernel moves
-the numbers and none of them can validate itself. Decisions never read the evaluation posterior, which only has to
+by +0.12 / +0.08 nats BI: every SMC kernel moves the numbers and none of them can validate itself.
+*Correction (same run):* an earlier version of this paragraph also said that success with final rejuvenation was
+≈ 0.47 vs ≈ 0.31 with 3 MH. That was a printing bug in code/analysis_g4_b5.py (it printed the identity-correct rate in
+the success column); the success rates are 0.307 (r10) vs 0.312 (3 MH). The JSON outputs were correct. Decisions never read the evaluation posterior, which only has to
 represent p(s | h_T) for a short, fixed history (≤ 5 probes), so a deterministic reference is possible.
 **Reference.** `touchbed/gridpost.py::AdaptiveGridPosterior`: uniform-prior grid over (k, x, y, θ), coarse cells 1 mm ×
 1 mm × 2° evaluated everywhere; every coarse cell within 25 nats of the maximum (dilated by one cell) is subdivided
