@@ -138,6 +138,36 @@
    "probes": 3.0,
    "gstar_probes": 4.175,
    "distinct_first_phi": 32
+  },
+  "rel_sd401": {
+   "n": 200,
+   "success": 0.365,
+   "gstar_success": 0.44,
+   "d_success": -0.075,
+   "d_success_ci95": [
+    -0.155,
+    0.005
+   ],
+   "bi": 6.068677840179803,
+   "gstar_bi": 6.380471785784231,
+   "probes": 3.57,
+   "gstar_probes": 4.175,
+   "distinct_first_phi": 32
+  },
+  "rel_sd402": {
+   "n": 200,
+   "success": 0.29,
+   "gstar_success": 0.44,
+   "d_success": -0.15,
+   "d_success_ci95": [
+    -0.22,
+    -0.08
+   ],
+   "bi": 5.73884798578728,
+   "gstar_bi": 6.380471785784231,
+   "probes": 3.0,
+   "gstar_probes": 4.175,
+   "distinct_first_phi": 32
   }
  }
 }
