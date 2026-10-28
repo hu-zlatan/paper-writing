@@ -1,0 +1,17 @@
+{
+ "purpose": "DEV / EXPLORATORY (not a gate, not confirmatory): finger-relative policy parametrisation (touchbed/relframe.py) at (S, kappa = 12, tau = 5.1), hp1, E_train 1e5, 3 seeds; 200 validation episodes, grid evaluation. Compared descriptively with the absolute-head G3 (ii) seeds and G* on the same episodes. Informs the stage-15 v2 decision only.",
+ "jobs": [
+  {
+   "id": "devrel_S_k12_sd400",
+   "cmd": "python main.py train2 --set S --method spce_total --frame rel --kappa 12 --tau 5.1 --lr 0.00036339014767503805 --ent-coef 0.00013313139952275948 --batch 128 --critic-lr 0.0014321061677694642 --seed 400 --max-episodes 100000 --budget-minutes 150 --out ../results/v2/dev_rel/rel_S_k12_sd400 && python main.py eval2 --set S --method spce_total --weights ../results/v2/dev_rel/rel_S_k12_sd400.npz --kappa 12 --tau 5.1 --split val --start 0 --count 200 --n-eval 2000 --budget-minutes 60 --out ../results/v2/dev_rel/val_rel_S_k12_sd400 && python main.py evalgrid --src ../results/v2/dev_rel/val_rel_S_k12_sd400.jsonl --split val --start 0 --count 200 --out ../results/v2/dev_rel/val_rel_S_k12_sd400_grid"
+  },
+  {
+   "id": "devrel_S_k12_sd401",
+   "cmd": "python main.py train2 --set S --method spce_total --frame rel --kappa 12 --tau 5.1 --lr 0.00036339014767503805 --ent-coef 0.00013313139952275948 --batch 128 --critic-lr 0.0014321061677694642 --seed 401 --max-episodes 100000 --budget-minutes 150 --out ../results/v2/dev_rel/rel_S_k12_sd401 && python main.py eval2 --set S --method spce_total --weights ../results/v2/dev_rel/rel_S_k12_sd401.npz --kappa 12 --tau 5.1 --split val --start 0 --count 200 --n-eval 2000 --budget-minutes 60 --out ../results/v2/dev_rel/val_rel_S_k12_sd401 && python main.py evalgrid --src ../results/v2/dev_rel/val_rel_S_k12_sd401.jsonl --split val --start 0 --count 200 --out ../results/v2/dev_rel/val_rel_S_k12_sd401_grid"
+  },
+  {
+   "id": "devrel_S_k12_sd402",
+   "cmd": "python main.py train2 --set S --method spce_total --frame rel --kappa 12 --tau 5.1 --lr 0.00036339014767503805 --ent-coef 0.00013313139952275948 --batch 128 --critic-lr 0.0014321061677694642 --seed 402 --max-episodes 100000 --budget-minutes 150 --out ../results/v2/dev_rel/rel_S_k12_sd402 && python main.py eval2 --set S --method spce_total --weights ../results/v2/dev_rel/rel_S_k12_sd402.npz --kappa 12 --tau 5.1 --split val --start 0 --count 200 --n-eval 2000 --budget-minutes 60 --out ../results/v2/dev_rel/val_rel_S_k12_sd402 && python main.py evalgrid --src ../results/v2/dev_rel/val_rel_S_k12_sd402.jsonl --split val --start 0 --count 200 --out ../results/v2/dev_rel/val_rel_S_k12_sd402_grid"
+  }
+ ]
+}

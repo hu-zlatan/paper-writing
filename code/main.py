@@ -160,7 +160,8 @@ def cmd_train2(a):
     from touchbed.train_v2 import TrainConfigV2, TrainerV2
     cfg = TrainConfigV2(setname=a.set, method=a.method, kappa=a.kappa, tau=a.tau, L=a.L, J=a.J, batch=a.batch,
                         lr=a.lr, critic_lr=a.critic_lr, ent_coef=a.ent_coef, seed=a.seed, max_episodes=a.max_episodes,
-                        val_every=a.val_every, val_episodes=a.val_episodes, budget_minutes=a.budget_minutes)
+                        val_every=a.val_every, val_episodes=a.val_episodes, budget_minutes=a.budget_minutes,
+                        extra={} if a.frame == "abs" else {"frame": a.frame})
     os.makedirs(os.path.dirname(os.path.abspath(a.out)), exist_ok=True)
     tr = TrainerV2(cfg)
     t0 = time.time()
@@ -423,6 +424,7 @@ def main():
     p.add_argument("--n-eval", type=int, default=8000)
     t2 = sub.add_parser("train2")
     t2.add_argument("--set", default="S"); t2.add_argument("--method", default="spce_total")
+    t2.add_argument("--frame", default="abs", choices=["abs", "rel"])
     t2.add_argument("--kappa", type=float, default=6.0); t2.add_argument("--tau", type=float, default=10.0)
     t2.add_argument("--L", type=int, default=4095); t2.add_argument("--J", type=int, default=16)
     t2.add_argument("--batch", type=int, default=128); t2.add_argument("--lr", type=float, default=3e-4)

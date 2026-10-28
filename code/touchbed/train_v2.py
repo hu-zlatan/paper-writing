@@ -25,6 +25,7 @@ from .nn import FEAT_DIM, MLP, Adam, obs_features
 from .pf import Prior
 from .shapes import get_set
 from .travel import A, PHI, PSI, cost
+from .relframe import RelDeepSets, rel_ctx, rel_features
 
 CTX_DIM = 3  # cos phi_t, sin phi_t, tau_rem / tau
 
@@ -92,8 +93,10 @@ class TrainerV2:
         self.prior = Prior(self.lib.K)
         self.rng = stream("train_v2", cfg.setname, cfg.method, cfg.kappa, cfg.tau, cfg.seed, cfg.L,
                           json.dumps(cfg.extra, sort_keys=True))
-        self.pi = CategoricalDeepSets(self.rng, A, cfg.hidden)
-        self.vf = CategoricalDeepSets(self.rng, 1, cfg.hidden)
+        self.rel = cfg.extra.get("frame", "abs") == "rel"
+        Net = RelDeepSets if self.rel else CategoricalDeepSets
+        self.pi = Net(self.rng, A, cfg.hidden)
+        self.vf = Net(self.rng, 1, cfg.hidden)
         self.opt_pi = Adam(self.pi.params(), lr=cfg.lr)
         self.opt_vf = Adam(self.vf.params(), lr=cfg.critic_lr)
         self.episodes = 0
@@ -123,6 +126,7 @@ class TrainerV2:
         F = np.zeros((B, T, FEAT_DIM)); CTX = np.zeros((B, T, CTX_DIM))
         MASK = np.zeros((B, T, A), dtype=bool); ACT = np.zeros((B, T), dtype=int)
         R = np.zeros((B, T)); COST = np.ones((B, T)); alive = np.zeros((B, T), dtype=bool)
+        RAW = np.zeros((B, T, 6)); PHIT = np.zeros((B, T)); TAUR = np.zeros((B, T))
         cum = np.zeros((B, J + cfg.L))
         g_prev = np.zeros(B)
         drop = cfg.method == "no_nc_input"
@@ -130,11 +134,12 @@ class TrainerV2:
             live = tau_rem >= 1.0 - 1e-12
             alive[:, t] = live
             CTX[:, t] = np.stack([np.cos(phi_t), np.sin(phi_t), tau_rem / cfg.tau], axis=1)
+            PHIT[:, t], TAUR[:, t] = phi_t, tau_rem
             c_all = 1.0 + cfg.kappa * np.abs((PHI[None, :] - phi_t[:, None] + np.pi) % (2 * np.pi) - np.pi) / np.pi
             feas = c_all <= tau_rem[:, None] + 1e-12
             feas[~live] = True  # dead rows: any value, masked out of the loss
             MASK[:, t] = feas
-            logits, _ = self.pi.forward(F[:, :t + 1], CTX[:, :t + 1])
+            logits, _ = self.pi.forward(*self._inputs(F, CTX, RAW, PHIT, TAUR, alive, t + 1))
             lp = masked_log_softmax(logits[:, t], feas)
             if greedy:
                 a = np.argmax(lp, axis=1)
@@ -155,10 +160,20 @@ class TrainerV2:
             R[:, t] = np.where(live, g - g_prev, 0.0)
             g_prev = np.where(live, g, g_prev)
             F[:, t] = np.where(live[:, None], obs_features(phi, psi, *o, drop_nc=drop), 0.0)
+            RAW[:, t] = np.stack([phi, psi, *(np.asarray(v, dtype=float) for v in o)], axis=1)
             tau_rem = np.where(live, tau_rem - c, tau_rem)
             phi_t = np.where(live, phi, phi_t)
         return dict(F=F, CTX=CTX, MASK=MASK, ACT=ACT, R=R, COST=COST, alive=alive, g_T=g_prev,
-                    n_probes=alive.sum(1))
+                    n_probes=alive.sum(1), RAW=RAW, PHIT=PHIT, TAUR=TAUR)
+
+    def _inputs(self, F, CTX, RAW, PHIT, TAUR, alive, upto):
+        """Network inputs for decisions 0..upto-1 (absolute: (F, CTX); finger-relative: (Frel, M, ctx, shift))."""
+        if not self.rel:
+            return F[:, :upto], CTX[:, :upto]
+        Fr, M = rel_features(RAW[:, :upto], PHIT[:, :upto], alive[:, :upto],
+                             drop_nc=self.cfg.method == "no_nc_input")
+        ctx, sh = rel_ctx(PHIT[:, :upto], TAUR[:, :upto], self.cfg.tau)
+        return Fr, M, ctx, sh
 
     def update(self, ro):
         cfg = self.cfg
@@ -169,14 +184,16 @@ class TrainerV2:
             ret = np.flip(np.cumsum(np.flip(R, axis=1), axis=1), axis=1)
         m = alive
         nm = m.sum()
-        V, _ = self.vf.forward(F, CTX)
+        T = F.shape[1]
+        X = self._inputs(F, CTX, ro["RAW"], ro["PHIT"], ro["TAUR"], alive, T)
+        V, _ = self.vf.forward(*X)
         adv = ret - V[..., 0]
         adv = (adv - adv[m].mean()) / (adv[m].std() + 1e-8)
-        logits, _ = self.pi.forward(F, CTX)
+        logits, _ = self.pi.forward(*X)
         lp_old = np.take_along_axis(masked_log_softmax(logits, MASK), ACT[..., None], axis=-1)[..., 0]
         onehot = np.zeros(MASK.shape); np.put_along_axis(onehot, ACT[..., None], 1.0, axis=-1)
         for _ in range(cfg.epochs):
-            logits, cache = self.pi.forward(F, CTX)
+            logits, cache = self.pi.forward(*X)
             lsm = masked_log_softmax(logits, MASK)
             p = np.where(MASK, np.exp(lsm), 0.0)
             lp = np.take_along_axis(lsm, ACT[..., None], axis=-1)[..., 0]
@@ -193,7 +210,7 @@ class TrainerV2:
             g_logits -= cfg.ent_coef * dH * m[..., None] / nm
             self.opt_pi.step(self.pi.backward(cache, g_logits))
         for _ in range(cfg.epochs):
-            V, vc = self.vf.forward(F, CTX)
+            V, vc = self.vf.forward(*X)
             gV = np.where(m, V[..., 0] - ret, 0.0)[..., None] / nm
             self.opt_vf.step(self.vf.backward(vc, gV))
         return {"v_loss": float(np.mean(((V[..., 0] - ret) ** 2)[m])), "entropy": float(H[..., 0][m].mean())}
@@ -251,6 +268,13 @@ class TrainerV2:
             F[0, i] = obs_features(phi, psi, o[0], o[1], o[2], o[3], drop_nc=self.cfg.method == "no_nc_input")
         ctx = np.zeros((1, t + 1, CTX_DIM))
         ctx[0, t] = [math.cos(ts.phi), math.sin(ts.phi), ts.tau_rem / ts.tau]
-        logits, _ = self.pi.forward(F, ctx)
+        if self.rel:
+            RAW = np.zeros((1, t + 1, 6)); PHIT = np.full((1, t + 1), ts.phi); TAUR = np.full((1, t + 1), ts.tau_rem)
+            for i, (phi, psi, o) in enumerate(pf.hist):
+                RAW[0, i] = [phi, psi, float(o[0]), float(o[1]), float(o[2]), float(o[3])]
+            alive = np.zeros((1, t + 1), dtype=bool); alive[0, :t] = True
+            logits, _ = self.pi.forward(*self._inputs(F, ctx, RAW, PHIT, TAUR, alive, t + 1))
+        else:
+            logits, _ = self.pi.forward(F, ctx)
         lsm = masked_log_softmax(logits[0, t], ts.feasible())
         return int(np.argmax(lsm))
