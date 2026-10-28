@@ -38,12 +38,12 @@ def make_states(setname: str, split: str, n: int):
 
 
 def run_episode(policy_factory, lib, prior, om: ObsModel, s0, T: int, ep_key, n_eval: int = 10000,
-                n_dec: int = 2000, needs_belief: bool = True, refine_iters: int = 30, obs_fn=None):
+                n_dec: int = 2000, needs_belief: bool = True, refine_iters: int = 30, obs_fn=None, pf_kwargs=None):
     """Run one episode of T touches. policy_factory(rng) -> object with .act(pf) -> (phi, psi) (or .act(history) for
     learned policies via an adapter). Returns per-episode metrics and per-decision latencies (seconds)."""
     obs_rng = stream("obs", *ep_key)
     pol = policy_factory(stream("policy", *ep_key))
-    pf_eval = ParticleFilter(lib, om, prior, n_eval, stream("pf_eval", *ep_key))
+    pf_eval = ParticleFilter(lib, om, prior, n_eval, stream("pf_eval", *ep_key), **(pf_kwargs or {}))
     pf_dec = ParticleFilter(lib, om, prior, n_dec, stream("pf_dec", *ep_key)) if needs_belief else None
     lat = []
     k0, x0, y0, t0 = s0
