@@ -1,0 +1,67 @@
+{
+ "gstar": {
+  "n": 500,
+  "success": 0.41,
+  "bi": 6.336746344854269,
+  "probes": 4.158
+ },
+ "seeds": {
+  "200": {
+   "n": 500,
+   "n_paired": 500,
+   "success": 0.19,
+   "gstar_success_paired": 0.41,
+   "bi": 5.099649109346805,
+   "probes": 2.362,
+   "train_status": "max_episodes",
+   "last_log": {
+    "episodes": 100096,
+    "g_T_mean": 4.81098820232093,
+    "sat_frac": 0.140625,
+    "probes_mean": 2.4296875,
+    "elapsed_s": 1483.5070643424988,
+    "v_loss": 5.680723587097504,
+    "entropy": 0.30306427258646557
+   }
+  },
+  "201": {
+   "n": 500,
+   "n_paired": 500,
+   "success": 0.23,
+   "gstar_success_paired": 0.41,
+   "bi": 5.245577612143335,
+   "probes": 2.586,
+   "train_status": "max_episodes",
+   "last_log": {
+    "episodes": 100096,
+    "g_T_mean": 4.724278784056104,
+    "sat_frac": 0.1015625,
+    "probes_mean": 2.421875,
+    "elapsed_s": 2309.307742357254,
+    "v_loss": 4.2608284959247245,
+    "entropy": 0.4412221715656658
+   }
+  },
+  "202": {
+   "n": 500,
+   "n_paired": 500,
+   "success": 0.192,
+   "gstar_success_paired": 0.41,
+   "bi": 5.103525133746875,
+   "probes": 2.248,
+   "train_status": "max_episodes",
+   "last_log": {
+    "episodes": 100096,
+    "g_T_mean": 4.488890419765622,
+    "sat_frac": 0.1328125,
+    "probes_mean": 2.359375,
+    "elapsed_s": 2308.3605103492737,
+    "v_loss": 9.870602250971263,
+    "entropy": 0.1769723924599895
+   }
+  }
+ },
+ "seed_mean_success": 0.20400000000000004,
+ "gstar_success_paired_mean": 0.41,
+ "rule_ii_success_pass": false
+}
