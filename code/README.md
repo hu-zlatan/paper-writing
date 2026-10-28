@@ -21,4 +21,4 @@ backpropagation (gradient-checked in tests/test_nn.py).
 Run tests: `cd code && python -m pytest -q tests`. Install: `pip install -r requirements.txt`.
 Sweeps run on GitHub Actions via `.github/workflows/experiments.yml` reading a manifest in `experiments/`.
 
-Not yet implemented (planned for H4): MuJoCo fingertip-contact evaluation (`touchbed/mujoco_eval.py`).
+`touchbed/mujoco_eval.py`: MuJoCo fingertip-contact probe for H4 (`main.py eval --mujoco-radius 4`).

@@ -38,7 +38,7 @@ def make_states(setname: str, split: str, n: int):
 
 
 def run_episode(policy_factory, lib, prior, om: ObsModel, s0, T: int, ep_key, n_eval: int = 10000,
-                n_dec: int = 2000, needs_belief: bool = True, refine_iters: int = 30):
+                n_dec: int = 2000, needs_belief: bool = True, refine_iters: int = 30, obs_fn=None):
     """Run one episode of T touches. policy_factory(rng) -> object with .act(pf) -> (phi, psi) (or .act(history) for
     learned policies via an adapter). Returns per-episode metrics and per-decision latencies (seconds)."""
     obs_rng = stream("obs", *ep_key)
@@ -52,7 +52,10 @@ def run_episode(policy_factory, lib, prior, om: ObsModel, s0, T: int, ep_key, n_
         t_start = time.perf_counter()
         phi, psi = pol.act(pf_dec if needs_belief else pf_eval)
         lat.append(time.perf_counter() - t_start)
-        obs = tuple(v[0] for v in sample_obs(om, lib, obs_rng, np.array([k0]), x0, y0, t0, phi, psi))
+        if obs_fn is None:
+            obs = tuple(v[0] for v in sample_obs(om, lib, obs_rng, np.array([k0]), x0, y0, t0, phi, psi))
+        else:  # e.g. MuJoCo contact (H4); same noise model, different contact geometry
+            obs = obs_fn(om, obs_rng, s0, phi, psi)
         n_contact += int(obs[0])
         pf_eval.update(phi, psi, obs)
         if pf_dec is not None:

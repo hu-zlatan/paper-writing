@@ -95,6 +95,10 @@ def cmd_eval(a):
     om = ObsModel()
     lib, prior, states = make_states(a.set, a.split, a.start + a.count)
     fac, needs = policy_factory(a, a.T)
+    obs_fn = None
+    if a.mujoco_radius > 0:
+        from touchbed.mujoco_eval import MujocoProbe
+        obs_fn = MujocoProbe(lib.shapes, r_finger=a.mujoco_radius).sample_obs
     os.makedirs(os.path.dirname(os.path.abspath(a.out)), exist_ok=True)
     t0 = time.time()
     with open(a.out + ".jsonl", "w") as f:
@@ -104,8 +108,8 @@ def cmd_eval(a):
                 print("EARLY_STOP_AT_80_PCT_BUDGET", flush=True)
                 break
             r, lat = run_episode(fac, lib, prior, om, states[i], a.T, (a.set, a.split, a.T, i), n_eval=a.n_eval,
-                                 n_dec=a.n_dec, needs_belief=needs)
-            r.update({"episode": i, "set": a.set, "T": a.T, "method": a.method, "weights": a.weights, "n_eval": a.n_eval,
+                                 n_dec=a.n_dec, needs_belief=needs, obs_fn=obs_fn)
+            r.update({"episode": i, "set": a.set, "T": a.T, "method": a.method, "weights": a.weights, "n_eval": a.n_eval, "mujoco_radius": a.mujoco_radius,
                       "latencies_s": lat})
             f.write(json.dumps(r) + "\n")
             f.flush()
@@ -150,7 +154,7 @@ def main():
     e.add_argument("--split", default="test"); e.add_argument("--start", type=int, default=0)
     e.add_argument("--count", type=int, default=100); e.add_argument("--n-eval", type=int, default=8000)
     e.add_argument("--n-dec", type=int, default=2000); e.add_argument("--C", type=int, default=64)
-    e.add_argument("--M", type=int, default=64); e.add_argument("--budget-minutes", type=float, default=330.0)
+    e.add_argument("--M", type=int, default=64); e.add_argument("--mujoco-radius", type=float, default=0.0); e.add_argument("--budget-minutes", type=float, default=330.0)
     e.add_argument("--out", required=True)
     p = sub.add_parser("pilot")
     p.add_argument("--set", default="S"); p.add_argument("--L", type=int, default=4095)
