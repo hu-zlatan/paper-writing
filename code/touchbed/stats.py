@@ -49,3 +49,12 @@ def seed_robustness(A, B):
     A, B = _as2d(A), _as2d(B)
     bm = B.mean(1)
     return int(np.sum([(A[:, s] - bm).mean() > 0 for s in range(A.shape[1])])), A.shape[1]
+
+
+def tost(A, B, margin: float, n_boot: int = 10000, seed: int = 0, alpha: float = 0.05):
+    """Two one-sided tests via the crossed bootstrap: equivalence of mean(A - B) within (-margin, +margin) is declared
+    when the (1 - 2*alpha) bootstrap interval lies inside the margins (equivalently both one-sided bounds)."""
+    r = crossed_bootstrap_diff(A, B, n_boot=n_boot, seed=seed, alpha=alpha)
+    r["equivalent"] = bool(r["lower"] > -margin and r["upper"] < margin)
+    r["margin"] = margin
+    return r

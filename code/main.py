@@ -139,6 +139,75 @@ def cmd_pilot(a):
           f" {per * 1e5 / 3600:.2f} CPU-h per run (+ validation)", flush=True)
 
 
+# ---------------------------------------------------------------------------------------------------------------- v2
+def save_v2(tr, out):
+    arrs = {f"pi_{i}": p for i, p in enumerate(tr.pi.params())}
+    arrs.update({f"vf_{i}": p for i, p in enumerate(tr.vf.params())})
+    np.savez_compressed(out + ".npz", **arrs)
+
+
+def load_v2(weights):
+    from touchbed.train_v2 import TrainConfigV2, TrainerV2
+    meta = json.load(open(weights.replace(".npz", ".json")))
+    tr = TrainerV2(TrainConfigV2(**meta["config"]))
+    z = np.load(weights)
+    for i, p in enumerate(tr.pi.params()):
+        p[...] = z[f"pi_{i}"]
+    return tr
+
+
+def cmd_train2(a):
+    from touchbed.train_v2 import TrainConfigV2, TrainerV2
+    cfg = TrainConfigV2(setname=a.set, method=a.method, kappa=a.kappa, tau=a.tau, L=a.L, J=a.J, batch=a.batch,
+                        lr=a.lr, critic_lr=a.critic_lr, ent_coef=a.ent_coef, seed=a.seed, max_episodes=a.max_episodes,
+                        val_every=a.val_every, val_episodes=a.val_episodes, budget_minutes=a.budget_minutes)
+    os.makedirs(os.path.dirname(os.path.abspath(a.out)), exist_ok=True)
+    tr = TrainerV2(cfg)
+    t0 = time.time()
+    status = tr.train(log_path=a.out + ".json")
+    save_v2(tr, a.out)
+    meta = json.load(open(a.out + ".json"))
+    meta.update({"env": env_info(), "wall_s": time.time() - t0})
+    json.dump(meta, open(a.out + ".json", "w"))
+    print(f"TRAIN_DONE status={status} episodes={tr.episodes} wall_s={time.time() - t0:.0f}")
+
+
+def cmd_eval2(a):
+    from touchbed.evaluate_v2 import make_states_v2, run_episode_v2
+    from touchbed.policies_v2 import CoverageV2, GStar, RandomV2
+    from touchbed.travel import rung_subset
+    om = ObsModel()
+    lib, prior, eps = make_states_v2(a.set, a.split, a.start + a.count)
+    if a.method == "random":
+        fac, needs = RandomV2, False
+    elif a.method == "coverage":
+        fac, needs = CoverageV2, True
+    elif a.method in ("gstar", "full_state_greedy"):
+        sub = None if a.rung_phi == 32 and a.rung_psi == 8 else rung_subset(a.rung_phi, a.rung_psi)
+        tgt = "ball" if a.method == "gstar" else "state"
+        fac, needs = (lambda rng: GStar(rng, M=a.M, subset=sub, target=tgt)), True
+    else:
+        tr = load_v2(a.weights)
+        fac, needs = (lambda rng: tr), False
+    os.makedirs(os.path.dirname(os.path.abspath(a.out)), exist_ok=True)
+    t0 = time.time()
+    with open(a.out + ".jsonl", "w") as f:
+        for i in range(a.start, a.start + a.count):
+            if time.time() - t0 > 0.8 * a.budget_minutes * 60:
+                f.write(json.dumps({"EARLY_STOP_AT_80_PCT_BUDGET": True, "next_index": i}) + "\n")
+                print("EARLY_STOP_AT_80_PCT_BUDGET", flush=True)
+                break
+            s0, phi0 = eps[i]
+            r = run_episode_v2(fac, lib, prior, om, s0, phi0, a.kappa, a.tau, (a.set, a.split, a.kappa, a.tau, i),
+                               n_eval=a.n_eval, n_dec=a.n_dec, needs_belief=needs, pf_kwargs={"mh_steps": a.mh_steps})
+            r.update({"episode": i, "set": a.set, "kappa": a.kappa, "tau": a.tau, "method": a.method,
+                      "weights": a.weights, "n_eval": a.n_eval, "n_dec": a.n_dec, "M": a.M,
+                      "rung": [a.rung_phi, a.rung_psi], "mh_steps": a.mh_steps})
+            f.write(json.dumps(r) + "\n")
+            f.flush()
+    print(f"EVAL2_DONE n={a.count} wall_s={time.time() - t0:.0f}")
+
+
 def main():
     ap = argparse.ArgumentParser()
     sub = ap.add_subparsers(dest="cmd", required=True)
@@ -161,8 +230,26 @@ def main():
     p = sub.add_parser("pilot")
     p.add_argument("--set", default="S"); p.add_argument("--L", type=int, default=4095)
     p.add_argument("--n-eval", type=int, default=8000)
+    t2 = sub.add_parser("train2")
+    t2.add_argument("--set", default="S"); t2.add_argument("--method", default="spce_total")
+    t2.add_argument("--kappa", type=float, default=6.0); t2.add_argument("--tau", type=float, default=10.0)
+    t2.add_argument("--L", type=int, default=4095); t2.add_argument("--J", type=int, default=16)
+    t2.add_argument("--batch", type=int, default=128); t2.add_argument("--lr", type=float, default=3e-4)
+    t2.add_argument("--critic-lr", type=float, default=1e-3); t2.add_argument("--ent-coef", type=float, default=1e-3)
+    t2.add_argument("--seed", type=int, default=0); t2.add_argument("--max-episodes", type=int, default=100_000)
+    t2.add_argument("--val-every", type=int, default=10_240); t2.add_argument("--val-episodes", type=int, default=500)
+    t2.add_argument("--budget-minutes", type=float, default=330.0); t2.add_argument("--out", required=True)
+    e2 = sub.add_parser("eval2")
+    e2.add_argument("--set", default="S"); e2.add_argument("--method", default="random")
+    e2.add_argument("--kappa", type=float, default=0.0); e2.add_argument("--tau", type=float, default=4.0)
+    e2.add_argument("--weights", default=None); e2.add_argument("--split", default="test")
+    e2.add_argument("--start", type=int, default=0); e2.add_argument("--count", type=int, default=100)
+    e2.add_argument("--n-eval", type=int, default=32000); e2.add_argument("--n-dec", type=int, default=2000)
+    e2.add_argument("--M", type=int, default=64); e2.add_argument("--rung-phi", type=int, default=32)
+    e2.add_argument("--rung-psi", type=int, default=8); e2.add_argument("--mh-steps", type=int, default=3)
+    e2.add_argument("--budget-minutes", type=float, default=330.0); e2.add_argument("--out", required=True)
     a = ap.parse_args()
-    {"train": cmd_train, "eval": cmd_eval, "pilot": cmd_pilot}[a.cmd](a)
+    {"train": cmd_train, "eval": cmd_eval, "pilot": cmd_pilot, "train2": cmd_train2, "eval2": cmd_eval2}[a.cmd](a)
 
 
 if __name__ == "__main__":
