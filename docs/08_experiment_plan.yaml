@@ -4,7 +4,7 @@
 # Every number below is a design parameter, not a result. All results must come from code/ runs written to results/.
 # Changes vs docs/07_hypotheses.md are listed under `deviations_from_hypotheses_doc` with reasons.
 
-version: v1
+version: v1  # amended 2026-10-28 by docs/07c_amendment_v1_1.md (L=4095, ball information co-primary, PF proposal, costs, no GRU)
 generated: "2026-10-28"
 hypotheses_doc: docs/07_hypotheses.md
 theory_doc: docs/07b_theoretical_bounds.md

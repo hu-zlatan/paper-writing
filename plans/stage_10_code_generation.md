@@ -27,3 +27,10 @@ PyTorch cannot be installed (download.pytorch.org blocked by the sandbox egress 
 ---
 
 ## Output Summary  (filled in AFTER the stage runs)
+
+## Continuation plan (run 2, 2026-10-28 09:45 UTC; must push before 13:49 UTC — next scheduled run)
+- [ ] Learning sanity pilot: does PPO on sPCE increments improve validation success at all (S, L=1023, ~20 min)?
+- [ ] Decide F2: L=4095 "decision-calibrated" sPCE (cap ≈ −log P(success region) ≈ 8.1 nats) vs goal-oriented objective; write dated amendment docs/07c_amendment_v1_1.md (D1 resolved, D3 ball information, PF proposal, cost re-estimates).
+- [ ] stats.py (paired crossed bootstrap, Holm, seed-robustness) + tests.
+- [ ] Learned-policy evaluation adapter + main.py CLI (train / eval / pilot with TIME_ESTIMATE, results.json) + shard workflow for GitHub Actions.
+- [ ] PF convergence check (N vs 4N) as the first Actions job.
