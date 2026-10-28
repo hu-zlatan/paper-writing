@@ -1,0 +1,110 @@
+{
+ "n_star": {
+  "A": {
+   "n_star": 3,
+   "gstar_success_first200": {
+    "32000": 0.96,
+    "128000": 0.965
+   },
+   "n_episodes": {
+    "32000": 200,
+    "128000": 200
+   },
+   "same_rule_outcome_at_128k": true
+  },
+  "S": {
+   "n_star": 4,
+   "gstar_success_first200": {
+    "128000": 0.68,
+    "32000": 0.665
+   },
+   "n_episodes": {
+    "128000": 200,
+    "32000": 200
+   },
+   "same_rule_outcome_at_128k": true
+  }
+ },
+ "tau": {
+  "A_k2": {
+   "n_star": 3,
+   "n_episodes": 200,
+   "mean_travel_time": 0.33399332112406,
+   "sd_travel_time": 0.23914320951055854,
+   "tau": 3.3,
+   "other_n_star_tau": {
+    "3": 3.3,
+    "4": 4.6,
+    "5": 6.2
+   }
+  },
+  "A_k6": {
+   "n_star": 3,
+   "n_episodes": 200,
+   "mean_travel_time": 0.1704647602645506,
+   "sd_travel_time": 0.20540810622013178,
+   "tau": 3.2,
+   "other_n_star_tau": {
+    "3": 3.2,
+    "4": 4.6,
+    "5": 6.4
+   }
+  },
+  "A_k12": {
+   "n_star": 3,
+   "n_episodes": 200,
+   "mean_travel_time": 0.2917299660254045,
+   "sd_travel_time": 0.6779772751845399,
+   "tau": 3.3,
+   "other_n_star_tau": {
+    "3": 3.3,
+    "4": 5.0,
+    "5": 6.9
+   }
+  },
+  "A_k0": {
+   "n_star": 3,
+   "tau": 3.0
+  },
+  "S_k2": {
+   "n_star": 4,
+   "n_episodes": 200,
+   "mean_travel_time": 0.7962237969390813,
+   "sd_travel_time": 0.5401987513113372,
+   "tau": 4.8,
+   "other_n_star_tau": {
+    "3": 3.4,
+    "4": 4.8,
+    "5": 6.3
+   }
+  },
+  "S_k6": {
+   "n_star": 4,
+   "n_episodes": 200,
+   "mean_travel_time": 0.9503799533244448,
+   "sd_travel_time": 1.0975740154500082,
+   "tau": 5.0,
+   "other_n_star_tau": {
+    "3": 3.3,
+    "4": 5.0,
+    "5": 6.8
+   }
+  },
+  "S_k12": {
+   "n_star": 4,
+   "n_episodes": 200,
+   "mean_travel_time": 1.1413561964427046,
+   "sd_travel_time": 1.9337436634586969,
+   "tau": 5.1,
+   "other_n_star_tau": {
+    "3": 3.3,
+    "4": 5.1,
+    "5": 7.6
+   }
+  },
+  "S_k0": {
+   "n_star": 4,
+   "tau": 4.0
+  }
+ }
+}

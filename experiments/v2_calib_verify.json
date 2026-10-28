@@ -1,0 +1,101 @@
+{
+ "purpose": "G5 tau verification (docs/07_hypotheses_v2.md \u00a71.2): G* with the budget enforced at the calibrated tau_kappa on the same 200 pilot episodes; pass if mean executed probe count is within n* +- 0.3. Only n_probes is read, which depends on G*'s own decision PF, so the evaluation PF is set to 2,000 particles to save compute (its outputs from this run are not used).",
+ "jobs": [
+  {
+   "id": "calibv_A_k2_sh0",
+   "cmd": "python main.py eval2 --set A --method gstar --kappa 2 --tau 3.3 --split pilot --start 0 --count 50 --n-eval 2000 --budget-minutes 330 --out ../results/v2/calib_verify/A_k2_tau3.3_sh0"
+  },
+  {
+   "id": "calibv_A_k2_sh1",
+   "cmd": "python main.py eval2 --set A --method gstar --kappa 2 --tau 3.3 --split pilot --start 50 --count 50 --n-eval 2000 --budget-minutes 330 --out ../results/v2/calib_verify/A_k2_tau3.3_sh1"
+  },
+  {
+   "id": "calibv_A_k2_sh2",
+   "cmd": "python main.py eval2 --set A --method gstar --kappa 2 --tau 3.3 --split pilot --start 100 --count 50 --n-eval 2000 --budget-minutes 330 --out ../results/v2/calib_verify/A_k2_tau3.3_sh2"
+  },
+  {
+   "id": "calibv_A_k2_sh3",
+   "cmd": "python main.py eval2 --set A --method gstar --kappa 2 --tau 3.3 --split pilot --start 150 --count 50 --n-eval 2000 --budget-minutes 330 --out ../results/v2/calib_verify/A_k2_tau3.3_sh3"
+  },
+  {
+   "id": "calibv_A_k6_sh0",
+   "cmd": "python main.py eval2 --set A --method gstar --kappa 6 --tau 3.2 --split pilot --start 0 --count 50 --n-eval 2000 --budget-minutes 330 --out ../results/v2/calib_verify/A_k6_tau3.2_sh0"
+  },
+  {
+   "id": "calibv_A_k6_sh1",
+   "cmd": "python main.py eval2 --set A --method gstar --kappa 6 --tau 3.2 --split pilot --start 50 --count 50 --n-eval 2000 --budget-minutes 330 --out ../results/v2/calib_verify/A_k6_tau3.2_sh1"
+  },
+  {
+   "id": "calibv_A_k6_sh2",
+   "cmd": "python main.py eval2 --set A --method gstar --kappa 6 --tau 3.2 --split pilot --start 100 --count 50 --n-eval 2000 --budget-minutes 330 --out ../results/v2/calib_verify/A_k6_tau3.2_sh2"
+  },
+  {
+   "id": "calibv_A_k6_sh3",
+   "cmd": "python main.py eval2 --set A --method gstar --kappa 6 --tau 3.2 --split pilot --start 150 --count 50 --n-eval 2000 --budget-minutes 330 --out ../results/v2/calib_verify/A_k6_tau3.2_sh3"
+  },
+  {
+   "id": "calibv_A_k12_sh0",
+   "cmd": "python main.py eval2 --set A --method gstar --kappa 12 --tau 3.3 --split pilot --start 0 --count 50 --n-eval 2000 --budget-minutes 330 --out ../results/v2/calib_verify/A_k12_tau3.3_sh0"
+  },
+  {
+   "id": "calibv_A_k12_sh1",
+   "cmd": "python main.py eval2 --set A --method gstar --kappa 12 --tau 3.3 --split pilot --start 50 --count 50 --n-eval 2000 --budget-minutes 330 --out ../results/v2/calib_verify/A_k12_tau3.3_sh1"
+  },
+  {
+   "id": "calibv_A_k12_sh2",
+   "cmd": "python main.py eval2 --set A --method gstar --kappa 12 --tau 3.3 --split pilot --start 100 --count 50 --n-eval 2000 --budget-minutes 330 --out ../results/v2/calib_verify/A_k12_tau3.3_sh2"
+  },
+  {
+   "id": "calibv_A_k12_sh3",
+   "cmd": "python main.py eval2 --set A --method gstar --kappa 12 --tau 3.3 --split pilot --start 150 --count 50 --n-eval 2000 --budget-minutes 330 --out ../results/v2/calib_verify/A_k12_tau3.3_sh3"
+  },
+  {
+   "id": "calibv_S_k2_sh0",
+   "cmd": "python main.py eval2 --set S --method gstar --kappa 2 --tau 4.8 --split pilot --start 0 --count 50 --n-eval 2000 --budget-minutes 330 --out ../results/v2/calib_verify/S_k2_tau4.8_sh0"
+  },
+  {
+   "id": "calibv_S_k2_sh1",
+   "cmd": "python main.py eval2 --set S --method gstar --kappa 2 --tau 4.8 --split pilot --start 50 --count 50 --n-eval 2000 --budget-minutes 330 --out ../results/v2/calib_verify/S_k2_tau4.8_sh1"
+  },
+  {
+   "id": "calibv_S_k2_sh2",
+   "cmd": "python main.py eval2 --set S --method gstar --kappa 2 --tau 4.8 --split pilot --start 100 --count 50 --n-eval 2000 --budget-minutes 330 --out ../results/v2/calib_verify/S_k2_tau4.8_sh2"
+  },
+  {
+   "id": "calibv_S_k2_sh3",
+   "cmd": "python main.py eval2 --set S --method gstar --kappa 2 --tau 4.8 --split pilot --start 150 --count 50 --n-eval 2000 --budget-minutes 330 --out ../results/v2/calib_verify/S_k2_tau4.8_sh3"
+  },
+  {
+   "id": "calibv_S_k6_sh0",
+   "cmd": "python main.py eval2 --set S --method gstar --kappa 6 --tau 5.0 --split pilot --start 0 --count 50 --n-eval 2000 --budget-minutes 330 --out ../results/v2/calib_verify/S_k6_tau5.0_sh0"
+  },
+  {
+   "id": "calibv_S_k6_sh1",
+   "cmd": "python main.py eval2 --set S --method gstar --kappa 6 --tau 5.0 --split pilot --start 50 --count 50 --n-eval 2000 --budget-minutes 330 --out ../results/v2/calib_verify/S_k6_tau5.0_sh1"
+  },
+  {
+   "id": "calibv_S_k6_sh2",
+   "cmd": "python main.py eval2 --set S --method gstar --kappa 6 --tau 5.0 --split pilot --start 100 --count 50 --n-eval 2000 --budget-minutes 330 --out ../results/v2/calib_verify/S_k6_tau5.0_sh2"
+  },
+  {
+   "id": "calibv_S_k6_sh3",
+   "cmd": "python main.py eval2 --set S --method gstar --kappa 6 --tau 5.0 --split pilot --start 150 --count 50 --n-eval 2000 --budget-minutes 330 --out ../results/v2/calib_verify/S_k6_tau5.0_sh3"
+  },
+  {
+   "id": "calibv_S_k12_sh0",
+   "cmd": "python main.py eval2 --set S --method gstar --kappa 12 --tau 5.1 --split pilot --start 0 --count 50 --n-eval 2000 --budget-minutes 330 --out ../results/v2/calib_verify/S_k12_tau5.1_sh0"
+  },
+  {
+   "id": "calibv_S_k12_sh1",
+   "cmd": "python main.py eval2 --set S --method gstar --kappa 12 --tau 5.1 --split pilot --start 50 --count 50 --n-eval 2000 --budget-minutes 330 --out ../results/v2/calib_verify/S_k12_tau5.1_sh1"
+  },
+  {
+   "id": "calibv_S_k12_sh2",
+   "cmd": "python main.py eval2 --set S --method gstar --kappa 12 --tau 5.1 --split pilot --start 100 --count 50 --n-eval 2000 --budget-minutes 330 --out ../results/v2/calib_verify/S_k12_tau5.1_sh2"
+  },
+  {
+   "id": "calibv_S_k12_sh3",
+   "cmd": "python main.py eval2 --set S --method gstar --kappa 12 --tau 5.1 --split pilot --start 150 --count 50 --n-eval 2000 --budget-minutes 330 --out ../results/v2/calib_verify/S_k12_tau5.1_sh3"
+  }
+ ]
+}
