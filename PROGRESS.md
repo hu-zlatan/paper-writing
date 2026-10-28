@@ -9,7 +9,7 @@
 **Topic:** Amortized, non-myopic active tactile localization (TouchBED)
 **Initialised:** 2026-10-28T07:56:44Z
 **Current version:** v1
-**Latest stage:** Stage 8.5 THEORETICAL_BOUNDS — next: stage 9 EXPERIMENT_DESIGN [GATE]
+**Latest stage:** Stage 9 EXPERIMENT_DESIGN [GATE] — next: stage 10 CODE_GENERATION
 
 ---
 
@@ -179,4 +179,16 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
 - **Outputs produced:** docs/07b_theoretical_bounds.md
 - **Decision:** PROCEED → stage 9.
 - **Summary:** Selection cost: greedy PF-EIG O(N·C·(V+M)) per decision vs policy O(d²), independent of belief resolution; training O(E·T·(L+1)·V). No convergence guarantee claimed for PPO (informal only). Key finding: the sPCE bound is capped at log(L+1) = 5.55 nats for L = 255, below the ≈ 8.1 nats needed for the success criterion, so the experiment design must raise L (or use a justified alternative) and measure saturation in the pilot.
+- **Commit:** see git log
+
+---
+
+## Stage 9. EXPERIMENT_DESIGN  [GATE]     [v1]
+
+- **Started:** 2026-10-28T09:19:00Z
+- **Finished:** see commit time ("stage 9 EXPERIMENT_DESIGN")
+- **Inputs used:** docs/07_hypotheses.md, docs/07b_theoretical_bounds.md
+- **Outputs produced:** docs/08_experiment_plan.yaml; docs/实验构想.md v1.1 note
+- **Decision:** PROCEED → stage 10. **GATE auto-approved** (AUTOPILOT §1). Evidence: all required keys present and every effective component (non-myopic credit assignment, planning for no-contact outcomes, DeepSets encoder, contrastive count L, budget input) has an ablation row (script-checked); every baseline has an equal-effort tuning protocol (12-config search for learned methods, 18-config Pareto sweep for greedy PF-EIG, C sweep for coverage); metrics have formulas; compute is pilot-gated and sharded on GitHub Actions.
+- **Summary:** Deviation D1 — the contrastive count L is chosen by a pre-registered pilot rule from {255, 1023, 4095} because sPCE ≤ log(L+1) (stage 8.5); D2 — if L = 4095, core seeds 10 → 6 before any primary episode count is cut. Side note: the second literature workflow run (40657337558) failed and did not overwrite the stage-4 candidates, so all cite_keys remain those of run 40654783282.
 - **Commit:** see git log
