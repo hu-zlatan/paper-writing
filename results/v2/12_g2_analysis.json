@@ -8,7 +8,8 @@
   "mean_v_la": 3.0414041242097016,
   "mean_v_greedy": 3.0263775351751705,
   "frac_la_differs": 0.58,
-  "mean_steps_before": 1.35
+  "mean_steps_before": 1.35,
+  "n_no_budget_left": 0
  },
  "k2": {
   "n_beliefs": 100,
@@ -19,25 +20,39 @@
   "mean_v_la": 2.6445541473531247,
   "mean_v_greedy": 2.6234715803274598,
   "frac_la_differs": 0.41,
-  "mean_steps_before": 1.53
+  "mean_steps_before": 1.53,
+  "n_no_budget_left": 0
  },
  "k6": {
-  "n_beliefs": 87,
-  "G": 0.017524148118409136,
-  "lb95": 0.011339632886467239,
-  "ub95": 0.0252401326408219,
-  "abs_gap_nats": 0.04729696346248602,
-  "mean_v_la": 2.698959352711731,
-  "mean_v_greedy": 2.651662389249245,
-  "frac_la_differs": 0.5402298850574713,
-  "mean_steps_before": 1.4597701149425288
+  "n_beliefs": 100,
+  "G": 0.018491155886170473,
+  "lb95": 0.012135788294845627,
+  "ub95": 0.02660014841403645,
+  "abs_gap_nats": 0.04948856460534978,
+  "mean_v_la": 2.676336996453654,
+  "mean_v_greedy": 2.626848431848304,
+  "frac_la_differs": 0.53,
+  "mean_steps_before": 1.48,
+  "n_no_budget_left": 2
+ },
+ "k12": {
+  "n_beliefs": 100,
+  "G": 0.014623431866752483,
+  "lb95": 0.009771900411918407,
+  "ub95": 0.020806951464256353,
+  "abs_gap_nats": 0.03916506215687132,
+  "mean_v_la": 2.678240136360614,
+  "mean_v_greedy": 2.6390750742037428,
+  "frac_la_differs": 0.53,
+  "mean_steps_before": 1.55,
+  "n_no_budget_left": 3
  },
  "decision": {
-  "kappa_hi": 6.0,
+  "kappa_hi": 12.0,
   "magnitude_ok": false,
   "g0_ok": true,
   "ordering_ok": true,
-  "complete": false,
+  "complete": true,
   "passes": false
  }
 }
