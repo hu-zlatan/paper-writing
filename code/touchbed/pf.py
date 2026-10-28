@@ -161,8 +161,13 @@ class ParticleFilter:
             perp = -vx * ey + vy * ex
             lperp = -0.5 * (perp / self.q_sxy) ** 2 - math.log(math.sqrt(2 * math.pi) * self.q_sxy)
             # log[Phi(along/s) - Phi((along-len)/s)] computed stably
-            hi, lo = log_ndtr(along / self.q_sxy), log_ndtr((along - ln) / self.q_sxy)
-            lseg = hi + np.log1p(-np.exp(np.minimum(lo - hi, -1e-300)))
+            # log[Phi(a) - Phi(b)], a = along/s > b = (along-len)/s. When b > 0 both CDFs are ~1 and the difference
+            # underflows; use the mirrored tail Phi(-b) - Phi(-a) there (root-cause fix of a log1p(-1) warning).
+            a_, b_ = along / self.q_sxy, (along - ln) / self.q_sxy
+            upper = b_ > 0
+            hi = np.where(upper, log_ndtr(-b_), log_ndtr(a_))
+            lo = np.where(upper, log_ndtr(-a_), log_ndtr(b_))
+            lseg = hi + np.log1p(-np.exp(lo - hi))
             term = np.where(m, lth + lperp + lseg, -np.inf)
             out.append(logsumexp(term, axis=1) - np.log(self._perim[k]) - math.log(lib.K))
         lq_contact = logsumexp(np.stack(out, 0), axis=0) - math.log(len(C))

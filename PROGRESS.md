@@ -9,7 +9,7 @@
 **Topic:** Amortized, non-myopic active tactile localization (TouchBED)
 **Initialised:** 2026-10-28T07:56:44Z
 **Current version:** v1
-**Latest stage:** Stage 11 RESOURCE_PLANNING — next: stage 12 EXPERIMENT_RUN
+**Latest stage:** Stage 13 ITERATIVE_REFINE — next: stage 14 RESULT_ANALYSIS
 
 ---
 
@@ -220,3 +220,24 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
 - **Decision:** PROCEED → stage 12.
 - **Summary:** Mandatory pilot ran on the actual runners and printed TIME_ESTIMATE: training 0.8–1.6 CPU-h per run at L=4095, greedy evaluation ≈ 21–31 CPU-h for the full grid. Total ≈ 150–200 CPU-h, feasible with ~20 concurrent GitHub Actions jobs over several runs; seeds per amendment A1 / RESTRICTS scaling rules. rl_success uses a training PF with N=500 / 2 MH steps (0.08 s per episode) to fit the equal 1e5-episode budget.
 - **Commit:** see git log ("stage 11 RESOURCE_PLANNING")
+
+---
+
+## Stage 12. EXPERIMENT_RUN     [v1]   (partial: pre-run checks only)
+
+- **Started:** 2026-10-28T10:08:00Z
+- **Finished:** 2026-10-28T10:40:00Z (stopped after the manipulation checks, as pre-registered)
+- **Inputs used:** docs/11_schedule.json, experiments/pfcheck_v1.json, code/run_checks.py
+- **Outputs produced:** results/v1/pfcheck/ (Actions run 40668209040), results/v1/12_pfcheck_analysis.json, results/v1/checks/{confusability,myopia}_*.json, results/v1/12_manipulation_checks.md
+- **Summary:** Confusability passes (C(S)=0.971, C(A)=0.772). **Myopia-gap manipulation check fails**: G(S) = −0.033 (mean abs. gap −0.110 ± 0.035 nats), G(A) = −0.020; identity-only exploratory gap on S +0.005 ± 0.012 nats — no evidence that look-ahead beats greedy one-step EIG in this action space. Evaluation PF not converged at 8k (success up to 6 pp and ball information 0.1–0.4 nats below 32k). Greedy beats random strongly at T=3 (A 0.767 vs 0.123, S 0.420 vs 0.133). The hyperparameter-search run (40669782607) was cancelled before completion because the pre-registration requires passing manipulation checks before main runs; its partial logs in results/v1/logs/hp_* are not used.
+- **Commit:** see git log
+
+---
+
+## Stage 13. ITERATIVE_REFINE     [v1]
+
+- **Started:** 2026-10-28T10:40:00Z
+- **Finished:** 2026-10-28T10:46:00Z
+- **Outputs produced:** code/touchbed/pf.py (root-cause fix of the log1p underflow warning); plans/stage_13_iterative_refine_v1.md
+- **Decision:** PROCEED → stage 14.
+- **Summary:** One numerical warning repaired at its root cause (mirrored normal tail); no non-finite results. PF mixing and the failed myopia check are design questions forwarded to stages 14–15.
