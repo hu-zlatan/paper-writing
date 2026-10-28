@@ -1,0 +1,25 @@
+name: literature-supplement
+# Targeted OpenAlex lookups for docs/03_supplement_queries.yaml -> docs/03_supplement.jsonl (append-only, new cite_keys).
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  lookup:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install pyyaml
+      - run: python code/literature/supplement.py
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/03_supplement.jsonl
+          git commit -m "literature supplement: targeted OpenAlex lookups (Actions run ${{ github.run_id }})" || exit 0
+          for i in 1 2 3 4 5; do git pull --rebase origin main && git push origin HEAD:main && exit 0; sleep 7; done
+          exit 1

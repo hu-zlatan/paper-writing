@@ -1,0 +1,15 @@
+# Targeted supplementary lookups (stage 8 v2 open item: references for budgeted / cost-aware information gathering).
+# Each query is run against OpenAlex (title search); hits are appended to docs/03_supplement.jsonl with new cite_keys
+# (existing cite_keys in docs/03_candidates.jsonl are never changed). Inclusion still requires screening (stage 5 rules).
+generated: "2026-10-28"
+queries:
+  - {q: "Adaptive submodularity: theory and applications in active learning and stochastic optimization", year_min: 2010}
+  - {q: "Sampling-based robotic information gathering algorithms", year_min: 2013}
+  - {q: "Near-optimal Bayesian active learning with noisy observations", year_min: 2010}
+  - {q: "Efficient informative sensing using multiple robots", year_min: 2008}
+  - {q: "cost-aware Bayesian experimental design", year_min: 2018}
+  - {q: "budgeted adaptive submodular maximization", year_min: 2012}
+  - {q: "informative path planning budget", year_min: 2018}
+  - {q: "Monte Carlo tree search informative path planning", year_min: 2018}
+  - {q: "Sequential Monte Carlo samplers", year_min: 2006}
+  - {q: "A sequential particle filter method for static models", year_min: 2002}
