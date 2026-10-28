@@ -134,7 +134,8 @@ class Trainer:
     def _success_reward(self, rng, s0s, obs_all, T_ep):
         out = np.zeros(len(T_ep))
         for b in range(len(T_ep)):
-            pf = ParticleFilter(self.lib, self.om, self.prior, 1000, rng)
+            pf = ParticleFilter(self.lib, self.om, self.prior, self.cfg.extra.get("train_pf_n", 1000), rng,
+                                mh_steps=self.cfg.extra.get("train_pf_mh", 3))
             for t in range(T_ep[b]):
                 phi, psi, c, px, py, n = (v[b] for v in obs_all[t])
                 pf.update(phi, psi, (c, px, py, n))

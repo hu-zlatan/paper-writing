@@ -1,5 +1,5 @@
 {
- "purpose": "Equal-effort hyperparameter search (docs/08_experiment_plan.yaml baselines.tuning_protocol): 12 shared random configs x {spce_total, spce_myopic, rl_success} on S, 1e5 episodes, pilot seed 100, L=4095; selection on validation success at T=5. RL-PFIG (secondary) not implemented in v1.",
+ "purpose": "Equal-effort hyperparameter search (docs/08_experiment_plan.yaml baselines.tuning_protocol): 12 shared random configs x {spce_total, spce_myopic, rl_success} on S, 1e5 episodes, pilot seed 100, L=4095; selection on validation success at T=5. RL-PFIG (secondary) not implemented in v1. rl_success uses a training PF with N=500, 2 MH steps (0.08 s/episode on the sandbox vs 0.18 s at N=1000) and L=63 (its reward does not use sPCE; L only affects the logged g_T).",
  "configs": [
   {
    "lr": 0.00010376045336106945,
@@ -173,51 +173,51 @@
   },
   {
    "id": "hp_S_rl_success_c00",
-   "cmd": "python main.py train --set S --method rl_success --seed 100 --L 4095 --max-episodes 100000 --batch 64 --lr 0.000104 --ent-coef 0.000218 --critic-lr 0.000315 --val-every 10240 --val-episodes 200 --budget-minutes 330 --out ../results/v1/hpsearch/S_rl_success_c00"
+   "cmd": "python main.py train --set S --method rl_success --seed 100 --L 63 --max-episodes 100000 --batch 64 --lr 0.000104 --ent-coef 0.000218 --critic-lr 0.000315 --val-every 10240 --val-episodes 200 --budget-minutes 330 --out ../results/v1/hpsearch/S_rl_success_c00"
   },
   {
    "id": "hp_S_rl_success_c01",
-   "cmd": "python main.py train --set S --method rl_success --seed 100 --L 4095 --max-episodes 100000 --batch 128 --lr 0.000363 --ent-coef 0.000133 --critic-lr 0.00143 --val-every 10240 --val-episodes 200 --budget-minutes 330 --out ../results/v1/hpsearch/S_rl_success_c01"
+   "cmd": "python main.py train --set S --method rl_success --seed 100 --L 63 --max-episodes 100000 --batch 128 --lr 0.000363 --ent-coef 0.000133 --critic-lr 0.00143 --val-every 10240 --val-episodes 200 --budget-minutes 330 --out ../results/v1/hpsearch/S_rl_success_c01"
   },
   {
    "id": "hp_S_rl_success_c02",
-   "cmd": "python main.py train --set S --method rl_success --seed 100 --L 4095 --max-episodes 100000 --batch 128 --lr 0.000427 --ent-coef 0.000232 --critic-lr 0.00109 --val-every 10240 --val-episodes 200 --budget-minutes 330 --out ../results/v1/hpsearch/S_rl_success_c02"
+   "cmd": "python main.py train --set S --method rl_success --seed 100 --L 63 --max-episodes 100000 --batch 128 --lr 0.000427 --ent-coef 0.000232 --critic-lr 0.00109 --val-every 10240 --val-episodes 200 --budget-minutes 330 --out ../results/v1/hpsearch/S_rl_success_c02"
   },
   {
    "id": "hp_S_rl_success_c03",
-   "cmd": "python main.py train --set S --method rl_success --seed 100 --L 4095 --max-episodes 100000 --batch 64 --lr 0.000653 --ent-coef 0.00137 --critic-lr 0.000608 --val-every 10240 --val-episodes 200 --budget-minutes 330 --out ../results/v1/hpsearch/S_rl_success_c03"
+   "cmd": "python main.py train --set S --method rl_success --seed 100 --L 63 --max-episodes 100000 --batch 64 --lr 0.000653 --ent-coef 0.00137 --critic-lr 0.000608 --val-every 10240 --val-episodes 200 --budget-minutes 330 --out ../results/v1/hpsearch/S_rl_success_c03"
   },
   {
    "id": "hp_S_rl_success_c04",
-   "cmd": "python main.py train --set S --method rl_success --seed 100 --L 4095 --max-episodes 100000 --batch 64 --lr 0.000482 --ent-coef 0.000237 --critic-lr 0.00295 --val-every 10240 --val-episodes 200 --budget-minutes 330 --out ../results/v1/hpsearch/S_rl_success_c04"
+   "cmd": "python main.py train --set S --method rl_success --seed 100 --L 63 --max-episodes 100000 --batch 64 --lr 0.000482 --ent-coef 0.000237 --critic-lr 0.00295 --val-every 10240 --val-episodes 200 --budget-minutes 330 --out ../results/v1/hpsearch/S_rl_success_c04"
   },
   {
    "id": "hp_S_rl_success_c05",
-   "cmd": "python main.py train --set S --method rl_success --seed 100 --L 4095 --max-episodes 100000 --batch 256 --lr 0.000182 --ent-coef 0.0059 --critic-lr 0.00172 --val-every 10240 --val-episodes 200 --budget-minutes 330 --out ../results/v1/hpsearch/S_rl_success_c05"
+   "cmd": "python main.py train --set S --method rl_success --seed 100 --L 63 --max-episodes 100000 --batch 256 --lr 0.000182 --ent-coef 0.0059 --critic-lr 0.00172 --val-every 10240 --val-episodes 200 --budget-minutes 330 --out ../results/v1/hpsearch/S_rl_success_c05"
   },
   {
    "id": "hp_S_rl_success_c06",
-   "cmd": "python main.py train --set S --method rl_success --seed 100 --L 4095 --max-episodes 100000 --batch 64 --lr 0.000245 --ent-coef 0.000392 --critic-lr 0.00198 --val-every 10240 --val-episodes 200 --budget-minutes 330 --out ../results/v1/hpsearch/S_rl_success_c06"
+   "cmd": "python main.py train --set S --method rl_success --seed 100 --L 63 --max-episodes 100000 --batch 64 --lr 0.000245 --ent-coef 0.000392 --critic-lr 0.00198 --val-every 10240 --val-episodes 200 --budget-minutes 330 --out ../results/v1/hpsearch/S_rl_success_c06"
   },
   {
    "id": "hp_S_rl_success_c07",
-   "cmd": "python main.py train --set S --method rl_success --seed 100 --L 4095 --max-episodes 100000 --batch 128 --lr 0.000116 --ent-coef 0.000117 --critic-lr 0.00123 --val-every 10240 --val-episodes 200 --budget-minutes 330 --out ../results/v1/hpsearch/S_rl_success_c07"
+   "cmd": "python main.py train --set S --method rl_success --seed 100 --L 63 --max-episodes 100000 --batch 128 --lr 0.000116 --ent-coef 0.000117 --critic-lr 0.00123 --val-every 10240 --val-episodes 200 --budget-minutes 330 --out ../results/v1/hpsearch/S_rl_success_c07"
   },
   {
    "id": "hp_S_rl_success_c08",
-   "cmd": "python main.py train --set S --method rl_success --seed 100 --L 4095 --max-episodes 100000 --batch 128 --lr 0.000118 --ent-coef 0.0096 --critic-lr 0.000503 --val-every 10240 --val-episodes 200 --budget-minutes 330 --out ../results/v1/hpsearch/S_rl_success_c08"
+   "cmd": "python main.py train --set S --method rl_success --seed 100 --L 63 --max-episodes 100000 --batch 128 --lr 0.000118 --ent-coef 0.0096 --critic-lr 0.000503 --val-every 10240 --val-episodes 200 --budget-minutes 330 --out ../results/v1/hpsearch/S_rl_success_c08"
   },
   {
    "id": "hp_S_rl_success_c09",
-   "cmd": "python main.py train --set S --method rl_success --seed 100 --L 4095 --max-episodes 100000 --batch 64 --lr 0.000454 --ent-coef 0.00683 --critic-lr 0.00096 --val-every 10240 --val-episodes 200 --budget-minutes 330 --out ../results/v1/hpsearch/S_rl_success_c09"
+   "cmd": "python main.py train --set S --method rl_success --seed 100 --L 63 --max-episodes 100000 --batch 64 --lr 0.000454 --ent-coef 0.00683 --critic-lr 0.00096 --val-every 10240 --val-episodes 200 --budget-minutes 330 --out ../results/v1/hpsearch/S_rl_success_c09"
   },
   {
    "id": "hp_S_rl_success_c10",
-   "cmd": "python main.py train --set S --method rl_success --seed 100 --L 4095 --max-episodes 100000 --batch 128 --lr 0.000737 --ent-coef 0.000697 --critic-lr 0.0014 --val-every 10240 --val-episodes 200 --budget-minutes 330 --out ../results/v1/hpsearch/S_rl_success_c10"
+   "cmd": "python main.py train --set S --method rl_success --seed 100 --L 63 --max-episodes 100000 --batch 128 --lr 0.000737 --ent-coef 0.000697 --critic-lr 0.0014 --val-every 10240 --val-episodes 200 --budget-minutes 330 --out ../results/v1/hpsearch/S_rl_success_c10"
   },
   {
    "id": "hp_S_rl_success_c11",
-   "cmd": "python main.py train --set S --method rl_success --seed 100 --L 4095 --max-episodes 100000 --batch 64 --lr 0.000394 --ent-coef 0.000349 --critic-lr 0.00145 --val-every 10240 --val-episodes 200 --budget-minutes 330 --out ../results/v1/hpsearch/S_rl_success_c11"
+   "cmd": "python main.py train --set S --method rl_success --seed 100 --L 63 --max-episodes 100000 --batch 64 --lr 0.000394 --ent-coef 0.000349 --critic-lr 0.00145 --val-every 10240 --val-episodes 200 --budget-minutes 330 --out ../results/v1/hpsearch/S_rl_success_c11"
   }
  ]
 }
