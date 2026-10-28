@@ -1,0 +1,32 @@
+# data files (keep small fixtures only)
+data/*
+!data/.gitkeep
+!data/README.md
+!data/fixtures/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+*.egg-info/
+
+# results — keep summaries, not raw blobs
+results/**/raw/
+results/**/checkpoints/
+*.npz
+*.npy
+*.pt
+*.pth
+*.ckpt
+
+# paper build artefacts
+paper/mypaper/*.aux
+paper/mypaper/*.log
+paper/mypaper/*.out
+paper/mypaper/*.bbl
+paper/mypaper/*.blg
+paper/mypaper/*.synctex.gz
+
+# secrets
+.env
+*.key

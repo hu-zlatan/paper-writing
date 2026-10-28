@@ -1,0 +1,116 @@
+# RESTRICTS.yaml — pipeline-wide constraint configuration
+# Loaded by every stage. Edit this file to tighten / loosen the pipeline's red lines.
+# Anything marked CRITICAL must not be relaxed below the floor — relaxing CRITICAL constraints
+# is the single most reliable way to ship a paper that gets desk-rejected.
+
+project:
+  name: "paper-writing"
+  target_venue: "TBD (chosen in stage 1)"            # NeurIPS | ICML | ICLR | CVPR | ACL | EMNLP | ...
+  topic: "<one-sentence research topic>"
+  initialised: "2026-10-28T07:56:44Z"
+
+# ─── Compute & resource red lines ─────────────────────────────────────────────
+compute:
+  # CRITICAL — every experiment script MUST start with a 5-minute pilot run that
+  # extrapolates a TIME_ESTIMATE before scaling up. Do not relax this.
+  pilot_required: true
+  pilot_max_minutes: 5
+
+  # Wall-clock budgets. The time_guard utility (scripts/time_guard.py) will halt
+  # any single run that exceeds budget_per_run_minutes and save a partial result.
+  budget_per_run_minutes: 30
+  budget_total_hours: 12
+
+  # If a single full run would take more than this, the pipeline must downscale
+  # automatically (smaller dataset, shorter horizon, fewer seeds) rather than
+  # silently exceed the budget.
+  downscale_threshold_minutes: 45
+
+# ─── Literature & citation red lines ──────────────────────────────────────────
+literature:
+  year_cutoff: 2018             # only cite work from this year forward unless seminal
+  min_papers_after_screen: 20   # stage 5 gate fails below this floor
+  min_seed_papers: 5            # stage 4 must surface at least this many seed papers
+  preferred_apis:
+    - openalex
+    - semanticscholar
+    - arxiv
+  # CRITICAL — every cited paper must have a verifiable record (DOI or arXiv ID
+  # or OpenAlex/S2 ID). Hallucinated citations are caught at stage 23.
+  hallucination_check: strict
+
+# ─── Authenticity red lines ───────────────────────────────────────────────────
+authenticity:
+  # CRITICAL — none of these may be relaxed. Violations are paper-killers.
+  forbid_fabricated_results: true        # no made-up numbers
+  forbid_unsupported_claims: true        # every claim cites evidence in /results
+  require_methodology_evidence_match: true  # paper claims must match what code did
+  trial_count_must_match_paper: true     # if paper says N trials, code must run N
+
+# ─── Top-conference writing red lines ─────────────────────────────────────────
+writing:
+  # Quality threshold for the stage 20 gate (1–10 scale).
+  quality_threshold: 7.5
+  # Minimum word counts per section. Floors, not targets.
+  section_floors:
+    abstract: 150
+    introduction: 700
+    related_work: 500
+    method: 800
+    experiments: 600
+    results: 500
+  total_words_floor: 4000
+  pages_target: 9              # NeurIPS/ICML main paper length
+
+# ─── Evidence-relevance audit (stage 23) ──────────────────────────────────────
+citation_audit:
+  green_flag_required: true
+  zero_red_flags_to_pass: true   # any 🔴 red flag forces loop → stage 19
+
+# ─── NumPy 2.x compatibility ──────────────────────────────────────────────────
+numpy:
+  version_min: "2.0"
+  # scripts/check_numpy2_compat.py runs at every code-generation and refinement step.
+  enforce_compat_check: true
+  forbidden_aliases:
+    - np.bool
+    - np.int
+    - np.float
+    - np.object
+    - np.str
+    - np.long
+    - np.complex
+  removed_apis_must_replace:
+    np.trapz: np.trapezoid
+    np.in1d: np.isin
+    np.alltrue: np.all
+    np.sometrue: np.any
+    np.product: np.prod
+    np.cumproduct: np.cumprod
+
+# ─── Loop / decision behaviour ────────────────────────────────────────────────
+loops:
+  max_refine_cycles: 3        # stage 13 ↔ 14 ↔ 15
+  max_revision_cycles: 3      # stage 19 ↔ 20
+  max_external_review_cycles: 3  # stage 24 ↔ 25
+  # When any of the above hits its cap without converging, escalate to the user
+  # rather than spinning silently.
+  escalate_on_cap_hit: true
+
+# ─── Model tier defaults ──────────────────────────────────────────────────────
+# Scheduled runs pick subagent models through the Agent tool's `model` option.
+models:
+  default: "session model"
+  weak_ok: "haiku"                     # for high-volume, low-stakes subagent calls
+  strongest_required: "opus"           # for stages 8, 14, 17, 18, 19, 24, 25
+
+# ─── Tool credentials ─────────────────────────────────────────────────────────
+# Scheduled cloud runs have none of these environment variables: use WebSearch /
+# WebFetch and GitHub Actions instead (AUTOPILOT.md §3). If the owner adds keys
+# later, they go into GitHub Actions secrets under these names, never into the repo.
+tools:
+  anthropic_api_key_env: "ANTHROPIC_API_KEY"
+  openai_api_key_env: "OPENAI_API_KEY"
+  tavily_api_key_env: "TAVILY_API_KEY"
+  semanticscholar_api_key_env: "S2_API_KEY"
+  kaggle_credentials_env: "KAGGLE_CONFIG_DIR"
