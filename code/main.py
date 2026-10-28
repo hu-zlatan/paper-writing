@@ -270,6 +270,31 @@ def cmd_trainnotch(a):
     print("TRAINNOTCH_DONE", json.dumps(f, default=float))
 
 
+def cmd_latency(a):
+    """H1b latency protocol (docs/07_hypotheses_v2.md §2.3): policy vs ladder rungs, interleaved, same decisions."""
+    from touchbed.latency import RUNGS, lik_evals_rung, macs_policy, run_latency
+    if a.weights:
+        pol = load_v2(a.weights)
+    else:
+        from touchbed.train_v2 import TrainConfigV2, TrainerV2
+        pol = TrainerV2(TrainConfigV2(setname=a.set, kappa=a.kappa, tau=a.tau))   # untrained (protocol test only)
+    try:
+        os.sched_setaffinity(0, {sorted(os.sched_getaffinity(0))[0]})
+    except (AttributeError, OSError):
+        pass
+    os.makedirs(os.path.dirname(os.path.abspath(a.out)), exist_ok=True)
+    recs = run_latency(a.set, a.kappa, a.tau, pol, a.start, a.episodes, warmup=a.warmup, max_decisions=a.warmup + a.decisions)
+    with open(a.out + ".jsonl", "w") as f:
+        f.write(json.dumps({"meta": True, "env": env_info(), "weights": a.weights, "set": a.set, "kappa": a.kappa,
+                            "tau": a.tau, "rungs": {r: list(map(str, v)) for r, v in RUNGS.items()},
+                            "lik_evals": {r: lik_evals_rung(N, 256 if g is None else g[0] * g[1], M)
+                                          for r, (N, g, M) in RUNGS.items()},
+                            "policy_macs_by_touch": [macs_policy(pol.cfg.hidden, t + 1) for t in range(8)]}) + "\n")
+        for r in recs:
+            f.write(json.dumps(r) + "\n")
+    print(f"LATENCY_DONE decisions={len(recs)}")
+
+
 def cmd_calib(a):
     """G5 tau calibration (docs/07_hypotheses_v2.md §1.2): run G* WITHOUT a budget for n* probes on pilot episodes and
     record the travel time it spends; tau_kappa = n* + mean travel time (rounded to 0.1), then verified with the budget."""
@@ -366,8 +391,14 @@ def main():
     tn.add_argument("--lr", type=float, default=3e-4); tn.add_argument("--critic-lr", type=float, default=1e-3)
     tn.add_argument("--ent-coef", type=float, default=1e-3); tn.add_argument("--batch", type=int, default=128)
     tn.add_argument("--max-episodes", type=int, default=100_000); tn.add_argument("--out", required=True)
+    la = sub.add_parser("latency")
+    la.add_argument("--set", default="S"); la.add_argument("--kappa", type=float, default=6.0)
+    la.add_argument("--tau", type=float, default=5.0); la.add_argument("--weights", default=None)
+    la.add_argument("--start", type=int, default=0); la.add_argument("--episodes", type=int, default=200)
+    la.add_argument("--warmup", type=int, default=20); la.add_argument("--decisions", type=int, default=500)
+    la.add_argument("--out", required=True)
     a = ap.parse_args()
-    {"trainnotch": cmd_trainnotch, "g2": cmd_g2, "g1": cmd_g1, "calib": cmd_calib, "train": cmd_train, "eval": cmd_eval, "pilot": cmd_pilot, "train2": cmd_train2, "eval2": cmd_eval2}[a.cmd](a)
+    {"latency": cmd_latency, "trainnotch": cmd_trainnotch, "g2": cmd_g2, "g1": cmd_g1, "calib": cmd_calib, "train": cmd_train, "eval": cmd_eval, "pilot": cmd_pilot, "train2": cmd_train2, "eval2": cmd_eval2}[a.cmd](a)
 
 
 if __name__ == "__main__":
