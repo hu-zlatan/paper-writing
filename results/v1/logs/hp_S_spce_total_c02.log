@@ -1,0 +1,3 @@
+/home/runner/work/paper-writing/paper-writing/code/touchbed/pf.py:165: RuntimeWarning: divide by zero encountered in log1p
+  lseg = hi + np.log1p(-np.exp(np.minimum(lo - hi, -1e-300)))
+{"episodes": 10240, "spce_T_mean": 7.521914869534937, "sat_frac": 0.9393939393939394, "log_std": [-0.4857880359841948, -0.6357601050644327], "elapsed_s": 388.476135969162, "clipfrac": 0.06634499396863691, "v_loss": 1.3258135298043574, "val_success": 0.3, "val_ig": 11.718729088404974}
