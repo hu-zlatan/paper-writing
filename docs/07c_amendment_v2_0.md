@@ -100,3 +100,10 @@ measured cost enters §6 through the downscale order. Thresholds unchanged.
   ties within 0.02 nats go to the lower configuration index. The sampled-policy value is reported, not used.
 - The weights of these four runs were not kept (a .gitignore rule excluded *.npz; fixed afterwards); G3 (ii) retrains
   the selected configuration with 3 pilot seeds, whose weights are kept.
+
+## Status note (2026-10-28, run 3) — G3 (iii) notch learnability
+With the G3 (i)-selected configuration (hp1: lr 3.63e-4, entropy 1.33e-4, batch 128, critic lr 1.43e-3), 3 seeds:
+exact value of the argmax policy 0.177 / 0.170 / 0.169 nats = 28 % of the exact optimum 0.615 (rule ≥ 80 %); all
+three choose a vertical first probe (greedy-like; exact greedy 0.174). The pre-registered remedy (E_train doubled to
+2·10⁵) gives the same values. **G3 (iii) fails.** Per §4 this sends the gate to stage 15 with learnability of set-up
+moves as a finding; the routing is decided at the gate decision together with G2, G3 (ii)/(iv), G4 (B8) and G5.

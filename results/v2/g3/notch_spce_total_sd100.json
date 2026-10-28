@@ -1,0 +1,103 @@
+{
+ "method": "spce_total",
+ "episodes": 100096,
+ "history": [
+  {
+   "episodes": 10240,
+   "g_T_mean": 0.0838068419695459,
+   "entropy": 2.3260721566632974,
+   "elapsed_s": 2.7022485733032227,
+   "a1": 27,
+   "a1_is_horizontal": false,
+   "p_horizontal_first": 0.0005028002131945333,
+   "v_pi": 0.05484804085628142
+  },
+  {
+   "episodes": 20480,
+   "g_T_mean": 0.12142148250536264,
+   "entropy": 1.7053365116879213,
+   "elapsed_s": 5.185868740081787,
+   "a1": 33,
+   "a1_is_horizontal": false,
+   "p_horizontal_first": 0.0005185331341715076,
+   "v_pi": 0.11280596517941376
+  },
+  {
+   "episodes": 30720,
+   "g_T_mean": 0.11228400632970142,
+   "entropy": 1.358034817386831,
+   "elapsed_s": 7.677234411239624,
+   "a1": 17,
+   "a1_is_horizontal": false,
+   "p_horizontal_first": 0.00043198342318508776,
+   "v_pi": 0.11239645837965562
+  },
+  {
+   "episodes": 40960,
+   "g_T_mean": 0.16147292449443543,
+   "entropy": 0.8688323430891385,
+   "elapsed_s": 10.14255428314209,
+   "a1": 20,
+   "a1_is_horizontal": false,
+   "p_horizontal_first": 6.020906386180866e-05,
+   "v_pi": 0.1701812945437803
+  },
+  {
+   "episodes": 51200,
+   "g_T_mean": 0.1703222193124278,
+   "entropy": 0.31541211730815644,
+   "elapsed_s": 12.798905611038208,
+   "a1": 20,
+   "a1_is_horizontal": false,
+   "p_horizontal_first": 1.1309453711617079e-05,
+   "v_pi": 0.17703990730040287
+  },
+  {
+   "episodes": 61440,
+   "g_T_mean": 0.1630141008528519,
+   "entropy": 0.14052304922806783,
+   "elapsed_s": 15.344090461730957,
+   "a1": 20,
+   "a1_is_horizontal": false,
+   "p_horizontal_first": 4.535297739650653e-06,
+   "v_pi": 0.17703990730040287
+  },
+  {
+   "episodes": 71680,
+   "g_T_mean": 0.11929486212363904,
+   "entropy": 0.07561568300458116,
+   "elapsed_s": 17.79710602760315,
+   "a1": 20,
+   "a1_is_horizontal": false,
+   "p_horizontal_first": 5.050696813352818e-06,
+   "v_pi": 0.17703990730040287
+  },
+  {
+   "episodes": 81920,
+   "g_T_mean": 0.20808180297954687,
+   "entropy": 0.05022916760875628,
+   "elapsed_s": 20.10426688194275,
+   "a1": 20,
+   "a1_is_horizontal": false,
+   "p_horizontal_first": 2.6605339782227154e-06,
+   "v_pi": 0.17703990730040287
+  },
+  {
+   "episodes": 92160,
+   "g_T_mean": 0.2453402450943275,
+   "entropy": 0.028843203157368175,
+   "elapsed_s": 22.589203119277954,
+   "a1": 20,
+   "a1_is_horizontal": false,
+   "p_horizontal_first": 1.436646702497169e-06,
+   "v_pi": 0.17703990730040287
+  }
+ ],
+ "final": {
+  "a1": 20,
+  "a1_is_horizontal": false,
+  "p_horizontal_first": 1.5135351619635954e-06,
+  "v_pi": 0.17703990730040287
+ },
+ "wall_s": 24.614065408706665
+}
