@@ -1,0 +1,85 @@
+{
+ "purpose": "Gate G2 pre-registered escalation kappa_hi = 12 (docs/07_hypotheses_v2.md \u00a71.2), launched before the kappa = 6 cell finished because its first 30 beliefs gave G(6) = 0.029 with the ordering holding; used only if the escalation conditions hold on the complete kappa = 6 result.",
+ "jobs": [
+  {
+   "id": "g2_S_k12_000",
+   "cmd": "python main.py g2 --set S --kappa 12 --tau 5.1 --n-star 4 --start 0 --count 5 --out ../results/v2/g2/S_k12_000"
+  },
+  {
+   "id": "g2_S_k12_005",
+   "cmd": "python main.py g2 --set S --kappa 12 --tau 5.1 --n-star 4 --start 5 --count 5 --out ../results/v2/g2/S_k12_005"
+  },
+  {
+   "id": "g2_S_k12_010",
+   "cmd": "python main.py g2 --set S --kappa 12 --tau 5.1 --n-star 4 --start 10 --count 5 --out ../results/v2/g2/S_k12_010"
+  },
+  {
+   "id": "g2_S_k12_015",
+   "cmd": "python main.py g2 --set S --kappa 12 --tau 5.1 --n-star 4 --start 15 --count 5 --out ../results/v2/g2/S_k12_015"
+  },
+  {
+   "id": "g2_S_k12_020",
+   "cmd": "python main.py g2 --set S --kappa 12 --tau 5.1 --n-star 4 --start 20 --count 5 --out ../results/v2/g2/S_k12_020"
+  },
+  {
+   "id": "g2_S_k12_025",
+   "cmd": "python main.py g2 --set S --kappa 12 --tau 5.1 --n-star 4 --start 25 --count 5 --out ../results/v2/g2/S_k12_025"
+  },
+  {
+   "id": "g2_S_k12_030",
+   "cmd": "python main.py g2 --set S --kappa 12 --tau 5.1 --n-star 4 --start 30 --count 5 --out ../results/v2/g2/S_k12_030"
+  },
+  {
+   "id": "g2_S_k12_035",
+   "cmd": "python main.py g2 --set S --kappa 12 --tau 5.1 --n-star 4 --start 35 --count 5 --out ../results/v2/g2/S_k12_035"
+  },
+  {
+   "id": "g2_S_k12_040",
+   "cmd": "python main.py g2 --set S --kappa 12 --tau 5.1 --n-star 4 --start 40 --count 5 --out ../results/v2/g2/S_k12_040"
+  },
+  {
+   "id": "g2_S_k12_045",
+   "cmd": "python main.py g2 --set S --kappa 12 --tau 5.1 --n-star 4 --start 45 --count 5 --out ../results/v2/g2/S_k12_045"
+  },
+  {
+   "id": "g2_S_k12_050",
+   "cmd": "python main.py g2 --set S --kappa 12 --tau 5.1 --n-star 4 --start 50 --count 5 --out ../results/v2/g2/S_k12_050"
+  },
+  {
+   "id": "g2_S_k12_055",
+   "cmd": "python main.py g2 --set S --kappa 12 --tau 5.1 --n-star 4 --start 55 --count 5 --out ../results/v2/g2/S_k12_055"
+  },
+  {
+   "id": "g2_S_k12_060",
+   "cmd": "python main.py g2 --set S --kappa 12 --tau 5.1 --n-star 4 --start 60 --count 5 --out ../results/v2/g2/S_k12_060"
+  },
+  {
+   "id": "g2_S_k12_065",
+   "cmd": "python main.py g2 --set S --kappa 12 --tau 5.1 --n-star 4 --start 65 --count 5 --out ../results/v2/g2/S_k12_065"
+  },
+  {
+   "id": "g2_S_k12_070",
+   "cmd": "python main.py g2 --set S --kappa 12 --tau 5.1 --n-star 4 --start 70 --count 5 --out ../results/v2/g2/S_k12_070"
+  },
+  {
+   "id": "g2_S_k12_075",
+   "cmd": "python main.py g2 --set S --kappa 12 --tau 5.1 --n-star 4 --start 75 --count 5 --out ../results/v2/g2/S_k12_075"
+  },
+  {
+   "id": "g2_S_k12_080",
+   "cmd": "python main.py g2 --set S --kappa 12 --tau 5.1 --n-star 4 --start 80 --count 5 --out ../results/v2/g2/S_k12_080"
+  },
+  {
+   "id": "g2_S_k12_085",
+   "cmd": "python main.py g2 --set S --kappa 12 --tau 5.1 --n-star 4 --start 85 --count 5 --out ../results/v2/g2/S_k12_085"
+  },
+  {
+   "id": "g2_S_k12_090",
+   "cmd": "python main.py g2 --set S --kappa 12 --tau 5.1 --n-star 4 --start 90 --count 5 --out ../results/v2/g2/S_k12_090"
+  },
+  {
+   "id": "g2_S_k12_095",
+   "cmd": "python main.py g2 --set S --kappa 12 --tau 5.1 --n-star 4 --start 95 --count 5 --out ../results/v2/g2/S_k12_095"
+  }
+ ]
+}
