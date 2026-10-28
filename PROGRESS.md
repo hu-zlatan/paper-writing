@@ -9,7 +9,7 @@
 **Topic:** Amortized, non-myopic active tactile localization (TouchBED)
 **Initialised:** 2026-10-28T07:56:44Z
 **Current version:** v1
-**Latest stage:** Stage 10 CODE_GENERATION (in progress) — resume from plans/stage_10_code_generation.md
+**Latest stage:** Stage 10 CODE_GENERATION — next: stage 11 RESOURCE_PLANNING
 
 ---
 
@@ -205,3 +205,6 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
 - **BLOCKERS found by dev pilots (docs/10_dev_findings_v1.md):** F1 (critical) the evaluation particle filter is far from converged — same 20 episodes give success 0.50 at N=4k vs 0.90 at N=40k, IG 25.6 vs 12.6 nats; needs contact-conditioned proposals / tempering and a grid reference before any comparison. F2 total-state sPCE saturates (L=255 cap 5.55 nats reached by an untrained policy in 75–97 % of episodes; L=4095 still 29–97 %) and total-state information is misaligned with the success criterion → re-open the stage-9 design: decision-relevant (identity/symmetry-mode) information objective or L=4095 at small budgets. F3 measured costs.
 - **F1 progress (same run):** contact-conditioned MH proposals added to the PF (closed-form density, unit-tested); on the same 20 episodes success/identity are stable from N=2k (0.80/0.85) to 32k (0.75/0.85) vs 0.50/0.55 for the old PF at 4k. Evidence-based IG still drifts with N (15.9 → 11.8) → replaced as metric candidate by "ball information" (log posterior/prior mass of the success region; 7.70 at 8k vs 7.73 at 32k). See docs/10_dev_findings_v1.md.
 - **Next (resume here):** formal N vs 4N convergence check (≥300 episodes) for the new PF, decide F2 (objective) and the metric change, decide F2 and amend docs/07_hypotheses.md / docs/08_experiment_plan.yaml with a dated v1.1 note, then finish stage 10 (learned-policy evaluation adapter, stats.py, main.py with TIME_ESTIMATE + results.json, MuJoCo eval, numpy2 check, README/requirements).
+- **Finished:** 2026-10-28 (run 2, see commit "stage 10 CODE_GENERATION: complete")
+- **Run-2 additions:** learning sanity pilot (val success 0.14 → 0.48 within 3·10⁴ episodes at L=1023, results/v1/dev/pilot3_learning.md); dated amendment docs/07c_amendment_v1_1.md (A1 L=4095 per the pre-registered D1 rule with seeds 6 and E_train cap 10⁵; A2 ball information co-primary instead of IG_T; A3 contact-conditioned PF; A4 cost re-estimates; A5 GRU variant dropped); stats.py; main.py CLI; per-index episode streams; experiments workflow for Actions. MuJoCo evaluation deferred until H4 work (documented).
+- **Decision:** PROCEED → stage 11.

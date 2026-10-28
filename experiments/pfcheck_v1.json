@@ -1,0 +1,205 @@
+{
+ "purpose": "Amendment A3: evaluation-PF convergence check (N=8000 vs 32000, 300 pilot episodes per cell) + TIME_ESTIMATE pilots on Actions runners",
+ "jobs": [
+  {
+   "id": "pfcheck_A_T3_random_N8000_sh0",
+   "cmd": "python main.py eval --set A --T 3 --method random --split pilot --start 0 --count 100 --n-eval 8000 --budget-minutes 300 --out ../results/v1/pfcheck/A_T3_random_N8000_sh0"
+  },
+  {
+   "id": "pfcheck_A_T3_random_N8000_sh1",
+   "cmd": "python main.py eval --set A --T 3 --method random --split pilot --start 100 --count 100 --n-eval 8000 --budget-minutes 300 --out ../results/v1/pfcheck/A_T3_random_N8000_sh1"
+  },
+  {
+   "id": "pfcheck_A_T3_random_N8000_sh2",
+   "cmd": "python main.py eval --set A --T 3 --method random --split pilot --start 200 --count 100 --n-eval 8000 --budget-minutes 300 --out ../results/v1/pfcheck/A_T3_random_N8000_sh2"
+  },
+  {
+   "id": "pfcheck_A_T3_random_N32000_sh0",
+   "cmd": "python main.py eval --set A --T 3 --method random --split pilot --start 0 --count 100 --n-eval 32000 --budget-minutes 300 --out ../results/v1/pfcheck/A_T3_random_N32000_sh0"
+  },
+  {
+   "id": "pfcheck_A_T3_random_N32000_sh1",
+   "cmd": "python main.py eval --set A --T 3 --method random --split pilot --start 100 --count 100 --n-eval 32000 --budget-minutes 300 --out ../results/v1/pfcheck/A_T3_random_N32000_sh1"
+  },
+  {
+   "id": "pfcheck_A_T3_random_N32000_sh2",
+   "cmd": "python main.py eval --set A --T 3 --method random --split pilot --start 200 --count 100 --n-eval 32000 --budget-minutes 300 --out ../results/v1/pfcheck/A_T3_random_N32000_sh2"
+  },
+  {
+   "id": "pfcheck_A_T3_greedy_N8000_sh0",
+   "cmd": "python main.py eval --set A --T 3 --method greedy --split pilot --start 0 --count 100 --n-eval 8000 --budget-minutes 300 --out ../results/v1/pfcheck/A_T3_greedy_N8000_sh0"
+  },
+  {
+   "id": "pfcheck_A_T3_greedy_N8000_sh1",
+   "cmd": "python main.py eval --set A --T 3 --method greedy --split pilot --start 100 --count 100 --n-eval 8000 --budget-minutes 300 --out ../results/v1/pfcheck/A_T3_greedy_N8000_sh1"
+  },
+  {
+   "id": "pfcheck_A_T3_greedy_N8000_sh2",
+   "cmd": "python main.py eval --set A --T 3 --method greedy --split pilot --start 200 --count 100 --n-eval 8000 --budget-minutes 300 --out ../results/v1/pfcheck/A_T3_greedy_N8000_sh2"
+  },
+  {
+   "id": "pfcheck_A_T3_greedy_N32000_sh0",
+   "cmd": "python main.py eval --set A --T 3 --method greedy --split pilot --start 0 --count 100 --n-eval 32000 --budget-minutes 300 --out ../results/v1/pfcheck/A_T3_greedy_N32000_sh0"
+  },
+  {
+   "id": "pfcheck_A_T3_greedy_N32000_sh1",
+   "cmd": "python main.py eval --set A --T 3 --method greedy --split pilot --start 100 --count 100 --n-eval 32000 --budget-minutes 300 --out ../results/v1/pfcheck/A_T3_greedy_N32000_sh1"
+  },
+  {
+   "id": "pfcheck_A_T3_greedy_N32000_sh2",
+   "cmd": "python main.py eval --set A --T 3 --method greedy --split pilot --start 200 --count 100 --n-eval 32000 --budget-minutes 300 --out ../results/v1/pfcheck/A_T3_greedy_N32000_sh2"
+  },
+  {
+   "id": "pfcheck_A_T10_random_N8000_sh0",
+   "cmd": "python main.py eval --set A --T 10 --method random --split pilot --start 0 --count 100 --n-eval 8000 --budget-minutes 300 --out ../results/v1/pfcheck/A_T10_random_N8000_sh0"
+  },
+  {
+   "id": "pfcheck_A_T10_random_N8000_sh1",
+   "cmd": "python main.py eval --set A --T 10 --method random --split pilot --start 100 --count 100 --n-eval 8000 --budget-minutes 300 --out ../results/v1/pfcheck/A_T10_random_N8000_sh1"
+  },
+  {
+   "id": "pfcheck_A_T10_random_N8000_sh2",
+   "cmd": "python main.py eval --set A --T 10 --method random --split pilot --start 200 --count 100 --n-eval 8000 --budget-minutes 300 --out ../results/v1/pfcheck/A_T10_random_N8000_sh2"
+  },
+  {
+   "id": "pfcheck_A_T10_random_N32000_sh0",
+   "cmd": "python main.py eval --set A --T 10 --method random --split pilot --start 0 --count 100 --n-eval 32000 --budget-minutes 300 --out ../results/v1/pfcheck/A_T10_random_N32000_sh0"
+  },
+  {
+   "id": "pfcheck_A_T10_random_N32000_sh1",
+   "cmd": "python main.py eval --set A --T 10 --method random --split pilot --start 100 --count 100 --n-eval 32000 --budget-minutes 300 --out ../results/v1/pfcheck/A_T10_random_N32000_sh1"
+  },
+  {
+   "id": "pfcheck_A_T10_random_N32000_sh2",
+   "cmd": "python main.py eval --set A --T 10 --method random --split pilot --start 200 --count 100 --n-eval 32000 --budget-minutes 300 --out ../results/v1/pfcheck/A_T10_random_N32000_sh2"
+  },
+  {
+   "id": "pfcheck_A_T10_greedy_N8000_sh0",
+   "cmd": "python main.py eval --set A --T 10 --method greedy --split pilot --start 0 --count 100 --n-eval 8000 --budget-minutes 300 --out ../results/v1/pfcheck/A_T10_greedy_N8000_sh0"
+  },
+  {
+   "id": "pfcheck_A_T10_greedy_N8000_sh1",
+   "cmd": "python main.py eval --set A --T 10 --method greedy --split pilot --start 100 --count 100 --n-eval 8000 --budget-minutes 300 --out ../results/v1/pfcheck/A_T10_greedy_N8000_sh1"
+  },
+  {
+   "id": "pfcheck_A_T10_greedy_N8000_sh2",
+   "cmd": "python main.py eval --set A --T 10 --method greedy --split pilot --start 200 --count 100 --n-eval 8000 --budget-minutes 300 --out ../results/v1/pfcheck/A_T10_greedy_N8000_sh2"
+  },
+  {
+   "id": "pfcheck_A_T10_greedy_N32000_sh0",
+   "cmd": "python main.py eval --set A --T 10 --method greedy --split pilot --start 0 --count 100 --n-eval 32000 --budget-minutes 300 --out ../results/v1/pfcheck/A_T10_greedy_N32000_sh0"
+  },
+  {
+   "id": "pfcheck_A_T10_greedy_N32000_sh1",
+   "cmd": "python main.py eval --set A --T 10 --method greedy --split pilot --start 100 --count 100 --n-eval 32000 --budget-minutes 300 --out ../results/v1/pfcheck/A_T10_greedy_N32000_sh1"
+  },
+  {
+   "id": "pfcheck_A_T10_greedy_N32000_sh2",
+   "cmd": "python main.py eval --set A --T 10 --method greedy --split pilot --start 200 --count 100 --n-eval 32000 --budget-minutes 300 --out ../results/v1/pfcheck/A_T10_greedy_N32000_sh2"
+  },
+  {
+   "id": "pfcheck_S_T3_random_N8000_sh0",
+   "cmd": "python main.py eval --set S --T 3 --method random --split pilot --start 0 --count 100 --n-eval 8000 --budget-minutes 300 --out ../results/v1/pfcheck/S_T3_random_N8000_sh0"
+  },
+  {
+   "id": "pfcheck_S_T3_random_N8000_sh1",
+   "cmd": "python main.py eval --set S --T 3 --method random --split pilot --start 100 --count 100 --n-eval 8000 --budget-minutes 300 --out ../results/v1/pfcheck/S_T3_random_N8000_sh1"
+  },
+  {
+   "id": "pfcheck_S_T3_random_N8000_sh2",
+   "cmd": "python main.py eval --set S --T 3 --method random --split pilot --start 200 --count 100 --n-eval 8000 --budget-minutes 300 --out ../results/v1/pfcheck/S_T3_random_N8000_sh2"
+  },
+  {
+   "id": "pfcheck_S_T3_random_N32000_sh0",
+   "cmd": "python main.py eval --set S --T 3 --method random --split pilot --start 0 --count 100 --n-eval 32000 --budget-minutes 300 --out ../results/v1/pfcheck/S_T3_random_N32000_sh0"
+  },
+  {
+   "id": "pfcheck_S_T3_random_N32000_sh1",
+   "cmd": "python main.py eval --set S --T 3 --method random --split pilot --start 100 --count 100 --n-eval 32000 --budget-minutes 300 --out ../results/v1/pfcheck/S_T3_random_N32000_sh1"
+  },
+  {
+   "id": "pfcheck_S_T3_random_N32000_sh2",
+   "cmd": "python main.py eval --set S --T 3 --method random --split pilot --start 200 --count 100 --n-eval 32000 --budget-minutes 300 --out ../results/v1/pfcheck/S_T3_random_N32000_sh2"
+  },
+  {
+   "id": "pfcheck_S_T3_greedy_N8000_sh0",
+   "cmd": "python main.py eval --set S --T 3 --method greedy --split pilot --start 0 --count 100 --n-eval 8000 --budget-minutes 300 --out ../results/v1/pfcheck/S_T3_greedy_N8000_sh0"
+  },
+  {
+   "id": "pfcheck_S_T3_greedy_N8000_sh1",
+   "cmd": "python main.py eval --set S --T 3 --method greedy --split pilot --start 100 --count 100 --n-eval 8000 --budget-minutes 300 --out ../results/v1/pfcheck/S_T3_greedy_N8000_sh1"
+  },
+  {
+   "id": "pfcheck_S_T3_greedy_N8000_sh2",
+   "cmd": "python main.py eval --set S --T 3 --method greedy --split pilot --start 200 --count 100 --n-eval 8000 --budget-minutes 300 --out ../results/v1/pfcheck/S_T3_greedy_N8000_sh2"
+  },
+  {
+   "id": "pfcheck_S_T3_greedy_N32000_sh0",
+   "cmd": "python main.py eval --set S --T 3 --method greedy --split pilot --start 0 --count 100 --n-eval 32000 --budget-minutes 300 --out ../results/v1/pfcheck/S_T3_greedy_N32000_sh0"
+  },
+  {
+   "id": "pfcheck_S_T3_greedy_N32000_sh1",
+   "cmd": "python main.py eval --set S --T 3 --method greedy --split pilot --start 100 --count 100 --n-eval 32000 --budget-minutes 300 --out ../results/v1/pfcheck/S_T3_greedy_N32000_sh1"
+  },
+  {
+   "id": "pfcheck_S_T3_greedy_N32000_sh2",
+   "cmd": "python main.py eval --set S --T 3 --method greedy --split pilot --start 200 --count 100 --n-eval 32000 --budget-minutes 300 --out ../results/v1/pfcheck/S_T3_greedy_N32000_sh2"
+  },
+  {
+   "id": "pfcheck_S_T10_random_N8000_sh0",
+   "cmd": "python main.py eval --set S --T 10 --method random --split pilot --start 0 --count 100 --n-eval 8000 --budget-minutes 300 --out ../results/v1/pfcheck/S_T10_random_N8000_sh0"
+  },
+  {
+   "id": "pfcheck_S_T10_random_N8000_sh1",
+   "cmd": "python main.py eval --set S --T 10 --method random --split pilot --start 100 --count 100 --n-eval 8000 --budget-minutes 300 --out ../results/v1/pfcheck/S_T10_random_N8000_sh1"
+  },
+  {
+   "id": "pfcheck_S_T10_random_N8000_sh2",
+   "cmd": "python main.py eval --set S --T 10 --method random --split pilot --start 200 --count 100 --n-eval 8000 --budget-minutes 300 --out ../results/v1/pfcheck/S_T10_random_N8000_sh2"
+  },
+  {
+   "id": "pfcheck_S_T10_random_N32000_sh0",
+   "cmd": "python main.py eval --set S --T 10 --method random --split pilot --start 0 --count 100 --n-eval 32000 --budget-minutes 300 --out ../results/v1/pfcheck/S_T10_random_N32000_sh0"
+  },
+  {
+   "id": "pfcheck_S_T10_random_N32000_sh1",
+   "cmd": "python main.py eval --set S --T 10 --method random --split pilot --start 100 --count 100 --n-eval 32000 --budget-minutes 300 --out ../results/v1/pfcheck/S_T10_random_N32000_sh1"
+  },
+  {
+   "id": "pfcheck_S_T10_random_N32000_sh2",
+   "cmd": "python main.py eval --set S --T 10 --method random --split pilot --start 200 --count 100 --n-eval 32000 --budget-minutes 300 --out ../results/v1/pfcheck/S_T10_random_N32000_sh2"
+  },
+  {
+   "id": "pfcheck_S_T10_greedy_N8000_sh0",
+   "cmd": "python main.py eval --set S --T 10 --method greedy --split pilot --start 0 --count 100 --n-eval 8000 --budget-minutes 300 --out ../results/v1/pfcheck/S_T10_greedy_N8000_sh0"
+  },
+  {
+   "id": "pfcheck_S_T10_greedy_N8000_sh1",
+   "cmd": "python main.py eval --set S --T 10 --method greedy --split pilot --start 100 --count 100 --n-eval 8000 --budget-minutes 300 --out ../results/v1/pfcheck/S_T10_greedy_N8000_sh1"
+  },
+  {
+   "id": "pfcheck_S_T10_greedy_N8000_sh2",
+   "cmd": "python main.py eval --set S --T 10 --method greedy --split pilot --start 200 --count 100 --n-eval 8000 --budget-minutes 300 --out ../results/v1/pfcheck/S_T10_greedy_N8000_sh2"
+  },
+  {
+   "id": "pfcheck_S_T10_greedy_N32000_sh0",
+   "cmd": "python main.py eval --set S --T 10 --method greedy --split pilot --start 0 --count 100 --n-eval 32000 --budget-minutes 300 --out ../results/v1/pfcheck/S_T10_greedy_N32000_sh0"
+  },
+  {
+   "id": "pfcheck_S_T10_greedy_N32000_sh1",
+   "cmd": "python main.py eval --set S --T 10 --method greedy --split pilot --start 100 --count 100 --n-eval 32000 --budget-minutes 300 --out ../results/v1/pfcheck/S_T10_greedy_N32000_sh1"
+  },
+  {
+   "id": "pfcheck_S_T10_greedy_N32000_sh2",
+   "cmd": "python main.py eval --set S --T 10 --method greedy --split pilot --start 200 --count 100 --n-eval 32000 --budget-minutes 300 --out ../results/v1/pfcheck/S_T10_greedy_N32000_sh2"
+  },
+  {
+   "id": "pilot_S",
+   "cmd": "python main.py pilot --set S --L 4095 --n-eval 8000"
+  },
+  {
+   "id": "pilot_A",
+   "cmd": "python main.py pilot --set A --L 4095 --n-eval 8000"
+  }
+ ]
+}

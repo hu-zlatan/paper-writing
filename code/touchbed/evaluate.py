@@ -29,9 +29,12 @@ def stream(*keys) -> np.random.Generator:
 def make_states(setname: str, split: str, n: int):
     lib = Library(get_set(setname))
     prior = Prior(lib.K)
-    rng = stream("states", setname, split, SPLIT_SALT[split])
-    k, x, y, th = prior.sample(rng, n)
-    return lib, prior, list(zip(k.tolist(), x.tolist(), y.tolist(), th.tolist()))
+    # one independent stream per episode index, so episode i is the same state whatever n or shard is requested
+    states = []
+    for i in range(n):
+        k, x, y, th = prior.sample(stream("state", setname, split, SPLIT_SALT[split], i), 1)
+        states.append((int(k[0]), float(x[0]), float(y[0]), float(th[0])))
+    return lib, prior, states
 
 
 def run_episode(policy_factory, lib, prior, om: ObsModel, s0, T: int, ep_key, n_eval: int = 10000,

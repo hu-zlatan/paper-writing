@@ -1,0 +1,62 @@
+name: experiments
+# Runs a manifest of `python main.py ...` commands (one matrix job each) and commits their outputs under results/.
+# Trigger: workflow_dispatch with the manifest path (experiments/<name>.json).
+on:
+  workflow_dispatch:
+    inputs:
+      manifest:
+        description: "path to manifest JSON {jobs:[{id, cmd}]}"
+        required: true
+permissions:
+  contents: write
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.m.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: m
+        run: |
+          python3 - <<'PY' >> "$GITHUB_OUTPUT"
+          import json, os
+          m = json.load(open(os.environ["MANIFEST"]))
+          for j in m["jobs"]:
+              assert j["cmd"].startswith("python main.py "), j
+          print("matrix=" + json.dumps({"include": m["jobs"]}))
+          PY
+        env:
+          MANIFEST: ${{ github.event.inputs.manifest }}
+  run:
+    needs: plan
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    strategy:
+      fail-fast: false
+      max-parallel: 20
+      matrix: ${{ fromJson(needs.plan.outputs.matrix) }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r code/requirements.txt
+      - name: Run
+        working-directory: code
+        env:
+          OMP_NUM_THREADS: "1"
+          OPENBLAS_NUM_THREADS: "1"
+          MKL_NUM_THREADS: "1"
+        run: |
+          mkdir -p ../results/v1/logs
+          set -o pipefail
+          ${{ matrix.cmd }} 2>&1 | tee "../results/v1/logs/${{ matrix.id }}.log"
+      - name: Commit outputs
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add results/
+          git commit -m "results: ${{ matrix.id }} (Actions run ${{ github.run_id }})" || exit 0
+          for i in 1 2 3 4 5 6 7 8; do git pull --rebase origin main && git push origin HEAD:main && exit 0; sleep $((RANDOM % 20 + 5)); done
+          exit 1
