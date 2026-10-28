@@ -1,0 +1,35 @@
+name: literature-collect
+# Stage 4 LITERATURE_COLLECT: the sandbox shell cannot reach bibliographic APIs, so the query runs here
+# and commits docs/03_candidates.jsonl + docs/03_collect_log.json back to main.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - docs/02_search_plan.yaml
+      - code/literature/collect.py
+      - .github/workflows/literature.yml
+permissions:
+  contents: write
+concurrency:
+  group: literature
+  cancel-in-progress: false
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install pyyaml
+      - run: python code/literature/collect.py
+      - name: Commit results
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/03_candidates.jsonl docs/03_collect_log.json
+          git commit -m "stage 4 LITERATURE_COLLECT: candidates from OpenAlex/arXiv/Semantic Scholar (Actions run ${{ github.run_id }})" || exit 0
+          for i in 1 2 3; do git pull --rebase origin main && git push origin HEAD:main && exit 0; sleep 5; done
+          exit 1
