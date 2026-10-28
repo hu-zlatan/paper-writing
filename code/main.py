@@ -323,6 +323,39 @@ def cmd_evalgrid(a):
     print(f"EVALGRID_DONE wall_s={time.time() - t0:.0f}")
 
 
+def cmd_evalpf(a):
+    """Offline evaluation-PF read-outs for recorded episodes (same pf_eval stream as run_episode_v2, so a re-run with
+    the recorded kernel reproduces the online numbers exactly)."""
+    from touchbed.evaluate import stream
+    from touchbed.evaluate_v2 import ball_information, make_states_v2, prior_ball_mass
+    from touchbed.gridpost import rebuild_history
+    from touchbed.pf import ParticleFilter, success
+    om = ObsModel()
+    recs = [json.loads(l) for l in open(a.src)]
+    recs = [r for r in recs if "episode" in r][a.start:a.start + a.count]
+    os.makedirs(os.path.dirname(os.path.abspath(a.out)), exist_ok=True)
+    t0 = time.time()
+    with open(a.out + ".jsonl", "w") as f:
+        for r in recs:
+            split = r.get("split", a.split)
+            lib, prior, eps = make_states_v2(r["set"], split, r["episode"] + 1)
+            s0, _ = eps[r["episode"]]
+            key = (r["set"], split, r["kappa"], r["tau"], r["episode"])
+            h = rebuild_history(lib, om, s0, r["actions"], key)
+            t1 = time.time()
+            pf = ParticleFilter(lib, om, prior, a.n_eval, stream("pf_eval", *key), mh_steps=a.mh_steps)
+            for phi, psi, obs in h:
+                pf.update(phi, psi, obs)
+            pf.rejuvenate(a.final_mh)
+            o = success(lib, pf.estimate(30), s0)
+            o.update({"ball_info": ball_information(pf, s0, prior_ball_mass(lib, prior, s0)), "episode": r["episode"],
+                      "set": r["set"], "kappa": r["kappa"], "tau": r["tau"], "method": r["method"], "actions": r["actions"],
+                      "n_eval": a.n_eval, "mh_steps": a.mh_steps, "final_mh": a.final_mh, "src": os.path.basename(a.src),
+                      "wall_s": time.time() - t1})
+            f.write(json.dumps(o) + "\n"); f.flush()
+    print(f"EVALPF_DONE wall_s={time.time() - t0:.0f}")
+
+
 def cmd_calib(a):
     """G5 tau calibration (docs/07_hypotheses_v2.md §1.2): run G* WITHOUT a budget for n* probes on pilot episodes and
     record the travel time it spends; tau_kappa = n* + mean travel time (rounded to 0.1), then verified with the budget."""
@@ -431,8 +464,13 @@ def main():
     eg.add_argument("--h-xy", type=float, default=1.0); eg.add_argument("--h-th", type=float, default=2.0)
     eg.add_argument("--sub", type=int, default=4); eg.add_argument("--budget-minutes", type=float, default=330.0)
     eg.add_argument("--out", required=True)
+    ep = sub.add_parser("evalpf")
+    ep.add_argument("--src", required=True); ep.add_argument("--split", default="pilot")
+    ep.add_argument("--start", type=int, default=0); ep.add_argument("--count", type=int, default=50)
+    ep.add_argument("--n-eval", type=int, default=32000); ep.add_argument("--mh-steps", type=int, default=3)
+    ep.add_argument("--final-mh", type=int, default=0); ep.add_argument("--out", required=True)
     a = ap.parse_args()
-    {"evalgrid": cmd_evalgrid, "latency": cmd_latency, "trainnotch": cmd_trainnotch, "g2": cmd_g2, "g1": cmd_g1, "calib": cmd_calib, "train": cmd_train, "eval": cmd_eval, "pilot": cmd_pilot, "train2": cmd_train2, "eval2": cmd_eval2}[a.cmd](a)
+    {"evalpf": cmd_evalpf, "evalgrid": cmd_evalgrid, "latency": cmd_latency, "trainnotch": cmd_trainnotch, "g2": cmd_g2, "g1": cmd_g1, "calib": cmd_calib, "train": cmd_train, "eval": cmd_eval, "pilot": cmd_pilot, "train2": cmd_train2, "eval2": cmd_eval2}[a.cmd](a)
 
 
 if __name__ == "__main__":
