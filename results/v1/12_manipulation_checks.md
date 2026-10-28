@@ -29,3 +29,17 @@ subset (vs 0.525 / 6.60 at 32k × 3 MH), so mixing, not particle count, is the b
 
 ## Greedy vs random (precondition of H1a: greedy ≥ random + 10 pp at T ≤ 5) — met
 T = 3, 300 pilot episodes, N_eval = 32k: success A 0.767 vs 0.123; S 0.420 vs 0.133.
+
+## Addendum (after stage 14): myopia-bank check on the positive-control set PC (2 shapes, rectangle ± notch)
+Same estimator and bank construction (100 beliefs; results/v1/checks/myopia_PC.json, myopia_identity_PC.json):
+
+| target | G | mean absolute gap (nats), 95 % bootstrap CI over beliefs | mean max EIG1 | mean EIG2* |
+|---|---|---|---|---|
+| full state | −0.052 | −0.183 [−0.261, −0.110] | 2.80 | 3.84 |
+| identity | −0.006 | +0.006 [−0.005, +0.017] | 0.118 | 0.261 |
+
+The bank estimator also finds no look-ahead gap on PC; the significantly negative full-state gap shows that choosing
+the first action by noisy two-step estimates is worse than choosing it by one-step EIG at this sample size, i.e. the
+estimator cannot detect small gaps. Note this is a bank of random beliefs, not the specific analytic H2b-P2 scenario
+(T = 2 from the prior), whose optimum was never computed. Deviation to record: C1/Y1/C2/M = 16/8/16/16 were used instead
+of the pre-registered 32/32/32 (cost: ≈ 5 s per belief vs ≈ 64× more).
