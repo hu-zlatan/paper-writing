@@ -10,13 +10,15 @@ from touchbed.checks import confusability, myopia_bank  # noqa: E402
 out = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "results", "v1", "checks")
 os.makedirs(out, exist_ok=True)
 which = sys.argv[1] if len(sys.argv) > 1 else "all"
-for s in ("S", "A"):
+target = sys.argv[2] if len(sys.argv) > 2 else "state"
+sets = sys.argv[3].split(",") if len(sys.argv) > 3 else ["S", "A"]
+for s in sets:
     if which in ("all", "myopia"):
         t = time.time()
-        rows = myopia_bank(s, 0, 100)
+        rows = myopia_bank(s, 0, 100, target=target)
         json.dump({"set": s, "params": {"n_particles": 1000, "C1": 16, "Y1": 8, "C2": 16, "M": 16,
-                                        "fresh_reestimate": "selected a1 re-estimated with 2*Y1 outcomes, 4*M samples"},
-                   "rows": rows, "wall_s": time.time() - t}, open(os.path.join(out, f"myopia_{s}.json"), "w"), indent=1)
+                                        "fresh_reestimate": "selected a1 re-estimated with 2*Y1 outcomes, 4*M samples", "target": target},
+                   "rows": rows, "wall_s": time.time() - t}, open(os.path.join(out, f"myopia_{s}.json" if target == "state" else f"myopia_{target}_{s}.json"), "w"), indent=1)
         print("myopia", s, time.time() - t, flush=True)
     if which in ("all", "conf"):
         t = time.time()

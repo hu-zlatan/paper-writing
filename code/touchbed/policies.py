@@ -54,7 +54,7 @@ class CoveragePolicy:
         return float(phi[j]), float(psi[j])
 
 
-def eig_candidates(pf, phi, psi, M: int, rng: np.random.Generator, particles=None):
+def eig_candidates(pf, phi, psi, M: int, rng: np.random.Generator, particles=None, target: str = "state"):
     """Nested-MC one-step EIG for each candidate (phi[c], psi[c]) on the PF belief (or a given particle subset).
     EIG(a) = 1/M sum_m [ log p(y_m | s_jm, a) - log sum_n w_n p(y_m | s_n, a) ],  j_m ~ w, y_m ~ p(. | s_jm, a)."""
     if particles is None:
@@ -80,8 +80,19 @@ def eig_candidates(pf, phi, psi, M: int, rng: np.random.Generator, particles=Non
     # log-likelihood of each sampled outcome under every particle: (M, N, C)
     ll = loglik_from_pred(om, c[:, None, :], px[:, None, :], py[:, None, :], pn[:, None, :],
                           hit[None], qx[None], qy[None], qn[None])
-    ll_true = np.take_along_axis(ll, j[:, None, :], axis=1)[:, 0, :]                                   # (M, C)
     ll_marg = logsumexp(ll + np.log(w)[None, :, None], axis=1)                                          # (M, C)
+    if target == "identity":
+        # I(k; y) = E[log p(y | k) - log p(y)], p(y | k) = sum_{i: k_i = k} w_i p(y | s_i) / W_k   (exploratory)
+        K = int(k.max()) + 1
+        lw = np.log(w)
+        ll_k = np.full((M, K, C), -np.inf)
+        for kk in range(K):
+            sel = k == kk
+            if sel.any():
+                ll_k[:, kk, :] = logsumexp(ll[:, sel, :] + lw[sel][None, :, None], axis=1) - logsumexp(lw[sel])
+        ll_true = np.take_along_axis(ll_k, k[j][:, None, :], axis=1)[:, 0, :]
+        return np.mean(ll_true - ll_marg, axis=0)
+    ll_true = np.take_along_axis(ll, j[:, None, :], axis=1)[:, 0, :]                                   # (M, C)
     return np.mean(ll_true - ll_marg, axis=0)
 
 

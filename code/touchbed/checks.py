@@ -69,12 +69,12 @@ def _reweight(k, x, y, th, w, lib, om, phi, psi, obs):
     return np.exp(lw - logsumexp(lw))
 
 
-def myopia_gap_belief(pf: ParticleFilter, rng, C1=16, Y1=8, C2=16, M=16):
+def myopia_gap_belief(pf: ParticleFilter, rng, C1=16, Y1=8, C2=16, M=16, target="state"):
     """Returns EIG2*, EIG2_greedy, max EIG1, P(NC) of the EIG1-maximiser for the PF belief."""
     lib, om = pf.lib, pf.om
     k, x, y, th, w = pf.k, pf.x, pf.y, pf.th, pf.weights()
     phi1, psi1 = sobol_candidates(rng, C1)
-    eig1 = eig_candidates(pf, phi1, psi1, M, rng, particles=(k, x, y, th, w))
+    eig1 = eig_candidates(pf, phi1, psi1, M, rng, particles=(k, x, y, th, w), target=target)
     def two_step(c, n_out, eig1_c):
         j = rng.choice(len(w), size=n_out, p=w)
         cont = []
@@ -83,14 +83,15 @@ def myopia_gap_belief(pf: ParticleFilter, rng, C1=16, Y1=8, C2=16, M=16):
                                                   phi1[c], psi1[c]))
             w2 = _reweight(k, x, y, th, w, lib, om, phi1[c], psi1[c], obs)
             phi2, psi2 = sobol_candidates(rng, C2)
-            cont.append(np.max(eig_candidates(pf, phi2, psi2, M, rng, particles=(k, x, y, th, w2))))
+            cont.append(np.max(eig_candidates(pf, phi2, psi2, M, rng, particles=(k, x, y, th, w2), target=target)))
         return eig1_c + float(np.mean(cont))
 
     two = np.array([two_step(c, Y1, eig1[c]) for c in range(C1)])
     c_opt = int(np.argmax(two))
     cg = int(np.argmax(eig1))
     # re-estimate both selected first actions with fresh, independent samples (removes the max-selection bias)
-    e1_fresh = eig_candidates(pf, phi1[[c_opt, cg]], psi1[[c_opt, cg]], 4 * M, rng, particles=(k, x, y, th, w))
+    e1_fresh = eig_candidates(pf, phi1[[c_opt, cg]], psi1[[c_opt, cg]], 4 * M, rng, particles=(k, x, y, th, w),
+                              target=target)
     v_opt = two_step(c_opt, 2 * Y1, float(e1_fresh[0]))
     v_greedy = two_step(cg, 2 * Y1, float(e1_fresh[1])) if cg != c_opt else v_opt
     hit, *_ = cast(lib, k, x, y, th, phi1[cg], psi1[cg])
@@ -98,7 +99,7 @@ def myopia_gap_belief(pf: ParticleFilter, rng, C1=16, Y1=8, C2=16, M=16):
     return v_opt, v_greedy, float(eig1.max()), p_nc
 
 
-def myopia_bank(setname: str, start: int, count: int, n_particles: int = 1000, **kw) -> list:
+def myopia_bank(setname: str, start: int, count: int, n_particles: int = 1000, **kw) -> list:  # kw: C1,Y1,C2,M,target
     lib = Library(get_set(setname))
     om = ObsModel()
     prior = Prior(lib.K)
