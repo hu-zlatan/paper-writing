@@ -1,0 +1,25 @@
+{
+ "purpose": "Gate G1 (a) (amendment B6): look-ahead estimator vs exact notch gap at the prior, 5 independent estimator seeds.",
+ "jobs": [
+  {
+   "id": "g1a_sd0",
+   "cmd": "python main.py g1 --part a --start 0 --count 1 --out ../results/v2/g1/a_sd0"
+  },
+  {
+   "id": "g1a_sd1",
+   "cmd": "python main.py g1 --part a --start 1 --count 1 --out ../results/v2/g1/a_sd1"
+  },
+  {
+   "id": "g1a_sd2",
+   "cmd": "python main.py g1 --part a --start 2 --count 1 --out ../results/v2/g1/a_sd2"
+  },
+  {
+   "id": "g1a_sd3",
+   "cmd": "python main.py g1 --part a --start 3 --count 1 --out ../results/v2/g1/a_sd3"
+  },
+  {
+   "id": "g1a_sd4",
+   "cmd": "python main.py g1 --part a --start 4 --count 1 --out ../results/v2/g1/a_sd4"
+  }
+ ]
+}

@@ -17,7 +17,7 @@ from .likelihood import ObsModel, sample_obs
 from .pf import ParticleFilter, Prior, success
 from .shapes import get_set
 
-SPLIT_SALT = {"pilot": 11, "val": 23, "test": 37}
+SPLIT_SALT = {"pilot": 11, "val": 23, "test": 37, "g2": 53}  # g2: fresh G2/H2b-P1 belief episodes
 
 
 def stream(*keys) -> np.random.Generator:

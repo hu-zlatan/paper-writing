@@ -241,6 +241,21 @@ def cmd_g1(a):
     print(f"G1_DONE wall_s={time.time() - t0:.0f}")
 
 
+def cmd_g2(a):
+    """Gate G2 headroom beliefs at (set, kappa, tau): one look-ahead estimate per belief index (amendment B6)."""
+    from touchbed.g2 import g2_gap
+    os.makedirs(os.path.dirname(os.path.abspath(a.out)), exist_ok=True)
+    t0 = time.time()
+    with open(a.out + ".jsonl", "w") as f:
+        for i in range(a.start, a.start + a.count):
+            if time.time() - t0 > 0.8 * a.budget_minutes * 60:
+                f.write(json.dumps({"EARLY_STOP_AT_80_PCT_BUDGET": True, "next_index": i}) + "\n")
+                break
+            r = g2_gap(a.set, a.kappa, a.tau, a.n_star, i, C1=a.C1, M_outer=a.M_outer)
+            f.write(json.dumps(r) + "\n"); f.flush()
+    print(f"G2_DONE wall_s={time.time() - t0:.0f}")
+
+
 def cmd_calib(a):
     """G5 tau calibration (docs/07_hypotheses_v2.md §1.2): run G* WITHOUT a budget for n* probes on pilot episodes and
     record the travel time it spends; tau_kappa = n* + mean travel time (rounded to 0.1), then verified with the budget."""
@@ -326,8 +341,14 @@ def main():
     g1.add_argument("--count", type=int, default=1); g1.add_argument("--C1", type=int, default=32)
     g1.add_argument("--M-outer", type=int, default=64); g1.add_argument("--bank", default="../results/v2/g1/bank.json")
     g1.add_argument("--out", required=True)
+    g2 = sub.add_parser("g2")
+    g2.add_argument("--set", default="S"); g2.add_argument("--kappa", type=float, default=6.0)
+    g2.add_argument("--tau", type=float, required=True); g2.add_argument("--n-star", type=int, default=4)
+    g2.add_argument("--start", type=int, default=0); g2.add_argument("--count", type=int, default=5)
+    g2.add_argument("--C1", type=int, default=32); g2.add_argument("--M-outer", type=int, default=64)
+    g2.add_argument("--budget-minutes", type=float, default=330.0); g2.add_argument("--out", required=True)
     a = ap.parse_args()
-    {"g1": cmd_g1, "calib": cmd_calib, "train": cmd_train, "eval": cmd_eval, "pilot": cmd_pilot, "train2": cmd_train2, "eval2": cmd_eval2}[a.cmd](a)
+    {"g2": cmd_g2, "g1": cmd_g1, "calib": cmd_calib, "train": cmd_train, "eval": cmd_eval, "pilot": cmd_pilot, "train2": cmd_train2, "eval2": cmd_eval2}[a.cmd](a)
 
 
 if __name__ == "__main__":

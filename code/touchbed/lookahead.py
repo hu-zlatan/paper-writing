@@ -27,6 +27,7 @@ def rollout_value(problem, logw0, budget0, a_first, s, seed: int, greedy_M: int 
         if not problem.budget_left(budget):
             break
         a = problem.greedy(logw, budget, rng, M=greedy_M) if greedy_M else problem.greedy(logw, budget, rng)
+
     return problem.target_logmass(logw, s) - problem.target_logmass(logw0, s)
 
 
@@ -46,12 +47,16 @@ def value_estimates(problem, logw, budget, actions, M_outer: int, seed: int, gre
 def lookahead_gap(problem, logw, budget, seed: int, C1: int = 32, M_outer: int = 64, top: int = 4, reest: int = 4,
                   greedy_M: int = 64):
     rng = np.random.default_rng(seed)
-    a_g = problem.greedy(logw, budget, np.random.default_rng(seed + 1), M=greedy_M)
+    if hasattr(problem, "first_greedy"):
+        a_g = int(problem.first_greedy(logw, budget, np.random.default_rng(seed + 1)))
+    else:
+        a_g = problem.greedy(logw, budget, np.random.default_rng(seed + 1), M=greedy_M)
     cand = [a_g]
     for a in getattr(problem, "setup_moves", lambda lw, b: [])(logw, budget):
         if a not in cand:
             cand.append(int(a))
-    pool = [a for a in rng.permutation(problem.n_actions) if a not in cand]
+    feas = problem.feasible(budget) if hasattr(problem, "feasible") else np.ones(problem.n_actions, bool)
+    pool = [a for a in rng.permutation(problem.n_actions) if a not in cand and feas[a]]
     cand += [int(a) for a in pool[:max(0, C1 - len(cand))]]
     scr = value_estimates(problem, logw, budget, cand, M_outer, seed + 2, greedy_M).mean(1)
     order = np.argsort(-scr)
