@@ -9,7 +9,7 @@
 **Topic:** Amortized, non-myopic active tactile localization (TouchBED)
 **Initialised:** 2026-10-28T07:56:44Z
 **Current version:** v2
-**Latest stage:** Stage 8 HYPOTHESIS_GEN [v2] — next: stage 8.5 THEORETICAL_BOUNDS [v2]
+**Latest stage:** Stage 8.5 THEORETICAL_BOUNDS [v2] — next: stage 9 EXPERIMENT_DESIGN [v2, GATE]
 
 ---
 
@@ -284,3 +284,13 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
 - **Outputs produced:** docs/07a_proposer_v2.md, docs/07b_skeptic_v2.md, docs/07_hypotheses_v2.md (canonical)
 - **Decision:** PROCEED → stage 8.5 (v2).
 - **Summary:** Two core ideas. H1 (guaranteed): an amortized policy trained on decision-calibrated sPCE is non-inferior to cost-aware greedy PF-EIG on the same ball-information target and same 256-action set, at ≥ 100× lower latency at matched accuracy. H2 (gated): with a travel cost κ between probes under a time budget, look-ahead beats both greedy and a cost-aware myopic policy at κ_hi on set S, with a κ×method interaction test and a κ = 0 negative control; a failed headroom gate is recorded as a refutation in the tested range. Pre-run gates G0–G5 (hygiene incl. a κ=0 bit-identity unit test, estimator validation on an exact notch gap, headroom, learnability, PF convergence 32k vs 128k on 600 episodes, comparator strength); gate decision 2026-11-12.
+
+---
+
+## Stage 8.5. THEORETICAL_BOUNDS     [v2]
+
+- **Started:** 2026-10-28T11:15:00Z
+- **Finished:** see commit "stage 8.5 v2"
+- **Outputs produced:** docs/07b_theoretical_bounds_v2.md; docs/03_supplement_queries.yaml + code/literature/supplement.py + .github/workflows/literature-supplement.yml (targeted OpenAlex lookups for the budgeted-information-gathering references, append-only cite_keys; dispatched)
+- **Decision:** PROCEED → stage 9 (v2).
+- **Summary:** Cost-aware greedy costs O(N·A·(V+M)) per decision vs O(d² + d·A) for the policy; informal argument that order-dependent travel costs turn the problem into an adaptive orienteering-type problem where ratio-greedy loses its guarantees (references pending verification); exact notch enumeration defined as the G1 estimator reference.
