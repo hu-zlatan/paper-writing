@@ -9,7 +9,7 @@
 **Topic:** Amortized, non-myopic active tactile localization (TouchBED)
 **Initialised:** 2026-10-28T07:56:44Z
 **Current version:** v2
-**Latest stage:** LOOP MARKER PIVOT 15 → 8 (v1 → v2) — next: stage 8 HYPOTHESIS_GEN v2
+**Latest stage:** Stage 8 HYPOTHESIS_GEN [v2] — next: stage 8.5 THEORETICAL_BOUNDS [v2]
 
 ---
 
@@ -273,3 +273,14 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
 - **Next stage:** 8 HYPOTHESIS_GEN
 - **Resuming under version:** v2
 - **Still valid for v2:** code/touchbed (geometry, likelihood, contact-conditioned PF, greedy/coverage/random, numpy PPO, stats, MuJoCo probe), literature (docs/03–06), the decision-calibrated L=4095 finding and ball-information metric (amendment A1/A2), measured costs.
+
+---
+
+## Stage 8. HYPOTHESIS_GEN (multi-agent debate)     [v2]
+
+- **Started:** 2026-10-28T10:57:00Z
+- **Finished:** see commit "stage 8 v2 HYPOTHESIS_GEN"
+- **Inputs used:** docs/06_synthesis.md, results/v1/14_analysis.md, results/v1/15_decision.md, docs/07c_amendment_v1_1.md
+- **Outputs produced:** docs/07a_proposer_v2.md, docs/07b_skeptic_v2.md, docs/07_hypotheses_v2.md (canonical)
+- **Decision:** PROCEED → stage 8.5 (v2).
+- **Summary:** Two core ideas. H1 (guaranteed): an amortized policy trained on decision-calibrated sPCE is non-inferior to cost-aware greedy PF-EIG on the same ball-information target and same 256-action set, at ≥ 100× lower latency at matched accuracy. H2 (gated): with a travel cost κ between probes under a time budget, look-ahead beats both greedy and a cost-aware myopic policy at κ_hi on set S, with a κ×method interaction test and a κ = 0 negative control; a failed headroom gate is recorded as a refutation in the tested range. Pre-run gates G0–G5 (hygiene incl. a κ=0 bit-identity unit test, estimator validation on an exact notch gap, headroom, learnability, PF convergence 32k vs 128k on 600 episodes, comparator strength); gate decision 2026-11-12.
