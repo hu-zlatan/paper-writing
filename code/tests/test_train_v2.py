@@ -24,7 +24,7 @@ def test_masked_softmax_logp_and_entropy_gradients():
     z = rng.standard_normal(6); mask = np.array([1, 1, 0, 1, 0, 1], bool); a = 3
     def logp(z): return masked_log_softmax(z, mask)[a]
     def ent(z):
-        l = masked_log_softmax(z, mask); p = np.where(mask, np.exp(l), 0); return -np.sum(np.where(mask, p * l, 0))
+        l = np.where(mask, masked_log_softmax(z, mask), 0.0); p = np.where(mask, np.exp(l), 0.0); return -np.sum(p * l)
     lsm = masked_log_softmax(z, mask); p = np.where(mask, np.exp(lsm), 0)
     g_lp = (np.eye(6)[a] - p)
     H = ent(z); g_H = -p * (np.where(mask, lsm, 0) + H)
