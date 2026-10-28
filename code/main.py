@@ -67,7 +67,8 @@ class LearnedAdapter:
 def cmd_train(a):
     cfg = TrainConfig(setname=a.set, method=a.method, L=a.L, batch=a.batch, seed=a.seed, max_episodes=a.max_episodes,
                       val_every=a.val_every, val_episodes=a.val_episodes, budget_minutes=a.budget_minutes,
-                      encoder=a.encoder, budget_input=not a.no_budget_input, lr=a.lr, ent_coef=a.ent_coef)
+                      encoder=a.encoder, budget_input=not a.no_budget_input, lr=a.lr, ent_coef=a.ent_coef,
+                      critic_lr=a.critic_lr)
     os.makedirs(os.path.dirname(os.path.abspath(a.out)), exist_ok=True)
     tr = Trainer(cfg)
     t0 = time.time()
@@ -147,7 +148,7 @@ def main():
     t.add_argument("--val-every", type=int, default=10_240); t.add_argument("--val-episodes", type=int, default=200)
     t.add_argument("--budget-minutes", type=float, default=330.0); t.add_argument("--encoder", default="deepsets")
     t.add_argument("--no-budget-input", action="store_true"); t.add_argument("--lr", type=float, default=3e-4)
-    t.add_argument("--ent-coef", type=float, default=1e-3); t.add_argument("--out", required=True)
+    t.add_argument("--ent-coef", type=float, default=1e-3); t.add_argument("--critic-lr", type=float, default=1e-3); t.add_argument("--out", required=True)
     e = sub.add_parser("eval")
     e.add_argument("--set", default="S"); e.add_argument("--T", type=int, default=5)
     e.add_argument("--method", default="random"); e.add_argument("--weights", default=None)
