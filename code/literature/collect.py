@@ -23,22 +23,28 @@ STOP = {"a", "an", "the", "on", "of", "for", "in", "to", "and", "with", "via", "
 NOW = dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
-def get(url, tries=4, accept="application/json"):
+DEADLINE = time.time() + 40 * 60  # stop querying after 40 min so partial results are always written
+DEAD_SOURCES = {}  # source -> consecutive failures; a source with 3 in a row is skipped for the rest of the run
+
+
+def get(url, tries=3, accept="application/json"):
     last = None
     for k in range(tries):
+        if time.time() > DEADLINE:
+            raise RuntimeError("time budget exhausted")
         req = urllib.request.Request(url, headers={"User-Agent": UA, "Accept": accept})
         try:
-            with urllib.request.urlopen(req, timeout=60) as r:
+            with urllib.request.urlopen(req, timeout=30) as r:
                 return r.read().decode("utf-8")
         except urllib.error.HTTPError as e:
             last = f"HTTP {e.code}"
             if e.code in (429, 500, 502, 503, 504):
-                time.sleep(3 * (2 ** k))
+                time.sleep(2 * (2 ** k))
                 continue
             break
         except Exception as e:  # network error: retry with backoff, then report
             last = repr(e)
-            time.sleep(3 * (2 ** k))
+            time.sleep(2 * (2 ** k))
     raise RuntimeError(f"{url} failed: {last}")
 
 
@@ -138,7 +144,7 @@ def arxiv(q, limit):
 def s2(q, limit):
     url = ("https://api.semanticscholar.org/graph/v1/paper/search?query=" + urllib.parse.quote(q) + f"&limit={limit}"
            "&fields=title,abstract,year,authors,externalIds,citationCount,venue,url")
-    data = json.loads(get(url, tries=3))
+    data = json.loads(get(url, tries=2))
     out = []
     for p in data.get("data", []) or []:
         ext = p.get("externalIds") or {}
@@ -188,6 +194,10 @@ def main():
         for name, fn in (("openalex", lambda: openalex(q, limit, yc)), ("arxiv", lambda: arxiv(q, limit)),
                          ("semanticscholar", lambda: s2(q, limit))):
             entry = {"strategy": strat, "query": q, "source": name}
+            if DEAD_SOURCES.get(name, 0) >= 3 or time.time() > DEADLINE:
+                entry["error"] = "skipped (source failing repeatedly or time budget exhausted)"
+                log["queries"].append(entry)
+                continue
             try:
                 got = fn()
                 entry["hits"] = len(got)
@@ -196,8 +206,10 @@ def main():
                     r["sources"] = [name]
                     r["strategy"] = strat
                 records.extend(got)
+                DEAD_SOURCES[name] = 0
             except Exception as e:  # logged per query; the run continues with the other sources
                 entry["error"] = str(e)[:300]
+                DEAD_SOURCES[name] = DEAD_SOURCES.get(name, 0) + 1
             log["queries"].append(entry)
             print(json.dumps(entry), flush=True)
 
