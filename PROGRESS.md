@@ -9,7 +9,7 @@
 **Topic:** Amortized, non-myopic active tactile localization (TouchBED)
 **Initialised:** 2026-10-28T07:56:44Z
 **Current version:** v2
-**Latest stage:** Stage 10 CODE_GENERATION [v2] (in progress) — resume from plans/stage_10_code_generation_v2.md
+**Latest stage:** Stage 12 EXPERIMENT_RUN [v2] gates (G3 failed → stage 15 after the remedy read-out) — see the run-4 section at the end
 
 ---
 
@@ -377,3 +377,21 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
 - **Run 3 ended ~17:55 UTC.** Actions still running: grid_g5 (random part), grid_g5_flat, grid_g3_val (policies),
   G3 remedy training, grid_ref (random part). Resume as described above; add the remedy seeds' validation evaluation
   (eval2 --split val --n-eval 2000, then evalgrid) before the gate decision.
+
+---
+
+## Stage 12. EXPERIMENT_RUN (pre-run gates G0–G5)     [v2]   (run 4 record; stages 10–11 v2 were completed in runs 2–3, see above)
+
+- **Started:** 2026-10-28T11:20:00Z (gates run inside the stage-10 v2 entry above, runs 2–3)
+- **Run 4 (2026-10-28 ~19:50 UTC →):** all Actions runs from run 3 had finished (no run in progress).
+  - `analysis_b8.py`: grid adopted (no SMC kernel passes every cell) — unchanged conclusion.
+  - `analysis_g5.py` on the grid: +10 pp rule passes everywhere; **A0 degenerate** (G* BI saturation 81.5 %) → removed
+    from the primary set; **flatness fails at κ = 6 (Δsuccess −2.7 pp) and κ = 12 (ΔBI +0.17)** → 𝒜 → 64 × 8 required.
+  - New `code/analysis_g3.py`: **G3 (ii) FAIL** — policy seed-mean success 0.204 vs G* 0.410 on the same 500 validation
+    episodes (grid); policies execute ≈ 2.4 probes vs 4.2. Remedy seeds (E_train 2 × 10⁵) read-out dispatched
+    (experiments/v2_g3_remedy_val.json, eval2 + grid in one job).
+  - Exploratory (labelled, not a gate): policies use only 4 absolute first angles and ignore φ0 → travel 0.54–0.63 rad
+    vs G* 0.13; candidate root cause = absolute-action head. Diagnostic runs at κ = 0 / 6 dispatched
+    (experiments/v2_diag_k0k6.json → results/v2/diag/).
+  - Recorded in docs/07c_amendment_v2_0.md (status note run 4) and plans/stage_12_experiment_run_v2.md.
+- **Decision:** G3 failed (iii and ii) → per §4 the gate goes to **stage 15** (via 13 → 14) once the remedy read-out is in.
