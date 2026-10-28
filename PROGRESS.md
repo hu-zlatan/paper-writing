@@ -330,3 +330,14 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
   - **G1 instrument built** (amendment B6): exact notch reference code/touchbed/notch.py (exact gap 0.717 at the prior),
     generic look-ahead estimator code/touchbed/lookahead.py, `main.py g1`. Zero-gap bank generation in progress.
   - **C(A) = 0.802** decided: keep A, report as marginal fail (amendment B7).
+  - **G5 τ verification: PASS** in all six cells (mean executed probes A 2.85/2.75/2.97 vs n*=3; S 3.89/3.95/4.10 vs
+    n*=4). τ frozen: A κ0 3.0, κ6 3.2 (κ12 3.3); S κ0 4.0, κ2 4.8, κ6 5.0 (κ12 5.1).
+  - **G1 (a): PASS** — mean estimated relative gap 0.829 over 5 seeds vs exact 0.717 (band [0.573, 0.860]); upward
+    bias comes from the MC comparator's noisier first action (V_G* 0.08–0.15 vs exact greedy 0.174). G1 (b) running.
+  - **G2** (S, κ ∈ {0, 2, 6}, 100 beliefs each) and **G3 (i)** (4 PPO configs) dispatched; notch-control learner and
+    the H1b latency protocol written (dev smoke tests in results/v2/dev/).
+  - **Evaluation posterior (B8):** partial B5 results show every SMC kernel moves BI by ≥ 0.08 nats relative to the
+    next heavier one. A deterministic adaptive grid posterior (0.25 mm / 0.5° where it matters) is introduced as the
+    reference; on S/random ep. 0 it equals the full fine grid (5.905) while PF kernels give 5.27–5.88. Grid-vs-kernel
+    comparison on 200 pilot episodes per κ=0 cell dispatched (experiments/v2_grid_ref.json). No main run before G4
+    passes under B8.
