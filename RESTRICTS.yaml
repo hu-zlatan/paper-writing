@@ -5,8 +5,8 @@
 
 project:
   name: "paper-writing"
-  target_venue: "TBD (chosen in stage 1)"            # NeurIPS | ICML | ICLR | CVPR | ACL | EMNLP | ...
-  topic: "<one-sentence research topic>"
+  target_venue: "RSS 2027"   # Stage 1 extended abstract 2026-12-04 23:59 AoE; Stage 2 full paper 2027-04-16 23:59 AoE (https://roboticsconference.org/information/cfp/, verified 2026-10-28)
+  topic: "Amortized, non-myopic active tactile localization: learning touch-selection policies that maximize the expected information gain about an object's pose and identity from sparse contacts"
   initialised: "2026-10-28T07:56:44Z"
 
 # ─── Compute & resource red lines ─────────────────────────────────────────────
@@ -60,7 +60,8 @@ writing:
     experiments: 600
     results: 500
   total_words_floor: 4000
-  pages_target: 9              # NeurIPS/ICML main paper length
+  pages_target: 8              # RSS 2027 Stage 2: 8 pages max excluding references
+  pages_extended_abstract: 5   # RSS 2027 Stage 1: 6 pages max = 5 content + 1 references, no supplementary
 
 # ─── Evidence-relevance audit (stage 23) ──────────────────────────────────────
 citation_audit:
