@@ -8,8 +8,8 @@
 **Target venue:** RSS 2027 — Stage 1 extended abstract 2026-12-04 23:59 AoE; Stage 2 full paper (invited) 2027-04-16 23:59 AoE (verified 2026-10-28 at https://roboticsconference.org/information/cfp/)
 **Topic:** Amortized, non-myopic active tactile localization (TouchBED)
 **Initialised:** 2026-10-28T07:56:44Z
-**Current version:** v1
-**Latest stage:** Stage 14 RESULT_ANALYSIS — next: stage 15 RESEARCH_DECISION
+**Current version:** v2
+**Latest stage:** LOOP MARKER PIVOT 15 → 8 (v1 → v2) — next: stage 8 HYPOTHESIS_GEN v2
 
 ---
 
@@ -252,3 +252,24 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
 - **Outputs produced:** results/v1/14_analysis.md (fresh opus subagent + area-chair pass)
 - **Decision:** PROCEED → stage 15.
 - **Summary:** G(S) = −0.033 [−0.054, −0.014] fails; G estimator not validated and run at reduced C/M (undocumented deviation, now flagged); PF at 8k not converged in all 6 cells; confusability per-shape rule broken for A2/A4/A6 and S self-symmetry entries are an artefact; H3 untestable (R_NC(S)=0.03); H1 untested. Main runs remain blocked by the pre-registration.
+
+---
+
+## Stage 15. RESEARCH_DECISION     [v1]
+
+- **Started:** 2026-10-28T10:53:00Z
+- **Finished:** see commit "loop v2: PIVOT from stage 15 to stage 8"
+- **Inputs used:** results/v1/14_analysis.md, results/v1/12_manipulation_checks.md (incl. PC addendum)
+- **Outputs produced:** results/v1/15_decision.md (fresh opus subagent)
+- **Decision:** PIVOT → 8.
+- **Summary:** No main experiment ran, but the pre-registered manipulation checks contradict the premise of H2a/H3 in this action space (any probe is reachable at equal cost): no measurable look-ahead value on S, A or PC, and no-contact outcomes are rarely decision-relevant. Rather than re-designing S until the check passes, v2 re-centres on (1) amortization — non-inferiority to greedy PF-EIG at ≥ 100× lower latency with a goal-oriented objective — and (2) a gated test of look-ahead under a realistic travel/time-budget action model (κ sweep, κ = 0 = v1 as control). Pre-run gates G0–G5 (hygiene, estimator validation against an exactly computed notch gap, travel manipulation check, learnability, PF convergence on ≥ 600 paired episodes, comparator strength).
+
+---
+
+## LOOP MARKER — PIVOT from stage 15 → stage 8     [version v1 → v2]
+
+- **Reason:** pre-run manipulation checks failed the premise of the non-myopic hypothesis (G(S) = −0.033 [−0.054, −0.014] vs required ≥ 0.10; identity-only +0.003; PC bank also no gap) and of H3 (R_NC(S) = 0.03); see results/v1/14_analysis.md and results/v1/15_decision.md.
+- **Snapshot taken:** results/v1/ (all v1 artefacts stay there unchanged); no paper files exist yet (paper/mypaper/v1/ not needed). docs/07_hypotheses.md, docs/07c_amendment_v1_1.md and docs/08_experiment_plan.yaml remain as the v1 record; v2 writes docs/07_hypotheses_v2.md and docs/08_experiment_plan_v2.yaml.
+- **Next stage:** 8 HYPOTHESIS_GEN
+- **Resuming under version:** v2
+- **Still valid for v2:** code/touchbed (geometry, likelihood, contact-conditioned PF, greedy/coverage/random, numpy PPO, stats, MuJoCo probe), literature (docs/03–06), the decision-calibrated L=4095 finding and ball-information metric (amendment A1/A2), measured costs.

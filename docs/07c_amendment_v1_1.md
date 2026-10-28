@@ -35,3 +35,12 @@ docs/07_hypotheses.md §7 applies, then test episodes per cell 2,000 → 1,000 f
 ## A5 — Encoder ablation
 A3's GRU variant is dropped (numpy GRU with hand-written backprop is not worth its cost for a secondary row); the
 padded-concatenation MLP variant is kept.
+
+## A6 — Recorded deviations found by the stage-14 analysis (2026-10-28)
+- The myopia-gap checks (results/v1/checks/myopia_*.json) used C1/Y1/C2/M = 16/8/16/16 instead of the pre-registered
+  32/32/32/32 (cost), with fresh re-estimation of the two selected first actions. Reported as run.
+- Confusability: shapes A2, A4, A6 exceed the per-shape 0.80 rule (0.806, 0.818, 0.818) although C(A) = 0.772 passes;
+  three S self-symmetry entries are 0.0 because the local optimum converged onto a symmetry element and was excluded —
+  an artefact of the search, not a measurement. Both to be fixed before any v2 main run.
+- The 12_manipulation_checks.md claim "mixing, not particle count, is the bottleneck" rests on a 40-episode subset and
+  is withdrawn as a conclusion (kept as a hypothesis to test).
