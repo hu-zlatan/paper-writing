@@ -1,0 +1,50 @@
+# Stage 3 · SEARCH_STRATEGY (v1) — produced with pipeline/references/stage_prompts/search_strategy.md
+# topic: Amortized, non-myopic active tactile localization (TouchBED)
+topic: "Amortized non-myopic active tactile localization of object pose and identity"
+year_cutoff: 2018          # seminal pre-2018 work allowed via the 'seminal' strategy
+per_query_limit: 25
+search_strategies:
+  - name: core_active_tactile_localization
+    goal: Direct prior work on choosing touches to localize / recognize objects.
+    queries:
+      - active tactile object localization
+      - touch based object pose estimation
+      - next best touch localization
+      - tactile exploration information gain
+      - active haptic object recognition
+  - name: tactile_pose_estimation_and_sensing
+    goal: Tactile perception methods that the belief / observation model builds on.
+    queries:
+      - tactile in-hand pose estimation
+      - visuotactile object pose tracking
+      - tactile shape exploration Gaussian process
+      - contact particle filter localization
+  - name: bayesian_experimental_design
+    goal: Policy-based and amortized sequential BED, EIG bounds.
+    queries:
+      - deep adaptive experimental design
+      - amortized sequential Bayesian experimental design
+      - expected information gain bounds
+      - reinforcement learning experimental design
+      - implicit likelihood adaptive design
+  - name: active_perception_and_information_gathering
+    goal: Information-gathering planning, POMDP and RL active perception in robotics.
+    queries:
+      - active perception reinforcement learning
+      - informative path planning robotics
+      - adaptive submodularity active learning
+      - belief space planning manipulation
+  - name: dexterous_manipulation_with_touch
+    goal: Applications / motivation — dexterous manipulation using touch, simulators and benchmarks.
+    queries:
+      - dexterous manipulation tactile feedback
+      - tactile reinforcement learning manipulation
+      - tactile simulation benchmark robotics
+      - blind grasping touch uncertainty
+seminal:
+  # pre-2018 work the paper must cite if it exists; collected without the year filter, verified individually
+  queries:
+    - global localization objects via touch
+    - efficient touch based localization submodularity
+    - next best touch model based localization
+    - manifold particle filter contact

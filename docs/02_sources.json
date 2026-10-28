@@ -1,0 +1,6 @@
+[
+  {"id": "openalex", "name": "OpenAlex works API", "type": "bibliographic_api", "url": "https://api.openalex.org/works", "status": "planned (queried from GitHub Actions; sandbox shell has no route)", "query": "search=<query>&per_page=25&filter=publication_year:>2017", "verified_at": "2026-10-28"},
+  {"id": "semanticscholar", "name": "Semantic Scholar Graph API", "type": "bibliographic_api", "url": "https://api.semanticscholar.org/graph/v1/paper/search", "status": "planned (unauthenticated, rate-limited; used for cross-checks)", "query": "query=<query>&limit=25&fields=title,abstract,year,authors,externalIds,citationCount,venue", "verified_at": "2026-10-28"},
+  {"id": "arxiv", "name": "arXiv API", "type": "preprint_api", "url": "https://export.arxiv.org/api/query", "status": "planned (recent preprints 2024-2026)", "query": "search_query=all:<query>&max_results=25&sortBy=relevance", "verified_at": "2026-10-28"},
+  {"id": "web", "name": "WebSearch / WebFetch (session tools)", "type": "web_search", "url": "https://www.google.com", "status": "used in stage 1 for venue/gap scan; used for spot checks", "query": "free text", "verified_at": "2026-10-28"}
+]

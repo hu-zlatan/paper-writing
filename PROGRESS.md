@@ -9,7 +9,7 @@
 **Topic:** Amortized, non-myopic active tactile localization (TouchBED)
 **Initialised:** 2026-10-28T07:56:44Z
 **Current version:** v1
-**Latest stage:** Stage 2 PROBLEM_DECOMPOSE — next: stage 3 SEARCH_STRATEGY
+**Latest stage:** Stage 3 SEARCH_STRATEGY — next: stage 4 LITERATURE_COLLECT
 
 ---
 
@@ -94,3 +94,15 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
 - **Decision:** PROCEED → stage 3.
 - **Summary:** Root question: does a policy trained on the total-EIG bound beat myopic EIG and match it at far lower online compute, and does this survive physical contact? Priorities: SQ1 non-myopic benefit, SQ3 negative information/multimodality, SQ2 amortization cost, SQ4 transfer, SQ5 bound tightness, SQ6 SE(3) (stretch). Biggest risks: greedy EIG may already be near-optimal (adaptive submodularity) and a close precursor may exist — both checked in stages 4–8.
 - **Commit:** see git log ("stage 2 PROBLEM_DECOMPOSE")
+
+---
+
+## Stage 3. SEARCH_STRATEGY     [v1]
+
+- **Started:** 2026-10-28T08:28:00Z
+- **Finished:** 2026-10-28T08:33:00Z
+- **Inputs used:** docs/01_problem_tree.md
+- **Outputs produced:** docs/02_search_plan.yaml (5 strategies, 22 queries + 4 seminal queries), docs/02_sources.json (4 sources); plans/stage_03_search_strategy.md
+- **Decision:** PROCEED → stage 4.
+- **Summary:** Strategies cover direct active-tactile localization, tactile pose estimation/sensing, Bayesian experimental design (DAD, EIG bounds, RL-BED), active perception/information gathering (submodularity, belief-space planning), and dexterous manipulation with touch. Pre-2018 seminal touch-localization work is collected separately without the year filter.
+- **Commit:** see git log ("stage 3 SEARCH_STRATEGY")
