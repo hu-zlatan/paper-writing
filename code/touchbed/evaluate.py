@@ -58,6 +58,7 @@ def run_episode(policy_factory, lib, prior, om: ObsModel, s0, T: int, ep_key, n_
     out = success(lib, est, s0)
     out["ig"] = pf_eval.realized_ig_evidence(s0)
     out["ig_kde"] = pf_eval.realized_ig(s0)
+    out["ball_info"] = pf_eval.ball_info(s0)
     out["n_contact"] = n_contact
     out["latency_median_s"] = float(np.median(lat))
     return out, lat

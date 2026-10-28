@@ -39,9 +39,15 @@ class Prior:
 
 class ParticleFilter:
     def __init__(self, lib, om: ObsModel, prior: Prior, n: int, rng: np.random.Generator, mh_steps: int = 3,
-                 rw_xy: float = 0.5, rw_th: float = math.radians(0.5), p_indep: float = 0.1):
+                 rw_xy: float = 0.5, rw_th: float = math.radians(0.5), p_indep: float = 0.1,
+                 contact_proposal: bool = True, q_sigma_xy: float = 1.0, q_sigma_th: float = math.radians(3.0),
+                 q_defensive: float = 0.1):
         self.lib, self.om, self.prior, self.rng = lib, om, prior, rng
         self.n, self.mh_steps, self.rw_xy, self.rw_th, self.p_indep = n, mh_steps, rw_xy, rw_th, p_indep
+        self.contact_proposal, self.q_sxy, self.q_sth, self.q_beta = contact_proposal, q_sigma_xy, q_sigma_th, q_defensive
+        e = lib.p1 - lib.p0
+        self._elen = np.where(lib.mask, np.linalg.norm(e, axis=-1), 0.0)        # (K, V)
+        self._perim = self._elen.sum(axis=1)                                    # (K,)
         K = prior.K
         per = int(math.ceil(n / K))
         sob = qmc.Sobol(d=3, scramble=True, seed=rng).random(1 << int(math.ceil(math.log2(per))))[:per]
@@ -91,6 +97,10 @@ class ParticleFilter:
         self.logw = np.full(self.n, -math.log(self.n))
         # MH moves invariant to p(s | h): random walk (symmetric, prior ratio = support indicator) or independent prior
         # proposal (acceptance = likelihood ratio). Both kernels are individually posterior-invariant.
+        contacts = [(o[1], o[2], o[3]) for _, _, o in self.hist if o[0]]
+        if self.contact_proposal and contacts:
+            self._mh_contact(np.asarray(contacts))
+            return
         for _ in range(self.mh_steps):
             indep = self.rng.random(self.n) < self.p_indep
             kp, xp, yp, tp = self.prior.sample(self.rng, self.n)
@@ -106,6 +116,81 @@ class ParticleFilter:
             self.k = np.where(acc, k2, self.k)
             self.x, self.y, self.th = np.where(acc, x2, self.x), np.where(acc, y2, self.y), np.where(acc, t2, self.th)
             self.loglik_hist = np.where(acc, ll2, self.loglik_hist)
+
+    # ---- contact-conditioned independence proposal ----------------------------------------------------------------
+    def _q_sample(self, C, n):
+        """Defensive mixture: prior w.p. beta, else align a random perimeter point of a random identity (edge chosen
+        proportional to length) with a random observed contact (position and outward normal), plus Gaussian noise."""
+        lib, rng = self.lib, self.rng
+        kp, xp, yp, tp = self.prior.sample(rng, n)
+        j = rng.integers(0, len(C), n)
+        k = rng.integers(0, lib.K, n)
+        cum = np.cumsum(self._elen[k], axis=1) / self._perim[k][:, None]
+        e = np.minimum((cum < rng.random(n)[:, None]).sum(axis=1), lib.V - 1)
+        u = rng.random(n)
+        pl = lib.p0[k, e] + u[:, None] * (lib.p1[k, e] - lib.p0[k, e])
+        th = wrap(C[j, 2] - lib.normal_ang[k, e] + self.q_sth * rng.standard_normal(n))
+        c, s = np.cos(th), np.sin(th)
+        x = C[j, 0] - (c * pl[:, 0] - s * pl[:, 1]) + self.q_sxy * rng.standard_normal(n)
+        y = C[j, 1] - (s * pl[:, 0] + c * pl[:, 1]) + self.q_sxy * rng.standard_normal(n)
+        use_prior = rng.random(n) < self.q_beta
+        return (np.where(use_prior, kp, k), np.where(use_prior, xp, x), np.where(use_prior, yp, y),
+                np.where(use_prior, tp, th))
+
+    def _q_logpdf(self, C, k, x, y, th):
+        """log q(s) of the defensive contact-conditioned mixture (closed form: Gaussian in theta per edge times a
+        Gaussian-blurred uniform segment in translation)."""
+        lib = self.lib
+        from scipy.special import log_ndtr
+        a = lib.p0[k]                                  # (N, V, 2)
+        b = lib.p1[k]
+        alpha = lib.normal_ang[k]                      # (N, V)
+        m = lib.mask[k]
+        c, s = np.cos(th)[:, None], np.sin(th)[:, None]
+        out = []
+        for cx, cy, cn in C:
+            dth = wrap(th[:, None] - (cn - alpha))
+            lth = -0.5 * (dth / self.q_sth) ** 2 - math.log(math.sqrt(2 * math.pi) * self.q_sth)
+            Ax = cx - (c * a[..., 0] - s * a[..., 1]); Ay = cy - (s * a[..., 0] + c * a[..., 1])
+            Dx = -(c * (b[..., 0] - a[..., 0]) - s * (b[..., 1] - a[..., 1]))
+            Dy = -(s * (b[..., 0] - a[..., 0]) + c * (b[..., 1] - a[..., 1]))
+            ln = np.where(m, np.hypot(Dx, Dy), 1.0)
+            ex, ey = Dx / ln, Dy / ln
+            vx, vy = x[:, None] - Ax, y[:, None] - Ay
+            along = vx * ex + vy * ey
+            perp = -vx * ey + vy * ex
+            lperp = -0.5 * (perp / self.q_sxy) ** 2 - math.log(math.sqrt(2 * math.pi) * self.q_sxy)
+            # log[Phi(along/s) - Phi((along-len)/s)] computed stably
+            hi, lo = log_ndtr(along / self.q_sxy), log_ndtr((along - ln) / self.q_sxy)
+            lseg = hi + np.log1p(-np.exp(np.minimum(lo - hi, -1e-300)))
+            term = np.where(m, lth + lperp + lseg, -np.inf)
+            out.append(logsumexp(term, axis=1) - np.log(self._perim[k]) - math.log(lib.K))
+        lq_contact = logsumexp(np.stack(out, 0), axis=0) - math.log(len(C))
+        lp = np.where(self.prior.inside(x, y), self.prior.log_density(), -np.inf)
+        return np.logaddexp(math.log(self.q_beta) + lp, math.log(1 - self.q_beta) + lq_contact)
+
+    def _mh_contact(self, C):
+        """Mixture of two posterior-invariant MH kernels per particle: random walk, or independence sampler with the
+        contact-conditioned proposal q (acceptance uses pi(s') q(s) / (pi(s) q(s')))."""
+        lq_cur = self._q_logpdf(C, self.k, self.x, self.y, self.th)
+        for _ in range(self.mh_steps):
+            use_q = self.rng.random(self.n) < 0.5
+            kq, xq, yq, tq = self._q_sample(C, self.n)
+            xr = self.x + self.rw_xy * self.rng.standard_normal(self.n)
+            yr = self.y + self.rw_xy * self.rng.standard_normal(self.n)
+            tr = wrap(self.th + self.rw_th * self.rng.standard_normal(self.n))
+            k2 = np.where(use_q, kq, self.k)
+            x2, y2, t2 = np.where(use_q, xq, xr), np.where(use_q, yq, yr), np.where(use_q, tq, tr)
+            ins = self.prior.inside(x2, y2)
+            ll2 = self._hist_loglik(k2, x2, y2, t2)
+            lq_new = self._q_logpdf(C, k2, x2, y2, t2)
+            log_acc = ll2 - self.loglik_hist + np.where(use_q, lq_cur - lq_new, 0.0)
+            log_acc = np.where(ins, log_acc, -np.inf)
+            acc = np.log(self.rng.random(self.n)) < log_acc
+            self.k = np.where(acc, k2, self.k)
+            self.x, self.y, self.th = np.where(acc, x2, self.x), np.where(acc, y2, self.y), np.where(acc, t2, self.th)
+            self.loglik_hist = np.where(acc, ll2, self.loglik_hist)
+            lq_cur = np.where(acc, lq_new, lq_cur)
 
     # ---- read-outs ------------------------------------------------------------------------------------------------
     def weights(self) -> np.ndarray:
@@ -162,6 +247,20 @@ class ParticleFilter:
         k0, x0, y0, t0 = s0
         ll0 = float(self._hist_loglik(np.array([k0]), np.array([x0]), np.array([y0]), np.array([t0]))[0])
         return ll0 - self.log_evidence
+
+    def ball_info(self, s0, r_xy: float = 5.0, r_th: float = math.radians(5.0)) -> float:
+        """Decision-relevant information: log P_hat(B(s0) | h) - log P(B(s0)), where B(s0) is the success region
+        (same identity, translation < r_xy, symmetry-folded rotation error < r_th). Bounded above by -log P(B); computed
+        from PF masses only (no density estimate). Floored at log(1/n) on the posterior side."""
+        k0, x0, y0, t0 = s0
+        w = self.weights()
+        g = self.lib.sym[k0]
+        inb = ((self.k == k0) & (np.hypot(self.x - x0, self.y - y0) < r_xy)
+               & (np.min(np.abs(wrap(self.th[:, None] - t0 - g[None, :])), axis=1) < r_th))
+        post = max(float(w[inb].sum()), 1.0 / self.n)
+        prior_mass = (1.0 / self.prior.K) * (math.pi * r_xy ** 2 / (2 * self.prior.xy_half) ** 2) * min(
+            1.0, len(g) * 2 * r_th / (2 * math.pi))
+        return math.log(post) - math.log(prior_mass)
 
     def realized_ig(self, s0, floor: float = 1e-3) -> float:
         """IG_T = log p_hat(s0 | h_T) - log p(s0) on the symmetry-folded space; floored at log(floor) (>= -6.9 nats)."""

@@ -27,6 +27,26 @@ Candidate fixes (to decide next run, then validate against an exact grid posteri
 Acceptance test for the fix: success / identity / IG change by < 1 pp / < 1 pp / < 0.05 nats from N to 4N (the
 pre-registered convergence check), and agreement with the grid reference on a reduced problem.
 
+### F1 update (same run): contact-conditioned proposals implemented
+`ParticleFilter` now uses, once contacts exist, a mixture of two posterior-invariant MH kernels per particle: random
+walk, and an independence sampler with a defensive contact-conditioned proposal q (align a length-weighted random
+perimeter point of a random identity with a random observed contact and its normal, plus noise; prior w.p. 0.1),
+whose density is evaluated in closed form (test: q integrates to 1 within MC error). Same 20 episodes
+(results/v1/dev/pilot2b_pf_convergence_contactq.json):
+
+| N_eval | success | identity acc. | IG (evidence) | ball information | s / episode |
+|---|---|---|---|---|---|
+| 2,000 | 0.80 | 0.85 | 15.9 | 6.91 | 0.30 |
+| 8,000 | 0.80 | 0.90 | 13.3 | 7.70 | 0.99 |
+| 32,000 | 0.75 | 0.85 | 11.8 | 7.73 | 4.07 |
+
+Success/identity are now stable already at N = 2,000 (bootstrap PF: 0.50 at N = 4,000), within the noise of 20
+episodes; the formal N vs 4N check on ≥ 300 episodes is still required. The **evidence-based IG keeps drifting with N**
+(its log-evidence is dominated by the first, prior-sampled update), so it is unsuitable as a metric. New metric
+**ball information** = log P̂(success region | h) − log P(success region) (bounded by ≈ 8.1 nats for asymmetric shapes,
+computed from PF masses only) converges between 8k and 32k (7.70 vs 7.73). Proposal: make ball information the
+co-primary metric instead of IG_T (deviation D3 revised; to be written into the v1.1 amendment).
+
 ## F2 — sPCE with prior contrastive samples saturates; total-state information is misaligned with success
 Untrained policy, one batch of 128 episodes on set S (rollout timing on the 2-vCPU sandbox):
 
