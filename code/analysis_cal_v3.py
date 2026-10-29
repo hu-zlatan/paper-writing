@@ -51,5 +51,20 @@ for f in sorted(glob.glob(os.path.join(base, "cal", "verify_*_sh*.jsonl"))):
             out["verify"].setdefault(cell, []).append(r["n_probes"])
 for cell, v in list(out["verify"].items()):
     out["verify"][cell] = {"n_episodes": len(v), "mean_probes": float(np.mean(v))}
+# E' failed -> sub = 8 for every v3 number: the n* rule re-applied to the sub-8 re-read (results/v3/cal_sub8, regrid3)
+out["n_star_sub8"] = {}
+for s in ("S", "A"):
+    d = {}
+    for f in glob.glob(os.path.join(base, "cal_sub8", f"nstar_{s}_*.jsonl")):
+        for line in open(f):
+            r = json.loads(line)
+            if "episode" in r:
+                d[r["episode"]] = r
+    if d:
+        p = float(np.mean([r["success"] for r in d.values()]))
+        out["n_star_sub8"][s] = {"n_star": 3 if p > 0.88 else (5 if p < 0.20 else 4), "gstar_success": p,
+                                 "n_episodes": len(d), "complete": len(d) == 200,
+                                 "success_flip_rate_vs_sub4": float(np.mean([r["success"] != r["orig_success"] for r in d.values()])),
+                                 "mean_abs_dBI_vs_sub4": float(np.mean([abs(r["ball_info"] - r["orig_ball_info"]) for r in d.values()]))}
 print(json.dumps(out, indent=1))
 json.dump(out, open(os.path.join(base, "12_cal_analysis.json"), "w"), indent=1)

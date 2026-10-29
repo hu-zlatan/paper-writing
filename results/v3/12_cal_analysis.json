@@ -66,5 +66,23 @@
    "n_episodes": 200,
    "mean_probes": 3.96
   }
+ },
+ "n_star_sub8": {
+  "S": {
+   "n_star": 4,
+   "gstar_success": 0.62,
+   "n_episodes": 200,
+   "complete": true,
+   "success_flip_rate_vs_sub4": 0.075,
+   "mean_abs_dBI_vs_sub4": 0.006044471179264313
+  },
+  "A": {
+   "n_star": 3,
+   "gstar_success": 0.985,
+   "n_episodes": 200,
+   "complete": true,
+   "success_flip_rate_vs_sub4": 0.0,
+   "mean_abs_dBI_vs_sub4": 0.004961466100181467
+  }
  }
 }

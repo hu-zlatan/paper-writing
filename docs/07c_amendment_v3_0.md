@@ -192,3 +192,10 @@ comparator E_train = 2 × 10⁵ from the start; H3 hold threshold 0.03 with part
 - **RL sweep validation set (recorded before the sweep, run 6):** v3.1 D9 names "500 `val3` episodes"; the trainer
   (`train_v2.Trainer.validate`) validates on its own fixed 500-episode stream (`stream("val_v2", set, κ, τ)`, states from
   the same prior). The sweep uses the trainer's set unchanged (no code change to the trainer); stated as a deviation.
+- **Cal′ n\* at sub 8** (`results/v3/12_cal_analysis.json` → `n_star_sub8`): S 0.620 → n\* 4; A 0.985 → n\* 3 —
+  unchanged, so τ_κ stand. Success flips sub 4 vs sub 8 on the 200 S0 cal3 episodes: 7.5 % (A0: 0 %); mean |ΔBI|
+  0.006 nats.
+- **Lat′ first pass** (500 decisions, 127 S12 pilot3 episodes, `results/v3/12_lat_analysis.json`): student median
+  L_dec 0.383 ms; G\* full (2,000, 512, 64) 709 ms (1,850×); pruned-16 194 ms → G\* full / pruned-16 = 3.65 < 10.
+  Two configurations (g500_512_64, g125_512_64) had CI half-widths > 10 % → per the if_fail rule 500 more decisions
+  (episodes from 132) are run and Q, R_b candidates and H1-fb activation are frozen on the pooled 1,000.
