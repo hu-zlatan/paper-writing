@@ -199,3 +199,10 @@ comparator E_train = 2 × 10⁵ from the start; H3 hold threshold 0.03 with part
   L_dec 0.383 ms; G\* full (2,000, 512, 64) 709 ms (1,850×); pruned-16 194 ms → G\* full / pruned-16 = 3.65 < 10.
   Two configurations (g500_512_64, g125_512_64) had CI half-widths > 10 % → per the if_fail rule 500 more decisions
   (episodes from 132) are run and Q, R_b candidates and H1-fb activation are frozen on the pooled 1,000.
+- **Lat′ frozen** (pooled 1,000 decisions on 253 S12 pilot3 episodes, two runner jobs; `results/v3/12_lat_analysis.json`):
+  per the if_fail rule the values are frozen after the 500 extra decisions even though six CI half-widths still exceed
+  10 % (the second runner was slower: student median 0.60 vs 0.38 ms — pooling across machines widens the CIs; the
+  final latency benchmark on test decisions will be one machine). Student median L_dec 0.41 ms; G\* full 913 ms
+  (2,238×); pruned-16 283 ms → ratio **3.2 < 10 → H1-fb withdrawn** (with the assimilation + neighbour-list sentence).
+  **Q** = 14 configurations; **R_b candidates** (maximal elements): g125_128_64, g125_512_16, g500_32_64, g500_128_16,
+  g500_512_4 → each run on the first 200 S12 pilot3 episodes at sub 8 (`experiments/v3_rb.json`).
