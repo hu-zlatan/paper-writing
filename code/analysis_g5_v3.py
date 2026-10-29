@@ -6,7 +6,9 @@ mass, i.e. posterior ball mass > exp(-0.5); computed from the recorded ball_mass
 0.15 D_c); eps_c = min(0.05 BI_c(G*), 0.15 D_c^BI) nats. H-star(c) = heuristic with the highest success on its 200
 episodes (ties -> B-spread < B-fan < B-cov). Flat' screen: H-star success >= success(G*) - delta_c in >= 2 cells.
 Episode sets are used in full (G* 0-499, others 0-199); incomplete files are reported as such.
-Writes results/v3/12_g5_analysis.json."""
+E' failed, so the binding numbers are the sub-8 re-reads (results/v3/g5_sub8, regrid3); `--sub 4` reports the
+original eval3 read-out for comparison. Writes results/v3/12_g5_analysis[_sub4].json."""
+import sys
 import glob
 import json
 import math
@@ -20,9 +22,13 @@ N_EXPECT = {"gstar": 500, "random": 200, "b_spread": 200, "b_fan": 200, "b_cov":
 HEUR = ("b_spread", "b_fan", "b_cov")
 
 
+SUB = 4 if "--sub" in sys.argv and sys.argv[sys.argv.index("--sub") + 1] == "4" else 8
+FOLDER = "g5" if SUB == 4 else "g5_sub8"
+
+
 def load(pre, method):
     d = {}
-    for f in glob.glob(os.path.join(base, "g5", f"{pre}_{method}_*.jsonl")):
+    for f in glob.glob(os.path.join(base, FOLDER, f"{pre}_{method}_*.jsonl")):
         for line in open(f):
             r = json.loads(line)
             if "episode" in r:
@@ -41,7 +47,7 @@ def summ(d):
             "sat": float(sat.mean()) if len(e) else None}
 
 
-out = {"cells": {}}
+out = {"sub": SUB, "cells": {}}
 flat_count = 0
 for name, pre in CELLS.items():
     m = {k: load(pre, k) for k in N_EXPECT}
@@ -73,4 +79,4 @@ out["flat_screen_cells"] = flat_count
 out["flat_prime_likely"] = bool(flat_count >= 2)
 out["surviving_cells"] = [k for k, v in out["cells"].items() if v["passes"]]
 print(json.dumps(out, indent=1))
-json.dump(out, open(os.path.join(base, "12_g5_analysis.json"), "w"), indent=1)
+json.dump(out, open(os.path.join(base, "12_g5_analysis.json" if SUB == 8 else "12_g5_analysis_sub4.json"), "w"), indent=1)

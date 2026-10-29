@@ -1,0 +1,207 @@
+{
+ "sub": 4,
+ "cells": {
+  "S0": {
+   "gstar": {
+    "n": 81,
+    "success": 0.5679012345679012,
+    "se_success": 0.05538382236088382,
+    "bi": 6.865889109786917,
+    "sd_bi": 0.9742943889677986,
+    "sat": 0.345679012345679
+   },
+   "random": {
+    "n": 8,
+    "success": 0.0,
+    "se_success": 0.0,
+    "bi": 4.742873080529898,
+    "sd_bi": 1.5837492019814148,
+    "sat": 0.0
+   },
+   "b_spread": {
+    "n": 0,
+    "success": null,
+    "se_success": null,
+    "bi": null,
+    "sd_bi": null,
+    "sat": null
+   },
+   "b_fan": {
+    "n": 0,
+    "success": null,
+    "se_success": null,
+    "bi": null,
+    "sd_bi": null,
+    "sat": null
+   },
+   "b_cov": {
+    "n": 0,
+    "success": null,
+    "se_success": null,
+    "bi": null,
+    "sd_bi": null,
+    "sat": null
+   },
+   "complete": {
+    "gstar": false,
+    "random": false,
+    "b_spread": false,
+    "b_fan": false,
+    "b_cov": false
+   },
+   "gstar_first200_success": 0.3076923076923077,
+   "gstar_last300_success": 0.6176470588235294,
+   "D_c": 0.5679012345679012,
+   "D_c_BI": 2.123016029257019,
+   "plus10pp_ok": true,
+   "nondegenerate": {
+    "gstar_in_[0.15,0.90]": true,
+    "D_c>=0.20": true,
+    "sat<0.5": true
+   },
+   "passes": true,
+   "delta_c": 0.04,
+   "eps_c": 0.3184524043885528,
+   "H_star": "b_spread",
+   "H_star_success": -1.0,
+   "flat_screen": false
+  },
+  "S12": {
+   "gstar": {
+    "n": 400,
+    "success": 0.4225,
+    "se_success": 0.024728792083212166,
+    "bi": 6.283920620241161,
+    "sd_bi": 0.9826730923489423,
+    "sat": 0.0975
+   },
+   "random": {
+    "n": 200,
+    "success": 0.085,
+    "se_success": 0.019769399225283587,
+    "bi": 3.007686902764506,
+    "sd_bi": 1.999297308047809,
+    "sat": 0.005
+   },
+   "b_spread": {
+    "n": 200,
+    "success": 0.07,
+    "se_success": 0.018086892447072265,
+    "bi": 3.837229995694246,
+    "sd_bi": 0.7831248178472313,
+    "sat": 0.0
+   },
+   "b_fan": {
+    "n": 200,
+    "success": 0.395,
+    "se_success": 0.034653706828922715,
+    "bi": 6.051436735651171,
+    "sd_bi": 1.092324330515993,
+    "sat": 0.06
+   },
+   "b_cov": {
+    "n": 200,
+    "success": 0.355,
+    "se_success": 0.033920910080708584,
+    "bi": 6.098398703436613,
+    "sd_bi": 1.024784944071849,
+    "sat": 0.06
+   },
+   "complete": {
+    "gstar": false,
+    "random": true,
+    "b_spread": true,
+    "b_fan": true,
+    "b_cov": true
+   },
+   "gstar_first200_success": 0.42,
+   "gstar_last300_success": 0.425,
+   "D_c": 0.33749999999999997,
+   "D_c_BI": 3.276233717476655,
+   "plus10pp_ok": true,
+   "nondegenerate": {
+    "gstar_in_[0.15,0.90]": true,
+    "D_c>=0.20": true,
+    "sat<0.5": true
+   },
+   "passes": true,
+   "delta_c": 0.04,
+   "eps_c": 0.31419603101205806,
+   "H_star": "b_fan",
+   "H_star_success": 0.395,
+   "flat_screen": true
+  },
+  "A12": {
+   "gstar": {
+    "n": 500,
+    "success": 0.472,
+    "se_success": 0.022347949832668024,
+    "bi": 6.712143126357323,
+    "sd_bi": 1.3181188141250821,
+    "sat": 0.304
+   },
+   "random": {
+    "n": 200,
+    "success": 0.04,
+    "se_success": 0.013891177924157585,
+    "bi": 2.4992384750895793,
+    "sd_bi": 2.086783416104076,
+    "sat": 0.005
+   },
+   "b_spread": {
+    "n": 200,
+    "success": 0.02,
+    "se_success": 0.009924336870116702,
+    "bi": 3.753720049633871,
+    "sd_bi": 0.9219262394767223,
+    "sat": 0.0
+   },
+   "b_fan": {
+    "n": 200,
+    "success": 0.39,
+    "se_success": 0.03457567623250011,
+    "bi": 6.372295546359387,
+    "sd_bi": 1.3141235584240731,
+    "sat": 0.22
+   },
+   "b_cov": {
+    "n": 200,
+    "success": 0.365,
+    "se_success": 0.034127679271557736,
+    "bi": 6.089526609761211,
+    "sd_bi": 1.5832338899077243,
+    "sat": 0.225
+   },
+   "complete": {
+    "gstar": true,
+    "random": true,
+    "b_spread": true,
+    "b_fan": true,
+    "b_cov": true
+   },
+   "gstar_first200_success": 0.465,
+   "gstar_last300_success": 0.4766666666666667,
+   "D_c": 0.432,
+   "D_c_BI": 4.212904651267744,
+   "plus10pp_ok": true,
+   "nondegenerate": {
+    "gstar_in_[0.15,0.90]": true,
+    "D_c>=0.20": true,
+    "sat<0.5": true
+   },
+   "passes": true,
+   "delta_c": 0.04,
+   "eps_c": 0.3356071563178662,
+   "H_star": "b_fan",
+   "H_star_success": 0.39,
+   "flat_screen": false
+  }
+ },
+ "flat_screen_cells": 1,
+ "flat_prime_likely": false,
+ "surviving_cells": [
+  "S0",
+  "S12",
+  "A12"
+ ]
+}
