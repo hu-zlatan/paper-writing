@@ -1,0 +1,9 @@
+{
+ "purpose": "D3-B validation follow-up (r3)",
+ "jobs": [
+  {
+   "id": "v3_d3b_val_s523_060_r63_c63_r65",
+   "cmd": "python main.py eval3 --set S --method belief_student --weights ../results/v3/d3b/S_k12_belief_hp0_s523_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 65 --count 2 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_belief_student_s523_r2_060_r63_c63_r65"
+  }
+ ]
+}
