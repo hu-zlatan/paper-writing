@@ -15,15 +15,26 @@ from .shapes import get_set
 from .travel import PHI, PSI, TravelState
 
 
-def g2_belief(setname, kappa, tau, n_star, i, n_dec=2000, M=64):
-    lib, prior, eps = make_states_v2(setname, "g2", i + 1)
+def _k(split, *keys):
+    """v2 keys unchanged for split 'g2'; any other split (v3: 'g2v3', amendment v3.0 C12) is added to every key."""
+    return keys if split == "g2" else (split,) + keys
+
+
+def g2_belief(setname, kappa, tau, n_star, i, n_dec=2000, M=64, split="g2"):
     om = ObsModel()
-    s0, phi0 = eps[i]
-    u = int(stream("g2_steps", setname, kappa, i).integers(0, n_star))
-    pf = ParticleFilter(lib, om, prior, n_dec, stream("g2_pf", setname, kappa, i))
+    if split == "g2":
+        lib, prior, eps = make_states_v2(setname, "g2", i + 1)
+        s0, phi0 = eps[i]
+    else:
+        from .v3 import state_v3
+        lib = Library(get_set(setname))
+        prior = Prior(lib.K)
+        s0, phi0 = state_v3(setname, split, i, prior=prior)
+    u = int(stream(*_k(split, "g2_steps", setname, kappa, i)).integers(0, n_star))
+    pf = ParticleFilter(lib, om, prior, n_dec, stream(*_k(split, "g2_pf", setname, kappa, i)))
     ts = TravelState(phi0, kappa, tau)
-    pol = GStar(stream("g2_pol", setname, kappa, i), M=M)
-    obs_rng = stream("g2_obs", setname, kappa, i)
+    pol = GStar(stream(*_k(split, "g2_pol", setname, kappa, i)), M=M)
+    obs_rng = stream(*_k(split, "g2_obs", setname, kappa, i))
     for _ in range(u):
         if ts.done():
             break
@@ -34,19 +45,19 @@ def g2_belief(setname, kappa, tau, n_star, i, n_dec=2000, M=64):
     return lib, om, pf, ts, u
 
 
-def g2_gap(setname, kappa, tau, n_star, i, n_la=500, C1=32, M_outer=64):
-    lib, om, pf, ts, u = g2_belief(setname, kappa, tau, n_star, i)
+def g2_gap(setname, kappa, tau, n_star, i, n_la=500, C1=32, M_outer=64, split="g2"):
+    lib, om, pf, ts, u = g2_belief(setname, kappa, tau, n_star, i, split=split)
     if ts.done() or not ts.feasible().any():
         # budget exhausted before the drawn step: no decision is left, V_LA = V_G* = 0 (contributes nothing to either
         # mean in the ratio-of-means G); recorded and counted
         return {"no_budget_left": True, "v_la": 0.0, "v_greedy": 0.0, "a_la": -1, "a_greedy": -1, "gap_abs": 0.0,
                 "gap_rel": float("nan"), "set": setname, "kappa": kappa, "tau": tau, "n_star": n_star, "index": i,
                 "steps_before": u, "tau_rem": ts.tau_rem}
-    rng = stream("g2_la", setname, kappa, i)
+    rng = stream(*_k(split, "g2_la", setname, kappa, i))
     prob = TouchbedProblem.from_pf(pf, n_la, rng)
-    g_full = GStar(stream("g2_first", setname, kappa, i), M=64)
+    g_full = GStar(stream(*_k(split, "g2_first", setname, kappa, i)), M=64)
     prob.first_greedy = lambda logw, budget, r: g_full.act(pf, budget)
     r = lookahead_gap(prob, np.zeros(n_la), ts, seed=int(rng.integers(1 << 30)), C1=C1, M_outer=M_outer, greedy_M=0)
     r.update({"set": setname, "kappa": kappa, "tau": tau, "n_star": n_star, "index": i, "steps_before": u,
-              "tau_rem": ts.tau_rem})
+              "tau_rem": ts.tau_rem, "split": split})
     return r

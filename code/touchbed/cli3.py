@@ -84,6 +84,14 @@ def make_policy(method, rng, n_star=None, weights=None):
     if method in ("student", "belief_student", "bc"):
         st, _ = load_student(weights)
         return st, st.needs_belief, 2000
+    if method == "rl":                                              # RL-relative comparator (train2 --frame rel)
+        from .train_v2 import TrainConfigV2, TrainerV2
+        meta = json.load(open(weights.replace(".npz", ".json")))
+        tr = TrainerV2(TrainConfigV2(**meta["config"]))
+        z = np.load(weights)
+        for i, p in enumerate(tr.pi.params()):
+            p[...] = z[f"pi_{i}"]
+        return tr, False, 2000
     if method in ("pruned16", "random16"):
         st, _ = load_student(weights)
         return Pruned(rng, st, 16, 64, random_k=method == "random16"), True, 2000
@@ -270,6 +278,23 @@ def cmd_g1c(a):
     print(f"G1C_DONE wall_s={time.time() - t0:.0f}")
 
 
+def cmd_g2v3(a):
+    """G2′ / H3 (amendment v3.0 C12): one look-ahead estimate per g2v3 belief index (B6 estimator, code unchanged)."""
+    from .g2 import g2_gap
+    from .v3 import require_v3_actions
+    require_v3_actions()
+    t0 = time.time()
+    with _open(a.out, ".jsonl") as f:
+        f.write(json.dumps({"header": True, "args": vars(a), "env": _env()}) + "\n")
+        for i in range(a.start, a.start + a.count):
+            if time.time() - t0 > 0.8 * a.budget_minutes * 60:
+                f.write(json.dumps({"EARLY_STOP_AT_80_PCT_BUDGET": True, "next_index": i}) + "\n")
+                break
+            r = g2_gap(a.set, a.kappa, a.tau, a.n_star, i, C1=a.C1, M_outer=a.M_outer, split="g2v3")
+            f.write(json.dumps(r) + "\n"); f.flush()
+    print(f"G2V3_DONE wall_s={time.time() - t0:.0f}")
+
+
 def cmd_pilot3(a):
     """Mandatory TIME_ESTIMATE pilot (RESTRICTS pilot_required, <= 5 min): one episode per method and one labelled
     episode in one cell, then extrapolation to the sweep sizes of docs/08_experiment_plan_v3.yaml."""
@@ -343,9 +368,12 @@ def register(sub):
     g.add_argument("--kappa", type=float, default=12.0); g.add_argument("--start", type=int, default=0)
     g.add_argument("--count", type=int, default=1); g.add_argument("--C1", type=int, default=32)
     g.add_argument("--M-outer", type=int, default=64); g.add_argument("--out", required=True)
+    g2 = sub.add_parser("g2v3"); common(g2, split=False)
+    g2.add_argument("--n-star", type=int, default=4); g2.add_argument("--C1", type=int, default=32)
+    g2.add_argument("--M-outer", type=int, default=64)
     p = sub.add_parser("pilot3")
     p.add_argument("--set", default="S"); p.add_argument("--kappa", type=float, default=12.0)
     p.add_argument("--tau", type=float, default=10.0); p.add_argument("--allow-32", action="store_true")
     p.add_argument("--out", required=True)
     return {"eval3": cmd_eval3, "calib3": cmd_calib3, "label3": cmd_label3, "dagger3": cmd_dagger3,
-            "distill3": cmd_distill3, "latency3": cmd_latency3, "g1c": cmd_g1c, "pilot3": cmd_pilot3}
+            "distill3": cmd_distill3, "latency3": cmd_latency3, "g1c": cmd_g1c, "g2v3": cmd_g2v3, "pilot3": cmd_pilot3}
