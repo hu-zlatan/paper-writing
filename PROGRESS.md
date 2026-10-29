@@ -640,12 +640,9 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
   - G5′ sub-8 re-reads in progress (S12 `v3_sub8_S12_r2`, A12 `v3_sub8_A12_r3`, S0 `v3_sub8_S0`); G2′ in progress
     (`v3_g2_r4`, `v3_g2_k2_r4`; bias check inside `v3_g2*`); D3-B r2 dispatched; RL sweep dispatched (cfg2 done).
 - **Where to resume (run 7):**
-  1. If `results/v3/d3rem/S_k12_s503_r2_{400..700}.npz` exist (sandbox run of run 6, committed) and
-     `results/v3/d3rem/S_k12_hp0_s50?_r2.npz` do not: train remedy round 2 per seed — `distill3 --round 2 --init
-     d3rem/..._r1.npz --shards <label3 00–11, 15–29> d3rem/S_k12_s<seed>_r1_*.npz d3rem/S_k12_s<seed>_r2_*.npz
-     --val-shards label3 12–14 --out ../results/v3/d3rem/S_k12_hp0_s<seed>_r2` (sandbox, seconds), commit, then
-     dispatch `experiments/v3_d3rem_val.json`. If the s503 shards are missing, re-run them (dagger3, see the manifest
-     `v3_d3rem_r2.json`).
+  1. Done in run 6: remedy DAgger r2 complete (s503 400–700 in the sandbox), remedy round-2 students trained
+     (R̄ 0.187 / 0.184 / 0.201), remedy validation dispatched (`experiments/v3_d3rem_val.json`, 126 jobs, sub 8).
+     Check it with the resume tool and complete early-stopped shards.
   2. When the remedy validation is complete: `python code/analysis_d3_v3.py --tag rem` → pass → H1 alive (freeze
      commit after G5′ sub-8 + R_b); fail → **H1 dead; H1-fb already withdrawn → outcome row 4** (characterisation
      paper) → tell the owner (OWNER_TODO) and proceed to stage 13/14 with the fallback plan, not a fourth design.
