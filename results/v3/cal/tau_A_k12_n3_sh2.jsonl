@@ -1,0 +1,26 @@
+{"header": true, "args": {"cmd": "calib3", "set": "A", "kappa": 12.0, "tau": 10.0, "start": 50, "count": 25, "budget_minutes": 25.0, "allow_32": false, "out": "../results/v3/cal/tau_A_k12_n3_sh2", "n_star": 3}, "env": {"TOUCHBED_NPHI": "64", "action_set": "64x8", "A": 512, "numpy": "2.5.4", "python": "3.12.15", "threads": {"OMP_NUM_THREADS": "1", "OPENBLAS_NUM_THREADS": "1", "MKL_NUM_THREADS": "1"}}}
+{"episode": 50, "set": "A", "kappa": 12.0, "n_star": 3, "travel_time": 0.4749235625049302, "travel_rad": 0.12433469791518181}
+{"episode": 51, "set": "A", "kappa": 12.0, "n_star": 3, "travel_time": 0.13237001310526542, "travel_rad": 0.034654388393923874}
+{"episode": 52, "set": "A", "kappa": 12.0, "n_star": 3, "travel_time": 0.021315465460602923, "travel_rad": 0.005580375808239779}
+{"episode": 53, "set": "A", "kappa": 12.0, "n_star": 3, "travel_time": 0.17428175963445502, "travel_rad": 0.04562685797685884}
+{"episode": 54, "set": "A", "kappa": 12.0, "n_star": 3, "travel_time": 0.1698842857940306, "travel_rad": 0.044475602017572946}
+{"episode": 55, "set": "A", "kappa": 12.0, "n_star": 3, "travel_time": 0.13083920534779558, "travel_rad": 0.03425362386018005}
+{"episode": 56, "set": "A", "kappa": 12.0, "n_star": 3, "travel_time": 0.0850765356515053, "travel_rad": 0.022272984949636587}
+{"episode": 57, "set": "A", "kappa": 12.0, "n_star": 3, "travel_time": 0.12335168019763731, "travel_rad": 0.03229339435973788}
+{"episode": 58, "set": "A", "kappa": 12.0, "n_star": 3, "travel_time": 0.21579089167988807, "travel_rad": 0.056493923334427265}
+{"episode": 59, "set": "A", "kappa": 12.0, "n_star": 3, "travel_time": 0.12074502973318069, "travel_rad": 0.031610974863936825}
+{"episode": 60, "set": "A", "kappa": 12.0, "n_star": 3, "travel_time": 0.0467242572263471, "travel_rad": 0.012232381937227643}
+{"episode": 61, "set": "A", "kappa": 12.0, "n_star": 3, "travel_time": 0.041439280190002536, "travel_rad": 0.010848778184580077}
+{"episode": 62, "set": "A", "kappa": 12.0, "n_star": 3, "travel_time": 0.09742974738792642, "travel_rad": 0.025507048219584938}
+{"episode": 63, "set": "A", "kappa": 12.0, "n_star": 3, "travel_time": 0.007382827756980737, "travel_rad": 0.001932819787004103}
+{"episode": 64, "set": "A", "kappa": 12.0, "n_star": 3, "travel_time": 0.07638828800608888, "travel_rad": 0.019998407035019206}
+{"episode": 65, "set": "A", "kappa": 12.0, "n_star": 3, "travel_time": 0.07298630494296177, "travel_rad": 0.01910776995178942}
+{"episode": 66, "set": "A", "kappa": 12.0, "n_star": 3, "travel_time": 0.13844371750476325, "travel_rad": 0.03624448048738538}
+{"episode": 67, "set": "A", "kappa": 12.0, "n_star": 3, "travel_time": 0.13274091124417975, "travel_rad": 0.03475148929962746}
+{"episode": 68, "set": "A", "kappa": 12.0, "n_star": 3, "travel_time": 0.051020992504935636, "travel_rad": 0.01335726460269715}
+{"episode": 69, "set": "A", "kappa": 12.0, "n_star": 3, "travel_time": 0.18383011764796287, "travel_rad": 0.048126612259282275}
+{"episode": 70, "set": "A", "kappa": 12.0, "n_star": 3, "travel_time": 0.1363088466389919, "travel_rad": 0.03568557260169625}
+{"episode": 71, "set": "A", "kappa": 12.0, "n_star": 3, "travel_time": 0.10910506846675871, "travel_rad": 0.028563640130381707}
+{"episode": 72, "set": "A", "kappa": 12.0, "n_star": 3, "travel_time": 0.10900837197629487, "travel_rad": 0.028538325048375945}
+{"episode": 73, "set": "A", "kappa": 12.0, "n_star": 3, "travel_time": 0.03387995288144108, "travel_rad": 0.008869750923025332}
+{"episode": 74, "set": "A", "kappa": 12.0, "n_star": 3, "travel_time": 0.10607457079451499, "travel_rad": 0.027770257695061584}
