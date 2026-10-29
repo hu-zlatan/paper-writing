@@ -226,3 +226,10 @@ comparator E_train = 2 × 10⁵ from the start; H3 hold threshold 0.03 with part
   `plans/stage_12_experiment_run_v3_main_row4.md` (M1 RL training; M2 no-grid test3 0–499 actions for G\*, random,
   remedied students, RL; M3 g_T / H2; M4 sub-8 success/BI re-read on test3 0–299). No test3 episode had been run
   before this commit; its hash is recorded in PROGRESS.md.
+- **Exploratory paired heuristic row (stage 15 v3, run 7; written before it runs).** B-fan (the S12 H★ at the G5′
+  screen, unchanged) on test3 0–299, S12, sub 8 (`experiments/v3_t3_bfan.json`; pilot: one pilot3 episode 83 s in the
+  sandbox → ≤ 7 CPU-h). Contrasts added to `analysis_m4_v3.py`: b_fan − student, b_fan − G\* (paired crossed
+  bootstrap). Readings fixed now: (a) student − b_fan ci95 excludes 0 in the student's favour → "the distilled student
+  exceeds a travel-nearest heuristic on test3 (exploratory)"; (b) otherwise → "on test3 the learned policies were not
+  shown to exceed a travel-nearest heuristic; at n\* = 4 the S12 task may be flat (exploratory, cf. G5′ flat screen)".
+  Not the dropped H★/H1c test (H1a was never reached); neither reading changes row 4.

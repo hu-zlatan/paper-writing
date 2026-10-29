@@ -32,6 +32,9 @@ meth = {"gstar": [load("S_k12_gstar_*.jsonl")],
         "student": [load(f"S_k12_student_rem_s{s}_*.jsonl") for s in (501, 502, 503)],
         "rl": [load(f"S_k12_rl_s{s}_*.jsonl") for s in (511, 512, 513)]}
 eps = [e for e in range(N) if all(e in d for ds in meth.values() for d in ds)]
+# exploratory paired heuristic row (stage 15 v3 item 1; status note in amendment v3.0): separate block, the M4 rows
+# above are unchanged by it
+bfan = load("S_k12_b_fan_*.jsonl")
 g5 = json.load(open(os.path.join(base, "12_g5_analysis.json")))["cells"]["S12"]
 out = {"n_episodes": len(eps), "complete": len(eps) == N, "delta_S12": g5["delta_c"], "rows": {}, "diffs": {}}
 
@@ -56,5 +59,17 @@ if eps:
     if out["gap_closure_reported"]:
         s = out["rows"]
         out["gap_closure"] = (s["student"]["success"] - s["rl"]["success"]) / (s["gstar"]["success"] - s["rl"]["success"])
+eps_h = [e for e in eps if e in bfan]
+out["exploratory_b_fan"] = {"n_episodes": len(eps_h), "complete": len(eps_h) == N}
+if eps_h:
+    meth["b_fan"] = [bfan]
+    eps_all, eps = eps, eps_h
+    out["exploratory_b_fan"]["success"] = float(arr("b_fan", "success").mean())
+    out["exploratory_b_fan"]["ball_info"] = float(arr("b_fan", "ball_info").mean())
+    for a, b in (("student", "b_fan"), ("b_fan", "gstar"), ("rl", "b_fan")):
+        for key in ("success", "ball_info"):
+            r95 = crossed_bootstrap_diff(arr(a, key), arr(b, key), alpha=0.025)
+            out["exploratory_b_fan"][f"{a}-{b}:{key}"] = {"diff": r95["diff"], "ci95": [r95["lower"], r95["upper"]]}
+    eps = eps_all
 print(json.dumps(out, indent=1))
 json.dump(out, open(os.path.join(base, "14_m4_analysis.json"), "w"), indent=1)

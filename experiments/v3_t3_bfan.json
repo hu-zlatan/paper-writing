@@ -1,0 +1,205 @@
+{
+ "purpose": "Stage 15 v3 item 1: exploratory paired B-fan row on test3 0-299, S12, sub 8 (status note in amendment v3.0).",
+ "jobs": [
+  {
+   "id": "v3_t3_bfan_000",
+   "cmd": "python main.py eval3 --set S --method b_fan --kappa 12 --tau 4.9 --n-star 4 --split test3 --start 0 --count 6 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_b_fan_000"
+  },
+  {
+   "id": "v3_t3_bfan_006",
+   "cmd": "python main.py eval3 --set S --method b_fan --kappa 12 --tau 4.9 --n-star 4 --split test3 --start 6 --count 6 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_b_fan_006"
+  },
+  {
+   "id": "v3_t3_bfan_012",
+   "cmd": "python main.py eval3 --set S --method b_fan --kappa 12 --tau 4.9 --n-star 4 --split test3 --start 12 --count 6 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_b_fan_012"
+  },
+  {
+   "id": "v3_t3_bfan_018",
+   "cmd": "python main.py eval3 --set S --method b_fan --kappa 12 --tau 4.9 --n-star 4 --split test3 --start 18 --count 6 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_b_fan_018"
+  },
+  {
+   "id": "v3_t3_bfan_024",
+   "cmd": "python main.py eval3 --set S --method b_fan --kappa 12 --tau 4.9 --n-star 4 --split test3 --start 24 --count 6 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_b_fan_024"
+  },
+  {
+   "id": "v3_t3_bfan_030",
+   "cmd": "python main.py eval3 --set S --method b_fan --kappa 12 --tau 4.9 --n-star 4 --split test3 --start 30 --count 6 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_b_fan_030"
+  },
+  {
+   "id": "v3_t3_bfan_036",
+   "cmd": "python main.py eval3 --set S --method b_fan --kappa 12 --tau 4.9 --n-star 4 --split test3 --start 36 --count 6 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_b_fan_036"
+  },
+  {
+   "id": "v3_t3_bfan_042",
+   "cmd": "python main.py eval3 --set S --method b_fan --kappa 12 --tau 4.9 --n-star 4 --split test3 --start 42 --count 6 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_b_fan_042"
+  },
+  {
+   "id": "v3_t3_bfan_048",
+   "cmd": "python main.py eval3 --set S --method b_fan --kappa 12 --tau 4.9 --n-star 4 --split test3 --start 48 --count 6 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_b_fan_048"
+  },
+  {
+   "id": "v3_t3_bfan_054",
+   "cmd": "python main.py eval3 --set S --method b_fan --kappa 12 --tau 4.9 --n-star 4 --split test3 --start 54 --count 6 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_b_fan_054"
+  },
+  {
+   "id": "v3_t3_bfan_060",
+   "cmd": "python main.py eval3 --set S --method b_fan --kappa 12 --tau 4.9 --n-star 4 --split test3 --start 60 --count 6 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_b_fan_060"
+  },
+  {
+   "id": "v3_t3_bfan_066",
+   "cmd": "python main.py eval3 --set S --method b_fan --kappa 12 --tau 4.9 --n-star 4 --split test3 --start 66 --count 6 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_b_fan_066"
+  },
+  {
+   "id": "v3_t3_bfan_072",
+   "cmd": "python main.py eval3 --set S --method b_fan --kappa 12 --tau 4.9 --n-star 4 --split test3 --start 72 --count 6 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_b_fan_072"
+  },
+  {
+   "id": "v3_t3_bfan_078",
+   "cmd": "python main.py eval3 --set S --method b_fan --kappa 12 --tau 4.9 --n-star 4 --split test3 --start 78 --count 6 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_b_fan_078"
+  },
+  {
+   "id": "v3_t3_bfan_084",
+   "cmd": "python main.py eval3 --set S --method b_fan --kappa 12 --tau 4.9 --n-star 4 --split test3 --start 84 --count 6 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_b_fan_084"
+  },
+  {
+   "id": "v3_t3_bfan_090",
+   "cmd": "python main.py eval3 --set S --method b_fan --kappa 12 --tau 4.9 --n-star 4 --split test3 --start 90 --count 6 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_b_fan_090"
+  },
+  {
+   "id": "v3_t3_bfan_096",
+   "cmd": "python main.py eval3 --set S --method b_fan --kappa 12 --tau 4.9 --n-star 4 --split test3 --start 96 --count 6 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_b_fan_096"
+  },
+  {
+   "id": "v3_t3_bfan_102",
+   "cmd": "python main.py eval3 --set S --method b_fan --kappa 12 --tau 4.9 --n-star 4 --split test3 --start 102 --count 6 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_b_fan_102"
+  },
+  {
+   "id": "v3_t3_bfan_108",
+   "cmd": "python main.py eval3 --set S --method b_fan --kappa 12 --tau 4.9 --n-star 4 --split test3 --start 108 --count 6 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_b_fan_108"
+  },
+  {
+   "id": "v3_t3_bfan_114",
+   "cmd": "python main.py eval3 --set S --method b_fan --kappa 12 --tau 4.9 --n-star 4 --split test3 --start 114 --count 6 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_b_fan_114"
+  },
+  {
+   "id": "v3_t3_bfan_120",
+   "cmd": "python main.py eval3 --set S --method b_fan --kappa 12 --tau 4.9 --n-star 4 --split test3 --start 120 --count 6 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_b_fan_120"
+  },
+  {
+   "id": "v3_t3_bfan_126",
+   "cmd": "python main.py eval3 --set S --method b_fan --kappa 12 --tau 4.9 --n-star 4 --split test3 --start 126 --count 6 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_b_fan_126"
+  },
+  {
+   "id": "v3_t3_bfan_132",
+   "cmd": "python main.py eval3 --set S --method b_fan --kappa 12 --tau 4.9 --n-star 4 --split test3 --start 132 --count 6 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_b_fan_132"
+  },
+  {
+   "id": "v3_t3_bfan_138",
+   "cmd": "python main.py eval3 --set S --method b_fan --kappa 12 --tau 4.9 --n-star 4 --split test3 --start 138 --count 6 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_b_fan_138"
+  },
+  {
+   "id": "v3_t3_bfan_144",
+   "cmd": "python main.py eval3 --set S --method b_fan --kappa 12 --tau 4.9 --n-star 4 --split test3 --start 144 --count 6 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_b_fan_144"
+  },
+  {
+   "id": "v3_t3_bfan_150",
+   "cmd": "python main.py eval3 --set S --method b_fan --kappa 12 --tau 4.9 --n-star 4 --split test3 --start 150 --count 6 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_b_fan_150"
+  },
+  {
+   "id": "v3_t3_bfan_156",
+   "cmd": "python main.py eval3 --set S --method b_fan --kappa 12 --tau 4.9 --n-star 4 --split test3 --start 156 --count 6 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_b_fan_156"
+  },
+  {
+   "id": "v3_t3_bfan_162",
+   "cmd": "python main.py eval3 --set S --method b_fan --kappa 12 --tau 4.9 --n-star 4 --split test3 --start 162 --count 6 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_b_fan_162"
+  },
+  {
+   "id": "v3_t3_bfan_168",
+   "cmd": "python main.py eval3 --set S --method b_fan --kappa 12 --tau 4.9 --n-star 4 --split test3 --start 168 --count 6 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_b_fan_168"
+  },
+  {
+   "id": "v3_t3_bfan_174",
+   "cmd": "python main.py eval3 --set S --method b_fan --kappa 12 --tau 4.9 --n-star 4 --split test3 --start 174 --count 6 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_b_fan_174"
+  },
+  {
+   "id": "v3_t3_bfan_180",
+   "cmd": "python main.py eval3 --set S --method b_fan --kappa 12 --tau 4.9 --n-star 4 --split test3 --start 180 --count 6 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_b_fan_180"
+  },
+  {
+   "id": "v3_t3_bfan_186",
+   "cmd": "python main.py eval3 --set S --method b_fan --kappa 12 --tau 4.9 --n-star 4 --split test3 --start 186 --count 6 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_b_fan_186"
+  },
+  {
+   "id": "v3_t3_bfan_192",
+   "cmd": "python main.py eval3 --set S --method b_fan --kappa 12 --tau 4.9 --n-star 4 --split test3 --start 192 --count 6 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_b_fan_192"
+  },
+  {
+   "id": "v3_t3_bfan_198",
+   "cmd": "python main.py eval3 --set S --method b_fan --kappa 12 --tau 4.9 --n-star 4 --split test3 --start 198 --count 6 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_b_fan_198"
+  },
+  {
+   "id": "v3_t3_bfan_204",
+   "cmd": "python main.py eval3 --set S --method b_fan --kappa 12 --tau 4.9 --n-star 4 --split test3 --start 204 --count 6 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_b_fan_204"
+  },
+  {
+   "id": "v3_t3_bfan_210",
+   "cmd": "python main.py eval3 --set S --method b_fan --kappa 12 --tau 4.9 --n-star 4 --split test3 --start 210 --count 6 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_b_fan_210"
+  },
+  {
+   "id": "v3_t3_bfan_216",
+   "cmd": "python main.py eval3 --set S --method b_fan --kappa 12 --tau 4.9 --n-star 4 --split test3 --start 216 --count 6 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_b_fan_216"
+  },
+  {
+   "id": "v3_t3_bfan_222",
+   "cmd": "python main.py eval3 --set S --method b_fan --kappa 12 --tau 4.9 --n-star 4 --split test3 --start 222 --count 6 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_b_fan_222"
+  },
+  {
+   "id": "v3_t3_bfan_228",
+   "cmd": "python main.py eval3 --set S --method b_fan --kappa 12 --tau 4.9 --n-star 4 --split test3 --start 228 --count 6 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_b_fan_228"
+  },
+  {
+   "id": "v3_t3_bfan_234",
+   "cmd": "python main.py eval3 --set S --method b_fan --kappa 12 --tau 4.9 --n-star 4 --split test3 --start 234 --count 6 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_b_fan_234"
+  },
+  {
+   "id": "v3_t3_bfan_240",
+   "cmd": "python main.py eval3 --set S --method b_fan --kappa 12 --tau 4.9 --n-star 4 --split test3 --start 240 --count 6 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_b_fan_240"
+  },
+  {
+   "id": "v3_t3_bfan_246",
+   "cmd": "python main.py eval3 --set S --method b_fan --kappa 12 --tau 4.9 --n-star 4 --split test3 --start 246 --count 6 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_b_fan_246"
+  },
+  {
+   "id": "v3_t3_bfan_252",
+   "cmd": "python main.py eval3 --set S --method b_fan --kappa 12 --tau 4.9 --n-star 4 --split test3 --start 252 --count 6 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_b_fan_252"
+  },
+  {
+   "id": "v3_t3_bfan_258",
+   "cmd": "python main.py eval3 --set S --method b_fan --kappa 12 --tau 4.9 --n-star 4 --split test3 --start 258 --count 6 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_b_fan_258"
+  },
+  {
+   "id": "v3_t3_bfan_264",
+   "cmd": "python main.py eval3 --set S --method b_fan --kappa 12 --tau 4.9 --n-star 4 --split test3 --start 264 --count 6 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_b_fan_264"
+  },
+  {
+   "id": "v3_t3_bfan_270",
+   "cmd": "python main.py eval3 --set S --method b_fan --kappa 12 --tau 4.9 --n-star 4 --split test3 --start 270 --count 6 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_b_fan_270"
+  },
+  {
+   "id": "v3_t3_bfan_276",
+   "cmd": "python main.py eval3 --set S --method b_fan --kappa 12 --tau 4.9 --n-star 4 --split test3 --start 276 --count 6 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_b_fan_276"
+  },
+  {
+   "id": "v3_t3_bfan_282",
+   "cmd": "python main.py eval3 --set S --method b_fan --kappa 12 --tau 4.9 --n-star 4 --split test3 --start 282 --count 6 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_b_fan_282"
+  },
+  {
+   "id": "v3_t3_bfan_288",
+   "cmd": "python main.py eval3 --set S --method b_fan --kappa 12 --tau 4.9 --n-star 4 --split test3 --start 288 --count 6 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_b_fan_288"
+  },
+  {
+   "id": "v3_t3_bfan_294",
+   "cmd": "python main.py eval3 --set S --method b_fan --kappa 12 --tau 4.9 --n-star 4 --split test3 --start 294 --count 6 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_b_fan_294"
+  }
+ ]
+}
