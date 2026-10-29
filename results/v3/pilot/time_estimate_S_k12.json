@@ -1,0 +1,22 @@
+{
+ "env": {
+  "TOUCHBED_NPHI": "64",
+  "action_set": "64x8",
+  "A": 512,
+  "numpy": "2.5.4",
+  "python": "3.12.15",
+  "threads": {
+   "OMP_NUM_THREADS": "1",
+   "OPENBLAS_NUM_THREADS": "1",
+   "MKL_NUM_THREADS": "1"
+  }
+ },
+ "set": "S",
+ "kappa": 12.0,
+ "tau": 6.0,
+ "label_episode_s": 7.520164966583252,
+ "label_decisions": 5,
+ "grid_eval_s_gstar_like": 4.457734823226929,
+ "student_episode_s_no_grid": 0.0016329288482666016,
+ "wall_s": 11.981051206588745
+}
