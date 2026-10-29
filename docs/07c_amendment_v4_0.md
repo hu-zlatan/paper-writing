@@ -37,7 +37,7 @@ v3 and all v3 numbers stay as they are (`results/v3/`, `paper/mypaper/v3/`); v4 
 - Exploratory status: E5 and all S2 test rows are reported with ci95, no multiplicity correction; S2 is one cell.
 
 ## Compute (estimate, free GitHub runners)
-Labels ≈ 2 CPU-h, DAgger ≈ 6, RL ≈ 3 × 1.2, val3 read-out ≈ 22, test3 ≈ 30, E5 ≈ 7 → ≈ 70 CPU-h (≈ 4–6 h wall on
+Labels ≈ 16 CPU-h (sandbox test: 19 s per S2 label episode), DAgger ≈ 20, RL ≈ 3 × 1.2, val3 read-out ≈ 22, test3 ≈ 30, E5 ≈ 7 → ≈ 100 CPU-h (≈ 6–8 h wall on
 20 runners). Over the 12-h reading of `RESTRICTS.yaml` only if run serially; recorded per the owner's default.
 
 ## Order
