@@ -1,0 +1,145 @@
+{
+ "purpose": "Gate G1' (07_hypotheses_v3 \u00a74; amendment v3.0 C12): (a) notch, 5 estimator runs; (b) the v2 zero-gap bank (100 beliefs, unchanged instrument, re-run on the v3 code path incl. the numpy log-sum-exp change); (c) travel-notch control, 5 runs (exact relative gap 0.7166 by enumeration, touchbed/travel_notch.py). Pass: (a) mean in [0.573, 0.860]; (b) mean in [-0.01, 0.02] and UB < 0.03; (c) estimate within +-20 % of the exact gap.",
+ "jobs": [
+  {
+   "id": "v3_g1a_sd0",
+   "cmd": "python main.py g1 --part a --start 0 --count 1 --out ../results/v3/g1/a_sd0"
+  },
+  {
+   "id": "v3_g1a_sd1",
+   "cmd": "python main.py g1 --part a --start 1 --count 1 --out ../results/v3/g1/a_sd1"
+  },
+  {
+   "id": "v3_g1a_sd2",
+   "cmd": "python main.py g1 --part a --start 2 --count 1 --out ../results/v3/g1/a_sd2"
+  },
+  {
+   "id": "v3_g1a_sd3",
+   "cmd": "python main.py g1 --part a --start 3 --count 1 --out ../results/v3/g1/a_sd3"
+  },
+  {
+   "id": "v3_g1a_sd4",
+   "cmd": "python main.py g1 --part a --start 4 --count 1 --out ../results/v3/g1/a_sd4"
+  },
+  {
+   "id": "v3_g1b_0",
+   "cmd": "python main.py g1 --part b --start 0 --count 4 --bank ../results/v2/g1/bank.json --out ../results/v3/g1/b_000"
+  },
+  {
+   "id": "v3_g1b_4",
+   "cmd": "python main.py g1 --part b --start 4 --count 4 --bank ../results/v2/g1/bank.json --out ../results/v3/g1/b_004"
+  },
+  {
+   "id": "v3_g1b_8",
+   "cmd": "python main.py g1 --part b --start 8 --count 4 --bank ../results/v2/g1/bank.json --out ../results/v3/g1/b_008"
+  },
+  {
+   "id": "v3_g1b_12",
+   "cmd": "python main.py g1 --part b --start 12 --count 4 --bank ../results/v2/g1/bank.json --out ../results/v3/g1/b_012"
+  },
+  {
+   "id": "v3_g1b_16",
+   "cmd": "python main.py g1 --part b --start 16 --count 4 --bank ../results/v2/g1/bank.json --out ../results/v3/g1/b_016"
+  },
+  {
+   "id": "v3_g1b_20",
+   "cmd": "python main.py g1 --part b --start 20 --count 4 --bank ../results/v2/g1/bank.json --out ../results/v3/g1/b_020"
+  },
+  {
+   "id": "v3_g1b_24",
+   "cmd": "python main.py g1 --part b --start 24 --count 4 --bank ../results/v2/g1/bank.json --out ../results/v3/g1/b_024"
+  },
+  {
+   "id": "v3_g1b_28",
+   "cmd": "python main.py g1 --part b --start 28 --count 4 --bank ../results/v2/g1/bank.json --out ../results/v3/g1/b_028"
+  },
+  {
+   "id": "v3_g1b_32",
+   "cmd": "python main.py g1 --part b --start 32 --count 4 --bank ../results/v2/g1/bank.json --out ../results/v3/g1/b_032"
+  },
+  {
+   "id": "v3_g1b_36",
+   "cmd": "python main.py g1 --part b --start 36 --count 4 --bank ../results/v2/g1/bank.json --out ../results/v3/g1/b_036"
+  },
+  {
+   "id": "v3_g1b_40",
+   "cmd": "python main.py g1 --part b --start 40 --count 4 --bank ../results/v2/g1/bank.json --out ../results/v3/g1/b_040"
+  },
+  {
+   "id": "v3_g1b_44",
+   "cmd": "python main.py g1 --part b --start 44 --count 4 --bank ../results/v2/g1/bank.json --out ../results/v3/g1/b_044"
+  },
+  {
+   "id": "v3_g1b_48",
+   "cmd": "python main.py g1 --part b --start 48 --count 4 --bank ../results/v2/g1/bank.json --out ../results/v3/g1/b_048"
+  },
+  {
+   "id": "v3_g1b_52",
+   "cmd": "python main.py g1 --part b --start 52 --count 4 --bank ../results/v2/g1/bank.json --out ../results/v3/g1/b_052"
+  },
+  {
+   "id": "v3_g1b_56",
+   "cmd": "python main.py g1 --part b --start 56 --count 4 --bank ../results/v2/g1/bank.json --out ../results/v3/g1/b_056"
+  },
+  {
+   "id": "v3_g1b_60",
+   "cmd": "python main.py g1 --part b --start 60 --count 4 --bank ../results/v2/g1/bank.json --out ../results/v3/g1/b_060"
+  },
+  {
+   "id": "v3_g1b_64",
+   "cmd": "python main.py g1 --part b --start 64 --count 4 --bank ../results/v2/g1/bank.json --out ../results/v3/g1/b_064"
+  },
+  {
+   "id": "v3_g1b_68",
+   "cmd": "python main.py g1 --part b --start 68 --count 4 --bank ../results/v2/g1/bank.json --out ../results/v3/g1/b_068"
+  },
+  {
+   "id": "v3_g1b_72",
+   "cmd": "python main.py g1 --part b --start 72 --count 4 --bank ../results/v2/g1/bank.json --out ../results/v3/g1/b_072"
+  },
+  {
+   "id": "v3_g1b_76",
+   "cmd": "python main.py g1 --part b --start 76 --count 4 --bank ../results/v2/g1/bank.json --out ../results/v3/g1/b_076"
+  },
+  {
+   "id": "v3_g1b_80",
+   "cmd": "python main.py g1 --part b --start 80 --count 4 --bank ../results/v2/g1/bank.json --out ../results/v3/g1/b_080"
+  },
+  {
+   "id": "v3_g1b_84",
+   "cmd": "python main.py g1 --part b --start 84 --count 4 --bank ../results/v2/g1/bank.json --out ../results/v3/g1/b_084"
+  },
+  {
+   "id": "v3_g1b_88",
+   "cmd": "python main.py g1 --part b --start 88 --count 4 --bank ../results/v2/g1/bank.json --out ../results/v3/g1/b_088"
+  },
+  {
+   "id": "v3_g1b_92",
+   "cmd": "python main.py g1 --part b --start 92 --count 4 --bank ../results/v2/g1/bank.json --out ../results/v3/g1/b_092"
+  },
+  {
+   "id": "v3_g1b_96",
+   "cmd": "python main.py g1 --part b --start 96 --count 4 --bank ../results/v2/g1/bank.json --out ../results/v3/g1/b_096"
+  },
+  {
+   "id": "v3_g1c_sd0",
+   "cmd": "python main.py g1c --kappa 12 --start 0 --count 1 --out ../results/v3/g1/c_sd0"
+  },
+  {
+   "id": "v3_g1c_sd1",
+   "cmd": "python main.py g1c --kappa 12 --start 1 --count 1 --out ../results/v3/g1/c_sd1"
+  },
+  {
+   "id": "v3_g1c_sd2",
+   "cmd": "python main.py g1c --kappa 12 --start 2 --count 1 --out ../results/v3/g1/c_sd2"
+  },
+  {
+   "id": "v3_g1c_sd3",
+   "cmd": "python main.py g1c --kappa 12 --start 3 --count 1 --out ../results/v3/g1/c_sd3"
+  },
+  {
+   "id": "v3_g1c_sd4",
+   "cmd": "python main.py g1c --kappa 12 --start 4 --count 1 --out ../results/v3/g1/c_sd4"
+  }
+ ]
+}
