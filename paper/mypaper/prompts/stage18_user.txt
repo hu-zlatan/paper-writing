@@ -1,0 +1,2487 @@
+Simulate peer review from at least 2 reviewer perspectives.
+
+Output markdown with Reviewer A and Reviewer B, each including strengths, weaknesses, and actionable revisions.
+
+Check specifically:
+
+1. Does the paper stay on topic (Active tactile localization under travel cost: how much headroom one-step look-ahead leaves over greedy cost-aware information-gain touch selection, and whether that greedy planner can be amortized by a learned policy (distillation from the planner vs reinforcement learning on the same objective))? Flag any sections where the paper drifts to unrelated topics or presents environment issues as contributions.
+
+2. METHODOLOGY-EVIDENCE CONSISTENCY: Compare the paper's claims about experimental setup (number of trials, statistical tests, hyperparameters, baselines) against the actual experiment evidence provided below. Flag any discrepancies where the paper claims something that is NOT supported by the actual code or results. For example:
+- Paper claims N trials but code shows a different number
+- Paper claims statistical tests (ANOVA, t-test) but code has none
+- Paper reports metrics not present in actual results
+- Paper describes methods not implemented in code
+
+3. TRIAL COUNT: The actual number of experiment runs is stated in the evidence below. If the paper claims a DIFFERENT number of trials (e.g., "100 independent trials" when only 1 was run), flag this as a CRITICAL fabrication that MUST be corrected.
+
+4. PAPER LENGTH: This paper targets NeurIPS/ICML submission (9 pages). Check that each section has adequate depth. Flag sections that are too short: Abstract (<150 words), Introduction (<700 words), Related Work (<500 words), Method (<800 words), Experiments (<600 words), Results (<500 words). A paper with fewer than 4000 total words is CRITICALLY under-length.
+
+5. REVIEW LIKE A TOP-CONFERENCE REVIEWER:
+- Is the contribution novel, or is it incremental over well-known work?
+- Are baselines properly tuned and competitive?
+- Are ablation studies present and meaningful?
+- Is every claim supported by evidence from the experiments?
+- Does the paper acknowledge its limitations honestly?
+- Would you recommend this paper be presented at NeurIPS/ICML? Why or why not?
+- Score the paper 1-10 following this rubric: 1-3 Reject (fundamental flaws), 4-5 Borderline (significant weaknesses), 6-7 Weak Accept (solid but not exciting), 8-9 Accept (strong contribution), 10 Strong Accept (exceptional).
+
+Paper draft:
+
+<!--
+% FIGURE 1 PROMPT:
+% Target model: Nano Banana 2 (image generation). Output: one wide scientific schematic figure, aspect ratio 3:1
+% (full text width of a two-column robotics paper, about one third of a page tall), pure white background (#FFFFFF),
+% clean flat-vector style, no photorealism, no 3D shading, no gradients, no drop shadows, no textures, no decorative
+% icons beyond those listed, no people, no robot arm, no logos, no watermark. Line weights uniform (thin 1.5 px
+% outlines, 2.5 px arrows). Font: a single clean sans-serif (Helvetica/Arial-like), dark grey #222222, all text
+% horizontal, no text other than the exact labels quoted below, spelled exactly as given (keep Greek letters and
+% symbols exactly: φ, ψ, κ, Δφ, π, *, ×). Exactly two accent colours: BLUE #1F6FB4 = information / probing, ORANGE
+% #E07B1A = travel / cost. Neutral greys for objects (#9A9A9A fill, #555555 outline). The figure is divided into three
+% panels side by side, left to right, separated by generous white space (no boxes around panels A and B). Each panel
+% has a bold panel letter in its top-left corner: "A", "B", "C".
+%
+% PANEL A (left, about 30 % of the width) - "the task", top-down view:
+%  1. Centre: one flat, irregular polygon (6 main sides, one small rectangular notch cut into its upper-right edge),
+%     solid grey fill #9A9A9A, outline #555555, seen from directly above.
+%  2. Around the polygon, a dashed thin grey square (#888888, dash pattern 4-3) slightly larger than the polygon:
+%     the position-uncertainty box. No label.
+%  3. Three to four faint "ghost" outlines of the same polygon and of one slightly different polygon (same size, notch
+%     on a different edge), each shifted and rotated by small amounts, drawn as very light grey outlines (#CFCFCF,
+%     no fill, 30 % opacity), overlapping the solid polygon: the particle belief over identity and pose. Small label
+%     beneath the box: "belief over identity × pose".
+%  4. A thin solid grey circle (#777777) centred on the polygon, radius about 2.2× the polygon's size: the stand-off
+%     circle. No label on the circle itself.
+%  5. A small filled dark dot (#222222) on the circle at about the 8 o'clock position: the current fingertip. Label
+%     next to it, outside the circle: "φ_t".
+%  6. A curved ORANGE arrow running along the circle clockwise from the fingertip dot (8 o'clock)
+%     up over the top to about the 1 o'clock position, arrowhead at the 1 o'clock end, drawn just outside the circle
+%     line so both remain visible. Label next to the arrow, outside the circle, orange text: "travel cost
+%     c(a) = 1 + κ|Δφ|/π". Small open orange circle at the arrow's end marking the new angle, labelled "φ′".
+%  7. From φ′, a straight BLUE arrow pointing inward toward the polygon, tilted slightly (about 15°) away from the
+%     radial direction; a thin dotted grey radial reference line from φ′ to the circle centre shows the tilt, and a
+%     small arc between the radial line and the blue arrow is labelled "ψ" in blue.
+%  8. The blue arrow ends exactly on the polygon's edge at a small blue filled diamond (contact marker) with a short
+%     blue tick perpendicular to the edge (the measured surface normal). Small blue label: "contact + normal".
+%
+% PANEL B (centre, about 45 % of the width) - "three ways to pick the next touch", block diagram:
+%  1. At the far left of panel B, vertically centred, a small cloud of about 20 tiny grey dots inside a rounded
+%     outline: the belief icon. Label below: "belief b".
+%  2. From the belief icon, three thin grey arrows fan out to the right into three horizontal lanes stacked top to
+%     bottom, each lane a row of rounded rectangles (white fill, #555555 outline) connected by thin grey arrows.
+%  3. Lane (i), top. Lane title at its left, bold: "(i) Greedy G*". Blocks left to right: "particle filter" ->
+%     "EIG / c over all 512 actions" (inside this block a tiny row of 12 thin vertical bars of varying height in BLUE,
+%     one bar taller and outlined darker) -> "argmax". To the right of the lane, a small simple clock icon (grey
+%     outline) with the label "0.91 s / decision".
+%  4. Lane (ii), middle. Lane title, bold: "(ii) One-step look-ahead". Blocks: "EIG / c scores" -> a small tree glyph
+%     (one root node branching to four child nodes, each child continuing in a short dashed line to a leaf dot) with the
+%     label under the tree: "rollouts completed by reduced greedy" -> "best first action".
+%  5. Lane (iii), bottom. Lane title, bold: "(iii) Learned policy". Blocks: a small cluster of 4 blue points with short
+%     tick marks, labelled "touch history (finger frame)" -> a block labelled "DeepSets" -> "512 masked logits"
+%     (inside: a tiny row of 12 thin bars, a few greyed out to suggest masking).
+%  6. Two training arrows enter the "DeepSets" block from above/below:
+%     - a SOLID BLUE arrow coming down from lane (i)'s "EIG / c over all 512 actions" block, labelled in blue:
+%       "DAgger: dense score labels from G*";
+%     - a DASHED ORANGE arrow entering from below, labelled in orange: "PPO: reward = ball-sPCE (g_T)".
+%  7. No other arrows, no numbers other than "512" (twice) and "0.91 s / decision".
+%
+% PANEL C (right, about 25 % of the width) - headline answers:
+%  Leave this panel as an EMPTY placeholder: a plain white rectangle with a thin light-grey border (#DDDDDD), the
+%  panel letter "C" in its top-left corner, and NOTHING else inside (no axes, no bars, no numbers, no text). The data
+%  inset is plotted separately from the results JSON and pasted into this frame; the generator must not draw any
+%  chart, value or label here.
+%
+% Global: balanced composition, generous margins, all labels legible when the figure is printed 17 cm wide, no
+% overlapping text, no clutter, no title above the figure, no caption inside the image.
+%
+% (Panel C inset, plotted with matplotlib, not generated; values from results/v3/results_v3.json:)
+%  left mini-plot: G(12) = 0.01624 (12_g2_analysis.k12.G), one-sided 95 % UB 0.02210 (.k12.ub95), dashed line at the
+%    pre-registered Hold threshold 0.03; y-axis "one-step headroom G(12)".
+%  right mini-plot: test3 0-299 success: G* 0.4267 (14_m4_analysis.rows.gstar.success); student 0.3822
+%    (.rows.student.success) with whisker from diffs["student-gstar:success"].ci95 = [-0.0933, +0.0056] relative to
+%    G*; RL 0.3567 (.rows.rl.success) with whisker from diffs["gstar-rl:success"].ci95 = [+0.0022, +0.1367],
+%    sign-flipped relative to G*; hatched fourth bar "B-fan (exploratory)" 0.36
+%    (.exploratory_b_fan.success) with whisker from exploratory_b_fan["b_fan-gstar:success"].ci95 = [-0.12, -0.01].
+-->
+
+<!-- Title: owner chooses between the proposed title (below) and Fallback B: "Cost-Aware Information-Gain Touch
+Selection: Look-Ahead Headroom and the Learnability of Amortized Policies" (07_hypotheses_v3 §3: the outcome map can
+only shorten the working title). Outcome row 4 (characterisation; no method claim). -->
+
+# Can Cost-Aware Information-Gain Touch Selection Be Amortized? Look-Ahead Headroom and Learnability under Travel Cost
+
+## Abstract
+
+Active tactile localization chooses where to touch next from a belief over object identity and pose. When moving the
+finger costs time, that choice must trade expected information against travel. We study two questions in this
+setting: how much headroom one-step look-ahead leaves over greedy cost-aware information-gain touch selection, and
+whether that greedy planner can be amortized by a learned policy, trained either by distillation from the planner or by
+reinforcement learning (RL) on the same objective. The task uses a joint identity × planar-pose particle belief, a
+finger that moves on a stand-off circle with travel cost $c(a) = 1 + \kappa|\Delta\phi|/\pi$, and the cost-aware greedy
+planner G\*, which maximises expected ball-information gain per unit cost. In a pre-registered characterisation, one-step
+rollout over the reduced greedy completion gains ≤ 2.2 % of the remaining expected ball information at κ = 12 (one-sided
+95 % upper bound). With an identical belief-free DeepSets head, neither DAgger distillation nor PPO was shown to reach
+G\*: the student failed the pre-registered non-inferiority gate (−4.40 pp against a threshold of −1.68 pp), and RL trails G\* by 7.0 pp in test success (ci95 [+0.2, +13.7] for G\* − RL). On RL's own objective, no improvement of distillation over RL was detected (pre-registered
+test rejected; Δ = +0.0002 nats, one-sided 95 % bounds [−0.31, +0.30]); this is a non-detection, not equality. Per
+decision, the learned head's median latency is about 2,200× below full-size G\*, not at equal accuracy. All hypotheses,
+thresholds and outcome readings were pre-registered; the experiments cover a single cell (set S, κ = 12, n\* = 4) and
+are preliminary.
+
+## 1 Introduction
+
+A robot that localizes an object by touch receives sparse, ambiguous measurements: one contact point and one surface
+normal per probe, or a miss. A single contact rarely fixes the pose, and near-symmetric object families make even the
+identity uncertain. The standard remedy is to maintain a belief over identity and pose, typically a particle filter, and
+to choose the next touch by its expected information gain \cite{petrovskaya2011global, hebert2013next,
+zheng2024bayesian, zheng2026bayesian}. Probing is not free. The finger has to travel to the next approach direction,
+and travel time competes with probes within a fixed time budget. Cost-aware selection therefore scores each candidate
+by information per unit cost \cite{ottenhaus2018active}, and surveys of active haptic perception identify this trade-off
+as central to practical exploration \cite{seminara2019active}.
+
+Two questions follow for every information-driven touch selector that pays for travel. The first concerns planning
+depth. Greedy information gathering is backed by (adaptive) submodularity: for touch-based localization, entropy
+reduction is submodular under certain assumptions, and greedy selection is then comparable to the optimal offline policy
+\cite{javdani2012efficient, vien2015touch}. These guarantees weaken when actions constrain the future
+\cite{chen2015submodular, esfandiari2019adaptivity}, and travel cost is exactly such a coupling: where the finger ends up
+after a probe determines what the next probe costs. A greedy selector may strand the finger far from the region that
+separates the remaining hypotheses. Whether paying for look-ahead is worth it under travel cost is an empirical question
+that, to our knowledge, has not been measured directly.
+
+The second question concerns amortization. Online particle-filter EIG re-optimises at every decision, with a cost that
+grows with particles × candidates × outcome samples. Amortized Bayesian experimental design replaces this with a policy
+network trained once, through RL on contrastive information bounds or related approaches \cite{foster2021deep,
+blau2022optimizing, ivanova2021implicit, hedman2025step, rainforth2024modern}, and tactile RL methods learn exploration
+policies end to end \cite{riou2024reinforcement, niemann2024when}. A validated greedy planner offers a second route:
+supervising the policy with the planner's dense per-action scores through DAgger \cite{ross2011reduction}, which removes
+long-horizon credit assignment and 512-way exploration from the learning problem. The question is whether such dense
+supervision beats RL on the same objective with the same head, and whether either learner reaches the planner.
+
+**What we did and found.** We ran a pre-registered study in which hypotheses, thresholds and the full outcome map were
+frozen before any test episode. Three hypotheses were registered: H1, a distilled student non-inferior to G\* (with a
+fallback, H1-fb, in which the student prunes G\*'s candidates); H2, distillation beating RL on RL's own objective; and
+H3, small one-step look-ahead headroom over G\*. The record reached the pre-written characterisation outcome. One-step
+rollout over the reduced greedy completion gains ≤ 2.2 % of the remaining expected ball information at κ = 12 (S,
+n\* = 4; one-sided 95 % UB of G(12) = 0.0221). With the same relative DeepSets head, neither learner was shown to reach
+G\*: the student failed the D3 non-inferiority rule on validation (Δ̂_succ −4.40 pp vs threshold −1.68 pp), and on test
+it trails by −4.4 pp (significant one-sided only) while RL trails by −7.0 pp (ci95 [+0.2, +13.7] for G\* − RL). Students
+fit the teacher's training labels to the pre-registered criterion but fail validation, which the pre-registered
+label-fit rule assigns to generalisation rather than capacity; covariate shift is inferred, not observed. On RL's own
+objective, ball-sPCE, no advantage of distillation was detected (H2 rejected), and passing would have required an
+observed difference above 0.41 nats. The learned head is about 2,200× cheaper per decision than full-size G\*, but not at
+equal accuracy. H1-fb was withdrawn before any accuracy number because candidate pruning cannot reach the registered
+10× latency ratio.
+
+**Contributions.**
+- **C1.** A measured, pre-registered bound on one-step look-ahead headroom over cost-aware greedy touch selection under
+  travel cost (H3, Hold), with three instrument checks and an on-belief bias check.
+- **C2.** A controlled learnability comparison of planner distillation (DAgger) against RL (PPO) with an identical
+  belief-free, finger-relative head, including a label-fit diagnosis and a belief-input control.
+- **C3.** A test of distillation against RL on RL's own objective (H2: rejected; a non-detection with stated power).
+- **C4.** Two measurement notes: the evaluator's grid resolution moves success outcomes, and per-decision latency with its
+  component split explains why candidate pruning cannot amortize G\*.
+
+The outcome reported here (row 4 of the pre-registered outcome map, a characterisation paper with no method claim) was
+written before the runs. Section 2 reviews related work, Section 3 defines the task, the planner, the headroom estimator
+and the two learners, Section 4 gives the protocol, Section 5 the results, and Sections 6–8 discuss, bound and conclude.
+
+## 2 Related Work
+
+**Tactile localization and next-best touch.** Estimating object pose from touch is usually posed as Bayesian filtering.
+Scaling-series Monte Carlo achieves global localization from sparse contacts on polygonal meshes
+\cite{petrovskaya2011global}; manifold particle filters sample on the contact manifold to avoid degeneracy in planar
+contact manipulation \cite{koval2015pose}; Tac2Pose returns a pose distribution from a single high-resolution touch
+\cite{bauza2023tac2pose}. On top of such estimators, information-driven selection picks the next touch. The next best
+touch maximises information gain on pose uncertainty \cite{hebert2013next}; Bayesian frameworks jointly track class and
+pose with customised particle filters and choose exploratory actions by expected information \cite{zheng2024bayesian,
+zheng2026bayesian}; recent work chooses contacts by expected information gain for rigid-body pose and shape
+\cite{gordon2026active} or learns exploration policies that balance global search and local refinement
+\cite{kamtikar2026tactful}. Cost-aware information gain combines expected gain with expected cost in one score
+\cite{ottenhaus2018active}, and reviews of active haptic perception summarise the space \cite{seminara2019active}.
+Per-step (myopic) selection is the norm in this line. Its headroom under travel cost, and the per-decision compute it
+costs, are rarely measured; C1 and C4 address both for one task.
+
+**Greedy versus non-myopic information gathering.** Submodularity explains why greedy selection works well for touch:
+Shannon entropy reduction is submodular under certain assumptions, and adaptive submodularity gives online guarantees
+\cite{javdani2012efficient}. Hierarchical action structure can be folded into the same framework through sequential
+submodular optimisation \cite{vien2015touch}. Outside touch, submodular surrogates approximate the value of information
+when the objective itself is not submodular \cite{chen2015submodular}, and semi-adaptive policies show how much
+adaptivity is needed to retain guarantees \cite{esfandiari2019adaptivity}. These results assume structure that travel
+cost can break: a probe changes the price of every later probe, so the information an action buys is no longer
+independent of where the finger ends up. Rather than bound the gap theoretically, we measure the one-step rollout
+headroom over the cost-aware greedy planner directly, with an estimator validated on constructions whose exact gap is
+known (H3).
+
+**Amortized and learned active sensing.** Deep adaptive design trains a design network on contrastive information
+bounds so that each decision is a forward pass \cite{foster2021deep}; implicit and RL formulations remove the need for
+likelihoods or differentiable simulators \cite{ivanova2021implicit, blau2022optimizing}, semi-amortized variants refine
+the policy online \cite{hedman2025step}, nested particle filters amortize design in dynamical systems
+\cite{iqbal2024recursive}, and transformer policies amortize inference and acquisition jointly \cite{huang2026aline}; a
+recent review covers the field \cite{rainforth2024modern}. In touch, RL agents explore for recognition with rewards for
+correct classification \cite{riou2021seeing, fleer2020efficient}, for classification, exploration and pose
+\cite{riou2024reinforcement}, or learn when to stop \cite{niemann2024when}; TANDEM3D co-trains exploration and decision
+making on 3D contacts \cite{xu2023tandem3d}, and Tactile MNIST provides a benchmark including localization
+\cite{schneider2025tactile}. A second route imitates an information-gathering expert: imitation of a clairvoyant oracle
+\cite{choudhury2017adaptive} and deep imitation of a nonmyopic active-search expert \cite{nguyen2024amortized}, both
+building on DAgger's no-regret reduction \cite{ross2011reduction}. What is missing is a controlled comparison of RL
+against supervised distillation of a validated planner, with the same head, the same action set and the same
+objective, evaluated on the objective RL itself optimises. C2 and C3 supply that comparison for one cell.
+
+## 3 Problem and Methods
+
+### 3.1 Task, belief and metrics
+
+**State and observations.** The object is a planar polygon with circumradius R = 40 mm, identity
+$k \in \{1,\dots,K\}$ from library S (K = 8, near-symmetric base/variant pairs), and unknown pose. The state is
+$s = (k, x, y, \theta)$ with prior $k \sim U\{1..K\}$, $x, y \sim U[-15, 15]$ mm, $\theta \sim U[0, 2\pi)$, and $G_k$
+is the exact symmetry group of shape $k$. A probe returns either a contact point with noise $\mathcal{N}(0,\sigma_p^2 I)$,
+$\sigma_p = 1.0$ mm, and a normal with noise $\mathcal{N}(0,\sigma_n^2)$, $\sigma_n = 5°$, or a miss
+$y = \varnothing$. Every method uses the same ε-softened likelihood $p_\varepsilon(y \mid s, a)$ with ε = 10⁻³.
+
+**Actions and travel cost.** The finger rests on a stand-off circle of radius $R_s$ = 100 mm at angle $\phi_t$, with
+start angle $\phi_0 \sim U[0, 2\pi)$ shared by all methods on an episode. An action $a = (\phi', \psi)$ selects one of 64
+target angles $\phi'$ (5.625° spacing) and one of 8 offsets $\psi \in \{-35°, -25°, \dots, +35°\}$, giving
+$|\mathcal{A}| = 512$. The finger travels the shorter way to $\phi'$ and probes from $100(\cos\phi', \sin\phi')$ mm in
+direction $\phi' + \pi + \psi$ with a 200 mm guarded stroke; afterwards $\phi_{t+1} = \phi'$. In units of one stroke,
+
+$$c(a) = 1 + \kappa\,\frac{|\Delta\phi|}{\pi}, \qquad \Delta\phi = \mathrm{wrap}(\phi' - \phi_t) \in (-\pi, \pi],$$
+
+so κ is the time to travel half the circle. Each episode has a time budget $\tau_\kappa$; with remaining time
+$\tau_{\mathrm{rem}}$ the feasible set is $\mathcal{F}(\tau_{\mathrm{rem}}) = \{a \in \mathcal{A} : c(a) \le
+\tau_{\mathrm{rem}}\}$, every method chooses only within it, and the episode ends when $\tau_{\mathrm{rem}} < 1$.
+Budgets are **probe-matched**: $\tau_\kappa$ is calibrated so that G\* executes $n^\*$ probes on average at every κ. For
+set S, $n^\* = 4$, $\tau_0 = 4.0$, $\tau_2 = 4.7$ and $\tau_{12} = 4.9$; at $\tau_{12}$, G\* executes 3.96 probes on
+average over 200 calibration episodes. Only the price of moving differs between κ levels, not the horizon.
+
+**Metrics.** From the evaluator's posterior after the last probe, the identity estimate $\hat k$ is the maximum-mass
+identity and the pose is refined by 30 Nelder–Mead iterations. Success is
+$[\hat k = k_0] \wedge [\|(\hat x, \hat y) - (x_0, y_0)\| < 5\,\mathrm{mm}] \wedge [\min_{g \in G_{k_0}}
+|\mathrm{wrap}(\hat\theta - \theta_0 - g)| < 5°]$. With $B(s_0)$ the success ball around the true state, the ball
+information is
+
+$$\mathrm{BI}(h) = \log \hat P(B(s_0) \mid h) - \log P(B(s_0)) \quad \text{[nats]},$$
+
+with the posterior mass floored at $1/(2 \cdot 32{,}000)$ and the prior mass computed exactly. BI is the shared
+information target of every information-based method below.
+
+### 3.2 Cost-aware greedy planner G\*
+
+G\* maintains an online particle filter $b = \{s_n, w_n\}_{n=1}^{N}$ and selects
+
+$$G^\*(b) = \arg\max_{a \in \mathcal{F}(\tau_{\mathrm{rem}})} \frac{\mathrm{EIG}_B(a; b)}{c(a)},$$
+
+where the ball EIG is estimated by nested Monte Carlo with $j_m \sim w$, $y_m \sim p_\varepsilon(\cdot \mid s_{j_m}, a)$:
+
+$$\mathrm{EIG}_B(a;b) = \frac{1}{M}\sum_{m=1}^{M}\Big[\log\!\!\sum_{n \in B(s_{j_m})}\!\! w_n p_\varepsilon(y_m \mid s_n,a)
+- \log\!\!\sum_{n \in B(s_{j_m})}\!\! w_n - \log \sum_n w_n p_\varepsilon(y_m \mid s_n, a)\Big].$$
+
+This is the expected one-step increment of $\log P(B(s_0) \mid h)$. Full size is $(N, C, M) = (2{,}000, 512, 64)$. At
+κ = 0 G\* reduces to plain ball greedy. At each decision G\* also exports the full score vector
+$s(a) = \max(0, \mathrm{EIG}_B(a;b))/c(a)$ over feasible $a$ (zero elsewhere), whose argmax equals G\*'s action; this
+vector is the distillation target. **Complexity.** Per decision, G\* evaluates $M \cdot N \cdot C + N \cdot C$
+likelihoods and builds ball-neighbour lists in $O(N^2)$, on top of the particle-filter assimilation of the last
+observation.
+
+### 3.3 One-step look-ahead headroom estimator
+
+To ask whether depth is worth paying for, we compare G\* with a policy that may deviate from it for one step. For a
+belief $b$ reached by G\*, let $V_{G^\*}(b)$ be the expected ball information gained over the remaining budget by
+following the greedy completion, and $V_{LA}(b)$ the value of the best first action followed by the same completion.
+The headroom is the dimensionless ratio of means over a bank of beliefs:
+
+$$G(\kappa) = \frac{\overline{V}_{LA} - \overline{V}_{G^\*}}{\overline{V}_{LA}}.$$
+
+The estimator screens $C_1 = 32$ first actions, including structured set-up moves, with common random numbers and
+$M_{\text{outer}} = 64$, then re-estimates the top 4 together with G\*'s action using 4 × 64 samples. Rollouts are
+completed by a **reduced greedy**: $N_{LA} = 500$ particles resampled from G\*'s decision filter, 128 candidates, M = 16,
+cost-aware and feasibility-restricted. G(κ) is therefore one-step-deviation headroom over a reduced greedy completion,
+not the gap to the optimal policy, and it makes no success claim. Hold requires three instrument checks: (a) a notch
+construction with a known exact relative gap (pass band [0.573, 0.860], 5 runs); (b) a bank of 100 beliefs with exact
+gap 0 (mean in [−0.01, 0.02], UB < 0.03); (c) a travel-notch whose exact gap is computed by enumeration (estimate within
+±20 %). A bias check compares the estimator's $V_{G^\*}$ with an independent 4×-sample full-G\* rollout on 20 beliefs;
+a ratio above 1.02 (over-reading greedy, which deflates G) would make Hold unavailable.
+
+### 3.4 Amortized policies with one shared head
+
+**Shared architecture.** Both learners use the same belief-free, finger-relative DeepSets head. Each touch in the history
+is encoded in the finger frame (contact indicator, contact point, normal, and the action that produced it), summed by
+a DeepSets encoder, and concatenated with a 5-dimensional relative context containing the finger angle and the
+remaining-budget fraction $\tau_{\mathrm{rem}}/\tau$. The encoder and head are 2 × 128 MLPs and output 512 relative
+logits, masked to $-\infty$ outside $\mathcal{F}(\tau_{\mathrm{rem}})$. The architecture, input and action set are the
+controlled variables of C2 and C3; only the training signal differs. **Complexity.** The implementation re-encodes the
+full history at each decision, $O(T^2 H^2 + T H A)$ for $T$ touches, hidden width $H$ and $A = 512$ actions.
+
+**Distillation.** The student $\pi_\theta$ minimises
+
+$$\mathcal{L}(\theta) = -\sum_{a \in \mathcal{F}} q(a)\log \pi_\theta(a \mid h) - \lambda \log \pi_\theta(a^\* \mid h),
+\qquad q = \mathrm{softmax}\big(\beta_T\, s(a)/\sigma_s\big)_{a \in \mathcal{F}},$$
+
+with $\sigma_s$ the per-decision standard deviation of $s$ over feasible actions (uniform over the argmax set if
+$\sigma_s < 10^{-6}$) and $a^\* = \arg\max_a s(a)$. Hyperparameters were selected on held-out floored normalised regret,
+
+$$r = \frac{s_{\max} - s(a_\pi)}{\max(s_{\max} - s_{\mathrm{med}},\ \rho\, s_{\max})}, \qquad \rho = 0.05,$$
+
+whose mean $\bar R$ also drives the stopping rule; decisions with $s_{\max} = 0$ are excluded. No success-based
+selection is used anywhere.
+
+> **Algorithm 1 (DAgger distillation of G\*).**
+> 1. Round 0: roll out G\* on 1,500 label episodes, store $(h, \phi_t, \tau_{\mathrm{rem}}, \mathcal{F}, s, a^\*)$ at
+>    every decision; hold out episodes 1,200–1,499 for $\bar R$. Train $\pi_\theta$ on $\mathcal{L}$.
+> 2. For round $r = 1, 2$ with mixing $\beta_{\mathrm{DAgger}} \in \{0.5, 0\}$: roll out 400 episodes per seed, executing
+>    G\*'s action with probability $\beta_{\mathrm{DAgger}}$ and $\pi_\theta$'s otherwise; run G\*'s filter alongside and
+>    label every visited belief with $s$; aggregate all data; continue training from the previous weights.
+> 3. In every round, evaluate held-out $\bar R$ after each epoch; stop when it improves by < 0.005 over 3 evaluations
+>    (cap 50 epochs); keep the last checkpoint.
+> 4. Remedy (pre-registered, applied once if gate D3 fails): double round 0 and both DAgger rounds and retrain.
+
+The applied remedy raised the end-of-round-2 training set from 7,957 to 17,083 decisions per seed.
+
+**RL (PPO).** The RL policy uses the same head and action set and is trained with PPO-clip \cite{schulman2017proximal},
+γ = 1 and a critic baseline. Its reward is the increment of ball-sPCE, a contrastive estimate of ball information in the
+style of \cite{foster2021deep}: per episode, $L = 4095$ contrastive states $s_{1:L} \sim p$ and $J = 16$ states
+$s_0^{(j)}$ uniform in $B(s_0)$ are fixed, and
+
+$$g_t = \log \hat p_B(h_t \mid s_0) - \log\Big[\tfrac{1}{L+1}\Big(\hat p_B(h_t \mid s_0) + \sum_{l=1}^{L} p(h_t \mid
+s_l)\Big)\Big], \quad \hat p_B(h \mid s_0) = \tfrac{1}{J}\sum_j p(h \mid s_0^{(j)}),$$
+
+with $r_t = g_t - g_{t-1}$. The return telescopes to $g_T$ (capped at $\log(L+1) = 8.32$ nats), so **$g_T$ is RL's own
+objective**. Each RL seed trains for 200,064 episodes; the learning rate was chosen by a 4-configuration sweep (Section
+4).
+
+**Belief-input control.** The same distillation recipe with the history encoder replaced by a 48-feature summary of
+G\*'s particle filter (per identity: weight, weighted mean and SD of $x$ and $y$, and the resultant length of
+$|G_k|\theta$) plus the relative context, trained on first-attempt-size data. It is used only by the encoder sentence of
+H2's fail branch.
+
+### 3.5 Baselines
+
+Random selects uniformly among feasible actions. Three heuristics use a budget-reservation rule, allowing $a$ only if
+$c(a) \le \tau_{\mathrm{rem}} - \max(0, n^\* - t - 1)$ after $t$ probes (else the cheapest feasible action):
+**B-spread** (belief-free) maximises the minimum angular distance to previous probe angles with ψ = +5°; **B-fan**
+(belief-free, travel-nearest) stays at $\phi_t$ when allowed and cycles ψ through +5°, −5°, +15°, …, −35°, otherwise
+moving to the nearest allowed $\phi'$; **B-cov** (belief-using) maximises coverage under an online filter. The best
+heuristic on pilot data, H★, was frozen before test; for S12 it is B-fan.
+
+## 4 Experimental Protocol
+
+**Pre-registration and routing.** Hypotheses, thresholds, the outcome map (rows 1–4) and a list of analyses not allowed
+after the run were frozen in design documents before any v3 run, and the main-run set was frozen before any test
+episode. The record reached row 4 through the gates: the D3 learnability gate failed on the first attempt and again
+after its one remedy (H1 dead, never tested on the test split), and H1-fb was withdrawn at the latency gate Lat′.
+Under row 4 the remaining pre-registered decisions are H2, H3 and the encoder sentence; all other numbers are gate data
+or reported rows without a test.
+
+**Cell.** All learning results are for set S at κ = 12 with $n^\* = 4$ (S12). H3 also uses κ ∈ {0, 2}.
+
+**Splits.** Disjoint episode streams: calibration (200), pilot3 (G\* 500 episodes; random and heuristics 200 each, for
+margins and H★), val3 (500 paired episodes, for D3 and its remedy), test3 episodes 0–499 (H2, $g_T$) and 0–299 (success
+and BI rows). Within a split, all methods run on the same episodes with the same initial state, start angle and
+observation stream (paired design). H3 uses 100 G\*-reached beliefs per κ, at a uniformly drawn step in
+$\{0, \dots, n^\*-1\}$.
+
+**Evaluator.** Success and BI are read from an adaptive grid posterior that rebuilds each history exactly. Its gate E′
+compared grid subdivision 4 with 8 on 16 episodes and failed (one counted success flip outside the [0.45, 0.55]
+true-identity-mass tie band), so subdivision 8 is used for every reported number. $g_T$, H3, latency and label fit do
+not use the grid.
+
+**Statistics.** Paired differences use a crossed episode × seed bootstrap with B = 10,000; bounds are one-sided 95 %
+unless labelled ci90/ci95 (two-sided). Each claim has one test and there is no correction across claims, because H2 and
+H3 are separate claims with separate decisions. The test-split success and BI intervals are descriptive, not tests.
+
+**Gate D3.** On 500 paired val3 episodes with 3 student seeds, D3 passes iff (i)
+$\hat\Delta_{\mathrm{succ}} \ge \max(-2\,\mathrm{pp},\ -\delta + 1.645\,\mathrm{SE}_s\sqrt{0.5})$; (ii) the same for BI
+with ε and a −0.15-nat floor; (iii) every seed's $\hat\Delta_{\mathrm{succ}} > -\delta$. Here δ = min(4 pp, 0.15·D_c)
+and ε = min(0.05·BI(G\*), 0.15·D_c^BI), with D_c the pilot random-to-G\* gap; for S12, δ = 0.04 (the cap) and
+ε_S12 = 0.3145 (provisional, see Table 1).¹
+
+**H2 and H3 rules.** H2 passes iff the one-sided 95 % lower bound of $g_T(\text{student}) - g_T(\text{RL})$ on test3
+0–499 exceeds +0.10 nats. H3 is Hold iff UB95(G(12)) < 0.03, Kill iff LB95(G(12)) > 0.05 (precedence), otherwise
+Inconclusive.
+
+**Hyperparameters and implementation.** Table 0 lists the training and estimator settings. Everything is numpy with
+hand-written backpropagation, run single-threaded (BLAS threads = 1, one pinned core) on GitHub Actions Ubuntu runners
+([CONST?:runner_cpu_model]; [CONST?:python_numpy_versions]). Latency follows a fixed protocol: all configurations are timed
+interleaved on the same S12 pilot decision states, 20 warm-up and 500 timed decisions, plus 500 more if any 95 % CI
+half-width exceeds 10 % of its median; the pooled 1,000 decisions on 253 pilot episodes came from two runner jobs.
+
+**Table 0. Settings (design constants from the frozen design documents; RL learning rate from the sweep).**
+
+| Component | Setting |
+|---|---|
+| G\* | N = 2,000 particles, C = 512 candidates, M = 64 outcome samples |
+| Distillation | Adam, lr 1e-3, β_T = 4, λ = 0.5, batch 256, gradient-norm clip 1.0, no weight decay |
+| Distillation data | round 0: 1,500 G\* rollouts; DAgger: 2 rounds × 400 rollouts per seed (β = 0.5, then 0); remedy doubles all three |
+| Stopping | held-out $\bar R$; < 0.005 improvement over 3 evaluations; ≤ 50 epochs; ρ = 0.05 |
+| Student seeds | 501, 502, 503 (belief-input control: 521–523) |
+| PPO | γ = 1, critic baseline, clip [CONST?:ppo_clip_epsilon], epochs per batch [CONST?:ppo_epochs]; 200,064 episodes per seed; seeds 511–513 |
+| PPO sweep | 4 configs, 1 seed, 50,048 episodes each; selected cfg 2: lr 1.09e-3, entropy 1.33e-4, batch 128, critic lr 1.43e-3 |
+| ball-sPCE | L = 4095 contrastive states, J = 16 ball states |
+| H3 estimator | C₁ = 32 screened, M_outer = 64, top 4 re-estimated with 4 × 64; completion N_LA = 500, 128 candidates, M = 16 |
+| Evaluator | adaptive grid posterior, subdivision 8; 30 Nelder–Mead iterations; tie band [0.45, 0.55] |
+
+**Table 1. Pre-registered gates and decisions (S12 unless stated).**
+
+| Row | Item | Measured | Rule | Outcome |
+|---|---|---|---|---|
+| R1 | Cal′ n\*, verification | S: G\* success 0.605 at κ = 0, τ = 4 → n\* = 4 (0.62 at sub 8); mean probes 3.96 | probes within n\* ± 0.3 | pass |
+| R2 | E′ evaluator | mean \|ΔBI\| 0.0126 nats; 1 counted flip (true-identity mass 0.2282 / 0.2281) | \|ΔBI\| ≤ 0.02, no counted flip | fail → sub 8 |
+| R3 | G5′ pilot | G\* 0.426 ± 0.0221 (n = 500); random [PENDING:12_g5_analysis.cells.S12.random.success]; D_c [PENDING:12_g5_analysis.cells.S12.D_c]; δ 0.04 | G\* ≥ random + 10 pp; non-degenerate | provisional pass² |
+| R4 | Lat′ / H1-fb | G\* full / pruned-16 = 3.22 | ≥ 10 | H1-fb withdrawn |
+| R5a | D3, first attempt | Δ̂_succ −5.87 pp (thr −1.43); Δ̂_BI −0.199 (thr −0.15); seeds −4.2 / −8.0 / −5.4 pp | (i)–(iii) | fail |
+| R5b | D3, remedy | −4.40 pp (thr −1.68) ✗; −0.096 (thr −0.15) ✓; seeds −4.6 / −4.6 / −4.0 pp ✗ | (i)–(iii) | fail → H1 dead |
+| R5c | D3-B belief input | [PENDING:12_d3_analysis_belief_student.succ.delta_hat]; [PENDING:12_d3_analysis_belief_student.bi.delta_hat] | as D3 (report-only) | [PENDING:12_d3_analysis_belief_student.passes] |
+| R6 | H2 | Δg_T +0.00023 nats, LB −0.3103 | LB > +0.10 | rejected |
+| R7 | H3 | UB95 G(12) = 0.0221; bias ratio 0.957 | UB < 0.03; ratio ≤ 1.02 | Hold |
+
+¹ The D3 files carry ε_S12 = 0.314266 from an earlier pilot read, against 0.314507 in the current one; the BI threshold is
+the −0.15 floor under either value. ² Provisional PASS in all 3 cells on incomplete random rows (n = 62 / 199 / 161 of
+200); D_c ≥ 0.35 everywhere, so δ_c = 0.04 (cap) is unlikely to move. Final sub-8 values:
+[PENDING:12_g5_analysis.cells].
+
+## 5 Results
+
+### 5.1 H3: one-step look-ahead headroom is small
+
+H3 is **Hold**. One-step rollout over the reduced greedy completion gains ≤ 2.2 % of the remaining expected ball
+information at κ = 12 (S, n\* = 4; one-sided 95 % UB of G(12) = 0.0221). The point estimate is G(12) = 0.01624, and the
+upper bound clears the 0.03 threshold by 0.0079. In absolute terms the gap is 0.041 nats on a mean $V_{G^\*}$ of 2.506
+nats (Table 2a). The point estimates follow the descriptive ordering G(0) ≤ G(2) ≤ G(12) (differences not tested), and even the largest is small.
+
+**Table 2a. Headroom over G\* (set S, 100 beliefs per κ).**
+
+| κ | G | LB95 | UB95 | gap (nats) | mean V_LA | mean V_G\* | frac LA ≠ G\* | no budget left |
+|---|---|---|---|---|---|---|---|---|
+| 0 | 0.006374 | 0.004028 | 0.009401 | 0.01795 | 2.816 | 2.798 | 0.58 | 0 |
+| 2 | 0.01418 | 0.009616 | 0.01974 | 0.03712 | 2.617 | 2.580 | 0.54 | 4 |
+| 12 | 0.01624 | 0.01148 | 0.02210 | 0.04137 | 2.548 | 2.506 | 0.62 | 1 |
+
+The look-ahead chooses a different first action from G\* on 62 % of beliefs at κ = 12, yet gains little on average.
+This pattern is consistent with near-ties among the top actions; the record does not separate near-ties from
+argmax-selection noise. All instrument checks passed: the notch construction gives a mean relative gap of 0.8290
+(band [0.573, 0.860]); the zero-gap bank gives 0.00254 (UB 0.00374); the travel-notch gives 0.7438 against an exact
+0.7166. Checks (a) and (b) reproduce the previous design iteration's values exactly, so they are not independent new
+evidence. On bias: on 20 separate beliefs the estimator reads V_G\* 0.087 nats (4.3 %, no CI) below an independent
+full-G\* rollout, comparable in size to the 0.041-nat κ = 12 gap; this direction alone would inflate G, and Hold could be
+affected only if V_LA were under-read by more, which was not checked. The ratio (0.957) is within the pre-registered
+guard, so Hold is not downgraded. Under travel cost, then, the reduced greedy completion leaves little headroom for one
+deviating step, consistent with greedy-competitiveness arguments \cite{javdani2012efficient, chen2015submodular} carrying over to this travel-coupled setting at the tested budget.
+
+### 5.2 Learnability: distillation and RL against the greedy teacher
+
+**D3 (binding evidence).** On 500 paired val3 episodes, the first-attempt students reached Δ̂_succ = −5.87 pp against a
+threshold of −1.43 pp and Δ̂_BI = −0.199 nats against −0.15, with per-seed success deficits of −4.2 / −8.0 / −5.4 pp.
+After the remedy, success was −4.40 pp against −1.68 pp (fail), BI −0.096 against −0.15 (pass), and seeds −4.6 / −4.6 /
+−4.0 pp (fail). Seed 503 sits exactly at −δ, but the verdict does not hinge on it, because rule (i) fails by 2.7 pp.
+After the one remedy (round 0 and both DAgger rounds doubled; 7,957 → 17,083 training decisions), the point estimates
+moved from −0.199 to −0.096 nats BI and from −5.87 to −4.40 pp success; this change was not tested.
+
+**Test3 (descriptive).** Table 2b reports test3 0–299. Neither learned policy was shown to reach G\*: the student failed
+the D3 non-inferiority rule on val3 (Δ̂_succ −4.40 pp vs threshold −1.68 pp), and on test3 it trails by −4.4 pp
+(significant one-sided only) while RL trails by −7.0 pp (ci95 [+0.2, +13.7] for G\* − RL). The student's BI deficit
+(−0.0487 nats) has a ci90 that includes 0, whereas G\* exceeds RL in BI by 0.338 nats (ci95 [+0.1585, +0.5196]). The
+remedied students agree closely with each other (per-seed success 0.3833 / 0.3767 / 0.3867), so the deficit is
+consistent across seeds. Gap closure is withheld by rule, because the lower bound of G\* − RL success does not exceed
+δ_S12.
+
+**Table 2b. Test-set rows (S12; success and BI on test3 0–299, sub-8 grid; $g_T$ on test3 0–499).**
+
+| Row | Method / contrast | Success | BI (nats) | Probes | $g_T$ (nats) |
+|---|---|---|---|---|---|
+| R8a | G\* | 0.4267 | 6.248 | 3.963 | 5.299 (no interval) |
+| R8b | Student (remedied, 3 seeds) | 0.3822 (0.3833 / 0.3767 / 0.3867) | 6.200 | 4.0 | 5.368 |
+| R8c | RL-relative (3 seeds) | 0.3567 (0.3667 / 0.3900 / 0.3133) | 5.910 | 3.0 | 5.368 |
+| — | Random | — | — | — | 2.618 (no interval) |
+| R8d–e | student − G\* | −0.0444, ci90 [−0.0856, −0.0033], ci95 [−0.0933, +0.0056] | −0.0487, ci90 [−0.1035, +0.0078], ci95 [−0.1138, +0.0190] | | |
+| R8f–g | student − RL | +0.0256, ci95 [−0.0367, +0.0878] | +0.2893, ci95 [+0.1170, +0.4652] | | +0.00023, bounds [−0.3103, +0.3034] |
+| R8h–i | G\* − RL | +0.0700, ci95 [+0.0022, +0.1367] | +0.3380, ci95 [+0.1585, +0.5196] | | |
+| R9 | B-fan (exploratory, paired) | 0.36 | 5.973 | — | — |
+| R9 | student − B-fan | +0.0222, ci95 [−0.0278, +0.0733] | +0.2263, ci95 [+0.1412, +0.3110] | | |
+| R9 | B-fan − G\* | −0.0667, ci95 [−0.12, −0.01] | −0.2750, ci95 [−0.3665, −0.1843] | | |
+| R9 | RL − B-fan | −0.0033, ci95 [−0.0689, +0.0633] | −0.0630, ci95 [−0.2465, +0.1199] | | |
+
+**Label fit and the encoder sentence.** All six history students fit the training labels by the pre-registered rule:
+train top-1 agreement 0.511–0.534 and train $\bar R$ 0.169–0.206 at the end of round 2 (under-fit requires
+$\bar R$ > 0.25 or top-1 < 0.50). Held-out top-1 is below 0.50 for 4 of the 6 (0.4833–0.4916; the remedied seeds 501 and
+502 reach 0.5067 and 0.5059). Students fit the teacher's training labels to the pre-registered criterion (top-1
+0.51–0.53) but fail validation; the label-fit rule assigns this to generalisation rather than capacity. The held-out
+regret is measured on teacher-visited states, so covariate shift is inferred, not observed.
+
+**Belief-input control.** The belief-input students are under-fit (train top-1 0.327–0.362, train $\bar R$
+0.338–0.379), and their D3-B read is still incomplete (final values [PENDING:12_d3_analysis_belief_student]). Because
+they are under-fit, the control isolates nothing about the representation; it shows only that this 48-feature summary,
+trained on first-attempt-size data, is a worse input than the relative history.
+
+### 5.3 H2: distillation against RL on RL's own objective
+
+On test3 0–499, the student reaches $g_T$ = 5.3678 nats and RL 5.3676; Δ = +0.00023 nats with one-sided 95 % bounds
+[−0.3103, +0.3034] (p_greater 0.4883). H2 is **rejected**. The pre-registered fail-branch reading applies: "dense
+supervision does not improve on RL with this head", because the paired success ci95 [−3.67, +8.78] pp contains 0; the
+alternative pre-written reading required that interval to exclude 0. Passing required an observed Δ > 0.41 nats; with
+SE ≈ 0.19, the test had about 80 % power only for a true Δ near 0.57 nats. No equivalence test (TOST) was pre-registered
+or run for H2. Overall, no difference between the two learned policies was detected on g_T (Δ = +0.0002 nats, one-sided
+95 % bounds [−0.31, +0.30]) or on test success (ci95 [−3.7, +8.8] pp); equivalence was not tested.
+
+The grid evaluator gives a further observation, not a mechanism. Student − RL BI is +0.289 nats (ci95 [+0.117, +0.465])
+on test3 0–299, while the g_T difference on 0–499 is undetected with bounds wide enough (±0.31 nats) to include a gap of
+that size; RL executes 3.0 probes against the student's 4.0. RL varies more across its 3 seeds than the student (test
+success range 7.7 vs 1.0 pp; g_T range 0.48 vs 0.14 nats), and the RL per-seed SD of g_T is about 3.3× the student's
+(0.253 vs 0.077 nats; range ratio 3.5). This spread is the likely source of the interval width, inferred from the
+per-seed SDs; no variance decomposition was done. The companion rows $g_T$(G\*) = 5.299 and $g_T$(random) = 2.618 on the
+same episodes carry no interval and no test, and we do not rank G\* against the learned policies on $g_T$: ball-sPCE is
+a contrastive estimate, and grid BI orders G\* above both learned policies. All three RL seeds ran to the 200,064-episode
+cap; the plateau rule fired at 102,400, 102,400 and 112,640 episodes, so training continued well past the point at which the registered plateau rule fired.
+
+### 5.4 Learned policies against a travel-nearest heuristic (exploratory)
+
+The paired B-fan row on test3 0–299 completed (Table 2b, R9). Student − B-fan success is +2.2 pp with ci95
+[−2.8, +7.3] pp, which contains 0, so the pre-written reading (b) applies: on test3 the learned policies were not shown
+to exceed a travel-nearest heuristic (RL − B-fan −0.3 pp, ci95 [−6.9, +6.3]). The second clause of reading (b), that the
+S12 task may be flat at $n^\* = 4$, is not supported on test3: B-fan trails G\* by 6.7 pp (ci95 [−12.0, −1.0]) and by
+0.275 nats BI (ci95 [−0.3665, −0.1843]), so the clause is omitted. As a report-only row, student − B-fan BI is +0.226 nats (ci95 [+0.141, +0.311]). The pilot flat-screen flag for S12 rests on an incomplete sub-8 B-fan row ([PENDING:12_g5_analysis.cells.S12.b_fan]); on the complete sub-4 screen, H★ for S12 was also B-fan (0.395, n = 200). This row is exploratory, it is not the dropped heuristic test of H1, and it does not change the outcome row.
+
+### 5.5 Per-decision cost
+
+**Table 2c. Per-decision latency (Lat′; 1,000 decisions, 253 S12 pilot episodes, two machines pooled).**
+
+| Quantity | Median | 95 % CI |
+|---|---|---|
+| Student, L_dec | 0.408 ms | [0.4036, 0.4137] ms |
+| G\* full (2,000, 512, 64), L_dec | 0.9135 s | [0.7910, 0.9413] s |
+| G\* components (assim / neighbour lists / scoring) | 0.0402 / 0.0967 / 0.7169 s | — |
+| Pruned-16 (student top-16 + G\* re-scoring) | 0.2833 s | [0.2811, 0.2853] s |
+| Student final read-out, L_final (per episode) | 0.2043 s | [0.1929, 0.2135] s |
+
+Per decision, the student's median latency is about 2,200× below full-size G\* (pooled-machine Lat′, protocol
+incomplete; G\* median CI alone ≈ 1,900–2,300×), not compared at equal accuracy. PF assimilation and neighbour lists
+account for 15.0 % of G\*'s per-decision time (component medians), so pruning candidates cannot exceed about 6.7× and
+cannot give 10×; measured full / pruned-16 = 3.22. This is why H1-fb was withdrawn before any accuracy was measured.
+
+## 6 Discussion
+
+**What the results say together.** C1 shows that, at this budget and travel cost, one deviating step over the reduced
+greedy completion gains ≤ 2.2 % of the remaining expected ball information (one-sided 95 % UB). A greedy teacher is therefore a
+defensible amortization target: there is little evidence that a deeper planner would have been a better one. C2 shows
+that a defensible target is not enough. With the same belief-free head, neither the distilled student nor PPO was shown
+to recover G\*'s success, and C3 shows that the dense per-action labels did not buy a detectable advantage on the
+objective RL optimises. The supervision signal that removed credit assignment and exploration from the learning problem
+did not, at this data scale, turn into parity with the teacher.
+
+**Why the student falls short.** The pre-registered label-fit rule points to generalisation rather than capacity: the
+students fit roughly half of G\*'s training argmax labels, which meets the registered criterion, yet fall below 0.50
+top-1 on held-out decisions in four of six cases. Because the held-out set is teacher-visited, covariate shift onto the
+student's own states is an inference, not an observation. The H3 pattern suggests a complementary reading: if many
+beliefs have several near-equal actions, top-1 agreement is a coarse measure of policy quality, and small score
+differences that the student cannot reproduce may still matter for the final pose estimate.
+
+**Unexpected results.** Two observations do not fit a simple story. First, BI separates the student from RL (+0.289
+nats) while $g_T$ does not, and RL executes one probe fewer; the two instruments and episode sets differ, so we report
+this as an observation only. Second, on test3 the learned policies were not shown to exceed a travel-nearest heuristic, while that heuristic trails G\* in both success and BI; the pre-written reading is reported without its flat-task clause.
+
+**Relation to prior work.** Amortized design methods \cite{foster2021deep, blau2022optimizing} and imitation of
+information-gathering experts \cite{choudhury2017adaptive, nguyen2024amortized} propose learned policies as replacements for online design or planning; our controlled single-cell result is a caution that, for contact sensing with a joint
+identity × pose belief and travel cost, neither route reached the online planner with a belief-free head.
+Semi-amortized designs that refine a learned proposal online \cite{hedman2025step}, or nested-filter amortization
+\cite{iqbal2024recursive}, are natural directions, although our latency split shows that the particle filter itself
+bounds the speed-up of any scheme that keeps it in the loop.
+
+**Open questions.** Would held-out evaluation on student-visited states confirm covariate shift? Would an equivalence
+test or a variance decomposition sharpen H2? Do the findings hold in other cells, such as the asymmetric set or κ = 0?
+
+## 7 Limitations
+
+- **Single cell.** All learning results are S12 only, with $n^\* = 4$. S0 and A12 appear only as incomplete pilot rows
+  (provisional PASS on incomplete random rows, n = 62 / 199 / 161 of 200).
+- **Evaluator not shown converged.** E′ failed: the one counted flip occurred with the true-identity mass unchanged
+  (0.228) and outside the [0.45, 0.55] tie band; the JSON does not record which part of the success criterion changed.
+  Sub 4 → 8 flips the success outcome of 7.5 % of the 200 S0 calibration episodes, and no finer grid was checked.
+  Sub-8 read-out costs 40.6 s per episode, which limited the grid-scored rows (G5′ re-reads, D3/D3-B, M4 on 300
+  episodes).
+- **RL comparator selected off-protocol.** The sweep was selected on the trainer's own validation stream rather than
+  val3, with 50,048-episode sweep runs; the selected configuration won by 0.919 nats of final validation ball-sPCE.
+- **RL probe use differs.** RL executes 3.0 probes against 4.0 for the student; travel is not reported.
+- **H3 scope.** H3 measures headroom over a reduced greedy completion, not the optimum; the bias direction of $V_{LA}$
+  was not checked; instrument checks (a) and (b) are identical to the previous iteration.
+- **Label-fit thresholds are coarse** (top-1 ≈ 0.52 counts as "fits"), and the held-out set is teacher-visited.
+- **Latency.** The Lat′ protocol is incomplete (six configurations with CI half-widths above 10 %, two machines pooled),
+  and the per-episode latency was not measured.
+- **Cross-split comparisons are unpaired.** G\* success is 0.426 on pilot3, 0.446 on val3 and 0.4267 on test3.
+- **Missing pre-registered report items.** Training compute including teacher labelling, and the teacher noise-floor
+  $\bar R$ and tie fraction, are not reported; without the latter, the scale of $\bar R$ ≈ 0.18 is unknown.
+- **Incomplete rows.** The belief-input validation and the sub-8 pilot re-reads were still running at writing
+  ([PENDING:12_d3_analysis_belief_student], [PENDING:12_g5_analysis.cells]).
+- **No physical demonstration.** All results are in simulation with planar objects; held-out object shapes were not
+  tested.
+
+## 8 Conclusion
+
+We asked two questions about active tactile localization under travel cost: how much one-step look-ahead adds over
+greedy cost-aware information-gain touch selection, and whether that greedy planner can be amortized by a learned
+policy, through distillation from the planner or RL on the same objective. In a pre-registered characterisation on a
+single cell, the answers are as follows. Greedy leaves little one-step headroom: rollout over the reduced greedy
+completion gains at most about 2.2 % of the remaining expected ball information (one-sided 95 % bound). Neither
+amortization route was shown to reach the planner with an identical belief-free head; the distilled student failed its
+non-inferiority gate, and RL trails the planner on test. Dense planner supervision did not improve on RL on RL's own
+objective, a non-detection rather than a demonstration of equality. The learned head is far cheaper per decision, but not
+at equal accuracy, and candidate pruning cannot recover the planner's cost because the particle filter bounds it.
+Concrete next steps are evaluation on student-visited states to test the covariate-shift reading, an equivalence test
+and variance decomposition for the distillation–RL comparison, more cells and object sets, and semi-amortized schemes
+that keep a cheaper filter in the loop. All hypotheses, thresholds and readings were fixed before the runs, and the
+scope is one shape set, one travel cost and four probes.
+
+<!-- WORD COUNTS (python, whitespace tokens, HTML comments excluded; tables and equations included)
+  Abstract: 268
+  1 Introduction: 764
+  2 Related Work: 505
+  3 Problem and Methods: 1511
+  4 Experimental Protocol: 1055
+  5 Results: 1722
+  6 Discussion: 440
+  7 Limitations: 330
+  8 Conclusion: 222
+  Main body total (excluding Abstract): 6549
+  Total including Abstract: 6817
+-->
+
+
+EXPERIMENT EVIDENCE
+
+(a) results/v3/results_v3.json (full):
+{
+ "12_cal_analysis": {
+  "n_star": {
+   "S": {
+    "n_star": 4,
+    "gstar_success": 0.605,
+    "n_episodes": 200,
+    "mean_probes": 4.0,
+    "mean_ball_info": 6.993141968612382,
+    "complete": true
+   },
+   "A": {
+    "n_star": 3,
+    "gstar_success": 0.985,
+    "n_episodes": 200,
+    "mean_probes": 4.0,
+    "mean_ball_info": 8.257578062745761,
+    "complete": true
+   }
+  },
+  "tau": {
+   "S_k12_nstar4": {
+    "n_star": 4,
+    "n_episodes": 200,
+    "mean_travel_time": 0.9388380275612175,
+    "sd_travel_time": 1.5056674918685549,
+    "tau": 4.9,
+    "complete": true
+   },
+   "S_k2_nstar4": {
+    "n_star": 4,
+    "n_episodes": 200,
+    "mean_travel_time": 0.7256581100129756,
+    "sd_travel_time": 0.5073827705622531,
+    "tau": 4.7,
+    "complete": true
+   },
+   "S_k0": {
+    "tau": 4.0
+   },
+   "A_k12_nstar4": {
+    "n_star": 4,
+    "n_episodes": 200,
+    "mean_travel_time": 1.0058737560601916,
+    "sd_travel_time": 1.9694119615272718,
+    "tau": 5.0,
+    "complete": true
+   },
+   "A_k12_nstar3": {
+    "n_star": 3,
+    "n_episodes": 200,
+    "mean_travel_time": 0.2596237560601914,
+    "sd_travel_time": 0.7825948833985069,
+    "tau": 3.3,
+    "complete": true
+   },
+   "A_k0": {
+    "tau": 3.0
+   }
+  },
+  "verify": {
+   "A_k12": {
+    "n_episodes": 200,
+    "mean_probes": 2.98
+   },
+   "S_k12": {
+    "n_episodes": 200,
+    "mean_probes": 3.96
+   }
+  },
+  "n_star_sub8": {
+   "S": {
+    "n_star": 4,
+    "gstar_success": 0.62,
+    "n_episodes": 200,
+    "complete": true,
+    "success_flip_rate_vs_sub4": 0.075,
+    "mean_abs_dBI_vs_sub4": 0.006044471179264313
+   },
+   "A": {
+    "n_star": 3,
+    "gstar_success": 0.985,
+    "n_episodes": 200,
+    "complete": true,
+    "success_flip_rate_vs_sub4": 0.0,
+    "mean_abs_dBI_vs_sub4": 0.004961466100181467
+   }
+  }
+ },
+ "12_d3_analysis": {
+  "kind": "student",
+  "tag": "r2",
+  "n_episodes": 500,
+  "complete": true,
+  "delta_S12": 0.04,
+  "eps_S12": 0.3142664496624395,
+  "succ": {
+   "delta_hat": -0.05866666666666667,
+   "se": 0.02205564825984528,
+   "threshold": -0.014345076053036917,
+   "passes": false,
+   "student_mean": 0.3873333333333333,
+   "gstar_mean": 0.446,
+   "per_seed": {
+    "501": -0.042,
+    "502": -0.08,
+    "503": -0.054
+   }
+  },
+  "bi": {
+   "delta_hat": -0.19881362530548385,
+   "se": 0.057400227617865146,
+   "threshold": -0.15,
+   "passes": false,
+   "student_mean": 6.182000352177329,
+   "gstar_mean": 6.3808139774828145,
+   "per_seed": {
+    "501": -0.12571461131541525,
+    "502": -0.3131850063972122,
+    "503": -0.15754125820382417
+   }
+  },
+  "seeds_ok": {
+   "501": false,
+   "502": false,
+   "503": false
+  },
+  "passes": false
+ },
+ "12_d3_analysis_belief_student": {
+  "kind": "belief_student",
+  "tag": "r2",
+  "n_episodes": 298,
+  "complete": false,
+  "delta_S12": 0.04,
+  "eps_S12": 0.31450684854971667,
+  "succ": {
+   "delta_hat": -0.19910514541387028,
+   "se": 0.02764805675550361,
+   "threshold": -0.007840038751654461,
+   "passes": false,
+   "student_mean": 0.24049217002237136,
+   "gstar_mean": 0.4395973154362416,
+   "per_seed": {
+    "521": -0.21476510067114093,
+    "522": -0.17114093959731544,
+    "523": -0.21140939597315436
+   }
+  },
+  "bi": {
+   "delta_hat": -1.012565391799951,
+   "se": 0.12557367310076342,
+   "threshold": -0.15,
+   "passes": false,
+   "student_mean": 5.39748795743507,
+   "gstar_mean": 6.41005334923502,
+   "per_seed": {
+    "521": -1.1639062560758344,
+    "522": -0.7385524470298762,
+    "523": -1.1352374722941427
+   }
+  },
+  "seeds_ok": {
+   "521": false,
+   "522": false,
+   "523": false
+  },
+  "passes": false
+ },
+ "12_d3_analysis_rem": {
+  "kind": "student",
+  "tag": "rem",
+  "n_episodes": 500,
+  "complete": true,
+  "delta_S12": 0.04,
+  "eps_S12": 0.3142664496624395,
+  "succ": {
+   "delta_hat": -0.04400000000000001,
+   "se": 0.01994023411453695,
+   "threshold": -0.016805706018424106,
+   "passes": false,
+   "student_mean": 0.402,
+   "gstar_mean": 0.446,
+   "per_seed": {
+    "501": -0.046,
+    "502": -0.046,
+    "503": -0.04
+   }
+  },
+  "bi": {
+   "delta_hat": -0.09618051605437986,
+   "se": 0.02807921021661683,
+   "threshold": -0.15,
+   "passes": true,
+   "student_mean": 6.284633461428434,
+   "gstar_mean": 6.3808139774828145,
+   "per_seed": {
+    "501": -0.09557634909771694,
+    "502": -0.08117232897178812,
+    "503": -0.11179287009363457
+   }
+  },
+  "seeds_ok": {
+   "501": false,
+   "502": false,
+   "503": false
+  },
+  "passes": false
+ },
+ "12_e_analysis": {
+  "n_episodes": 16,
+  "by_cell_method": {
+   "A12_gstar": 4,
+   "A12_b_fan": 4,
+   "S12_gstar": 4,
+   "S12_b_fan": 4
+  },
+  "mean_abs_dBI": 0.012594195835973099,
+  "max_abs_dBI": 0.05233758012623824,
+  "flips": [
+   {
+    "set": "A",
+    "method": "b_fan",
+    "episode": 1,
+    "mass_sub4": 0.22815503808276077,
+    "mass_sub8": 0.22813238636334962,
+    "counts": true
+   },
+   {
+    "set": "S",
+    "method": "b_fan",
+    "episode": 3,
+    "mass_sub4": 0.4999014464482992,
+    "mass_sub8": 0.49984028251563045,
+    "counts": false
+   }
+  ],
+  "counted_flips": 1,
+  "mean_wall_s_sub8": 40.58095121383667,
+  "passes": false,
+  "complete": true
+ },
+ "12_g1_analysis": {
+  "a": {
+   "n_runs": 5,
+   "estimates": [
+    0.840871688461927,
+    0.7602710593025139,
+    0.8383534528208526,
+    0.8629149454231025,
+    0.8425174269852441
+   ],
+   "mean": 0.828985714598728,
+   "exact": 0.7166450192088315,
+   "band": [
+    0.573,
+    0.86
+   ],
+   "passes": true,
+   "complete": true
+  },
+  "b": {
+   "n_beliefs": 100,
+   "mean": 0.002538162524456071,
+   "ub95": 0.00374104150112455,
+   "passes": true,
+   "complete": true
+  },
+  "c": {
+   "n_runs": 5,
+   "estimates": [
+    0.7768822124017556,
+    0.7872985794899109,
+    0.7909252395353189,
+    0.6430344448050888,
+    0.7206601629801676
+   ],
+   "mean": 0.7437601278424484,
+   "exact": 0.7166450192088315,
+   "band": [
+    0.5733160153670652,
+    0.8599740230505978
+   ],
+   "passes": true,
+   "complete": true
+  }
+ },
+ "12_g2_analysis": {
+  "k0": {
+   "n_beliefs": 100,
+   "complete": true,
+   "G": 0.006373989024342136,
+   "lb95": 0.0040276042559610585,
+   "ub95": 0.00940120239376621,
+   "abs_gap_nats": 0.017947229734551762,
+   "mean_v_la": 2.815698248931972,
+   "mean_v_greedy": 2.7977510191974204,
+   "frac_la_differs": 0.58,
+   "n_no_budget_left": 0
+  },
+  "k2": {
+   "n_beliefs": 100,
+   "complete": true,
+   "G": 0.014182745925535438,
+   "lb95": 0.009616380442670566,
+   "ub95": 0.01974373779890334,
+   "abs_gap_nats": 0.03711770766779843,
+   "mean_v_la": 2.617103053434071,
+   "mean_v_greedy": 2.5799853457662727,
+   "frac_la_differs": 0.54,
+   "n_no_budget_left": 4
+  },
+  "k12": {
+   "n_beliefs": 100,
+   "complete": true,
+   "G": 0.016240650338528353,
+   "lb95": 0.011478523538506343,
+   "ub95": 0.022098024937453987,
+   "abs_gap_nats": 0.04137486393872214,
+   "mean_v_la": 2.5476112764134125,
+   "mean_v_greedy": 2.5062364124746903,
+   "frac_la_differs": 0.62,
+   "n_no_budget_left": 1
+  },
+  "bias_check": {
+   "n_beliefs": 20,
+   "complete": true,
+   "mean_estimator_v_greedy": 1.9395780914147713,
+   "mean_reference_v": 2.0261181653237554,
+   "ratio": 0.957287745902443,
+   "n_floored_rollouts": 3,
+   "hold_available": true
+  },
+  "H3": {
+   "region_raw": "Hold",
+   "tested_on_64x8": true,
+   "region": "Hold",
+   "downgraded": false,
+   "ordering_G0<=G2<=G12": true,
+   "complete": true
+  }
+ },
+ "12_g5_analysis": {
+  "sub": 8,
+  "cells": {
+   "S0": {
+    "gstar": {
+     "n": 500,
+     "success": 0.66,
+     "se_success": 0.021206117013673087,
+     "bi": 7.012167653217252,
+     "sd_bi": 1.0144230368855967,
+     "sat": 0.42
+    },
+    "random": {
+     "n": 162,
+     "success": 0.22839506172839505,
+     "se_success": 0.03308475446940937,
+     "bi": 5.240849606032071,
+     "sd_bi": 1.620357249966937,
+     "sat": 0.043209876543209874
+    },
+    "b_spread": {
+     "n": 200,
+     "success": 0.465,
+     "se_success": 0.035357115664894155,
+     "bi": 6.65212930550477,
+     "sd_bi": 0.8695915385975201,
+     "sat": 0.15
+    },
+    "b_fan": {
+     "n": 136,
+     "success": 0.3897058823529412,
+     "se_success": 0.041973113758819354,
+     "bi": 6.174332834018495,
+     "sd_bi": 1.0958085007953255,
+     "sat": 0.07352941176470588
+    },
+    "b_cov": {
+     "n": 8,
+     "success": 0.25,
+     "se_success": 0.16366341767699427,
+     "bi": 6.676717611918525,
+     "sd_bi": 0.7310724512840003,
+     "sat": 0.0
+    },
+    "complete": {
+     "gstar": true,
+     "random": false,
+     "b_spread": true,
+     "b_fan": false,
+     "b_cov": false
+    },
+    "gstar_first200_success": 0.675,
+    "gstar_last300_success": 0.65,
+    "D_c": 0.43160493827160495,
+    "D_c_BI": 1.771318047185181,
+    "plus10pp_ok": true,
+    "nondegenerate": {
+     "gstar_in_[0.15,0.90]": true,
+     "D_c>=0.20": true,
+     "sat<0.5": true
+    },
+    "passes": true,
+    "delta_c": 0.04,
+    "eps_c": 0.2656977070777771,
+    "H_star": "b_spread",
+    "H_star_success": 0.465,
+    "flat_screen": false
+   },
+   "S12": {
+    "gstar": {
+     "n": 500,
+     "success": 0.426,
+     "se_success": 0.022136577335085575,
+     "bi": 6.290136970994333,
+     "sd_bi": 0.9859577579628083,
+     "sat": 0.1
+    },
+    "random": {
+     "n": 199,
+     "success": 0.07537688442211055,
+     "se_success": 0.01876155666972613,
+     "bi": 2.9983450162292105,
+     "sd_bi": 1.99951441159141,
+     "sat": 0.005025125628140704
+    },
+    "b_spread": {
+     "n": 187,
+     "success": 0.06417112299465241,
+     "se_success": 0.017968489439364892,
+     "bi": 3.842258938400502,
+     "sd_bi": 0.8003452560105816,
+     "sat": 0.0
+    },
+    "b_fan": {
+     "n": 154,
+     "success": 0.4025974025974026,
+     "se_success": 0.039648186007942926,
+     "bi": 6.058466704324208,
+     "sd_bi": 1.096421722705283,
+     "sat": 0.05844155844155844
+    },
+    "b_cov": {
+     "n": 191,
+     "success": 0.34554973821989526,
+     "se_success": 0.0344998182021188,
+     "bi": 6.085373615552245,
+     "sd_bi": 1.0142408559676717,
+     "sat": 0.05235602094240838
+    },
+    "complete": {
+     "gstar": true,
+     "random": false,
+     "b_spread": false,
+     "b_fan": false,
+     "b_cov": false
+    },
+    "gstar_first200_success": 0.43,
+    "gstar_last300_success": 0.42333333333333334,
+    "D_c": 0.35062311557788944,
+    "D_c_BI": 3.291791954765123,
+    "plus10pp_ok": true,
+    "nondegenerate": {
+     "gstar_in_[0.15,0.90]": true,
+     "D_c>=0.20": true,
+     "sat<0.5": true
+    },
+    "passes": true,
+    "delta_c": 0.04,
+    "eps_c": 0.31450684854971667,
+    "H_star": "b_fan",
+    "H_star_success": 0.4025974025974026,
+    "flat_screen": true
+   },
+   "A12": {
+    "gstar": {
+     "n": 500,
+     "success": 0.47,
+     "se_success": 0.022342748192502798,
+     "bi": 6.713534854935011,
+     "sd_bi": 1.3154001059330156,
+     "sat": 0.306
+    },
+    "random": {
+     "n": 197,
+     "success": 0.030456852791878174,
+     "se_success": 0.012274337113713384,
+     "bi": 2.4915780961852105,
+     "sd_bi": 2.082039855583785,
+     "sat": 0.005076142131979695
+    },
+    "b_spread": {
+     "n": 179,
+     "success": 0.0335195530726257,
+     "se_success": 0.013490736029603179,
+     "bi": 3.761410886238869,
+     "sd_bi": 0.916732328435174,
+     "sat": 0.0
+    },
+    "b_fan": {
+     "n": 171,
+     "success": 0.39766081871345027,
+     "se_success": 0.037536389557616866,
+     "bi": 6.389296444117744,
+     "sd_bi": 1.29020943033642,
+     "sat": 0.21052631578947367
+    },
+    "b_cov": {
+     "n": 153,
+     "success": 0.3790849673202614,
+     "se_success": 0.039351616270563064,
+     "bi": 6.186829259792564,
+     "sd_bi": 1.5661562558567927,
+     "sat": 0.23529411764705882
+    },
+    "complete": {
+     "gstar": true,
+     "random": false,
+     "b_spread": false,
+     "b_fan": false,
+     "b_cov": false
+    },
+    "gstar_first200_success": 0.48,
+    "gstar_last300_success": 0.4633333333333333,
+    "D_c": 0.4395431472081218,
+    "D_c_BI": 4.2219567587498,
+    "plus10pp_ok": true,
+    "nondegenerate": {
+     "gstar_in_[0.15,0.90]": true,
+     "D_c>=0.20": true,
+     "sat<0.5": true
+    },
+    "passes": true,
+    "delta_c": 0.04,
+    "eps_c": 0.3356767427467506,
+    "H_star": "b_fan",
+    "H_star_success": 0.39766081871345027,
+    "flat_screen": false
+   }
+  },
+  "flat_screen_cells": 1,
+  "flat_prime_likely": false,
+  "surviving_cells": [
+   "S0",
+   "S12",
+   "A12"
+  ]
+ },
+ "12_g5_analysis_sub4": {
+  "sub": 4,
+  "cells": {
+   "S0": {
+    "gstar": {
+     "n": 500,
+     "success": 0.648,
+     "se_success": 0.021380042385946048,
+     "bi": 7.010813285460442,
+     "sd_bi": 1.013956078954415,
+     "sat": 0.42
+    },
+    "random": {
+     "n": 160,
+     "success": 0.21875,
+     "se_success": 0.032784644885244255,
+     "bi": 5.265250643953355,
+     "sd_bi": 1.690346699273745,
+     "sat": 0.04375
+    },
+    "b_spread": {
+     "n": 200,
+     "success": 0.465,
+     "se_success": 0.035357115664894155,
+     "bi": 6.65039168038515,
+     "sd_bi": 0.870437834189672,
+     "sat": 0.15
+    },
+    "b_fan": {
+     "n": 200,
+     "success": 0.415,
+     "se_success": 0.03492813871897355,
+     "bi": 6.085056583693729,
+     "sd_bi": 1.074437793053946,
+     "sat": 0.075
+    },
+    "b_cov": {
+     "n": 30,
+     "success": 0.43333333333333335,
+     "se_success": 0.0920186554465537,
+     "bi": 6.725168392423387,
+     "sd_bi": 0.7125379224822836,
+     "sat": 0.16666666666666666
+    },
+    "complete": {
+     "gstar": true,
+     "random": false,
+     "b_spread": true,
+     "b_fan": true,
+     "b_cov": false
+    },
+    "gstar_first200_success": 0.69,
+    "gstar_last300_success": 0.62,
+    "D_c": 0.42925,
+    "D_c_BI": 1.745562641507087,
+    "plus10pp_ok": true,
+    "nondegenerate": {
+     "gstar_in_[0.15,0.90]": true,
+     "D_c>=0.20": true,
+     "sat<0.5": true
+    },
+    "passes": true,
+    "delta_c": 0.04,
+    "eps_c": 0.261834396226063,
+    "H_star": "b_spread",
+    "H_star_success": 0.465,
+    "flat_screen": false
+   },
+   "S12": {
+    "gstar": {
+     "n": 497,
+     "success": 0.41851106639839036,
+     "se_success": 0.022150491224640773,
+     "bi": 6.293884857216835,
+     "sd_bi": 0.9879582167406499,
+     "sat": 0.1006036217303823
+    },
+    "random": {
+     "n": 200,
+     "success": 0.085,
+     "se_success": 0.019769399225283587,
+     "bi": 3.007686902764506,
+     "sd_bi": 1.999297308047809,
+     "sat": 0.005
+    },
+    "b_spread": {
+     "n": 200,
+     "success": 0.07,
+     "se_success": 0.018086892447072265,
+     "bi": 3.837229995694246,
+     "sd_bi": 0.7831248178472313,
+     "sat": 0.0
+    },
+    "b_fan": {
+     "n": 200,
+     "success": 0.395,
+     "se_success": 0.034653706828922715,
+     "bi": 6.051436735651171,
+     "sd_bi": 1.092324330515993,
+     "sat": 0.06
+    },
+    "b_cov": {
+     "n": 200,
+     "success": 0.355,
+     "se_success": 0.033920910080708584,
+     "bi": 6.098398703436613,
+     "sd_bi": 1.024784944071849,
+     "sat": 0.06
+    },
+    "complete": {
+     "gstar": false,
+     "random": true,
+     "b_spread": true,
+     "b_fan": true,
+     "b_cov": true
+    },
+    "gstar_first200_success": 0.42,
+    "gstar_last300_success": 0.4175084175084175,
+    "D_c": 0.33351106639839034,
+    "D_c_BI": 3.2861979544523288,
+    "plus10pp_ok": true,
+    "nondegenerate": {
+     "gstar_in_[0.15,0.90]": true,
+     "D_c>=0.20": true,
+     "sat<0.5": true
+    },
+    "passes": true,
+    "delta_c": 0.04,
+    "eps_c": 0.31469424286084174,
+    "H_star": "b_fan",
+    "H_star_success": 0.395,
+    "flat_screen": true
+   },
+   "A12": {
+    "gstar": {
+     "n": 500,
+     "success": 0.472,
+     "se_success": 0.022347949832668024,
+     "bi": 6.712143126357323,
+     "sd_bi": 1.3181188141250821,
+     "sat": 0.304
+    },
+    "random": {
+     "n": 200,
+     "success": 0.04,
+     "se_success": 0.013891177924157585,
+     "bi": 2.4992384750895793,
+     "sd_bi": 2.086783416104076,
+     "sat": 0.005
+    },
+    "b_spread": {
+     "n": 200,
+     "success": 0.02,
+     "se_success": 0.009924336870116702,
+     "bi": 3.753720049633871,
+     "sd_bi": 0.9219262394767223,
+     "sat": 0.0
+    },
+    "b_fan": {
+     "n": 200,
+     "success": 0.39,
+     "se_success": 0.03457567623250011,
+     "bi": 6.372295546359387,
+     "sd_bi": 1.3141235584240731,
+     "sat": 0.22
+    },
+    "b_cov": {
+     "n": 200,
+     "success": 0.365,
+     "se_success": 0.034127679271557736,
+     "bi": 6.089526609761211,
+     "sd_bi": 1.5832338899077243,
+     "sat": 0.225
+    },
+    "complete": {
+     "gstar": true,
+     "random": true,
+     "b_spread": true,
+     "b_fan": true,
+     "b_cov": true
+    },
+    "gstar_first200_success": 0.465,
+    "gstar_last300_success": 0.4766666666666667,
+    "D_c": 0.432,
+    "D_c_BI": 4.212904651267744,
+    "plus10pp_ok": true,
+    "nondegenerate": {
+     "gstar_in_[0.15,0.90]": true,
+     "D_c>=0.20": true,
+     "sat<0.5": true
+    },
+    "passes": true,
+    "delta_c": 0.04,
+    "eps_c": 0.3356071563178662,
+    "H_star": "b_fan",
+    "H_star_success": 0.39,
+    "flat_screen": false
+   }
+  },
+  "flat_screen_cells": 1,
+  "flat_prime_likely": false,
+  "surviving_cells": [
+   "S0",
+   "S12",
+   "A12"
+  ]
+ },
+ "12_lat_analysis": {
+  "files": [
+   "S_k12_pilot.jsonl",
+   "S_k12_pilot_more.jsonl"
+  ],
+  "n_decisions": 1000,
+  "n_episodes": 253,
+  "methods": {
+   "g125_512_16": {
+    "median": 0.020150849999936327,
+    "ci": [
+     0.01977989908768336,
+     0.020443736000004264
+    ],
+    "half_width_rel": 0.016471685123034548,
+    "component_medians": {
+     "t_assim": 0.0031731095000253617,
+     "t_nb": 0.0008860165001465248,
+     "t_score": 0.016271208000034676,
+     "t_select": 2.6915500029645045e-05
+    }
+   },
+   "g125_512_4": {
+    "median": 0.010920341499968345,
+    "ci": [
+     0.010789310300059186,
+     0.011182793862522543
+    ],
+    "half_width_rel": 0.018016083217933146,
+    "component_medians": {
+     "t_assim": 0.003028566000068622,
+     "t_nb": 0.000875647499981369,
+     "t_score": 0.008806057000015244,
+     "t_select": 2.6439500004471483e-05
+    }
+   },
+   "g125_128_64": {
+    "median": 0.015071522500079482,
+    "ci": [
+     0.014551007749956569,
+     0.01563493781251992
+    ],
+    "half_width_rel": 0.035959541000507286,
+    "component_medians": {
+     "t_assim": 0.003010039999963965,
+     "t_nb": 0.000862868000126582,
+     "t_score": 0.01030373349999536,
+     "t_select": 2.6870499993947305e-05
+    }
+   },
+   "g125_128_16": {
+    "median": 0.007686634999998887,
+    "ci": [
+     0.00743401461249249,
+     0.008151781837487704
+    ],
+    "half_width_rel": 0.04668930064945964,
+    "component_medians": {
+     "t_assim": 0.003044972499992582,
+     "t_nb": 0.0008705079999344889,
+     "t_score": 0.0036615770000025805,
+     "t_select": 2.6484499983325804e-05
+    }
+   },
+   "g125_128_4": {
+    "median": 0.006179234500109487,
+    "ci": [
+     0.006104048499992132,
+     0.006277912999962609
+    ],
+    "half_width_rel": 0.014068449738183334,
+    "component_medians": {
+     "t_assim": 0.002887454499955311,
+     "t_nb": 0.000858048999816674,
+     "t_score": 0.0019858984999245877,
+     "t_select": 2.6219000119453995e-05
+    }
+   },
+   "g125_32_64": {
+    "median": 0.007867019000002529,
+    "ci": [
+     0.007428304500024296,
+     0.00835743307492791
+    ],
+    "half_width_rel": 0.05905213746803683,
+    "component_medians": {
+     "t_assim": 0.0029466009999623566,
+     "t_nb": 0.0008536309999840341,
+     "t_score": 0.003924547499991604,
+     "t_select": 2.6564999956235624e-05
+    }
+   },
+   "g125_32_16": {
+    "median": 0.004691430000036689,
+    "ci": [
+     0.004522945999980266,
+     0.005596729274973455
+    ],
+    "half_width_rel": 0.11444093538481787,
+    "component_medians": {
+     "t_assim": 0.0030135100000734383,
+     "t_nb": 0.0008583849999581616,
+     "t_score": 0.0014369909999913943,
+     "t_select": 2.6038499925107317e-05
+    }
+   },
+   "g125_32_4": {
+    "median": 0.004202506000012818,
+    "ci": [
+     0.004015729000002466,
+     0.005211866749988302
+    ],
+    "half_width_rel": 0.1423124381002892,
+    "component_medians": {
+     "t_assim": 0.00299306550002143,
+     "t_nb": 0.0008531590000870892,
+     "t_score": 0.0007732409999334777,
+     "t_select": 2.53934999818739e-05
+    }
+   },
+   "pruned16": {
+    "median": 0.2833444260000988,
+    "ci": [
+     0.2811347649999334,
+     0.2853233614999908
+    ],
+    "half_width_rel": 0.007391351506692368,
+    "component_medians": {
+     "t_feat": 0.000111698999944565,
+     "t_fwd": 0.00015290099997855577,
+     "t_mask": 3.0472499929601327e-05,
+     "t_assim": 0.03922143799997002,
+     "t_nb": 0.09635324350006158,
+     "t_score": 0.13110458849990891,
+     "t_select": 7.559399998058325e-05
+    }
+   },
+   "random16": {
+    "median": 0.28095394449999844,
+    "ci": [
+     0.2781336740000313,
+     0.28364108069999644
+    ],
+    "half_width_rel": 0.009801262462725745,
+    "component_medians": {
+     "t_feat": 0.00020180050000817573,
+     "t_fwd": 0.00018071299996336165,
+     "t_mask": 3.461400001469883e-05,
+     "t_assim": 0.04006620249990078,
+     "t_nb": 0.0980097995000051,
+     "t_score": 0.13824147300005052,
+     "t_select": 0.00011844899984225776
+    }
+   },
+   "student": {
+    "median": 0.00040812899999309593,
+    "ci": [
+     0.0004036272874657243,
+     0.0004137049998007569
+    ],
+    "half_width_rel": 0.012346234076974582,
+    "component_medians": {
+     "t_feat": 0.00020079750001400498,
+     "t_fwd": 0.00018023950008227985,
+     "t_mask": 3.462949985078012e-05
+    }
+   },
+   "g2000_512_64": {
+    "median": 0.9134639894999736,
+    "ci": [
+     0.7909800091750249,
+     0.9413416659999712
+    ],
+    "half_width_rel": 0.08230300184425093,
+    "component_medians": {
+     "t_assim": 0.04023960350002653,
+     "t_nb": 0.09671669100009694,
+     "t_score": 0.7168749699999921,
+     "t_select": 4.537999996045983e-05
+    }
+   },
+   "g2000_512_16": {
+    "median": 0.39076923699997224,
+    "ci": [
+     0.38474601699999766,
+     0.3970526702624738
+    ],
+    "half_width_rel": 0.015746701757995637,
+    "component_medians": {
+     "t_assim": 0.04186662849997447,
+     "t_nb": 0.09621869149998474,
+     "t_score": 0.25465013299981365,
+     "t_select": 3.737250000312997e-05
+    }
+   },
+   "g2000_512_4": {
+    "median": 0.27553395699993644,
+    "ci": [
+     0.25804330400001163,
+     0.29229023499999585
+    ],
+    "half_width_rel": 0.06214647982570097,
+    "component_medians": {
+     "t_assim": 0.0397587475000023,
+     "t_nb": 0.09661762299992915,
+     "t_score": 0.128375595499989,
+     "t_select": 3.355249964442919e-05
+    }
+   },
+   "g2000_128_64": {
+    "median": 0.31586069449997467,
+    "ci": [
+     0.30735506849995603,
+     0.3305281240000113
+    ],
+    "half_width_rel": 0.03668239813241013,
+    "component_medians": {
+     "t_assim": 0.03950386450003407,
+     "t_nb": 0.09715107499994247,
+     "t_score": 0.17916225149997445,
+     "t_select": 4.6168499977738975e-05
+    }
+   },
+   "g2000_128_16": {
+    "median": 0.22492865050003275,
+    "ci": [
+     0.21332944099998485,
+     0.23730776098757356
+    ],
+    "half_width_rel": 0.053302058084381765,
+    "component_medians": {
+     "t_assim": 0.040644192999991446,
+     "t_nb": 0.09719219099997645,
+     "t_score": 0.06669678100007559,
+     "t_select": 3.432700003713762e-05
+    }
+   },
+   "g2000_128_4": {
+    "median": 0.17846212499989633,
+    "ci": [
+     0.1752573094249527,
+     0.18151533100035522
+    ],
+    "half_width_rel": 0.017533192478253135,
+    "component_medians": {
+     "t_assim": 0.04194347500003914,
+     "t_nb": 0.09766135499990014,
+     "t_score": 0.03738655349997089,
+     "t_select": 3.364800011240732e-05
+    }
+   },
+   "g2000_32_64": {
+    "median": 0.2217124470000158,
+    "ci": [
+     0.210143176612479,
+     0.22442014050000125
+    ],
+    "half_width_rel": 0.03219702835971414,
+    "component_medians": {
+     "t_assim": 0.0418031070000211,
+     "t_nb": 0.0961453919996984,
+     "t_score": 0.05294644949992744,
+     "t_select": 3.822799988029146e-05
+    }
+   },
+   "g2000_32_16": {
+    "median": 0.14917192450002403,
+    "ci": [
+     0.14629890200012596,
+     0.155170279999993
+    ],
+    "half_width_rel": 0.029735414454164284,
+    "component_medians": {
+     "t_assim": 0.040358319500001016,
+     "t_nb": 0.09760122900001988,
+     "t_score": 0.017173136499991415,
+     "t_select": 3.187999999454405e-05
+    }
+   },
+   "g2000_32_4": {
+    "median": 0.13207513049997033,
+    "ci": [
+     0.12897875399994518,
+     0.14094673500005683
+    ],
+    "half_width_rel": 0.04530747368867577,
+    "component_medians": {
+     "t_assim": 0.039950103500018486,
+     "t_nb": 0.09691403600002957,
+     "t_score": 0.00970306049998726,
+     "t_select": 3.070799988336148e-05
+    }
+   },
+   "g500_512_64": {
+    "median": 0.18810561099996903,
+    "ci": [
+     0.1639840851125413,
+     0.2039412964999201
+    ],
+    "half_width_rel": 0.1062095148968878,
+    "component_medians": {
+     "t_assim": 0.011398385499944652,
+     "t_nb": 0.00559307249997687,
+     "t_score": 0.16766200250009433,
+     "t_select": 3.2830999998623156e-05
+    }
+   },
+   "g500_512_16": {
+    "median": 0.07333266750005407,
+    "ci": [
+     0.07177192031248865,
+     0.07464432695000624
+    ],
+    "half_width_rel": 0.019584768531128848,
+    "component_medians": {
+     "t_assim": 0.011415778500008855,
+     "t_nb": 0.005501880999986497,
+     "t_score": 0.05579070149988752,
+     "t_select": 3.017150004325231e-05
+    }
+   },
+   "g500_512_4": {
+    "median": 0.03995386250008437,
+    "ci": [
+     0.038938034587581424,
+     0.043853576999936195
+    ],
+    "half_width_rel": 0.06151523413217421,
+    "component_medians": {
+     "t_assim": 0.011265527999995584,
+     "t_nb": 0.005409572000189655,
+     "t_score": 0.027369092999947497,
+     "t_select": 2.9450000027964052e-05
+    }
+   },
+   "g500_128_64": {
+    "median": 0.05673470049995899,
+    "ci": [
+     0.05553373108751884,
+     0.05892057400001249
+    ],
+    "half_width_rel": 0.029848072543329097,
+    "component_medians": {
+     "t_assim": 0.011241079999990689,
+     "t_nb": 0.005443007000167199,
+     "t_score": 0.03792461000000458,
+     "t_select": 3.233499995758393e-05
+    }
+   },
+   "g500_128_16": {
+    "median": 0.02937649499995132,
+    "ci": [
+     0.026197526000032667,
+     0.03476222128751374
+    ],
+    "half_width_rel": 0.14577462844861622,
+    "component_medians": {
+     "t_assim": 0.011348743999974431,
+     "t_nb": 0.005489971499855528,
+     "t_score": 0.01273281149997274,
+     "t_select": 2.7916999954413768e-05
+    }
+   },
+   "g500_128_4": {
+    "median": 0.022223370000233444,
+    "ci": [
+     0.021799399499968786,
+     0.022729405000063707
+    ],
+    "half_width_rel": 0.02092404302509368,
+    "component_medians": {
+     "t_assim": 0.011223946000029628,
+     "t_nb": 0.005447818499931145,
+     "t_score": 0.006461829999921065,
+     "t_select": 2.7281000086532003e-05
+    }
+   },
+   "g500_32_64": {
+    "median": 0.032560711000087394,
+    "ci": [
+     0.027551869000035367,
+     0.034189891000096395
+    ],
+    "half_width_rel": 0.1019330014022607,
+    "component_medians": {
+     "t_assim": 0.011128794999990532,
+     "t_nb": 0.0055657474998724865,
+     "t_score": 0.014130162999890672,
+     "t_select": 2.873350001664221e-05
+    }
+   },
+   "g500_32_16": {
+    "median": 0.018170937500002537,
+    "ci": [
+     0.017204444000071817,
+     0.018777995499951315
+    ],
+    "half_width_rel": 0.04329857773929602,
+    "component_medians": {
+     "t_assim": 0.011067374999981894,
+     "t_nb": 0.005506887499905133,
+     "t_score": 0.004670840500011764,
+     "t_select": 2.702550003164106e-05
+    }
+   },
+   "g500_32_4": {
+    "median": 0.016491528999949878,
+    "ci": [
+     0.015652690462489006,
+     0.01716563299999052
+    ],
+    "half_width_rel": 0.045870293091262594,
+    "component_medians": {
+     "t_assim": 0.010902272500061372,
+     "t_nb": 0.005421156000011251,
+     "t_score": 0.002283178499965288,
+     "t_select": 2.6865500004191745e-05
+    }
+   },
+   "g125_512_64": {
+    "median": 0.04837607499999308,
+    "ci": [
+     0.043292170999961854,
+     0.05534761168767943
+    ],
+    "half_width_rel": 0.12460126919886848,
+    "component_medians": {
+     "t_assim": 0.0029832405000433937,
+     "t_nb": 0.0008691355000109979,
+     "t_score": 0.04548398400015685,
+     "t_select": 2.7486499845963408e-05
+    }
+   }
+  },
+  "protocol_complete": false,
+  "ci_too_wide": [
+   "g125_32_16",
+   "g125_32_4",
+   "g500_512_64",
+   "g500_128_16",
+   "g500_32_64",
+   "g125_512_64"
+  ],
+  "student_median_s": 0.00040812899999309593,
+  "Q": [
+   "g125_32_4",
+   "g125_32_16",
+   "g125_32_64",
+   "g125_128_4",
+   "g125_128_16",
+   "g125_128_64",
+   "g125_512_4",
+   "g125_512_16",
+   "g500_32_4",
+   "g500_32_16",
+   "g500_32_64",
+   "g500_128_4",
+   "g500_128_16",
+   "g500_512_4"
+  ],
+  "R_b_candidates": [
+   "g125_128_64",
+   "g125_512_16",
+   "g500_32_64",
+   "g500_128_16",
+   "g500_512_4"
+  ],
+  "Q_empty": false,
+  "ratio_full_over_student": 2238.174669076263,
+  "ratio_full_over_pruned16": 3.223864334990148,
+  "H1_fb_active": false,
+  "L_final": {
+   "median": 0.20434046499985925,
+   "ci": [
+    0.1928690600000209,
+    0.21347067500005323
+   ],
+   "half_width_rel": 0.050410022802009666
+  }
+ },
+ "12_rl_sweep_selection": {
+  "rule": "argmax final val ball-sPCE; ties within 0.02 nats -> lower index",
+  "rows": [
+   {
+    "cfg": 0,
+    "lr": 0.00036339014767503805,
+    "ent_coef": 0.00013313139952275948,
+    "batch": 128,
+    "critic_lr": 0.0014321061677694642,
+    "status": "max_episodes",
+    "episodes": 50048,
+    "final_val_episodes": 40960,
+    "final_val_ball_spce": 4.74740830353125,
+    "final_val_ball_spce_sampled": 4.813022029497628,
+    "train_g_T_last_batch": 5.017253114130899
+   },
+   {
+    "cfg": 1,
+    "lr": 0.00012113004922501268,
+    "ent_coef": 0.00013313139952275948,
+    "batch": 128,
+    "critic_lr": 0.0014321061677694642,
+    "status": "max_episodes",
+    "episodes": 50048,
+    "final_val_episodes": 40960,
+    "final_val_ball_spce": 4.679114846131953,
+    "final_val_ball_spce_sampled": 4.751736552098986,
+    "train_g_T_last_batch": 4.980931527710563
+   },
+   {
+    "cfg": 2,
+    "lr": 0.001090170443025114,
+    "ent_coef": 0.00013313139952275948,
+    "batch": 128,
+    "critic_lr": 0.0014321061677694642,
+    "status": "max_episodes",
+    "episodes": 50048,
+    "final_val_episodes": 40960,
+    "final_val_ball_spce": 5.666242682574702,
+    "final_val_ball_spce_sampled": 5.630884175302558,
+    "train_g_T_last_batch": 5.757433207864823
+   },
+   {
+    "cfg": 3,
+    "lr": 0.00036339014767503805,
+    "ent_coef": 0.0013313139952275948,
+    "batch": 128,
+    "critic_lr": 0.0014321061677694642,
+    "status": "max_episodes",
+    "episodes": 50048,
+    "final_val_episodes": 40960,
+    "final_val_ball_spce": 4.625549471485357,
+    "final_val_ball_spce_sampled": 4.916567244788891,
+    "train_g_T_last_batch": 4.978103598196965
+   }
+  ],
+  "selected_cfg": 2,
+  "validation_stream": "trainer val_v2 (deviation: not val3)"
+ },
+ "14_derived": {
+  "h2_gT_per_seed_student": {
+   "sd": 0.07671690714863458,
+   "range": 0.13762461409830706
+  },
+  "h2_gT_per_seed_rl": {
+   "sd": 0.2526155067832012,
+   "range": 0.4766581341425349
+  },
+  "h2_gT_sd_ratio_rl_over_student": 3.292827046504537,
+  "h2_gT_range_ratio_rl_over_student": 3.46346572715584,
+  "m4_success_range_student": 0.010000000000000009,
+  "m4_success_range_rl": 0.07666666666666666,
+  "rl_sweep_margin_best_minus_second": 0.9188343790434521
+ },
+ "14_h2_analysis": {
+  "student_tag": "rem",
+  "n_episodes": 500,
+  "complete": true,
+  "threshold_nats": 0.1,
+  "student_mean": 5.3678482019185045,
+  "rl_mean": 5.36761576048348,
+  "bootstrap": {
+   "diff": 0.0002324414350238726,
+   "lower": -0.3103236417260658,
+   "upper": 0.3033542925230637,
+   "p_greater": 0.4883,
+   "p_less": 0.5117,
+   "n_episodes": 500,
+   "n_seeds": [
+    3,
+    3
+   ],
+   "n_boot": 10000
+  },
+  "per_seed_student": {
+   "501": 5.2794540134392705,
+   "502": 5.4070119647786665,
+   "503": 5.4170786275375775
+  },
+  "per_seed_rl": {
+   "511": 5.654297180328503,
+   "512": 5.270911054935971,
+   "513": 5.177639046185968
+  },
+  "passes": false,
+  "g_T_gstar": 5.299300071706202,
+  "g_T_random": 2.61821885365271,
+  "rl_training": {
+   "511": {
+    "status": "max_episodes",
+    "plateau_at": 102400,
+    "episodes": 200064,
+    "wall_s": 4068.9127039909363
+   },
+   "512": {
+    "status": "max_episodes",
+    "plateau_at": 102400,
+    "episodes": 200064,
+    "wall_s": 2880.6637835502625
+   },
+   "513": {
+    "status": "max_episodes",
+    "plateau_at": 112640,
+    "episodes": 200064,
+    "wall_s": 3990.0908603668213
+   }
+  }
+ },
+ "14_labelfit": {
+  "rule": "under-fit := train R_bar > 0.25 or train top-1 < 0.50 (end of round 2)",
+  "groups": {
+   "first_attempt": [
+    {
+     "student": "S_k12_hp0_s501_r2",
+     "train_R_bar": 0.18750506175419443,
+     "train_top1": 0.5303506346613045,
+     "train_decisions": 7957,
+     "heldout_R_bar": 0.210243923429152,
+     "heldout_top1": 0.4916387959866221,
+     "under_fit": false
+    },
+    {
+     "student": "S_k12_hp0_s502_r2",
+     "train_R_bar": 0.20635059640089864,
+     "train_top1": 0.5107452557496543,
+     "train_decisions": 7957,
+     "heldout_R_bar": 0.22525272256457654,
+     "heldout_top1": 0.48327759197324416,
+     "under_fit": false
+    },
+    {
+     "student": "S_k12_hp0_s503_r2",
+     "train_R_bar": 0.18532239837360615,
+     "train_top1": 0.5278301294132429,
+     "train_decisions": 7959,
+     "heldout_R_bar": 0.2068121839279038,
+     "heldout_top1": 0.4882943143812709,
+     "under_fit": false
+    }
+   ],
+   "remedy": [
+    {
+     "student": "S_k12_hp0_s501_r2",
+     "train_R_bar": 0.17948984135337712,
+     "train_top1": 0.5233272844348182,
+     "train_decisions": 17083,
+     "heldout_R_bar": 0.18653996379141644,
+     "heldout_top1": 0.5066889632107023,
+     "under_fit": false
+    },
+    {
+     "student": "S_k12_hp0_s502_r2",
+     "train_R_bar": 0.16874135545263538,
+     "train_top1": 0.5343909149446818,
+     "train_decisions": 17083,
+     "heldout_R_bar": 0.18408276698078424,
+     "heldout_top1": 0.5058528428093646,
+     "under_fit": false
+    },
+    {
+     "student": "S_k12_hp0_s503_r2",
+     "train_R_bar": 0.1774420885358548,
+     "train_top1": 0.5275323307390719,
+     "train_decisions": 17089,
+     "heldout_R_bar": 0.2012487063009335,
+     "heldout_top1": 0.4916387959866221,
+     "under_fit": false
+    }
+   ],
+   "belief_input": [
+    {
+     "student": "S_k12_belief_hp0_s521_r2",
+     "train_R_bar": 0.3674603706262377,
+     "train_top1": 0.33366846801558375,
+     "train_decisions": 7957,
+     "heldout_R_bar": 0.40180677585779623,
+     "heldout_top1": 0.2968227424749164,
+     "under_fit": true
+    },
+    {
+     "student": "S_k12_belief_hp0_s522_r2",
+     "train_R_bar": 0.3786827606644551,
+     "train_top1": 0.3270028927178971,
+     "train_decisions": 7951,
+     "heldout_R_bar": 0.3942234349366931,
+     "heldout_top1": 0.3085284280936455,
+     "under_fit": true
+    },
+    {
+     "student": "S_k12_belief_hp0_s523_r2",
+     "train_R_bar": 0.33803519308939456,
+     "train_top1": 0.3620364550597109,
+     "train_decisions": 7955,
+     "heldout_R_bar": 0.38424864327716574,
+     "heldout_top1": 0.30518394648829433,
+     "under_fit": true
+    }
+   ]
+  }
+ },
+ "14_m4_analysis": {
+  "n_episodes": 300,
+  "complete": true,
+  "delta_S12": 0.04,
+  "rows": {
+   "gstar": {
+    "success": 0.4266666666666667,
+    "ball_info": 6.248257789255915,
+    "probes": 3.9633333333333334,
+    "per_seed_success": [
+     0.4266666666666667
+    ]
+   },
+   "student": {
+    "success": 0.38222222222222224,
+    "ball_info": 6.199559494150433,
+    "probes": 4.0,
+    "per_seed_success": [
+     0.38333333333333336,
+     0.37666666666666665,
+     0.38666666666666666
+    ]
+   },
+   "rl": {
+    "success": 0.3566666666666667,
+    "ball_info": 5.91023528336657,
+    "probes": 3.0,
+    "per_seed_success": [
+     0.36666666666666664,
+     0.39,
+     0.31333333333333335
+    ]
+   }
+  },
+  "diffs": {
+   "student-gstar:success": {
+    "diff": -0.04444444444444445,
+    "ci90": [
+     -0.08555555555555557,
+     -0.0033333333333333383
+    ],
+    "ci95": [
+     -0.09333333333333335,
+     0.005555555555555546
+    ]
+   },
+   "student-gstar:ball_info": {
+    "diff": -0.048698295105482396,
+    "ci90": [
+     -0.10354336297521093,
+     0.007778312479527685
+    ],
+    "ci95": [
+     -0.11381723577368254,
+     0.019043726815655238
+    ]
+   },
+   "student-rl:success": {
+    "diff": 0.025555555555555564,
+    "ci90": [
+     -0.026666666666666655,
+     0.07777777777777778
+    ],
+    "ci95": [
+     -0.03666666666666665,
+     0.0877777777777778
+    ]
+   },
+   "student-rl:ball_info": {
+    "diff": 0.2893242107838624,
+    "ci90": [
+     0.1401979911773711,
+     0.43965936333162897
+    ],
+    "ci95": [
+     0.11703426127012961,
+     0.4652411336447996
+    ]
+   },
+   "gstar-rl:success": {
+    "diff": 0.07000000000000002,
+    "ci90": [
+     0.01222222222222225,
+     0.12555555555555556
+    ],
+    "ci95": [
+     0.0022222222222222365,
+     0.13666666666666666
+    ]
+   },
+   "gstar-rl:ball_info": {
+    "diff": 0.3380225058893448,
+    "ci90": [
+     0.1865555909436212,
+     0.48940554162649313
+    ],
+    "ci95": [
+     0.15845233650866292,
+     0.5195564404717172
+    ]
+   }
+  },
+  "gap_closure_reported": false,
+  "exploratory_b_fan": {
+   "n_episodes": 300,
+   "complete": true,
+   "success": 0.36,
+   "ball_info": 5.973236727544934,
+   "student-b_fan:success": {
+    "diff": 0.022222222222222213,
+    "ci95": [
+     -0.027777777777777787,
+     0.07333333333333333
+    ]
+   },
+   "student-b_fan:ball_info": {
+    "diff": 0.22632276660549844,
+    "ci95": [
+     0.14115157620073915,
+     0.3110182139205082
+    ]
+   },
+   "b_fan-gstar:success": {
+    "diff": -0.06666666666666667,
+    "ci95": [
+     -0.12,
+     -0.01
+    ]
+   },
+   "b_fan-gstar:ball_info": {
+    "diff": -0.27502106171098084,
+    "ci95": [
+     -0.366536269338665,
+     -0.18425674418951835
+    ]
+   },
+   "rl-b_fan:success": {
+    "diff": -0.003333333333333357,
+    "ci95": [
+     -0.0688888888888889,
+     0.06333333333333331
+    ]
+   },
+   "rl-b_fan:ball_info": {
+    "diff": -0.06300144417836392,
+    "ci95": [
+     -0.24648129479465214,
+     0.11989994227963628
+    ]
+   }
+  }
+ }
+}
+
+(b) First 200 lines of the longest run log (results/v3/lat/S_k12_pilot.jsonl):
+{"header": true, "args": {"cmd": "latency3", "set": "S", "kappa": 12.0, "tau": 4.9, "start": 0, "count": 300, "budget_minutes": 330.0, "allow_32": false, "out": "../results/v3/lat/S_k12_pilot", "split": "pilot3", "weights": "../results/v3/d3/S_k12_hp0_s501_r0.npz", "warmup": 20, "decisions": 500}, "env": {"TOUCHBED_NPHI": "64", "action_set": "64x8", "A": 512, "numpy": "2.5.4", "python": "3.12.15", …[line truncated]
+{"episode": 5, "step": 0, "timers": {"g125_512_16": {"t_assim": 2.3000001192485797e-07, "t_nb": 0.000524891999987176, "t_score": 0.019963213000011137, "t_select": 2.112100000317696e-05, "L_dec": 0.020509456000013415}, "g125_512_4": {"t_assim": 1.9999998812636477e-07, "t_nb": 0.0005197739999971418, "t_score": 0.009974756000019624, "t_select": 1.913899998839952e-05, "L_dec": 0.010513868999993292}, " …[line truncated]
+{"episode": 5, "step": 1, "timers": {"g125_512_4": {"t_assim": 0.003388070999989168, "t_nb": 0.0006745780000017021, "t_score": 0.007597312000001466, "t_select": 1.847799998699884e-05, "L_dec": 0.011678438999979335}, "g125_128_64": {"t_assim": 0.0029995250000069973, "t_nb": 0.0006071759999883852, "t_score": 0.009610769999994773, "t_select": 2.030000001695953e-05, "L_dec": 0.013237771000007115}, "g1 …[line truncated]
+{"episode": 5, "step": 2, "timers": {"g125_128_64": {"t_assim": 0.00041154099997697813, "t_nb": 0.000636721000006446, "t_score": 0.005089017000017293, "t_select": 1.6795999982832654e-05, "L_dec": 0.00615407499998355}, "g125_128_16": {"t_assim": 0.0003204029999892555, "t_nb": 0.000542679000005819, "t_score": 0.0018854939999926046, "t_select": 1.4823000014985155e-05, "L_dec": 0.0027633990000026643}, …[line truncated]
+{"episode": 6, "step": 0, "timers": {"g125_128_16": {"t_assim": 2.5099998879341e-07, "t_nb": 0.00046134500001926426, "t_score": 0.005069155000001047, "t_select": 1.5692999994598722e-05, "L_dec": 0.005546444000003703}, "g125_128_4": {"t_assim": 9.999999406318238e-08, "t_nb": 0.0004333340000073349, "t_score": 0.0026270109999870783, "t_select": 1.4182000001028428e-05, "L_dec": 0.003074626999989505},  …[line truncated]
+{"episode": 6, "step": 1, "timers": {"g125_128_4": {"t_assim": 0.0032769219999977395, "t_nb": 0.0005386020000059943, "t_score": 0.002111815000006345, "t_select": 1.7527000011341443e-05, "L_dec": 0.00594486600002142}, "g125_32_64": {"t_assim": 0.002832151999996313, "t_nb": 0.0005195939999964594, "t_score": 0.00344087900001, "t_select": 1.6043999977455314e-05, "L_dec": 0.0068086689999802275}, "g125_ …[line truncated]
+{"episode": 6, "step": 2, "timers": {"g125_32_64": {"t_assim": 0.005071829000002026, "t_nb": 0.0004986620000124731, "t_score": 0.0019540969999809477, "t_select": 1.709599999344391e-05, "L_dec": 0.007541683999988891}, "g125_32_16": {"t_assim": 0.00452695799998537, "t_nb": 0.0012081419999958598, "t_score": 0.0007718540000212215, "t_select": 1.5572999984669877e-05, "L_dec": 0.006522526999987122}, "g1 …[line truncated]
+{"episode": 6, "step": 3, "timers": {"g125_32_16": {"t_assim": 0.00040855699998587625, "t_nb": 0.0017377910000107022, "t_score": 0.0007419890000051055, "t_select": 1.6714999986788825e-05, "L_dec": 0.0029050519999884727}, "g125_32_4": {"t_assim": 0.00030970700001375917, "t_nb": 0.0004693479999957617, "t_score": 0.0004074450000075558, "t_select": 1.493199999913486e-05, "L_dec": 0.0012014320000162115 …[line truncated]
+{"episode": 7, "step": 0, "timers": {"g125_32_4": {"t_assim": 2.399999914359796e-07, "t_nb": 0.0005485270000065157, "t_score": 0.0009498630000166486, "t_select": 1.7375999988189506e-05, "L_dec": 0.0015160060000027897}, "pruned16": {"t_feat": 7.460300000161624e-05, "t_fwd": 0.00011251899999820125, "t_mask": 1.6555000001972076e-05, "t_assim": 9.999999406318238e-08, "t_nb": 0.0553820490000021, "t_sco …[line truncated]
+{"episode": 7, "step": 1, "timers": {"pruned16": {"t_feat": 0.00011957999998912783, "t_fwd": 0.0001361649999864767, "t_mask": 2.104200001440404e-05, "t_assim": 0.021702277999992248, "t_nb": 0.09567286300000433, "t_score": 0.0870618509999872, "t_select": 7.447299998375456e-05, "L_dec": 0.20478825199995754}, "random16": {"t_feat": 0.00019224999999778447, "t_fwd": 0.0001516089999995529, "t_mask": 2.7 …[line truncated]
+{"episode": 7, "step": 2, "timers": {"random16": {"t_feat": 0.0001181279999968865, "t_fwd": 0.00015186899997843284, "t_mask": 1.8878000020094987e-05, "t_assim": 0.03885634899998536, "t_nb": 0.3574887280000212, "t_score": 0.08496152499998288, "t_select": 0.0001234350000061113, "L_dec": 0.48171891199999095}, "student": {"t_feat": 0.0001976380000030531, "t_fwd": 0.00017328100000213453, "t_mask": 2.42 …[line truncated]
+{"episode": 7, "step": 3, "timers": {"student": {"t_feat": 0.00013260000000059335, "t_fwd": 0.00016224400002329276, "t_mask": 2.6779999984682945e-05, "L_dec": 0.00032162400000856906}, "g2000_512_64": {"t_assim": 0.002294470999999021, "t_nb": 0.2540195469999844, "t_score": 0.12796484599999758, "t_select": 4.8412000012376666e-05, "L_dec": 0.3843272759999934}, "g2000_512_16": {"t_assim": 0.0574189170 …[line truncated]
+{"episode": 8, "step": 0, "timers": {"g2000_512_64": {"t_assim": 1.9999998812636477e-07, "t_nb": 0.05541811100002292, "t_score": 0.9801249649999875, "t_select": 4.045099998961632e-05, "L_dec": 1.0355837269999881}, "g2000_512_16": {"t_assim": 2.0100000597267353e-07, "t_nb": 0.05500919299998941, "t_score": 0.34226651299999844, "t_select": 2.8863000011369877e-05, "L_dec": 0.3973047700000052}, "g2000_ …[line truncated]
+{"episode": 8, "step": 1, "timers": {"g2000_512_16": {"t_assim": 0.003482110000021521, "t_nb": 0.06139837799997849, "t_score": 0.224446539000013, "t_select": 3.270900000984511e-05, "L_dec": 0.28935973600002285}, "g2000_512_4": {"t_assim": 0.003512113999988742, "t_nb": 0.058242320000005066, "t_score": 0.1259748699999932, "t_select": 2.460700000028737e-05, "L_dec": 0.18775391099998728}, "g2000_128_6 …[line truncated]
+{"episode": 8, "step": 2, "timers": {"g2000_512_4": {"t_assim": 0.02314977200001067, "t_nb": 0.0739336089999938, "t_score": 0.09022919500000626, "t_select": 2.485799998908078e-05, "L_dec": 0.1873374339999998}, "g2000_128_64": {"t_assim": 0.02247921099998962, "t_nb": 0.09808574300001283, "t_score": 0.10998723200000882, "t_select": 3.097699999443648e-05, "L_dec": 0.2305831630000057}, "g2000_128_16": …[line truncated]
+{"episode": 8, "step": 3, "timers": {"g2000_128_64": {"t_assim": 0.04102075999998078, "t_nb": 0.07579841100002227, "t_score": 0.05738010700000018, "t_select": 3.804799999329589e-05, "L_dec": 0.17423732599999653}, "g2000_128_16": {"t_assim": 0.043409994000001006, "t_nb": 0.06061770099998398, "t_score": 0.02669881500000315, "t_select": 2.6710000014418256e-05, "L_dec": 0.13075322000000256}, "g2000_12 …[line truncated]
+{"episode": 9, "step": 0, "timers": {"g2000_128_16": {"t_assim": 3.309999954126397e-07, "t_nb": 0.054931253000006564, "t_score": 0.09111338399998203, "t_select": 2.774200001454119e-05, "L_dec": 0.14607270999999855}, "g2000_128_4": {"t_assim": 1.8000000068241206e-07, "t_nb": 0.05556559100000413, "t_score": 0.04746083399999179, "t_select": 3.261899999529305e-05, "L_dec": 0.1030592239999919}, "g2000_ …[line truncated]
+{"episode": 9, "step": 1, "timers": {"g2000_128_4": {"t_assim": 0.022128008999999338, "t_nb": 0.058469191000000365, "t_score": 0.040482456999995975, "t_select": 3.1497999998464365e-05, "L_dec": 0.12111115499999414}, "g2000_32_64": {"t_assim": 0.02185324499998842, "t_nb": 0.05948738699999012, "t_score": 0.057246015000004036, "t_select": 3.732600001171704e-05, "L_dec": 0.1386239729999943}, "g2000_32 …[line truncated]
+{"episode": 9, "step": 2, "timers": {"g2000_32_64": {"t_assim": 0.023957107999990512, "t_nb": 0.057592212000002974, "t_score": 0.027300078999985544, "t_select": 2.2835000009990836e-05, "L_dec": 0.10887223399998902}, "g2000_32_16": {"t_assim": 0.023763457000001154, "t_nb": 0.05790576399999736, "t_score": 0.008829284000000825, "t_select": 2.0200999983899237e-05, "L_dec": 0.09051870599998324}, "g2000 …[line truncated]
+{"episode": 9, "step": 3, "timers": {"g2000_32_16": {"t_assim": 0.044115357999999105, "t_nb": 0.06495895000000473, "t_score": 0.006175503000008575, "t_select": 2.2723999990148513e-05, "L_dec": 0.11527253500000256}, "g2000_32_4": {"t_assim": 0.042463155999996616, "t_nb": 0.067846956000011, "t_score": 0.003015005999998266, "t_select": 2.343599999221624e-05, "L_dec": 0.1133485539999981}, "g500_512_64 …[line truncated]
+{"episode": 10, "step": 0, "timers": {"g2000_32_4": {"t_assim": 3.199999980552093e-07, "t_nb": 0.055959433999987596, "t_score": 0.0178620690000173, "t_select": 2.5457999981881585e-05, "L_dec": 0.07384728099998483}, "g500_512_64": {"t_assim": 1.9000000861524313e-07, "t_nb": 0.002889614999986634, "t_score": 0.2171477530000061, "t_select": 3.3150000007253766e-05, "L_dec": 0.2200707080000086}, "g500_5 …[line truncated]
+{"episode": 10, "step": 1, "timers": {"g500_512_64": {"t_assim": 0.0075065730000005715, "t_nb": 0.003515488000005007, "t_score": 0.15462378600000193, "t_select": 0.00035685800000351264, "L_dec": 0.16600270500001102}, "g500_512_16": {"t_assim": 0.007447363000011364, "t_nb": 0.0051114739999889025, "t_score": 0.0500437780000027, "t_select": 2.2685000004685207e-05, "L_dec": 0.06262530000000766}, "g500 …[line truncated]
+{"episode": 10, "step": 2, "timers": {"g500_512_16": {"t_assim": 0.007556635000014467, "t_nb": 0.0031479870000055143, "t_score": 0.03085277499999961, "t_select": 2.253399998153327e-05, "L_dec": 0.041579931000001125}, "g500_512_4": {"t_assim": 0.007539549000000534, "t_nb": 0.003053464000004169, "t_score": 0.01469603099999972, "t_select": 1.93089999811491e-05, "L_dec": 0.025308352999985573}, "g500_1 …[line truncated]
+{"episode": 10, "step": 3, "timers": {"g500_512_4": {"t_assim": 0.013293056000009074, "t_nb": 0.004431351999983235, "t_score": 0.008257861999993565, "t_select": 1.7126000017242404e-05, "L_dec": 0.025999396000003117}, "g500_128_64": {"t_assim": 0.011955357999994476, "t_nb": 0.004500336000006655, "t_score": 0.010499723000009453, "t_select": 1.709599999344391e-05, "L_dec": 0.026972513000004028}, "g50 …[line truncated]
+{"episode": 11, "step": 0, "timers": {"g500_128_64": {"t_assim": 2.0999999605919584e-07, "t_nb": 0.002711029000010967, "t_score": 0.06066863499998476, "t_select": 2.624999999056854e-05, "L_dec": 0.06340612399998236}, "g500_128_16": {"t_assim": 9.100000397666008e-08, "t_nb": 0.002814403999991555, "t_score": 0.01847027200000184, "t_select": 1.8177000015384692e-05, "L_dec": 0.021302944000012758}, "g5 …[line truncated]
+{"episode": 11, "step": 1, "timers": {"g500_128_16": {"t_assim": 0.0067130719999966, "t_nb": 0.003811030999997911, "t_score": 0.011409447000005457, "t_select": 1.8827999980430832e-05, "L_dec": 0.0219523779999804}, "g500_128_4": {"t_assim": 0.006403325999997378, "t_nb": 0.004876025000015716, "t_score": 0.005778263999985711, "t_select": 1.5734000015754646e-05, "L_dec": 0.01707334900001456}, "g500_32 …[line truncated]
+{"episode": 11, "step": 2, "timers": {"g500_128_4": {"t_assim": 0.011417265999995152, "t_nb": 0.009978665999994973, "t_score": 0.004684703999998874, "t_select": 1.699599999938073e-05, "L_dec": 0.02609763199998838}, "g500_32_64": {"t_assim": 0.011304284999994252, "t_nb": 0.0038327089999938835, "t_score": 0.006827655000023469, "t_select": 1.561399997740409e-05, "L_dec": 0.02198026299998901}, "g500_3 …[line truncated]
+{"episode": 11, "step": 3, "timers": {"g500_32_64": {"t_assim": 0.0008148889999972653, "t_nb": 0.005437939000017877, "t_score": 0.005034932000000936, "t_select": 1.6483999985439368e-05, "L_dec": 0.011304244000001518}, "g500_32_16": {"t_assim": 0.015627151999979105, "t_nb": 0.021955423999997947, "t_score": 0.0017416860000025736, "t_select": 1.8597999996927683e-05, "L_dec": 0.039342859999976554}, "g …[line truncated]
+{"episode": 12, "step": 0, "timers": {"g500_32_16": {"t_assim": 2.3000001192485797e-07, "t_nb": 0.0029096570000035626, "t_score": 0.005384818999999652, "t_select": 1.8869000001586755e-05, "L_dec": 0.008313575000016726}, "g500_32_4": {"t_assim": 8.000000661922968e-08, "t_nb": 0.0028343030000144154, "t_score": 0.0025434949999976197, "t_select": 1.6644999988102427e-05, "L_dec": 0.005394523000006757}, …[line truncated]
+{"episode": 12, "step": 1, "timers": {"g500_32_4": {"t_assim": 0.007113720000006651, "t_nb": 0.003561660999992, "t_score": 0.001863415000002533, "t_select": 1.6955999996071114e-05, "L_dec": 0.012555751999997256}, "g125_512_64": {"t_assim": 0.0027433900000062295, "t_nb": 0.0006811359999971955, "t_score": 0.03605282400002352, "t_select": 2.1081999989291944e-05, "L_dec": 0.03949843200001624}, "g125_5 …[line truncated]
+{"episode": 12, "step": 2, "timers": {"g125_512_64": {"t_assim": 0.0004293570000015734, "t_nb": 0.0008138070000143216, "t_score": 0.02363573499999916, "t_select": 1.9428999991077944e-05, "L_dec": 0.02489832800000613}, "g125_512_16": {"t_assim": 0.00034498099998359066, "t_nb": 0.0005266539999979614, "t_score": 0.008465653000001794, "t_select": 1.634400001648828e-05, "L_dec": 0.009353631999999834},  …[line truncated]
+{"episode": 12, "step": 3, "timers": {"g125_512_16": {"t_assim": 0.005283555000005435, "t_nb": 0.0005939749999868127, "t_score": 0.0062516549999998006, "t_select": 1.7557000006718226e-05, "L_dec": 0.012146741999998767}, "g125_512_4": {"t_assim": 0.0002673430000186272, "t_nb": 0.0004900189999830218, "t_score": 0.002508290999998053, "t_select": 1.4882000016314123e-05, "L_dec": 0.003280535000016016}, …[line truncated]
+{"episode": 13, "step": 0, "timers": {"g125_512_4": {"t_assim": 1.9999998812636477e-07, "t_nb": 0.00048543200000494835, "t_score": 0.010143811999995478, "t_select": 1.8097000008765463e-05, "L_dec": 0.010647540999997318}, "g125_128_64": {"t_assim": 8.100002446553844e-08, "t_nb": 0.0004412449999904311, "t_score": 0.01345704700000283, "t_select": 1.6434000002618632e-05, "L_dec": 0.013914807000020346} …[line truncated]
+{"episode": 13, "step": 1, "timers": {"g125_128_64": {"t_assim": 0.0034901220000165267, "t_nb": 0.0006225779999908809, "t_score": 0.010864018000006581, "t_select": 2.081200000247918e-05, "L_dec": 0.014997530000016468}, "g125_128_16": {"t_assim": 0.00319494599995096, "t_nb": 0.0006137750000334563, "t_score": 0.003850544999977501, "t_select": 1.717600002848485e-05, "L_dec": 0.007676441999990402}, "g …[line truncated]
+{"episode": 13, "step": 2, "timers": {"g125_128_16": {"t_assim": 0.004970482999965498, "t_nb": 0.0006098790000237386, "t_score": 0.00313741999997319, "t_select": 1.7717000048378395e-05, "L_dec": 0.008735499000010805}, "g125_128_4": {"t_assim": 0.004482037000002492, "t_nb": 0.0004818360000058419, "t_score": 0.0010001480000028096, "t_select": 1.8417999967823562e-05, "L_dec": 0.005982438999978967}, " …[line truncated]
+{"episode": 13, "step": 3, "timers": {"g125_128_4": {"t_assim": 0.0004054810000297948, "t_nb": 0.0006348069999830841, "t_score": 0.0013060890000247127, "t_select": 1.6034999987368792e-05, "L_dec": 0.0023624120000249604}, "g125_32_64": {"t_assim": 0.0003291369999942617, "t_nb": 0.0005299590000049648, "t_score": 0.0015208920000304715, "t_select": 1.5082999993865087e-05, "L_dec": 0.002395071000023563 …[line truncated]
+{"episode": 14, "step": 0, "timers": {"g125_32_64": {"t_assim": 3.11000007968687e-07, "t_nb": 0.0004945149999571186, "t_score": 0.004142443000034746, "t_select": 1.7014999968978373e-05, "L_dec": 0.004654283999968811}, "g125_32_16": {"t_assim": 6.999999868639861e-08, "t_nb": 0.00043556700001090576, "t_score": 0.0014336099999923135, "t_select": 1.444200000833007e-05, "L_dec": 0.0018836890000102358}, …[line truncated]
+{"episode": 14, "step": 1, "timers": {"g125_32_16": {"t_assim": 0.00308537000000797, "t_nb": 0.0007746469999574401, "t_score": 0.0012116670000068552, "t_select": 1.7194999998082494e-05, "L_dec": 0.005088878999970348}, "g125_32_4": {"t_assim": 0.002719948999981625, "t_nb": 0.0005274250000297798, "t_score": 0.0006913020000069992, "t_select": 1.558299999260271e-05, "L_dec": 0.003954259000011007}, "pr …[line truncated]
+{"episode": 14, "step": 2, "timers": {"g125_32_4": {"t_assim": 0.004865665000011177, "t_nb": 0.00054777500002956, "t_score": 0.0005158579999715585, "t_select": 1.534300002958844e-05, "L_dec": 0.005944641000041884}, "pruned16": {"t_feat": 9.74470000301153e-05, "t_fwd": 0.00015235999995866223, "t_mask": 1.7546000037782505e-05, "t_assim": 0.0417832159999989, "t_nb": 0.08159031299999242, "t_score": 0. …[line truncated]
+{"episode": 14, "step": 3, "timers": {"pruned16": {"t_feat": 0.00013821800001778684, "t_fwd": 0.0001578279999989718, "t_mask": 2.2714000010637392e-05, "t_assim": 0.04359227300000157, "t_nb": 0.067301853999993, "t_score": 0.0940202809999846, "t_select": 6.890400004522235e-05, "L_dec": 0.2053020720000518}, "random16": {"t_feat": 0.0001977189999706752, "t_fwd": 0.00016901400005053802, "t_mask": 2.732 …[line truncated]
+{"episode": 15, "step": 0, "timers": {"random16": {"t_feat": 7.77569999854677e-05, "t_fwd": 0.00011395199999242323, "t_mask": 2.2504000014578196e-05, "t_assim": 1.899999801935337e-07, "t_nb": 0.056372629000009056, "t_score": 0.09621293599997216, "t_select": 8.319500000197877e-05, "L_dec": 0.15288316299995586}, "student": {"t_feat": 0.000142213999993146, "t_fwd": 0.0001468920000320395, "t_mask": 2. …[line truncated]
+{"episode": 15, "step": 1, "timers": {"student": {"t_feat": 0.00012181400001054499, "t_fwd": 0.00014031099999556318, "t_mask": 2.426699995794479e-05, "L_dec": 0.00028639199996405296}, "g2000_512_64": {"t_assim": 0.02419100399998797, "t_nb": 0.06740372199999456, "t_score": 0.6602984350000156, "t_select": 4.7992000020258274e-05, "L_dec": 0.7519411530000184}, "g2000_512_16": {"t_assim": 0.02343323200 …[line truncated]
+{"episode": 15, "step": 2, "timers": {"g2000_512_64": {"t_assim": 0.03856460399998696, "t_nb": 0.06733609499997328, "t_score": 0.3781538430000069, "t_select": 3.622400004132942e-05, "L_dec": 0.48409076600000844}, "g2000_512_16": {"t_assim": 0.04211672299999236, "t_nb": 0.06538298600003145, "t_score": 0.1411221089999799, "t_select": 2.9354999981023866e-05, "L_dec": 0.24865117299998474}, "g2000_512_ …[line truncated]
+{"episode": 15, "step": 3, "timers": {"g2000_512_16": {"t_assim": 0.06030617700002949, "t_nb": 0.09331690499999468, "t_score": 0.045200252999961776, "t_select": 2.8013000019200263e-05, "L_dec": 0.19885134800000515}, "g2000_512_4": {"t_assim": 0.059668145999978606, "t_nb": 0.06832143900004439, "t_score": 0.025152912999999444, "t_select": 2.559899996867898e-05, "L_dec": 0.15316809699999112}, "g2000_ …[line truncated]
+{"episode": 16, "step": 0, "timers": {"g2000_512_4": {"t_assim": 3.099999617006688e-07, "t_nb": 0.055470968000008725, "t_score": 0.1878848090000247, "t_select": 2.516799997920316e-05, "L_dec": 0.24338125499997432}, "g2000_128_64": {"t_assim": 1.800000291041215e-07, "t_nb": 0.056727530999978626, "t_score": 0.23539314399999967, "t_select": 3.8268000025709625e-05, "L_dec": 0.2921591230000331}, "g2000 …[line truncated]
+{"episode": 16, "step": 1, "timers": {"g2000_128_64": {"t_assim": 0.022175395000033404, "t_nb": 0.07323515499996347, "t_score": 0.1838922790000197, "t_select": 4.805200001101184e-05, "L_dec": 0.2793508810000276}, "g2000_128_16": {"t_assim": 0.022623551000037878, "t_nb": 0.09518973699999833, "t_score": 0.06381637199996248, "t_select": 5.0727000029837654e-05, "L_dec": 0.18168038700002853}, "g2000_12 …[line truncated]
+{"episode": 16, "step": 2, "timers": {"g2000_128_16": {"t_assim": 0.03906401400001869, "t_nb": 0.14761549600001445, "t_score": 0.03379328099998702, "t_select": 3.128700001298057e-05, "L_dec": 0.22050407800003313}, "g2000_128_4": {"t_assim": 0.04338979199997084, "t_nb": 0.14943331000000626, "t_score": 0.020497406999993473, "t_select": 2.724099999795726e-05, "L_dec": 0.21334774999996853}, "g2000_32_ …[line truncated]
+{"episode": 16, "step": 3, "timers": {"g2000_128_4": {"t_assim": 0.0627533570000196, "t_nb": 0.21884734799999706, "t_score": 0.008630404999962593, "t_select": 2.6390000016363047e-05, "L_dec": 0.2902574999999956}, "g2000_32_64": {"t_assim": 0.059816715000010845, "t_nb": 0.15128287199996748, "t_score": 0.019896971000036956, "t_select": 2.8412999995452992e-05, "L_dec": 0.23102497100001074}, "g2000_32 …[line truncated]
+{"episode": 17, "step": 0, "timers": {"g2000_32_64": {"t_assim": 3.200000264769187e-07, "t_nb": 0.054919124999969426, "t_score": 0.07637674900001912, "t_select": 3.739699997140633e-05, "L_dec": 0.13133359099998643}, "g2000_32_16": {"t_assim": 3.200000264769187e-07, "t_nb": 0.05832261400001926, "t_score": 0.028787338999961776, "t_select": 2.9104000020652165e-05, "L_dec": 0.08713937700002816}, "g200 …[line truncated]
+{"episode": 17, "step": 1, "timers": {"g2000_32_16": {"t_assim": 0.022929809000004298, "t_nb": 0.05844088800000691, "t_score": 0.02675732200003722, "t_select": 0.0001229149999630863, "L_dec": 0.10825093400001151}, "g2000_32_4": {"t_assim": 0.02651545700001634, "t_nb": 0.0708302999999546, "t_score": 0.008691695000038635, "t_select": 2.7170999999270862e-05, "L_dec": 0.10606462300000885}, "g500_512_6 …[line truncated]
+{"episode": 17, "step": 2, "timers": {"g2000_32_4": {"t_assim": 0.024035497999989275, "t_nb": 0.07080666600000995, "t_score": 0.004270692999966741, "t_select": 2.5729000014962367e-05, "L_dec": 0.09913858599998093}, "g500_512_64": {"t_assim": 0.00771816700000727, "t_nb": 0.0039508020000198485, "t_score": 0.08681854700000713, "t_select": 2.8852999946593627e-05, "L_dec": 0.09851636899998084}, "g500_5 …[line truncated]
+{"episode": 17, "step": 3, "timers": {"g500_512_64": {"t_assim": 0.013055465999968874, "t_nb": 0.006717919000038819, "t_score": 0.05508055899997544, "t_select": 2.8241999984857102e-05, "L_dec": 0.07488218599996799}, "g500_512_16": {"t_assim": 0.0005798029999937171, "t_nb": 0.003343255999993744, "t_score": 0.017315241999995123, "t_select": 2.3244999965754687e-05, "L_dec": 0.02126154599994834}, "g50 …[line truncated]
+{"episode": 18, "step": 0, "timers": {"g500_512_16": {"t_assim": 2.200000039920269e-07, "t_nb": 0.0030099439999844435, "t_score": 0.08215985800001135, "t_select": 2.4477000010847405e-05, "L_dec": 0.08519449900001064}, "g500_512_4": {"t_assim": 2.4000001985768904e-07, "t_nb": 0.002956573999995271, "t_score": 0.03776285200001439, "t_select": 2.2815000022546883e-05, "L_dec": 0.040742481000052067}, "g …[line truncated]
+{"episode": 18, "step": 1, "timers": {"g500_512_4": {"t_assim": 0.007366730000001098, "t_nb": 0.0046221650000006775, "t_score": 0.02619397000000845, "t_select": 1.9749999978557753e-05, "L_dec": 0.03820261499998878}, "g500_128_64": {"t_assim": 0.007090725000011844, "t_nb": 0.004776817999982086, "t_score": 0.03624069900001814, "t_select": 2.829199996767784e-05, "L_dec": 0.04813653399997975}, "g500_1 …[line truncated]
+{"episode": 18, "step": 2, "timers": {"g500_128_64": {"t_assim": 0.011841142999969634, "t_nb": 0.008814522000022862, "t_score": 0.027776444999972227, "t_select": 2.14519999985896e-05, "L_dec": 0.04845356199996331}, "g500_128_16": {"t_assim": 0.011653700000010758, "t_nb": 0.01200608099998135, "t_score": 0.008306978000007348, "t_select": 1.641400001517468e-05, "L_dec": 0.03198317300001463}, "g500_12 …[line truncated]
+{"episode": 18, "step": 3, "timers": {"g500_128_16": {"t_assim": 0.01675076399999398, "t_nb": 0.005188777000000755, "t_score": 0.006693472999984351, "t_select": 1.699599999938073e-05, "L_dec": 0.028650009999978465}, "g500_128_4": {"t_assim": 0.015720923000003495, "t_nb": 0.006517337999980555, "t_score": 0.0023111510000148883, "t_select": 1.502300000311152e-05, "L_dec": 0.02456443500000205}, "g500_ …[line truncated]
+{"episode": 19, "step": 0, "timers": {"g500_128_4": {"t_assim": 2.599999788799323e-07, "t_nb": 0.0029329480000228614, "t_score": 0.013734901000020727, "t_select": 2.4226999983056885e-05, "L_dec": 0.016692336000005525}, "g500_32_64": {"t_assim": 1.7100001059588976e-07, "t_nb": 0.0028998180000030516, "t_score": 0.01581192999998393, "t_select": 2.7281000029688585e-05, "L_dec": 0.018739200000027267},  …[line truncated]
+{"episode": 19, "step": 1, "timers": {"g500_32_64": {"t_assim": 0.007515172000012171, "t_nb": 0.0038792550000152914, "t_score": 0.010173196999971879, "t_select": 2.76720000442765e-05, "L_dec": 0.021595296000043618}, "g500_32_16": {"t_assim": 0.007299326999998357, "t_nb": 0.004070123000019521, "t_score": 0.003336176000004798, "t_select": 2.0420999987891264e-05, "L_dec": 0.014726047000010567}, "g500 …[line truncated]
+{"episode": 19, "step": 2, "timers": {"g500_32_16": {"t_assim": 0.012290436999990106, "t_nb": 0.00400954100001627, "t_score": 0.003230907999977717, "t_select": 2.3565000049075024e-05, "L_dec": 0.01955445100003317}, "g500_32_4": {"t_assim": 0.011708961000010731, "t_nb": 0.004016821999982767, "t_score": 0.0015440060000173617, "t_select": 1.4912999972693797e-05, "L_dec": 0.017284701999983554}, "g125_ …[line truncated]
+{"episode": 19, "step": 3, "timers": {"g500_32_4": {"t_assim": 0.013257561999978407, "t_nb": 0.004662114000041129, "t_score": 0.0008522859999970933, "t_select": 1.543299998729708e-05, "L_dec": 0.018787395000003926}, "g125_512_64": {"t_assim": 0.004871179000019765, "t_nb": 0.0004644609999786553, "t_score": 0.013789373999998134, "t_select": 1.5344000019013038e-05, "L_dec": 0.019140358000015567}, "g1 …[line truncated]
+{"episode": 20, "step": 0, "timers": {"g125_512_64": {"t_assim": 2.1099998548379517e-07, "t_nb": 0.00048016400000960857, "t_score": 0.06219669799997973, "t_select": 1.914900002475406e-05, "L_dec": 0.06269622199999958}, "g125_512_16": {"t_assim": 1.3000004628338502e-07, "t_nb": 0.00048526199998377706, "t_score": 0.021262869999986833, "t_select": 1.650500001915134e-05, "L_dec": 0.021764767000036045} …[line truncated]
+{"episode": 20, "step": 1, "timers": {"g125_512_16": {"t_assim": 0.00321698599998399, "t_nb": 0.000504861000024448, "t_score": 0.013830427000016243, "t_select": 1.6564999953061488e-05, "L_dec": 0.017568838999977743}, "g125_512_4": {"t_assim": 0.002879128000017772, "t_nb": 0.000499031999993349, "t_score": 0.007278175000010378, "t_select": 1.4231999955427455e-05, "L_dec": 0.010670566999976927}, "g12 …[line truncated]
+{"episode": 20, "step": 2, "timers": {"g125_512_4": {"t_assim": 0.0004604839999728938, "t_nb": 0.0005558270000278753, "t_score": 0.0062756300000046394, "t_select": 1.8958999987717107e-05, "L_dec": 0.007310899999993126}, "g125_128_64": {"t_assim": 0.0003145339999832686, "t_nb": 0.0006313910000130818, "t_score": 0.004932086999986041, "t_select": 1.9850000001042645e-05, "L_dec": 0.005897861999983434} …[line truncated]
+{"episode": 20, "step": 3, "timers": {"g125_128_64": {"t_assim": 0.0064891119999970215, "t_nb": 0.0007458430000042426, "t_score": 0.0024090979999868978, "t_select": 1.724600002717125e-05, "L_dec": 0.009661299000015333}, "g125_128_16": {"t_assim": 0.0002988100000038685, "t_nb": 0.0004189509999719121, "t_score": 0.0007254120000084185, "t_select": 1.4161000024159875e-05, "L_dec": 0.001457334000008359 …[line truncated]
+{"episode": 21, "step": 0, "timers": {"g125_128_16": {"t_assim": 2.0999999605919584e-07, "t_nb": 0.0005762480000157666, "t_score": 0.0054436709999663435, "t_select": 2.024100001563056e-05, "L_dec": 0.0060403699999938}, "g125_128_4": {"t_assim": 3.2100001590151805e-07, "t_nb": 0.0005113099999789483, "t_score": 0.0027988570000161417, "t_select": 1.709600002186562e-05, "L_dec": 0.003327584000032857}, …[line truncated]
+{"episode": 21, "step": 1, "timers": {"g125_128_4": {"t_assim": 0.0031411929999762833, "t_nb": 0.000580064000018865, "t_score": 0.002157239999974081, "t_select": 1.7055000000709697e-05, "L_dec": 0.005895551999969939}, "g125_32_64": {"t_assim": 0.0028728679999971973, "t_nb": 0.0005095569999866711, "t_score": 0.0035810749999996005, "t_select": 1.5282999981991452e-05, "L_dec": 0.0069787829999654605}, …[line truncated]
+{"episode": 21, "step": 2, "timers": {"g125_32_64": {"t_assim": 0.00485131900001079, "t_nb": 0.0005415459999653649, "t_score": 0.002045861999988574, "t_select": 1.5744000052109186e-05, "L_dec": 0.007454471000016838}, "g125_32_16": {"t_assim": 0.004408722999983183, "t_nb": 0.000596788999985165, "t_score": 0.000761096000019279, "t_select": 1.4100999976562889e-05, "L_dec": 0.00578070899996419}, "g125 …[line truncated]
+{"episode": 21, "step": 3, "timers": {"g125_32_16": {"t_assim": 0.00041133999997100545, "t_nb": 0.0007739359999732187, "t_score": 0.000704732000031072, "t_select": 1.5652999991289107e-05, "L_dec": 0.0019056609999665852}, "g125_32_4": {"t_assim": 0.005337130999976125, "t_nb": 0.0011423509999985981, "t_score": 0.00042258600001332525, "t_select": 1.511300001766358e-05, "L_dec": 0.006917181000005712}, …[line truncated]
+{"episode": 22, "step": 0, "timers": {"g125_32_4": {"t_assim": 2.5100001721511944e-07, "t_nb": 0.0004809840000348231, "t_score": 0.0009155099999702543, "t_select": 1.6474999995352846e-05, "L_dec": 0.0014132200000176454}, "pruned16": {"t_feat": 7.306099996640114e-05, "t_fwd": 0.00010148199999093777, "t_mask": 1.6465000044263434e-05, "t_assim": 1.0000002248489182e-07, "t_nb": 0.05571665099995471, "t …[line truncated]
+{"episode": 22, "step": 1, "timers": {"pruned16": {"t_feat": 0.00011590500002967019, "t_fwd": 0.00012914499995986262, "t_mask": 2.0240000026205962e-05, "t_assim": 0.02198155600001428, "t_nb": 0.06484281799998826, "t_score": 0.09645234399999936, "t_select": 8.612999999968451e-05, "L_dec": 0.18362813800001732}, "random16": {"t_feat": 0.00020413699996879586, "t_fwd": 0.000170557000046756, "t_mask": 3 …[line truncated]
+{"episode": 22, "step": 2, "timers": {"random16": {"t_feat": 0.00012044099997865487, "t_fwd": 0.0001620440000351664, "t_mask": 2.3736000002827495e-05, "t_assim": 0.04008427000002257, "t_nb": 0.08991868999999042, "t_score": 0.09265353000000687, "t_select": 0.00010842300002877892, "L_dec": 0.22307113400006529}, "student": {"t_feat": 0.0002049490000217702, "t_fwd": 0.00018141399999649366, "t_mask": 2 …[line truncated]
+{"episode": 22, "step": 3, "timers": {"student": {"t_feat": 0.0001263909999806856, "t_fwd": 0.00016013100002965075, "t_mask": 2.4796999980480905e-05, "L_dec": 0.00031131899999081725}, "g2000_512_64": {"t_assim": 0.060209930999974404, "t_nb": 0.08503659399997332, "t_score": 0.20629557200004456, "t_select": 3.740599998991456e-05, "L_dec": 0.3515795029999822}, "g2000_512_16": {"t_assim": 0.0589974549 …[line truncated]
+{"episode": 23, "step": 0, "timers": {"g2000_512_64": {"t_assim": 2.4000001985768904e-07, "t_nb": 0.058002494999982446, "t_score": 0.9950390179999999, "t_select": 3.8097000015113736e-05, "L_dec": 1.0530798500000174}, "g2000_512_16": {"t_assim": 1.7999997226070263e-07, "t_nb": 0.05634728199999017, "t_score": 0.33813313400003153, "t_select": 3.037599998378937e-05, "L_dec": 0.39451097199997776}, "g20 …[line truncated]
+{"episode": 23, "step": 1, "timers": {"g2000_512_16": {"t_assim": 0.022603000000003703, "t_nb": 0.061715540000022884, "t_score": 0.2350070009999854, "t_select": 3.59050000042771e-05, "L_dec": 0.31936144600001626}, "g2000_512_4": {"t_assim": 0.02231882199998836, "t_nb": 0.06029930599999034, "t_score": 0.1354312579999828, "t_select": 2.6119000040125684e-05, "L_dec": 0.2180755050000016}, "g2000_128_6 …[line truncated]
+{"episode": 23, "step": 2, "timers": {"g2000_512_4": {"t_assim": 0.04421528699998589, "t_nb": 0.09905006200000344, "t_score": 0.08797576900002468, "t_select": 2.592900000308873e-05, "L_dec": 0.2312670470000171}, "g2000_128_64": {"t_assim": 0.043356673999994655, "t_nb": 0.10520966100000351, "t_score": 0.12758781200000158, "t_select": 5.486199995630159e-05, "L_dec": 0.27620900899995604}, "g2000_128_ …[line truncated]
+{"episode": 23, "step": 3, "timers": {"g2000_128_64": {"t_assim": 0.06200868299998774, "t_nb": 0.10814208600004349, "t_score": 0.028014162999966175, "t_select": 3.49219999975503e-05, "L_dec": 0.19819985399999496}, "g2000_128_16": {"t_assim": 0.061697715000036624, "t_nb": 0.2843971179999585, "t_score": 0.00860049400000662, "t_select": 2.434600003198284e-05, "L_dec": 0.3547196730000337}, "g2000_128_ …[line truncated]
+{"episode": 24, "step": 0, "timers": {"g2000_128_16": {"t_assim": 1.899999801935337e-07, "t_nb": 0.06285099199999422, "t_score": 0.10531390600004897, "t_select": 3.204799998002272e-05, "L_dec": 0.1681971360000034}, "g2000_128_4": {"t_assim": 3.5100003970001126e-07, "t_nb": 0.05638439199998402, "t_score": 0.05384300399998665, "t_select": 3.448199998956625e-05, "L_dec": 0.11026222899999993}, "g2000_ …[line truncated]
+{"episode": 24, "step": 1, "timers": {"g2000_128_4": {"t_assim": 0.0222510909999869, "t_nb": 0.11443370099999584, "t_score": 0.03463145200004192, "t_select": 2.6188999981968664e-05, "L_dec": 0.17134243300000662}, "g2000_32_64": {"t_assim": 0.025811755000006542, "t_nb": 0.09895689600000424, "t_score": 0.04260749700000588, "t_select": 3.607399997918037e-05, "L_dec": 0.16741222199999584}, "g2000_32_1 …[line truncated]
+{"episode": 24, "step": 2, "timers": {"g2000_32_64": {"t_assim": 0.041249251000010645, "t_nb": 0.22693256600001632, "t_score": 0.033295413000018925, "t_select": 3.6776000001736975e-05, "L_dec": 0.30151400600004763}, "g2000_32_16": {"t_assim": 0.04138222799997493, "t_nb": 0.1760312010000007, "t_score": 0.011751031000017065, "t_select": 2.6348999995207123e-05, "L_dec": 0.2291908089999879}, "g2000_32 …[line truncated]
+{"episode": 24, "step": 3, "timers": {"g2000_32_16": {"t_assim": 0.05941174000003002, "t_nb": 0.13711886099997628, "t_score": 0.0071504150000123445, "t_select": 2.1231999994597572e-05, "L_dec": 0.20370224800001324}, "g2000_32_4": {"t_assim": 0.08282471600000463, "t_nb": 0.07330762899999854, "t_score": 0.0028581530000337807, "t_select": 2.270400000270456e-05, "L_dec": 0.15901320200003966}, "g500_51 …[line truncated]
+{"episode": 25, "step": 0, "timers": {"g2000_32_4": {"t_assim": 3.509999828565924e-07, "t_nb": 0.05520311899999797, "t_score": 0.018535622000001695, "t_select": 2.5719000007029535e-05, "L_dec": 0.07376481099998955}, "g500_512_64": {"t_assim": 1.9999998812636477e-07, "t_nb": 0.0029167740000275444, "t_score": 0.2317882090000012, "t_select": 2.631999996083323e-05, "L_dec": 0.2347315029999777}, "g500_ …[line truncated]
+{"episode": 25, "step": 1, "timers": {"g500_512_64": {"t_assim": 0.0015430939999987459, "t_nb": 0.004943787000001976, "t_score": 0.14609724700000015, "t_select": 2.7210999974158767e-05, "L_dec": 0.15261133899997503}, "g500_512_16": {"t_assim": 0.0015848969999865403, "t_nb": 0.003964923000012277, "t_score": 0.04940006499998617, "t_select": 2.3705999979029002e-05, "L_dec": 0.05497359099996402}, "g50 …[line truncated]
+{"episode": 25, "step": 2, "timers": {"g500_512_16": {"t_assim": 0.007398394999995617, "t_nb": 0.004579599000010148, "t_score": 0.029247286999975586, "t_select": 2.310500002522531e-05, "L_dec": 0.041248386000006576}, "g500_512_4": {"t_assim": 0.007209590000002208, "t_nb": 0.004155529999991359, "t_score": 0.015356392000001051, "t_select": 2.0121000034123426e-05, "L_dec": 0.02674163300002874}, "g500 …[line truncated]
+{"episode": 25, "step": 3, "timers": {"g500_512_4": {"t_assim": 0.008870308999973986, "t_nb": 0.0050448069999902145, "t_score": 0.012682750999999826, "t_select": 2.1262000018396066e-05, "L_dec": 0.026619128999982422}, "g500_128_64": {"t_assim": 0.007814088000031916, "t_nb": 0.004029307999985576, "t_score": 0.013626371999976072, "t_select": 3.194800001438125e-05, "L_dec": 0.025501716000007946}, "g5 …[line truncated]
+{"episode": 26, "step": 0, "timers": {"g500_128_64": {"t_assim": 3.200000264769187e-07, "t_nb": 0.0028082489999974314, "t_score": 0.064958187000002, "t_select": 3.0756000001019856e-05, "L_dec": 0.06779751200002693}, "g500_128_16": {"t_assim": 1.0000002248489182e-07, "t_nb": 0.002893977999974595, "t_score": 0.018843709000009312, "t_select": 2.2674000035749486e-05, "L_dec": 0.02176046100004214}, "g5 …[line truncated]
+{"episode": 26, "step": 1, "timers": {"g500_128_16": {"t_assim": 0.007080594000001383, "t_nb": 0.0036769270000149845, "t_score": 0.011455061999981808, "t_select": 2.0461000019622588e-05, "L_dec": 0.0222330440000178}, "g500_128_4": {"t_assim": 0.0068644379999796, "t_nb": 0.0037876939999819115, "t_score": 0.005976511000028495, "t_select": 1.8457999999554886e-05, "L_dec": 0.01664710099998956}, "g500_ …[line truncated]
+{"episode": 26, "step": 2, "timers": {"g500_128_4": {"t_assim": 0.011708192999947187, "t_nb": 0.02497656600002074, "t_score": 0.004680929000016931, "t_select": 2.1903000003931083e-05, "L_dec": 0.04138759099998879}, "g500_32_64": {"t_assim": 0.011531296999976348, "t_nb": 0.004690664999998262, "t_score": 0.008496616000002177, "t_select": 1.8947999990359676e-05, "L_dec": 0.024737525999967147}, "g500_ …[line truncated]
+{"episode": 26, "step": 3, "timers": {"g500_32_64": {"t_assim": 0.01709606999997959, "t_nb": 0.011806602000035582, "t_score": 0.005126652999990711, "t_select": 2.0650999999816122e-05, "L_dec": 0.0340499760000057}, "g500_32_16": {"t_assim": 0.01656385900002988, "t_nb": 0.004093357999977343, "t_score": 0.00169560099999444, "t_select": 1.699599999938073e-05, "L_dec": 0.022369814000001043}, "g500_32_4 …[line truncated]
+{"episode": 27, "step": 0, "timers": {"g500_32_16": {"t_assim": 2.3000001192485797e-07, "t_nb": 0.002808469999990848, "t_score": 0.005984845000000405, "t_select": 1.914900002475406e-05, "L_dec": 0.008812694000027932}, "g500_32_4": {"t_assim": 8.000000661922968e-08, "t_nb": 0.0027572729999860712, "t_score": 0.00254871900000353, "t_select": 1.701600001524639e-05, "L_dec": 0.005323088000011467}, "g12 …[line truncated]
+{"episode": 27, "step": 1, "timers": {"g500_32_4": {"t_assim": 0.006949265000002924, "t_nb": 0.003403554999977132, "t_score": 0.0020083040000145047, "t_select": 1.7856999988907774e-05, "L_dec": 0.012378980999983469}, "g125_512_64": {"t_assim": 0.0027898010000058093, "t_nb": 0.0005818459999886727, "t_score": 0.040300986999966426, "t_select": 2.1172000003844005e-05, "L_dec": 0.04369380599996475}, "g …[line truncated]
+{"episode": 27, "step": 2, "timers": {"g125_512_64": {"t_assim": 0.003541493000000173, "t_nb": 0.0004469429999858221, "t_score": 0.02571069600003284, "t_select": 1.9598999983827525e-05, "L_dec": 0.029718731000002663}, "g125_512_16": {"t_assim": 0.0031907750000073065, "t_nb": 0.0006031979999647774, "t_score": 0.00805478900002754, "t_select": 1.7275999994126323e-05, "L_dec": 0.01186603799999375}, "g …[line truncated]
+{"episode": 27, "step": 3, "timers": {"g125_512_16": {"t_assim": 0.005199381000011272, "t_nb": 0.0007089279999945575, "t_score": 0.003961806999996043, "t_select": 1.6303999984756956e-05, "L_dec": 0.009886419999986629}, "g125_512_4": {"t_assim": 0.005201444000022093, "t_nb": 0.0010232409999844094, "t_score": 0.0016223640000134765, "t_select": 1.558299999260271e-05, "L_dec": 0.007862632000012582}, " …[line truncated]
+{"episode": 28, "step": 0, "timers": {"g125_512_4": {"t_assim": 2.310000013494573e-07, "t_nb": 0.000487624000015785, "t_score": 0.010925916000019242, "t_select": 1.7966999962482078e-05, "L_dec": 0.011431737999998859}, "g125_128_64": {"t_assim": 9.000001455206075e-08, "t_nb": 0.00045342300001038893, "t_score": 0.015356969999970715, "t_select": 1.8468000007487717e-05, "L_dec": 0.015828951000003144}, …[line truncated]
+{"episode": 28, "step": 1, "timers": {"g125_128_64": {"t_assim": 0.003205057000002398, "t_nb": 0.00047259199999416523, "t_score": 0.009031633000006423, "t_select": 1.8688000011479744e-05, "L_dec": 0.012727970000014466}, "g125_128_16": {"t_assim": 0.004180947000008928, "t_nb": 0.001330154000015682, "t_score": 0.0048136199999930795, "t_select": 1.6204000019115483e-05, "L_dec": 0.010340925000036805}, …[line truncated]
+{"episode": 28, "step": 2, "timers": {"g125_128_16": {"t_assim": 0.0048918969999931505, "t_nb": 0.00044762400000308844, "t_score": 0.002486545000010665, "t_select": 1.592400002436989e-05, "L_dec": 0.007841990000031274}, "g125_128_4": {"t_assim": 0.004512185999999474, "t_nb": 0.0003954460000272775, "t_score": 0.001437003999967601, "t_select": 1.5953999991324963e-05, "L_dec": 0.006360589999985677},  …[line truncated]
+{"episode": 28, "step": 3, "timers": {"g125_128_4": {"t_assim": 0.007152532000020528, "t_nb": 0.0005365779999806364, "t_score": 0.0012678200000095785, "t_select": 1.7376000016611215e-05, "L_dec": 0.008974306000027354}, "g125_32_64": {"t_assim": 0.0002596310000058111, "t_nb": 0.00038879499999211475, "t_score": 0.0014513759999772446, "t_select": 1.5253000015036378e-05, "L_dec": 0.002115054999990207} …[line truncated]
+{"episode": 29, "step": 0, "timers": {"g125_32_64": {"t_assim": 3.6000000136482413e-07, "t_nb": 0.0005178490000048441, "t_score": 0.004363564999948721, "t_select": 1.8708000027345406e-05, "L_dec": 0.004900481999982276}, "g125_32_16": {"t_assim": 9.000001455206075e-08, "t_nb": 0.0004488849999688682, "t_score": 0.0014931970000020556, "t_select": 1.4962000022933353e-05, "L_dec": 0.001957134000008409} …[line truncated]
+{"episode": 29, "step": 1, "timers": {"g125_32_16": {"t_assim": 0.0033649579999632806, "t_nb": 0.0010487300000363575, "t_score": 0.0011759809999603021, "t_select": 1.7546000037782505e-05, "L_dec": 0.005607214999997723}, "g125_32_4": {"t_assim": 0.00026293599995597106, "t_nb": 0.0004001220000304784, "t_score": 0.0007096790000105102, "t_select": 1.4341999985845177e-05, "L_dec": 0.0013870789999828048 …[line truncated]
+{"episode": 29, "step": 2, "timers": {"g125_32_4": {"t_assim": 0.0049777469999980894, "t_nb": 0.0004902779999724771, "t_score": 0.0005270740000469232, "t_select": 1.609399998869776e-05, "L_dec": 0.0060111930000061875}, "pruned16": {"t_feat": 0.00010079200001200661, "t_fwd": 0.00014185300000235657, "t_mask": 1.7726999999467807e-05, "t_assim": 0.03855829999997695, "t_nb": 0.06979927899999439, "t_sco …[line truncated]
+{"episode": 29, "step": 3, "timers": {"pruned16": {"t_feat": 0.0001251979999778996, "t_fwd": 0.00017535500001031323, "t_mask": 2.6118999983282265e-05, "t_assim": 0.0626856860000089, "t_nb": 0.0958738589999939, "t_score": 0.08004661199998964, "t_select": 7.51540000010209e-05, "L_dec": 0.23900798299996495}, "random16": {"t_feat": 0.00019119799998179587, "t_fwd": 0.0001877530000342631, "t_mask": 2.94 …[line truncated]
+{"episode": 30, "step": 0, "timers": {"random16": {"t_feat": 8.072200000697194e-05, "t_fwd": 0.00010140200004116195, "t_mask": 2.2764999982882728e-05, "t_assim": 1.9999998812636477e-07, "t_nb": 0.055455019000021366, "t_score": 0.10785647000000154, "t_select": 8.50079999281661e-05, "L_dec": 0.1636015859999702}, "student": {"t_feat": 0.00014820300003748343, "t_fwd": 0.00013338099995507946, "t_mask": …[line truncated]
+{"episode": 30, "step": 1, "timers": {"student": {"t_feat": 0.00013802799992390646, "t_fwd": 0.0001502260000734168, "t_mask": 2.7631999955701758e-05, "L_dec": 0.000315885999953025}, "g2000_512_64": {"t_assim": 0.021997432000034678, "t_nb": 0.058181042999990495, "t_score": 0.6649211459999833, "t_select": 4.960499995831924e-05, "L_dec": 0.7451492259999668}, "g2000_512_16": {"t_assim": 0.022858538000 …[line truncated]
+{"episode": 30, "step": 2, "timers": {"g2000_512_64": {"t_assim": 0.0415546210000457, "t_nb": 0.06433183899991946, "t_score": 0.3966747030000306, "t_select": 3.9318999938586785e-05, "L_dec": 0.5026004819999343}, "g2000_512_16": {"t_assim": 0.04691157199999907, "t_nb": 0.06239628299999822, "t_score": 0.158661817000052, "t_select": 3.164699990065856e-05, "L_dec": 0.26800131899994994}, "g2000_512_4": …[line truncated]
+{"episode": 30, "step": 3, "timers": {"g2000_512_16": {"t_assim": 0.0024347580000494418, "t_nb": 0.06112660999997388, "t_score": 0.048718183999994835, "t_select": 2.9283999992912868e-05, "L_dec": 0.11230883600001107}, "g2000_512_4": {"t_assim": 0.002227586000003612, "t_nb": 0.055889238999952795, "t_score": 0.02939916599996195, "t_select": 2.4817000053189986e-05, "L_dec": 0.08754080799997155}, "g20 …[line truncated]
+{"episode": 31, "step": 0, "timers": {"g2000_512_4": {"t_assim": 7.419999974445091e-07, "t_nb": 0.05626595599994744, "t_score": 0.1864306160000524, "t_select": 2.862299993466877e-05, "L_dec": 0.24272593699993195}, "g2000_128_64": {"t_assim": 2.4999997094710125e-07, "t_nb": 0.05682266500002697, "t_score": 0.26605989500001215, "t_select": 5.8968999951503065e-05, "L_dec": 0.32294177899996157}, "g2000 …[line truncated]
+{"episode": 31, "step": 1, "timers": {"g2000_128_64": {"t_assim": 0.02249191900000369, "t_nb": 0.0553508770000235, "t_score": 0.16360685899996952, "t_select": 5.4602999966846255e-05, "L_dec": 0.24150425799996356}, "g2000_128_16": {"t_assim": 0.02366954199999327, "t_nb": 0.05979814400006944, "t_score": 0.056628561000025, "t_select": 3.452199996445415e-05, "L_dec": 0.14013076900005217}, "g2000_128_4 …[line truncated]
+{"episode": 31, "step": 2, "timers": {"g2000_128_16": {"t_assim": 0.026321424999991905, "t_nb": 0.06269339400000717, "t_score": 0.044573949999971774, "t_select": 2.6570000045467168e-05, "L_dec": 0.13361533900001632}, "g2000_128_4": {"t_assim": 0.027940032000060455, "t_nb": 0.08247733499990773, "t_score": 0.022618489000024056, "t_select": 2.417600001081155e-05, "L_dec": 0.13306003200000305}, "g2000 …[line truncated]
+{"episode": 31, "step": 3, "timers": {"g2000_128_4": {"t_assim": 0.04484629099999893, "t_nb": 0.0649356630000284, "t_score": 0.008706961000029878, "t_select": 2.3736000002827495e-05, "L_dec": 0.11851265100006003}, "g2000_32_64": {"t_assim": 0.04219246499997098, "t_nb": 0.06232697500001905, "t_score": 0.01976557299997239, "t_select": 2.866400006951153e-05, "L_dec": 0.12431367700003193}, "g2000_32_1 …[line truncated]
+{"episode": 32, "step": 0, "timers": {"g2000_32_64": {"t_assim": 3.2100001590151805e-07, "t_nb": 0.0559351089999609, "t_score": 0.07349995900005979, "t_select": 3.771699994103983e-05, "L_dec": 0.12947310599997763}, "g2000_32_16": {"t_assim": 1.800000291041215e-07, "t_nb": 0.05768040700002075, "t_score": 0.027989707999950042, "t_select": 2.7942999963670445e-05, "L_dec": 0.08569823799996357}, "g2000 …[line truncated]
+{"episode": 32, "step": 1, "timers": {"g2000_32_16": {"t_assim": 0.02314129100000173, "t_nb": 0.0716207119999126, "t_score": 0.013209146999997756, "t_select": 2.9355000037867285e-05, "L_dec": 0.10800050499994995}, "g2000_32_4": {"t_assim": 0.02305509199993594, "t_nb": 0.07660296300002756, "t_score": 0.006171391000066251, "t_select": 2.6018999960797373e-05, "L_dec": 0.10585546499999055}, "g500_512_ …[line truncated]
+{"episode": 32, "step": 2, "timers": {"g2000_32_4": {"t_assim": 0.04113261899999543, "t_nb": 0.11428213199997117, "t_score": 0.006804555000030632, "t_select": 2.614899995023734e-05, "L_dec": 0.16224545499994747}, "g500_512_64": {"t_assim": 0.012578096999959598, "t_nb": 0.004109728000003088, "t_score": 0.08857481699999425, "t_select": 2.7131000024382956e-05, "L_dec": 0.10528977299998132}, "g500_512 …[line truncated]
+{"episode": 32, "step": 3, "timers": {"g500_512_64": {"t_assim": 0.0007198130000460878, "t_nb": 0.004251126999974986, "t_score": 0.04737867799997275, "t_select": 2.542800007176993e-05, "L_dec": 0.052375046000065595}, "g500_512_16": {"t_assim": 0.0129399720000265, "t_nb": 0.005315318999919327, "t_score": 0.015024218999997174, "t_select": 2.081200000247918e-05, "L_dec": 0.03330032199994548}, "g500_5 …[line truncated]
+{"episode": 33, "step": 0, "timers": {"g500_512_16": {"t_assim": 7.009999762885855e-07, "t_nb": 0.002905231999989155, "t_score": 0.07872223399999712, "t_select": 2.343599999221624e-05, "L_dec": 0.08165160299995478}, "g500_512_4": {"t_assim": 1.8100001852872083e-07, "t_nb": 0.0028208239999685247, "t_score": 0.036775551999994605, "t_select": 2.1863000029043178e-05, "L_dec": 0.0396184200000107}, "g50 …[line truncated]
+{"episode": 33, "step": 1, "timers": {"g500_512_4": {"t_assim": 0.006769224000095164, "t_nb": 0.004990896999970573, "t_score": 0.024791414999981498, "t_select": 2.080199999454635e-05, "L_dec": 0.03657233800004178}, "g500_128_64": {"t_assim": 0.006926711000005525, "t_nb": 0.0035800519999611424, "t_score": 0.037135696000063945, "t_select": 3.0326000000968634e-05, "L_dec": 0.04767278500003158}, "g500 …[line truncated]
+{"episode": 33, "step": 2, "timers": {"g500_128_64": {"t_assim": 0.011779580000052192, "t_nb": 0.010299680999992233, "t_score": 0.03137516099991444, "t_select": 2.4316999997608946e-05, "L_dec": 0.05347873899995648}, "g500_128_16": {"t_assim": 0.011451305000036882, "t_nb": 0.0075128649999669506, "t_score": 0.009542601000021023, "t_select": 1.9909999991796212e-05, "L_dec": 0.02852668100001665}, "g50 …[line truncated]
+{"episode": 33, "step": 3, "timers": {"g500_128_16": {"t_assim": 0.01584154700003637, "t_nb": 0.020943368999951417, "t_score": 0.0036794210000152816, "t_select": 2.1423000021059124e-05, "L_dec": 0.04048576000002413}, "g500_128_4": {"t_assim": 0.015836318999959076, "t_nb": 0.008092396000051849, "t_score": 0.0018150839999862, "t_select": 1.766599996244622e-05, "L_dec": 0.02576146499995957}, "g500_32 …[line truncated]
+{"episode": 34, "step": 0, "timers": {"g500_128_4": {"t_assim": 3.2100001590151805e-07, "t_nb": 0.002878243999930419, "t_score": 0.011475932000053035, "t_select": 2.1262000018396066e-05, "L_dec": 0.014375759000017752}, "g500_32_64": {"t_assim": 1.7999991541728377e-07, "t_nb": 0.002870012000016686, "t_score": 0.014977546000068287, "t_select": 3.019499990841723e-05, "L_dec": 0.017877932999908808}, " …[line truncated]
+{"episode": 34, "step": 1, "timers": {"g500_32_64": {"t_assim": 0.007530961000043135, "t_nb": 0.004020653999987189, "t_score": 0.011436921999916194, "t_select": 2.112200002102327e-05, "L_dec": 0.02300965899996754}, "g500_32_16": {"t_assim": 0.007001533999982712, "t_nb": 0.00421432600001026, "t_score": 0.0039639189999434166, "t_select": 1.872799998636765e-05, "L_dec": 0.015198506999922756}, "g500_3 …[line truncated]
+{"episode": 34, "step": 2, "timers": {"g500_32_16": {"t_assim": 0.012418519999982891, "t_nb": 0.003883948999941822, "t_score": 0.0024337649999779387, "t_select": 1.816700000745186e-05, "L_dec": 0.018754400999910104}, "g500_32_4": {"t_assim": 0.011614259999987553, "t_nb": 0.00344406599992908, "t_score": 0.0012194660000659496, "t_select": 1.764699993600516e-05, "L_dec": 0.016295438999918588}, "g125_ …[line truncated]
+{"episode": 34, "step": 3, "timers": {"g500_32_4": {"t_assim": 0.017329642000049716, "t_nb": 0.009057898000037312, "t_score": 0.000913445999913165, "t_select": 1.7957000068236084e-05, "L_dec": 0.02731894300006843}, "g125_512_64": {"t_assim": 0.005074290000038673, "t_nb": 0.0004695169999422433, "t_score": 0.013375219000067773, "t_select": 2.051999990726472e-05, "L_dec": 0.018939545999955953}, "g125 …[line truncated]
+{"episode": 35, "step": 0, "timers": {"g125_512_64": {"t_assim": 3.0999990485724993e-07, "t_nb": 0.0005613460000404302, "t_score": 0.06040263399995638, "t_select": 2.4237000047833135e-05, "L_dec": 0.0609885269999495}, "g125_512_16": {"t_assim": 2.0099992070754524e-07, "t_nb": 0.000583929000072203, "t_score": 0.020560235999937504, "t_select": 2.098200002365047e-05, "L_dec": 0.021165347999954065}, " …[line truncated]
+{"episode": 35, "step": 1, "timers": {"g125_512_16": {"t_assim": 0.0033203090000597513, "t_nb": 0.0005995029999894541, "t_score": 0.01444541900002605, "t_select": 1.922900003137329e-05, "L_dec": 0.01838446000010663}, "g125_512_4": {"t_assim": 0.0029355200000509285, "t_nb": 0.0005274339999914446, "t_score": 0.007280761999936658, "t_select": 1.627500000722648e-05, "L_dec": 0.010759990999986258}, "g1 …[line truncated]
+{"episode": 35, "step": 2, "timers": {"g125_512_4": {"t_assim": 0.004854518000001917, "t_nb": 0.0012094249999563544, "t_score": 0.004349338999986685, "t_select": 1.6625000057501893e-05, "L_dec": 0.010429907000002459}, "g125_128_64": {"t_assim": 0.004666835000080027, "t_nb": 0.0011064010000154667, "t_score": 0.006282670999894435, "t_select": 1.7526000078760262e-05, "L_dec": 0.01207343300006869}, "g …[line truncated]
+{"episode": 35, "step": 3, "timers": {"g125_128_64": {"t_assim": 0.006495121000057225, "t_nb": 0.0005913799999461844, "t_score": 0.00219344300001012, "t_select": 1.7637000041759165e-05, "L_dec": 0.009297581000055288}, "g125_128_16": {"t_assim": 0.005886835000069368, "t_nb": 0.001839970999981233, "t_score": 0.0007317910000210759, "t_select": 1.534399996216962e-05, "L_dec": 0.008473941000033847}, "g …[line truncated]
+{"episode": 36, "step": 0, "timers": {"g125_128_16": {"t_assim": 2.1100004232721403e-07, "t_nb": 0.0004726109999637629, "t_score": 0.005001171000003524, "t_select": 1.7957000068236084e-05, "L_dec": 0.00549195000007785}, "g125_128_4": {"t_assim": 1.200000951939728e-07, "t_nb": 0.0004196520000050441, "t_score": 0.002568336999956955, "t_select": 1.4471999975285144e-05, "L_dec": 0.003002581000032478}, …[line truncated]
+{"episode": 36, "step": 1, "timers": {"g125_128_4": {"t_assim": 0.0032897230000799027, "t_nb": 0.0005399829999532813, "t_score": 0.0020293960000117295, "t_select": 1.758600001267041e-05, "L_dec": 0.005876688000057584}, "g125_32_64": {"t_assim": 0.00026844500007427996, "t_nb": 0.00041282099994077726, "t_score": 0.0035205510000650975, "t_select": 1.569400001244503e-05, "L_dec": 0.0042175110000926},  …[line truncated]
+{"episode": 36, "step": 2, "timers": {"g125_32_64": {"t_assim": 0.0037316579999924215, "t_nb": 0.0005226670000411104, "t_score": 0.002559263999955874, "t_select": 1.799699998628057e-05, "L_dec": 0.006831585999975687}, "g125_32_16": {"t_assim": 0.0002709279999635328, "t_nb": 0.0004188600000816223, "t_score": 0.0007821579999927053, "t_select": 1.6213999970204895e-05, "L_dec": 0.0014881600000080653}, …[line truncated]
+{"episode": 36, "step": 3, "timers": {"g125_32_16": {"t_assim": 0.00039992199992866517, "t_nb": 0.0005522720000499248, "t_score": 0.0006837989999439742, "t_select": 1.5824000001884997e-05, "L_dec": 0.0016518169999244492}, "g125_32_4": {"t_assim": 0.004744985000002089, "t_nb": 0.000449787000093238, "t_score": 0.0003856409999798416, "t_select": 1.3829999943482107e-05, "L_dec": 0.0055942430000186505} …[line truncated]
+{"episode": 37, "step": 0, "timers": {"g125_32_4": {"t_assim": 3.200000264769187e-07, "t_nb": 0.0004999830000542715, "t_score": 0.0009105409999392577, "t_select": 1.7446000015297614e-05, "L_dec": 0.0014282900000353038}, "pruned16": {"t_feat": 7.395200009341352e-05, "t_fwd": 0.00010019999990618089, "t_mask": 1.699599999938073e-05, "t_assim": 8.999995770864189e-08, "t_nb": 0.055188292000025285, "t_s …[line truncated]
+{"episode": 37, "step": 1, "timers": {"pruned16": {"t_feat": 0.0001506269999254073, "t_fwd": 0.000184197000066888, "t_mask": 3.0105999940133188e-05, "t_assim": 0.02346304599996074, "t_nb": 0.07074333200000638, "t_score": 0.0997610800000075, "t_select": 8.957499994721729e-05, "L_dec": 0.19442196299985426}, "random16": {"t_feat": 0.00019585500001539913, "t_fwd": 0.00014695100003336847, "t_mask": 2.7 …[line truncated]
+{"episode": 37, "step": 2, "timers": {"random16": {"t_feat": 0.00012484800004131102, "t_fwd": 0.00015645499991023826, "t_mask": 2.2403999992093304e-05, "t_assim": 0.04184337100002722, "t_nb": 0.15016831599996294, "t_score": 0.08189768600004754, "t_select": 0.00010634099987782974, "L_dec": 0.2743194209998592}, "student": {"t_feat": 0.0002033060000030673, "t_fwd": 0.00017033699998592056, "t_mask": 2 …[line truncated]
+{"episode": 37, "step": 3, "timers": {"student": {"t_feat": 0.0001274420000072496, "t_fwd": 0.0001767859999972643, "t_mask": 2.7180999950360274e-05, "L_dec": 0.00033140899995487416}, "g2000_512_64": {"t_assim": 0.05925774900003944, "t_nb": 0.11888509599998542, "t_score": 0.20267978800006858, "t_select": 4.2213999904561206e-05, "L_dec": 0.380864846999998}, "g2000_512_16": {"t_assim": 0.058612587999 …[line truncated]
+{"episode": 38, "step": 0, "timers": {"g2000_512_64": {"t_assim": 2.1100004232721403e-07, "t_nb": 0.0570835219999708, "t_score": 1.025927855999953, "t_select": 0.00010548900002049777, "L_dec": 1.0831170779999866}, "g2000_512_16": {"t_assim": 2.0000004496978363e-07, "t_nb": 0.06861658499997247, "t_score": 0.3394235130000425, "t_select": 3.343000003042107e-05, "L_dec": 0.40807372800009034}, "g2000_5 …[line truncated]
+{"episode": 38, "step": 1, "timers": {"g2000_512_16": {"t_assim": 0.024020620999976927, "t_nb": 0.07460863400001472, "t_score": 0.24174991699999282, "t_select": 4.878300001109892e-05, "L_dec": 0.34042795499999556}, "g2000_512_4": {"t_assim": 0.02342959999998584, "t_nb": 0.07325411599993004, "t_score": 0.13416777400004776, "t_select": 2.5078000021494518e-05, "L_dec": 0.23087656799998513}, "g2000_12 …[line truncated]
+{"episode": 38, "step": 2, "timers": {"g2000_512_4": {"t_assim": 0.04161664999992354, "t_nb": 0.07189953500005686, "t_score": 0.0764458989999639, "t_select": 2.5078000021494518e-05, "L_dec": 0.1899871619999658}, "g2000_128_64": {"t_assim": 0.04019579999999223, "t_nb": 0.12765870800001267, "t_score": 0.0920081009999194, "t_select": 6.266500008678122e-05, "L_dec": 0.2599252740000111}, "g2000_128_16" …[line truncated]
+{"episode": 38, "step": 3, "timers": {"g2000_128_64": {"t_assim": 0.04615993000004437, "t_nb": 0.12343362699994032, "t_score": 0.051054850000014085, "t_select": 3.93889999941166e-05, "L_dec": 0.2206877959999929}, "g2000_128_16": {"t_assim": 0.043073423000009825, "t_nb": 0.06138263000002553, "t_score": 0.014652382000008402, "t_select": 3.108599992174277e-05, "L_dec": 0.1191395209999655}, "g2000_128 …[line truncated]
+{"episode": 39, "step": 0, "timers": {"g2000_128_16": {"t_assim": 2.5000008463393897e-07, "t_nb": 0.05641073399999641, "t_score": 0.1064526879999903, "t_select": 3.434199993535003e-05, "L_dec": 0.1628980140000067}, "g2000_128_4": {"t_assim": 1.500000053056283e-07, "t_nb": 0.058746140000039304, "t_score": 0.053054951000035544, "t_select": 3.56339999143529e-05, "L_dec": 0.1118368749999945}, "g2000_3 …[line truncated]
+{"episode": 39, "step": 1, "timers": {"g2000_128_4": {"t_assim": 0.022634809000010137, "t_nb": 0.0737075869999444, "t_score": 0.03442877700001645, "t_select": 2.5688000050649862e-05, "L_dec": 0.13079686100002164}, "g2000_32_64": {"t_assim": 0.025887877000059234, "t_nb": 0.06739529300000413, "t_score": 0.04223530000001574, "t_select": 3.486299999622133e-05, "L_dec": 0.13555333300007533}, "g2000_32_ …[line truncated]
+{"episode": 39, "step": 2, "timers": {"g2000_32_64": {"t_assim": 0.04134580200002347, "t_nb": 0.06311919600000238, "t_score": 0.03716430700001183, "t_select": 3.4862000006796734e-05, "L_dec": 0.14166416700004447}, "g2000_32_16": {"t_assim": 0.04088729299996885, "t_nb": 0.05955318600001647, "t_score": 0.014259649999985413, "t_select": 2.5569000058567326e-05, "L_dec": 0.1147256980000293}, "g2000_32_ …[line truncated]
+{"episode": 39, "step": 3, "timers": {"g2000_32_16": {"t_assim": 0.06193433200007803, "t_nb": 0.06779396399997495, "t_score": 0.006120666000015262, "t_select": 2.1833000005244685e-05, "L_dec": 0.13587079500007349}, "g2000_32_4": {"t_assim": 0.058555665000085355, "t_nb": 0.06792542199991658, "t_score": 0.002714938000053735, "t_select": 2.08609999390319e-05, "L_dec": 0.1292168859999947}, "g500_512_6 …[line truncated]
+{"episode": 40, "step": 0, "timers": {"g2000_32_4": {"t_assim": 1.8999992335011484e-07, "t_nb": 0.057368918000065605, "t_score": 0.01819948199999999, "t_select": 2.5597999979254382e-05, "L_dec": 0.0755941879999682}, "g500_512_64": {"t_assim": 2.0100003439438296e-07, "t_nb": 0.0031121550000534626, "t_score": 0.22120956599997044, "t_select": 2.4057000018729013e-05, "L_dec": 0.22434597900007702}, "g5 …[line truncated]
+{"episode": 40, "step": 1, "timers": {"g500_512_64": {"t_assim": 0.0070765350000101535, "t_nb": 0.0036834759999919697, "t_score": 0.14717699100003756, "t_select": 2.7740999939851463e-05, "L_dec": 0.15796474299997953}, "g500_512_16": {"t_assim": 0.006692215999919426, "t_nb": 0.0034294940001018404, "t_score": 0.04930502699994577, "t_select": 2.335500005301583e-05, "L_dec": 0.05945009200002005}, "g50 …[line truncated]
+{"episode": 40, "step": 2, "timers": {"g500_512_16": {"t_assim": 0.007946876999994856, "t_nb": 0.003398837999952775, "t_score": 0.038642419999973754, "t_select": 2.286500000536762e-05, "L_dec": 0.05001099999992675}, "g500_512_4": {"t_assim": 0.00782397199998286, "t_nb": 0.003612169999996695, "t_score": 0.01818689699996412, "t_select": 2.072100005534594e-05, "L_dec": 0.02964375999999902}, "g500_128 …[line truncated]
+{"episode": 40, "step": 3, "timers": {"g500_512_4": {"t_assim": 0.013267619000089326, "t_nb": 0.003997058999971159, "t_score": 0.00934005499993873, "t_select": 2.17930000872002e-05, "L_dec": 0.026626526000086415}, "g500_128_64": {"t_assim": 0.01284113700000944, "t_nb": 0.005181192000009105, "t_score": 0.014294064999944567, "t_select": 2.5477999997747247e-05, "L_dec": 0.03234187199996086}, "g500_12 …[line truncated]
+{"episode": 41, "step": 0, "timers": {"g500_128_64": {"t_assim": 2.100000529026147e-07, "t_nb": 0.0027802369999108123, "t_score": 0.058529006000071604, "t_select": 2.551900001890317e-05, "L_dec": 0.06133497200005422}, "g500_128_16": {"t_assim": 6.00000475969864e-08, "t_nb": 0.002804022999953304, "t_score": 0.0171168150000085, "t_select": 2.17729999576477e-05, "L_dec": 0.01994267099996705}, "g500_1 …[line truncated]
+{"episode": 41, "step": 1, "timers": {"g500_128_16": {"t_assim": 0.007156397000017023, "t_nb": 0.0042426489999343175, "t_score": 0.013426349000042137, "t_select": 2.236399996036198e-05, "L_dec": 0.02484775899995384}, "g500_128_4": {"t_assim": 0.007151098999997885, "t_nb": 0.003968795999981012, "t_score": 0.0067502560000320955, "t_select": 1.9960000031460368e-05, "L_dec": 0.017890111000042452}, "g5 …[line truncated]
+{"episode": 41, "step": 2, "timers": {"g500_128_4": {"t_assim": 0.011367658999915875, "t_nb": 0.004152873000066393, "t_score": 0.0037390609999192748, "t_select": 1.941900006841024e-05, "L_dec": 0.019279011999969953}, "g500_32_64": {"t_assim": 0.01116869999998471, "t_nb": 0.009104860999968878, "t_score": 0.006866821000016898, "t_select": 2.0360000007713097e-05, "L_dec": 0.0271607419999782}, "g500_3 …[line truncated]
+{"episode": 42, "step": 0, "timers": {"g500_32_64": {"t_assim": 3.309999101475114e-07, "t_nb": 0.002935060000027079, "t_score": 0.017395566999994116, "t_select": 2.9344000040509854e-05, "L_dec": 0.020360301999971853}, "g500_32_16": {"t_assim": 1.800000291041215e-07, "t_nb": 0.002981199000032575, "t_score": 0.0050777369999650546, "t_select": 1.988999997593055e-05, "L_dec": 0.008079006000002664}, "g …[line truncated]
+{"episode": 42, "step": 1, "timers": {"g500_32_16": {"t_assim": 0.0072997930000155975, "t_nb": 0.0043180430000120396, "t_score": 0.003431768000041302, "t_select": 1.821699993342918e-05, "L_dec": 0.015067821000002368}, "g500_32_4": {"t_assim": 0.007251409999980751, "t_nb": 0.004498804999911954, "t_score": 0.0016426140000476153, "t_select": 1.643400003104034e-05, "L_dec": 0.01340926299997136}, "g125 …[line truncated]
+{"episode": 42, "step": 2, "timers": {"g500_32_4": {"t_assim": 0.012568144999931974, "t_nb": 0.004287286000021595, "t_score": 0.001574464999976044, "t_select": 1.7967000076168915e-05, "L_dec": 0.018447863000005782}, "g125_512_64": {"t_assim": 0.004655901999967682, "t_nb": 0.0004892480000080468, "t_score": 0.023362194000014824, "t_select": 1.8537999949330697e-05, "L_dec": 0.028525881999939884}, "g1 …[line truncated]
+{"episode": 42, "step": 3, "timers": {"g125_512_64": {"t_assim": 0.0063732820000268475, "t_nb": 0.000867868999989696, "t_score": 0.014263622000044052, "t_select": 1.6954999978224805e-05, "L_dec": 0.02152172800003882}, "g125_512_16": {"t_assim": 0.005890344000022196, "t_nb": 0.0004673849999790036, "t_score": 0.004189568000015242, "t_select": 1.56840000045122e-05, "L_dec": 0.010562981000020955}, "g1 …[line truncated]
+{"episode": 43, "step": 0, "timers": {"g125_512_16": {"t_assim": 4.400000079840538e-07, "t_nb": 0.0004919909999898664, "t_score": 0.01959499899999173, "t_select": 1.941000004990201e-05, "L_dec": 0.020106840000039483}, "g125_512_4": {"t_assim": 9.999996564147295e-08, "t_nb": 0.00048296600004960055, "t_score": 0.01013116399997216, "t_select": 1.683599998614227e-05, "L_dec": 0.010631065999973544}, "g …[line truncated]
+{"episode": 43, "step": 1, "timers": {"g125_512_4": {"t_assim": 0.003049592000024859, "t_nb": 0.0007677809999222518, "t_score": 0.007269288000088636, "t_select": 1.683599998614227e-05, "L_dec": 0.011103497000021889}, "g125_128_64": {"t_assim": 0.0027889040001127796, "t_nb": 0.0005512409999255397, "t_score": 0.00914105300000756, "t_select": 1.741699998092372e-05, "L_dec": 0.012498615000026803}, "g1 …[line truncated]
+{"episode": 43, "step": 2, "timers": {"g125_128_64": {"t_assim": 0.004958405000024868, "t_nb": 0.0007052729999941221, "t_score": 0.006958648000022549, "t_select": 1.774700001533347e-05, "L_dec": 0.012640073000056873}, "g125_128_16": {"t_assim": 0.0045292319999816755, "t_nb": 0.0014781889999539999, "t_score": 0.0024727320000010877, "t_select": 1.5174000054685166e-05, "L_dec": 0.008495326999991448}, …[line truncated]
+{"episode": 43, "step": 3, "timers": {"g125_128_16": {"t_assim": 0.0062572109999337044, "t_nb": 0.0006194219999997586, "t_score": 0.0015830890000643194, "t_select": 1.6454999922643765e-05, "L_dec": 0.008476176999920426}, "g125_128_4": {"t_assim": 0.005953529000066737, "t_nb": 0.0015273439998964022, "t_score": 0.0006312799999932395, "t_select": 1.5123000025596411e-05, "L_dec": 0.008127275999981975} …[line truncated]
+{"episode": 44, "step": 0, "timers": {"g125_128_4": {"t_assim": 2.0999993921577698e-07, "t_nb": 0.0004890459999842278, "t_score": 0.002920861999996305, "t_select": 1.6906000041672087e-05, "L_dec": 0.0034270239999614205}, "g125_32_64": {"t_assim": 1.1000008726114174e-07, "t_nb": 0.000424967999947512, "t_score": 0.003992565999965336, "t_select": 1.6225000081249163e-05, "L_dec": 0.0044338690000813585 …[line truncated]
+{"episode": 44, "step": 1, "timers": {"g125_32_64": {"t_assim": 0.0030110100000229068, "t_nb": 0.0005290259999810587, "t_score": 0.002500312000051963, "t_select": 1.6954999978224805e-05, "L_dec": 0.006057303000034153}, "g125_32_16": {"t_assim": 0.002738313999998354, "t_nb": 0.00043377199995120463, "t_score": 0.0009349450000399884, "t_select": 1.5062999977999425e-05, "L_dec": 0.0041220939999675466} …[line truncated]
+{"episode": 44, "step": 2, "timers": {"g125_32_16": {"t_assim": 0.004712595999990299, "t_nb": 0.0005078519999415221, "t_score": 0.0012883190000820832, "t_select": 1.610399999663059e-05, "L_dec": 0.006524871000010535}, "g125_32_4": {"t_assim": 0.004415855000047486, "t_nb": 0.0004955529999506325, "t_score": 0.000559812000005877, "t_select": 1.4381000028151902e-05, "L_dec": 0.005485601000032148}, "pr …[line truncated]
+{"episode": 44, "step": 3, "timers": {"g125_32_4": {"t_assim": 0.005300499999975727, "t_nb": 0.0006034880000242993, "t_score": 0.0004186260000551556, "t_select": 1.4471999975285144e-05, "L_dec": 0.006337086000030467}, "pruned16": {"t_feat": 0.00011724899991349957, "t_fwd": 0.00013297200007400534, "t_mask": 1.7555999988871918e-05, "t_assim": 0.0018807200000310331, "t_nb": 0.21524772199995823, "t_sc …[line truncated]
+{"episode": 45, "step": 0, "timers": {"pruned16": {"t_feat": 8.808300003693148e-05, "t_fwd": 0.00014404699993519898, "t_mask": 2.882400008274999e-05, "t_assim": 2.7999999474559445e-07, "t_nb": 0.05548836599996321, "t_score": 0.10562316100003954, "t_select": 8.655100009491434e-05, "L_dec": 0.1614593120001473}, "random16": {"t_feat": 0.00015701699999226548, "t_fwd": 0.0001484340000388329, "t_mask":  …[line truncated]
+{"episode": 45, "step": 1, "timers": {"random16": {"t_feat": 0.00012274699997760763, "t_fwd": 0.00012692300003891432, "t_mask": 2.0581999933710904e-05, "t_assim": 0.02238294300002508, "t_nb": 0.06692516999999043, "t_score": 0.09508291099996313, "t_select": 0.00010710399999425135, "L_dec": 0.18476837999992313}, "student": {"t_feat": 0.00019720999989658594, "t_fwd": 0.000173715000073571, "t_mask": 2 …[line truncated]
+{"episode": 45, "step": 2, "timers": {"student": {"t_feat": 0.00012029300000904186, "t_fwd": 0.00016825599993808282, "t_mask": 2.5448999963373353e-05, "L_dec": 0.00031399799991049804}, "g2000_512_64": {"t_assim": 0.04205519699996785, "t_nb": 0.05975891800005684, "t_score": 0.495058782000001, "t_select": 6.007099989346898e-05, "L_dec": 0.5969329679999191}, "g2000_512_16": {"t_assim": 0.042746379000 …[line truncated]
+{"episode": 45, "step": 3, "timers": {"g2000_512_64": {"t_assim": 0.04398372200000722, "t_nb": 0.06166084200003752, "t_score": 0.13595054199993228, "t_select": 4.6701000087523425e-05, "L_dec": 0.24164180700006455}, "g2000_512_16": {"t_assim": 0.042803565999975035, "t_nb": 0.0625404410000101, "t_score": 0.04844298800003344, "t_select": 2.732099994773307e-05, "L_dec": 0.1538143159999663}, "g2000_512 …[line truncated]
+{"episode": 46, "step": 0, "timers": {"g2000_512_16": {"t_assim": 3.909999577444978e-07, "t_nb": 0.05542851799998516, "t_score": 0.34028947199999493, "t_select": 2.8474000032474578e-05, "L_dec": 0.3957468549999703}, "g2000_512_4": {"t_assim": 1.999999312829459e-07, "t_nb": 0.05522875400004068, "t_score": 0.18185960400001022, "t_select": 2.4487000018780236e-05, "L_dec": 0.23711304500000097}, "g2000 …[line truncated]
+{"episode": 46, "step": 1, "timers": {"g2000_512_4": {"t_assim": 0.022487140999942312, "t_nb": 0.0775935249999975, "t_score": 0.1260063640000908, "t_select": 2.4706999965928844e-05, "L_dec": 0.22611173699999654}, "g2000_128_64": {"t_assim": 0.02469356799997513, "t_nb": 0.0668314960000771, "t_score": 0.18467804799990972, "t_select": 5.4864000048837624e-05, "L_dec": 0.2762579760000108}, "g2000_128_1 …[line truncated]
+{"episode": 46, "step": 2, "timers": {"g2000_128_64": {"t_assim": 0.03842195899994749, "t_nb": 0.17879171699996732, "t_score": 0.08692097000005106, "t_select": 5.342199995084229e-05, "L_dec": 0.3041880679999167}, "g2000_128_16": {"t_assim": 0.03947183800005405, "t_nb": 0.14698710300001494, "t_score": 0.030196544999967045, "t_select": 2.9756000003544614e-05, "L_dec": 0.21668524200003958}, "g2000_12 …[line truncated]
+{"episode": 46, "step": 3, "timers": {"g2000_128_16": {"t_assim": 0.06090285799996309, "t_nb": 0.1484645799999953, "t_score": 0.01338204199998927, "t_select": 2.5388000040038605e-05, "L_dec": 0.2227748679999877}, "g2000_128_4": {"t_assim": 0.055850299999974595, "t_nb": 0.2693208410000807, "t_score": 0.007376663999934863, "t_select": 2.3236000060933293e-05, "L_dec": 0.3325710410000511}, "g2000_32_6 …[line truncated]
+{"episode": 47, "step": 0, "timers": {"g2000_128_4": {"t_assim": 1.8999992335011484e-07, "t_nb": 0.055126590000099895, "t_score": 0.05005759199991644, "t_select": 3.069700005653431e-05, "L_dec": 0.10521506899999622}, "g2000_32_64": {"t_assim": 3.9100007143133553e-07, "t_nb": 0.056433906999927785, "t_score": 0.07328172500001529, "t_select": 3.650600001492421e-05, "L_dec": 0.12975252900002943}, "g20 …[line truncated]
+{"episode": 47, "step": 1, "timers": {"g2000_32_64": {"t_assim": 0.021503806000055192, "t_nb": 0.07439414599991778, "t_score": 0.04408666400001948, "t_select": 3.7926999993942445e-05, "L_dec": 0.1400225429999864}, "g2000_32_16": {"t_assim": 0.0222747379999646, "t_nb": 0.07596349200002805, "t_score": 0.015698560000032558, "t_select": 2.5117999939539004e-05, "L_dec": 0.11396190799996475}, "g2000_32_ …[line truncated]
+{"episode": 47, "step": 2, "timers": {"g2000_32_16": {"t_assim": 0.04082769500007544, "t_nb": 0.06991894700001922, "t_score": 0.006137494999961746, "t_select": 2.3405999968417746e-05, "L_dec": 0.11690754300002482}, "g2000_32_4": {"t_assim": 0.038971197000023494, "t_nb": 0.0824018129999331, "t_score": 0.002752036000060798, "t_select": 2.1001999925829296e-05, "L_dec": 0.12414604799994322}, "g500_512 …[line truncated]
+{"episode": 47, "step": 3, "timers": {"g2000_32_4": {"t_assim": 0.057029343999943194, "t_nb": 0.16419269800007896, "t_score": 0.002725617000010061, "t_select": 2.1391999894149194e-05, "L_dec": 0.22396905099992637}, "g500_512_64": {"t_assim": 0.016023269000015716, "t_nb": 0.007281110000008084, "t_score": 0.010021359999996093, "t_select": 2.0511000002443325e-05, "L_dec": 0.03334625000002234}, "g500_ …[line truncated]
+{"episode": 48, "step": 0, "timers": {"g500_512_64": {"t_assim": 3.309999101475114e-07, "t_nb": 0.0027900060000547455, "t_score": 0.21989968100001533, "t_select": 2.6790999982040375e-05, "L_dec": 0.22271680899996227}, "g500_512_16": {"t_assim": 1.800000291041215e-07, "t_nb": 0.002862435999986701, "t_score": 0.07928036800001337, "t_select": 2.3886999997557723e-05, "L_dec": 0.08216687100002673}, "g5 …[line truncated]
+{"episode": 48, "step": 1, "timers": {"g500_512_16": {"t_assim": 0.006540029000007053, "t_nb": 0.004941785000028176, "t_score": 0.04456806200005303, "t_select": 2.195299998675182e-05, "L_dec": 0.05607182900007501}, "g500_512_4": {"t_assim": 0.0067460010000104376, "t_nb": 0.0034641439999631984, "t_score": 0.024049944000012147, "t_select": 2.146199994967901e-05, "L_dec": 0.03428155099993546}, "g500_ …[line truncated]
+{"episode": 48, "step": 2, "timers": {"g500_512_4": {"t_assim": 0.012071164999952089, "t_nb": 0.01797153100005744, "t_score": 0.015689529999917795, "t_select": 2.154300000256626e-05, "L_dec": 0.04575376899992989}, "g500_128_64": {"t_assim": 0.011342125000055603, "t_nb": 0.0046996400000125504, "t_score": 0.024620927999990272, "t_select": 2.3015000010673248e-05, "L_dec": 0.0406857080000691}, "g500_1 …[line truncated]
+{"episode": 49, "step": 0, "timers": {"g500_128_64": {"t_assim": 3.610000476328423e-07, "t_nb": 0.0029017319999411484, "t_score": 0.06616694100000586, "t_select": 3.038600004856562e-05, "L_dec": 0.06909942000004321}, "g500_128_16": {"t_assim": 2.0100003439438296e-07, "t_nb": 0.0028675700000349025, "t_score": 0.01901496599998609, "t_select": 2.218399993125786e-05, "L_dec": 0.021904920999986643}, "g …[line truncated]
+{"episode": 49, "step": 1, "timers": {"g500_128_16": {"t_assim": 0.007450290000065252, "t_nb": 0.004603621000001112, "t_score": 0.011563103999947089, "t_select": 2.2434000015891797e-05, "L_dec": 0.023639449000029344}, "g500_128_4": {"t_assim": 0.00699179200000799, "t_nb": 0.004136109999990367, "t_score": 0.005795193000039944, "t_select": 2.8634000045713037e-05, "L_dec": 0.016951729000084015}, "g50 …[line truncated]
+{"episode": 49, "step": 2, "timers": {"g500_128_4": {"t_assim": 0.0005292330000656875, "t_nb": 0.004253371000004336, "t_score": 0.005208960000004481, "t_select": 1.991099998122081e-05, "L_dec": 0.010011475000055725}, "g500_32_64": {"t_assim": 0.00044515500007946684, "t_nb": 0.004650572999935321, "t_score": 0.009669536000046719, "t_select": 1.8937999925583426e-05, "L_dec": 0.01478420199998709}, "g5 …[line truncated]
+{"episode": 49, "step": 3, "timers": {"g500_32_64": {"t_assim": 0.012939184999936515, "t_nb": 0.006169417000023714, "t_score": 0.004992732000005162, "t_select": 1.8027999999503663e-05, "L_dec": 0.024119361999964894}, "g500_32_16": {"t_assim": 0.011841509000078076, "t_nb": 0.005047705999913887, "t_score": 0.0015686689999938608, "t_select": 1.6235000089181995e-05, "L_dec": 0.018474119000075007}, "g5 …[line truncated]
+{"episode": 50, "step": 0, "timers": {"g500_32_16": {"t_assim": 2.900000026784255e-07, "t_nb": 0.0029435049999619878, "t_score": 0.005904366000095251, "t_select": 1.9038999994336336e-05, "L_dec": 0.008867200000054254}, "g500_32_4": {"t_assim": 9.099994713324122e-08, "t_nb": 0.002763271000048917, "t_score": 0.0024628059999258767, "t_select": 1.699599999938073e-05, "L_dec": 0.0052431639999213075}, " …[line truncated]
+{"episode": 50, "step": 1, "timers": {"g500_32_4": {"t_assim": 0.0070106629999600045, "t_nb": 0.0060812149999947, "t_score": 0.0015490090000866985, "t_select": 1.8087999933413812e-05, "L_dec": 0.014658974999974816}, "g125_512_64": {"t_assim": 0.002783070999953452, "t_nb": 0.00048668800002360513, "t_score": 0.03402093399995465, "t_select": 2.131200005806022e-05, "L_dec": 0.03731200499998977}, "g125 …[line truncated]
+{"episode": 50, "step": 2, "timers": {"g125_512_64": {"t_assim": 0.003493993999995837, "t_nb": 0.000489242999947237, "t_score": 0.022849497000038355, "t_select": 1.8847999967874784e-05, "L_dec": 0.026851581999949303}, "g125_512_16": {"t_assim": 0.0032670699999926, "t_nb": 0.0011660899999696994, "t_score": 0.007394665999981953, "t_select": 1.601400003892195e-05, "L_dec": 0.011843839999983174}, "g12 …[line truncated]
+{"episode": 50, "step": 3, "timers": {"g125_512_16": {"t_assim": 0.0004392469999174864, "t_nb": 0.0015860470000461646, "t_score": 0.003677502999948956, "t_select": 1.7026000023179222e-05, "L_dec": 0.005719822999935786}, "g125_512_4": {"t_assim": 0.005046321000008902, "t_nb": 0.00039360699997814663, "t_score": 0.0015975349999735045, "t_select": 1.5313000062633364e-05, "L_dec": 0.0070527760000231865 …[line truncated]
+{"episode": 51, "step": 0, "timers": {"g125_512_4": {"t_assim": 3.4000004234258085e-07, "t_nb": 0.0004899439999235256, "t_score": 0.010199964000094042, "t_select": 1.8687999954636325e-05, "L_dec": 0.010708936000014546}, "g125_128_64": {"t_assim": 1.999999312829459e-07, "t_nb": 0.00046070899998085224, "t_score": 0.014421183000081328, "t_select": 1.7617000025893503e-05, "L_dec": 0.014899709000019357 …[line truncated]
+{"episode": 51, "step": 1, "timers": {"g125_128_64": {"t_assim": 0.00322500000004311, "t_nb": 0.0008597329999702197, "t_score": 0.009377789000041048, "t_select": 2.2073999957683554e-05, "L_dec": 0.013484596000012061}, "g125_128_16": {"t_assim": 0.0029150089999347983, "t_nb": 0.0010999380000384917, "t_score": 0.003430772000001525, "t_select": 1.741699998092372e-05, "L_dec": 0.007463135999955739}, " …[line truncated]
+{"episode": 51, "step": 2, "timers": {"g125_128_16": {"t_assim": 0.0034966679999115513, "t_nb": 0.00045957800000451243, "t_score": 0.0019271660000867996, "t_select": 1.666499997554638e-05, "L_dec": 0.00590007699997841}, "g125_128_4": {"t_assim": 0.003218866999986858, "t_nb": 0.0004750409999587646, "t_score": 0.0010586570000441498, "t_select": 1.461299996208254e-05, "L_dec": 0.004767177999951855},  …[line truncated]
+{"episode": 51, "step": 3, "timers": {"g125_128_4": {"t_assim": 0.005287920999990092, "t_nb": 0.0005754610000394678, "t_score": 0.0011985129999629862, "t_select": 2.0111000026190595e-05, "L_dec": 0.007082006000018737}, "g125_32_64": {"t_assim": 0.004690958000082901, "t_nb": 0.0009500879999677636, "t_score": 0.0014718969999876208, "t_select": 1.5212999983305053e-05, "L_dec": 0.0071281560000215904}, …[line truncated]
+{"episode": 52, "step": 0, "timers": {"g125_32_64": {"t_assim": 2.599999788799323e-07, "t_nb": 0.0004739500000141561, "t_score": 0.004218713000000207, "t_select": 1.799699998628057e-05, "L_dec": 0.004710919999979524}, "g125_32_16": {"t_assim": 1.1100007668574108e-07, "t_nb": 0.00042843999995056947, "t_score": 0.001430151000022306, "t_select": 1.4621999980590772e-05, "L_dec": 0.001873324000030152}, …[line truncated]
+{"episode": 52, "step": 1, "timers": {"g125_32_16": {"t_assim": 0.0030643149999605157, "t_nb": 0.0005436840000356824, "t_score": 0.0011720060000470767, "t_select": 1.617399993847357e-05, "L_dec": 0.004796178999981748}, "g125_32_4": {"t_assim": 0.002719040999977551, "t_nb": 0.0005527979999442323, "t_score": 0.0006457090000822063, "t_select": 1.3559999956669344e-05, "L_dec": 0.003931107999960659}, " …[line truncated]
+{"episode": 52, "step": 2, "timers": {"g125_32_4": {"t_assim": 0.00040733699995598727, "t_nb": 0.0006180070000709748, "t_score": 0.000561199999992823, "t_select": 1.4281999938248191e-05, "L_dec": 0.0016008259999580332}, "pruned16": {"t_feat": 0.00010526000005484093, "t_fwd": 0.00014319699994302937, "t_mask": 1.717600002848485e-05, "t_assim": 0.040131555000016306, "t_nb": 0.06926238599999124, "t_sc …[line truncated]
+{"episode": 52, "step": 3, "timers": {"pruned16": {"t_feat": 0.00012530900005458534, "t_fwd": 0.00016041300000324554, "t_mask": 2.7040999952987477e-05, "t_assim": 0.05851827300000423, "t_nb": 0.11275643999999829, "t_score": 0.08017479099999036, "t_select": 8.853399992858613e-05, "L_dec": 0.2518508009999323}, "random16": {"t_feat": 0.00019456400002582086, "t_fwd": 0.0001724610000337634, "t_mask": 2 …[line truncated]
+{"episode": 53, "step": 0, "timers": {"random16": {"t_feat": 8.440800002063042e-05, "t_fwd": 0.00010632099997565092, "t_mask": 2.2915000045031775e-05, "t_assim": 2.0000004496978363e-07, "t_nb": 0.056297352999990835, "t_score": 0.10914146999994045, "t_select": 8.568000009745447e-05, "L_dec": 0.16573834700011503}, "student": {"t_feat": 0.00014825400000972877, "t_fwd": 0.00013761800005340774, "t_mask …[line truncated]
+{"episode": 53, "step": 1, "timers": {"student": {"t_feat": 0.00011351199998443917, "t_fwd": 0.00013752799998201226, "t_mask": 1.946999998381216e-05, "L_dec": 0.0002705099999502636}, "g2000_512_64": {"t_assim": 0.022675316000004386, "t_nb": 0.06389405300001272, "t_score": 0.6826967160000095, "t_select": 5.206900004850468e-05, "L_dec": 0.7693181540000751}, "g2000_512_16": {"t_assim": 0.024391776000 …[line truncated]
+{"episode": 53, "step": 2, "timers": {"g2000_512_64": {"t_assim": 0.02626672500002769, "t_nb": 0.0800672330000225, "t_score": 0.4039779309999858, "t_select": 3.9430000015272526e-05, "L_dec": 0.5103513190000513}, "g2000_512_16": {"t_assim": 0.02844585399998323, "t_nb": 0.0740392760000077, "t_score": 0.15766736000000492, "t_select": 3.290999995897437e-05, "L_dec": 0.2601853999999548}, "g2000_512_4": …[line truncated]
+{"episode": 53, "step": 3, "timers": {"g2000_512_16": {"t_assim": 0.04244232799999281, "t_nb": 0.07396927199999936, "t_score": 0.07917961500004367, "t_select": 2.6749999960884452e-05, "L_dec": 0.19561796499999673}, "g2000_512_4": {"t_assim": 0.04018001800000093, "t_nb": 0.056467869000016435, "t_score": 0.046047506000036265, "t_select": 3.1737999961478636e-05, "L_dec": 0.1427271310000151}, "g2000_1 …[line truncated]
+{"episode": 54, "step": 0, "timers": {"g2000_512_4": {"t_assim": 3.1000001854408765e-07, "t_nb": 0.05457872999988922, "t_score": 0.1735089070000413, "t_select": 2.515799997127033e-05, "L_dec": 0.22811310499992032}, "g2000_128_64": {"t_assim": 2.210000502600451e-07, "t_nb": 0.056180272999995395, "t_score": 0.25250692399993113, "t_select": 4.78220000559304e-05, "L_dec": 0.3087352400000327}, "g2000_1 …[line truncated]
+{"episode": 54, "step": 1, "timers": {"g2000_128_64": {"t_assim": 0.02157855500001915, "t_nb": 0.07351777899998524, "t_score": 0.15677230100004635, "t_select": 4.6030000021346495e-05, "L_dec": 0.2519146650000721}, "g2000_128_16": {"t_assim": 0.02181290999999419, "t_nb": 0.05961123600002338, "t_score": 0.050748399999974936, "t_select": 2.8042000053574156e-05, "L_dec": 0.13220058800004608}, "g2000_1 …[line truncated]
+{"episode": 54, "step": 2, "timers": {"g2000_128_16": {"t_assim": 0.038887138000063715, "t_nb": 0.06250301399995806, "t_score": 0.030885193000017352, "t_select": 2.8682999982265756e-05, "L_dec": 0.1323040280000214}, "g2000_128_4": {"t_assim": 0.002225387000066803, "t_nb": 0.06493264999994608, "t_score": 0.020086656999978914, "t_select": 2.568900004007446e-05, "L_dec": 0.08727038300003187}, "g2000_ …[line truncated]
+{"episode": 54, "step": 3, "timers": {"g2000_128_4": {"t_assim": 0.056276133999972444, "t_nb": 0.06236575700006597, "t_score": 0.009981949999996687, "t_select": 2.204399993388506e-05, "L_dec": 0.12864588499996898}, "g2000_32_64": {"t_assim": 0.05468819199995778, "t_nb": 0.07846948899998551, "t_score": 0.018547158000046693, "t_select": 2.3564999992231606e-05, "L_dec": 0.15172840399998222}, "g2000_3 …[line truncated]
+{"episode": 55, "step": 0, "timers": {"g2000_32_64": {"t_assim": 3.300000344097498e-07, "t_nb": 0.055110781999928804, "t_score": 0.07359007000002293, "t_select": 3.742700005204824e-05, "L_dec": 0.1287386090000382}, "g2000_32_16": {"t_assim": 1.0099995506607229e-07, "t_nb": 0.056544573999985914, "t_score": 0.027685673000064526, "t_select": 2.4467000002914574e-05, "L_dec": 0.08425481500000842}, "g20 …[line truncated]
+{"episode": 55, "step": 1, "timers": {"g2000_32_16": {"t_assim": 0.021691844999963905, "t_nb": 0.11011991999998827, "t_score": 0.015099974999998267, "t_select": 2.3356000042440428e-05, "L_dec": 0.14693509599999288}, "g2000_32_4": {"t_assim": 0.021641597999973783, "t_nb": 0.10583348800003023, "t_score": 0.007635713000013311, "t_select": 2.2003000026415975e-05, "L_dec": 0.13513280200004374}, "g500_5 …[line truncated]
+
+
+(c) Statistical tests actually present in code/ (grep of scipy.stats and the repo's own test functions in code/touchbed/stats.py: crossed paired bootstrap, TOST via bootstrap, Holm, seed robustness):
+code/touchbed/pf.py:16:from scipy.stats import qmc
+code/touchbed/stats.py:13:def crossed_bootstrap_diff(A, B, n_boot: int = 10000, seed: int = 0, alpha: float = 0.05):
+code/touchbed/stats.py:34:def holm(pvals, alpha: float = 0.05):
+code/touchbed/stats.py:47:def seed_robustness(A, B):
+code/touchbed/stats.py:54:def tost(A, B, margin: float, n_boot: int = 10000, seed: int = 0, alpha: float = 0.05):
+code/touchbed/stats.py:57:    r = crossed_bootstrap_diff(A, B, n_boot=n_boot, seed=seed, alpha=alpha)
+code/touchbed/policies.py:9:from scipy.stats import qmc
+code/analysis_g4_fallback.py:12:from touchbed.stats import crossed_bootstrap_diff  # noqa: E402
+code/analysis_g4_fallback.py:33:        bs = crossed_bootstrap_diff(a, b, n_boot=4000, seed=1, alpha=0.025)
+code/analysis_h2_v3.py:13:from touchbed.stats import crossed_bootstrap_diff  # noqa: E402
+code/analysis_h2_v3.py:37:    r = crossed_bootstrap_diff(A, B)
+code/analysis_d3_v3.py:7:B = 10,000, the scheme of stats.crossed_bootstrap_diff). Usage: python analysis_d3_v3.py [--kind student|belief_student]
+code/analysis_b8.py:11:from touchbed.stats import crossed_bootstrap_diff  # noqa: E402
+code/analysis_b8.py:47:            bs = crossed_bootstrap_diff(a, b, n_boot=4000, seed=1, alpha=0.025)
+code/analysis_g4.py:11:from touchbed.stats import crossed_bootstrap_diff  # noqa: E402
+code/analysis_g4.py:32:                bs = crossed_bootstrap_diff(a, b, n_boot=4000, seed=1, alpha=0.025)
+code/analysis_pfcheck.py:12:from touchbed.stats import crossed_bootstrap_diff  # noqa: E402
+code/analysis_pfcheck.py:34:                bs = crossed_bootstrap_diff(a, b, n_boot=4000, seed=1)
+code/analysis_m4_v3.py:15:from touchbed.stats import crossed_bootstrap_diff  # noqa: E402
+code/analysis_m4_v3.py:53:            r90 = crossed_bootstrap_diff(arr(a, key), arr(b, key), alpha=0.05)
+code/analysis_m4_v3.py:54:            r95 = crossed_bootstrap_diff(arr(a, key), arr(b, key), alpha=0.025)
+code/analysis_m4_v3.py:71:            r95 = crossed_bootstrap_diff(arr(a, key), arr(b, key), alpha=0.025)
+code/analysis_g4_b5.py:11:from touchbed.stats import crossed_bootstrap_diff  # noqa: E402
+code/analysis_g4_b5.py:33:            bs = crossed_bootstrap_diff(a, b, n_boot=4000, seed=1, alpha=0.025)
+
+
+(d) Condition x seed combinations: see per-analysis 'n_episodes', per-seed keys and 'rows' in (a). Run outputs: 2055 files under results/v3/. The reviewer may open any file in code/ and results/v3/ of the repository at /home/claude/paper-writing to verify claims.

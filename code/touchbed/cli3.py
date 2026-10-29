@@ -221,6 +221,8 @@ def cmd_distill3(a):
     lr, beta_T, lam, batch = HP_GRID[a.hp]
     cfg = DistillConfig(lr=lr, beta_T=beta_T, lam=lam, batch=batch, hidden=a.hidden, tau=a.tau, seed=a.seed,
                         budget_minutes=a.budget_minutes)
+    if getattr(a, "fixed_epochs", None):                     # stage 18 v3 exploratory row: no early stop
+        cfg.max_epochs, cfg.stop_patience = a.fixed_epochs, 10 ** 9
     paths = sorted(p for g in a.shards for p in glob.glob(g))
     vpaths = sorted(p for g in a.val_shards for p in glob.glob(g))
     D = load_shards(paths)
@@ -437,6 +439,7 @@ def register(sub):
     ds.add_argument("--kind", default="history", choices=["history", "belief"]); ds.add_argument("--hidden", type=int, default=128)
     ds.add_argument("--shards", nargs="+", required=True); ds.add_argument("--val-shards", nargs="+", required=True)
     ds.add_argument("--init", default=None); ds.add_argument("--budget-minutes", type=float, default=330.0)
+    ds.add_argument("--fixed-epochs", type=int, default=None)  # train exactly N epochs (no stopping rule); default off
     ds.add_argument("--out", required=True)
     la = sub.add_parser("latency3"); common(la)
     la.add_argument("--weights", required=True); la.add_argument("--warmup", type=int, default=20)

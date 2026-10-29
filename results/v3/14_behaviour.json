@@ -1,0 +1,364 @@
+{
+ "note": "report-only diagnostics; travel_rad is the logged total finger travel per episode",
+ "grid_step_deg": 5.625,
+ "methods": {
+  "gstar": {
+   "n_episodes": 500,
+   "travel_deg_mean": 6.132426960013103,
+   "travel_deg_median": 6.2832985630583575,
+   "travel_deg_max": 24.92495210106672,
+   "probes_mean": 3.962,
+   "probes_hist": {
+    "3": 19,
+    "4": 481
+   },
+   "frac_between_probe_moves_gt_1_step": 0.06279540850776502,
+   "frac_between_probe_moves_eq_0": 0.7933828494260635,
+   "gT_n": 500,
+   "gT_cap_log_L_plus_1": 8.317766166719343,
+   "gT_saturated_frac": 0.058
+  },
+  "random": {
+   "n_episodes": 500,
+   "travel_deg_mean": 38.44658079174821,
+   "travel_deg_median": 39.02126448112808,
+   "travel_deg_max": 58.45172889866383,
+   "probes_mean": 1.946,
+   "probes_hist": {
+    "1": 136,
+    "2": 259,
+    "3": 101,
+    "4": 4
+   },
+   "frac_between_probe_moves_gt_1_step": 0.37420718816067655,
+   "frac_between_probe_moves_eq_0": 0.3298097251585624,
+   "gT_n": 500,
+   "gT_cap_log_L_plus_1": 8.317766166719343,
+   "gT_saturated_frac": 0.0
+  },
+  "student_rem_s501": {
+   "n_episodes": 500,
+   "travel_deg_mean": 1.5165429597952818,
+   "travel_deg_median": 1.5049587548260759,
+   "travel_deg_max": 12.265247925782127,
+   "probes_mean": 4.0,
+   "probes_hist": {
+    "4": 500
+   },
+   "frac_between_probe_moves_gt_1_step": 0.0013333333333333333,
+   "frac_between_probe_moves_eq_0": 0.9966666666666667,
+   "gT_n": 500,
+   "gT_cap_log_L_plus_1": 8.317766166719343,
+   "gT_saturated_frac": 0.03
+  },
+  "student_rem_s502": {
+   "n_episodes": 500,
+   "travel_deg_mean": 2.045292959795282,
+   "travel_deg_median": 1.6412958134768894,
+   "travel_deg_max": 13.296356662797805,
+   "probes_mean": 4.0,
+   "probes_hist": {
+    "4": 500
+   },
+   "frac_between_probe_moves_gt_1_step": 0.012666666666666666,
+   "frac_between_probe_moves_eq_0": 0.9766666666666667,
+   "gT_n": 500,
+   "gT_cap_log_L_plus_1": 8.317766166719343,
+   "gT_saturated_frac": 0.034
+  },
+  "student_rem_s503": {
+   "n_episodes": 500,
+   "travel_deg_mean": 1.8765429597952816,
+   "travel_deg_median": 1.5942906911085222,
+   "travel_deg_max": 13.341574742416269,
+   "probes_mean": 4.0,
+   "probes_hist": {
+    "4": 500
+   },
+   "frac_between_probe_moves_gt_1_step": 0.010666666666666666,
+   "frac_between_probe_moves_eq_0": 0.9846666666666667,
+   "gT_n": 500,
+   "gT_cap_log_L_plus_1": 8.317766166719343,
+   "gT_saturated_frac": 0.024
+  },
+  "rl_s511": {
+   "n_episodes": 500,
+   "travel_deg_mean": 23.01529295979528,
+   "travel_deg_median": 23.67852904521773,
+   "travel_deg_max": 28.393742586044862,
+   "probes_mean": 3.0,
+   "probes_hist": {
+    "3": 500
+   },
+   "frac_between_probe_moves_gt_1_step": 0.549,
+   "frac_between_probe_moves_eq_0": 0.0,
+   "gT_n": 500,
+   "gT_cap_log_L_plus_1": 8.317766166719343,
+   "gT_saturated_frac": 0.012
+  },
+  "rl_s512": {
+   "n_episodes": 500,
+   "travel_deg_mean": 25.75974627232526,
+   "travel_deg_median": 25.731152025628838,
+   "travel_deg_max": 28.493741759171193,
+   "probes_mean": 3.0,
+   "probes_hist": {
+    "3": 500
+   },
+   "frac_between_probe_moves_gt_1_step": 0.5,
+   "frac_between_probe_moves_eq_0": 0.219,
+   "gT_n": 500,
+   "gT_cap_log_L_plus_1": 8.317766166719343,
+   "gT_saturated_frac": 0.004
+  },
+  "rl_s513": {
+   "n_episodes": 500,
+   "travel_deg_mean": 25.65275372767475,
+   "travel_deg_median": 25.682620347644253,
+   "travel_deg_max": 28.47458934110374,
+   "probes_mean": 3.0,
+   "probes_hist": {
+    "3": 500
+   },
+   "frac_between_probe_moves_gt_1_step": 0.473,
+   "frac_between_probe_moves_eq_0": 0.184,
+   "gT_n": 500,
+   "gT_cap_log_L_plus_1": 8.317766166719343,
+   "gT_saturated_frac": 0.012
+  },
+  "b_fan": {
+   "n_episodes": 300,
+   "travel_deg_mean": 1.454160502737537,
+   "travel_deg_median": 1.5458673142831,
+   "travel_deg_max": 2.804164829608714,
+   "probes_mean": 4.0,
+   "probes_hist": {
+    "4": 300
+   },
+   "frac_between_probe_moves_gt_1_step": 0.0,
+   "frac_between_probe_moves_eq_0": 1.0
+  }
+ },
+ "rl_final": {
+  "S_k12_rel_cfg2_sd511": {
+   "episodes": 200064,
+   "entropy": 0.004497245653266826,
+   "probes_mean": 3.0,
+   "sat_frac": 0.3125
+  },
+  "S_k12_rel_cfg2_sd512": {
+   "episodes": 200064,
+   "entropy": 0.00200312981281006,
+   "probes_mean": 3.0,
+   "sat_frac": 0.2265625
+  },
+  "S_k12_rel_cfg2_sd513": {
+   "episodes": 200064,
+   "entropy": 0.012510248002976053,
+   "probes_mean": 3.0,
+   "sat_frac": 0.28125
+  }
+ },
+ "teacher_tie_fraction": {
+  "n_logged": 210,
+  "max": 0.0
+ },
+ "student_rounds": {
+  "d3/S_k12_hp0_s501_r0.json": {
+   "epochs": 5,
+   "wall_s": 3.187690019607544,
+   "train_loss_last": 3.4074153862729917,
+   "train_loss_prev": 3.446970643288253,
+   "status": "converged"
+  },
+  "d3/S_k12_hp0_s501_r1.json": {
+   "epochs": 14,
+   "wall_s": 13.324543237686157,
+   "train_loss_last": 2.6694251947399565,
+   "train_loss_prev": 2.685412653520126,
+   "status": "converged"
+  },
+  "d3/S_k12_hp0_s501_r2.json": {
+   "epochs": 7,
+   "wall_s": 8.623026847839355,
+   "train_loss_last": 2.561511671241911,
+   "train_loss_prev": 2.583873391097402,
+   "status": "converged"
+  },
+  "d3/S_k12_hp0_s502_r0.json": {
+   "epochs": 5,
+   "wall_s": 3.9379138946533203,
+   "train_loss_last": 3.429522410027759,
+   "train_loss_prev": 3.4685932115566604,
+   "status": "converged"
+  },
+  "d3/S_k12_hp0_s502_r1.json": {
+   "epochs": 13,
+   "wall_s": 11.944657802581787,
+   "train_loss_last": 2.687902807923153,
+   "train_loss_prev": 2.7063800339082924,
+   "status": "converged"
+  },
+  "d3/S_k12_hp0_s502_r2.json": {
+   "epochs": 4,
+   "wall_s": 5.051007986068726,
+   "train_loss_last": 2.6413311448006414,
+   "train_loss_prev": 2.6638346160163398,
+   "status": "converged"
+  },
+  "d3/S_k12_hp0_s503_r0.json": {
+   "epochs": 5,
+   "wall_s": 3.936194896697998,
+   "train_loss_last": 3.3941562391935363,
+   "train_loss_prev": 3.4616297232878073,
+   "status": "converged"
+  },
+  "d3/S_k12_hp0_s503_r1.json": {
+   "epochs": 11,
+   "wall_s": 10.039183378219604,
+   "train_loss_last": 2.714303064814532,
+   "train_loss_prev": 2.753056078660648,
+   "status": "converged"
+  },
+  "d3/S_k12_hp0_s503_r2.json": {
+   "epochs": 8,
+   "wall_s": 10.240665435791016,
+   "train_loss_last": 2.6096916297922754,
+   "train_loss_prev": 2.622660348282989,
+   "status": "converged"
+  },
+  "d3b/S_k12_belief_hp0_s521_r0.json": {
+   "epochs": 6,
+   "wall_s": 3.5309245586395264,
+   "train_loss_last": 3.2679321842664883,
+   "train_loss_prev": 3.321845142850106,
+   "status": "converged"
+  },
+  "d3b/S_k12_belief_hp0_s521_r1.json": {
+   "epochs": 8,
+   "wall_s": 5.990190505981445,
+   "train_loss_last": 3.0914346224237175,
+   "train_loss_prev": 3.0973497748502243,
+   "status": "converged"
+  },
+  "d3b/S_k12_belief_hp0_s521_r2.json": {
+   "epochs": 4,
+   "wall_s": 3.4393715858459473,
+   "train_loss_last": 3.035734410713359,
+   "train_loss_prev": 3.040932704483614,
+   "status": "converged"
+  },
+  "d3b/S_k12_belief_hp0_s522_r0.json": {
+   "epochs": 6,
+   "wall_s": 3.4982430934906006,
+   "train_loss_last": 3.2886533422662647,
+   "train_loss_prev": 3.349218099789585,
+   "status": "converged"
+  },
+  "d3b/S_k12_belief_hp0_s522_r1.json": {
+   "epochs": 4,
+   "wall_s": 3.425776720046997,
+   "train_loss_last": 3.1206590122651763,
+   "train_loss_prev": 3.140453459543122,
+   "status": "converged"
+  },
+  "d3b/S_k12_belief_hp0_s522_r2.json": {
+   "epochs": 6,
+   "wall_s": 5.3010029792785645,
+   "train_loss_last": 3.0469540816775176,
+   "train_loss_prev": 3.046626865814061,
+   "status": "converged"
+  },
+  "d3b/S_k12_belief_hp0_s523_r0.json": {
+   "epochs": 8,
+   "wall_s": 4.822635173797607,
+   "train_loss_last": 3.2215280883115027,
+   "train_loss_prev": 3.255587856444277,
+   "status": "converged"
+  },
+  "d3b/S_k12_belief_hp0_s523_r1.json": {
+   "epochs": 4,
+   "wall_s": 3.4006600379943848,
+   "train_loss_last": 3.1064744178012167,
+   "train_loss_prev": 3.1203698861666767,
+   "status": "converged"
+  },
+  "d3b/S_k12_belief_hp0_s523_r2.json": {
+   "epochs": 10,
+   "wall_s": 8.71381402015686,
+   "train_loss_last": 2.966158684841794,
+   "train_loss_prev": 2.964080841811384,
+   "status": "converged"
+  },
+  "d3rem/S_k12_hp0_s501_r0.json": {
+   "epochs": 16,
+   "wall_s": 25.30975842475891,
+   "train_loss_last": 2.6843140656728544,
+   "train_loss_prev": 2.706986438822282,
+   "status": "converged"
+  },
+  "d3rem/S_k12_hp0_s501_r1.json": {
+   "epochs": 4,
+   "wall_s": 9.375034093856812,
+   "train_loss_last": 2.6547462768103234,
+   "train_loss_prev": 2.6645357362898094,
+   "status": "converged"
+  },
+  "d3rem/S_k12_hp0_s501_r2.json": {
+   "epochs": 6,
+   "wall_s": 15.170243501663208,
+   "train_loss_last": 2.5479613187973165,
+   "train_loss_prev": 2.5683955379729926,
+   "status": "converged"
+  },
+  "d3rem/S_k12_hp0_s502_r0.json": {
+   "epochs": 16,
+   "wall_s": 27.588038444519043,
+   "train_loss_last": 2.6569416119152205,
+   "train_loss_prev": 2.6650818559000484,
+   "status": "converged"
+  },
+  "d3rem/S_k12_hp0_s502_r1.json": {
+   "epochs": 7,
+   "wall_s": 14.913357496261597,
+   "train_loss_last": 2.5384185536869697,
+   "train_loss_prev": 2.551972996407268,
+   "status": "converged"
+  },
+  "d3rem/S_k12_hp0_s502_r2.json": {
+   "epochs": 7,
+   "wall_s": 18.494335651397705,
+   "train_loss_last": 2.478295393871679,
+   "train_loss_prev": 2.4880446528922495,
+   "status": "converged"
+  },
+  "d3rem/S_k12_hp0_s503_r0.json": {
+   "epochs": 13,
+   "wall_s": 23.006795644760132,
+   "train_loss_last": 2.7192996008918446,
+   "train_loss_prev": 2.7385390001508885,
+   "status": "converged"
+  },
+  "d3rem/S_k12_hp0_s503_r1.json": {
+   "epochs": 7,
+   "wall_s": 15.366939544677734,
+   "train_loss_last": 2.580479818075537,
+   "train_loss_prev": 2.593952702902935,
+   "status": "converged"
+  },
+  "d3rem/S_k12_hp0_s503_r2.json": {
+   "epochs": 6,
+   "wall_s": 15.547439813613892,
+   "train_loss_last": 2.5206221854038984,
+   "train_loss_prev": 2.5275550022894913,
+   "status": "converged"
+  }
+ },
+ "student_rounds_summary": {
+  "n_rounds": 27,
+  "epochs_min": 4,
+  "epochs_max": 16,
+  "wall_s_min": 3.187690019607544,
+  "wall_s_max": 27.588038444519043
+ }
+}

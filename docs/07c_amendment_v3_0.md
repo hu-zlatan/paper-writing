@@ -239,3 +239,15 @@ comparator E_train = 2 × 10⁵ from the start; H3 hold threshold 0.03 with part
   (RL − B-fan −0.3 pp, ci95 [−6.9, +6.3]). The second clause of (b) ("the S12 task may be flat") is **not supported** on
   test3: B-fan − G\* success −6.7 pp, ci95 [−12.0, −1.0]; BI −0.28 nats, ci95 [−0.37, −0.18]. Reported as written
   without the flat clause. Report-only: student − B-fan BI +0.23 nats, ci95 [+0.14, +0.31]. Row 4 unchanged.
+- **Exploratory long-training student row (stage 18 v3 review, run 8; written before it runs).** Both stage-18
+  reviewers flag that the stopping rule ended every student round after 4–16 epochs (3–28 s;
+  `results/v3/14_behaviour.json` → `student_rounds_summary`). Row: for seeds 501–503, a student trained from scratch on
+  exactly the remedied round-2 aggregate (same 43 shards, same held-out shards, hp 0) for a fixed 200 epochs, no stopping
+  rule (`distill3 --fixed-epochs 200`, new flag; default behaviour unchanged), last checkpoint kept. Measured: held-out
+  R̄, train R̄ / top-1 (`analysis_labelfit_v3.py`), then test3 0–299 success / BI at sub 8, paired with G\* and the
+  remedied students (`analysis_m4_v3.py`, new exploratory block). Readings fixed now: (a) long − remedied student success
+  ci95 excludes 0 in favour of long → "the D3 deficit was partly an optimisation artefact of the stopping rule
+  (exploratory; D3 and row 4 unchanged)"; (b) otherwise → "training 200 epochs without a stopping rule did not detectably
+  change test success; the stopping rule is not shown to explain the deficit". In both cases long − G\* is reported
+  with its ci95. If held-out R̄ is worse than the remedied student's for all three seeds, that is reported as over-fit.
+
