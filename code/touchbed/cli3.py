@@ -296,6 +296,24 @@ def cmd_g2v3(a):
     print(f"G2V3_DONE wall_s={time.time() - t0:.0f}")
 
 
+def cmd_bias3(a):
+    """G2′ bias check (07_hypotheses_v3 §3.4): full-G* reference value on g2v3 beliefs (touchbed/bias3.py)."""
+    from .bias3 import bias_reference
+    from .v3 import require_v3_actions
+    require_v3_actions()
+    t0 = time.time()
+    with _open(a.out, ".jsonl") as f:
+        f.write(json.dumps({"header": True, "args": vars(a), "env": _env()}) + "\n")
+        for i in range(a.start, a.start + a.count):
+            if time.time() - t0 > 0.8 * a.budget_minutes * 60:
+                f.write(json.dumps({"EARLY_STOP_AT_80_PCT_BUDGET": True, "next_index": i}) + "\n")
+                break
+            r = bias_reference(a.set, a.kappa, a.tau, a.n_star, i, n_roll=a.n_roll)
+            r["wall_s"] = time.time() - t0
+            f.write(json.dumps(r) + "\n"); f.flush()
+    print(f"BIAS3_DONE wall_s={time.time() - t0:.0f}")
+
+
 def cmd_regrid3(a):
     """E′ (v3.0 C2): grid re-read of recorded eval3 episodes at another evaluator setting (histories rebuilt exactly
     from actions + the episode's observation stream)."""
@@ -400,6 +418,8 @@ def register(sub):
     g2 = sub.add_parser("g2v3"); common(g2, split=False)
     g2.add_argument("--n-star", type=int, default=4); g2.add_argument("--C1", type=int, default=32)
     g2.add_argument("--M-outer", type=int, default=64)
+    bz = sub.add_parser("bias3"); common(bz, split=False)
+    bz.add_argument("--n-star", type=int, default=4); bz.add_argument("--n-roll", type=int, default=256)
     rg = sub.add_parser("regrid3")
     rg.add_argument("--src", nargs="+", required=True); rg.add_argument("--episodes", type=int, nargs="+", required=True)
     rg.add_argument("--sub", type=int, default=8); rg.add_argument("--out", required=True)
@@ -408,4 +428,4 @@ def register(sub):
     p.add_argument("--tau", type=float, default=10.0); p.add_argument("--allow-32", action="store_true")
     p.add_argument("--out", required=True)
     return {"eval3": cmd_eval3, "calib3": cmd_calib3, "label3": cmd_label3, "dagger3": cmd_dagger3,
-            "distill3": cmd_distill3, "latency3": cmd_latency3, "g1c": cmd_g1c, "g2v3": cmd_g2v3, "regrid3": cmd_regrid3, "pilot3": cmd_pilot3}
+            "distill3": cmd_distill3, "latency3": cmd_latency3, "g1c": cmd_g1c, "g2v3": cmd_g2v3, "bias3": cmd_bias3, "regrid3": cmd_regrid3, "pilot3": cmd_pilot3}

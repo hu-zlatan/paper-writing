@@ -1,0 +1,37 @@
+{
+ "purpose": "Cal' for the descriptive H3 level kappa = 2 (07_hypotheses_v3 \u00a73.4): tau_2 = n* (4) + mean travel time of unbudgeted G* for 4 probes on the 200 cal3 episodes, rounded to 0.1 (same rule as tau_12).",
+ "jobs": [
+  {
+   "id": "v3_cal_tau_S_k2_sh0",
+   "cmd": "python main.py calib3 --set S --kappa 2 --n-star 4 --start 0 --count 25 --budget-minutes 25 --out ../results/v3/cal/tau_S_k2_sh0"
+  },
+  {
+   "id": "v3_cal_tau_S_k2_sh1",
+   "cmd": "python main.py calib3 --set S --kappa 2 --n-star 4 --start 25 --count 25 --budget-minutes 25 --out ../results/v3/cal/tau_S_k2_sh1"
+  },
+  {
+   "id": "v3_cal_tau_S_k2_sh2",
+   "cmd": "python main.py calib3 --set S --kappa 2 --n-star 4 --start 50 --count 25 --budget-minutes 25 --out ../results/v3/cal/tau_S_k2_sh2"
+  },
+  {
+   "id": "v3_cal_tau_S_k2_sh3",
+   "cmd": "python main.py calib3 --set S --kappa 2 --n-star 4 --start 75 --count 25 --budget-minutes 25 --out ../results/v3/cal/tau_S_k2_sh3"
+  },
+  {
+   "id": "v3_cal_tau_S_k2_sh4",
+   "cmd": "python main.py calib3 --set S --kappa 2 --n-star 4 --start 100 --count 25 --budget-minutes 25 --out ../results/v3/cal/tau_S_k2_sh4"
+  },
+  {
+   "id": "v3_cal_tau_S_k2_sh5",
+   "cmd": "python main.py calib3 --set S --kappa 2 --n-star 4 --start 125 --count 25 --budget-minutes 25 --out ../results/v3/cal/tau_S_k2_sh5"
+  },
+  {
+   "id": "v3_cal_tau_S_k2_sh6",
+   "cmd": "python main.py calib3 --set S --kappa 2 --n-star 4 --start 150 --count 25 --budget-minutes 25 --out ../results/v3/cal/tau_S_k2_sh6"
+  },
+  {
+   "id": "v3_cal_tau_S_k2_sh7",
+   "cmd": "python main.py calib3 --set S --kappa 2 --n-star 4 --start 175 --count 25 --budget-minutes 25 --out ../results/v3/cal/tau_S_k2_sh7"
+  }
+ ]
+}
