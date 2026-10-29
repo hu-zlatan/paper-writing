@@ -1,0 +1,21 @@
+{
+ "purpose": "First D3 read (report-only, for the record): the 13 val3 episodes still missing for seed 503 (early-stopped shards).",
+ "jobs": [
+  {
+   "id": "v3_d3_val_s503_fill_115",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3/S_k12_hp0_s503_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 115 --count 5 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s503_r2_115_fill"
+  },
+  {
+   "id": "v3_d3_val_s503_fill_218",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3/S_k12_hp0_s503_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 218 --count 2 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s503_r2_218_fill"
+  },
+  {
+   "id": "v3_d3_val_s503_fill_356",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3/S_k12_hp0_s503_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 356 --count 4 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s503_r2_356_fill"
+  },
+  {
+   "id": "v3_d3_val_s503_fill_418",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3/S_k12_hp0_s503_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 418 --count 2 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s503_r2_418_fill"
+  }
+ ]
+}
