@@ -250,4 +250,13 @@ comparator E_train = 2 × 10⁵ from the start; H3 hold threshold 0.03 with part
   (exploratory; D3 and row 4 unchanged)"; (b) otherwise → "training 200 epochs without a stopping rule did not detectably
   change test success; the stopping rule is not shown to explain the deficit". In both cases long − G\* is reported
   with its ci95. If held-out R̄ is worse than the remedied student's for all three seeds, that is reported as over-fit.
+- **Long-training student result (run 8; Actions run 40950403018 + 1 job in the sandbox; `14_m4_analysis.json` →
+  `exploratory_long_student`, `14_labelfit.json` → `long_200_epochs_exploratory`).** 300/300 test3 episodes × 3 seeds,
+  sub 8. Success 41.0 % (seeds 40.7 / 43.3 / 39.0 %), BI 6.24 nats. long − remedied student success +2.8 pp, ci95
+  [−1.0, +6.7] → ci95 contains 0 → **reading (b)**: "training 200 epochs without a stopping rule did not detectably
+  change test success; the stopping rule is not shown to explain the deficit". Reported as written: long − G\* success
+  −1.7 pp, ci95 [−6.8, +3.4]; BI −0.008 nats, ci95 [−0.083, +0.066] (the remedied student's ci95 vs G\* was [−9.3, +0.6]
+  pp). Train top-1 0.60–0.63 vs held-out 0.50–0.53; held-out R̄ 0.181 / 0.164 / 0.173 (all three better than the
+  remedied students' 0.187 / 0.184 / 0.201 → not over-fit by the pre-written criterion). Exploratory, on test3 after the
+  freeze, single cell: D3 (a val3 rule) and row 4 are unchanged; no parity claim may be made from it.
 

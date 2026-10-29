@@ -1999,8 +1999,43 @@
    }
   },
   "exploratory_long_student": {
-   "n_episodes": 0,
-   "complete": false
+   "n_episodes": 300,
+   "complete": true,
+   "success": 0.41,
+   "ball_info": 6.2401749755314935,
+   "per_seed_success": [
+    0.4066666666666667,
+    0.43333333333333335,
+    0.39
+   ],
+   "student_long-student:success": {
+    "diff": 0.027777777777777773,
+    "ci95": [
+     -0.010000000000000004,
+     0.06666666666666668
+    ]
+   },
+   "student_long-student:ball_info": {
+    "diff": 0.04061548138106112,
+    "ci95": [
+     -0.01584824791046847,
+     0.09812230316792803
+    ]
+   },
+   "student_long-gstar:success": {
+    "diff": -0.016666666666666677,
+    "ci95": [
+     -0.06777777777777778,
+     0.03444444444444444
+    ]
+   },
+   "student_long-gstar:ball_info": {
+    "diff": -0.008082813724421285,
+    "ci95": [
+     -0.08277353255662723,
+     0.06618812054133923
+    ]
+   }
   }
  }
 }
