@@ -295,6 +295,34 @@ def cmd_g2v3(a):
     print(f"G2V3_DONE wall_s={time.time() - t0:.0f}")
 
 
+def cmd_regrid3(a):
+    """E′ (v3.0 C2): grid re-read of recorded eval3 episodes at another evaluator setting (histories rebuilt exactly
+    from actions + the episode's observation stream)."""
+    from .evaluate_v2 import prior_ball_mass
+    from .gridpost import AdaptiveGridPosterior, rebuild_history
+    from .v3 import ep_key_v3, require_v3_actions, states_v3
+    require_v3_actions()
+    om = ObsModel()
+    recs = [json.loads(l) for f in a.src for l in open(f)]
+    recs = [r for r in recs if "episode" in r and r["episode"] in set(a.episodes)]
+    t0 = time.time()
+    with _open(a.out, ".jsonl") as f:
+        f.write(json.dumps({"header": True, "args": vars(a), "env": _env()}) + "\n")
+        for r in recs:
+            lib, prior, eps = states_v3(r["set"], r["split"], [r["episode"]])
+            s0, _ = eps[0]
+            key = ep_key_v3(r["set"], r["split"], r["kappa"], r["tau"], r["episode"])
+            h = rebuild_history(lib, om, s0, r["actions"], key)
+            t1 = time.time()
+            G = AdaptiveGridPosterior(lib, prior, om, h, s0, sub=a.sub)
+            o = G.readout(s0, prior_ball_mass(lib, prior, s0))
+            o.update({k: r[k] for k in ("episode", "set", "split", "kappa", "tau", "method", "actions")})
+            o.update({"sub": a.sub, "wall_s": time.time() - t1, "orig_success": r["success"],
+                      "orig_ball_info": r["ball_info"], "orig_identity_mass_true": r.get("identity_mass_true")})
+            f.write(json.dumps(o) + "\n"); f.flush()
+    print(f"REGRID3_DONE wall_s={time.time() - t0:.0f}")
+
+
 def cmd_pilot3(a):
     """Mandatory TIME_ESTIMATE pilot (RESTRICTS pilot_required, <= 5 min): one episode per method and one labelled
     episode in one cell, then extrapolation to the sweep sizes of docs/08_experiment_plan_v3.yaml."""
@@ -371,9 +399,12 @@ def register(sub):
     g2 = sub.add_parser("g2v3"); common(g2, split=False)
     g2.add_argument("--n-star", type=int, default=4); g2.add_argument("--C1", type=int, default=32)
     g2.add_argument("--M-outer", type=int, default=64)
+    rg = sub.add_parser("regrid3")
+    rg.add_argument("--src", nargs="+", required=True); rg.add_argument("--episodes", type=int, nargs="+", required=True)
+    rg.add_argument("--sub", type=int, default=8); rg.add_argument("--out", required=True)
     p = sub.add_parser("pilot3")
     p.add_argument("--set", default="S"); p.add_argument("--kappa", type=float, default=12.0)
     p.add_argument("--tau", type=float, default=10.0); p.add_argument("--allow-32", action="store_true")
     p.add_argument("--out", required=True)
     return {"eval3": cmd_eval3, "calib3": cmd_calib3, "label3": cmd_label3, "dagger3": cmd_dagger3,
-            "distill3": cmd_distill3, "latency3": cmd_latency3, "g1c": cmd_g1c, "g2v3": cmd_g2v3, "pilot3": cmd_pilot3}
+            "distill3": cmd_distill3, "latency3": cmd_latency3, "g1c": cmd_g1c, "g2v3": cmd_g2v3, "regrid3": cmd_regrid3, "pilot3": cmd_pilot3}

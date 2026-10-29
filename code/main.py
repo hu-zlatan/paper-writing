@@ -26,7 +26,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 # v3 sub-commands run on the 64 x 8 action set (amendment v3.0 C1): the flag must be set before touchbed.travel is
 # imported. An explicit TOUCHBED_NPHI in the environment wins; --allow-32 (tests only) keeps the 32 x 8 default.
-V3_COMMANDS = {"eval3", "calib3", "label3", "dagger3", "distill3", "latency3", "g1c", "g2v3", "pilot3"}
+V3_COMMANDS = {"eval3", "calib3", "label3", "dagger3", "distill3", "latency3", "g1c", "g2v3", "regrid3", "pilot3"}
 if len(sys.argv) > 1 and sys.argv[1] in V3_COMMANDS and "--allow-32" not in sys.argv:
     os.environ.setdefault("TOUCHBED_NPHI", "64")
 # train3rl = the v2 PPO trainer (train2) on the 64 x 8 set: RL-relative comparator of H2 (amendment v3.0 C9, v3.1 D9)
