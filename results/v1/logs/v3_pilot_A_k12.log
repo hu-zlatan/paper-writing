@@ -1,0 +1,3 @@
+TIME_ESTIMATE: label 2.0s per G*-labelled episode (3 decisions); grid read-out 5.4s per episode; student rollout 0.001s per episode (untrained, no grid)
+TIME_ESTIMATE: round-0 labels per cell (1,500 ep): 0.85 CPU-h
+TIME_ESTIMATE: G* pilot per cell (500 ep, label-free + grid): 1.03 CPU-h
