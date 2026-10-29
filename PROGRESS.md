@@ -613,6 +613,14 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
   re-estimate ≈ 526 CPU-h (gates ≈ 190, main after full downscale ≈ 336) → owner informed (OWNER_TODO) with a default.
   G2′ (S0, S12, κ = 2) + bias check dispatched; bias check implemented (`touchbed/bias3.py`, 256 full-G* rollouts per
   belief — sample count chosen before any G2′ number, since the pre-registered text gives none).
-- **Next:** G5′ decision on sub-8 values (`code/analysis_g5_v3.py` → point it at g5_sub8); HP selection → Lat′ (one
-  runner job) → DAgger rounds 1–2 (seeds 501–503) → D3 validation at sub 8; G2′ analysis. The 64 × 16 S12 report
+- **Run 6, D3 path:** HP config 0 selected (held-out R̄ 0.3827; cfg 2/3 within 0.01). Round-0 students 502/503 and
+  every distill3 step run in the sandbox (seconds each; data from runners). DAgger r1 done (3 × 400, β 0.5) → round-1
+  R̄ 0.234 / 0.229 / 0.227; DAgger r2 (β 0) dispatched. D3-B round 0 (seeds 521–523) + DAgger r1 dispatched. RL sweep
+  (v3.1 D9) dispatched; deviation noted (trainer's own validation stream, not val3). Lat′ dispatched (one job).
+  G* on val3 0–499 at sub 8 dispatched. Sub-8 re-reads: Cal′ n*, A12, S12 dispatched; S0 after its sub-4 pilot ends.
+  Queue juggling: several runs were cancelled and re-dispatched for D3 priority; follow-up manifests (`*_r1`, `*_r2`)
+  resume from the recorded episode — every partial output is labelled by its file name and nothing is double counted
+  (analyses key on episode index).
+- **Next:** after DAgger r2: round-2 training (sandbox) → students on val3 0–499 at sub 8 (3 seeds) →
+  `code/analysis_d3_v3.py`; G5′ on sub-8 values; Lat′ → R_b selection; G2′ analysis (H3); freeze commit. The 64 × 16 S12 report
   (report-only) needs a ψ-count flag that does not exist yet — deferred.
