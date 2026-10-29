@@ -1,0 +1,17 @@
+{
+ "purpose": "v4 E3 (amendment v4.0): RL-relative in S2, v3 config 2, seeds 611-613, 2e5 episodes, plateau recorded not used",
+ "jobs": [
+  {
+   "id": "v4_rl_S2_sd611",
+   "cmd": "python main.py train3rl --set S --method spce_total --frame rel --kappa 2 --tau 4.7 --lr 0.001090170443025114 --ent-coef 0.00013313139952275948 --batch 128 --critic-lr 0.0014321061677694642 --seed 611 --max-episodes 200000 --no-plateau-stop --budget-minutes 330 --out ../results/v4/rl/S_k2_rel_cfg2_sd611"
+  },
+  {
+   "id": "v4_rl_S2_sd612",
+   "cmd": "python main.py train3rl --set S --method spce_total --frame rel --kappa 2 --tau 4.7 --lr 0.001090170443025114 --ent-coef 0.00013313139952275948 --batch 128 --critic-lr 0.0014321061677694642 --seed 612 --max-episodes 200000 --no-plateau-stop --budget-minutes 330 --out ../results/v4/rl/S_k2_rel_cfg2_sd612"
+  },
+  {
+   "id": "v4_rl_S2_sd613",
+   "cmd": "python main.py train3rl --set S --method spce_total --frame rel --kappa 2 --tau 4.7 --lr 0.001090170443025114 --ent-coef 0.00013313139952275948 --batch 128 --critic-lr 0.0014321061677694642 --seed 613 --max-episodes 200000 --no-plateau-stop --budget-minutes 330 --out ../results/v4/rl/S_k2_rel_cfg2_sd613"
+  }
+ ]
+}

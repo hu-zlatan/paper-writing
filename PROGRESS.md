@@ -835,3 +835,29 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
   all fixed. Body now 11,247 words (length-protected revision); condensed 5-page / 8-page exports are stage 22's job.
   Number audit: 0 unmatched apart from the version string "3.13"; never-write list clean; no placeholders.
 - **Decision:** PROCEED → stage 20.
+
+---
+
+## Stage 20. QUALITY_GATE     [v3]  — FAIL (cycle 1 of 3)
+
+- **Run 8.** Template verbatim (fresh opus subagent, json mode; prompt `paper/mypaper/prompts/stage20_*.txt`, threshold
+  7.5 from RESTRICTS). Output `paper/mypaper/20_quality_gate.json` (copy in `paper/mypaper/v3/`).
+- **Score 5.5 < 7.5.** Required actions 1–6 evidence-level (a cell where travel binds; budget-matched learners under the
+  registered rule; reduced G\* paired on test; H3 instrument; seeds/sweeps; covariate shift), 7–11 paper-level.
+- **Not auto-approved** (the gate failed; the owner's auto-approve directive covers passing gates only).
+- **Decision (template decision table): evidence-level → loop to stage 13.**
+
+---
+
+## LOOP MARKER — REFINE from stage 20 → stage 13     [version v3 → v4]
+
+- **Reason:** stage 20 v3 (5.5 / 10): the only learner cell S12 is a stay-and-probe regime (G\* travel 6.1° per
+  episode), the amortization answer is open after the exploratory long-training row, and the cost claim lacks a
+  reduced-G\* comparison on test. Refine cycle 3 of 3 (`RESTRICTS.yaml` max_refine_cycles) — the last allowed.
+- **Snapshot taken:** `results/v3/` (unchanged, v4 writes to `results/v4/`), `paper/mypaper/v3/` (draft_v3_final.md,
+  stage-17 and stage-19 snapshots, 20_quality_gate.json).
+- **Design:** `docs/07c_amendment_v4_0.md` (written before any v4 run): learner cell S2 (κ = 2, τ = 4.7; design pilot:
+  budgeted G\* travels 62° per episode on 6 pilot3 episodes), budget-matched student recipe (fixed 200 epochs per round,
+  remedy-size DAgger, seeds 601–603), RL seeds 611–613, rule D4 (= D3 form, δ 4 pp), H2-S2; E5 reduced G\* on S12 test3.
+- **Next stage:** 13 ITERATIVE_REFINE → 12-style runs (E1–E5) → 14 → 15 → 16–20.
+- **Resuming under version:** v4

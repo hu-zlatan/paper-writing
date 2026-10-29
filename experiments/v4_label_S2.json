@@ -1,0 +1,245 @@
+{
+ "purpose": "v4 E1 (amendment v4.0): round-0 G* labels for S2 (S, kappa 2, tau 4.7), label3 0-2,999 in shards of 50 (sandbox test: 19 s per episode); held-out = shards s1200-s1450",
+ "jobs": [
+  {
+   "id": "v4_label_S2_0000",
+   "cmd": "python main.py label3 --set S --kappa 2 --tau 4.7 --start 0 --count 50 --budget-minutes 25 --out ../results/v4/labels/S_k2_r0_s0000"
+  },
+  {
+   "id": "v4_label_S2_0050",
+   "cmd": "python main.py label3 --set S --kappa 2 --tau 4.7 --start 50 --count 50 --budget-minutes 25 --out ../results/v4/labels/S_k2_r0_s0050"
+  },
+  {
+   "id": "v4_label_S2_0100",
+   "cmd": "python main.py label3 --set S --kappa 2 --tau 4.7 --start 100 --count 50 --budget-minutes 25 --out ../results/v4/labels/S_k2_r0_s0100"
+  },
+  {
+   "id": "v4_label_S2_0150",
+   "cmd": "python main.py label3 --set S --kappa 2 --tau 4.7 --start 150 --count 50 --budget-minutes 25 --out ../results/v4/labels/S_k2_r0_s0150"
+  },
+  {
+   "id": "v4_label_S2_0200",
+   "cmd": "python main.py label3 --set S --kappa 2 --tau 4.7 --start 200 --count 50 --budget-minutes 25 --out ../results/v4/labels/S_k2_r0_s0200"
+  },
+  {
+   "id": "v4_label_S2_0250",
+   "cmd": "python main.py label3 --set S --kappa 2 --tau 4.7 --start 250 --count 50 --budget-minutes 25 --out ../results/v4/labels/S_k2_r0_s0250"
+  },
+  {
+   "id": "v4_label_S2_0300",
+   "cmd": "python main.py label3 --set S --kappa 2 --tau 4.7 --start 300 --count 50 --budget-minutes 25 --out ../results/v4/labels/S_k2_r0_s0300"
+  },
+  {
+   "id": "v4_label_S2_0350",
+   "cmd": "python main.py label3 --set S --kappa 2 --tau 4.7 --start 350 --count 50 --budget-minutes 25 --out ../results/v4/labels/S_k2_r0_s0350"
+  },
+  {
+   "id": "v4_label_S2_0400",
+   "cmd": "python main.py label3 --set S --kappa 2 --tau 4.7 --start 400 --count 50 --budget-minutes 25 --out ../results/v4/labels/S_k2_r0_s0400"
+  },
+  {
+   "id": "v4_label_S2_0450",
+   "cmd": "python main.py label3 --set S --kappa 2 --tau 4.7 --start 450 --count 50 --budget-minutes 25 --out ../results/v4/labels/S_k2_r0_s0450"
+  },
+  {
+   "id": "v4_label_S2_0500",
+   "cmd": "python main.py label3 --set S --kappa 2 --tau 4.7 --start 500 --count 50 --budget-minutes 25 --out ../results/v4/labels/S_k2_r0_s0500"
+  },
+  {
+   "id": "v4_label_S2_0550",
+   "cmd": "python main.py label3 --set S --kappa 2 --tau 4.7 --start 550 --count 50 --budget-minutes 25 --out ../results/v4/labels/S_k2_r0_s0550"
+  },
+  {
+   "id": "v4_label_S2_0600",
+   "cmd": "python main.py label3 --set S --kappa 2 --tau 4.7 --start 600 --count 50 --budget-minutes 25 --out ../results/v4/labels/S_k2_r0_s0600"
+  },
+  {
+   "id": "v4_label_S2_0650",
+   "cmd": "python main.py label3 --set S --kappa 2 --tau 4.7 --start 650 --count 50 --budget-minutes 25 --out ../results/v4/labels/S_k2_r0_s0650"
+  },
+  {
+   "id": "v4_label_S2_0700",
+   "cmd": "python main.py label3 --set S --kappa 2 --tau 4.7 --start 700 --count 50 --budget-minutes 25 --out ../results/v4/labels/S_k2_r0_s0700"
+  },
+  {
+   "id": "v4_label_S2_0750",
+   "cmd": "python main.py label3 --set S --kappa 2 --tau 4.7 --start 750 --count 50 --budget-minutes 25 --out ../results/v4/labels/S_k2_r0_s0750"
+  },
+  {
+   "id": "v4_label_S2_0800",
+   "cmd": "python main.py label3 --set S --kappa 2 --tau 4.7 --start 800 --count 50 --budget-minutes 25 --out ../results/v4/labels/S_k2_r0_s0800"
+  },
+  {
+   "id": "v4_label_S2_0850",
+   "cmd": "python main.py label3 --set S --kappa 2 --tau 4.7 --start 850 --count 50 --budget-minutes 25 --out ../results/v4/labels/S_k2_r0_s0850"
+  },
+  {
+   "id": "v4_label_S2_0900",
+   "cmd": "python main.py label3 --set S --kappa 2 --tau 4.7 --start 900 --count 50 --budget-minutes 25 --out ../results/v4/labels/S_k2_r0_s0900"
+  },
+  {
+   "id": "v4_label_S2_0950",
+   "cmd": "python main.py label3 --set S --kappa 2 --tau 4.7 --start 950 --count 50 --budget-minutes 25 --out ../results/v4/labels/S_k2_r0_s0950"
+  },
+  {
+   "id": "v4_label_S2_1000",
+   "cmd": "python main.py label3 --set S --kappa 2 --tau 4.7 --start 1000 --count 50 --budget-minutes 25 --out ../results/v4/labels/S_k2_r0_s1000"
+  },
+  {
+   "id": "v4_label_S2_1050",
+   "cmd": "python main.py label3 --set S --kappa 2 --tau 4.7 --start 1050 --count 50 --budget-minutes 25 --out ../results/v4/labels/S_k2_r0_s1050"
+  },
+  {
+   "id": "v4_label_S2_1100",
+   "cmd": "python main.py label3 --set S --kappa 2 --tau 4.7 --start 1100 --count 50 --budget-minutes 25 --out ../results/v4/labels/S_k2_r0_s1100"
+  },
+  {
+   "id": "v4_label_S2_1150",
+   "cmd": "python main.py label3 --set S --kappa 2 --tau 4.7 --start 1150 --count 50 --budget-minutes 25 --out ../results/v4/labels/S_k2_r0_s1150"
+  },
+  {
+   "id": "v4_label_S2_1200",
+   "cmd": "python main.py label3 --set S --kappa 2 --tau 4.7 --start 1200 --count 50 --budget-minutes 25 --out ../results/v4/labels/S_k2_r0_s1200"
+  },
+  {
+   "id": "v4_label_S2_1250",
+   "cmd": "python main.py label3 --set S --kappa 2 --tau 4.7 --start 1250 --count 50 --budget-minutes 25 --out ../results/v4/labels/S_k2_r0_s1250"
+  },
+  {
+   "id": "v4_label_S2_1300",
+   "cmd": "python main.py label3 --set S --kappa 2 --tau 4.7 --start 1300 --count 50 --budget-minutes 25 --out ../results/v4/labels/S_k2_r0_s1300"
+  },
+  {
+   "id": "v4_label_S2_1350",
+   "cmd": "python main.py label3 --set S --kappa 2 --tau 4.7 --start 1350 --count 50 --budget-minutes 25 --out ../results/v4/labels/S_k2_r0_s1350"
+  },
+  {
+   "id": "v4_label_S2_1400",
+   "cmd": "python main.py label3 --set S --kappa 2 --tau 4.7 --start 1400 --count 50 --budget-minutes 25 --out ../results/v4/labels/S_k2_r0_s1400"
+  },
+  {
+   "id": "v4_label_S2_1450",
+   "cmd": "python main.py label3 --set S --kappa 2 --tau 4.7 --start 1450 --count 50 --budget-minutes 25 --out ../results/v4/labels/S_k2_r0_s1450"
+  },
+  {
+   "id": "v4_label_S2_1500",
+   "cmd": "python main.py label3 --set S --kappa 2 --tau 4.7 --start 1500 --count 50 --budget-minutes 25 --out ../results/v4/labels/S_k2_r0_s1500"
+  },
+  {
+   "id": "v4_label_S2_1550",
+   "cmd": "python main.py label3 --set S --kappa 2 --tau 4.7 --start 1550 --count 50 --budget-minutes 25 --out ../results/v4/labels/S_k2_r0_s1550"
+  },
+  {
+   "id": "v4_label_S2_1600",
+   "cmd": "python main.py label3 --set S --kappa 2 --tau 4.7 --start 1600 --count 50 --budget-minutes 25 --out ../results/v4/labels/S_k2_r0_s1600"
+  },
+  {
+   "id": "v4_label_S2_1650",
+   "cmd": "python main.py label3 --set S --kappa 2 --tau 4.7 --start 1650 --count 50 --budget-minutes 25 --out ../results/v4/labels/S_k2_r0_s1650"
+  },
+  {
+   "id": "v4_label_S2_1700",
+   "cmd": "python main.py label3 --set S --kappa 2 --tau 4.7 --start 1700 --count 50 --budget-minutes 25 --out ../results/v4/labels/S_k2_r0_s1700"
+  },
+  {
+   "id": "v4_label_S2_1750",
+   "cmd": "python main.py label3 --set S --kappa 2 --tau 4.7 --start 1750 --count 50 --budget-minutes 25 --out ../results/v4/labels/S_k2_r0_s1750"
+  },
+  {
+   "id": "v4_label_S2_1800",
+   "cmd": "python main.py label3 --set S --kappa 2 --tau 4.7 --start 1800 --count 50 --budget-minutes 25 --out ../results/v4/labels/S_k2_r0_s1800"
+  },
+  {
+   "id": "v4_label_S2_1850",
+   "cmd": "python main.py label3 --set S --kappa 2 --tau 4.7 --start 1850 --count 50 --budget-minutes 25 --out ../results/v4/labels/S_k2_r0_s1850"
+  },
+  {
+   "id": "v4_label_S2_1900",
+   "cmd": "python main.py label3 --set S --kappa 2 --tau 4.7 --start 1900 --count 50 --budget-minutes 25 --out ../results/v4/labels/S_k2_r0_s1900"
+  },
+  {
+   "id": "v4_label_S2_1950",
+   "cmd": "python main.py label3 --set S --kappa 2 --tau 4.7 --start 1950 --count 50 --budget-minutes 25 --out ../results/v4/labels/S_k2_r0_s1950"
+  },
+  {
+   "id": "v4_label_S2_2000",
+   "cmd": "python main.py label3 --set S --kappa 2 --tau 4.7 --start 2000 --count 50 --budget-minutes 25 --out ../results/v4/labels/S_k2_r0_s2000"
+  },
+  {
+   "id": "v4_label_S2_2050",
+   "cmd": "python main.py label3 --set S --kappa 2 --tau 4.7 --start 2050 --count 50 --budget-minutes 25 --out ../results/v4/labels/S_k2_r0_s2050"
+  },
+  {
+   "id": "v4_label_S2_2100",
+   "cmd": "python main.py label3 --set S --kappa 2 --tau 4.7 --start 2100 --count 50 --budget-minutes 25 --out ../results/v4/labels/S_k2_r0_s2100"
+  },
+  {
+   "id": "v4_label_S2_2150",
+   "cmd": "python main.py label3 --set S --kappa 2 --tau 4.7 --start 2150 --count 50 --budget-minutes 25 --out ../results/v4/labels/S_k2_r0_s2150"
+  },
+  {
+   "id": "v4_label_S2_2200",
+   "cmd": "python main.py label3 --set S --kappa 2 --tau 4.7 --start 2200 --count 50 --budget-minutes 25 --out ../results/v4/labels/S_k2_r0_s2200"
+  },
+  {
+   "id": "v4_label_S2_2250",
+   "cmd": "python main.py label3 --set S --kappa 2 --tau 4.7 --start 2250 --count 50 --budget-minutes 25 --out ../results/v4/labels/S_k2_r0_s2250"
+  },
+  {
+   "id": "v4_label_S2_2300",
+   "cmd": "python main.py label3 --set S --kappa 2 --tau 4.7 --start 2300 --count 50 --budget-minutes 25 --out ../results/v4/labels/S_k2_r0_s2300"
+  },
+  {
+   "id": "v4_label_S2_2350",
+   "cmd": "python main.py label3 --set S --kappa 2 --tau 4.7 --start 2350 --count 50 --budget-minutes 25 --out ../results/v4/labels/S_k2_r0_s2350"
+  },
+  {
+   "id": "v4_label_S2_2400",
+   "cmd": "python main.py label3 --set S --kappa 2 --tau 4.7 --start 2400 --count 50 --budget-minutes 25 --out ../results/v4/labels/S_k2_r0_s2400"
+  },
+  {
+   "id": "v4_label_S2_2450",
+   "cmd": "python main.py label3 --set S --kappa 2 --tau 4.7 --start 2450 --count 50 --budget-minutes 25 --out ../results/v4/labels/S_k2_r0_s2450"
+  },
+  {
+   "id": "v4_label_S2_2500",
+   "cmd": "python main.py label3 --set S --kappa 2 --tau 4.7 --start 2500 --count 50 --budget-minutes 25 --out ../results/v4/labels/S_k2_r0_s2500"
+  },
+  {
+   "id": "v4_label_S2_2550",
+   "cmd": "python main.py label3 --set S --kappa 2 --tau 4.7 --start 2550 --count 50 --budget-minutes 25 --out ../results/v4/labels/S_k2_r0_s2550"
+  },
+  {
+   "id": "v4_label_S2_2600",
+   "cmd": "python main.py label3 --set S --kappa 2 --tau 4.7 --start 2600 --count 50 --budget-minutes 25 --out ../results/v4/labels/S_k2_r0_s2600"
+  },
+  {
+   "id": "v4_label_S2_2650",
+   "cmd": "python main.py label3 --set S --kappa 2 --tau 4.7 --start 2650 --count 50 --budget-minutes 25 --out ../results/v4/labels/S_k2_r0_s2650"
+  },
+  {
+   "id": "v4_label_S2_2700",
+   "cmd": "python main.py label3 --set S --kappa 2 --tau 4.7 --start 2700 --count 50 --budget-minutes 25 --out ../results/v4/labels/S_k2_r0_s2700"
+  },
+  {
+   "id": "v4_label_S2_2750",
+   "cmd": "python main.py label3 --set S --kappa 2 --tau 4.7 --start 2750 --count 50 --budget-minutes 25 --out ../results/v4/labels/S_k2_r0_s2750"
+  },
+  {
+   "id": "v4_label_S2_2800",
+   "cmd": "python main.py label3 --set S --kappa 2 --tau 4.7 --start 2800 --count 50 --budget-minutes 25 --out ../results/v4/labels/S_k2_r0_s2800"
+  },
+  {
+   "id": "v4_label_S2_2850",
+   "cmd": "python main.py label3 --set S --kappa 2 --tau 4.7 --start 2850 --count 50 --budget-minutes 25 --out ../results/v4/labels/S_k2_r0_s2850"
+  },
+  {
+   "id": "v4_label_S2_2900",
+   "cmd": "python main.py label3 --set S --kappa 2 --tau 4.7 --start 2900 --count 50 --budget-minutes 25 --out ../results/v4/labels/S_k2_r0_s2900"
+  },
+  {
+   "id": "v4_label_S2_2950",
+   "cmd": "python main.py label3 --set S --kappa 2 --tau 4.7 --start 2950 --count 50 --budget-minutes 25 --out ../results/v4/labels/S_k2_r0_s2950"
+  }
+ ]
+}
