@@ -1,0 +1,85 @@
+{
+ "purpose": "D3 validation follow-up: student/G* shards that early-stopped at the 80 % budget (sub-8 read-out of weak-policy episodes is slower than planned) resume at next_index; same commands.",
+ "jobs": [
+  {
+   "id": "v3_d3_val_student_s501_000_r16",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3/S_k12_hp0_s501_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 16 --count 4 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s501_r2_000_r16"
+  },
+  {
+   "id": "v3_d3_val_student_s501_040_r51",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3/S_k12_hp0_s501_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 51 --count 9 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s501_r2_040_r51"
+  },
+  {
+   "id": "v3_d3_val_student_s501_120_r135",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3/S_k12_hp0_s501_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 135 --count 5 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s501_r2_120_r135"
+  },
+  {
+   "id": "v3_d3_val_student_s501_140_r153",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3/S_k12_hp0_s501_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 153 --count 7 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s501_r2_140_r153"
+  },
+  {
+   "id": "v3_d3_val_student_s501_400_r412",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3/S_k12_hp0_s501_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 412 --count 8 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s501_r2_400_r412"
+  },
+  {
+   "id": "v3_d3_val_student_s502_020_r34",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3/S_k12_hp0_s502_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 34 --count 6 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s502_r2_020_r34"
+  },
+  {
+   "id": "v3_d3_val_student_s502_040_r57",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3/S_k12_hp0_s502_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 57 --count 3 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s502_r2_040_r57"
+  },
+  {
+   "id": "v3_d3_val_student_s502_080_r99",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3/S_k12_hp0_s502_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 99 --count 1 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s502_r2_080_r99"
+  },
+  {
+   "id": "v3_d3_val_student_s502_100_r113",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3/S_k12_hp0_s502_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 113 --count 7 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s502_r2_100_r113"
+  },
+  {
+   "id": "v3_d3_val_student_s502_140_r156",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3/S_k12_hp0_s502_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 156 --count 4 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s502_r2_140_r156"
+  },
+  {
+   "id": "v3_d3_val_student_s502_200_r219",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3/S_k12_hp0_s502_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 219 --count 1 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s502_r2_200_r219"
+  },
+  {
+   "id": "v3_d3_val_student_s502_220_r235",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3/S_k12_hp0_s502_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 235 --count 5 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s502_r2_220_r235"
+  },
+  {
+   "id": "v3_d3_val_student_s502_260_r269",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3/S_k12_hp0_s502_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 269 --count 11 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s502_r2_260_r269"
+  },
+  {
+   "id": "v3_d3_val_student_s502_300_r313",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3/S_k12_hp0_s502_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 313 --count 7 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s502_r2_300_r313"
+  },
+  {
+   "id": "v3_d3_val_student_s502_340_r357",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3/S_k12_hp0_s502_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 357 --count 3 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s502_r2_340_r357"
+  },
+  {
+   "id": "v3_d3_val_student_s502_360_r374",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3/S_k12_hp0_s502_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 374 --count 6 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s502_r2_360_r374"
+  },
+  {
+   "id": "v3_d3_val_student_s502_400_r416",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3/S_k12_hp0_s502_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 416 --count 4 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s502_r2_400_r416"
+  },
+  {
+   "id": "v3_d3_val_student_s502_420_r437",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3/S_k12_hp0_s502_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 437 --count 3 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s502_r2_420_r437"
+  },
+  {
+   "id": "v3_d3_val_student_s502_480_r498",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3/S_k12_hp0_s502_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 498 --count 2 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s502_r2_480_r498"
+  },
+  {
+   "id": "v3_d3_val_gstar_260_r268",
+   "cmd": "python main.py eval3 --set S --method gstar --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 268 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_gstar_260_r268"
+  }
+ ]
+}
