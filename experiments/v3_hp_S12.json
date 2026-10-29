@@ -1,0 +1,21 @@
+{
+ "purpose": "HP grid (amendment v3.0 C7): 4 configs, seed 501, S12, round 0 on label3 0-1,199 (shards 00-11); selection by held-out floored normalised regret R-bar on label3 1,200-1,499 (shards 12-14), ties within 0.01 -> lower index. Training is a declared long single-process exception (v3.1 D10; time_guard).",
+ "jobs": [
+  {
+   "id": "v3_hp_S12_cfg0",
+   "cmd": "python main.py distill3 --set S --kappa 12 --tau 4.9 --hp 0 --seed 501 --round 0 --shards ../results/v3/labels/S_k12_r0_0?.npz ../results/v3/labels/S_k12_r0_1[01].npz --val-shards ../results/v3/labels/S_k12_r0_1[234].npz --budget-minutes 300 --out ../results/v3/hp/S_k12_hp0_s501_r0"
+  },
+  {
+   "id": "v3_hp_S12_cfg1",
+   "cmd": "python main.py distill3 --set S --kappa 12 --tau 4.9 --hp 1 --seed 501 --round 0 --shards ../results/v3/labels/S_k12_r0_0?.npz ../results/v3/labels/S_k12_r0_1[01].npz --val-shards ../results/v3/labels/S_k12_r0_1[234].npz --budget-minutes 300 --out ../results/v3/hp/S_k12_hp1_s501_r0"
+  },
+  {
+   "id": "v3_hp_S12_cfg2",
+   "cmd": "python main.py distill3 --set S --kappa 12 --tau 4.9 --hp 2 --seed 501 --round 0 --shards ../results/v3/labels/S_k12_r0_0?.npz ../results/v3/labels/S_k12_r0_1[01].npz --val-shards ../results/v3/labels/S_k12_r0_1[234].npz --budget-minutes 300 --out ../results/v3/hp/S_k12_hp2_s501_r0"
+  },
+  {
+   "id": "v3_hp_S12_cfg3",
+   "cmd": "python main.py distill3 --set S --kappa 12 --tau 4.9 --hp 3 --seed 501 --round 0 --shards ../results/v3/labels/S_k12_r0_0?.npz ../results/v3/labels/S_k12_r0_1[01].npz --val-shards ../results/v3/labels/S_k12_r0_1[234].npz --budget-minutes 300 --out ../results/v3/hp/S_k12_hp3_s501_r0"
+  }
+ ]
+}
