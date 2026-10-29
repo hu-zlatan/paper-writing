@@ -533,17 +533,22 @@ statistic.
 
 **Long-training student (exploratory, pre-registered readings).** To test the stopping-rule explanation, a student is
 trained for each of seeds 501–503 from scratch on exactly the remedied round-2 data, for a fixed 200 epochs without the
-stopping rule, and read on test3 0–299 paired with G\* and the remedied students. The row is still running:
-[PENDING:long_student]. Its readings were written before it runs: (a) if the long − remedied student success ci95
-excludes 0 in favour of the long student, "the D3 deficit was partly an optimisation artefact of the stopping rule
-(exploratory; D3 and row 4 unchanged)"; (b) otherwise, "training 200 epochs without a stopping rule did not detectably
-change test success; the stopping rule is not shown to explain the deficit". In both cases long − G\* is reported with
-its ci95, and held-out $\bar R$ worse than the remedied student's for all three seeds is reported as over-fit.
+stopping rule, and read on test3 0–299 paired with G\* and the remedied students. Its readings were written before it
+ran: (a) if the long − remedied student success ci95 excludes 0 in favour of the long student, "the D3 deficit was partly
+an optimisation artefact of the stopping rule (exploratory; D3 and row 4 unchanged)"; (b) otherwise, "training 200 epochs
+without a stopping rule did not detectably change test success; the stopping rule is not shown to explain the deficit".
+The long students fit their labels more closely (train top-1 0.602–0.628 against held-out 0.503–0.530) and generalise at
+least as well on the held-out decisions (held-out $\bar R$ 0.181 / 0.164 / 0.173 against 0.187 / 0.184 / 0.201 for the
+remedied students), so they are not over-fit by the pre-written criterion. On test3 their success is 41.0 % (per seed
+40.7 / 43.3 / 39.0 %). Long − remedied student success is +2.8 pp with ci95 [−1.0, +6.7] pp, so **reading (b)** applies.
+As pre-specified, long − G\* is reported: −1.7 pp, ci95 [−6.8, +3.4] pp, and BI −0.008 nats, ci95 [−0.083, +0.066].
+These intervals are on test3 after the freeze, in one cell, and are exploratory; they do not revisit D3 (a val3 rule) and
+support no parity statement. They do mean that the stopping rule cannot be excluded as a contributor to the D3 deficit:
+the point estimate moved toward G\*, but by less than this test can resolve.
 
 **Belief-input control.** The belief-input students are under-fit (train top-1 0.327–0.362, train $\bar R$
-0.338–0.379). Their validation read is incomplete and provisional: on 298 val3 episodes, Δ̂_succ = −19.9 pp against a
-threshold of −0.78 pp and Δ̂_BI = −1.01 nats against −0.15, with per-seed success deficits of −21.5 / −17.1 / −21.1 pp;
-every criterion fails. Because these students are under-fit, the control isolates nothing about the representation; it
+0.338–0.379). On all 300 paired val3 episodes, Δ̂_succ = −20.1 pp against a threshold of −0.75 pp and Δ̂_BI = −1.02 nats
+against −0.15, with per-seed success deficits of −21.7 / −17.3 / −21.3 pp; every criterion fails. Because these students are under-fit, the control isolates nothing about the representation; it
 shows only that this 48-feature summary, trained on first-attempt-size data, is a worse input than the touch history.
 
 ### 5.3 Behaviour in the tested cell: a stay-and-probe regime
@@ -664,8 +669,10 @@ the rest. A cell in which travel binds is the necessary next design; it was not 
 
 **Why the student falls short.** The pre-registered label-fit rule points to generalisation rather than capacity, but
 two other explanations remain open. The first is optimisation: student rounds stopped after 4–16 epochs and seconds of
-wall time, and train top-1 of about 0.52 sits close to held-out top-1, which an under-optimised model would also show;
-the long-training row is designed to separate this. The second is covariate shift onto the student's own states, which
+wall time, and train top-1 of about 0.52 sat close to held-out top-1, which an under-optimised model would also show.
+The long-training row raised train top-1 to 0.602–0.628 while held-out top-1 stayed at 0.503–0.530, which fits the
+generalisation reading better than a capacity limit; its test success moved toward G\* by +2.8 pp, an amount this test
+cannot resolve (ci95 [−1.0, +6.7] pp), so optimisation remains a possible contributor. The second is covariate shift onto the student's own states, which
 is inferred rather than observed because the held-out set is teacher-visited. The H3 pattern suggests a complementary
 reading: if many beliefs have several near-tied actions, top-1 agreement is a coarse measure of policy quality, and small
 score differences that the student cannot reproduce may still matter for the final pose estimate.
@@ -688,8 +695,8 @@ bounds the speed-up of any scheme that keeps it in the loop. For practitioners, 
 smaller filter: until reduced-size G\* is scored for accuracy, the per-decision ratio against full-size G\* overstates
 what amortization buys.
 
-**Open questions.** Would held-out evaluation on student-visited states confirm covariate shift? Does the
-long-training student close part of the D3 deficit? Would an equivalence test or a variance decomposition sharpen H2,
+**Open questions.** Would held-out evaluation on student-visited states confirm covariate shift? Would a longer-trained
+student, read on val3 with D3's own rule and more episodes, close part of the deficit? Would an equivalence test or a variance decomposition sharpen H2,
 and would more seeds give it useful power? Do the findings hold in a cell where travel binds, in other cells such as
 the asymmetric set or κ = 0, and with a full-action screen for H3?
 
@@ -714,7 +721,8 @@ the asymmetric set or κ = 0, and with a full-action screen for H3?
   The distillation grid also had 4 configurations on 1 seed and round 0, and its winner, also the largest learning rate,
   won narrowly.
 - **Unmatched optimisation budgets.** Student rounds stopped after 4–16 epochs (3.2–27.6 s), while each RL seed trained
-  for 200,064 episodes; the long-training row is pending.
+  for 200,064 episodes. A 200-epoch exploratory row did not detectably change test success (Section 5.2), but it
+is one cell, three seeds and 300 episodes.
 - **RL behaviour differs.** RL executes exactly 3 probes and travels 23.0–25.8° per episode against the student's 4
   probes and 1.5–2.0°, with near-deterministic final policies.
 - **Low power.** Three seeds per learner; H2 had about 80 % power only for a true Δ near 0.57 nats, and success
@@ -727,8 +735,7 @@ the asymmetric set or κ = 0, and with a full-action screen for H3?
 - **Missing pre-registered report items.** Training compute including teacher labelling, and the teacher noise-floor
   $\bar R$, are not reported; without the latter, the scale of $\bar R$ ≈ 0.18 is unknown. The teacher tie fraction is
   reported (0.0 in 210 logged evaluations).
-- **Incomplete rows.** The belief-input validation (298 episodes) and the sub-8 pilot re-reads are provisional, and the
-  long-training student row is running.
+- **Incomplete rows.** The sub-8 pilot re-reads (G5′) are provisional; they are report-only and no claim rests on them.
 - **No physical demonstration.** All results are in simulation with planar objects; held-out object shapes were not
   tested.
 
@@ -768,7 +775,7 @@ names: Cal′ (budget calibration), E′ (evaluator resolution), G5′ (pilot ma
 | R4 | Lat′ / H1-fb | G\* full / pruned-16 = 3.22 | ≥ 10 | H1-fb withdrawn |
 | R5a | D3, first attempt | Δ̂_succ −5.87 pp (thr −1.43); Δ̂_BI −0.199 (thr −0.15); seeds −4.2 / −8.0 / −5.4 pp | (i)–(iii) | fail |
 | R5b | D3, remedy | −4.40 pp (thr −1.68) ✗; −0.096 (thr −0.15) ✓; seeds −4.6 / −4.6 / −4.0 pp ✗ | (i)–(iii) | fail → H1 dead |
-| R5c | D3-B belief input (298 episodes, incomplete) | Δ̂_succ −19.9 pp (thr −0.78); Δ̂_BI −1.01 (thr −0.15); seeds −21.5 / −17.1 / −21.1 pp | as D3 (report-only) | fail (provisional) |
+| R5c | D3-B belief input (300 episodes) | Δ̂_succ −20.1 pp (thr −0.75); Δ̂_BI −1.02 (thr −0.15); seeds −21.7 / −17.3 / −21.3 pp | as D3 (report-only) | fail |
 | R6 | H2 | Δg_T +0.00023 nats, LB −0.3103 | LB > +0.10 | rejected |
 | R7 | H3 | UB95 G(12) = 0.0221; bias ratio 0.957 | UB < 0.03; ratio ≤ 1.02 | Hold |
 
