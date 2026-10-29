@@ -1,0 +1,21 @@
+{
+ "purpose": "Cal' verification (v3.0 C4) for A12: n* = 3 (G* success 0.985 at kappa 0, tau 4), tau_12 = 3 + 0.260 = 3.3 (200 cal3 episodes, results/v3/12_cal_analysis.json, run 6). With the budget enforced, G*'s mean executed probes must be within 3 +- 0.3 on the same 200 cal3 episodes.",
+ "jobs": [
+  {
+   "id": "v3_cal_verify_A_k12_sh0",
+   "cmd": "python main.py eval3 --set A --method gstar --kappa 12 --tau 3.3 --n-star 3 --split cal3 --start 0 --count 50 --no-grid --budget-minutes 25 --out ../results/v3/cal/verify_A_k12_sh0"
+  },
+  {
+   "id": "v3_cal_verify_A_k12_sh1",
+   "cmd": "python main.py eval3 --set A --method gstar --kappa 12 --tau 3.3 --n-star 3 --split cal3 --start 50 --count 50 --no-grid --budget-minutes 25 --out ../results/v3/cal/verify_A_k12_sh1"
+  },
+  {
+   "id": "v3_cal_verify_A_k12_sh2",
+   "cmd": "python main.py eval3 --set A --method gstar --kappa 12 --tau 3.3 --n-star 3 --split cal3 --start 100 --count 50 --no-grid --budget-minutes 25 --out ../results/v3/cal/verify_A_k12_sh2"
+  },
+  {
+   "id": "v3_cal_verify_A_k12_sh3",
+   "cmd": "python main.py eval3 --set A --method gstar --kappa 12 --tau 3.3 --n-star 3 --split cal3 --start 150 --count 50 --no-grid --budget-minutes 25 --out ../results/v3/cal/verify_A_k12_sh3"
+  }
+ ]
+}

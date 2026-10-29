@@ -31,15 +31,28 @@
   },
   "A_k12_nstar4": {
    "n_star": 4,
-   "n_episodes": 125,
-   "mean_travel_time": 1.0637547215795657,
-   "sd_travel_time": 2.213663044601768,
-   "tau": 5.1,
-   "complete": false
+   "n_episodes": 200,
+   "mean_travel_time": 1.0058737560601916,
+   "sd_travel_time": 1.9694119615272718,
+   "tau": 5.0,
+   "complete": true
+  },
+  "A_k12_nstar3": {
+   "n_star": 3,
+   "n_episodes": 200,
+   "mean_travel_time": 0.2596237560601914,
+   "sd_travel_time": 0.7825948833985069,
+   "tau": 3.3,
+   "complete": true
   },
   "A_k0": {
    "tau": 3.0
   }
  },
- "verify": {}
+ "verify": {
+  "S_k12": {
+   "n_episodes": 200,
+   "mean_probes": 3.96
+  }
+ }
 }

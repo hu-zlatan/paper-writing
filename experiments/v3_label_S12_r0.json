@@ -1,0 +1,65 @@
+{
+ "purpose": "Round-0 G* labels for S12 (v3.0 C7, v3.1 D1): label3 indices 0-1,499 at tau_12 = 4.9 (Cal' verified, mean probes 3.96 in 4 +- 0.3); 1,200-1,499 (shards 12-14) are the held-out validation-regret set.",
+ "jobs": [
+  {
+   "id": "v3_label_S12_r0_00",
+   "cmd": "python main.py label3 --set S --kappa 12 --tau 4.9 --start 0 --count 100 --budget-minutes 25 --out ../results/v3/labels/S_k12_r0_00"
+  },
+  {
+   "id": "v3_label_S12_r0_01",
+   "cmd": "python main.py label3 --set S --kappa 12 --tau 4.9 --start 100 --count 100 --budget-minutes 25 --out ../results/v3/labels/S_k12_r0_01"
+  },
+  {
+   "id": "v3_label_S12_r0_02",
+   "cmd": "python main.py label3 --set S --kappa 12 --tau 4.9 --start 200 --count 100 --budget-minutes 25 --out ../results/v3/labels/S_k12_r0_02"
+  },
+  {
+   "id": "v3_label_S12_r0_03",
+   "cmd": "python main.py label3 --set S --kappa 12 --tau 4.9 --start 300 --count 100 --budget-minutes 25 --out ../results/v3/labels/S_k12_r0_03"
+  },
+  {
+   "id": "v3_label_S12_r0_04",
+   "cmd": "python main.py label3 --set S --kappa 12 --tau 4.9 --start 400 --count 100 --budget-minutes 25 --out ../results/v3/labels/S_k12_r0_04"
+  },
+  {
+   "id": "v3_label_S12_r0_05",
+   "cmd": "python main.py label3 --set S --kappa 12 --tau 4.9 --start 500 --count 100 --budget-minutes 25 --out ../results/v3/labels/S_k12_r0_05"
+  },
+  {
+   "id": "v3_label_S12_r0_06",
+   "cmd": "python main.py label3 --set S --kappa 12 --tau 4.9 --start 600 --count 100 --budget-minutes 25 --out ../results/v3/labels/S_k12_r0_06"
+  },
+  {
+   "id": "v3_label_S12_r0_07",
+   "cmd": "python main.py label3 --set S --kappa 12 --tau 4.9 --start 700 --count 100 --budget-minutes 25 --out ../results/v3/labels/S_k12_r0_07"
+  },
+  {
+   "id": "v3_label_S12_r0_08",
+   "cmd": "python main.py label3 --set S --kappa 12 --tau 4.9 --start 800 --count 100 --budget-minutes 25 --out ../results/v3/labels/S_k12_r0_08"
+  },
+  {
+   "id": "v3_label_S12_r0_09",
+   "cmd": "python main.py label3 --set S --kappa 12 --tau 4.9 --start 900 --count 100 --budget-minutes 25 --out ../results/v3/labels/S_k12_r0_09"
+  },
+  {
+   "id": "v3_label_S12_r0_10",
+   "cmd": "python main.py label3 --set S --kappa 12 --tau 4.9 --start 1000 --count 100 --budget-minutes 25 --out ../results/v3/labels/S_k12_r0_10"
+  },
+  {
+   "id": "v3_label_S12_r0_11",
+   "cmd": "python main.py label3 --set S --kappa 12 --tau 4.9 --start 1100 --count 100 --budget-minutes 25 --out ../results/v3/labels/S_k12_r0_11"
+  },
+  {
+   "id": "v3_label_S12_r0_12",
+   "cmd": "python main.py label3 --set S --kappa 12 --tau 4.9 --start 1200 --count 100 --budget-minutes 25 --out ../results/v3/labels/S_k12_r0_12"
+  },
+  {
+   "id": "v3_label_S12_r0_13",
+   "cmd": "python main.py label3 --set S --kappa 12 --tau 4.9 --start 1300 --count 100 --budget-minutes 25 --out ../results/v3/labels/S_k12_r0_13"
+  },
+  {
+   "id": "v3_label_S12_r0_14",
+   "cmd": "python main.py label3 --set S --kappa 12 --tau 4.9 --start 1400 --count 100 --budget-minutes 25 --out ../results/v3/labels/S_k12_r0_14"
+  }
+ ]
+}

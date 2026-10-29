@@ -28,6 +28,7 @@ def _open(out, suffix):
 
 # ─── weights ─────────────────────────────────────────────────────────────────────────────────────────────────────────
 def save_student(path, st, meta):
+    os.makedirs(os.path.dirname(os.path.abspath(path)), exist_ok=True)
     ps = st.get_state()
     np.savez_compressed(path, kind=np.array(type(st).__name__), meta=np.array(json.dumps(meta)),
                         **{f"p{i}": p for i, p in enumerate(ps)})

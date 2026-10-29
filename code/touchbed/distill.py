@@ -105,6 +105,8 @@ def stack(eps):
 
 
 def save_shard(path, eps, meta):
+    import os
+    os.makedirs(os.path.dirname(os.path.abspath(path)), exist_ok=True)
     d = stack(eps)
     np.savez_compressed(path, meta=np.array(__import__("json").dumps(meta)), **d)
 
