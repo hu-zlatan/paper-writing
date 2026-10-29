@@ -818,3 +818,20 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
   experiments/v3_t3_long.json …`), then `python code/analysis_m4_v3.py && python code/tools_results_v3.py`, read the
   pre-written reading, fill `[PENDING:long_student]` in draft_v3.md (and the labelfit numbers if added); (2) G5′ sub-8
   (`v3_sub8_g5_r7` follow-ups) and D3-B (1 job) completion → replace provisional values; (3) stage 18 pass 2 → 19 → 20.
+
+---
+
+## Stage 18 (pass 2) + Stage 19 (pass 2)     [v3]
+
+- **Run 8.** D3-B complete (300/300; −20.1 pp, all criteria fail, report-only). Long-training row complete (reading
+  (b); long − G\* −1.7 pp, ci95 [−6.8, +3.4]; status note in amendment v3.0). Both filled into the draft.
+- Stage 18 pass 2 (required: pass-1 revision added > 30 %): two fresh opus reviewer pairs, `18_review_pass2_run{1,2}.md`.
+  Scores 4 / 3 and 3 / 4; **CRITICAL_FABRICATION: no**. Found: R_b (reduced G\*) pilot rows exist though the paper said
+  "not measured" → new report-only `code/analysis_rb_v3.py` → `results/v3/14_rb_frontier.json` (pilot3, incomplete
+  155–186 / 200; e.g. g125_512_16 −4.3 pp success [−11.8, +3.2], −0.30 nats BI vs full G\* at 18 ms median); undisclosed
+  second runtime (all distillation training in the sandbox: Python 3.13.18 / numpy 2.5.3); tie-fraction definition is a
+  flat-score statistic; stale "(running)"; long row must be "exploratory, post-freeze".
+- Stage 19 pass 2 (fresh opus subagent, template verbatim + facts block; snapshot `paper/mypaper/v3/draft_v3_stage19pass1.md`):
+  all fixed. Body now 11,247 words (length-protected revision); condensed 5-page / 8-page exports are stage 22's job.
+  Number audit: 0 unmatched apart from the version string "3.13"; never-write list clean; no placeholders.
+- **Decision:** PROCEED → stage 20.
