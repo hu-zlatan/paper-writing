@@ -30,7 +30,8 @@ def top1(st, D, chunk=256):
 
 
 groups = {"first_attempt": "d3/S_k12_hp0_s50?_r2.json", "remedy": "d3rem/S_k12_hp0_s50?_r2.json",
-          "belief_input": "d3b/S_k12_belief_hp0_s52?_r2.json"}
+          "belief_input": "d3b/S_k12_belief_hp0_s52?_r2.json",
+          "long_200_epochs_exploratory": "d3long/S_k12_long200_s50?.json"}  # stage 18 v3 exploratory row
 out = {"rule": "under-fit := train R_bar > 0.25 or train top-1 < 0.50 (end of round 2)", "groups": {}}
 for g, pat in groups.items():
     rows = []

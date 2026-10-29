@@ -87,6 +87,35 @@
     "heldout_top1": 0.30518394648829433,
     "under_fit": true
    }
+  ],
+  "long_200_epochs_exploratory": [
+   {
+    "student": "S_k12_long200_s501",
+    "train_R_bar": 0.11134035144133235,
+    "train_top1": 0.6277000526839548,
+    "train_decisions": 17083,
+    "heldout_R_bar": 0.18059714566418733,
+    "heldout_top1": 0.5033444816053512,
+    "under_fit": false
+   },
+   {
+    "student": "S_k12_long200_s502",
+    "train_R_bar": 0.12790833258553228,
+    "train_top1": 0.6015336884622139,
+    "train_decisions": 17083,
+    "heldout_R_bar": 0.1643197249891704,
+    "heldout_top1": 0.5301003344481605,
+    "under_fit": false
+   },
+   {
+    "student": "S_k12_long200_s503",
+    "train_R_bar": 0.120913602075911,
+    "train_top1": 0.6075838258528878,
+    "train_decisions": 17089,
+    "heldout_R_bar": 0.17278953291005758,
+    "heldout_top1": 0.5100334448160535,
+    "under_fit": false
+   }
   ]
  }
 }
