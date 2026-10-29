@@ -621,6 +621,16 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
   Queue juggling: several runs were cancelled and re-dispatched for D3 priority; follow-up manifests (`*_r1`, `*_r2`)
   resume from the recorded episode — every partial output is labelled by its file name and nothing is double counted
   (analyses key on episode index).
-- **Next:** after DAgger r2: round-2 training (sandbox) → students on val3 0–499 at sub 8 (3 seeds) →
-  `code/analysis_d3_v3.py`; G5′ on sub-8 values; Lat′ → R_b selection; G2′ analysis (H3); freeze commit. The 64 × 16 S12 report
+- **Run 6, later:** round-2 students R̄ 0.210 / 0.225 / 0.207; val3 evaluation at sub 8 running (students are slow at
+  sub 8: 20-episode jobs hit the 80 % budget → follow-ups needed). Partial read (seed 501, 363 episodes): student 0.394
+  vs G* 0.438 — points to a D3 fail; the remedy (round 0 doubled with label3 1,500–2,999; DAgger rounds of 800 from
+  fresh remedy students; held-out set unchanged) was started speculatively: labels done, remedy round-0 students
+  (R̄ 0.231 / 0.209 / 0.226), remedy DAgger r1 dispatched. Used only if D3 fails. Cal′ n* at sub 8 unchanged.
+  Lat′ first pass: G* full 709 ms vs student 0.38 ms (1,850×); pruned-16 ratio 3.65 → H1-fb inactive unless the
+  pooled 1,000 decisions change it; 500 more decisions running. D3-B DAgger crashed (belief student got no PF) →
+  fixed in `_label_loop`, re-dispatched. G2′ partial: G(0) 0.008 (68 beliefs), G(2) 0.017 (29).
+- **Next:** D3 decision (`analysis_d3_v3.py`, needs sub-8 S12 G5′ margins) → remedy r1 training → remedy r2 → remedy
+  validation; G5′ (sub 8) for S12/A12/S0 (S0 sub-8 manifest still to build after its sub-4 pilot completes); Lat′ pooled
+  → R_b selection runs; G2′/H3; then the gate decision + freeze commit. Cancelled-and-not-yet-re-dispatched:
+  sub-8 A12 (`v3_sub8_A12_r2` → regenerate), G2′ (`v3_g2_r3`, `v3_g2_k2_r3` → regenerate with the resume tool). The 64 × 16 S12 report
   (report-only) needs a ψ-count flag that does not exist yet — deferred.
