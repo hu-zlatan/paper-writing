@@ -33,3 +33,5 @@ paper/mypaper/*.synctex.gz
 
 # trained v2 policy weights are small (<1 MB) and needed for evaluation
 !results/v2/**/*.npz
+# v3 label / DAgger shards and student weights are the training data and models of record (amendment v3.0 C7)
+!results/v3/**/*.npz
