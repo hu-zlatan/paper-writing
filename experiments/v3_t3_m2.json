@@ -1,0 +1,101 @@
+{
+ "purpose": "Row-4 main run M2 (plans/stage_12_experiment_run_v3_main_row4.md): no-grid test3 0-499 actions for G*, random and the remedied students (RL after M1).",
+ "jobs": [
+  {
+   "id": "v3_t3_gstar_000",
+   "cmd": "python main.py eval3 --set S --method gstar --kappa 12 --tau 4.9 --n-star 4 --split test3 --start 0 --count 25 --no-grid --budget-minutes 25 --out ../results/v3/test3/S_k12_gstar_000"
+  },
+  {
+   "id": "v3_t3_gstar_025",
+   "cmd": "python main.py eval3 --set S --method gstar --kappa 12 --tau 4.9 --n-star 4 --split test3 --start 25 --count 25 --no-grid --budget-minutes 25 --out ../results/v3/test3/S_k12_gstar_025"
+  },
+  {
+   "id": "v3_t3_gstar_050",
+   "cmd": "python main.py eval3 --set S --method gstar --kappa 12 --tau 4.9 --n-star 4 --split test3 --start 50 --count 25 --no-grid --budget-minutes 25 --out ../results/v3/test3/S_k12_gstar_050"
+  },
+  {
+   "id": "v3_t3_gstar_075",
+   "cmd": "python main.py eval3 --set S --method gstar --kappa 12 --tau 4.9 --n-star 4 --split test3 --start 75 --count 25 --no-grid --budget-minutes 25 --out ../results/v3/test3/S_k12_gstar_075"
+  },
+  {
+   "id": "v3_t3_gstar_100",
+   "cmd": "python main.py eval3 --set S --method gstar --kappa 12 --tau 4.9 --n-star 4 --split test3 --start 100 --count 25 --no-grid --budget-minutes 25 --out ../results/v3/test3/S_k12_gstar_100"
+  },
+  {
+   "id": "v3_t3_gstar_125",
+   "cmd": "python main.py eval3 --set S --method gstar --kappa 12 --tau 4.9 --n-star 4 --split test3 --start 125 --count 25 --no-grid --budget-minutes 25 --out ../results/v3/test3/S_k12_gstar_125"
+  },
+  {
+   "id": "v3_t3_gstar_150",
+   "cmd": "python main.py eval3 --set S --method gstar --kappa 12 --tau 4.9 --n-star 4 --split test3 --start 150 --count 25 --no-grid --budget-minutes 25 --out ../results/v3/test3/S_k12_gstar_150"
+  },
+  {
+   "id": "v3_t3_gstar_175",
+   "cmd": "python main.py eval3 --set S --method gstar --kappa 12 --tau 4.9 --n-star 4 --split test3 --start 175 --count 25 --no-grid --budget-minutes 25 --out ../results/v3/test3/S_k12_gstar_175"
+  },
+  {
+   "id": "v3_t3_gstar_200",
+   "cmd": "python main.py eval3 --set S --method gstar --kappa 12 --tau 4.9 --n-star 4 --split test3 --start 200 --count 25 --no-grid --budget-minutes 25 --out ../results/v3/test3/S_k12_gstar_200"
+  },
+  {
+   "id": "v3_t3_gstar_225",
+   "cmd": "python main.py eval3 --set S --method gstar --kappa 12 --tau 4.9 --n-star 4 --split test3 --start 225 --count 25 --no-grid --budget-minutes 25 --out ../results/v3/test3/S_k12_gstar_225"
+  },
+  {
+   "id": "v3_t3_gstar_250",
+   "cmd": "python main.py eval3 --set S --method gstar --kappa 12 --tau 4.9 --n-star 4 --split test3 --start 250 --count 25 --no-grid --budget-minutes 25 --out ../results/v3/test3/S_k12_gstar_250"
+  },
+  {
+   "id": "v3_t3_gstar_275",
+   "cmd": "python main.py eval3 --set S --method gstar --kappa 12 --tau 4.9 --n-star 4 --split test3 --start 275 --count 25 --no-grid --budget-minutes 25 --out ../results/v3/test3/S_k12_gstar_275"
+  },
+  {
+   "id": "v3_t3_gstar_300",
+   "cmd": "python main.py eval3 --set S --method gstar --kappa 12 --tau 4.9 --n-star 4 --split test3 --start 300 --count 25 --no-grid --budget-minutes 25 --out ../results/v3/test3/S_k12_gstar_300"
+  },
+  {
+   "id": "v3_t3_gstar_325",
+   "cmd": "python main.py eval3 --set S --method gstar --kappa 12 --tau 4.9 --n-star 4 --split test3 --start 325 --count 25 --no-grid --budget-minutes 25 --out ../results/v3/test3/S_k12_gstar_325"
+  },
+  {
+   "id": "v3_t3_gstar_350",
+   "cmd": "python main.py eval3 --set S --method gstar --kappa 12 --tau 4.9 --n-star 4 --split test3 --start 350 --count 25 --no-grid --budget-minutes 25 --out ../results/v3/test3/S_k12_gstar_350"
+  },
+  {
+   "id": "v3_t3_gstar_375",
+   "cmd": "python main.py eval3 --set S --method gstar --kappa 12 --tau 4.9 --n-star 4 --split test3 --start 375 --count 25 --no-grid --budget-minutes 25 --out ../results/v3/test3/S_k12_gstar_375"
+  },
+  {
+   "id": "v3_t3_gstar_400",
+   "cmd": "python main.py eval3 --set S --method gstar --kappa 12 --tau 4.9 --n-star 4 --split test3 --start 400 --count 25 --no-grid --budget-minutes 25 --out ../results/v3/test3/S_k12_gstar_400"
+  },
+  {
+   "id": "v3_t3_gstar_425",
+   "cmd": "python main.py eval3 --set S --method gstar --kappa 12 --tau 4.9 --n-star 4 --split test3 --start 425 --count 25 --no-grid --budget-minutes 25 --out ../results/v3/test3/S_k12_gstar_425"
+  },
+  {
+   "id": "v3_t3_gstar_450",
+   "cmd": "python main.py eval3 --set S --method gstar --kappa 12 --tau 4.9 --n-star 4 --split test3 --start 450 --count 25 --no-grid --budget-minutes 25 --out ../results/v3/test3/S_k12_gstar_450"
+  },
+  {
+   "id": "v3_t3_gstar_475",
+   "cmd": "python main.py eval3 --set S --method gstar --kappa 12 --tau 4.9 --n-star 4 --split test3 --start 475 --count 25 --no-grid --budget-minutes 25 --out ../results/v3/test3/S_k12_gstar_475"
+  },
+  {
+   "id": "v3_t3_random",
+   "cmd": "python main.py eval3 --set S --method random --kappa 12 --tau 4.9 --n-star 4 --split test3 --start 0 --count 500 --no-grid --budget-minutes 25 --out ../results/v3/test3/S_k12_random_000"
+  },
+  {
+   "id": "v3_t3_student_rem_s501",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s501_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split test3 --start 0 --count 500 --no-grid --budget-minutes 25 --out ../results/v3/test3/S_k12_student_rem_s501_000"
+  },
+  {
+   "id": "v3_t3_student_rem_s502",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s502_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split test3 --start 0 --count 500 --no-grid --budget-minutes 25 --out ../results/v3/test3/S_k12_student_rem_s502_000"
+  },
+  {
+   "id": "v3_t3_student_rem_s503",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s503_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split test3 --start 0 --count 500 --no-grid --budget-minutes 25 --out ../results/v3/test3/S_k12_student_rem_s503_000"
+  }
+ ]
+}

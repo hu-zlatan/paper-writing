@@ -341,8 +341,8 @@ def cmd_regrid3(a):
             G = AdaptiveGridPosterior(lib, prior, om, h, s0, sub=a.sub)
             o = G.readout(s0, prior_ball_mass(lib, prior, s0))
             o.update({k: r[k] for k in ("episode", "set", "split", "kappa", "tau", "method", "actions")})
-            o.update({"sub": a.sub, "wall_s": time.time() - t1, "orig_success": r["success"],
-                      "orig_ball_info": r["ball_info"], "orig_identity_mass_true": r.get("identity_mass_true")})
+            o.update({"sub": a.sub, "wall_s": time.time() - t1, "orig_success": r.get("success"),
+                      "orig_ball_info": r.get("ball_info"), "orig_identity_mass_true": r.get("identity_mass_true")})
             f.write(json.dumps(o) + "\n"); f.flush()
     print(f"REGRID3_DONE wall_s={time.time() - t0:.0f}")
 

@@ -213,3 +213,16 @@ comparator E_train = 2 × 10⁵ from the start; H3 hold threshold 0.03 with part
   minus the held-out 1,200–1,499; DAgger rounds of 800 from fresh remedy students; held-out set unchanged), re-checked
   on the same 500 val3 episodes with the same rule. The remedy data were collected from the moment the partial read
   pointed to a fail; nothing from them was looked at before this note.
+- **D3 remedy FAILS (run 7, 2026-10-29 ≈ 15:00 UTC) → H1 dead; H1-fb already withdrawn → outcome row 4.** Seed 501's
+  remedied student is complete on all 500 paired val3 episodes (sub 8): Δ̂_succ = −4.6 pp ≤ −δ_S12 = −4 pp, so rule
+  (iii) ("every seed's point Δ̂_succ > −δ") fails whatever the other seeds give; δ_S12 is the 4 pp cap and can only
+  get smaller when G5′ completes, which makes (iii) stricter, never looser. Partial reads at the time (not used for the
+  decision): s502 −6.2 pp on 96 episodes, s503 on 17. The validation of seeds 502/503 continues so the learnability
+  diagnosis (row 4) reports complete numbers (`python code/analysis_d3_v3.py --tag rem` →
+  `results/v3/12_d3_analysis_rem.json` once complete; the first-attempt read stays in `12_d3_analysis.json`).
+  Per v3.1 D8 no new students are trained. The row-4 main-run set is frozen in the freeze note below before any test3
+  episode is run.
+- **Freeze note (row 4), run 7.** The main-run set under row 4 is frozen in
+  `plans/stage_12_experiment_run_v3_main_row4.md` (M1 RL training; M2 no-grid test3 0–499 actions for G\*, random,
+  remedied students, RL; M3 g_T / H2; M4 sub-8 success/BI re-read on test3 0–299). No test3 episode had been run
+  before this commit; its hash is recorded in PROGRESS.md.

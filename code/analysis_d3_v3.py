@@ -5,7 +5,7 @@ G*, grid read-out sub 8 (E' failed). Margins delta_S12, eps_S12 from results/v3/
 (iii) every seed's point Delta_succ > -delta
 Delta = mean over episodes of (seed-mean student - G*); SE = SD of the crossed bootstrap (episodes and seeds resampled,
 B = 10,000, the scheme of stats.crossed_bootstrap_diff). Usage: python analysis_d3_v3.py [--kind student|belief_student]
-[--tag r2]. Writes results/v3/12_d3_analysis[_<kind>].json."""
+[--tag r2]. Writes results/v3/12_d3_analysis[_<kind>][_<tag> if tag != r2].json."""
 import glob
 import json
 import math
@@ -61,5 +61,5 @@ if eps:
     out["seeds_ok"] = {s: v > -delta for s, v in out["succ"]["per_seed"].items()}
     out["passes"] = bool(out["succ"]["passes"] and out["bi"]["passes"] and all(out["seeds_ok"].values()))
 print(json.dumps(out, indent=1))
-name = "12_d3_analysis.json" if kind == "student" else f"12_d3_analysis_{kind}.json"
+name = "12_d3_analysis" + ("" if kind == "student" else f"_{kind}") + ("" if tag == "r2" else f"_{tag}") + ".json"
 json.dump(out, open(os.path.join(base, name), "w"), indent=1)
