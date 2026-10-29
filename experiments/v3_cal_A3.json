@@ -1,0 +1,37 @@
+{
+ "purpose": "Cal' (v3.0 C4): the n* rule gave n* = 3 for set A (G* success 0.985 > 0.88 at kappa = 0, tau = 4 on 200 cal3 episodes; results/v3/cal/nstar_A_*). tau_12 for A is recalibrated with n* = 3 (the n* = 4 run is kept and reported).",
+ "jobs": [
+  {
+   "id": "v3_cal_tau_A_k12_n3_sh0",
+   "cmd": "python main.py calib3 --set A --kappa 12 --n-star 3 --start 0 --count 25 --budget-minutes 25 --out ../results/v3/cal/tau_A_k12_n3_sh0"
+  },
+  {
+   "id": "v3_cal_tau_A_k12_n3_sh1",
+   "cmd": "python main.py calib3 --set A --kappa 12 --n-star 3 --start 25 --count 25 --budget-minutes 25 --out ../results/v3/cal/tau_A_k12_n3_sh1"
+  },
+  {
+   "id": "v3_cal_tau_A_k12_n3_sh2",
+   "cmd": "python main.py calib3 --set A --kappa 12 --n-star 3 --start 50 --count 25 --budget-minutes 25 --out ../results/v3/cal/tau_A_k12_n3_sh2"
+  },
+  {
+   "id": "v3_cal_tau_A_k12_n3_sh3",
+   "cmd": "python main.py calib3 --set A --kappa 12 --n-star 3 --start 75 --count 25 --budget-minutes 25 --out ../results/v3/cal/tau_A_k12_n3_sh3"
+  },
+  {
+   "id": "v3_cal_tau_A_k12_n3_sh4",
+   "cmd": "python main.py calib3 --set A --kappa 12 --n-star 3 --start 100 --count 25 --budget-minutes 25 --out ../results/v3/cal/tau_A_k12_n3_sh4"
+  },
+  {
+   "id": "v3_cal_tau_A_k12_n3_sh5",
+   "cmd": "python main.py calib3 --set A --kappa 12 --n-star 3 --start 125 --count 25 --budget-minutes 25 --out ../results/v3/cal/tau_A_k12_n3_sh5"
+  },
+  {
+   "id": "v3_cal_tau_A_k12_n3_sh6",
+   "cmd": "python main.py calib3 --set A --kappa 12 --n-star 3 --start 150 --count 25 --budget-minutes 25 --out ../results/v3/cal/tau_A_k12_n3_sh6"
+  },
+  {
+   "id": "v3_cal_tau_A_k12_n3_sh7",
+   "cmd": "python main.py calib3 --set A --kappa 12 --n-star 3 --start 175 --count 25 --budget-minutes 25 --out ../results/v3/cal/tau_A_k12_n3_sh7"
+  }
+ ]
+}
