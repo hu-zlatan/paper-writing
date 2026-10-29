@@ -174,3 +174,5 @@ comparator E_train = 2 × 10⁵ from the start; H3 hold threshold 0.03 with part
   (b) zero-gap bank, 100 beliefs, mean 0.0025, UB 0.0037 — pass; (c) travel-notch exact 0.717, mean estimate 0.744
   ∈ ±20 % — pass. As recorded at stage 10, (c) checks the estimator's travel/feasibility handling; it does not show
   travel-created headroom.
+- **Cal′ A12 verification** (Actions run 40839618917): mean executed probes **2.98** on the 200 cal3 episodes at
+  τ 3.3 — within 3 ± 0.3, **pass**. Cal′ is complete for S0, S12, A12 (A0 not run; it enters only via the reserve, v3.1 D3).

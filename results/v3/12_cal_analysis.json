@@ -50,6 +50,10 @@
   }
  },
  "verify": {
+  "A_k12": {
+   "n_episodes": 200,
+   "mean_probes": 2.98
+  },
   "S_k12": {
    "n_episodes": 200,
    "mean_probes": 3.96
