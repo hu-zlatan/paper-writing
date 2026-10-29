@@ -673,6 +673,58 @@
    "findings": "Single sim-to-real approach.",
    "limitations": "Not localization.",
    "citation": "Yijiong Lin, John Lloyd, Alex Church, et al.. Tactile Gym 2.0: Sim-to-Real Deep Reinforcement Learning for Comparing Low-Cost High-Resolution Robot Touch. IEEE Robotics and Automation Letters, 2022. doi:10.1109/lra.2022.3195195"
+  },
+  {
+   "card_id": "C57",
+   "title": "A Reduction of Imitation Learning and Structured Prediction to No-Regret Online Learning",
+   "cite_key": "ross2011reduction",
+   "problem": "Imitation learning violates i.i.d. assumptions because the learner's own predictions change the observation distribution.",
+   "method": "DAgger: an iterative algorithm that trains a stationary deterministic policy, seen as a no-regret online learner, aggregating expert labels on states visited by the learner.",
+   "data": "Two imitation learning problems and a sequence labeling benchmark (per abstract).",
+   "metrics": "Task performance vs prior imitation approaches.",
+   "findings": "Any no-regret algorithm plus reduction assumptions yields a policy that performs well under its own induced distribution; outperforms previous approaches on the tested problems.",
+   "limitations": "Guarantees are relative to the expert; needs an expert that can be queried on learner-visited states.",
+   "citation": "Stéphane Ross, Geoffrey J. Gordon, J. Andrew Bagnell. A Reduction of Imitation Learning and Structured Prediction to No-Regret Online Learning. AISTATS 2011, PMLR 15:627-635. arXiv:1011.0686",
+   "verified": "docs/07d_reference_check_v3.md #9; arXiv PDF re-fetched run 8"
+  },
+  {
+   "card_id": "C58",
+   "title": "Proximal Policy Optimization Algorithms",
+   "cite_key": "schulman2017proximal",
+   "problem": "Policy-gradient RL that is simpler than TRPO and allows several optimisation passes per batch.",
+   "method": "Alternate sampling with optimising a clipped surrogate objective over several epochs of minibatch updates.",
+   "data": "Robotic locomotion and Atari benchmarks (per abstract).",
+   "metrics": "Return / sample efficiency.",
+   "findings": "Reported to outperform other online policy-gradient methods on the tested benchmarks.",
+   "limitations": "Empirical; no guarantee of reaching the optimum of the objective.",
+   "citation": "John Schulman, Filip Wolski, Prafulla Dhariwal, Alec Radford, Oleg Klimov. Proximal Policy Optimization Algorithms. arXiv:1707.06347, 2017. doi:10.48550/arXiv.1707.06347",
+   "verified": "arXiv abs + PDF fetched run 8 (no journal-ref)"
+  },
+  {
+   "card_id": "C59",
+   "title": "Adaptive Information Gathering via Imitation Learning",
+   "cite_key": "choudhury2017adaptive",
+   "problem": "Select informative sensing locations from the measurement history without online POMDP solving.",
+   "method": "Imitation learning of a clairvoyant oracle that knows the world map at train time; analysed as equivalent to online oracle execution with posterior sampling.",
+   "data": "2D and 3D exploration problems.",
+   "metrics": "Information gathered vs heuristics; evaluation cost.",
+   "findings": "Near-optimality guarantees for adaptive-submodular problems; trained policies adapt to map distributions and are cheap to evaluate.",
+   "limitations": "Oracle is clairvoyant (not a belief-space planner); no travel-cost touch setting.",
+   "citation": "Sanjiban Choudhury, Ashish Kapoor, Gireeja Ranade, Sebastian Scherer, Debadeepta Dey. Adaptive Information Gathering via Imitation Learning. Robotics: Science and Systems XIII, 2017. doi:10.15607/RSS.2017.XIII.041. arXiv:1705.07834",
+   "verified": "docs/07d_reference_check_v3.md #1; arXiv PDF re-fetched run 8"
+  },
+  {
+   "card_id": "C60",
+   "title": "Amortized nonmyopic active search via deep imitation learning",
+   "cite_key": "nguyen2024amortized",
+   "problem": "Amortize a nonmyopic active-search policy.",
+   "method": "Deep imitation learning of a nonmyopic active-search expert (title-level; details not re-read).",
+   "data": "not re-read",
+   "metrics": "not re-read",
+   "findings": "not re-read; cite only for existence of imitation-based amortization of a nonmyopic search expert.",
+   "limitations": "Venue unverified; cite as arXiv preprint. Content beyond the title not verified in this repo.",
+   "citation": "Quan Nguyen, Anindya Sarkar, Roman Garnett. Amortized nonmyopic active search via deep imitation learning. arXiv:2405.15031, 2024.",
+   "verified": "docs/07d_reference_check_v3.md #3 (PDF + HTML fetched run 5); run-8 re-fetch blocked"
   }
  ]
 }

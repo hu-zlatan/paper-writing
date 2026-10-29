@@ -218,6 +218,9 @@ RL, and the task against tactile localization. Every paragraph ends with the gap
 
 Until a card exists, the draft writes "DAgger"/"PPO" without a citation and leaves a `[CITE-MISSING]` marker.
 
+**Update (run 8):** cards added — C57 `ross2011reduction` (DAgger), C58 `schulman2017proximal` (PPO), C59
+`choudhury2017adaptive`, C60 `nguyen2024amortized` (arXiv only, title-level). No `[CITE-MISSING]` remains for these.
+
 ---
 
 ## 4. Problem and methods (target 850 words)
