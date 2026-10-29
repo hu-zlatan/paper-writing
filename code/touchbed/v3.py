@@ -105,8 +105,9 @@ def run_episode_v3(policy, lib, prior, om, s0, phi0, kappa, tau, ep_key, needs_b
         lab = None
         if teacher is not None:
             s, mask, a_t = teacher.score_vector(pf, ts)
+            from .distill import belief_features
             lab = {"t": ts.n_probes, "phi_t": ts.phi, "tau_rem": ts.tau_rem, "s": s, "mask": mask, "a_teacher": a_t,
-                   "feasible": ts.feasible().copy()}
+                   "feasible": ts.feasible().copy(), "belief": belief_features(pf).astype(np.float32)}
         t_start = time.perf_counter()
         a = int(policy.act(pf if needs_belief else hview, ts)) if policy is not None else None
         lat.append(time.perf_counter() - t_start)

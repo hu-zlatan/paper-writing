@@ -82,3 +82,39 @@ def test_label_and_train_end_to_end_small():
     for lab, a_ex, used in zip(r["labels"], r["actions"], r["executed_teacher"]):
         assert a_ex == (lab["a_teacher"] if used else lab["a_policy"])
     assert {"success", "ball_info"} <= set(r)
+
+
+def test_belief_student_gradient_and_training():
+    from touchbed.distill import BELIEF_DIM, BeliefStudent, belief_features
+    from touchbed.pf import ParticleFilter
+    lib, prior, eps = states_v3("S", "label3", range(4), kappa=12.0)
+    om = ObsModel()
+    pf = ParticleFilter(lib, om, prior, 300, np.random.default_rng(0))
+    bf = belief_features(pf)
+    assert bf.shape == (BELIEF_DIM,) and abs(bf.reshape(8, 6)[:, 0].sum() - 1) < 1e-9
+    packed = []
+    for i, (s0, phi0) in enumerate(eps):
+        r = run_episode_v3(None, lib, prior, om, s0, phi0, 12.0, 6.0, ep_key_v3("S", "label3", 12.0, 6.0, i),
+                           n_dec=200, teacher=GStar(np.random.default_rng(i), M=4), evaluate=False)
+        packed.append(episode_arrays(r["history"], r["labels"], 4))
+    D = stack(packed)
+    assert np.abs(D["BF"][D["valid"]]).sum() > 0
+    bs = BeliefStudent(np.random.default_rng(1), hidden=32, tau=6.0)
+    # finite-difference check of one parameter through the adapter
+    from touchbed.distill import decision_logits
+    idx = np.arange(4)
+    out, cache = decision_logits(bs, D, idx)
+    loss, g = loss_and_grad(out, D["S"].astype(float), D["MASK"], D["AT"].astype(int), D["valid"], 4.0, 0.5)
+    grads = bs.net.backward(cache, g)
+    P = bs.net.params()[0]
+    e = 1e-6
+    P[0, 0] += e; lp = loss_and_grad(decision_logits(bs, D, idx)[0], D["S"].astype(float), D["MASK"], D["AT"].astype(int), D["valid"], 4.0, 0.5)[0]
+    P[0, 0] -= 2 * e; lm = loss_and_grad(decision_logits(bs, D, idx)[0], D["S"].astype(float), D["MASK"], D["AT"].astype(int), D["valid"], 4.0, 0.5)[0]
+    P[0, 0] += e
+    assert abs((lp - lm) / (2 * e) - grads[0][0, 0]) < 1e-6
+    before = mean_regret(bs, D)["R_bar"]
+    cfg = DistillConfig(lr=3e-3, batch=16, max_epochs=40, stop_patience=40, tau=6.0, budget_minutes=5)
+    train_round(bs, Adam(bs.net.params(), lr=cfg.lr), D, idx, D, idx, cfg, np.random.default_rng(2), [])
+    assert mean_regret(bs, D)["R_bar"] < before
+    from touchbed.travel import TravelState
+    assert 0 <= bs.act(pf, TravelState(0.2, 12.0, 6.0)) < A

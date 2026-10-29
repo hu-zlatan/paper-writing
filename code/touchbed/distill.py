@@ -89,12 +89,15 @@ def episode_arrays(history, labels, T):
     """Pack one labelled episode: RAW (T, 6), PHIT, TAUR (T), valid (T), S (T, A) float32, MASK (T, A), AT (T)."""
     RAW = np.zeros((T, 6)); PHIT = np.zeros(T); TAUR = np.zeros(T); valid = np.zeros(T, dtype=bool)
     S = np.zeros((T, A), dtype=np.float32); MASK = np.zeros((T, A), dtype=bool); AT = np.zeros(T, dtype=np.int16)
+    BF = np.zeros((T, BELIEF_DIM), dtype=np.float32)
     for t, lab in enumerate(labels[:T]):
         PHIT[t], TAUR[t], valid[t] = lab["phi_t"], lab["tau_rem"], True
         S[t], MASK[t], AT[t] = lab["s"], lab["mask"], lab["a_teacher"]
+        if "belief" in lab:
+            BF[t] = lab["belief"]
     for i, (phi, psi, o) in enumerate(history[:T]):
         RAW[i] = [phi, psi, float(o[0]), float(o[1]), float(o[2]), float(o[3])]
-    return dict(RAW=RAW, PHIT=PHIT, TAUR=TAUR, valid=valid, S=S, MASK=MASK, AT=AT)
+    return dict(RAW=RAW, PHIT=PHIT, TAUR=TAUR, valid=valid, S=S, MASK=MASK, AT=AT, BF=BF)
 
 
 def stack(eps):
@@ -163,8 +166,10 @@ class Student:
 
 def decision_logits(student, D, idx):
     """Logits (B, T, A) for the decisions of episodes idx (decision t sees touches < t: valid mask shifted)."""
-    RAW, PHIT, TAUR, valid = D["RAW"][idx], D["PHIT"][idx], D["TAUR"][idx], D["valid"][idx]
-    return student.logits(RAW, PHIT, TAUR, valid)
+    PHIT, TAUR = D["PHIT"][idx], D["TAUR"][idx]
+    if isinstance(student, BeliefStudent):
+        return student.logits_from(D["BF"][idx], PHIT, TAUR)
+    return student.logits(D["RAW"][idx], PHIT, TAUR, D["valid"][idx])
 
 
 def mean_regret(student, D, idx=None, chunk=256):
@@ -216,3 +221,76 @@ def train_round(student, opt, D, train_idx, val_D, val_idx, cfg: DistillConfig, 
 
 def config_dict(cfg):
     return asdict(cfg)
+
+
+# ─── belief-input student (H2 control, D3-B; 07_hypotheses_v3 §2.2, amendment v3.0 C9) ─────────────────────────────────
+BELIEF_DIM = 48
+
+
+def belief_features(pf) -> np.ndarray:
+    """Per identity k (K = 8): (w_k, weighted mean x, y, weighted SD x, y, resultant length of |G_k|·theta), flattened
+    (48,). Positions in mm / 100. Identities with no weight get zeros."""
+    w = pf.weights()
+    K = pf.prior.K
+    out = np.zeros((K, 6))
+    for k in range(K):
+        sel = pf.k == k
+        wk = float(w[sel].sum())
+        if wk <= 0:
+            continue
+        ww = w[sel] / wk
+        mx, my = float(ww @ pf.x[sel]), float(ww @ pf.y[sel])
+        sx = math.sqrt(max(float(ww @ (pf.x[sel] - mx) ** 2), 0.0))
+        sy = math.sqrt(max(float(ww @ (pf.y[sel] - my) ** 2), 0.0))
+        g = len(pf.lib.sym[k])
+        R = abs(complex(ww @ np.cos(g * pf.th[sel]), ww @ np.sin(g * pf.th[sel])))
+        out[k] = [wk, mx / 100.0, my / 100.0, sx / 100.0, sy / 100.0, R]
+    return out.reshape(-1)
+
+
+class BeliefStudent:
+    """Same output head and recipe as Student, input = belief_features(PF) + the relative context (no DeepSets)."""
+    name = "belief_student"
+    needs_belief = True
+
+    def __init__(self, rng, hidden=128, tau=10.0):
+        from .nn import MLP
+        from .relframe import REL_CTX_DIM
+        self.rho = MLP([BELIEF_DIM + REL_CTX_DIM, hidden, hidden, A], rng, out_scale=0.01)
+        self.tau = tau
+
+    class _Net:  # adapter so training code can call .net.params() / .net.backward()
+        def __init__(self, outer):
+            self.o = outer
+
+        def params(self):
+            return self.o.rho.params()
+
+        def backward(self, cache, gout):
+            from .relframe import abs_index_of_rel
+            rc, s = cache
+            gout = np.take_along_axis(gout, abs_index_of_rel(s), axis=-1)
+            g, _ = self.o.rho.backward(rc, gout)
+            return g
+
+    @property
+    def net(self):
+        return BeliefStudent._Net(self)
+
+    def logits_from(self, BF, PHIT, TAUR):
+        from .relframe import rel_index_of_abs
+        ctx, sh = rel_ctx(PHIT, TAUR, self.tau)
+        out, rc = self.rho.forward(np.concatenate([BF, ctx], axis=-1))
+        return np.take_along_axis(out, rel_index_of_abs(sh), axis=-1), (rc, sh)
+
+    def act(self, pf, ts):
+        out, _ = self.logits_from(belief_features(pf)[None, None, :], np.full((1, 1), ts.phi),
+                                  np.full((1, 1), ts.tau_rem))
+        return int(np.argmax(np.where(ts.feasible(), out[0, 0], -np.inf)))
+
+    def get_state(self):
+        return [p.copy() for p in self.rho.params()]
+
+    def set_state(self, ps):
+        for p, v in zip(self.rho.params(), ps):
+            p[...] = v
