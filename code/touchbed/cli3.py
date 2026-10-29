@@ -347,6 +347,31 @@ def cmd_regrid3(a):
     print(f"REGRID3_DONE wall_s={time.time() - t0:.0f}")
 
 
+def cmd_gt3(a):
+    """H2 read-out (08 plan v3, ball_sPCE_g_T): g_T of recorded eval3 episodes on fixed per-episode contrastive draws
+    (touchbed/gt3.py); histories rebuilt exactly from the recorded actions. No grid evaluation."""
+    from .gridpost import rebuild_history
+    from .gt3 import contrast_draws, g_T
+    from .v3 import ep_key_v3, require_v3_actions, states_v3
+    require_v3_actions()
+    om = ObsModel()
+    recs = [json.loads(l) for f in a.src for l in open(f)]
+    recs = sorted({(r["method"], r["episode"]): r for r in recs if "episode" in r}.values(),
+                  key=lambda r: (r["method"], r["episode"]))
+    t0 = time.time()
+    with _open(a.out, ".jsonl") as f:
+        f.write(json.dumps({"header": True, "args": vars(a), "env": _env()}) + "\n")
+        for r in recs:
+            lib, prior, eps = states_v3(r["set"], r["split"], [r["episode"]])
+            s0, _ = eps[0]
+            key = ep_key_v3(r["set"], r["split"], r["kappa"], r["tau"], r["episode"])
+            h = rebuild_history(lib, om, s0, r["actions"], key)
+            g = g_T(lib, om, h, contrast_draws(lib, prior, s0, key, J=a.J, L=a.L), J=a.J)
+            f.write(json.dumps({k: r[k] for k in ("episode", "set", "split", "kappa", "tau", "method")}
+                               | {"g_T": g, "n_probes": len(h), "J": a.J, "L": a.L}) + "\n")
+    print(f"GT3_DONE n={len(recs)} wall_s={time.time() - t0:.0f}")
+
+
 def cmd_pilot3(a):
     """Mandatory TIME_ESTIMATE pilot (RESTRICTS pilot_required, <= 5 min): one episode per method and one labelled
     episode in one cell, then extrapolation to the sweep sizes of docs/08_experiment_plan_v3.yaml."""
@@ -429,9 +454,13 @@ def register(sub):
     rg.add_argument("--src", nargs="+", required=True); rg.add_argument("--episodes", type=int, nargs="+", required=True)
     rg.add_argument("--sub", type=int, default=8); rg.add_argument("--out", required=True)
     rg.add_argument("--budget-minutes", type=float, default=25.0)
+    gt = sub.add_parser("gt3")
+    gt.add_argument("--src", nargs="+", required=True); gt.add_argument("--J", type=int, default=16)
+    gt.add_argument("--L", type=int, default=4095); gt.add_argument("--out", required=True)
     p = sub.add_parser("pilot3")
     p.add_argument("--set", default="S"); p.add_argument("--kappa", type=float, default=12.0)
     p.add_argument("--tau", type=float, default=10.0); p.add_argument("--allow-32", action="store_true")
     p.add_argument("--out", required=True)
     return {"eval3": cmd_eval3, "calib3": cmd_calib3, "label3": cmd_label3, "dagger3": cmd_dagger3,
-            "distill3": cmd_distill3, "latency3": cmd_latency3, "g1c": cmd_g1c, "g2v3": cmd_g2v3, "bias3": cmd_bias3, "regrid3": cmd_regrid3, "pilot3": cmd_pilot3}
+            "distill3": cmd_distill3, "latency3": cmd_latency3, "g1c": cmd_g1c, "g2v3": cmd_g2v3, "bias3": cmd_bias3, "regrid3": cmd_regrid3, "gt3": cmd_gt3,
+            "pilot3": cmd_pilot3}
