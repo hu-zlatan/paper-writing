@@ -1,0 +1,52 @@
+{
+ "exact_v_opt": 0.6150063421914825,
+ "exact_v_greedy": 0.1742651102781143,
+ "rule": "seed-mean v_pi >= 0.8 * v_opt",
+ "runs": [
+  {
+   "file": "notch_spce_total_2x_sd100.json",
+   "episodes": 200064,
+   "v_pi": 0.17703990730040287,
+   "frac_of_opt": 0.28786679933990245,
+   "horizontal_first": false
+  },
+  {
+   "file": "notch_spce_total_2x_sd101.json",
+   "episodes": 200064,
+   "v_pi": 0.16979612268165997,
+   "frac_of_opt": 0.276088409229435,
+   "horizontal_first": false
+  },
+  {
+   "file": "notch_spce_total_2x_sd102.json",
+   "episodes": 200064,
+   "v_pi": 0.16883330701522326,
+   "frac_of_opt": 0.2745228714448882,
+   "horizontal_first": false
+  },
+  {
+   "file": "notch_spce_total_sd100.json",
+   "episodes": 100096,
+   "v_pi": 0.17703990730040287,
+   "frac_of_opt": 0.28786679933990245,
+   "horizontal_first": false
+  },
+  {
+   "file": "notch_spce_total_sd101.json",
+   "episodes": 100096,
+   "v_pi": 0.16979612268165997,
+   "frac_of_opt": 0.276088409229435,
+   "horizontal_first": false
+  },
+  {
+   "file": "notch_spce_total_sd102.json",
+   "episodes": 100096,
+   "v_pi": 0.16883330701522326,
+   "frac_of_opt": 0.2745228714448882,
+   "horizontal_first": false
+  }
+ ],
+ "notch_spce_total_2x_seed_mean": 0.17188977899909538,
+ "notch_spce_total_seed_mean": 0.17188977899909538,
+ "passes": false
+}
