@@ -9,7 +9,7 @@
 **Topic:** Amortized, non-myopic active tactile localization (TouchBED)
 **Initialised:** 2026-10-28T07:56:44Z
 **Current version:** v3
-**Latest stage:** Stage 10 CODE_GENERATION [v3] IN PROGRESS (items 1–5 of plans/stage_10_code_generation_v3.md done) → continue at item 6 (see the end of this file)
+**Latest stage:** Stage 12 EXPERIMENT_RUN [v3] gates IN PROGRESS (Cal′ and G1′ running on Actions) → see the end of this file
 
 ---
 
@@ -569,3 +569,36 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
   floored regret, Student, training round with the R̄ stop rule).
 - **Remaining:** (6) 27-config greedy grid + component timers; (7) belief-summary features; (8) travel-notch;
   (9) provenance scripts; (10) main.py subcommands + manifests + TIME_ESTIMATE pilots; numpy2 / forbidden-pattern checks.
+- **Finished (run 5):** all 10 items. (6) `latency3.py` (27 configs, component timers, pruned-16/random-16, L_final);
+  (7) belief-input student (48 features); (8) `travel_notch.py` (exact gap 0.717 — equals the κ = 0 notch gap; the control
+  checks the estimator's travel/feasibility handling, it does not show travel-created headroom); (9) provenance scripts
+  reproduce `12_g3_notch_analysis.json` and `12_g3_hp_selection.txt` exactly (15_decision §3.5 item 4 closed); (10)
+  `touchbed/cli3.py` + main.py: eval3, calib3, label3, dagger3, distill3, latency3, g1c, g2v3, pilot3, train3rl (v3
+  commands imply TOUCHBED_NPHI=64). Pre-run implementation change: `ball_eig` uses a plain-numpy log-sum-exp (≈ 20 %
+  faster G*; equivalence test to 1e-10 with identical argmax). numpy2 check: 0 errors; no subprocess/eval/exec in
+  v3 code; 55 tests pass (+ g2v3/rl additions, 28 targeted tests pass).
+- **Decision:** PROCEED → stage 11.
+
+---
+
+## Stage 11. RESOURCE_PLANNING     [v3]
+
+- **Finished:** 2026-10-29 run 5
+- **Outputs:** docs/11_schedule_v3.json; results/v3/pilot/time_estimate_{S_k12,S_k0,A_k12}.json (Actions run
+  40807921186; TIME_ESTIMATE lines in results/v1/logs/v3_pilot_*.log)
+- **Summary:** measured on runners: G*-labelled episode 7.5 s (S12, 5 decisions, τ 6 uncalibrated), 22.2 s (S0,
+  ≈ 5.5 s per decision with all 512 actions feasible), 2.0 s (A12); grid read-out 3.6–5.4 s. Total ≈ 273 CPU-h (gates
+  ≈ 113, main ≈ 160 > 150 → frozen downscale order at the freeze commit if confirmed after calibration). κ = 0 G* is
+  ≈ 3× the planning value.
+- **Decision:** PROCEED → stage 12 gates.
+
+---
+
+## Stage 12. EXPERIMENT_RUN (pre-run gates)     [v3]   (IN PROGRESS)
+
+- **Started:** 2026-10-29 run 5
+- **G0′:** unit tests green; TIME_ESTIMATE pilots done (above).
+- **Dispatched:** experiments/v3_cal.json (Cal′: n* at κ = 0/τ = 4 on 200 cal3 episodes per set with grid read-out;
+  τ_12 with n* = 4 — speculative, re-run if the n* rule changes n*); experiments/v3_g1.json (G1′ a/b/c).
+- **Next:** analyse Cal′ (n* rule, τ_12 = n* + mean travel time rounded to 0.1) → status note in amendment v3.0 →
+  budget verification run (G*, 200 per cell, mean probes within n* ± 0.3) → G5′ / E′ / round-0 labels S12.
