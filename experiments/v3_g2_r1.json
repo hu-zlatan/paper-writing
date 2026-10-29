@@ -1,0 +1,245 @@
+{
+ "purpose": "G2' follow-up: the first G2' run was cancelled for queue priority (D3 path); same commands, beliefs already recorded are skipped.",
+ "jobs": [
+  {
+   "id": "v3_g2_S_k0_000_r1",
+   "cmd": "python main.py g2v3 --set S --kappa 0 --tau 4 --n-star 4 --start 1 --count 4 --budget-minutes 25 --out ../results/v3/g2/S_k0_000_r1"
+  },
+  {
+   "id": "v3_g2_S_k0_005_r7",
+   "cmd": "python main.py g2v3 --set S --kappa 0 --tau 4 --n-star 4 --start 7 --count 3 --budget-minutes 25 --out ../results/v3/g2/S_k0_005_r7"
+  },
+  {
+   "id": "v3_g2_S_k0_010_r11",
+   "cmd": "python main.py g2v3 --set S --kappa 0 --tau 4 --n-star 4 --start 11 --count 4 --budget-minutes 25 --out ../results/v3/g2/S_k0_010_r11"
+  },
+  {
+   "id": "v3_g2_S_k0_015_r15",
+   "cmd": "python main.py g2v3 --set S --kappa 0 --tau 4 --n-star 4 --start 15 --count 5 --budget-minutes 25 --out ../results/v3/g2/S_k0_015_r15"
+  },
+  {
+   "id": "v3_g2_S_k0_020_r20",
+   "cmd": "python main.py g2v3 --set S --kappa 0 --tau 4 --n-star 4 --start 20 --count 5 --budget-minutes 25 --out ../results/v3/g2/S_k0_020_r20"
+  },
+  {
+   "id": "v3_g2_S_k0_025_r25",
+   "cmd": "python main.py g2v3 --set S --kappa 0 --tau 4 --n-star 4 --start 25 --count 5 --budget-minutes 25 --out ../results/v3/g2/S_k0_025_r25"
+  },
+  {
+   "id": "v3_g2_S_k0_030_r31",
+   "cmd": "python main.py g2v3 --set S --kappa 0 --tau 4 --n-star 4 --start 31 --count 4 --budget-minutes 25 --out ../results/v3/g2/S_k0_030_r31"
+  },
+  {
+   "id": "v3_g2_S_k0_035_r37",
+   "cmd": "python main.py g2v3 --set S --kappa 0 --tau 4 --n-star 4 --start 37 --count 3 --budget-minutes 25 --out ../results/v3/g2/S_k0_035_r37"
+  },
+  {
+   "id": "v3_g2_S_k0_040_r41",
+   "cmd": "python main.py g2v3 --set S --kappa 0 --tau 4 --n-star 4 --start 41 --count 4 --budget-minutes 25 --out ../results/v3/g2/S_k0_040_r41"
+  },
+  {
+   "id": "v3_g2_S_k0_045_r46",
+   "cmd": "python main.py g2v3 --set S --kappa 0 --tau 4 --n-star 4 --start 46 --count 4 --budget-minutes 25 --out ../results/v3/g2/S_k0_045_r46"
+  },
+  {
+   "id": "v3_g2_S_k0_050_r53",
+   "cmd": "python main.py g2v3 --set S --kappa 0 --tau 4 --n-star 4 --start 53 --count 2 --budget-minutes 25 --out ../results/v3/g2/S_k0_050_r53"
+  },
+  {
+   "id": "v3_g2_S_k0_055_r55",
+   "cmd": "python main.py g2v3 --set S --kappa 0 --tau 4 --n-star 4 --start 55 --count 5 --budget-minutes 25 --out ../results/v3/g2/S_k0_055_r55"
+  },
+  {
+   "id": "v3_g2_S_k0_060",
+   "cmd": "python main.py g2v3 --set S --kappa 0 --tau 4 --n-star 4 --start 60 --count 5 --budget-minutes 25 --out ../results/v3/g2/S_k0_060"
+  },
+  {
+   "id": "v3_g2_S_k0_065_r65",
+   "cmd": "python main.py g2v3 --set S --kappa 0 --tau 4 --n-star 4 --start 65 --count 5 --budget-minutes 25 --out ../results/v3/g2/S_k0_065_r65"
+  },
+  {
+   "id": "v3_g2_S_k0_070_r70",
+   "cmd": "python main.py g2v3 --set S --kappa 0 --tau 4 --n-star 4 --start 70 --count 5 --budget-minutes 25 --out ../results/v3/g2/S_k0_070_r70"
+  },
+  {
+   "id": "v3_g2_S_k0_075_r76",
+   "cmd": "python main.py g2v3 --set S --kappa 0 --tau 4 --n-star 4 --start 76 --count 4 --budget-minutes 25 --out ../results/v3/g2/S_k0_075_r76"
+  },
+  {
+   "id": "v3_g2_S_k0_080_r81",
+   "cmd": "python main.py g2v3 --set S --kappa 0 --tau 4 --n-star 4 --start 81 --count 4 --budget-minutes 25 --out ../results/v3/g2/S_k0_080_r81"
+  },
+  {
+   "id": "v3_g2_S_k0_085_r86",
+   "cmd": "python main.py g2v3 --set S --kappa 0 --tau 4 --n-star 4 --start 86 --count 4 --budget-minutes 25 --out ../results/v3/g2/S_k0_085_r86"
+  },
+  {
+   "id": "v3_g2_S_k0_090_r90",
+   "cmd": "python main.py g2v3 --set S --kappa 0 --tau 4 --n-star 4 --start 90 --count 5 --budget-minutes 25 --out ../results/v3/g2/S_k0_090_r90"
+  },
+  {
+   "id": "v3_g2_S_k0_095_r96",
+   "cmd": "python main.py g2v3 --set S --kappa 0 --tau 4 --n-star 4 --start 96 --count 4 --budget-minutes 25 --out ../results/v3/g2/S_k0_095_r96"
+  },
+  {
+   "id": "v3_g2_S_k12_000",
+   "cmd": "python main.py g2v3 --set S --kappa 12 --tau 4.9 --n-star 4 --start 0 --count 5 --budget-minutes 25 --out ../results/v3/g2/S_k12_000"
+  },
+  {
+   "id": "v3_g2_S_k12_005",
+   "cmd": "python main.py g2v3 --set S --kappa 12 --tau 4.9 --n-star 4 --start 5 --count 5 --budget-minutes 25 --out ../results/v3/g2/S_k12_005"
+  },
+  {
+   "id": "v3_g2_S_k12_010",
+   "cmd": "python main.py g2v3 --set S --kappa 12 --tau 4.9 --n-star 4 --start 10 --count 5 --budget-minutes 25 --out ../results/v3/g2/S_k12_010"
+  },
+  {
+   "id": "v3_g2_S_k12_015",
+   "cmd": "python main.py g2v3 --set S --kappa 12 --tau 4.9 --n-star 4 --start 15 --count 5 --budget-minutes 25 --out ../results/v3/g2/S_k12_015"
+  },
+  {
+   "id": "v3_g2_S_k12_020",
+   "cmd": "python main.py g2v3 --set S --kappa 12 --tau 4.9 --n-star 4 --start 20 --count 5 --budget-minutes 25 --out ../results/v3/g2/S_k12_020"
+  },
+  {
+   "id": "v3_g2_S_k12_025",
+   "cmd": "python main.py g2v3 --set S --kappa 12 --tau 4.9 --n-star 4 --start 25 --count 5 --budget-minutes 25 --out ../results/v3/g2/S_k12_025"
+  },
+  {
+   "id": "v3_g2_S_k12_030",
+   "cmd": "python main.py g2v3 --set S --kappa 12 --tau 4.9 --n-star 4 --start 30 --count 5 --budget-minutes 25 --out ../results/v3/g2/S_k12_030"
+  },
+  {
+   "id": "v3_g2_S_k12_035",
+   "cmd": "python main.py g2v3 --set S --kappa 12 --tau 4.9 --n-star 4 --start 35 --count 5 --budget-minutes 25 --out ../results/v3/g2/S_k12_035"
+  },
+  {
+   "id": "v3_g2_S_k12_040",
+   "cmd": "python main.py g2v3 --set S --kappa 12 --tau 4.9 --n-star 4 --start 40 --count 5 --budget-minutes 25 --out ../results/v3/g2/S_k12_040"
+  },
+  {
+   "id": "v3_g2_S_k12_045",
+   "cmd": "python main.py g2v3 --set S --kappa 12 --tau 4.9 --n-star 4 --start 45 --count 5 --budget-minutes 25 --out ../results/v3/g2/S_k12_045"
+  },
+  {
+   "id": "v3_g2_S_k12_050",
+   "cmd": "python main.py g2v3 --set S --kappa 12 --tau 4.9 --n-star 4 --start 50 --count 5 --budget-minutes 25 --out ../results/v3/g2/S_k12_050"
+  },
+  {
+   "id": "v3_g2_S_k12_055",
+   "cmd": "python main.py g2v3 --set S --kappa 12 --tau 4.9 --n-star 4 --start 55 --count 5 --budget-minutes 25 --out ../results/v3/g2/S_k12_055"
+  },
+  {
+   "id": "v3_g2_S_k12_060",
+   "cmd": "python main.py g2v3 --set S --kappa 12 --tau 4.9 --n-star 4 --start 60 --count 5 --budget-minutes 25 --out ../results/v3/g2/S_k12_060"
+  },
+  {
+   "id": "v3_g2_S_k12_065",
+   "cmd": "python main.py g2v3 --set S --kappa 12 --tau 4.9 --n-star 4 --start 65 --count 5 --budget-minutes 25 --out ../results/v3/g2/S_k12_065"
+  },
+  {
+   "id": "v3_g2_S_k12_070",
+   "cmd": "python main.py g2v3 --set S --kappa 12 --tau 4.9 --n-star 4 --start 70 --count 5 --budget-minutes 25 --out ../results/v3/g2/S_k12_070"
+  },
+  {
+   "id": "v3_g2_S_k12_075",
+   "cmd": "python main.py g2v3 --set S --kappa 12 --tau 4.9 --n-star 4 --start 75 --count 5 --budget-minutes 25 --out ../results/v3/g2/S_k12_075"
+  },
+  {
+   "id": "v3_g2_S_k12_080",
+   "cmd": "python main.py g2v3 --set S --kappa 12 --tau 4.9 --n-star 4 --start 80 --count 5 --budget-minutes 25 --out ../results/v3/g2/S_k12_080"
+  },
+  {
+   "id": "v3_g2_S_k12_085",
+   "cmd": "python main.py g2v3 --set S --kappa 12 --tau 4.9 --n-star 4 --start 85 --count 5 --budget-minutes 25 --out ../results/v3/g2/S_k12_085"
+  },
+  {
+   "id": "v3_g2_S_k12_090",
+   "cmd": "python main.py g2v3 --set S --kappa 12 --tau 4.9 --n-star 4 --start 90 --count 5 --budget-minutes 25 --out ../results/v3/g2/S_k12_090"
+  },
+  {
+   "id": "v3_g2_S_k12_095",
+   "cmd": "python main.py g2v3 --set S --kappa 12 --tau 4.9 --n-star 4 --start 95 --count 5 --budget-minutes 25 --out ../results/v3/g2/S_k12_095"
+  },
+  {
+   "id": "v3_bias_S_k12_00",
+   "cmd": "python main.py bias3 --set S --kappa 12 --tau 4.9 --n-star 4 --start 0 --count 1 --n-roll 256 --budget-minutes 30 --out ../results/v3/g2/bias_S_k12_00"
+  },
+  {
+   "id": "v3_bias_S_k12_01",
+   "cmd": "python main.py bias3 --set S --kappa 12 --tau 4.9 --n-star 4 --start 1 --count 1 --n-roll 256 --budget-minutes 30 --out ../results/v3/g2/bias_S_k12_01"
+  },
+  {
+   "id": "v3_bias_S_k12_02",
+   "cmd": "python main.py bias3 --set S --kappa 12 --tau 4.9 --n-star 4 --start 2 --count 1 --n-roll 256 --budget-minutes 30 --out ../results/v3/g2/bias_S_k12_02"
+  },
+  {
+   "id": "v3_bias_S_k12_03",
+   "cmd": "python main.py bias3 --set S --kappa 12 --tau 4.9 --n-star 4 --start 3 --count 1 --n-roll 256 --budget-minutes 30 --out ../results/v3/g2/bias_S_k12_03"
+  },
+  {
+   "id": "v3_bias_S_k12_04",
+   "cmd": "python main.py bias3 --set S --kappa 12 --tau 4.9 --n-star 4 --start 4 --count 1 --n-roll 256 --budget-minutes 30 --out ../results/v3/g2/bias_S_k12_04"
+  },
+  {
+   "id": "v3_bias_S_k12_05",
+   "cmd": "python main.py bias3 --set S --kappa 12 --tau 4.9 --n-star 4 --start 5 --count 1 --n-roll 256 --budget-minutes 30 --out ../results/v3/g2/bias_S_k12_05"
+  },
+  {
+   "id": "v3_bias_S_k12_06",
+   "cmd": "python main.py bias3 --set S --kappa 12 --tau 4.9 --n-star 4 --start 6 --count 1 --n-roll 256 --budget-minutes 30 --out ../results/v3/g2/bias_S_k12_06"
+  },
+  {
+   "id": "v3_bias_S_k12_07",
+   "cmd": "python main.py bias3 --set S --kappa 12 --tau 4.9 --n-star 4 --start 7 --count 1 --n-roll 256 --budget-minutes 30 --out ../results/v3/g2/bias_S_k12_07"
+  },
+  {
+   "id": "v3_bias_S_k12_08",
+   "cmd": "python main.py bias3 --set S --kappa 12 --tau 4.9 --n-star 4 --start 8 --count 1 --n-roll 256 --budget-minutes 30 --out ../results/v3/g2/bias_S_k12_08"
+  },
+  {
+   "id": "v3_bias_S_k12_09",
+   "cmd": "python main.py bias3 --set S --kappa 12 --tau 4.9 --n-star 4 --start 9 --count 1 --n-roll 256 --budget-minutes 30 --out ../results/v3/g2/bias_S_k12_09"
+  },
+  {
+   "id": "v3_bias_S_k12_10",
+   "cmd": "python main.py bias3 --set S --kappa 12 --tau 4.9 --n-star 4 --start 10 --count 1 --n-roll 256 --budget-minutes 30 --out ../results/v3/g2/bias_S_k12_10"
+  },
+  {
+   "id": "v3_bias_S_k12_11",
+   "cmd": "python main.py bias3 --set S --kappa 12 --tau 4.9 --n-star 4 --start 11 --count 1 --n-roll 256 --budget-minutes 30 --out ../results/v3/g2/bias_S_k12_11"
+  },
+  {
+   "id": "v3_bias_S_k12_12",
+   "cmd": "python main.py bias3 --set S --kappa 12 --tau 4.9 --n-star 4 --start 12 --count 1 --n-roll 256 --budget-minutes 30 --out ../results/v3/g2/bias_S_k12_12"
+  },
+  {
+   "id": "v3_bias_S_k12_13",
+   "cmd": "python main.py bias3 --set S --kappa 12 --tau 4.9 --n-star 4 --start 13 --count 1 --n-roll 256 --budget-minutes 30 --out ../results/v3/g2/bias_S_k12_13"
+  },
+  {
+   "id": "v3_bias_S_k12_14",
+   "cmd": "python main.py bias3 --set S --kappa 12 --tau 4.9 --n-star 4 --start 14 --count 1 --n-roll 256 --budget-minutes 30 --out ../results/v3/g2/bias_S_k12_14"
+  },
+  {
+   "id": "v3_bias_S_k12_15",
+   "cmd": "python main.py bias3 --set S --kappa 12 --tau 4.9 --n-star 4 --start 15 --count 1 --n-roll 256 --budget-minutes 30 --out ../results/v3/g2/bias_S_k12_15"
+  },
+  {
+   "id": "v3_bias_S_k12_16",
+   "cmd": "python main.py bias3 --set S --kappa 12 --tau 4.9 --n-star 4 --start 16 --count 1 --n-roll 256 --budget-minutes 30 --out ../results/v3/g2/bias_S_k12_16"
+  },
+  {
+   "id": "v3_bias_S_k12_17",
+   "cmd": "python main.py bias3 --set S --kappa 12 --tau 4.9 --n-star 4 --start 17 --count 1 --n-roll 256 --budget-minutes 30 --out ../results/v3/g2/bias_S_k12_17"
+  },
+  {
+   "id": "v3_bias_S_k12_18",
+   "cmd": "python main.py bias3 --set S --kappa 12 --tau 4.9 --n-star 4 --start 18 --count 1 --n-roll 256 --budget-minutes 30 --out ../results/v3/g2/bias_S_k12_18"
+  },
+  {
+   "id": "v3_bias_S_k12_19",
+   "cmd": "python main.py bias3 --set S --kappa 12 --tau 4.9 --n-star 4 --start 19 --count 1 --n-roll 256 --budget-minutes 30 --out ../results/v3/g2/bias_S_k12_19"
+  }
+ ]
+}
