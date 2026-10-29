@@ -9,7 +9,7 @@
 **Topic:** Amortized, non-myopic active tactile localization (TouchBED)
 **Initialised:** 2026-10-28T07:56:44Z
 **Current version:** v3
-**Latest stage:** Stage 15 RESEARCH_DECISION [v3] = PROCEED (row-4 characterisation paper) → stage 16 next; see the end of this file
+**Latest stage:** Stage 16 PAPER_OUTLINE [v3] done (row-4 characterisation paper) → stage 17 next; see the end of this file
 
 ---
 
@@ -741,3 +741,19 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
   (`tools_regrid_followup.py` for regrid3, `tools_resume_manifest.py` for eval3, `tools_regrid_manifest.py` for G5′);
   re-run `analysis_m4_v3.py`, `analysis_d3_v3.py --kind belief_student`, `analysis_g5_v3.py`, `tools_results_v3.py`;
   then stage 16 PAPER_OUTLINE for the row-4 paper (RSS Stage 1 extended-abstract format by default; owner decides).
+
+---
+
+## Stage 16. PAPER_OUTLINE     [v3]
+
+- **Finished:** 2026-10-29 run 7. Output: `paper/mypaper/sections/00_outline.md` (fresh opus subagent, template
+  verbatim with the topic-constraint block; plan `plans/stage_16_paper_outline_v3.md`). RSS Stage 1 extended-abstract
+  format by default (≈ 3,450 body words; Abstract 180, Intro 550, Related 300, Problem & methods 850, Protocol 300,
+  Results 950, Discussion & limitations 400, Conclusion 100); Figure 1 plan; row map R1–R17 → results_v3.json keys;
+  pass-2 binding sentences and a never-write list. Title candidates: "Can Cost-Aware Information-Gain Touch Selection
+  Be Amortized? Look-Ahead Headroom and Learnability under Travel Cost" or the shortening-only fallback
+  "Cost-Aware Information-Gain Touch Selection: Look-Ahead Headroom and the Learnability of Amortized Policies"
+  (07_hyp_v3 §4 says outcomes can only shorten the working title → the fallback is the rule-compliant default).
+- **Gaps:** no knowledge cards for DAgger, PPO and two related works → `[CITE-MISSING]` markers; they must be collected
+  and verified (stage 4/23 procedure) before stage 17 cites them. B-fan row (R9) pending.
+- **Decision:** PROCEED → stage 17 after the B-fan row and the missing citations (run 8).
