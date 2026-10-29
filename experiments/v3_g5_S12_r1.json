@@ -1,0 +1,33 @@
+{
+ "purpose": "G5' S12 follow-up: shards that early-stopped at the 80 % budget (resume at next_index) or whose output was not pushed; same commands otherwise.",
+ "jobs": [
+  {
+   "id": "v3_g5_S_k12_gstar_000_r82",
+   "cmd": "python main.py eval3 --set S --method gstar --kappa 12 --tau 4.9 --n-star 4 --split pilot3 --start 82 --count 18 --budget-minutes 25 --out ../results/v3/g5/S_k12_gstar_000_r82"
+  },
+  {
+   "id": "v3_g5_S_k12_gstar_100_r174",
+   "cmd": "python main.py eval3 --set S --method gstar --kappa 12 --tau 4.9 --n-star 4 --split pilot3 --start 174 --count 26 --budget-minutes 25 --out ../results/v3/g5/S_k12_gstar_100_r174"
+  },
+  {
+   "id": "v3_g5_S_k12_gstar_200_r289",
+   "cmd": "python main.py eval3 --set S --method gstar --kappa 12 --tau 4.9 --n-star 4 --split pilot3 --start 289 --count 11 --budget-minutes 25 --out ../results/v3/g5/S_k12_gstar_200_r289"
+  },
+  {
+   "id": "v3_g5_S_k12_gstar_300",
+   "cmd": "python main.py eval3 --set S --method gstar --kappa 12 --tau 4.9 --n-star 4 --split pilot3 --start 300 --count 100 --budget-minutes 25 --out ../results/v3/g5/S_k12_gstar_300"
+  },
+  {
+   "id": "v3_g5_S_k12_gstar_400_r493",
+   "cmd": "python main.py eval3 --set S --method gstar --kappa 12 --tau 4.9 --n-star 4 --split pilot3 --start 493 --count 7 --budget-minutes 25 --out ../results/v3/g5/S_k12_gstar_400_r493"
+  },
+  {
+   "id": "v3_g5_S_k12_random_152_r159",
+   "cmd": "python main.py eval3 --set S --method random --kappa 12 --tau 4.9 --n-star 4 --split pilot3 --start 159 --count 1 --budget-minutes 25 --out ../results/v3/g5/S_k12_random_152_r159"
+  },
+  {
+   "id": "v3_g5_S_k12_random_176_r183",
+   "cmd": "python main.py eval3 --set S --method random --kappa 12 --tau 4.9 --n-star 4 --split pilot3 --start 183 --count 1 --budget-minutes 25 --out ../results/v3/g5/S_k12_random_176_r183"
+  }
+ ]
+}

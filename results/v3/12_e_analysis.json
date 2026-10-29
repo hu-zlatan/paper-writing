@@ -1,0 +1,33 @@
+{
+ "n_episodes": 16,
+ "by_cell_method": {
+  "A12_gstar": 4,
+  "A12_b_fan": 4,
+  "S12_gstar": 4,
+  "S12_b_fan": 4
+ },
+ "mean_abs_dBI": 0.012594195835973099,
+ "max_abs_dBI": 0.05233758012623824,
+ "flips": [
+  {
+   "set": "A",
+   "method": "b_fan",
+   "episode": 1,
+   "mass_sub4": 0.22815503808276077,
+   "mass_sub8": 0.22813238636334962,
+   "counts": true
+  },
+  {
+   "set": "S",
+   "method": "b_fan",
+   "episode": 3,
+   "mass_sub4": 0.4999014464482992,
+   "mass_sub8": 0.49984028251563045,
+   "counts": false
+  }
+ ],
+ "counted_flips": 1,
+ "mean_wall_s_sub8": 40.58095121383667,
+ "passes": false,
+ "complete": true
+}

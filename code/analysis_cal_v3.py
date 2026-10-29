@@ -31,7 +31,7 @@ for s in ("S", "A"):
         out["n_star"][s] = {"n_star": n_star, "gstar_success": p, "n_episodes": len(ns),
                             "mean_probes": float(np.mean([r["n_probes"] for r in ns])),
                             "mean_ball_info": float(np.mean([r["ball_info"] for r in ns])), "complete": len(ns) == 200}
-    for k in (12.0,):
+    for k in (12.0, 2.0):
         cal = rows(f"tau_{s}_k{k:g}_sh*.jsonl") + rows(f"tau_{s}_k{k:g}_n*_sh*.jsonl")
         if cal:
             byn = {}
