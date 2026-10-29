@@ -1,0 +1,73 @@
+% FIGURE 1 PROMPT:
+% Target model: Nano Banana 2 (image generation). Output: one wide scientific schematic figure, aspect ratio 3:1
+% (full text width of a two-column robotics paper, about one third of a page tall), pure white background (#FFFFFF),
+% clean flat-vector style, no photorealism, no 3D shading, no gradients, no drop shadows, no textures, no decorative
+% icons beyond those listed, no people, no robot arm, no logos, no watermark. Line weights uniform (thin 1.5 px
+% outlines, 2.5 px arrows). Font: a single clean sans-serif (Helvetica/Arial-like), dark grey #222222, all text
+% horizontal, no text other than the exact labels quoted below, spelled exactly as given (keep Greek letters and
+% symbols exactly: φ, ψ, κ, Δφ, π, *, ×). Exactly two accent colours: BLUE #1F6FB4 = information / probing, ORANGE
+% #E07B1A = travel / cost. Neutral greys for objects (#9A9A9A fill, #555555 outline). The figure is divided into three
+% panels side by side, left to right, separated by generous white space (no boxes around panels A and B). Each panel
+% has a bold panel letter in its top-left corner: "A", "B", "C".
+%
+% PANEL A (left, about 30 % of the width) - "the task", top-down view:
+%  1. Centre: one flat, irregular polygon (6 main sides, one small rectangular notch cut into its upper-right edge),
+%     solid grey fill #9A9A9A, outline #555555, seen from directly above.
+%  2. Around the polygon, a dashed thin grey square (#888888, dash pattern 4-3) slightly larger than the polygon:
+%     the position-uncertainty box. No label.
+%  3. Three to four faint "ghost" outlines of the same polygon and of one slightly different polygon (same size, notch
+%     on a different edge), each shifted and rotated by small amounts, drawn as very light grey outlines (#CFCFCF,
+%     no fill, 30 % opacity), overlapping the solid polygon: the particle belief over identity and pose. Small label
+%     beneath the box: "belief over identity × pose".
+%  4. A thin solid grey circle (#777777) centred on the polygon, radius about 2.2× the polygon's size: the stand-off
+%     circle. No label on the circle itself.
+%  5. A small filled dark dot (#222222) on the circle at about the 8 o'clock position: the current fingertip. Label
+%     next to it, outside the circle: "φ_t".
+%  6. A curved ORANGE arrow running along the circle clockwise from the fingertip dot (8 o'clock)
+%     up over the top to about the 1 o'clock position, arrowhead at the 1 o'clock end, drawn just outside the circle
+%     line so both remain visible. Label next to the arrow, outside the circle, orange text: "travel cost
+%     c(a) = 1 + κ|Δφ|/π". Small open orange circle at the arrow's end marking the new angle, labelled "φ′".
+%  7. From φ′, a straight BLUE arrow pointing inward toward the polygon, tilted slightly (about 15°) away from the
+%     radial direction; a thin dotted grey radial reference line from φ′ to the circle centre shows the tilt, and a
+%     small arc between the radial line and the blue arrow is labelled "ψ" in blue.
+%  8. The blue arrow ends exactly on the polygon's edge at a small blue filled diamond (contact marker) with a short
+%     blue tick perpendicular to the edge (the measured surface normal). Small blue label: "contact + normal".
+%
+% PANEL B (centre, about 45 % of the width) - "three ways to pick the next touch", block diagram:
+%  1. At the far left of panel B, vertically centred, a small cloud of about 20 tiny grey dots inside a rounded
+%     outline: the belief icon. Label below: "belief b".
+%  2. From the belief icon, three thin grey arrows fan out to the right into three horizontal lanes stacked top to
+%     bottom, each lane a row of rounded rectangles (white fill, #555555 outline) connected by thin grey arrows.
+%  3. Lane (i), top. Lane title at its left, bold: "(i) Greedy G*". Blocks left to right: "particle filter" ->
+%     "EIG / c over all 512 actions" (inside this block a tiny row of 12 thin vertical bars of varying height in BLUE,
+%     one bar taller and outlined darker) -> "argmax". To the right of the lane, a small simple clock icon (grey
+%     outline) with the label "0.91 s / decision".
+%  4. Lane (ii), middle. Lane title, bold: "(ii) One-step look-ahead". Blocks: "EIG / c scores" -> a small tree glyph
+%     (one root node branching to four child nodes, each child continuing in a short dashed line to a leaf dot) with the
+%     label under the tree: "rollouts completed by reduced greedy" -> "best first action".
+%  5. Lane (iii), bottom. Lane title, bold: "(iii) Learned policy". Blocks: a small cluster of 4 blue points with short
+%     tick marks, labelled "touch history (finger frame)" -> a block labelled "DeepSets" -> "512 masked logits"
+%     (inside: a tiny row of 12 thin bars, a few greyed out to suggest masking).
+%  6. Two training arrows enter the "DeepSets" block from above/below:
+%     - a SOLID BLUE arrow coming down from lane (i)'s "EIG / c over all 512 actions" block, labelled in blue:
+%       "DAgger: dense score labels from G*";
+%     - a DASHED ORANGE arrow entering from below, labelled in orange: "PPO: reward = ball-sPCE (g_T)".
+%  7. No other arrows, no numbers other than "512" (twice) and "0.91 s / decision".
+%
+% PANEL C (right, about 25 % of the width) - headline answers:
+%  Leave this panel as an EMPTY placeholder: a plain white rectangle with a thin light-grey border (#DDDDDD), the
+%  panel letter "C" in its top-left corner, and NOTHING else inside (no axes, no bars, no numbers, no text). The data
+%  inset is plotted separately from the results JSON and pasted into this frame; the generator must not draw any
+%  chart, value or label here.
+%
+% Global: balanced composition, generous margins, all labels legible when the figure is printed 17 cm wide, no
+% overlapping text, no clutter, no title above the figure, no caption inside the image.
+%
+% (Panel C inset, plotted with matplotlib, not generated; values from results/v3/results_v3.json:)
+%  left mini-plot: G(12) = 0.01624 (12_g2_analysis.k12.G), one-sided 95 % UB 0.02210 (.k12.ub95), dashed line at the
+%    pre-registered Hold threshold 0.03; y-axis "one-step headroom G(12)".
+%  right mini-plot: test3 0-299 success: G* 0.4267 (14_m4_analysis.rows.gstar.success); student 0.3822
+%    (.rows.student.success) with whisker from diffs["student-gstar:success"].ci95 = [-0.0933, +0.0056] relative to
+%    G*; RL 0.3567 (.rows.rl.success) with whisker from diffs["gstar-rl:success"].ci95 = [+0.0022, +0.1367],
+%    sign-flipped relative to G*; hatched fourth bar "B-fan (exploratory)" 0.36
+%    (.exploratory_b_fan.success) with whisker from exploratory_b_fan["b_fan-gstar:success"].ci95 = [-0.12, -0.01].

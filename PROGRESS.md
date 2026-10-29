@@ -757,3 +757,26 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
 - **Gaps:** no knowledge cards for DAgger, PPO and two related works → `[CITE-MISSING]` markers; they must be collected
   and verified (stage 4/23 procedure) before stage 17 cites them. B-fan row (R9) pending.
 - **Decision:** PROCEED → stage 17 after the B-fan row and the missing citations (run 8).
+
+---
+
+## Stage 17. PAPER_DRAFT     [v3]
+
+- **Run 8 (2026-10-29, from 19:50 UTC).** No open issues; no new owner directives.
+- **Stage-15 conditions:** (1) B-fan test3 row complete (300/300, Actions run 40927313419): B-fan success 36.0 %;
+  student − B-fan +2.2 pp, ci95 [−2.8, +7.3] → pre-written **reading (b)**; its "task may be flat" clause is **not
+  supported** (B-fan − G\* −6.7 pp, ci95 [−12.0, −1.0]) and is dropped (status note in amendment v3.0, c004577).
+  (3) still running, report-only: G5′ sub-8 re-reads (463 episodes left in run 40916248950), D3-B (2 episodes) →
+  `[PENDING:…]` markers in the draft.
+- **Citations:** cards C57–C60 added (`ross2011reduction`, `schulman2017proximal`, `choudhury2017adaptive`,
+  `nguyen2024amortized` arXiv-only/title-level); PPO verified on arXiv abs this run, the others in 07d (run 5).
+- **Length decision:** master draft meets `RESTRICTS.yaml` floors (Stage 2 full paper); the 5-page RSS Stage 1 extended
+  abstract will be a separate condensed export in stage 22 (`plans/stage_17_paper_draft_v3.md`).
+- **Output:** `paper/mypaper/sections/draft_v3.md` (fresh opus subagent, template verbatim; prompt files kept in
+  `paper/mypaper/prompts/stage17_*.txt`), `paper/mypaper/figures/figure1_prompt.txt`. Body 6,549 words (+ abstract 268,
+  over the 250 ceiling → stage 19). All floors met.
+- **Checks:** `code/tools_number_audit.py` → 0 unmatched decimal numbers (derived spreads moved into code:
+  `code/analysis_derived_v3.py` → `results/v3/14_derived.json`); 31 cite keys, all in the cards; never-write list
+  clean. Open markers: 4 `[CONST?:…]` (runner CPU model, numpy versions, PPO clip/epochs — the code has clip 0.2 and
+  4 epochs; to be filled from code in stage 19), `[PENDING:…]` for G5′ and D3-B.
+- **Decision:** PROCEED → stage 18.

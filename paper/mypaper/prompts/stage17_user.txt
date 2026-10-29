@@ -1,0 +1,2400 @@
+Target: RSS 2027 (Robotics: Science and Systems). This master draft serves the Stage 2 full paper (<= 8 pages excluding references); a 5-page Stage 1 extended abstract will be condensed from it later. Binding length floors for this repo (RESTRICTS.yaml, they replace the 9-page floors quoted below): total main body >= 4,000 words (aim 4,300-5,000); Abstract >= 150, Introduction >= 700, Related Work >= 500, Method >= 800, Experiments >= 600, Results >= 500, Discussion >= 300, Limitations >= 200, Conclusion >= 150. Pre-registered outcome row 4: this is a characterisation / measurement paper with NO method claim (H1 distillation-parity failed, H1-fb withdrawn, H2 failed as a non-detection, H3 'Hold'). Write it honestly as such; follow every binding sentence and the never-write list in the outline. Rows whose data are still running are marked [PENDING:<results key>] in the text instead of a number (G5' sub-8 re-reads, D3-B belief-student validation).
+
+
+Write a FULL-LENGTH paper draft section by section in markdown. This paper must be suitable for submission to a top-tier ML conference (NeurIPS, ICML, ICLR).
+
+CRITICAL LENGTH REQUIREMENTS — each section MUST meet its minimum word count:
+
+1. **Title**: Concise, informative (10-15 words)
+2. **Abstract** (150-250 words): Problem, method, key results with numbers, conclusion
+3. **Introduction** (800-1000 words): Motivation with real-world context, problem statement, research gap analysis, brief method overview, contribution list (3-4 bullet points), paper organization
+4. **Related Work** (600-800 words): Organized by 3-4 thematic groups, each with 4-5 citations. Compare and contrast approaches, identify limitations of prior work, position this work clearly
+5. **Method** (1000-1500 words): Formal problem definition with mathematical notation, detailed algorithm description with equations, complexity analysis, design rationale for key choices
+6. **Experiments** (800-1200 words): Detailed experimental setup (datasets, preprocessing, data splits), baselines and their implementations, hyperparameter settings (in a table), evaluation metrics with justification, hardware and runtime information
+7. **Results** (600-800 words): Main results table(s) with ALL metrics, per-condition analysis, statistical significance discussion, ablation studies, qualitative analysis where relevant
+8. **Discussion** (400-600 words): Interpretation of key findings, unexpected results analysis, comparison with prior work, practical implications
+9. **Limitations** (200-300 words): Honest assessment of scope, dataset, methodology, and generalizability limitations
+10. **Conclusion** (200-300 words): Summary of contributions, main findings, and concrete future work directions
+
+TOTAL TARGET: 5000-6500 words in the main body. If any section is shorter than its minimum, EXPAND it with substantive technical content — NOT filler.
+
+QUALITY STANDARDS:
+- Use formal academic language throughout
+- Include mathematical notation where appropriate (use LaTeX-style $...$ for inline math)
+- Every claim must be supported by either a citation or experimental evidence
+- Results tables should use markdown table format with proper column headers
+- Provide algorithm pseudocode in the Method section when applicable
+
+Required sections: Title, Abstract, Introduction, Related Work, Method, Experiments, Results, Discussion, Limitations, Conclusion.
+Do NOT include a References section — it will be auto-generated.
+
+=== HARD TOPIC CONSTRAINT ===
+
+The paper MUST be about: Active tactile localization under travel cost: how much headroom one-step look-ahead leaves over greedy cost-aware information-gain touch selection, and whether that greedy planner can be amortized by a learned policy (distillation from the planner vs reinforcement learning on the same objective)
+
+PROHIBITED content (unless user explicitly specifies case-study mode):
+
+- Do NOT treat environment setup, dependency installation, or infrastructure failures as a research contribution.
+
+- Do NOT present debugging logs, system errors, or configuration issues as experimental findings.
+
+- Do NOT drift to tangential topics not directly related to the stated topic.
+
+- Every section MUST connect back to the core research question.
+
+- The Abstract and Introduction MUST clearly state the research problem derived from: Active tactile localization under travel cost: how much headroom one-step look-ahead leaves over greedy cost-aware information-gain touch selection, and whether that greedy planner can be amortized by a learned policy (distillation from the planner vs reinforcement learning on the same objective)
+
+- The Method section MUST describe a technical approach, not a workflow.
+
+- The Results section MUST report quantitative outcomes of experiments, not environment status.
+
+=== END CONSTRAINT ===
+
+
+
+EXPERIMENT METRICS (use ONLY these numbers; round to 4 sig figs; the file is results/v3/results_v3.json, pasted in full):
+{
+ "12_cal_analysis": {
+  "n_star": {
+   "S": {
+    "n_star": 4,
+    "gstar_success": 0.605,
+    "n_episodes": 200,
+    "mean_probes": 4.0,
+    "mean_ball_info": 6.993141968612382,
+    "complete": true
+   },
+   "A": {
+    "n_star": 3,
+    "gstar_success": 0.985,
+    "n_episodes": 200,
+    "mean_probes": 4.0,
+    "mean_ball_info": 8.257578062745761,
+    "complete": true
+   }
+  },
+  "tau": {
+   "S_k12_nstar4": {
+    "n_star": 4,
+    "n_episodes": 200,
+    "mean_travel_time": 0.9388380275612175,
+    "sd_travel_time": 1.5056674918685549,
+    "tau": 4.9,
+    "complete": true
+   },
+   "S_k2_nstar4": {
+    "n_star": 4,
+    "n_episodes": 200,
+    "mean_travel_time": 0.7256581100129756,
+    "sd_travel_time": 0.5073827705622531,
+    "tau": 4.7,
+    "complete": true
+   },
+   "S_k0": {
+    "tau": 4.0
+   },
+   "A_k12_nstar4": {
+    "n_star": 4,
+    "n_episodes": 200,
+    "mean_travel_time": 1.0058737560601916,
+    "sd_travel_time": 1.9694119615272718,
+    "tau": 5.0,
+    "complete": true
+   },
+   "A_k12_nstar3": {
+    "n_star": 3,
+    "n_episodes": 200,
+    "mean_travel_time": 0.2596237560601914,
+    "sd_travel_time": 0.7825948833985069,
+    "tau": 3.3,
+    "complete": true
+   },
+   "A_k0": {
+    "tau": 3.0
+   }
+  },
+  "verify": {
+   "A_k12": {
+    "n_episodes": 200,
+    "mean_probes": 2.98
+   },
+   "S_k12": {
+    "n_episodes": 200,
+    "mean_probes": 3.96
+   }
+  },
+  "n_star_sub8": {
+   "S": {
+    "n_star": 4,
+    "gstar_success": 0.62,
+    "n_episodes": 200,
+    "complete": true,
+    "success_flip_rate_vs_sub4": 0.075,
+    "mean_abs_dBI_vs_sub4": 0.006044471179264313
+   },
+   "A": {
+    "n_star": 3,
+    "gstar_success": 0.985,
+    "n_episodes": 200,
+    "complete": true,
+    "success_flip_rate_vs_sub4": 0.0,
+    "mean_abs_dBI_vs_sub4": 0.004961466100181467
+   }
+  }
+ },
+ "12_d3_analysis": {
+  "kind": "student",
+  "tag": "r2",
+  "n_episodes": 500,
+  "complete": true,
+  "delta_S12": 0.04,
+  "eps_S12": 0.3142664496624395,
+  "succ": {
+   "delta_hat": -0.05866666666666667,
+   "se": 0.02205564825984528,
+   "threshold": -0.014345076053036917,
+   "passes": false,
+   "student_mean": 0.3873333333333333,
+   "gstar_mean": 0.446,
+   "per_seed": {
+    "501": -0.042,
+    "502": -0.08,
+    "503": -0.054
+   }
+  },
+  "bi": {
+   "delta_hat": -0.19881362530548385,
+   "se": 0.057400227617865146,
+   "threshold": -0.15,
+   "passes": false,
+   "student_mean": 6.182000352177329,
+   "gstar_mean": 6.3808139774828145,
+   "per_seed": {
+    "501": -0.12571461131541525,
+    "502": -0.3131850063972122,
+    "503": -0.15754125820382417
+   }
+  },
+  "seeds_ok": {
+   "501": false,
+   "502": false,
+   "503": false
+  },
+  "passes": false
+ },
+ "12_d3_analysis_belief_student": {
+  "kind": "belief_student",
+  "tag": "r2",
+  "n_episodes": 298,
+  "complete": false,
+  "delta_S12": 0.04,
+  "eps_S12": 0.31450684854971667,
+  "succ": {
+   "delta_hat": -0.19910514541387028,
+   "se": 0.02764805675550361,
+   "threshold": -0.007840038751654461,
+   "passes": false,
+   "student_mean": 0.24049217002237136,
+   "gstar_mean": 0.4395973154362416,
+   "per_seed": {
+    "521": -0.21476510067114093,
+    "522": -0.17114093959731544,
+    "523": -0.21140939597315436
+   }
+  },
+  "bi": {
+   "delta_hat": -1.012565391799951,
+   "se": 0.12557367310076342,
+   "threshold": -0.15,
+   "passes": false,
+   "student_mean": 5.39748795743507,
+   "gstar_mean": 6.41005334923502,
+   "per_seed": {
+    "521": -1.1639062560758344,
+    "522": -0.7385524470298762,
+    "523": -1.1352374722941427
+   }
+  },
+  "seeds_ok": {
+   "521": false,
+   "522": false,
+   "523": false
+  },
+  "passes": false
+ },
+ "12_d3_analysis_rem": {
+  "kind": "student",
+  "tag": "rem",
+  "n_episodes": 500,
+  "complete": true,
+  "delta_S12": 0.04,
+  "eps_S12": 0.3142664496624395,
+  "succ": {
+   "delta_hat": -0.04400000000000001,
+   "se": 0.01994023411453695,
+   "threshold": -0.016805706018424106,
+   "passes": false,
+   "student_mean": 0.402,
+   "gstar_mean": 0.446,
+   "per_seed": {
+    "501": -0.046,
+    "502": -0.046,
+    "503": -0.04
+   }
+  },
+  "bi": {
+   "delta_hat": -0.09618051605437986,
+   "se": 0.02807921021661683,
+   "threshold": -0.15,
+   "passes": true,
+   "student_mean": 6.284633461428434,
+   "gstar_mean": 6.3808139774828145,
+   "per_seed": {
+    "501": -0.09557634909771694,
+    "502": -0.08117232897178812,
+    "503": -0.11179287009363457
+   }
+  },
+  "seeds_ok": {
+   "501": false,
+   "502": false,
+   "503": false
+  },
+  "passes": false
+ },
+ "12_e_analysis": {
+  "n_episodes": 16,
+  "by_cell_method": {
+   "A12_gstar": 4,
+   "A12_b_fan": 4,
+   "S12_gstar": 4,
+   "S12_b_fan": 4
+  },
+  "mean_abs_dBI": 0.012594195835973099,
+  "max_abs_dBI": 0.05233758012623824,
+  "flips": [
+   {
+    "set": "A",
+    "method": "b_fan",
+    "episode": 1,
+    "mass_sub4": 0.22815503808276077,
+    "mass_sub8": 0.22813238636334962,
+    "counts": true
+   },
+   {
+    "set": "S",
+    "method": "b_fan",
+    "episode": 3,
+    "mass_sub4": 0.4999014464482992,
+    "mass_sub8": 0.49984028251563045,
+    "counts": false
+   }
+  ],
+  "counted_flips": 1,
+  "mean_wall_s_sub8": 40.58095121383667,
+  "passes": false,
+  "complete": true
+ },
+ "12_g1_analysis": {
+  "a": {
+   "n_runs": 5,
+   "estimates": [
+    0.840871688461927,
+    0.7602710593025139,
+    0.8383534528208526,
+    0.8629149454231025,
+    0.8425174269852441
+   ],
+   "mean": 0.828985714598728,
+   "exact": 0.7166450192088315,
+   "band": [
+    0.573,
+    0.86
+   ],
+   "passes": true,
+   "complete": true
+  },
+  "b": {
+   "n_beliefs": 100,
+   "mean": 0.002538162524456071,
+   "ub95": 0.00374104150112455,
+   "passes": true,
+   "complete": true
+  },
+  "c": {
+   "n_runs": 5,
+   "estimates": [
+    0.7768822124017556,
+    0.7872985794899109,
+    0.7909252395353189,
+    0.6430344448050888,
+    0.7206601629801676
+   ],
+   "mean": 0.7437601278424484,
+   "exact": 0.7166450192088315,
+   "band": [
+    0.5733160153670652,
+    0.8599740230505978
+   ],
+   "passes": true,
+   "complete": true
+  }
+ },
+ "12_g2_analysis": {
+  "k0": {
+   "n_beliefs": 100,
+   "complete": true,
+   "G": 0.006373989024342136,
+   "lb95": 0.0040276042559610585,
+   "ub95": 0.00940120239376621,
+   "abs_gap_nats": 0.017947229734551762,
+   "mean_v_la": 2.815698248931972,
+   "mean_v_greedy": 2.7977510191974204,
+   "frac_la_differs": 0.58,
+   "n_no_budget_left": 0
+  },
+  "k2": {
+   "n_beliefs": 100,
+   "complete": true,
+   "G": 0.014182745925535438,
+   "lb95": 0.009616380442670566,
+   "ub95": 0.01974373779890334,
+   "abs_gap_nats": 0.03711770766779843,
+   "mean_v_la": 2.617103053434071,
+   "mean_v_greedy": 2.5799853457662727,
+   "frac_la_differs": 0.54,
+   "n_no_budget_left": 4
+  },
+  "k12": {
+   "n_beliefs": 100,
+   "complete": true,
+   "G": 0.016240650338528353,
+   "lb95": 0.011478523538506343,
+   "ub95": 0.022098024937453987,
+   "abs_gap_nats": 0.04137486393872214,
+   "mean_v_la": 2.5476112764134125,
+   "mean_v_greedy": 2.5062364124746903,
+   "frac_la_differs": 0.62,
+   "n_no_budget_left": 1
+  },
+  "bias_check": {
+   "n_beliefs": 20,
+   "complete": true,
+   "mean_estimator_v_greedy": 1.9395780914147713,
+   "mean_reference_v": 2.0261181653237554,
+   "ratio": 0.957287745902443,
+   "n_floored_rollouts": 3,
+   "hold_available": true
+  },
+  "H3": {
+   "region_raw": "Hold",
+   "tested_on_64x8": true,
+   "region": "Hold",
+   "downgraded": false,
+   "ordering_G0<=G2<=G12": true,
+   "complete": true
+  }
+ },
+ "12_g5_analysis": {
+  "sub": 8,
+  "cells": {
+   "S0": {
+    "gstar": {
+     "n": 500,
+     "success": 0.66,
+     "se_success": 0.021206117013673087,
+     "bi": 7.012167653217252,
+     "sd_bi": 1.0144230368855967,
+     "sat": 0.42
+    },
+    "random": {
+     "n": 62,
+     "success": 0.25806451612903225,
+     "se_success": 0.05602505611062518,
+     "bi": 5.555985924570482,
+     "sd_bi": 1.585525510332503,
+     "sat": 0.04838709677419355
+    },
+    "b_spread": {
+     "n": 0,
+     "success": null,
+     "se_success": null,
+     "bi": null,
+     "sd_bi": null,
+     "sat": null
+    },
+    "b_fan": {
+     "n": 0,
+     "success": null,
+     "se_success": null,
+     "bi": null,
+     "sd_bi": null,
+     "sat": null
+    },
+    "b_cov": {
+     "n": 0,
+     "success": null,
+     "se_success": null,
+     "bi": null,
+     "sd_bi": null,
+     "sat": null
+    },
+    "complete": {
+     "gstar": true,
+     "random": false,
+     "b_spread": false,
+     "b_fan": false,
+     "b_cov": false
+    },
+    "gstar_first200_success": 0.675,
+    "gstar_last300_success": 0.65,
+    "D_c": 0.4019354838709678,
+    "D_c_BI": 1.4561817286467695,
+    "plus10pp_ok": true,
+    "nondegenerate": {
+     "gstar_in_[0.15,0.90]": true,
+     "D_c>=0.20": true,
+     "sat<0.5": true
+    },
+    "passes": true,
+    "delta_c": 0.04,
+    "eps_c": 0.21842725929701542,
+    "H_star": "b_spread",
+    "H_star_success": -1.0,
+    "flat_screen": false
+   },
+   "S12": {
+    "gstar": {
+     "n": 500,
+     "success": 0.426,
+     "se_success": 0.022136577335085575,
+     "bi": 6.290136970994333,
+     "sd_bi": 0.9859577579628083,
+     "sat": 0.1
+    },
+    "random": {
+     "n": 199,
+     "success": 0.07537688442211055,
+     "se_success": 0.01876155666972613,
+     "bi": 2.9983450162292105,
+     "sd_bi": 1.99951441159141,
+     "sat": 0.005025125628140704
+    },
+    "b_spread": {
+     "n": 187,
+     "success": 0.06417112299465241,
+     "se_success": 0.017968489439364892,
+     "bi": 3.842258938400502,
+     "sd_bi": 0.8003452560105816,
+     "sat": 0.0
+    },
+    "b_fan": {
+     "n": 154,
+     "success": 0.4025974025974026,
+     "se_success": 0.039648186007942926,
+     "bi": 6.058466704324208,
+     "sd_bi": 1.096421722705283,
+     "sat": 0.05844155844155844
+    },
+    "b_cov": {
+     "n": 174,
+     "success": 0.3563218390804598,
+     "se_success": 0.03641099577255489,
+     "bi": 6.085687808852997,
+     "sd_bi": 1.0385293476567403,
+     "sat": 0.05747126436781609
+    },
+    "complete": {
+     "gstar": true,
+     "random": false,
+     "b_spread": false,
+     "b_fan": false,
+     "b_cov": false
+    },
+    "gstar_first200_success": 0.43,
+    "gstar_last300_success": 0.42333333333333334,
+    "D_c": 0.35062311557788944,
+    "D_c_BI": 3.291791954765123,
+    "plus10pp_ok": true,
+    "nondegenerate": {
+     "gstar_in_[0.15,0.90]": true,
+     "D_c>=0.20": true,
+     "sat<0.5": true
+    },
+    "passes": true,
+    "delta_c": 0.04,
+    "eps_c": 0.31450684854971667,
+    "H_star": "b_fan",
+    "H_star_success": 0.4025974025974026,
+    "flat_screen": true
+   },
+   "A12": {
+    "gstar": {
+     "n": 500,
+     "success": 0.47,
+     "se_success": 0.022342748192502798,
+     "bi": 6.713534854935011,
+     "sd_bi": 1.3154001059330156,
+     "sat": 0.306
+    },
+    "random": {
+     "n": 161,
+     "success": 0.024844720496894408,
+     "se_success": 0.012305349537986924,
+     "bi": 2.549366738468463,
+     "sd_bi": 2.1292809984205405,
+     "sat": 0.006211180124223602
+    },
+    "b_spread": {
+     "n": 76,
+     "success": 0.05263157894736842,
+     "se_success": 0.0257841025556124,
+     "bi": 3.8672924605315226,
+     "sd_bi": 0.9349241631017299,
+     "sat": 0.0
+    },
+    "b_fan": {
+     "n": 0,
+     "success": null,
+     "se_success": null,
+     "bi": null,
+     "sd_bi": null,
+     "sat": null
+    },
+    "b_cov": {
+     "n": 0,
+     "success": null,
+     "se_success": null,
+     "bi": null,
+     "sd_bi": null,
+     "sat": null
+    },
+    "complete": {
+     "gstar": true,
+     "random": false,
+     "b_spread": false,
+     "b_fan": false,
+     "b_cov": false
+    },
+    "gstar_first200_success": 0.48,
+    "gstar_last300_success": 0.4633333333333333,
+    "D_c": 0.44515527950310557,
+    "D_c_BI": 4.1641681164665485,
+    "plus10pp_ok": true,
+    "nondegenerate": {
+     "gstar_in_[0.15,0.90]": true,
+     "D_c>=0.20": true,
+     "sat<0.5": true
+    },
+    "passes": true,
+    "delta_c": 0.04,
+    "eps_c": 0.3356767427467506,
+    "H_star": "b_spread",
+    "H_star_success": 0.05263157894736842,
+    "flat_screen": false
+   }
+  },
+  "flat_screen_cells": 1,
+  "flat_prime_likely": false,
+  "surviving_cells": [
+   "S0",
+   "S12",
+   "A12"
+  ]
+ },
+ "12_g5_analysis_sub4": {
+  "sub": 4,
+  "cells": {
+   "S0": {
+    "gstar": {
+     "n": 500,
+     "success": 0.648,
+     "se_success": 0.021380042385946048,
+     "bi": 7.010813285460442,
+     "sd_bi": 1.013956078954415,
+     "sat": 0.42
+    },
+    "random": {
+     "n": 160,
+     "success": 0.21875,
+     "se_success": 0.032784644885244255,
+     "bi": 5.265250643953355,
+     "sd_bi": 1.690346699273745,
+     "sat": 0.04375
+    },
+    "b_spread": {
+     "n": 200,
+     "success": 0.465,
+     "se_success": 0.035357115664894155,
+     "bi": 6.65039168038515,
+     "sd_bi": 0.870437834189672,
+     "sat": 0.15
+    },
+    "b_fan": {
+     "n": 200,
+     "success": 0.415,
+     "se_success": 0.03492813871897355,
+     "bi": 6.085056583693729,
+     "sd_bi": 1.074437793053946,
+     "sat": 0.075
+    },
+    "b_cov": {
+     "n": 30,
+     "success": 0.43333333333333335,
+     "se_success": 0.0920186554465537,
+     "bi": 6.725168392423387,
+     "sd_bi": 0.7125379224822836,
+     "sat": 0.16666666666666666
+    },
+    "complete": {
+     "gstar": true,
+     "random": false,
+     "b_spread": true,
+     "b_fan": true,
+     "b_cov": false
+    },
+    "gstar_first200_success": 0.69,
+    "gstar_last300_success": 0.62,
+    "D_c": 0.42925,
+    "D_c_BI": 1.745562641507087,
+    "plus10pp_ok": true,
+    "nondegenerate": {
+     "gstar_in_[0.15,0.90]": true,
+     "D_c>=0.20": true,
+     "sat<0.5": true
+    },
+    "passes": true,
+    "delta_c": 0.04,
+    "eps_c": 0.261834396226063,
+    "H_star": "b_spread",
+    "H_star_success": 0.465,
+    "flat_screen": false
+   },
+   "S12": {
+    "gstar": {
+     "n": 497,
+     "success": 0.41851106639839036,
+     "se_success": 0.022150491224640773,
+     "bi": 6.293884857216835,
+     "sd_bi": 0.9879582167406499,
+     "sat": 0.1006036217303823
+    },
+    "random": {
+     "n": 200,
+     "success": 0.085,
+     "se_success": 0.019769399225283587,
+     "bi": 3.007686902764506,
+     "sd_bi": 1.999297308047809,
+     "sat": 0.005
+    },
+    "b_spread": {
+     "n": 200,
+     "success": 0.07,
+     "se_success": 0.018086892447072265,
+     "bi": 3.837229995694246,
+     "sd_bi": 0.7831248178472313,
+     "sat": 0.0
+    },
+    "b_fan": {
+     "n": 200,
+     "success": 0.395,
+     "se_success": 0.034653706828922715,
+     "bi": 6.051436735651171,
+     "sd_bi": 1.092324330515993,
+     "sat": 0.06
+    },
+    "b_cov": {
+     "n": 200,
+     "success": 0.355,
+     "se_success": 0.033920910080708584,
+     "bi": 6.098398703436613,
+     "sd_bi": 1.024784944071849,
+     "sat": 0.06
+    },
+    "complete": {
+     "gstar": false,
+     "random": true,
+     "b_spread": true,
+     "b_fan": true,
+     "b_cov": true
+    },
+    "gstar_first200_success": 0.42,
+    "gstar_last300_success": 0.4175084175084175,
+    "D_c": 0.33351106639839034,
+    "D_c_BI": 3.2861979544523288,
+    "plus10pp_ok": true,
+    "nondegenerate": {
+     "gstar_in_[0.15,0.90]": true,
+     "D_c>=0.20": true,
+     "sat<0.5": true
+    },
+    "passes": true,
+    "delta_c": 0.04,
+    "eps_c": 0.31469424286084174,
+    "H_star": "b_fan",
+    "H_star_success": 0.395,
+    "flat_screen": true
+   },
+   "A12": {
+    "gstar": {
+     "n": 500,
+     "success": 0.472,
+     "se_success": 0.022347949832668024,
+     "bi": 6.712143126357323,
+     "sd_bi": 1.3181188141250821,
+     "sat": 0.304
+    },
+    "random": {
+     "n": 200,
+     "success": 0.04,
+     "se_success": 0.013891177924157585,
+     "bi": 2.4992384750895793,
+     "sd_bi": 2.086783416104076,
+     "sat": 0.005
+    },
+    "b_spread": {
+     "n": 200,
+     "success": 0.02,
+     "se_success": 0.009924336870116702,
+     "bi": 3.753720049633871,
+     "sd_bi": 0.9219262394767223,
+     "sat": 0.0
+    },
+    "b_fan": {
+     "n": 200,
+     "success": 0.39,
+     "se_success": 0.03457567623250011,
+     "bi": 6.372295546359387,
+     "sd_bi": 1.3141235584240731,
+     "sat": 0.22
+    },
+    "b_cov": {
+     "n": 200,
+     "success": 0.365,
+     "se_success": 0.034127679271557736,
+     "bi": 6.089526609761211,
+     "sd_bi": 1.5832338899077243,
+     "sat": 0.225
+    },
+    "complete": {
+     "gstar": true,
+     "random": true,
+     "b_spread": true,
+     "b_fan": true,
+     "b_cov": true
+    },
+    "gstar_first200_success": 0.465,
+    "gstar_last300_success": 0.4766666666666667,
+    "D_c": 0.432,
+    "D_c_BI": 4.212904651267744,
+    "plus10pp_ok": true,
+    "nondegenerate": {
+     "gstar_in_[0.15,0.90]": true,
+     "D_c>=0.20": true,
+     "sat<0.5": true
+    },
+    "passes": true,
+    "delta_c": 0.04,
+    "eps_c": 0.3356071563178662,
+    "H_star": "b_fan",
+    "H_star_success": 0.39,
+    "flat_screen": false
+   }
+  },
+  "flat_screen_cells": 1,
+  "flat_prime_likely": false,
+  "surviving_cells": [
+   "S0",
+   "S12",
+   "A12"
+  ]
+ },
+ "12_lat_analysis": {
+  "files": [
+   "S_k12_pilot.jsonl",
+   "S_k12_pilot_more.jsonl"
+  ],
+  "n_decisions": 1000,
+  "n_episodes": 253,
+  "methods": {
+   "g125_512_16": {
+    "median": 0.020150849999936327,
+    "ci": [
+     0.01977989908768336,
+     0.020443736000004264
+    ],
+    "half_width_rel": 0.016471685123034548,
+    "component_medians": {
+     "t_assim": 0.0031731095000253617,
+     "t_nb": 0.0008860165001465248,
+     "t_score": 0.016271208000034676,
+     "t_select": 2.6915500029645045e-05
+    }
+   },
+   "g125_512_4": {
+    "median": 0.010920341499968345,
+    "ci": [
+     0.010789310300059186,
+     0.011182793862522543
+    ],
+    "half_width_rel": 0.018016083217933146,
+    "component_medians": {
+     "t_assim": 0.003028566000068622,
+     "t_nb": 0.000875647499981369,
+     "t_score": 0.008806057000015244,
+     "t_select": 2.6439500004471483e-05
+    }
+   },
+   "g125_128_64": {
+    "median": 0.015071522500079482,
+    "ci": [
+     0.014551007749956569,
+     0.01563493781251992
+    ],
+    "half_width_rel": 0.035959541000507286,
+    "component_medians": {
+     "t_assim": 0.003010039999963965,
+     "t_nb": 0.000862868000126582,
+     "t_score": 0.01030373349999536,
+     "t_select": 2.6870499993947305e-05
+    }
+   },
+   "g125_128_16": {
+    "median": 0.007686634999998887,
+    "ci": [
+     0.00743401461249249,
+     0.008151781837487704
+    ],
+    "half_width_rel": 0.04668930064945964,
+    "component_medians": {
+     "t_assim": 0.003044972499992582,
+     "t_nb": 0.0008705079999344889,
+     "t_score": 0.0036615770000025805,
+     "t_select": 2.6484499983325804e-05
+    }
+   },
+   "g125_128_4": {
+    "median": 0.006179234500109487,
+    "ci": [
+     0.006104048499992132,
+     0.006277912999962609
+    ],
+    "half_width_rel": 0.014068449738183334,
+    "component_medians": {
+     "t_assim": 0.002887454499955311,
+     "t_nb": 0.000858048999816674,
+     "t_score": 0.0019858984999245877,
+     "t_select": 2.6219000119453995e-05
+    }
+   },
+   "g125_32_64": {
+    "median": 0.007867019000002529,
+    "ci": [
+     0.007428304500024296,
+     0.00835743307492791
+    ],
+    "half_width_rel": 0.05905213746803683,
+    "component_medians": {
+     "t_assim": 0.0029466009999623566,
+     "t_nb": 0.0008536309999840341,
+     "t_score": 0.003924547499991604,
+     "t_select": 2.6564999956235624e-05
+    }
+   },
+   "g125_32_16": {
+    "median": 0.004691430000036689,
+    "ci": [
+     0.004522945999980266,
+     0.005596729274973455
+    ],
+    "half_width_rel": 0.11444093538481787,
+    "component_medians": {
+     "t_assim": 0.0030135100000734383,
+     "t_nb": 0.0008583849999581616,
+     "t_score": 0.0014369909999913943,
+     "t_select": 2.6038499925107317e-05
+    }
+   },
+   "g125_32_4": {
+    "median": 0.004202506000012818,
+    "ci": [
+     0.004015729000002466,
+     0.005211866749988302
+    ],
+    "half_width_rel": 0.1423124381002892,
+    "component_medians": {
+     "t_assim": 0.00299306550002143,
+     "t_nb": 0.0008531590000870892,
+     "t_score": 0.0007732409999334777,
+     "t_select": 2.53934999818739e-05
+    }
+   },
+   "pruned16": {
+    "median": 0.2833444260000988,
+    "ci": [
+     0.2811347649999334,
+     0.2853233614999908
+    ],
+    "half_width_rel": 0.007391351506692368,
+    "component_medians": {
+     "t_feat": 0.000111698999944565,
+     "t_fwd": 0.00015290099997855577,
+     "t_mask": 3.0472499929601327e-05,
+     "t_assim": 0.03922143799997002,
+     "t_nb": 0.09635324350006158,
+     "t_score": 0.13110458849990891,
+     "t_select": 7.559399998058325e-05
+    }
+   },
+   "random16": {
+    "median": 0.28095394449999844,
+    "ci": [
+     0.2781336740000313,
+     0.28364108069999644
+    ],
+    "half_width_rel": 0.009801262462725745,
+    "component_medians": {
+     "t_feat": 0.00020180050000817573,
+     "t_fwd": 0.00018071299996336165,
+     "t_mask": 3.461400001469883e-05,
+     "t_assim": 0.04006620249990078,
+     "t_nb": 0.0980097995000051,
+     "t_score": 0.13824147300005052,
+     "t_select": 0.00011844899984225776
+    }
+   },
+   "student": {
+    "median": 0.00040812899999309593,
+    "ci": [
+     0.0004036272874657243,
+     0.0004137049998007569
+    ],
+    "half_width_rel": 0.012346234076974582,
+    "component_medians": {
+     "t_feat": 0.00020079750001400498,
+     "t_fwd": 0.00018023950008227985,
+     "t_mask": 3.462949985078012e-05
+    }
+   },
+   "g2000_512_64": {
+    "median": 0.9134639894999736,
+    "ci": [
+     0.7909800091750249,
+     0.9413416659999712
+    ],
+    "half_width_rel": 0.08230300184425093,
+    "component_medians": {
+     "t_assim": 0.04023960350002653,
+     "t_nb": 0.09671669100009694,
+     "t_score": 0.7168749699999921,
+     "t_select": 4.537999996045983e-05
+    }
+   },
+   "g2000_512_16": {
+    "median": 0.39076923699997224,
+    "ci": [
+     0.38474601699999766,
+     0.3970526702624738
+    ],
+    "half_width_rel": 0.015746701757995637,
+    "component_medians": {
+     "t_assim": 0.04186662849997447,
+     "t_nb": 0.09621869149998474,
+     "t_score": 0.25465013299981365,
+     "t_select": 3.737250000312997e-05
+    }
+   },
+   "g2000_512_4": {
+    "median": 0.27553395699993644,
+    "ci": [
+     0.25804330400001163,
+     0.29229023499999585
+    ],
+    "half_width_rel": 0.06214647982570097,
+    "component_medians": {
+     "t_assim": 0.0397587475000023,
+     "t_nb": 0.09661762299992915,
+     "t_score": 0.128375595499989,
+     "t_select": 3.355249964442919e-05
+    }
+   },
+   "g2000_128_64": {
+    "median": 0.31586069449997467,
+    "ci": [
+     0.30735506849995603,
+     0.3305281240000113
+    ],
+    "half_width_rel": 0.03668239813241013,
+    "component_medians": {
+     "t_assim": 0.03950386450003407,
+     "t_nb": 0.09715107499994247,
+     "t_score": 0.17916225149997445,
+     "t_select": 4.6168499977738975e-05
+    }
+   },
+   "g2000_128_16": {
+    "median": 0.22492865050003275,
+    "ci": [
+     0.21332944099998485,
+     0.23730776098757356
+    ],
+    "half_width_rel": 0.053302058084381765,
+    "component_medians": {
+     "t_assim": 0.040644192999991446,
+     "t_nb": 0.09719219099997645,
+     "t_score": 0.06669678100007559,
+     "t_select": 3.432700003713762e-05
+    }
+   },
+   "g2000_128_4": {
+    "median": 0.17846212499989633,
+    "ci": [
+     0.1752573094249527,
+     0.18151533100035522
+    ],
+    "half_width_rel": 0.017533192478253135,
+    "component_medians": {
+     "t_assim": 0.04194347500003914,
+     "t_nb": 0.09766135499990014,
+     "t_score": 0.03738655349997089,
+     "t_select": 3.364800011240732e-05
+    }
+   },
+   "g2000_32_64": {
+    "median": 0.2217124470000158,
+    "ci": [
+     0.210143176612479,
+     0.22442014050000125
+    ],
+    "half_width_rel": 0.03219702835971414,
+    "component_medians": {
+     "t_assim": 0.0418031070000211,
+     "t_nb": 0.0961453919996984,
+     "t_score": 0.05294644949992744,
+     "t_select": 3.822799988029146e-05
+    }
+   },
+   "g2000_32_16": {
+    "median": 0.14917192450002403,
+    "ci": [
+     0.14629890200012596,
+     0.155170279999993
+    ],
+    "half_width_rel": 0.029735414454164284,
+    "component_medians": {
+     "t_assim": 0.040358319500001016,
+     "t_nb": 0.09760122900001988,
+     "t_score": 0.017173136499991415,
+     "t_select": 3.187999999454405e-05
+    }
+   },
+   "g2000_32_4": {
+    "median": 0.13207513049997033,
+    "ci": [
+     0.12897875399994518,
+     0.14094673500005683
+    ],
+    "half_width_rel": 0.04530747368867577,
+    "component_medians": {
+     "t_assim": 0.039950103500018486,
+     "t_nb": 0.09691403600002957,
+     "t_score": 0.00970306049998726,
+     "t_select": 3.070799988336148e-05
+    }
+   },
+   "g500_512_64": {
+    "median": 0.18810561099996903,
+    "ci": [
+     0.1639840851125413,
+     0.2039412964999201
+    ],
+    "half_width_rel": 0.1062095148968878,
+    "component_medians": {
+     "t_assim": 0.011398385499944652,
+     "t_nb": 0.00559307249997687,
+     "t_score": 0.16766200250009433,
+     "t_select": 3.2830999998623156e-05
+    }
+   },
+   "g500_512_16": {
+    "median": 0.07333266750005407,
+    "ci": [
+     0.07177192031248865,
+     0.07464432695000624
+    ],
+    "half_width_rel": 0.019584768531128848,
+    "component_medians": {
+     "t_assim": 0.011415778500008855,
+     "t_nb": 0.005501880999986497,
+     "t_score": 0.05579070149988752,
+     "t_select": 3.017150004325231e-05
+    }
+   },
+   "g500_512_4": {
+    "median": 0.03995386250008437,
+    "ci": [
+     0.038938034587581424,
+     0.043853576999936195
+    ],
+    "half_width_rel": 0.06151523413217421,
+    "component_medians": {
+     "t_assim": 0.011265527999995584,
+     "t_nb": 0.005409572000189655,
+     "t_score": 0.027369092999947497,
+     "t_select": 2.9450000027964052e-05
+    }
+   },
+   "g500_128_64": {
+    "median": 0.05673470049995899,
+    "ci": [
+     0.05553373108751884,
+     0.05892057400001249
+    ],
+    "half_width_rel": 0.029848072543329097,
+    "component_medians": {
+     "t_assim": 0.011241079999990689,
+     "t_nb": 0.005443007000167199,
+     "t_score": 0.03792461000000458,
+     "t_select": 3.233499995758393e-05
+    }
+   },
+   "g500_128_16": {
+    "median": 0.02937649499995132,
+    "ci": [
+     0.026197526000032667,
+     0.03476222128751374
+    ],
+    "half_width_rel": 0.14577462844861622,
+    "component_medians": {
+     "t_assim": 0.011348743999974431,
+     "t_nb": 0.005489971499855528,
+     "t_score": 0.01273281149997274,
+     "t_select": 2.7916999954413768e-05
+    }
+   },
+   "g500_128_4": {
+    "median": 0.022223370000233444,
+    "ci": [
+     0.021799399499968786,
+     0.022729405000063707
+    ],
+    "half_width_rel": 0.02092404302509368,
+    "component_medians": {
+     "t_assim": 0.011223946000029628,
+     "t_nb": 0.005447818499931145,
+     "t_score": 0.006461829999921065,
+     "t_select": 2.7281000086532003e-05
+    }
+   },
+   "g500_32_64": {
+    "median": 0.032560711000087394,
+    "ci": [
+     0.027551869000035367,
+     0.034189891000096395
+    ],
+    "half_width_rel": 0.1019330014022607,
+    "component_medians": {
+     "t_assim": 0.011128794999990532,
+     "t_nb": 0.0055657474998724865,
+     "t_score": 0.014130162999890672,
+     "t_select": 2.873350001664221e-05
+    }
+   },
+   "g500_32_16": {
+    "median": 0.018170937500002537,
+    "ci": [
+     0.017204444000071817,
+     0.018777995499951315
+    ],
+    "half_width_rel": 0.04329857773929602,
+    "component_medians": {
+     "t_assim": 0.011067374999981894,
+     "t_nb": 0.005506887499905133,
+     "t_score": 0.004670840500011764,
+     "t_select": 2.702550003164106e-05
+    }
+   },
+   "g500_32_4": {
+    "median": 0.016491528999949878,
+    "ci": [
+     0.015652690462489006,
+     0.01716563299999052
+    ],
+    "half_width_rel": 0.045870293091262594,
+    "component_medians": {
+     "t_assim": 0.010902272500061372,
+     "t_nb": 0.005421156000011251,
+     "t_score": 0.002283178499965288,
+     "t_select": 2.6865500004191745e-05
+    }
+   },
+   "g125_512_64": {
+    "median": 0.04837607499999308,
+    "ci": [
+     0.043292170999961854,
+     0.05534761168767943
+    ],
+    "half_width_rel": 0.12460126919886848,
+    "component_medians": {
+     "t_assim": 0.0029832405000433937,
+     "t_nb": 0.0008691355000109979,
+     "t_score": 0.04548398400015685,
+     "t_select": 2.7486499845963408e-05
+    }
+   }
+  },
+  "protocol_complete": false,
+  "ci_too_wide": [
+   "g125_32_16",
+   "g125_32_4",
+   "g500_512_64",
+   "g500_128_16",
+   "g500_32_64",
+   "g125_512_64"
+  ],
+  "student_median_s": 0.00040812899999309593,
+  "Q": [
+   "g125_32_4",
+   "g125_32_16",
+   "g125_32_64",
+   "g125_128_4",
+   "g125_128_16",
+   "g125_128_64",
+   "g125_512_4",
+   "g125_512_16",
+   "g500_32_4",
+   "g500_32_16",
+   "g500_32_64",
+   "g500_128_4",
+   "g500_128_16",
+   "g500_512_4"
+  ],
+  "R_b_candidates": [
+   "g125_128_64",
+   "g125_512_16",
+   "g500_32_64",
+   "g500_128_16",
+   "g500_512_4"
+  ],
+  "Q_empty": false,
+  "ratio_full_over_student": 2238.174669076263,
+  "ratio_full_over_pruned16": 3.223864334990148,
+  "H1_fb_active": false,
+  "L_final": {
+   "median": 0.20434046499985925,
+   "ci": [
+    0.1928690600000209,
+    0.21347067500005323
+   ],
+   "half_width_rel": 0.050410022802009666
+  }
+ },
+ "12_rl_sweep_selection": {
+  "rule": "argmax final val ball-sPCE; ties within 0.02 nats -> lower index",
+  "rows": [
+   {
+    "cfg": 0,
+    "lr": 0.00036339014767503805,
+    "ent_coef": 0.00013313139952275948,
+    "batch": 128,
+    "critic_lr": 0.0014321061677694642,
+    "status": "max_episodes",
+    "episodes": 50048,
+    "final_val_episodes": 40960,
+    "final_val_ball_spce": 4.74740830353125,
+    "final_val_ball_spce_sampled": 4.813022029497628,
+    "train_g_T_last_batch": 5.017253114130899
+   },
+   {
+    "cfg": 1,
+    "lr": 0.00012113004922501268,
+    "ent_coef": 0.00013313139952275948,
+    "batch": 128,
+    "critic_lr": 0.0014321061677694642,
+    "status": "max_episodes",
+    "episodes": 50048,
+    "final_val_episodes": 40960,
+    "final_val_ball_spce": 4.679114846131953,
+    "final_val_ball_spce_sampled": 4.751736552098986,
+    "train_g_T_last_batch": 4.980931527710563
+   },
+   {
+    "cfg": 2,
+    "lr": 0.001090170443025114,
+    "ent_coef": 0.00013313139952275948,
+    "batch": 128,
+    "critic_lr": 0.0014321061677694642,
+    "status": "max_episodes",
+    "episodes": 50048,
+    "final_val_episodes": 40960,
+    "final_val_ball_spce": 5.666242682574702,
+    "final_val_ball_spce_sampled": 5.630884175302558,
+    "train_g_T_last_batch": 5.757433207864823
+   },
+   {
+    "cfg": 3,
+    "lr": 0.00036339014767503805,
+    "ent_coef": 0.0013313139952275948,
+    "batch": 128,
+    "critic_lr": 0.0014321061677694642,
+    "status": "max_episodes",
+    "episodes": 50048,
+    "final_val_episodes": 40960,
+    "final_val_ball_spce": 4.625549471485357,
+    "final_val_ball_spce_sampled": 4.916567244788891,
+    "train_g_T_last_batch": 4.978103598196965
+   }
+  ],
+  "selected_cfg": 2,
+  "validation_stream": "trainer val_v2 (deviation: not val3)"
+ },
+ "14_h2_analysis": {
+  "student_tag": "rem",
+  "n_episodes": 500,
+  "complete": true,
+  "threshold_nats": 0.1,
+  "student_mean": 5.3678482019185045,
+  "rl_mean": 5.36761576048348,
+  "bootstrap": {
+   "diff": 0.0002324414350238726,
+   "lower": -0.3103236417260658,
+   "upper": 0.3033542925230637,
+   "p_greater": 0.4883,
+   "p_less": 0.5117,
+   "n_episodes": 500,
+   "n_seeds": [
+    3,
+    3
+   ],
+   "n_boot": 10000
+  },
+  "per_seed_student": {
+   "501": 5.2794540134392705,
+   "502": 5.4070119647786665,
+   "503": 5.4170786275375775
+  },
+  "per_seed_rl": {
+   "511": 5.654297180328503,
+   "512": 5.270911054935971,
+   "513": 5.177639046185968
+  },
+  "passes": false,
+  "g_T_gstar": 5.299300071706202,
+  "g_T_random": 2.61821885365271,
+  "rl_training": {
+   "511": {
+    "status": "max_episodes",
+    "plateau_at": 102400,
+    "episodes": 200064,
+    "wall_s": 4068.9127039909363
+   },
+   "512": {
+    "status": "max_episodes",
+    "plateau_at": 102400,
+    "episodes": 200064,
+    "wall_s": 2880.6637835502625
+   },
+   "513": {
+    "status": "max_episodes",
+    "plateau_at": 112640,
+    "episodes": 200064,
+    "wall_s": 3990.0908603668213
+   }
+  }
+ },
+ "14_labelfit": {
+  "rule": "under-fit := train R_bar > 0.25 or train top-1 < 0.50 (end of round 2)",
+  "groups": {
+   "first_attempt": [
+    {
+     "student": "S_k12_hp0_s501_r2",
+     "train_R_bar": 0.18750506175419443,
+     "train_top1": 0.5303506346613045,
+     "train_decisions": 7957,
+     "heldout_R_bar": 0.210243923429152,
+     "heldout_top1": 0.4916387959866221,
+     "under_fit": false
+    },
+    {
+     "student": "S_k12_hp0_s502_r2",
+     "train_R_bar": 0.20635059640089864,
+     "train_top1": 0.5107452557496543,
+     "train_decisions": 7957,
+     "heldout_R_bar": 0.22525272256457654,
+     "heldout_top1": 0.48327759197324416,
+     "under_fit": false
+    },
+    {
+     "student": "S_k12_hp0_s503_r2",
+     "train_R_bar": 0.18532239837360615,
+     "train_top1": 0.5278301294132429,
+     "train_decisions": 7959,
+     "heldout_R_bar": 0.2068121839279038,
+     "heldout_top1": 0.4882943143812709,
+     "under_fit": false
+    }
+   ],
+   "remedy": [
+    {
+     "student": "S_k12_hp0_s501_r2",
+     "train_R_bar": 0.17948984135337712,
+     "train_top1": 0.5233272844348182,
+     "train_decisions": 17083,
+     "heldout_R_bar": 0.18653996379141644,
+     "heldout_top1": 0.5066889632107023,
+     "under_fit": false
+    },
+    {
+     "student": "S_k12_hp0_s502_r2",
+     "train_R_bar": 0.16874135545263538,
+     "train_top1": 0.5343909149446818,
+     "train_decisions": 17083,
+     "heldout_R_bar": 0.18408276698078424,
+     "heldout_top1": 0.5058528428093646,
+     "under_fit": false
+    },
+    {
+     "student": "S_k12_hp0_s503_r2",
+     "train_R_bar": 0.1774420885358548,
+     "train_top1": 0.5275323307390719,
+     "train_decisions": 17089,
+     "heldout_R_bar": 0.2012487063009335,
+     "heldout_top1": 0.4916387959866221,
+     "under_fit": false
+    }
+   ],
+   "belief_input": [
+    {
+     "student": "S_k12_belief_hp0_s521_r2",
+     "train_R_bar": 0.3674603706262377,
+     "train_top1": 0.33366846801558375,
+     "train_decisions": 7957,
+     "heldout_R_bar": 0.40180677585779623,
+     "heldout_top1": 0.2968227424749164,
+     "under_fit": true
+    },
+    {
+     "student": "S_k12_belief_hp0_s522_r2",
+     "train_R_bar": 0.3786827606644551,
+     "train_top1": 0.3270028927178971,
+     "train_decisions": 7951,
+     "heldout_R_bar": 0.3942234349366931,
+     "heldout_top1": 0.3085284280936455,
+     "under_fit": true
+    },
+    {
+     "student": "S_k12_belief_hp0_s523_r2",
+     "train_R_bar": 0.33803519308939456,
+     "train_top1": 0.3620364550597109,
+     "train_decisions": 7955,
+     "heldout_R_bar": 0.38424864327716574,
+     "heldout_top1": 0.30518394648829433,
+     "under_fit": true
+    }
+   ]
+  }
+ },
+ "14_m4_analysis": {
+  "n_episodes": 300,
+  "complete": true,
+  "delta_S12": 0.04,
+  "rows": {
+   "gstar": {
+    "success": 0.4266666666666667,
+    "ball_info": 6.248257789255915,
+    "probes": 3.9633333333333334,
+    "per_seed_success": [
+     0.4266666666666667
+    ]
+   },
+   "student": {
+    "success": 0.38222222222222224,
+    "ball_info": 6.199559494150433,
+    "probes": 4.0,
+    "per_seed_success": [
+     0.38333333333333336,
+     0.37666666666666665,
+     0.38666666666666666
+    ]
+   },
+   "rl": {
+    "success": 0.3566666666666667,
+    "ball_info": 5.91023528336657,
+    "probes": 3.0,
+    "per_seed_success": [
+     0.36666666666666664,
+     0.39,
+     0.31333333333333335
+    ]
+   }
+  },
+  "diffs": {
+   "student-gstar:success": {
+    "diff": -0.04444444444444445,
+    "ci90": [
+     -0.08555555555555557,
+     -0.0033333333333333383
+    ],
+    "ci95": [
+     -0.09333333333333335,
+     0.005555555555555546
+    ]
+   },
+   "student-gstar:ball_info": {
+    "diff": -0.048698295105482396,
+    "ci90": [
+     -0.10354336297521093,
+     0.007778312479527685
+    ],
+    "ci95": [
+     -0.11381723577368254,
+     0.019043726815655238
+    ]
+   },
+   "student-rl:success": {
+    "diff": 0.025555555555555564,
+    "ci90": [
+     -0.026666666666666655,
+     0.07777777777777778
+    ],
+    "ci95": [
+     -0.03666666666666665,
+     0.0877777777777778
+    ]
+   },
+   "student-rl:ball_info": {
+    "diff": 0.2893242107838624,
+    "ci90": [
+     0.1401979911773711,
+     0.43965936333162897
+    ],
+    "ci95": [
+     0.11703426127012961,
+     0.4652411336447996
+    ]
+   },
+   "gstar-rl:success": {
+    "diff": 0.07000000000000002,
+    "ci90": [
+     0.01222222222222225,
+     0.12555555555555556
+    ],
+    "ci95": [
+     0.0022222222222222365,
+     0.13666666666666666
+    ]
+   },
+   "gstar-rl:ball_info": {
+    "diff": 0.3380225058893448,
+    "ci90": [
+     0.1865555909436212,
+     0.48940554162649313
+    ],
+    "ci95": [
+     0.15845233650866292,
+     0.5195564404717172
+    ]
+   }
+  },
+  "gap_closure_reported": false,
+  "exploratory_b_fan": {
+   "n_episodes": 300,
+   "complete": true,
+   "success": 0.36,
+   "ball_info": 5.973236727544934,
+   "student-b_fan:success": {
+    "diff": 0.022222222222222213,
+    "ci95": [
+     -0.027777777777777787,
+     0.07333333333333333
+    ]
+   },
+   "student-b_fan:ball_info": {
+    "diff": 0.22632276660549844,
+    "ci95": [
+     0.14115157620073915,
+     0.3110182139205082
+    ]
+   },
+   "b_fan-gstar:success": {
+    "diff": -0.06666666666666667,
+    "ci95": [
+     -0.12,
+     -0.01
+    ]
+   },
+   "b_fan-gstar:ball_info": {
+    "diff": -0.27502106171098084,
+    "ci95": [
+     -0.366536269338665,
+     -0.18425674418951835
+    ]
+   },
+   "rl-b_fan:success": {
+    "diff": -0.003333333333333357,
+    "ci95": [
+     -0.0688888888888889,
+     0.06333333333333331
+    ]
+   },
+   "rl-b_fan:ball_info": {
+    "diff": -0.06300144417836392,
+    "ci95": [
+     -0.24648129479465214,
+     0.11989994227963628
+    ]
+   }
+  }
+ }
+}
+
+CITATIONS: Use the cite_keys provided. Format as \cite{cite_key}. Available cite_keys and one-line summaries:
+- zheng2026bayesian: Bayesian Active Object Recognition and 6D Pose Estimation from Multimodal Contact Sensing — Bayesian belief over class and pose using customized progressive particle filter; fuses wrist force/torque, GelSight contact and free-space (non-contact) constr
+- zheng2024bayesian: A Bayesian Framework for Active Tactile Object Recognition, Pose Estimation and Shape Transfer Learning — Customized particle filter jointly updating class and pose while tracking novelty; GPIS reconstructs novel shapes with prior grounded in PF MAP estimate; explor
+- gordon2026active: Active Tactile Exploration for Rigid Body Pose and Shape Estimation — Contact-rich system-identification loss penalizing physical constraint violation without numerical stiffness; exploration scheme maximizing Expected Information
+- javdani2012efficient: Efficient Touch Based Localization through Submodularity — Shows Shannon entropy reduction is submodular under certain assumptions so greedy is comparable to optimal offline; adaptive-submodularity-based online methods 
+- hebert2013next: The next best touch for model-based localization — Information gain metric on pose uncertainty picks next best touch; estimator updates pose; extended to simultaneously estimate model parameter or model class.
+- petrovskaya2011global: Global Localization of Objects via Touch — Scaling Series: Monte Carlo successive refinements with annealing; analytical measurement model for polygonal meshes.
+- vien2015touch: Touch based POMDP manipulation via sequential submodular optimization — Integrates an action hierarchy into adaptive submodularity framework, motivated by hierarchical POMDP planning, using sequential submodular optimization.
+- kamtikar2026tactful: TACTFUL: Tactile-Driven Exploration For Object Localization and Identification in Confined Environments — Single policy trained entirely on real hardware without simulation, balancing global exploration and local surface refinement via a dynamic reward schedule; ide
+- riou2024reinforcement: Reinforcement Learning Based Tactile Sensing for Active Point Cloud Acquisition, Recognition and Localization — RL agent jointly trained with classifier and pose estimator; rewards for classification, exploration and pose estimation.
+- riou2021seeing: Seeing By Haptic Glance: Reinforcement Learning Based 3d Object Recognition — RL framework where haptic exploration (agent predicts next position) is optimized simultaneously with recognition; reward only on correct recognition.
+- niemann2024when: Learning When to Stop: Efficient Active Tactile Perception with Deep Reinforcement Learning — Extends Haptic Attention Model with hybrid action space (continuous glance location plus discrete decision to classify) using deep RL.
+- schneider2025tactile: Tactile MNIST: Benchmarking Active Tactile Perception — Tactile MNIST Benchmark Suite, Gymnasium-compatible, tasks: localization, classification, volume estimation; CycleGAN for tactile rendering.
+- xu2023tandem3d: TANDEM3D: Active Tactile Exploration for 3D Object Recognition — TANDEM3D: co-training of exploration and decision making; PointNet++ encoder on contact positions and normals; 6DOF movement.
+- murali2022active: Active Visuo-Tactile Interactive Robotic Perception for Accurate Object Pose Estimation in Dense Clutter — Declutter graph; translation-invariant Quaternion filter; active visual and tactile points chosen by maximizing expected information gain.
+- murali2024shared: Shared visuo-tactile interactive perception for robust object pose estimation — Stochastic Translation-Invariant Quaternion Filter; hand-eye calibration; joint information gain criterion for active representation.
+- ottenhaus2018active: Active Tactile Exploration Based on Cost-Aware Information Gain Maximization — Information Gain Estimation Function combining information gain and expected cost to pick next best touch target.
+- shahidzadeh2023actexplore: AcTExplore: Active Tactile Exploration of Unknown Objects — RL-driven active tactile exploration that incrementally collects tactile data and reconstructs 3D shapes.
+- fleer2020efficient: Learning efficient haptic shape exploration with a rigid tactile sensor array — Haptic Attention Model: recurrent attention inspired RL with feature extractor and RNN; reward on success only.
+- pai2023tactofind: TactoFind: A Tactile Only System for Object Retrieval — System with sparse fingertip touch on dexterous hand to localize, identify and grasp novel objects.
+- sipos2023multiscope: MultiSCOPE: Disambiguating In-Hand Object Poses with Proprioception and Tactile Feedback — Tool segmentation routine, consistency loss across interactions, loss explaining external force-torque; bimanual frictional contacts.
+- kuster2026belief: Belief-Driven Tactile Exploration for Vision-Free Plug–Socket Insertion — Particle belief over planar position and orientation updated via contact height measurements from a CAD-based collision model; contact-guided tangential motions
+- saleem2026manipulation: Manipulation in the Blind: Motion Planning for Manipulation under Uncertainty using Contacts — Search-based POMDP planning: experience-based policy database, hierarchical online planning, lazy belief-update heuristic search; torque-based contact detection
+- koval2015pose: Pose estimation for planar contact manipulation with manifold particle filters — Manifold particle filter sampling from dual proposal on the contact manifold; three sampling techniques.
+- drigalski2020contact: Contact-based in-hand pose estimation using Bayesian state estimation and particle filtering — Bayesian state estimation with particle filtering from contact.
+- manuelli2016localizing: Localizing external contact using proprioceptive sensors: The Contact Particle Filter — Contact Particle Filter finds contact points best explaining joint torque.
+- bauza2023tac2pose: Tac2Pose: Tactile object pose estimation from the first touch — Simulate contact shapes for dense pose set; contrastive object-specific embedding; outputs pose distribution; calibration from RGB tactile to binary contact sha
+- kelestemur2020bayes: Learning Bayes Filter Models for Tactile Localization — Learnable Bayes filter with observation model conditioned on visual maps plus motion model, trained self-supervised in simulation.
+- zirui2026tacloc: TacLoc: Global Tactile Localization on Objects from a Registration Perspective — One-shot point cloud registration; graph-theoretic partial-to-full registration with normal-guided graph pruning and hypothesis-and-verification.
+- ye2026you: You Only Touch Once: 6-DoF Object Pose Estimation from Single Tactile Contact — Coarse-to-fine contact localization network pretrained on virtual patches, closed-form normal-aware SVD solver.
+- liang2020hand: In-Hand Object Pose Tracking via Contact Feedback and GPU-Accelerated Robotic Simulation — GPU-accelerated parallel simulation with derivative-free sample-based optimizers.
+- rostel2022state: Learning a State Estimator for Tactile In-Hand Manipulation — Differentiable particle filter with learned proposal and SE(3) Lie-group update.
+- sodhi2021tactile: Learning Tactile Models for Factor Graph-based Estimation — Learned tactile observation models in factor graph.
+- suresh2021tactile: Tactile SLAM: Real-time inference of shape and pose from planar pushing — Online SLAM with GPIS regression and factor graph pose estimation.
+- suresh2024neuralfeels: NeuralFeels with neural fields: Visuotactile perception for in-hand manipulation — Neural field plus pose graph.
+- yang2019multifidelity: Multifidelity Sampling for Fast Bayesian Shape Estimation With Tactile Exploration — Next sample chosen by mutual information and local curvature.
+- gandler2020object: Object shape estimation and modeling, based on sparse Gaussian process implicit surfaces, combining visual data and tactile exploration — Sparse GPIS.
+- foster2021deep: Deep Adaptive Design: Amortizing Sequential Bayesian Experimental Design — DAD design network, contrastive bounds.
+- ivanova2021implicit: Implicit Deep Adaptive Design: Policy-Based Experimental Design without Likelihoods — iDAD.
+- blau2022optimizing: Optimizing Sequential Experimental Design with Deep Reinforcement Learning — MDP formulation, deep RL.
+- vincent2022policy: Policy-Based Bayesian Experimental Design for Non-Differentiable Implicit Models — RL-DAD with likelihood-free bounds.
+- hedman2025step: Step-DAD: Semi-Amortized Policy-Based Bayesian Experimental Design — Step-DAD periodic updates.
+- rainforth2024modern: Modern Bayesian Experimental Design — Review.
+- kleinegesse2020sequential: Sequential Bayesian Experimental Design for Implicit Models via Mutual Information — MI utility, ratio estimation, BO.
+- iqbal2024nesting: Nesting Particle Filters for Experimental Design in Dynamical Systems — Inside-Out SMC^2.
+- iqbal2024recursive: Recursive Nested Filtering for Efficient Amortized Bayesian Experimental Design — IO-NPF.
+- huang2026aline: ALINE: Joint Amortization for Bayesian Inference and Active Data Acquisition — ALINE transformer RL.
+- asano2022sequential: Sequential Bayesian experimental designs via reinforcement learning — RL.
+- shen2023reinforcement: Reinforcement Learning based Sequential and Robust Bayesian Optimal Experimental Design — PG-sOED, vsOED.
+- chen2015submodular: Submodular Surrogates for Value of Information — DiRECt.
+- esfandiari2019adaptivity: Adaptivity in Adaptive Submodularity — Semi-adaptive policy.
+- seminara2019active: Active Haptic Perception in Robots: A Review — Review.
+- navarroguerrero2023visuo: Visuo-haptic object perception for robots: an overview — Review.
+- bonzini2022leveraging: Leveraging symmetry detection to speed up haptic object exploration in robots — GP with symmetry.
+- calandra2018more: More Than a Feeling: Learning to Grasp and Regrasp Using Vision and Touch — Action-conditional CNN.
+- qi2023general: General In-Hand Object Rotation with Vision and Touch — RotateIt.
+- lin2022tactile: Tactile Gym 2.0: Sim-to-Real Deep Reinforcement Learning for Comparing Low-Cost High-Resolution Robot Touch — Extend simulator.
+- ross2011reduction: A Reduction of Imitation Learning and Structured Prediction to No-Regret Online Learning — DAgger: an iterative algorithm that trains a stationary deterministic policy, seen as a no-regret online learner, aggregating expert labels on states visited by
+- schulman2017proximal: Proximal Policy Optimization Algorithms — Alternate sampling with optimising a clipped surrogate objective over several epochs of minibatch updates.
+- choudhury2017adaptive: Adaptive Information Gathering via Imitation Learning — Imitation learning of a clairvoyant oracle that knows the world map at train time; analysed as equivalent to online oracle execution with posterior sampling.
+- nguyen2024amortized: Amortized nonmyopic active search via deep imitation learning — Deep imitation learning of a nonmyopic active-search expert (title-level; details not re-read).
+
+Outline:
+
+# Paper outline (stage 16, v3, outcome row 4: characterisation paper)
+
+**Venue (default until the owner decides, 15_decision §4.3):** RSS 2027 Stage 1 extended abstract: at most 5 content
+pages plus 1 page of references, double-column, no supplementary material. The method must be complete; experiments
+may be preliminary. **Main-body target: about 3,400 words** (abstract not counted), plus 2 tables and 2 figures.
+If the owner picks RA-L or a workshop (option b), expand the same structure (§11 at the end lists what grows).
+
+**Paper type.** This is the pre-registered **row-4 characterisation** of `docs/07_hypotheses_v3.md` §5. There is no
+method claim. Every claim is the outcome of a pre-registered decision rule, or it is a labelled descriptive or
+exploratory row.
+
+**Sources (the only ones the draft may quote numbers from).**
+- `results/v3/results_v3.json`, cited below as `key.path` (top-level key first).
+- `results/v3/14_analysis.md`. Its pass-2 rewrites (S1–S7, M1–M8, m1–m7) are **binding** wording; see §0.3.
+- `results/v3/15_decision.md`: labels, the PROCEED conditions and the pre-written readings of the B-fan row.
+- Citations come only from `docs/05_knowledge_cards.json`, using the exact `cite_key`.
+
+---
+
+## 0. Global constraints for the draft
+
+### 0.1 Title
+
+**Proposed title:** *Can Cost-Aware Information-Gain Touch Selection Be Amortized? Look-Ahead Headroom and
+Learnability under Travel Cost*
+
+- The title and abstract contain no "near-optimal" (07_hypotheses_v3 §3, "Working title"; 15_decision §4.2).
+- The question form is deliberate. Row 4 has no amortization result, so the title asks rather than asserts.
+- **Owner check:** 07_hypotheses_v3 §3 says "the outcome map can only shorten" the working title. A strict reading of
+  that rule allows only:
+  - **Fallback B:** *Cost-Aware Information-Gain Touch Selection: Look-Ahead Headroom and the Learnability of
+    Amortized Policies*. This drops "Amortizing", which row 4 does not support.
+  - The owner chooses between the proposed title and Fallback B.
+
+### 0.2 Labels the paper must carry (15_decision §1)
+
+| Claim | Label | Key |
+|---|---|---|
+| H1 (distilled student non-inferior to G\*) | **dead at D3** (never tested on test3) | `12_d3_analysis_rem.passes` = false |
+| H1-fb (student-pruned greedy) | **withdrawn** (Lat′ ratio 3.22 < 10) | `12_lat_analysis.ratio_full_over_pruned16`, `.H1_fb_active` |
+| H2 (student beats RL on g_T by > 0.10 nats) | **rejected**. Fail-branch reading: "dense supervision does not improve on RL with this head". This is a non-detection, not equality. | `14_h2_analysis.passes`, `.bootstrap.lower` |
+| H3 (small one-step headroom) | **Hold** | `12_g2_analysis.H3.region`, `.k12.ub95` |
+| Encoder sentence | "generalisation / covariate shift, not capacity". Rule-permitted but weakly supported: covariate shift is inferred, not observed. | `14_labelfit.groups.*[].under_fit` |
+
+### 0.3 Binding phrasing (pass-2 rewrites; the draft must use these and never the pass-1 sentences)
+
+- **S5 (H3 headline):** "One-step rollout over the reduced greedy completion gains ≤ 2.2 % of the remaining expected
+  ball information at κ = 12 (S, n\* = 4; one-sided 95 % UB of G(12) = 0.0221)."
+- **S4 (H3 bias):** "On 20 separate beliefs the estimator reads V_G\* 0.087 nats (4.3 %, no CI) below an independent
+  full-G\* rollout, comparable in size to the 0.041-nat κ = 12 gap; this direction alone would inflate G, and Hold could
+  be affected only if V_LA were under-read by more, which was not checked."
+- **S7 (learned vs G\*):** "Neither learned policy was shown to reach G\*: the student failed the D3 non-inferiority rule
+  on val3 (Δ̂_succ −4.40 pp vs threshold −1.68 pp), and on test3 it trails by −4.4 pp (significant one-sided only) while
+  RL trails by −7.0 pp (ci95 [+0.2, +13.7] for G\* − RL)."
+- **S1 (student vs RL):** "No difference between the two learned policies was detected on g_T (Δ = +0.0002 nats,
+  one-sided 95 % bounds [−0.31, +0.30]) or on test success (ci95 [−3.7, +8.8] pp); equivalence was not tested."
+- **S3 (BI vs g_T):** "Student − RL BI is +0.289 nats (ci95 [+0.117, +0.465]) on test3 0–299, while the g_T difference
+  on 0–499 is undetected with bounds wide enough (±0.31 nats) to include a gap of that size; RL executes 3.0 probes
+  against the student's 4.0."
+- **S2 (heuristic, unpaired):** "On unpaired splits the travel-nearest heuristic b_fan (0.403 ± 0.040, n = 154 of 200
+  pilot3 episodes) has a point success comparable to the remedied student (0.402 val3, 0.382 test3); no paired
+  comparison exists, so nothing in the record shows the student beats it." This sentence is superseded by the paired
+  row if that row completes (§9, row R9).
+- **S6 (H1-fb):** "PF assimilation and neighbour lists account for 15.0 % of G\*'s per-decision time (component
+  medians), so pruning candidates cannot exceed about 6.7× and cannot give 10×; measured full / pruned-16 = 3.22."
+- **M1 (remedy):** "After the one remedy (round 0 and both DAgger rounds doubled; 7,957 → 17,083 training decisions),
+  the point estimates moved from −0.199 to −0.096 nats BI and from −5.87 to −4.40 pp success; this change was not
+  tested."
+- **M3 (H2 power):** "Passing required an observed Δ > 0.41 nats; with SE ≈ 0.19, the test had about 80 % power only for
+  a true Δ near 0.57 nats."
+- **M5 (latency):** "Per decision, the student's median latency is about 2,200× below full-size G\* (pooled-machine
+  Lat′, protocol incomplete; G\* median CI alone ≈ 1,900–2,300×), not compared at equal accuracy."
+- **M4 (per episode, optional):** "Assuming 3–4 decisions per episode and no greedy read-out cost, Σ L_dec(G\*) /
+  (Σ L_dec(student) + L_final) ≈ 13–18×; the protocol L_ep was not measured and would be lower."
+- **M6 (D3-B):** "The 5 missing episodes can raise Δ̂_succ by at most 2.0 pp (to −18.1 pp), still 17 pp below the
+  threshold, so the D3-B verdict cannot flip."
+- **M7 (E′ flip):** "The one counted flip occurred with the true-identity mass unchanged (0.228) and outside the
+  [0.45, 0.55] tie band; the JSON does not record which part of the success criterion changed."
+- **M8 (sub-8 cost):** "Sub-8 read-out costs 40.6 s per episode, which limited the grid-scored rows (G5′ re-reads,
+  D3/D3-B, M4 on 300 episodes)."
+- **m2 / m5 (RL seeds):** "RL varies more across its 3 seeds than the student (test success range 7.7 vs 1.0 pp; g_T
+  range 0.48 vs 0.14 nats)"; "The RL per-seed SD of g_T is about 3.3× the student's (0.253 vs 0.077 nats; range ratio
+  3.5)."
+- **m3 (evaluator):** "Sub 4 → 8 flips the success outcome of 7.5 % of the 200 S0 calibration episodes."
+- **m6 (TOST):** "No equivalence test (TOST) was pre-registered or run for H2."
+- **m7 (G5′):** "Provisional PASS in all 3 cells on incomplete random rows (n = 62 / 199 / 161 of 200); D_c ≥ 0.35
+  everywhere, so δ_c = 0.04 (cap) is unlikely to move."
+
+### 0.4 Never write
+
+- Any method claim, or any phrasing implying that H1, H1-fb or H2 passed.
+- "near-optimal".
+- "indistinguishable", "same sPCE", or "RL and distillation are equal".
+- "2,000× per episode"; any latency ratio without "per decision".
+- "the remedy cut/halved" (causal wording).
+- "objective mismatch". The H2 fail branch excludes it because the success ci95 contains 0.
+- "RL is unstable".
+- "zero-travel heuristic". B-fan is travel-nearest.
+- A learning-vs-heuristic sentence beyond the pre-written readings of §9 R9.
+- A number from PROGRESS.md or from the 07c notes that the JSON contradicts. The first-attempt values are the JSON's
+  −5.87 pp, not the note's −6.8 pp.
+- Gap closure (`14_m4_analysis.gap_closure_reported` = false).
+- CPU-h. It is not in the JSON.
+- Environment, CI or infrastructure problems presented as findings. Compute only limits n; it is mentioned once, in
+  Limitations, through the M8 sentence.
+
+---
+
+## 1. Abstract (about 180 words, not counted in the body target)
+
+**Goal.** State the research problem (active tactile localization under travel cost):
+- (i) how much headroom one-step look-ahead leaves over greedy cost-aware information-gain touch selection;
+- (ii) whether that greedy planner can be amortized by a learned policy, comparing distillation from the planner with RL
+  on the same objective.
+
+Then give the four headline outcomes with numbers, and say that the experiments are preliminary: one cell (S, κ = 12),
+n\* = 4.
+
+**Content, in order.**
+1. Problem and setting: a joint identity × planar-pose belief, travel cost on a stand-off circle, and the cost-aware
+   greedy G\*.
+2. H3: the S5 sentence, shortened to "≤ 2.2 % (one-sided 95 % UB)".
+3. Learnability: neither DAgger distillation nor PPO with the same relative DeepSets head was shown to reach G\* (the S7
+   sentence, short form).
+4. H2: on RL's own objective, no improvement of distillation over RL was detected (pre-registered test rejected;
+   non-detection).
+5. Per-decision cost: about 2,200× lower median latency for the learned head, not at equal accuracy (the M5 short form).
+6. "Pre-registered; single cell; preliminary."
+
+**Evidence links.** `12_g2_analysis.k12.ub95`; `12_d3_analysis_rem.succ.delta_hat` / `.threshold`;
+`14_m4_analysis.diffs["student-gstar:success"]`; `14_m4_analysis.diffs["gstar-rl:success"]`;
+`14_h2_analysis.bootstrap.diff` / `.lower` / `.upper`; `12_lat_analysis.ratio_full_over_student`.
+
+**Constraint.** No "near-optimal". No learning-vs-heuristic sentence unless R9 reading (a) occurs. In that case add
+one clause, labelled exploratory.
+
+---
+
+## 2. Introduction (target 550 words)
+
+**Goal.** Motivate the two coupled questions behind every information-driven touch selector under travel cost:
+- (1) Is greedy cost-aware EIG selection good enough, or is planning depth worth paying for?
+- (2) Can the per-decision cost of online belief-based selection be amortized into a network?
+
+Then state that this is a pre-registered characterisation with an honest negative core.
+
+**Paragraph plan.**
+1. **(about 130 words) Active tactile localization.**
+   - Touches are sparse and ambiguous, so a belief over identity and pose is maintained, and the next touch is chosen
+     by expected information gain.
+   - Moving the finger costs time, so selection must be cost-aware.
+   - Cite: `petrovskaya2011global`, `hebert2013next`, `zheng2024bayesian`, `zheng2026bayesian`, `ottenhaus2018active`,
+     `seminara2019active`.
+2. **(about 120 words) Question 1, depth.**
+   - Greedy selection is backed by (adaptive) submodularity, yet it can be weak when actions constrain the future.
+     Travel cost is exactly such a coupling.
+   - Cite: `javdani2012efficient`, `vien2015touch`, `chen2015submodular`, `esfandiari2019adaptivity`.
+3. **(about 120 words) Question 2, amortization.**
+   - Online PF-based EIG re-optimises at every decision.
+   - Amortized experimental design learns a policy instead, through RL on contrastive bounds or through other
+     approaches.
+   - The question is whether supervising the policy with the planner's dense per-action scores (DAgger distillation)
+     beats RL on the same objective with the same head.
+   - Cite: `foster2021deep`, `blau2022optimizing`, `ivanova2021implicit`, `hedman2025step`, `rainforth2024modern`;
+     tactile RL: `riou2024reinforcement`, `niemann2024when`.
+4. **(about 180 words) What we did and found.**
+   - Pre-registered design (hypotheses, thresholds and outcome map frozen before any test episode).
+   - One-step rollout headroom over G\* is small: the S5 sentence.
+   - With the same relative DeepSets head, neither DAgger distillation nor PPO was shown to reach G\*: the S7 sentence.
+     A label-fit diagnosis assigns the student's shortfall to generalisation rather than capacity, in the weak form of
+     §0.2.
+   - On RL's training objective no advantage of distillation was detected (H2 rejected; the M3 power caveat).
+   - The learned head is about 2,200× cheaper per decision, not at equal accuracy (M5).
+5. **Contributions list.** Exactly C1–C4. C5 is folded into C2 and C4.
+   - **C1** a measured, pre-registered bound on one-step look-ahead headroom over cost-aware greedy touch selection
+     under travel cost (H3);
+   - **C2** a controlled learnability comparison of planner distillation (DAgger) vs RL (PPO) with an identical
+     belief-free relative head, including a label-fit / belief-input diagnosis;
+   - **C3** a test of distillation vs RL on RL's own objective (H2: rejected);
+   - **C4** two measurement notes: evaluator grid resolution moves success outcomes, and per-decision latency with its
+     component split.
+   - A one-line pre-registration statement goes at the end: the row-4 outcome was written before the run.
+
+**Evidence links.** `12_g2_analysis.k12` (G, ub95, abs_gap_nats); `12_d3_analysis_rem.succ`;
+`14_m4_analysis.diffs["student-gstar:success"]`, `["gstar-rl:success"]`; `14_h2_analysis.bootstrap`;
+`14_labelfit.groups.remedy`; `12_lat_analysis.ratio_full_over_student`.
+
+---
+
+## 3. Related work (target 300 words; three compact paragraphs)
+
+**Goal.** Place C1 against the greedy-vs-planning literature, C2/C3 against amortized experimental design and tactile
+RL, and the task against tactile localization. Every paragraph ends with the gap that this paper's question fills.
+
+1. **Tactile localization and next-best-touch (about 100 words).**
+   - Estimation: `petrovskaya2011global`, `koval2015pose`, `bauza2023tac2pose`.
+   - Information-driven selection: `hebert2013next`, `zheng2024bayesian`, `zheng2026bayesian`, `gordon2026active`,
+     `kamtikar2026tactful`.
+   - Cost-aware IG: `ottenhaus2018active`.
+   - Survey: `seminara2019active`.
+   - **Gap:** per-step (myopic) selection is the norm; its headroom under travel cost and its per-decision compute are
+     rarely measured.
+2. **Greedy vs non-myopic information gathering (about 80 words).**
+   - `javdani2012efficient`, `vien2015touch`, `chen2015submodular`, `esfandiari2019adaptivity`.
+   - **Gap:** guarantees assume submodular structure that travel cost can break, so we measure headroom directly (H3).
+3. **Amortized and learned active sensing (about 120 words).**
+   - BED amortization: `foster2021deep`, `ivanova2021implicit`, `blau2022optimizing`, `hedman2025step`,
+     `iqbal2024recursive`, `huang2026aline`, `rainforth2024modern`.
+   - Tactile RL: `riou2021seeing`, `riou2024reinforcement`, `niemann2024when`, `xu2023tandem3d`, `fleer2020efficient`.
+   - Benchmark: `schneider2025tactile`.
+   - **Gap:** RL vs supervised distillation of a validated planner, compared on the RL objective with the same head.
+
+**Missing cards (must not be cited until added and verified in stage 8.5/23).**
+- DAgger (Ross et al.).
+- PPO (Schulman et al.).
+- Imitation of information-gathering oracles (Choudhury et al., RSS 2017).
+- arXiv:2405.15031 (named in 07_hypotheses_v3 §3.1).
+
+Until a card exists, the draft writes "DAgger"/"PPO" without a citation and leaves a `[CITE-MISSING]` marker.
+
+**Update (run 8):** cards added — C57 `ross2011reduction` (DAgger), C58 `schulman2017proximal` (PPO), C59
+`choudhury2017adaptive`, C60 `nguyen2024amortized` (arXiv only, title-level). No `[CITE-MISSING]` remains for these.
+
+---
+
+## 4. Problem and methods (target 850 words)
+
+**Goal.** Give a complete technical description of the task, the cost-aware greedy planner, the headroom estimator and
+the two amortized learners. Describe the technical approach, not a workflow.
+
+**Constants.** Design constants (object geometry, noise, success tolerances, contrastive L/J, DAgger round sizes,
+learning rates) are quoted from the frozen design documents (`docs/07_hypotheses_v2.md` §1.1–§1.4,
+`docs/07_hypotheses_v3.md` §1.2, §1.6, §2.1, §2.2, `docs/07c_amendment_v3_0.md`). They are design inputs, not results.
+The drafter copies them verbatim from those sections.
+
+### 4.1 Task and belief (about 200 words)
+
+- **State:** s = (k, x, y, θ), a planar polygon of identity k from a library (set S, near-symmetric pairs), with an
+  unknown planar pose.
+- **Finger:** sits on a stand-off circle at angle φ_t.
+- **Action:** a = (φ′, ψ) on a 64 φ′ × 8 ψ grid (512 actions). The finger travels to φ′ and then probes in direction
+  φ′ + π + ψ.
+- **Travel cost:** c(a) = 1 + κ·|Δφ|/π strokes. The episode has a time budget τ_κ, an action is feasible iff
+  c(a) ≤ τ_rem, and the episode ends when τ_rem < 1.
+- **Probe matching:** budgets are probe-matched so that G\* executes n\* probes on average at every κ. Cal′ verification:
+  `12_cal_analysis.verify.S_k12` (mean probes 3.96 for n\* = 4).
+- **Observation:** a contact point and normal with Gaussian noise, or a miss, under an ε-softened likelihood.
+- **Belief:** a particle filter over (k, x, y, θ).
+- **Metrics (equations):**
+  - success = correct MAP identity ∧ position and rotation within tolerance, modulo symmetry;
+  - ball information BI = log P̂(B(s₀) | h) − log P(B(s₀)), in nats.
+- **Equations:** c(a); the feasibility mask; the BI definition.
+
+### 4.2 Cost-aware greedy planner G\* (about 120 words)
+
+- G\*(b) = argmax over feasible a of EIG_B(a; b) / c(a). EIG_B is the expected gain in ball information, estimated by
+  nested Monte Carlo on an online PF.
+- Full-size configuration (N, C, M) = (2,000, 512, 64).
+- At each decision G\* exports the full score vector s(a) = max(0, EIG_B)/c(a). This vector is the distillation target.
+- **Equations:** the G\* argmax; s(a).
+
+### 4.3 One-step look-ahead headroom estimator (about 150 words)
+
+- G(κ) = (mean V_LA − mean V_G\*) / mean V_LA over G\*-reached beliefs.
+  - V is the expected remaining-budget ball information.
+  - V_LA takes the best first action under rollouts completed by a **reduced greedy** (N_LA = 500, 128 candidates,
+    M = 16; 07c C12) and uses common random numbers.
+- G(κ) is dimensionless. It is **one-step-deviation headroom over a reduced greedy completion**, not the gap to the
+  optimum (binding, S5).
+- **Instrument checks** (all must pass for Hold):
+  - (a) a notch construction with a known exact gap;
+  - (b) a zero-gap bank;
+  - (c) a travel-notch;
+  - a bias check of V_G\* against an independent full-G\* rollout.
+- **Equation:** G(κ).
+
+### 4.4 Amortized policies with one shared head (about 280 words)
+
+- **Shared architecture.**
+  - A belief-free, finger-relative DeepSets head. Input: the touch history in the finger frame, the finger angle and the
+    remaining-budget fraction.
+  - Output: 512 masked logits.
+  - Identical for both learners. This is the controlled variable of C2/C3.
+- **Distillation (student).**
+  - Loss: soft cross-entropy to softmax(β_T·s(a)/σ_s) over feasible a, plus λ·CE to G\*'s argmax.
+  - Data: round 0 on G\* rollouts, then two DAgger rounds (mixing β = 0.5, then 0) with G\* labels at student-visited
+    beliefs.
+  - Hyperparameters were selected on held-out floored normalised regret R̄; the stopping rule also uses R̄. No
+    success-based selection.
+  - Remedy (pre-registered, applied once): round 0 and both DAgger rounds doubled. End-of-round-2 training decisions
+    went from 7,957 to 17,083 (`14_labelfit.groups.first_attempt[].train_decisions`, `.remedy[].train_decisions`).
+- **RL (PPO).**
+  - Same head and action set. The reward telescopes to ball-sPCE g_T, a contrastive lower bound on terminal ball
+    information, so **g_T is RL's own objective**.
+  - Training length: 200,064 episodes per seed (`14_h2_analysis.rl_training.*.episodes`).
+  - Learning rate selected from a 4-config sweep (`12_rl_sweep_selection`, selected cfg 2). That selection was made on
+    the trainer's `val_v2` stream, which is stated as a deviation.
+- **Belief-input control.** The same recipe with a 48-feature PF summary replacing the history encoder, trained on
+  first-attempt-size data. It is used only by the encoder sentence.
+- **Equations:** the distillation loss; the floored normalised regret r = r_u / max(s_max − s_med, ρ·s_max); the g_T
+  definition (refer to the BED card `foster2021deep` for sPCE).
+
+### 4.5 Baselines (about 100 words)
+
+- **Random** with the feasibility mask.
+- **Three heuristics** with a budget-reservation rule:
+  - B-spread (belief-free, angular spread);
+  - **B-fan** (belief-free, **travel-nearest**: stays at φ_t when allowed, cycles ψ, otherwise moves to the nearest
+    allowed φ′);
+  - B-cov (belief-using coverage).
+- H★ for S12 is B-fan (`12_g5_analysis.cells.S12.H_star`), selected on pilot3 and frozen.
+
+---
+
+## 5. Experimental protocol (target 300 words)
+
+**Goal.** Show that every claim comes from a frozen, pre-registered rule, and give the reader the gates in one table.
+
+**Content.**
+- **Pre-registration.**
+  - The hypotheses, thresholds, outcome map (rows 1–4) and not-allowed list were frozen before any test3 episode
+    (07c freeze note).
+  - Row 4 was reached through the gates: D3 failed twice, and H1-fb was withdrawn at Lat′.
+- **Cell.** Set S, κ = 12, n\* = 4 (`12_cal_analysis.n_star.S.n_star`). H3 also uses κ ∈ {0, 2}.
+- **Splits.**
+  - pilot3: G5′ margins and H★.
+  - val3: 500 episodes, for D3 and the D3 remedy.
+  - test3 0–499: H2 g_T.
+  - test3 0–299: the M4 success and BI rows.
+  - All splits are disjoint, and all methods are paired on the same episodes.
+- **Evaluator.**
+  - An adaptive grid posterior. E′ failed (`12_e_analysis.counted_flips` = 1, `.passes` = false), so sub = 8 is used
+    everywhere.
+  - Each read-out costs `12_e_analysis.mean_wall_s_sub8` (40.6 s); use the M8 sentence.
+- **Statistics.**
+  - Crossed episode × seed bootstrap, B = 10,000 (`14_h2_analysis.bootstrap.n_boot`). One-sided 95 % bounds unless
+    labelled.
+  - One test per claim. There is no correction across claims; the analysis §3.3 justification is one sentence.
+  - The M4 intervals are descriptive, not tests.
+- **D3 rule.** One sentence plus a formula: (i) Δ̂_succ ≥ max(−2 pp, −δ + 1.645·SE·√0.5); (ii) the same for BI with the
+  −0.15 floor; (iii) every seed > −δ. δ_S12 = 0.04 (`12_d3_analysis_rem.delta_S12`).
+- **Margins.**
+  - ε_S12 from `12_g5_analysis.cells.S12.eps_c`.
+  - Footnote: the D3 files carry a stale `eps_S12` (0.314266 vs 0.314507). It cannot move the −0.15 floor.
+
+**Table 1 (gate and decision table)** is placed in this section. Its rows are listed in §9 (R1–R5).
+
+---
+
+## 6. Results (target 950 words)
+
+### 6.1 H3: one-step look-ahead headroom is small (about 250 words)
+
+**Goal.** Answer research question (1) with the pre-registered Hold verdict and its instrument support, and state the
+bias caveat honestly.
+
+**Content.**
+- Hold, using the S5 sentence: G(12) = 0.01624, UB95 0.02210 < 0.03, margin 0.0079.
+- The absolute gap is 0.041 nats on a mean V_G\* of 2.506.
+- The ordering G(0) ≤ G(2) ≤ G(12) holds.
+- "LA differs from G\*" is not headroom: LA ≠ G\* in 0.62 of beliefs while the mean gain is small, a pattern that fits
+  near-ties among the top actions. Phrase this as "consistent with", not "shows".
+- Instrument checks:
+  - G1′ (a) 0.8290 in band;
+  - (b) 0.00254, UB 0.00374;
+  - (c) 0.7438 vs exact 0.7166.
+  - Note that (a) and (b) are identical to v2, so they are not independent evidence.
+- The bias sentence S4, verbatim.
+
+**Evidence links.**
+- `12_g2_analysis.k0` / `.k2` / `.k12`: `G`, `lb95`, `ub95`, `abs_gap_nats`, `mean_v_la`, `mean_v_greedy`,
+  `frac_la_differs`, `n_no_budget_left`.
+- `12_g2_analysis.H3`: `region`, `downgraded`, `ordering_G0<=G2<=G12`.
+- `12_g2_analysis.bias_check`: `ratio`, `mean_estimator_v_greedy`, `mean_reference_v`, `n_floored_rollouts`.
+- `12_g1_analysis.a.mean`, `.a.band`; `.b.mean`, `.b.ub95`; `.c.mean`, `.c.exact`.
+- Cards: `javdani2012efficient`, `chen2015submodular` (the interpretation of greedy competitiveness).
+
+**Figure 2(a)** plots this subsection (see §10).
+
+### 6.2 Learnability: distillation and RL vs the greedy teacher (about 350 words)
+
+**Goal.** Answer research question (2), part 1: can the greedy planner be amortized by either learner with this head?
+
+**Content.**
+1. **D3 (val3, 500 paired episodes, the binding evidence).**
+   - First attempt: Δ̂_succ −5.87 pp vs threshold −1.43 pp; Δ̂_BI −0.199 vs −0.15; seeds −4.2 / −8.0 / −5.4 pp.
+   - Remedy: −4.40 pp vs −1.68 pp ✗; BI −0.096 vs −0.15 ✓; seeds −4.6 / −4.6 / −4.0 pp ✗.
+   - Seed 503 sits exactly at −δ. The verdict does not hinge on it, because rule (i) fails by 2.7 pp.
+   - The change between attempts uses the M1 sentence (not tested).
+2. **Test3 0–299 (descriptive).**
+   - Success, BI and probes for G\*, the student and RL; paired diffs.
+   - Student − G\*: use S7 ("significant one-sided only").
+   - G\* − RL: +7.0 pp, ci95 [+0.22, +13.67].
+3. **Label-fit diagnosis and encoder sentence.**
+   - All six history students fit by the rule: train top-1 0.511–0.534, R̄ 0.169–0.206.
+   - Held-out top-1 is below 0.50 for 4 of 6.
+   - Use the analysis §2.2 "Allowed wording" verbatim: "Students fit the teacher's training labels to the
+     pre-registered criterion (top-1 0.51–0.53) but fail validation; the label-fit rule assigns this to generalisation
+     rather than capacity. The held-out regret is measured on teacher-visited states, so covariate shift is inferred,
+     not observed."
+4. **Belief-input control.**
+   - Under-fit (train top-1 0.327–0.362) and D3-B fails (−20.1 pp, −1.01 nats, on 295 of 300 episodes; use the M6
+     bound).
+   - It isolates nothing about the representation. It shows only that this 48-feature summary, trained on
+     first-attempt-size data, is a worse input than the relative history.
+
+**Evidence links.**
+- `12_d3_analysis.succ.delta_hat` / `.threshold` / `.per_seed`; `12_d3_analysis.bi.*`; `12_d3_analysis.seeds_ok`.
+- `12_d3_analysis_rem.succ.*`, `.bi.*`, `.seeds_ok`, `.passes`.
+- `12_d3_analysis_belief_student.succ.delta_hat`, `.bi.delta_hat`, `.n_episodes` (295), `.complete` (false).
+- `14_m4_analysis.rows.gstar|student|rl` (`success`, `ball_info`, `probes`, `per_seed_success`).
+- `14_m4_analysis.diffs["student-gstar:success"]`, `["student-gstar:ball_info"]`, `["gstar-rl:success"]`,
+  `["gstar-rl:ball_info"]`.
+- `14_m4_analysis.gap_closure_reported` (false; state that it is withheld by rule).
+- `14_labelfit.groups.first_attempt`, `.remedy`, `.belief_input` (`train_top1`, `train_R_bar`, `heldout_top1`,
+  `heldout_R_bar`, `under_fit`).
+
+**Table 2** carries items 1–2. The label fit goes into the text, or into a 3-row compact sub-table if space allows.
+
+### 6.3 H2: distillation vs RL on RL's own objective (about 200 words)
+
+**Goal.** Answer research question (2), part 2: does dense planner supervision beat RL on the objective RL optimises?
+
+**Content.**
+- g_T: student 5.3678, RL 5.3676; Δ +0.00023 nats; one-sided 95 % bounds [−0.3103, +0.3034]. H2 is rejected.
+- Fail-branch reading: "dense supervision does not improve on RL with this head", justified by the success ci95
+  [−3.67, +8.78] pp containing 0.
+- The M3 power sentence and m6 (no TOST).
+- S1 for the overall comparison.
+- S3 for BI (+0.289 nats, ci95 excludes 0) vs g_T. Present this as an observation, not a mechanism.
+- Seed spread: use m2/m5. This is the likely source of the interval width, inferred from the per-seed SDs; no variance
+  decomposition was done.
+- **Report-only companion rows (now in the JSON, pre-registered as "reported with the test"):**
+  - g_T(G\*) = 5.2993 and g_T(random) = 2.6182 on the same test3 0–499 episodes.
+  - These carry **no interval and no test**. The draft states the values and does not rank G\* against the learned
+    policies on g_T.
+  - Reason: ball-sPCE is a contrastive bound, and grid BI orders G\* above both learned policies.
+- RL plateau status: all three seeds ran to max episodes (200,064); the plateau rule fired at 102,400 / 102,400 /
+  112,640 episodes.
+
+**Evidence links.**
+- `14_h2_analysis.student_mean`, `.rl_mean`, `.bootstrap` (`diff`, `lower`, `upper`, `p_greater`, `n_boot`,
+  `n_seeds`), `.threshold_nats`, `.passes`.
+- `14_h2_analysis.per_seed_student`, `.per_seed_rl`.
+- `14_h2_analysis.g_T_gstar`, `.g_T_random`.
+- `14_h2_analysis.rl_training.{511,512,513}.status|plateau_at|episodes`.
+- `14_m4_analysis.diffs["student-rl:success"]`, `["student-rl:ball_info"]`.
+- `14_m4_analysis.rows.rl.probes`, `.rows.student.probes`.
+- Cards: `blau2022optimizing`, `foster2021deep` (RL / contrastive-bound BED context).
+
+### 6.4 Learned policies vs a travel-nearest heuristic (exploratory, about 100 words; paired row still running)
+
+**Goal.** Bound every "learning" sentence. The paired B-fan row on test3 0–299 is still running, so the draft carries
+both pre-written readings and keeps only the one that occurs.
+
+**Content.**
+- Context, always included:
+  - G5′ flat screen in S12 (`flat_screen: true`).
+  - B-fan pilot3 success 0.4026 ± 0.0396 (n = 154 of 200), within its SE of G\*'s pilot3 0.426 (m4 wording: unpaired).
+- **If the paired row completes** (`14_m4_analysis.exploratory_b_fan.complete` = true), use exactly one reading
+  (15_decision §4.1, 07c note):
+  - **(a)** if `exploratory_b_fan["student-b_fan:success"].ci95` excludes 0 in the student's favour: "the distilled
+    student exceeds a travel-nearest heuristic on test3 (exploratory)".
+  - **(b)** otherwise: "on test3 the learned policies were not shown to exceed a travel-nearest heuristic; at n\* = 4
+    the S12 task may be flat (exploratory, cf. G5′ flat screen)".
+- **If the row does not complete** before the draft freeze: use the S2 sentence and move the gap into Limitations.
+- Either way, the subsection states that this is **not** the dropped H1c test and does not change row 4.
+
+**Evidence links.**
+- `12_g5_analysis.cells.S12.b_fan` (`success`, `se_success`, `n`), `.cells.S12.gstar.success`, `.cells.S12.flat_screen`.
+- Planned keys, written by `code/analysis_m4_v3.py`, not yet in the JSON:
+  - `14_m4_analysis.exploratory_b_fan.success`, `.ball_info`, `.n_episodes`, `.complete`;
+  - `exploratory_b_fan["student-b_fan:success"].ci95`, `["b_fan-gstar:success"].ci95`, `["rl-b_fan:success"].ci95`;
+  - the same contrasts for `:ball_info`.
+
+### 6.5 Per-decision cost (about 50 words, plus a footnote)
+
+**Goal.** Quantify the amortization payoff that would exist if accuracy were matched, and explain why H1-fb was
+withdrawn.
+
+**Content.**
+- M5 sentence: student 0.408 ms vs G\* full 0.9135 s per decision (about 2,200×, not at equal accuracy).
+- S6 sentence: the 15.0 % PF floor bounds candidate pruning at about 6.7×; measured full / pruned-16 = 3.22.
+- The M4 per-episode sentence is optional. Drop it first if space is short.
+
+**Evidence links.**
+- `12_lat_analysis.student_median_s`; `.methods.student.median|ci`; `.methods.g2000_512_64.median|ci|component_medians`
+  (`t_assim`, `t_nb`, `t_score`).
+- `.methods.pruned16.median|component_medians`; `.ratio_full_over_student`; `.ratio_full_over_pruned16`;
+  `.H1_fb_active`; `.L_final.median`; `.protocol_complete` (false); `.ci_too_wide`.
+
+---
+
+## 7. Discussion and limitations (target 400 words)
+
+**Goal.** Interpret C1–C4 together for the research question, and list every limitation that bounds the wording.
+
+**Discussion (about 150 words).**
+- Small one-step headroom (C1) means that a greedy teacher is a defensible amortization target at this budget. Yet
+  neither learner was shown to recover it (C2), and dense supervision bought no detectable advantage on RL's objective
+  (C3).
+- The remaining gap is attributed to generalisation, in the weak form only.
+- Possible next steps, framed as questions and not as results:
+  - student-visited held-out evaluation;
+  - a TOST for H2;
+  - a variance decomposition;
+  - more cells.
+- Cards: `hedman2025step` (semi-amortization as a direction), `iqbal2024recursive`.
+
+**Limitations (about 250 words; one sentence each, from analysis §4 and 15_decision §4.2).**
+1. **Single cell.**
+   - S12 only, n\* = 4.
+   - S0 and A12 appear only as incomplete G5′ rows (m7).
+2. **Evaluator not shown converged.**
+   - E′ failed: M7 sentence; m3 flip rate (`12_cal_analysis.n_star_sub8.S.success_flip_rate_vs_sub4`).
+   - No finer grid was checked.
+   - M8 cost sentence.
+3. **RL comparator selected off-protocol.**
+   - The sweep was selected on the `val_v2` stream, with 50,048-episode sweep runs.
+   - The selected config won by 0.919 nats (`12_rl_sweep_selection.rows[*].final_val_ball_spce`, `.validation_stream`).
+4. **RL probe use differs.** RL executes 3.0 probes vs 4.0; travel is not reported.
+5. **H3 scope.**
+   - It measures a reduced greedy completion, not the optimum.
+   - The bias direction of V_LA was not checked (S4).
+   - G1′ (a)/(b) are identical to v2.
+6. **Label-fit thresholds are coarse,** and the held-out set is teacher-visited.
+7. **Latency.**
+   - The Lat′ protocol is incomplete (six CIs > 10 %, two machines pooled).
+   - L_ep was not measured.
+8. **Cross-split comparisons are unpaired.** G\* success is 0.426 on pilot3 and 0.446 on val3 (`12_d3_analysis_rem.succ.gstar_mean`),
+   against 0.4267 on test3.
+9. **Missing pre-registered report items:** CPU-h including labelling; teacher noise-floor R̄ and tie fraction.
+10. **The heuristic gap,** if R9 has not completed.
+
+---
+
+## 8. Conclusion (target 100 words)
+
+**Goal.** Restate the answer to the research problem in four clauses:
+- greedy leaves little one-step headroom (S5, short form);
+- neither amortization route was shown to reach it (S7, short form);
+- distillation did not improve on RL on RL's objective (non-detection);
+- the learned head is far cheaper per decision but not at equal accuracy.
+
+End with the pre-registration and single-cell scope. No new numbers.
+
+---
+
+## 9. Results rows and tables (every row that will appear, mapped to `results_v3.json`)
+
+Legend: **[DEC]** = pre-registered decision; **[GATE]** = gate datum; **[REP]** = reported row, no test;
+**[EXPL]** = exploratory; **[INC]** = incomplete at outline time.
+
+### Table 1: pre-registered gates and decisions (Section 5; one row each)
+
+| Row | Item | Keys | Tag |
+|---|---|---|---|
+| R1 | Cal′ n\* and verification (S: 0.605 → n\* 4; verify 3.96) | `12_cal_analysis.n_star.S`, `.n_star_sub8.S`, `.verify.S_k12` | GATE |
+| R2 | E′ (mean \|ΔBI\| 0.0126; 1 counted flip; FAIL → sub 8) | `12_e_analysis.mean_abs_dBI`, `.counted_flips`, `.passes`, `.flips[0].mass_sub4/_sub8` | GATE |
+| R3 | G5′ S12 (G\* 0.426, random 0.0754, D_c 0.351, δ 0.04, ε 0.3145; provisional) | `12_g5_analysis.cells.S12.{gstar,random,D_c,delta_c,eps_c,passes,complete}` | GATE, INC |
+| R4 | Lat′ / H1-fb (3.22 < 10 → withdrawn) | `12_lat_analysis.ratio_full_over_pruned16`, `.H1_fb_active` | DEC |
+| R5a | D3 first attempt (−5.87 pp vs −1.43; −0.199 vs −0.15; seeds) | `12_d3_analysis.succ`, `.bi`, `.seeds_ok`, `.passes` | DEC |
+| R5b | D3 remedy (−4.40 pp vs −1.68 ✗; −0.096 vs −0.15 ✓; seeds ✗ → H1 dead) | `12_d3_analysis_rem.succ`, `.bi`, `.seeds_ok`, `.passes` | DEC |
+| R5c | D3-B belief input (−20.1 pp; −1.01 nats; 295 of 300) | `12_d3_analysis_belief_student.succ`, `.bi`, `.n_episodes`, `.complete` | REP, INC |
+| R6 | H2 (Δg_T +0.00023, LB −0.3103 vs > +0.10 → rejected) | `14_h2_analysis.bootstrap`, `.threshold_nats`, `.passes` | DEC |
+| R7 | H3 (UB95 G(12) 0.0221 < 0.03 → Hold; bias ratio 0.957) | `12_g2_analysis.k12.ub95`, `.H3.region`, `.bias_check.ratio` | DEC |
+
+### Table 2: test-set rows (Section 6.2–6.4)
+
+| Row | Item | Keys | Tag |
+|---|---|---|---|
+| R8a | test3 0–299: G\* success 0.4267 / BI 6.2483 / probes 3.963 | `14_m4_analysis.rows.gstar` | REP |
+| R8b | Student (remedied, 3 seeds): 0.3822 / 6.1996 / 4.0; per seed | `14_m4_analysis.rows.student` | REP |
+| R8c | RL-relative (3 seeds): 0.3567 / 5.9102 / 3.0; per seed | `14_m4_analysis.rows.rl` | REP |
+| R8d | student − G\* success −0.0444, ci90 [−0.0856, −0.0033], ci95 [−0.0933, +0.0056] | `14_m4_analysis.diffs["student-gstar:success"]` | REP |
+| R8e | student − G\* BI −0.0487, ci90 / ci95 | `14_m4_analysis.diffs["student-gstar:ball_info"]` | REP |
+| R8f | student − RL success +0.0256, ci95 [−0.0367, +0.0878] | `14_m4_analysis.diffs["student-rl:success"]` | REP |
+| R8g | student − RL BI +0.2893, ci95 [+0.1170, +0.4652] | `14_m4_analysis.diffs["student-rl:ball_info"]` | REP |
+| R8h | G\* − RL success +0.0700, ci95 [+0.0022, +0.1367] | `14_m4_analysis.diffs["gstar-rl:success"]` | REP |
+| R8i | G\* − RL BI +0.3380, ci95 [+0.1585, +0.5196] | `14_m4_analysis.diffs["gstar-rl:ball_info"]` | REP |
+| R8j | g_T column, test3 0–499: student 5.3678, RL 5.3676, G\* 5.2993, random 2.6182 (G\* and random: no interval) | `14_h2_analysis.student_mean`, `.rl_mean`, `.g_T_gstar`, `.g_T_random` | DEC (student/RL), REP |
+| **R9** | **B-fan (H★) on test3 0–299, paired:** success, BI; student − b_fan, b_fan − G\*, RL − b_fan (ci95) | `14_m4_analysis.exploratory_b_fan.*` (planned keys, §6.4) | **EXPL, INC (running)**. Reading (a) or (b) pre-written; if not complete at freeze, the row is omitted and the S2 sentence plus a limitation are used |
+
+### In-text rows (no table)
+
+| Row | Item | Keys | Tag |
+|---|---|---|---|
+| R10 | Label fit, 9 students (train / held-out R̄, top-1, decisions, under_fit) | `14_labelfit.groups.*` | DEC input (encoder sentence) |
+| R11 | H3 κ = 0 / 2 values, ordering, frac LA ≠ G\*, no-budget-left | `12_g2_analysis.k0`, `.k2`, `.k12`, `.H3["ordering_G0<=G2<=G12"]` | REP |
+| R12 | G1′ (a)(b)(c) | `12_g1_analysis.a`, `.b`, `.c` | GATE |
+| R13 | Latency medians and CIs: student, G\* full, pruned-16, L_final; component split | `12_lat_analysis.methods.{student,g2000_512_64,pruned16}`, `.L_final`, `.ratio_full_over_student` | REP (protocol incomplete) |
+| R14 | RL training status and plateau | `14_h2_analysis.rl_training` | REP |
+| R15 | RL sweep selection (cfg 2; `val_v2` deviation) | `12_rl_sweep_selection.selected_cfg`, `.rows`, `.validation_stream` | REP (limitation) |
+| R16 | Pilot3 heuristic context: S12 b_fan, b_cov, b_spread, random; flat_screen | `12_g5_analysis.cells.S12.*` | EXPL, INC |
+| R17 | Evaluator flip rate S0 sub 4 → 8 (0.075) | `12_cal_analysis.n_star_sub8.S.success_flip_rate_vs_sub4` | REP (methods note) |
+
+---
+
+## 10. Figure plan
+
+### Figure 1 (schematic plus headline; full-width top of page 1, about 1/3 page height)
+
+**The story.** One picture that sets the two research questions side by side:
+- the depth question: how much does one-step look-ahead add over greedy cost-aware EIG?
+- the amortization question: can a network replace the greedy planner, trained by distillation or by RL?
+
+It also previews the answers: a small headroom bar, and two learned policies both short of the teacher.
+
+**Visual elements (left to right; an image-generation prompt can be written from this).**
+1. **Panel A, the task (schematic).**
+   - Top-down view of a flat polygonal object (grey) inside a dashed square uncertainty box.
+   - A thin circle around it is the finger's stand-off circle, with the fingertip as a small dark dot at angle φ_t.
+   - A curved orange arrow along the circle leads to a new angle φ′, labelled "travel cost c(a) = 1 + κ|Δφ|/π".
+   - A straight blue probe arrow points inward from φ′ toward the object, tilted by ψ, and ends at a contact marker
+     with a short normal tick.
+   - Faint semi-transparent ghost outlines of the object at alternative poses and identities show the particle belief.
+2. **Panel B, three ways to pick the next touch (schematic block diagram).**
+   - A belief cloud icon feeds three parallel lanes:
+     - **(i) "Greedy G\*"**: particle filter → EIG/c scored over all 512 actions → argmax. Clock icon "0.91 s / decision" (`12_lat_analysis.methods.g2000_512_64.median`).
+       Optional; only if the draft keeps the latency sentence; label it "per decision".
+     - **(ii) "One-step look-ahead"**: the same scores plus a short rollout tree whose leaves are completed by a
+       "reduced greedy".
+     - **(iii) "Learned policy"**: the touch history (points in the finger frame) → DeepSets block → 512 masked logits.
+       Two training arrows enter the block: a solid arrow "DAgger: dense score labels from G\*" and a dashed arrow
+       "PPO: reward = ball-sPCE (g_T)".
+   - Clean flat-vector style, two accent colours (blue = information, orange = travel), no text beyond the labels.
+3. **Panel C, headline answers (small data inset, drawn from JSON, not generated).**
+   - Left mini-plot: G(12) point and one-sided 95 % UB (`12_g2_analysis.k12.G`, `.ub95`) against a dashed line at the
+     pre-registered 0.03 Hold threshold.
+   - Right mini-plot: test3 success with paired-difference whiskers, three bars:
+     - G\* (`14_m4_analysis.rows.gstar.success`);
+     - student (`.rows.student.success`, whisker from `.diffs["student-gstar:success"].ci95`);
+     - RL (`.rows.rl.success`, whisker from `.diffs["gstar-rl:success"].ci95`, sign-flipped).
+   - If R9 completes, a hatched fourth bar for B-fan (`14_m4_analysis.exploratory_b_fan.success`), labelled
+     "exploratory".
+
+**Draft caption.**
+> **Figure 1.** *Two questions about cost-aware touch selection.* (A) A finger on a stand-off circle chooses where to
+> move (paying travel cost proportional to |Δφ|) and in which direction to probe; the belief is a particle set over
+> object identity and planar pose. (B) We compare the cost-aware greedy planner G\* (EIG per unit cost), a one-step
+> look-ahead that rolls out a reduced greedy completion, and a belief-free DeepSets policy trained either by DAgger on
+> G\*'s dense scores or by PPO on ball-sPCE. (C) At κ = 12 (set S, n\* = 4), one-step rollout gains ≤ 2.2 % of the
+> remaining expected ball information (one-sided 95 % UB), and neither learned policy was shown to reach G\*'s test
+> success (paired intervals; single cell, preliminary).
+
+### Figure 2 (data; one column, two stacked panels)
+
+- **(a) H3 headroom vs κ.**
+  - Points G(κ) with [lb95, ub95] for κ ∈ {0, 2, 12}, from `12_g2_analysis.k0|k2|k12.{G,lb95,ub95}`.
+  - A dashed line at the 0.03 Hold threshold; a secondary marker for `frac_la_differs`.
+  - Caption mentions the S4 bias caveat in one clause.
+- **(b) Paired-difference forest plot (test3).**
+  - Six rows from `14_m4_analysis.diffs.*` (success in pp, BI in nats, in two sub-axes), showing ci90 (thick) and ci95
+    (thin).
+  - Plus one row for H2 Δg_T with its one-sided bounds (`14_h2_analysis.bootstrap.diff|lower|upper`) and the +0.10
+    threshold line.
+  - Optional R9 rows in grey, labelled "exploratory".
+  - Caption: "descriptive intervals except H2; no multiplicity correction; not tests".
+- The dataviz skill is applied at plotting time.
+
+---
+
+## 11. Word budget and venue switch
+
+| Section | Words |
+|---|---|
+| Abstract | 180 (not counted) |
+| 1 Introduction | 550 |
+| 2 Related work | 300 |
+| 3 Problem and methods | 850 |
+| 4 Experimental protocol | 300 |
+| 5 Results | 950 |
+| 6 Discussion and limitations | 400 |
+| 7 Conclusion | 100 |
+| **Body total** | **3,450** |
+
+(Numbering in this table follows the paper. Outline sections 2–8 above correspond to paper sections 1–7.)
+
+**If the owner picks RA-L or a workshop (15_decision §4.3 b), these parts grow:**
+- the full label-fit table;
+- G5′ context for all three cells;
+- the latency Pareto over the greedy grid;
+- the §4.1 task-4 analyses, if they were run;
+- the per-episode latency paragraph.
+
+The claims stay the same.
