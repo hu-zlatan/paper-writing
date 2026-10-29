@@ -629,8 +629,30 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
   Lat′ first pass: G* full 709 ms vs student 0.38 ms (1,850×); pruned-16 ratio 3.65 → H1-fb inactive unless the
   pooled 1,000 decisions change it; 500 more decisions running. D3-B DAgger crashed (belief student got no PF) →
   fixed in `_label_loop`, re-dispatched. G2′ partial: G(0) 0.008 (68 beliefs), G(2) 0.017 (29).
-- **Next:** D3 decision (`analysis_d3_v3.py`, needs sub-8 S12 G5′ margins) → remedy r1 training → remedy r2 → remedy
-  validation; G5′ (sub 8) for S12/A12/S0 (S0 sub-8 manifest still to build after its sub-4 pilot completes); Lat′ pooled
-  → R_b selection runs; G2′/H3; then the gate decision + freeze commit. Cancelled-and-not-yet-re-dispatched:
-  sub-8 A12 (`v3_sub8_A12_r2` → regenerate), G2′ (`v3_g2_r3`, `v3_g2_k2_r3` → regenerate with the resume tool). The 64 × 16 S12 report
+- **Run 6, end state (≈ 12:30 UTC):**
+  - **D3 first attempt FAILS** (468/500 paired val3 episodes, sub 8): Δsucc −6.8 pp, ΔBI −0.19 nats, all 3 seeds
+    ≤ −δ → the one remedy runs (status note in amendment v3.0). Remedy: labels 1,500–2,999 done; remedy r0 students
+    (R̄ 0.231/0.209/0.226), DAgger r1 800/seed done → r1 students (R̄ 0.203/0.197/0.191); DAgger r2: 20/24 shards from
+    runners, s503 shards 400–700 re-run in the sandbox (the runner jobs sat queued; that run was cancelled).
+  - **Lat′ frozen** (pooled 1,000 decisions): G* full / student 2,238×; G* full / pruned-16 3.2 → **H1-fb withdrawn**;
+    Q = 14 configs; 5 R_b candidates → R_b selection runs dispatched (`v3_rb.json`, sub 8).
+  - **E′ FAIL** → sub 8 everywhere; Cal′ n* unchanged at sub 8.
+  - G5′ sub-8 re-reads in progress (S12 `v3_sub8_S12_r2`, A12 `v3_sub8_A12_r3`, S0 `v3_sub8_S0`); G2′ in progress
+    (`v3_g2_r4`, `v3_g2_k2_r4`; bias check inside `v3_g2*`); D3-B r2 dispatched; RL sweep dispatched (cfg2 done).
+- **Where to resume (run 7):**
+  1. If `results/v3/d3rem/S_k12_s503_r2_{400..700}.npz` exist (sandbox run of run 6, committed) and
+     `results/v3/d3rem/S_k12_hp0_s50?_r2.npz` do not: train remedy round 2 per seed — `distill3 --round 2 --init
+     d3rem/..._r1.npz --shards <label3 00–11, 15–29> d3rem/S_k12_s<seed>_r1_*.npz d3rem/S_k12_s<seed>_r2_*.npz
+     --val-shards label3 12–14 --out ../results/v3/d3rem/S_k12_hp0_s<seed>_r2` (sandbox, seconds), commit, then
+     dispatch `experiments/v3_d3rem_val.json`. If the s503 shards are missing, re-run them (dagger3, see the manifest
+     `v3_d3rem_r2.json`).
+  2. When the remedy validation is complete: `python code/analysis_d3_v3.py --tag rem` → pass → H1 alive (freeze
+     commit after G5′ sub-8 + R_b); fail → **H1 dead; H1-fb already withdrawn → outcome row 4** (characterisation
+     paper) → tell the owner (OWNER_TODO) and proceed to stage 13/14 with the fallback plan, not a fourth design.
+  3. Re-run the follow-up tool on every manifest still incomplete (`code/tools_resume_manifest.py`,
+     `code/tools_regrid_manifest.py`); complete the first D3 read (`analysis_d3_v3.py`) for the record.
+  4. D3-B: after r2, train round 2 (`--kind belief`), evaluate 300 val3 episodes (sub 8), `analysis_d3_v3.py --kind
+     belief_student` (report-only). RL sweep: select per v3.1 D9 when the 4 configs are in.
+  5. G5′ decision on sub-8 values (`analysis_g5_v3.py`), G2′/H3 (`analysis_g2_v3.py`), then the gate decision and
+     the freeze commit (status notes with commit hashes). The 64 × 16 S12 report
   (report-only) needs a ψ-count flag that does not exist yet — deferred.
