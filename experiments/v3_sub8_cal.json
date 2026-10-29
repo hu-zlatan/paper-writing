@@ -1,0 +1,145 @@
+{
+ "purpose": "E' failed -> sub = 8 for every v3 number (amendment v3.0 C2): re-read of the Cal' n* episodes (G* at kappa 0, tau 4, 200 cal3 per set) at sub 8; the n* rule is re-applied to the sub-8 success.",
+ "jobs": [
+  {
+   "id": "v3_sub8_nstar_S_000",
+   "cmd": "python main.py regrid3 --src ../results/v3/cal/nstar_S_sh0.jsonl --episodes 0 1 2 3 4 5 6 7 8 9 --sub 8 --budget-minutes 25 --out ../results/v3/cal_sub8/nstar_S_000"
+  },
+  {
+   "id": "v3_sub8_nstar_S_010",
+   "cmd": "python main.py regrid3 --src ../results/v3/cal/nstar_S_sh0.jsonl --episodes 10 11 12 13 14 15 16 17 18 19 --sub 8 --budget-minutes 25 --out ../results/v3/cal_sub8/nstar_S_010"
+  },
+  {
+   "id": "v3_sub8_nstar_S_020",
+   "cmd": "python main.py regrid3 --src ../results/v3/cal/nstar_S_sh1.jsonl --episodes 20 21 22 23 24 25 26 27 28 29 --sub 8 --budget-minutes 25 --out ../results/v3/cal_sub8/nstar_S_020"
+  },
+  {
+   "id": "v3_sub8_nstar_S_030",
+   "cmd": "python main.py regrid3 --src ../results/v3/cal/nstar_S_sh1.jsonl --episodes 30 31 32 33 34 35 36 37 38 39 --sub 8 --budget-minutes 25 --out ../results/v3/cal_sub8/nstar_S_030"
+  },
+  {
+   "id": "v3_sub8_nstar_S_040",
+   "cmd": "python main.py regrid3 --src ../results/v3/cal/nstar_S_sh2.jsonl --episodes 40 41 42 43 44 45 46 47 48 --sub 8 --budget-minutes 25 --out ../results/v3/cal_sub8/nstar_S_040"
+  },
+  {
+   "id": "v3_sub8_nstar_S_049",
+   "cmd": "python main.py regrid3 --src ../results/v3/cal/nstar_S_sh2.jsonl --episodes 49 50 51 52 53 54 55 56 57 --sub 8 --budget-minutes 25 --out ../results/v3/cal_sub8/nstar_S_049"
+  },
+  {
+   "id": "v3_sub8_nstar_S_058",
+   "cmd": "python main.py regrid3 --src ../results/v3/cal/nstar_S_sh2.jsonl --episodes 58 59 --sub 8 --budget-minutes 25 --out ../results/v3/cal_sub8/nstar_S_058"
+  },
+  {
+   "id": "v3_sub8_nstar_S_060",
+   "cmd": "python main.py regrid3 --src ../results/v3/cal/nstar_S_sh3.jsonl --episodes 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 --sub 8 --budget-minutes 25 --out ../results/v3/cal_sub8/nstar_S_060"
+  },
+  {
+   "id": "v3_sub8_nstar_S_078",
+   "cmd": "python main.py regrid3 --src ../results/v3/cal/nstar_S_sh3.jsonl --episodes 78 79 --sub 8 --budget-minutes 25 --out ../results/v3/cal_sub8/nstar_S_078"
+  },
+  {
+   "id": "v3_sub8_nstar_S_080",
+   "cmd": "python main.py regrid3 --src ../results/v3/cal/nstar_S_sh4.jsonl --episodes 80 81 82 83 84 85 86 87 88 89 90 91 92 --sub 8 --budget-minutes 25 --out ../results/v3/cal_sub8/nstar_S_080"
+  },
+  {
+   "id": "v3_sub8_nstar_S_093",
+   "cmd": "python main.py regrid3 --src ../results/v3/cal/nstar_S_sh4.jsonl --episodes 93 94 95 96 97 98 99 --sub 8 --budget-minutes 25 --out ../results/v3/cal_sub8/nstar_S_093"
+  },
+  {
+   "id": "v3_sub8_nstar_S_100",
+   "cmd": "python main.py regrid3 --src ../results/v3/cal/nstar_S_sh5.jsonl --episodes 100 101 102 103 104 105 106 107 108 109 --sub 8 --budget-minutes 25 --out ../results/v3/cal_sub8/nstar_S_100"
+  },
+  {
+   "id": "v3_sub8_nstar_S_110",
+   "cmd": "python main.py regrid3 --src ../results/v3/cal/nstar_S_sh5.jsonl --episodes 110 111 112 113 114 115 116 117 118 119 --sub 8 --budget-minutes 25 --out ../results/v3/cal_sub8/nstar_S_110"
+  },
+  {
+   "id": "v3_sub8_nstar_S_120",
+   "cmd": "python main.py regrid3 --src ../results/v3/cal/nstar_S_sh6.jsonl --episodes 120 121 122 123 124 125 126 127 128 129 --sub 8 --budget-minutes 25 --out ../results/v3/cal_sub8/nstar_S_120"
+  },
+  {
+   "id": "v3_sub8_nstar_S_130",
+   "cmd": "python main.py regrid3 --src ../results/v3/cal/nstar_S_sh6.jsonl --episodes 130 131 132 133 134 135 136 137 138 139 --sub 8 --budget-minutes 25 --out ../results/v3/cal_sub8/nstar_S_130"
+  },
+  {
+   "id": "v3_sub8_nstar_S_140",
+   "cmd": "python main.py regrid3 --src ../results/v3/cal/nstar_S_sh7.jsonl --episodes 140 141 142 143 144 145 146 147 148 149 --sub 8 --budget-minutes 25 --out ../results/v3/cal_sub8/nstar_S_140"
+  },
+  {
+   "id": "v3_sub8_nstar_S_150",
+   "cmd": "python main.py regrid3 --src ../results/v3/cal/nstar_S_sh7.jsonl --episodes 150 151 152 153 154 155 156 157 158 159 --sub 8 --budget-minutes 25 --out ../results/v3/cal_sub8/nstar_S_150"
+  },
+  {
+   "id": "v3_sub8_nstar_S_160",
+   "cmd": "python main.py regrid3 --src ../results/v3/cal/nstar_S_sh8.jsonl --episodes 160 161 162 163 164 165 166 167 168 169 --sub 8 --budget-minutes 25 --out ../results/v3/cal_sub8/nstar_S_160"
+  },
+  {
+   "id": "v3_sub8_nstar_S_170",
+   "cmd": "python main.py regrid3 --src ../results/v3/cal/nstar_S_sh8.jsonl --episodes 170 171 172 173 174 175 176 177 178 179 --sub 8 --budget-minutes 25 --out ../results/v3/cal_sub8/nstar_S_170"
+  },
+  {
+   "id": "v3_sub8_nstar_S_180",
+   "cmd": "python main.py regrid3 --src ../results/v3/cal/nstar_S_sh9.jsonl --episodes 180 181 182 183 184 185 186 187 188 189 190 191 192 193 --sub 8 --budget-minutes 25 --out ../results/v3/cal_sub8/nstar_S_180"
+  },
+  {
+   "id": "v3_sub8_nstar_S_194",
+   "cmd": "python main.py regrid3 --src ../results/v3/cal/nstar_S_sh9.jsonl --episodes 194 195 196 197 198 199 --sub 8 --budget-minutes 25 --out ../results/v3/cal_sub8/nstar_S_194"
+  },
+  {
+   "id": "v3_sub8_nstar_A_000",
+   "cmd": "python main.py regrid3 --src ../results/v3/cal/nstar_A_sh0.jsonl --episodes 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 --sub 8 --budget-minutes 25 --out ../results/v3/cal_sub8/nstar_A_000"
+  },
+  {
+   "id": "v3_sub8_nstar_A_020",
+   "cmd": "python main.py regrid3 --src ../results/v3/cal/nstar_A_sh1.jsonl --episodes 20 21 22 23 24 25 26 27 28 29 30 --sub 8 --budget-minutes 25 --out ../results/v3/cal_sub8/nstar_A_020"
+  },
+  {
+   "id": "v3_sub8_nstar_A_031",
+   "cmd": "python main.py regrid3 --src ../results/v3/cal/nstar_A_sh1.jsonl --episodes 31 32 33 34 35 36 37 38 39 --sub 8 --budget-minutes 25 --out ../results/v3/cal_sub8/nstar_A_031"
+  },
+  {
+   "id": "v3_sub8_nstar_A_040",
+   "cmd": "python main.py regrid3 --src ../results/v3/cal/nstar_A_sh2.jsonl --episodes 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 --sub 8 --budget-minutes 25 --out ../results/v3/cal_sub8/nstar_A_040"
+  },
+  {
+   "id": "v3_sub8_nstar_A_060",
+   "cmd": "python main.py regrid3 --src ../results/v3/cal/nstar_A_sh3.jsonl --episodes 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 --sub 8 --budget-minutes 25 --out ../results/v3/cal_sub8/nstar_A_060"
+  },
+  {
+   "id": "v3_sub8_nstar_A_080",
+   "cmd": "python main.py regrid3 --src ../results/v3/cal/nstar_A_sh4.jsonl --episodes 80 81 82 83 84 85 86 87 88 89 90 --sub 8 --budget-minutes 25 --out ../results/v3/cal_sub8/nstar_A_080"
+  },
+  {
+   "id": "v3_sub8_nstar_A_091",
+   "cmd": "python main.py regrid3 --src ../results/v3/cal/nstar_A_sh4.jsonl --episodes 91 92 93 94 95 96 97 98 99 --sub 8 --budget-minutes 25 --out ../results/v3/cal_sub8/nstar_A_091"
+  },
+  {
+   "id": "v3_sub8_nstar_A_100",
+   "cmd": "python main.py regrid3 --src ../results/v3/cal/nstar_A_sh5.jsonl --episodes 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 --sub 8 --budget-minutes 25 --out ../results/v3/cal_sub8/nstar_A_100"
+  },
+  {
+   "id": "v3_sub8_nstar_A_116",
+   "cmd": "python main.py regrid3 --src ../results/v3/cal/nstar_A_sh5.jsonl --episodes 116 117 118 119 --sub 8 --budget-minutes 25 --out ../results/v3/cal_sub8/nstar_A_116"
+  },
+  {
+   "id": "v3_sub8_nstar_A_120",
+   "cmd": "python main.py regrid3 --src ../results/v3/cal/nstar_A_sh6.jsonl --episodes 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 --sub 8 --budget-minutes 25 --out ../results/v3/cal_sub8/nstar_A_120"
+  },
+  {
+   "id": "v3_sub8_nstar_A_136",
+   "cmd": "python main.py regrid3 --src ../results/v3/cal/nstar_A_sh6.jsonl --episodes 136 137 138 139 --sub 8 --budget-minutes 25 --out ../results/v3/cal_sub8/nstar_A_136"
+  },
+  {
+   "id": "v3_sub8_nstar_A_140",
+   "cmd": "python main.py regrid3 --src ../results/v3/cal/nstar_A_sh7.jsonl --episodes 140 141 142 143 144 145 146 147 148 149 150 151 152 153 154 155 156 157 158 159 --sub 8 --budget-minutes 25 --out ../results/v3/cal_sub8/nstar_A_140"
+  },
+  {
+   "id": "v3_sub8_nstar_A_160",
+   "cmd": "python main.py regrid3 --src ../results/v3/cal/nstar_A_sh8.jsonl --episodes 160 161 162 163 164 165 166 167 168 169 170 171 172 173 174 175 176 177 178 179 --sub 8 --budget-minutes 25 --out ../results/v3/cal_sub8/nstar_A_160"
+  },
+  {
+   "id": "v3_sub8_nstar_A_180",
+   "cmd": "python main.py regrid3 --src ../results/v3/cal/nstar_A_sh9.jsonl --episodes 180 181 182 183 184 185 186 187 188 189 190 191 192 193 194 195 196 197 198 199 --sub 8 --budget-minutes 25 --out ../results/v3/cal_sub8/nstar_A_180"
+  }
+ ]
+}

@@ -327,7 +327,11 @@ def cmd_regrid3(a):
     t0 = time.time()
     with _open(a.out, ".jsonl") as f:
         f.write(json.dumps({"header": True, "args": vars(a), "env": _env()}) + "\n")
-        for r in recs:
+        for j, r in enumerate(recs):
+            if time.time() - t0 > 0.8 * a.budget_minutes * 60:
+                f.write(json.dumps({"EARLY_STOP_AT_80_PCT_BUDGET": True,
+                                    "remaining": [[q["method"], q["episode"]] for q in recs[j:]]}) + "\n")
+                break
             lib, prior, eps = states_v3(r["set"], r["split"], [r["episode"]])
             s0, _ = eps[0]
             key = ep_key_v3(r["set"], r["split"], r["kappa"], r["tau"], r["episode"])
@@ -423,6 +427,7 @@ def register(sub):
     rg = sub.add_parser("regrid3")
     rg.add_argument("--src", nargs="+", required=True); rg.add_argument("--episodes", type=int, nargs="+", required=True)
     rg.add_argument("--sub", type=int, default=8); rg.add_argument("--out", required=True)
+    rg.add_argument("--budget-minutes", type=float, default=25.0)
     p = sub.add_parser("pilot3")
     p.add_argument("--set", default="S"); p.add_argument("--kappa", type=float, default=12.0)
     p.add_argument("--tau", type=float, default=10.0); p.add_argument("--allow-32", action="store_true")
