@@ -1,0 +1,45 @@
+{
+ "n_star": {
+  "S": {
+   "n_star": 4,
+   "gstar_success": 0.605,
+   "n_episodes": 200,
+   "mean_probes": 4.0,
+   "mean_ball_info": 6.993141968612382,
+   "complete": true
+  },
+  "A": {
+   "n_star": 3,
+   "gstar_success": 0.985,
+   "n_episodes": 200,
+   "mean_probes": 4.0,
+   "mean_ball_info": 8.257578062745761,
+   "complete": true
+  }
+ },
+ "tau": {
+  "S_k12_nstar4": {
+   "n_star": 4,
+   "n_episodes": 200,
+   "mean_travel_time": 0.9388380275612175,
+   "sd_travel_time": 1.5056674918685549,
+   "tau": 4.9,
+   "complete": true
+  },
+  "S_k0": {
+   "tau": 4.0
+  },
+  "A_k12_nstar4": {
+   "n_star": 4,
+   "n_episodes": 125,
+   "mean_travel_time": 1.0637547215795657,
+   "sd_travel_time": 2.213663044601768,
+   "tau": 5.1,
+   "complete": false
+  },
+  "A_k0": {
+   "tau": 3.0
+  }
+ },
+ "verify": {}
+}
