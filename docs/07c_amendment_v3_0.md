@@ -233,3 +233,9 @@ comparator E_train = 2 × 10⁵ from the start; H3 hold threshold 0.03 with part
   exceeds a travel-nearest heuristic on test3 (exploratory)"; (b) otherwise → "on test3 the learned policies were not
   shown to exceed a travel-nearest heuristic; at n\* = 4 the S12 task may be flat (exploratory, cf. G5′ flat screen)".
   Not the dropped H★/H1c test (H1a was never reached); neither reading changes row 4.
+- **B-fan row result (run 8, Actions run 40927313419, `results/v3/14_m4_analysis.json` → `exploratory_b_fan`).** 300/300
+  test3 episodes, sub 8: B-fan success 36.0 %, BI 5.97 nats. student − B-fan success +2.2 pp, ci95 [−2.8, +7.3] → ci95
+  contains 0 → **reading (b)** applies: "on test3 the learned policies were not shown to exceed a travel-nearest heuristic"
+  (RL − B-fan −0.3 pp, ci95 [−6.9, +6.3]). The second clause of (b) ("the S12 task may be flat") is **not supported** on
+  test3: B-fan − G\* success −6.7 pp, ci95 [−12.0, −1.0]; BI −0.28 nats, ci95 [−0.37, −0.18]. Reported as written
+  without the flat clause. Report-only: student − B-fan BI +0.23 nats, ci95 [+0.14, +0.31]. Row 4 unchanged.
