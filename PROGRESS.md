@@ -9,7 +9,7 @@
 **Topic:** Amortized, non-myopic active tactile localization (TouchBED)
 **Initialised:** 2026-10-28T07:56:44Z
 **Current version:** v3
-**Latest stage:** Stage 8 HYPOTHESIS_GEN [v3] done → next: Stage 8.5 THEORETICAL_BOUNDS [v3], then amendment v3.0 + stage 9 (see the end of this file)
+**Latest stage:** Stage 8.5 THEORETICAL_BOUNDS [v3] done → next: amendment v3.0 (docs/07c_amendment_v3_0.md), then stage 9 v3 (see the end of this file)
 
 ---
 
@@ -485,3 +485,31 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
   then write docs/07c_amendment_v3_0.md freezing everything listed in 07_hypotheses_v3 §6.1 *before* any v3 run, then
   stage 9 v3 (docs/08_experiment_plan_v3.yaml, gate auto-approval with evidence), then stage 10 v3 code (64 × 8 action
   set, DAgger trainer, heuristics, greedy grid, latency split).
+
+---
+
+## Stage 8.5. THEORETICAL_BOUNDS     [v3]
+
+- **Started / Finished:** 2026-10-29 run 5
+- **Inputs used:** docs/07_hypotheses_v3.md, code/touchbed/*, docs/07b_theoretical_bounds_v2.md
+- **Outputs produced:** docs/07b_theoretical_bounds_v3.md (fresh opus subagent, template verbatim);
+  docs/07d_reference_check_v3.md (fresh subagent, WebSearch/WebFetch; 12 references + novelty search);
+  plans/stage_08_5_theoretical_bounds_v3.md
+- **Decision:** PROCEED → amendment v3.0, then stage 9 (v3).
+- **Summary:** Per-decision cost of greedy (N, C, M) = O(N·C·(V+M) + N² + PF assimilation); student O(T·H² + H·A)
+  (as implemented O(T²·H² + T·H·A), ≈ 5.5× more at T = 4). The ≥ 100× ratio is a constants statement at these sizes, not
+  an asymptotic separation (op counts: full G* ≈ 510× minimal student, 92× as implemented). Small grid configurations
+  are within 1–10× of the student on op counts, so Q (§1.8) is likely non-empty and H1b rests on their accuracy;
+  pruned-16 ≈ 11× on op counts (N² neighbour lists dominate) — close to the 10× H1-fb threshold, decided by Lat′.
+  DAgger's guarantee does not apply as stated (soft-CE surrogate, noisy approximate teacher, non-convex learner,
+  3 rounds); greedy guarantees do not transfer under travel costs (informal; Singh et al. JAIR 2009 verified for the
+  "greedy can be arbitrarily bad with path costs" sentence). Early ball-EIG has an action-dependent self-inclusion bias
+  that grows as N shrinks (relevant to the small-N grid configurations).
+- **References:** 1, 3–11, 12a VERIFIED; #2 author list corrected (no Scherer); javdani2012efficient → arXiv:1208.6067
+  (figshare DOI unconfirmed); 12b partial. Novelty search (3 queries): no prior distillation of a greedy-EIG planner into
+  a tactile localisation policy found; closest APPLE (arXiv:2505.06182, RL) and Gordon et al. (online greedy EIG).
+- **Discrepancies found (to be resolved in amendment v3.0, not silently):** (1) H3 text says the look-ahead rollouts
+  complete with G* at M = 64, but the B6/G1/G2 code path (`g2.py` → `lookahead_gap(..., greedy_M=0)` →
+  `TouchbedProblem` defaults) completes with N_LA = 500 particles, rung (16, 8), M = 16 — as the `lookahead_tb.py`
+  docstring states; (2) two informal G* latency figures disagree (0.840 s per decision on 256 in 15_decision §3.4 vs
+  "≈ 2.3 s at M = 32" in the stage 10 v2 entry); neither was taken under the latency protocol — Lat′ supersedes both.
