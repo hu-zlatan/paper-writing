@@ -171,7 +171,7 @@ def cmd_train2(a):
     cfg = TrainConfigV2(setname=a.set, method=a.method, kappa=a.kappa, tau=a.tau, L=a.L, J=a.J, batch=a.batch,
                         lr=a.lr, critic_lr=a.critic_lr, ent_coef=a.ent_coef, seed=a.seed, max_episodes=a.max_episodes,
                         val_every=a.val_every, val_episodes=a.val_episodes, budget_minutes=a.budget_minutes,
-                        extra={} if a.frame == "abs" else {"frame": a.frame})
+                        plateau_stop=not a.no_plateau_stop, extra={} if a.frame == "abs" else {"frame": a.frame})
     os.makedirs(os.path.dirname(os.path.abspath(a.out)), exist_ok=True)
     tr = TrainerV2(cfg)
     t0 = time.time()
@@ -442,6 +442,7 @@ def main():
     t2.add_argument("--seed", type=int, default=0); t2.add_argument("--max-episodes", type=int, default=100_000)
     t2.add_argument("--val-every", type=int, default=10_240); t2.add_argument("--val-episodes", type=int, default=500)
     t2.add_argument("--budget-minutes", type=float, default=330.0); t2.add_argument("--out", required=True)
+    t2.add_argument("--no-plateau-stop", action="store_true")  # v3 H2: plateau recorded, not used to stop (08 plan)
     e2 = sub.add_parser("eval2")
     e2.add_argument("--set", default="S"); e2.add_argument("--method", default="random")
     e2.add_argument("--kappa", type=float, default=0.0); e2.add_argument("--tau", type=float, default=4.0)

@@ -1,0 +1,59 @@
+{
+ "rule": "argmax final val ball-sPCE; ties within 0.02 nats -> lower index",
+ "rows": [
+  {
+   "cfg": 0,
+   "lr": 0.00036339014767503805,
+   "ent_coef": 0.00013313139952275948,
+   "batch": 128,
+   "critic_lr": 0.0014321061677694642,
+   "status": "max_episodes",
+   "episodes": 50048,
+   "final_val_episodes": 40960,
+   "final_val_ball_spce": 4.74740830353125,
+   "final_val_ball_spce_sampled": 4.813022029497628,
+   "train_g_T_last_batch": 5.017253114130899
+  },
+  {
+   "cfg": 1,
+   "lr": 0.00012113004922501268,
+   "ent_coef": 0.00013313139952275948,
+   "batch": 128,
+   "critic_lr": 0.0014321061677694642,
+   "status": "max_episodes",
+   "episodes": 50048,
+   "final_val_episodes": 40960,
+   "final_val_ball_spce": 4.679114846131953,
+   "final_val_ball_spce_sampled": 4.751736552098986,
+   "train_g_T_last_batch": 4.980931527710563
+  },
+  {
+   "cfg": 2,
+   "lr": 0.001090170443025114,
+   "ent_coef": 0.00013313139952275948,
+   "batch": 128,
+   "critic_lr": 0.0014321061677694642,
+   "status": "max_episodes",
+   "episodes": 50048,
+   "final_val_episodes": 40960,
+   "final_val_ball_spce": 5.666242682574702,
+   "final_val_ball_spce_sampled": 5.630884175302558,
+   "train_g_T_last_batch": 5.757433207864823
+  },
+  {
+   "cfg": 3,
+   "lr": 0.00036339014767503805,
+   "ent_coef": 0.0013313139952275948,
+   "batch": 128,
+   "critic_lr": 0.0014321061677694642,
+   "status": "max_episodes",
+   "episodes": 50048,
+   "final_val_episodes": 40960,
+   "final_val_ball_spce": 4.625549471485357,
+   "final_val_ball_spce_sampled": 4.916567244788891,
+   "train_g_T_last_batch": 4.978103598196965
+  }
+ ],
+ "selected_cfg": 2,
+ "validation_stream": "trainer val_v2 (deviation: not val3)"
+}

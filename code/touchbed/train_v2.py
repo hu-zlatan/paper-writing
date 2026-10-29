@@ -80,6 +80,7 @@ class TrainConfigV2:
     val_episodes: int = 500
     plateau_window: int = 5
     plateau_tol: float = 0.02   # nats
+    plateau_stop: bool = True   # False: the plateau is recorded (plateau_at) but training continues (v3 H2 runs)
     seed: int = 0
     budget_minutes: float = 330.0
     extra: dict = field(default_factory=dict)
@@ -98,6 +99,7 @@ class TrainerV2:
         self.pi = Net(self.rng, A, cfg.hidden)
         self.vf = Net(self.rng, 1, cfg.hidden)
         self.opt_pi = Adam(self.pi.params(), lr=cfg.lr)
+        self.plateau_at = None
         self.opt_vf = Adam(self.vf.params(), lr=cfg.critic_lr)
         self.episodes = 0
         self.history = []
@@ -247,9 +249,13 @@ class TrainerV2:
                     print(json.dumps(rec), flush=True)
                 w = cfg.plateau_window
                 if len(vals) >= 2 * w and np.mean(vals[-w:]) - np.mean(vals[-2 * w:-w]) < cfg.plateau_tol:
-                    status = "plateau"
-                    self.history.append(rec)
-                    break
+                    if cfg.plateau_stop:
+                        status = "plateau"
+                        self.history.append(rec)
+                        break
+                    rec["plateau_rule_met"] = True
+                    if self.plateau_at is None:
+                        self.plateau_at = self.episodes
             self.history.append(rec)
             if time.time() - t0 > 0.8 * cfg.budget_minutes * 60:
                 status = "EARLY_STOP_AT_80_PCT_BUDGET"
@@ -257,7 +263,8 @@ class TrainerV2:
                 break
         self.status = status
         if log_path:
-            json.dump({"config": asdict(cfg), "status": status, "history": self.history}, open(log_path, "w"))
+            json.dump({"config": asdict(cfg), "status": status, "plateau_at": self.plateau_at, "history": self.history},
+                      open(log_path, "w"))
         return status
 
     def act(self, pf, ts):

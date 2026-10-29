@@ -40,3 +40,18 @@ def test_rollout_shapes_and_budget():
     assert ro["F"].shape[1] == 8 and (ro["n_probes"] >= 1).all()
     spent = (ro["COST"] * ro["alive"]).sum(1)
     assert (spent <= 8.0 + 1e-9).all() and (8.0 - spent < 7.0 + 1e-9).all()
+
+
+def test_plateau_recorded_without_stopping():
+    """plateau_stop=False (v3 H2 runs): a flat validation curve records plateau_at and training runs to max_episodes;
+    the default (True) still stops at the plateau."""
+    for stop in (True, False):
+        cfg = TrainConfigV2(setname="S", kappa=12.0, tau=4.9, batch=8, max_episodes=8 * 14, val_every=8,
+                            val_episodes=4, plateau_window=2, plateau_stop=stop, extra={"frame": "rel"})
+        tr = TrainerV2(cfg)
+        tr.validate = lambda greedy=True: 1.0
+        status = tr.train(verbose=False)
+        if stop:
+            assert status == "plateau" and tr.episodes == 8 * 4
+        else:
+            assert status == "max_episodes" and tr.episodes == 8 * 14 and tr.plateau_at == 8 * 4

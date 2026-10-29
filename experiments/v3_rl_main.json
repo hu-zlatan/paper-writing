@@ -1,0 +1,17 @@
+{
+ "purpose": "H2 RL-relative comparator (08 plan, v3.1 D9): selected sweep config 2 (lr x 3), seeds 511-513, E_train = 2e5, plateau rule recorded but not used to stop.",
+ "jobs": [
+  {
+   "id": "v3_rl_S12_sd511",
+   "cmd": "python main.py train3rl --set S --method spce_total --frame rel --kappa 12 --tau 4.9 --lr 0.001090170443025114 --ent-coef 0.00013313139952275948 --batch 128 --critic-lr 0.0014321061677694642 --seed 511 --max-episodes 200000 --no-plateau-stop --budget-minutes 330 --out ../results/v3/rl/S_k12_rel_cfg2_sd511"
+  },
+  {
+   "id": "v3_rl_S12_sd512",
+   "cmd": "python main.py train3rl --set S --method spce_total --frame rel --kappa 12 --tau 4.9 --lr 0.001090170443025114 --ent-coef 0.00013313139952275948 --batch 128 --critic-lr 0.0014321061677694642 --seed 512 --max-episodes 200000 --no-plateau-stop --budget-minutes 330 --out ../results/v3/rl/S_k12_rel_cfg2_sd512"
+  },
+  {
+   "id": "v3_rl_S12_sd513",
+   "cmd": "python main.py train3rl --set S --method spce_total --frame rel --kappa 12 --tau 4.9 --lr 0.001090170443025114 --ent-coef 0.00013313139952275948 --batch 128 --critic-lr 0.0014321061677694642 --seed 513 --max-episodes 200000 --no-plateau-stop --budget-minutes 330 --out ../results/v3/rl/S_k12_rel_cfg2_sd513"
+  }
+ ]
+}
