@@ -1,0 +1,21 @@
+{
+ "purpose": "RL comparator sweep (amendment v3.1 D9): 4 configs x 5e4 episodes, seed 519, S12 (tau 4.9), finger-relative PPO on its own ball-sPCE objective; selection on the final greedy-policy validation ball-sPCE (ties within 0.02 nats -> lower index). Deviation recorded before the run: the trainer's validation set is its fixed 500-episode validation stream (stream 'val_v2' keyed by set, kappa, tau; same state distribution), not the val3 split named in D9.",
+ "jobs": [
+  {
+   "id": "v3_rlsweep_S12_cfg0",
+   "cmd": "python main.py train3rl --set S --method spce_total --frame rel --kappa 12 --tau 4.9 --lr 0.00036339014767503805 --ent-coef 0.00013313139952275948 --batch 128 --critic-lr 0.0014321061677694642 --seed 519 --max-episodes 50000 --budget-minutes 330 --out ../results/v3/rl/sweep_S_k12_cfg0_sd519"
+  },
+  {
+   "id": "v3_rlsweep_S12_cfg1",
+   "cmd": "python main.py train3rl --set S --method spce_total --frame rel --kappa 12 --tau 4.9 --lr 0.00012113004922501268 --ent-coef 0.00013313139952275948 --batch 128 --critic-lr 0.0014321061677694642 --seed 519 --max-episodes 50000 --budget-minutes 330 --out ../results/v3/rl/sweep_S_k12_cfg1_sd519"
+  },
+  {
+   "id": "v3_rlsweep_S12_cfg2",
+   "cmd": "python main.py train3rl --set S --method spce_total --frame rel --kappa 12 --tau 4.9 --lr 0.001090170443025114 --ent-coef 0.00013313139952275948 --batch 128 --critic-lr 0.0014321061677694642 --seed 519 --max-episodes 50000 --budget-minutes 330 --out ../results/v3/rl/sweep_S_k12_cfg2_sd519"
+  },
+  {
+   "id": "v3_rlsweep_S12_cfg3",
+   "cmd": "python main.py train3rl --set S --method spce_total --frame rel --kappa 12 --tau 4.9 --lr 0.00036339014767503805 --ent-coef 0.0013313139952275948 --batch 128 --critic-lr 0.0014321061677694642 --seed 519 --max-episodes 50000 --budget-minutes 330 --out ../results/v3/rl/sweep_S_k12_cfg3_sd519"
+  }
+ ]
+}

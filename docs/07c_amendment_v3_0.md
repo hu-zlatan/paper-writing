@@ -189,3 +189,6 @@ comparator E_train = 2 × 10⁵ from the start; H3 hold threshold 0.03 with part
   excluded): cfg 0 **0.3827**, cfg 1 0.4194, cfg 2 0.3832, cfg 3 0.3872; cfg 0, 2, 3 within 0.01 of the best → lowest
   index → **config 0** (lr 1e-3, β_T 4, λ 0.5, batch 256). Every round-0 run stopped by the frozen stop rule after 4–5
   epochs. Seeds 502/503 round 0 trained in the sandbox with config 0 (R̄ 0.3867 / 0.3846; env recorded in the JSON).
+- **RL sweep validation set (recorded before the sweep, run 6):** v3.1 D9 names "500 `val3` episodes"; the trainer
+  (`train_v2.Trainer.validate`) validates on its own fixed 500-episode stream (`stream("val_v2", set, κ, τ)`, states from
+  the same prior). The sweep uses the trainer's set unchanged (no code change to the trainer); stated as a deviation.
