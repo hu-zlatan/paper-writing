@@ -667,3 +667,19 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
     new test). H2 RL runs dispatched: seeds 511–513, 2 × 10⁵ episodes (`v3_rl_main.json`).
   - Follow-ups dispatched: R_b selection (`v3_rb_r1.json`, 31 early-stopped shards), G2′ (`v3_g2_r5.json`, 5).
   - Sandbox: remedy val shards s503 480–499 run locally (one process at a time: sub-8 read-out peaks ≈ 3.7 GB).
+  - **D3 remedy FAILS → H1 dead (H1-fb already withdrawn) → outcome row 4** (status note in amendment v3.0): seed 501's
+    remedied student complete on 500 paired val3 episodes, Δ̂_succ −4.6 pp ≤ −δ_S12 (4 pp cap) → rule (iii) fails
+    regardless of seeds 502/503 (their validation continues for the record). First-attempt read kept in
+    `12_d3_analysis.json`; remedy read will be `12_d3_analysis_rem.json`.
+  - **FREEZE commit 671c14e** (row-4 main-run set, `plans/stage_12_experiment_run_v3_main_row4.md`, before any test3
+    episode): M1 RL training (running); M2 no-grid test3 0–499 actions for G*, random, remedied students, RL; M3 g_T →
+    H2 (`gt3`, `analysis_h2_v3.py`); M4 sub-8 success/BI re-read on test3 0–299. Dropped: everything that served only
+    H1/H1-fb (S0/A12 students, student test grid, H★, R_b, BC/abs-frame/Gen-κ/curve rows, final latency). Main ≈ 21 CPU-h.
+  - New code: `touchbed/gt3.py` + `gt3` command (H2 g_T on fixed per-episode contrastive draws; equals the trainer reward
+    in a test); `analysis_h2_v3.py`; `regrid3` accepts no-grid eval3 outputs (no-grid G* actions + regrid sub 8 reproduce
+    the val3 grid eval bit-for-bit, checked on one episode). 60 tests pass.
+  - Interim H3: κ = 12 complete (100 beliefs): G = 0.016, UB95 0.022 < 0.03 → region **Hold**; κ = 0 follow-ups running.
+  - Dispatched M2 (`v3_t3_m2.json`); re-dispatched D3-B validation (`v3_d3b_val_r1.json`) and G5′ re-reads
+    (`v3_sub8_g5_r5.json`) after cancelling them for queue priority; R_b follow-up cancelled (H1-only).
+  - Owner told (OWNER_TODO + push): row 4, venue decision (default: RSS Stage 1 extended abstract written honestly as a
+    measurement / diagnosis paper).
