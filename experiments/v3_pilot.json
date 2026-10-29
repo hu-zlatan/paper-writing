@@ -1,0 +1,17 @@
+{
+ "purpose": "Stage 11/12 v3 mandatory TIME_ESTIMATE pilots (RESTRICTS pilot_required; <= 5 min each) on the GitHub-hosted runner: one G*-labelled episode, one grid read-out, one student rollout per cell (tau not yet calibrated; timing only).",
+ "jobs": [
+  {
+   "id": "v3_pilot_S_k12",
+   "cmd": "python main.py pilot3 --set S --kappa 12 --tau 6 --out ../results/v3/pilot/time_estimate_S_k12"
+  },
+  {
+   "id": "v3_pilot_A_k12",
+   "cmd": "python main.py pilot3 --set A --kappa 12 --tau 4 --out ../results/v3/pilot/time_estimate_A_k12"
+  },
+  {
+   "id": "v3_pilot_S_k0",
+   "cmd": "python main.py pilot3 --set S --kappa 0 --tau 4 --out ../results/v3/pilot/time_estimate_S_k0"
+  }
+ ]
+}

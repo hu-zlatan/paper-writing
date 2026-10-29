@@ -24,6 +24,12 @@ import numpy as np
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
+# v3 sub-commands run on the 64 x 8 action set (amendment v3.0 C1): the flag must be set before touchbed.travel is
+# imported. An explicit TOUCHBED_NPHI in the environment wins; --allow-32 (tests only) keeps the 32 x 8 default.
+V3_COMMANDS = {"eval3", "calib3", "label3", "dagger3", "distill3", "latency3", "g1c", "pilot3"}
+if len(sys.argv) > 1 and sys.argv[1] in V3_COMMANDS and "--allow-32" not in sys.argv:
+    os.environ.setdefault("TOUCHBED_NPHI", "64")
+
 from touchbed.evaluate import make_states, run_episode  # noqa: E402
 from touchbed.likelihood import ObsModel  # noqa: E402
 from touchbed.policies import CoveragePolicy, GreedyEIGPolicy, RandomPolicy  # noqa: E402
@@ -480,7 +486,11 @@ def main():
     ep.add_argument("--start", type=int, default=0); ep.add_argument("--count", type=int, default=50)
     ep.add_argument("--n-eval", type=int, default=32000); ep.add_argument("--mh-steps", type=int, default=3)
     ep.add_argument("--final-mh", type=int, default=0); ep.add_argument("--out", required=True)
+    from touchbed import cli3
+    v3cmds = cli3.register(sub)
     a = ap.parse_args()
+    if a.cmd in v3cmds:
+        return v3cmds[a.cmd](a)
     {"evalpf": cmd_evalpf, "evalgrid": cmd_evalgrid, "latency": cmd_latency, "trainnotch": cmd_trainnotch, "g2": cmd_g2, "g1": cmd_g1, "calib": cmd_calib, "train": cmd_train, "eval": cmd_eval, "pilot": cmd_pilot, "train2": cmd_train2, "eval2": cmd_eval2}[a.cmd](a)
 
 

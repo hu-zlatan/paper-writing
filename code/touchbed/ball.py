@@ -33,6 +33,16 @@ def neighbours(lib, k, x, y, th):
     return out
 
 
+def _lse(a, axis):
+    """log-sum-exp over `axis` in plain numpy (same value as scipy.special.logsumexp to ~1e-15 relative; all -inf
+    slices give -inf). Used by ball_eig, where scipy's array-API dispatch overhead was ~45 % of G*'s decision time
+    (cProfile, 512 actions, M = 64, run 5)."""
+    m = np.max(a, axis=axis, keepdims=True)
+    m = np.where(np.isfinite(m), m, 0.0)
+    with np.errstate(divide="ignore"):
+        return np.log(np.sum(np.exp(a - m), axis=axis)) + np.squeeze(m, axis=axis)
+
+
 def ball_eig(pf, phi, psi, M: int, rng, particles=None, nb=None, chunk: int = 16):
     """One-step expected increment of log P(B(s0) | h) on a particle belief, for candidates (phi[c], psi[c]):
     EIG_B(a) = 1/M sum_m [ log sum_{n in B(j_m)} w_n p(y_m|s_n,a) - log sum_{n in B(j_m)} w_n - log sum_n w_n p(y_m|s_n,a) ]."""
@@ -62,9 +72,9 @@ def ball_eig(pf, phi, psi, M: int, rng, particles=None, nb=None, chunk: int = 16
         joint = ll + lw[None, :, None]
         mask = nb[j]                                                                   # (M, C, N)
         mask = np.transpose(mask, (0, 2, 1))                                           # (M, N, C)
-        l_ball = logsumexp(np.where(mask, joint, -np.inf), axis=1)
-        l_wb = logsumexp(np.where(mask, lw[None, :, None], -np.inf), axis=1)
-        l_all = logsumexp(joint, axis=1)
+        l_ball = _lse(np.where(mask, joint, -np.inf), axis=1)
+        l_wb = _lse(np.where(mask, lw[None, :, None], -np.inf), axis=1)
+        l_all = _lse(joint, axis=1)
         out.append(np.mean(l_ball - l_wb - l_all, axis=0))
     return np.concatenate(out)
 

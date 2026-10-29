@@ -38,3 +38,18 @@ def test_score_vector_respects_subset():
     sub = np.arange(0, A, 4)
     s, mask, a = GStar(np.random.default_rng(3), M=4, subset=sub).score_vector(pf, ts)
     assert set(np.flatnonzero(mask)) <= set(sub) and a in sub
+
+
+def test_numpy_lse_matches_scipy_in_ball_eig(monkeypatch):
+    """Run-5 speed-up of ball_eig (plain-numpy log-sum-exp) is numerically equivalent to the scipy version."""
+    from scipy.special import logsumexp
+
+    from touchbed import ball
+    pf, ts = _belief(1, n=300, probes=2)
+    feas = np.flatnonzero(ts.feasible())
+    args = (pf, PHI[feas], PSI[feas], 16)
+    e_new = ball.ball_eig(*args, np.random.default_rng(4))
+    monkeypatch.setattr(ball, "_lse", lambda a, axis: logsumexp(a, axis=axis))
+    e_old = ball.ball_eig(*args, np.random.default_rng(4))
+    assert np.allclose(e_new, e_old, rtol=0, atol=1e-10)
+    assert int(np.argmax(e_new)) == int(np.argmax(e_old))
