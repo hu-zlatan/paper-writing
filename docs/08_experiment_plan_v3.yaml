@@ -1,0 +1,469 @@
+# Stage 9 · EXPERIMENT_DESIGN [GATE] · v3  (after PIVOT 15 → 8; supersedes docs/08_experiment_plan_v2.yaml for v3)
+# Produced with pipeline/references/stage_prompts/experiment_design.md; system role "You are a principal investigator
+# designing ML experiments."; {preamble} = "This is iteration v3; previous results showed that (a) one-step look-ahead
+# headroom over cost-aware greedy G* under travel cost is small on the 32x8 action set (G(12) = 0.0146, UB 0.0208; Idea 2
+# refuted in the tested range) and (b) an RL-trained amortized policy on the ball-sPCE objective fails learnability
+# against G* (S12 success 0.204 -> 0.243 after the one remedy vs G* 0.410 on 500 validation episodes). Details:
+# results/v2/14_analysis.md and results/v2/15_decision.md (area-chair wording in 14_analysis is binding for any v2
+# number)."; {hypotheses} = docs/07_hypotheses_v3.md (canonical; section numbers below refer to it).
+# Binding pre-registration: docs/07c_amendment_v3_0.md (commit a1de0fc). Where this file and the amendment differ, the
+# amendment wins; this file adds no rule, threshold or row. Inconsistencies found between the hypotheses and the
+# amendment are listed under consistency_notes; they are RESOLVED by docs/07c_amendment_v3_1.md (D1-D10, written in run 5
+# before any v3 run), which is binding together with v3.0.
+# Every number here is a design parameter, a pre-registered threshold, or a cited measured/planning estimate
+# ([measured, source] / [planning, source] / [derived] = arithmetic on quoted numbers). None is a result.
+
+version: v3
+generated: "2026-10-29"
+hypotheses_doc: docs/07_hypotheses_v3.md
+theory_doc: docs/07b_theoretical_bounds_v3.md
+preregistration: "docs/07c_amendment_v3_0.md (commit a1de0fc; status notes with n*, tau_kappa, delta_c, epsilon_c, H-star, R_b, H1-fb activation, test sizes are appended after the gates, each with a data commit hash)"
+amendments_inherited: "docs/07c_amendment_v1_1.md, docs/07c_amendment_v2_0.md (B6 estimator, B8 evaluator), as referenced by 07_hypotheses_v3 §1.1"
+v2_numbers_rule: "Every v2 number quoted anywhere in v3 uses the area-chair wording of results/v2/14_analysis.md (rows 1-17); all v2 learned-policy numbers are validation/pilot; kappa = 0/6 diagnostics and relative-head seeds 400-402 are exploratory (amendment C14)."
+global_settings:
+  action_set: "64 phi' (5.625 deg, phi' = i*2pi/64) x 8 psi in {-35, -25, ..., +35} deg = 512 actions, index a = i_phi*8 + i_psi; every v3 job sets TOUCHBED_NPHI=64 and records it in its output JSON (an output without it is not a v3 result); default 32 must reproduce v2 bit-for-bit (amendment C1)"
+  candidate_subsets: "C = 512 (all); 128 = rung_subset(32, 4) (every 2nd phi', psi idx 0,2,5,7); 32 = rung_subset(16, 2) (every 4th phi', psi idx 2,5) (C1)"
+  evaluator: "gridpost.AdaptiveGridPosterior, sub = 4 (B8); MAP identity, Nelder-Mead pose, ball mass floored at 1/(2*32,000); histories rebuilt exactly from recorded actions and observation streams; tie band [0.45, 0.55] pre-registered (C2); sub = 8 for every v3 number if E' fails"
+  cells: "primary {S0, S12, A12}; kappa_hi = 12; no kappa = 6 cells; A0 re-checked once at G5' under v2 §1.7, enters as 4th primary cell only if informative (C3)"
+  informative_cell_rules: "I1 (pre-test removal from success and BI), I2 (on-test non-informative success -> decided on BI, labelled), I3 (H1 'decided on success' iff >= 2 I1-surviving cells are success-informative on test); no other rule (07_hypotheses_v3 §1.4, C3)"
+  travel_model: "c(a) = 1 + kappa*|wrap(phi' - phi_t)|/pi strokes; feasible iff c(a) <= tau_rem; episode ends at tau_rem < 1; tau_kappa probe-matched per cell; n* per set by the kappa = 0, tau = 4 rule (v2 §1.2, C4)"
+
+objectives:
+  - id: O1
+    hypothesis: H1a
+    statement: "A DAgger-distilled, belief-free, finger-relative student is non-inferior to full-size cost-aware ball greedy G* (2,000, 512, 64): in every success-informative cell one-sided 95% LB of success(student) - success(G*) > -delta_c (delta_c = min(4 pp, 0.15*D_c)); in every I1-surviving cell LB of BI(student) - BI(G*) > -epsilon_c; >= 4 of 5 seeds with point Delta_success > -delta_c in every success-informative cell."
+  - id: O2
+    hypothesis: H1b
+    statement: "At its own accuracy the student is >= 100x cheaper per decision than the best greedy configuration: in every success-informative cell UB of success(R_b) - success(student) < 0, R_b fixed by the §1.8 rule in Lat' before test (or 'grid floor' (125, 32, 4)). The 100x is per decision and a constants statement at these sizes, not an asymptotic separation (C11; 07b_theoretical_bounds_v3 §2.3)."
+  - id: O3
+    hypothesis: H1c
+    statement: "Learning is needed: in every cell where H1a passes on success, UB of success(H-star) - success(G*) < -delta_c on the first 500 test episodes (all 1,000 if the pilot gap G* - H-star < 12 pp). Outcomes pass / flat / unresolved per §3.1."
+  - id: O4
+    hypothesis: "H1-fb (conditionally registered fallback)"
+    statement: "Active only if Lat' median L_dec(G* full)/L_dec(pruned-16) >= 10. Then: pruned-16 (student top-16 + G* re-scoring) NI to G* by the H1a rules and latency-ratio LB >= 10 on 500 test decisions; control random-16 UB(success(random-16) - success(G*)) < -delta_c, else the word 'learned' is dropped."
+  - id: O5
+    hypothesis: H2
+    statement: "On the first 500 S12 test episodes with the same per-episode contrastive draws (L = 4095, J = 16): one-sided 95% crossed-bootstrap LB of g_T(student, seeds 501-503) - g_T(RL-relative, seeds 511-513) > +0.10 nats (PPO under-optimises its own objective at 2e5 episodes). Encoder sentence only under the label-fit and belief-input (D3-B) conditions of §3.3."
+  - id: O6
+    hypothesis: H3
+    statement: "One-step rollout headroom over G* with the C12 reduced greedy completion is small on 64x8: one-sided 95% UB of G(12) < 0.03 (set S, n* re-calibrated). Regions Kill (LB > 0.05, precedence) / Hold (UB < 0.03) / Inconclusive; Hold downgraded if G1'(c) fails or the bias-check ratio > 1.02; untested if G1'(a) or (b) fails."
+
+datasets:
+  - name: shapes_S
+    generator: "code/touchbed/shapes.py::make_set_S() (unchanged from v2)"
+    cells: [S0, S12]
+  - name: shapes_A
+    generator: "code/touchbed/shapes.py::make_set_A(0, 8) (unchanged; v2 per-shape confusability rule)"
+    cells: [A12, "A0 (re-check only)"]
+  - name: notch_control
+    generator: "code/touchbed/shapes.py::make_positive_control(); code/touchbed/notch.py exact values (G1'(a), 5 runs)"
+  - name: travel_notch_control
+    generator: "new in stage 10 (G1'(c)): notch geometry, actions on the stand-off circle, kappa such that the identity feature is far from the cheap action; exact values by enumeration, T = 2"
+  - name: zero_gap_bank
+    generator: "100 beliefs from split bank3 (salt 101) (G1'(b))"
+  - name: travel_environment
+    description: "Finger on the 100 mm stand-off circle; 512-action set (global_settings); cost c(a); budget tau_kappa per cell from Cal'."
+  - name: episode_splits
+    description: "New splits added to evaluate.SPLIT_SALT (existing entries unchanged); episode i of split s on set X uses stream('state', X, s, salt, i), disjoint from v2 by key (C5). Paired designs use the same indices for every method in a cell."
+    splits:
+      - {split: cal3, salt: 61, size_per_cell: 200, use: "Cal' (n*, tau_kappa)"}
+      - {split: pilot3, salt: 67, size_per_cell: "G* 500; random 200; each heuristic 200; greedy-grid candidates 200 (S12 only); 64x16 report 300 (S12, G* only)", use: "G5', margins, H-star, R_b, E' (first shard)"}
+      - {split: val3, salt: 71, size_per_cell: 500, use: "D3 (500); D3-B (first 300); held-out regret beliefs for noise floor (200)"}
+      - {split: test3, salt: 79, size_per_cell: "1,000 paired (indices 0-999); power rule -> 2,000 (indices 1,000-1,999) in <= 2 cells", use: "H1a, H1b, G*; subsets: first 500 H-star (H1c) and H2 g_T; first 300 BC / abs-frame / RL success / Gen-kappa rows; first 200 success-vs-probe curve; first 100 random sanity"}
+      - {split: label3, salt: 83, size_per_cell: "1,500 round-0 G* rollouts (indices 0-1,499; 1,200-1,499 = held-out validation-regret set)", use: "round-0 distillation data"}
+      - {split: dagger3, salt: 89, size_per_cell: "400 student rollouts per seed per round, index 1,000*r + 400*(seed-501) + j (C7, see consistency_notes N1)", use: "DAgger rounds 1-2"}
+      - {split: g2v3, salt: 97, size_per_cell: "100 beliefs per kappa in {0, 2, 12} (set S)", use: "H3 / G2'"}
+      - {split: bank3, salt: 101, size_per_cell: 100, use: "G1'(b) zero-gap bank"}
+
+baselines:
+  - name: G_star
+    description: "Cost-aware ball greedy: argmax over feasible a of EIG_B(a; b)/c(a), online PF N = 2,000 (resample-move, 3 MH), M = 64, all 512 actions (policies_v2.GStar). Teacher and comparator in every H1 contrast; score_vector() exports s(a) = max(0, EIG_B)/c(a)."
+    tuning_protocol: "No tuning in v3 by design: full size (2,000, 512, 64) frozen in v2 §1.4; action set fixed by the pre-registered G5 flatness consequence (C1). Its accuracy-latency trade-off is swept explicitly by the 27-configuration grid (next entry). 64x16 vs 64x8 at S12 on 300 pilot episodes is report-only."
+  - name: greedy_grid_27_and_R_b
+    description: "27 configurations N in {2,000, 500, 125} x C in {512, 128, 32} (nested subsets) x M in {64, 16, 4}; per-decision latency components t_assim, t_nb, t_score, t_select. R_b = the boundary configuration: Q = configs with median L_dec <= 100 x median L_dec(student); keep maximal elements of Q under componentwise order on (N, C, M) (<= 7); R_b = highest success on 200 S12 pilot episodes (ties -> higher median L_dec); empty Q -> R_b = (125, 32, 4) 'grid floor'."
+    tuning_protocol: "Full factorial grid of 27 configurations timed in Lat' (all, interleaved, same decision states); accuracy sweep of the <= 7 maximal qualifying configurations on 200 S12 pilot episodes each; R_b frozen in a status note before any test episode. No post-test change of R_b (§5)."
+  - name: H_star_heuristics
+    description: "B-spread (belief-free, max-min wrap distance, psi = +5 deg), B-fan (belief-free, stay at phi_t, psi cycle +-5, +-15, +-25, +-35), B-cov (CoverageV2, PF N = 2,000), all with the budget reservation rule c(a) <= tau_rem - max(0, n* - t - 1), fallback cheapest feasible. H-star(c) = best of the three per cell."
+    tuning_protocol: "Parameter-free rules frozen in C10; the selection among the three is the sweep: each run on 200 pilot3 episodes per cell, H-star(c) = highest pilot success (ties B-spread < B-fan < B-cov), frozen at the G5' status note before test."
+  - name: random
+    description: "Uniform over the feasible part of the 512-action set (policies_v2.RandomV2); sanity row and D_c anchor."
+    tuning_protocol: "None (parameter-free)."
+  - name: RL_relative
+    description: "PPO sPCE-total (gamma = 1, returns-to-go of ball-sPCE increments, L = 4095, J = 16), finger-relative RelDeepSets head, 512 actions, E_train = 2e5 episodes; v2 plateau rule (validation ball-sPCE on 500 episodes every 1e4 episodes, 5-eval moving average < 0.02 nats) recorded but not used to stop early. Seeds 511-513, S12 only (H2)."
+    tuning_protocol: "Amendment v3.1 D9 (replaces the original no-sweep text): 4-config PPO sweep at S12, seed 519, E_train = 5e4 each, selected on RL's own objective (final validation ball-sPCE of the argmax policy, 500 val3 episodes; ties within 0.02 nats -> lower index); configs = v2 hp1 (lr 3.63e-4, entropy 1.33e-4, batch 128, critic lr 1.43e-3), lr x 1/3, lr x 3, entropy x 10; selected config for seeds 511-513 at E_train = 2e5. Equal sweep size to the student (4 configs, 1 seed)."
+  - name: pruned_16_and_random_16
+    description: "H1-fb only (if active): G* full size re-scoring only the student's top-16 feasible actions; control: G* re-scoring 16 feasible actions drawn uniformly per decision."
+    tuning_protocol: "k = 16 fixed, no k sweep (§3.2); activation decided by measured Lat' ratio before any accuracy number; uses the frozen main students."
+
+proposed_methods:
+  - name: distilled_student
+    description: >-
+      Finger-relative DeepSets (relframe.RelDeepSets, context dim 5, hidden 128 as v2) over 512 relative actions with
+      feasibility mask; belief-free input (touch history, finger angle, tau_rem/tau). Loss = CE(logits, softmax(beta_T *
+      s/sigma_s) over feasible a) + lambda * CE(logits, argmax s); sigma_s = per-decision SD of s over feasible a; uniform
+      over the argmax set if sigma_s < 1e-6. Data: round 0 = 1,500 G* rollouts per cell (label3 0-1,499, every decision
+      labelled, shared by seeds; 1,200-1,499 held out); DAgger round 1 = 400 student rollouts per seed with beta_DAgger =
+      0.5, round 2 = 400 with beta_DAgger = 0; G* labels (N = 2,000, M = 64) at every visited belief; aggregated; each
+      round restarts from previous weights. Stop: validation R-bar every epoch, stop if improvement < 0.005 over 3
+      evaluations, cap 50 epochs, last checkpoint, no success-based selection. Adam, no weight decay, grad-norm clip 1.0.
+      HP grid (seed 501, S12, round 0, held-out R-bar, ties within 0.01 -> lower index): config 0 (lr 1e-3, beta_T 4,
+      lambda 0.5, batch 256), 1 (3e-4, 4, 0.5, 256), 2 (1e-3, 16, 0.5, 256), 3 (1e-3, 4, 0, 512); the chosen config is
+      used in every cell and row. Seeds 501-505 per primary cell (S12 501-503 = D3 students, reused). One model per cell.
+    tuning_protocol: "4-config HP grid above, 1 seed, selected on held-out round-0 floored normalised regret before DAgger (C7)."
+    effective_components:
+      - {id: C1, name: "supervised distillation from G*'s score vectors (dense per-decision labels) instead of RL on the policy's own objective", ablation: [A1], hypothesis: H2}
+      - {id: C2, name: "DAgger on-policy relabelling (rounds 1-2) instead of behaviour cloning on teacher rollouts", ablation: [A2]}
+      - {id: C3, name: "finger-relative action/history frame", ablation: [A3]}
+      - {id: C4, name: "belief-free input (no particle filter at decision time)", ablation: [A4]}
+      - {id: C5, name: "soft-label target softmax(beta_T*s/sigma_s) with lambda-weighted argmax term", ablation: [A5], claim_scope: "regret sensitivity only (see A5 and consistency_notes N6); no task-metric claim"}
+      - {id: C6, name: "amortization (one forward pass replaces online PF + EIG scoring)", ablation: [A6], hypothesis: "H1b (+ full-size latency ratio, report-only)"}
+      - {id: C7, name: "learned action selection (vs non-learned heuristics)", ablation: [A7], hypothesis: H1c}
+      - {id: C8, name: "learned candidate ranking used for pruning (H1-fb only, if active)", ablation: [A8], hypothesis: "H1-fb control"}
+      - {id: C9, name: "one-step greedy teacher (no look-ahead) as the distillation target", ablation: [A9], hypothesis: "H3 (teacher-level, BI not success)"}
+      - {id: C10, name: "per-cell training (one student per (set, kappa))", ablation: [A10], claim_scope: "wording rule only: 'transfers to kappa = 0 without retraining' iff Gen-kappa success LB > -delta_S0"}
+    not_claimed_as_effective: "beta_DAgger schedule (0.5 -> 0), round sizes, stop rule, regret-based HP selection, hidden width, cost-awareness of the teacher (c(a) division): fixed design choices with no ablation row; the paper must not call them effective, key or important (hard_constraints §3)."
+
+ablations:
+  - id: A1
+    removes: C1
+    variant: "RL-relative: same RelDeepSets head and 512 actions trained by PPO on ball-sPCE (its own objective), E_train = 2e5"
+    cells: [S12]
+    seeds: "511-513 (vs student 501-503)"
+    episodes: "first 500 test3 for g_T (H2 test); first 300 test3 for success/BI (reported row)"
+    readout: "H2 test (g_T LB > +0.10 nats); success, BI, probes, gap closure (only if LB(success(G*) - success(RL)) > delta_S12), CPU-h incl. G* labelling"
+  - id: A2
+    removes: C2
+    variant: "BC-only: round-0 checkpoints of student seeds 501-503 at S12 (no DAgger; no separate training, C8)"
+    cells: [S12]
+    seeds: "501-503 (round-0 checkpoints)"
+    episodes: "first 300 test3"
+    readout: "success, BI, R-bar; Holm-family reported row; not data-matched to DAgger (1,500 vs 1,500 + 800 rollouts per seed): a BC = DAgger result means the paper does not attribute NI to DAgger specifically (07b §6)"
+  - id: A3
+    removes: C3
+    variant: "absolute-frame student: train_v2.CategoricalDeepSets head, same recipe (round 0 + DAgger 1-2 with its own G* labels), chosen HP config"
+    cells: [S12]
+    seeds: "531-533"
+    episodes: "first 300 test3"
+    readout: "success, BI, R-bar; Holm-family reported row; first item of the downscale order"
+  - id: A4
+    removes: C4
+    variant: "belief-input student (D3-B): same head and recipe, input = 48 PF-summary features (per identity k = 1..8: w_k, weighted mean x, y, weighted SD x, y, resultant length of |G_k|*theta) from a PF N = 2,000, plus the relative context"
+    cells: [S12]
+    seeds: "521-523"
+    episodes: "first 300 val3 (gate-period, report-only; no test episodes)"
+    readout: "D3 rule applied (report-only); used only by the H2/D3 encoder sentence (§3.3); training-set R-bar and top-1 logged"
+  - id: A5
+    removes: C5
+    variant: "HP-grid row (no new runs): config 0 vs 2 (beta_T 4 vs 16) and config 0 vs 3 (lambda 0.5 vs 0, with batch 256 vs 512 changed jointly)"
+    cells: [S12]
+    seeds: "501 (round 0 only)"
+    episodes: "held-out round-0 beliefs (label3 1,200-1,499)"
+    readout: "held-out R-bar per config; reported as the HP-grid row. No hard-label-only config exists in the frozen grid, so this row cannot support 'soft labels improve success' (consistency_notes N6)"
+  - id: A6
+    removes: C6
+    variant: "online greedy without amortization: the 27-configuration (N, C, M) grid, R_b, and full-size G*"
+    cells: "Lat' timing on S12 pilot decisions; R_b and G* on all test3 1,000 episodes per primary cell"
+    seeds: "deterministic (one RNG stream per episode)"
+    readout: "H1b test; L_dec components, L_ep, full-size ratio with CI, likelihood-evaluation and MAC counts, cProfile share, Pareto plot, break-even episodes"
+  - id: A7
+    removes: C7
+    variant: "H-star(c) in {B-spread, B-fan, B-cov}"
+    cells: "every primary cell where H1a passes on success"
+    seeds: "deterministic"
+    episodes: "first 500 test3 (all 1,000 if pilot gap G* - H-star < 12 pp)"
+    readout: "H1c (pass / flat / unresolved)"
+  - id: A8
+    removes: C8
+    variant: "random-16 pruned G* (16 feasible actions uniform per decision) vs pruned-16"
+    cells: "every informative cell where H1-fb passes (only if H1-fb is active)"
+    seeds: "deterministic"
+    episodes: "1,000 test3 per informative cell"
+    readout: "H1-fb control UB < -delta_c"
+  - id: A9
+    removes: C9
+    variant: "one-step look-ahead (rollout) teacher replacing G*'s first action: B6/G1 estimator, C1 = 32 screened incl. structured set-up moves, M_outer = 64, top 4 + G* re-estimated 4 x 64; completion by the reduced greedy of C12 (N_LA = 500 resampled from G*'s decision PF, no MH, rung_subset(16, 8) = 128 candidates, M = 16)"
+    cells: "set S, kappa in {0, 2, 12}"
+    seeds: "100 g2v3 beliefs per kappa"
+    readout: "G(kappa) relative gap, absolute nats, fraction LA != G*; H3 regions; measures teacher headroom in BI only, no success claim, no student retrained on a look-ahead teacher"
+  - id: A10
+    removes: C10
+    variant: "Gen-kappa: S12-trained students 501-503 run unchanged in S0 vs G* at S0"
+    cells: [S0]
+    seeds: "501-503 (S12 models)"
+    episodes: "first 300 test3"
+    readout: "success/BI difference to G*; wording rule only (§2.2); fourth item of the downscale order"
+  - id: A11
+    removes: "none (diagnostic curve)"
+    variant: "success-vs-probe curve: grid evaluation after each probe, G* and student seed 501"
+    cells: [S12]
+    episodes: "first 200 test3"
+    readout: "saturation diagnostic (skeptic §1.3 (iv)); third item of the downscale order"
+
+metrics:
+  - name: success
+    formula: "1[identity correct AND ||(dx, dy)|| < 5 mm AND symmetry-folded rotation error < 5 deg] using the evaluator estimate (MAP identity, Nelder-Mead pose, 30 iterations)"
+    code: "touchbed/pf.py::success(lib, AdaptiveGridPosterior.estimate(), s0), via gridpost.GridPosterior.readout"
+  - name: ball_information_BI
+    formula: "log max(P_hat(B(s0) | h), 1/(2*32,000)) - log P(B(s0)) nats; P(B) from the prior (cap -log P(B) ~ 8.10 nats [07b §1]); P_hat = evaluator ball mass"
+    code: "touchbed/gridpost.py::GridPosterior.readout (ball_info), evaluate_v2.prior_ball_mass"
+  - name: error_components
+    formula: "identity error rate; translation error ||(dx, dy)|| mm; folded rotation error deg (reported)"
+    code: "touchbed/pf.py::success output dict"
+  - name: executed_probes_and_travel
+    formula: "number of probes executed before tau_rem < 1; travel = sum_t |wrap(phi'_t - phi_{t-1})| rad per episode"
+    code: "touchbed/travel.py::TravelState.step (episode record)"
+  - name: paired_difference_and_bounds
+    formula: "per episode, seed-averaged outcome difference (method - comparator); crossed episode x seed bootstrap, B = 10,000, one-sided 95% percentile LB/UB; intersection-union across cells (H1a, H1b, H1c)"
+    code: "touchbed/stats.py::crossed_bootstrap_diff; seed rule touchbed/stats.py::seed_robustness"
+  - name: reported_row_p_values
+    formula: "two-sided bootstrap p-values, Holm within {student vs BC, vs abs-frame, vs random per cell}; TOST of student vs G* at +-delta_c (report-only)"
+    code: "touchbed/stats.py::holm, touchbed/stats.py::tost"
+  - name: margins
+    formula: "D_c = success(G*) - success(random) on pilot3 (G* 500, random 200); delta_c = min(0.04, 0.15*D_c); D_c^BI = BI(G*) - BI(random); epsilon_c = min(0.05*BI_c(G*), 0.15*D_c^BI) nats"
+    code: "new analysis script for G5' (stage 10), values in an amendment status note"
+  - name: D3_rule
+    formula: "(i) Delta_hat_succ >= max(-0.02, -delta_S12 + 1.645*SE_s*sqrt(500/1,000)); (ii) Delta_hat_BI >= max(-0.15, -epsilon_S12 + 1.645*SE_BI*sqrt(500/1,000)); (iii) every seed's point Delta_hat_succ > -delta_S12; SE from the crossed bootstrap on the 500 val3 episodes x 3 seeds"
+    code: "touchbed/stats.py::crossed_bootstrap_diff (SE from bootstrap replicates)"
+  - name: ball_sPCE_g_T
+    formula: "g_T = log((1/J) sum_j p(h_T | s_j^B)) - log((1/(L+1)) [ (1/J) sum_j p(h_T | s_j^B) + sum_{l=1..L} p(h_T | s_l) ]), s_j^B ~ uniform in ball B(s0) (J = 16), s_l ~ prior (L = 4,095), same per-episode draws for every method"
+    code: "touchbed/train_v2.py::TrainerV2.rollout (g_T), ball.sample_in_ball; v3 evaluation wrapper on fixed test3 draws (stage 10)"
+  - name: floored_normalised_regret
+    formula: "r = (s_max - s(a_pi)) / max(s_max - s_med, rho*s_max), rho = 0.05, s_med = median of s over feasible a; decisions with s_max = 0 excluded and counted; R-bar = mean r; tie decision iff s_max - s_med < rho*s_max (fraction reported); r <= 20 by construction"
+    code: "new distill.py regret function (stage 10; unit-tested in G0') on GStar.score_vector() output"
+  - name: teacher_noise_floor_and_near_ties
+    formula: "R-bar of G*'s own first choice re-scored with an independent RNG stream on 200 val3 beliefs; fraction of decisions with (s_max - s_(2))/s_max < 0.05"
+    code: "distill.py (stage 10) + policies_v2.GStar.score_vector()"
+  - name: label_fit
+    formula: "training-set R-bar and top-1 agreement with argmax s at end of round 2; under-fit := R-bar > 0.25 or top-1 < 0.50 (labelling rule of §3.3, not a prediction)"
+    code: "distill.py (stage 10)"
+  - name: decision_latency_L_dec
+    formula: "median over >= 500 timed decisions (after 20 warm-up) of time from receiving y_t to emitting a_{t+1}; greedy = t_assim + t_nb + t_score + t_select; student = t_feat + t_fwd + t_mask; one pinned core, OMP/MKL/OPENBLAS threads = 1, interleaved; bootstrap 95% CI of the median; +500 decisions if any CI half-width > 10% of its median; selection-only time also reported"
+    code: "touchbed/latency.py::run_latency extended with component timers (stage 10; G0' check: components sum to L_dec within 5%)"
+  - name: episode_latency_L_ep
+    formula: "sum of L_dec over the episode + L_final; L_final(student) = one PF (N = 2,000) pass over the history + MAP identity + 30 Nelder-Mead iterations; L_final(greedy) = read-out only; evaluator excluded"
+    code: "touchbed/latency.py (stage 10 extension)"
+  - name: latency_ratio
+    formula: "median L_dec(A)/median L_dec(B) with bootstrap over decisions; H1-fb: one-sided 95% LB of median ratio G*/pruned-16 on 500 test decisions"
+    code: "new ~10-line ratio bootstrap (stage 10)"
+  - name: implementation_independent_counts
+    formula: "likelihood evaluations per greedy call M*N*C + N*C; student MACs; cProfile share of L_dec inside vectorised numpy kernels"
+    code: "touchbed/latency.py::lik_evals_rung(N, C, M); touchbed/latency.py::macs_policy(hidden, n_touch, ctx_dim=5, n_act=512)"
+  - name: break_even_episodes
+    formula: "training CPU time incl. G* labelling / (per-episode G* time - per-episode student time)"
+    code: "analysis script (stage 14) from job CPU logs"
+  - name: H3_relative_gap
+    formula: "G(kappa) = [mean V_LA - mean V_G*] / mean V_LA over 100 G*-reached beliefs (dimensionless; V in nats of expected remaining-budget ball information); one-sided 95% bounds by bootstrap over beliefs of the ratio of means; absolute nats reported"
+    code: "touchbed/g2.py::g2_gap -> touchbed/lookahead.py::lookahead_gap(..., greedy_M=0) with lookahead_tb.TouchbedProblem (M = 16, rung (16, 8)); analysis_g2.py"
+  - name: H3_bias_check
+    formula: "ratio of estimator V_G* to an independent 4x-sample full G* rollout estimate on 20 S12 beliefs; > 1.02 -> 'Hold' unavailable"
+    code: "stage 10 script around g2.py"
+  - name: gap_closure_H2
+    formula: "[success(student) - success(RL)] / [success(G*) - success(RL)], reported only if LB(success(G*) - success(RL)) > delta_S12"
+    code: "stats.crossed_bootstrap_diff + analysis script"
+  - name: E_prime_evaluator_check
+    formula: "mean |BI(sub 4) - BI(sub 8)| over 16 episodes; success flips counted only if true-identity mass outside [0.45, 0.55] under both settings"
+    code: "gridpost.AdaptiveGridPosterior(sub=4 / sub=8)"
+  - name: compute_accounting
+    formula: "CPU-h per job from runner logs; TIME_ESTIMATE line per sweep"
+    code: "main.py pilot (TIME_ESTIMATE), touchbed/time_guard.py"
+
+statistical_tests:   # 07_hypotheses_v3 §1.9 = C13; no correction across H1, H2, H3; IU within each
+  - {claim: H1a, test: "crossed bootstrap of paired Delta (student - G*), success and BI, per cell; IU", rule: "LB > -delta_c (success), LB > -epsilon_c (BI); seed rule >= 4/5"}
+  - {claim: H1b, test: "crossed bootstrap of success(R_b) - success(student), one-sided UB per cell; IU", rule: "UB < 0"}
+  - {claim: H1c, test: "paired episode bootstrap of success(H-star) - success(G*), one-sided UB, cells where H1a passes; IU", rule: "UB < -delta_c"}
+  - {claim: H1-fb, test: "as H1a for pruned-16; median-ratio bootstrap", rule: "NI as H1a; ratio LB >= 10"}
+  - {claim: "H1-fb control", test: "as H1c for random-16", rule: "UB < -delta_c"}
+  - {claim: H2, test: "crossed bootstrap of g_T(student) - g_T(RL), S12", rule: "LB > +0.10 nats"}
+  - {claim: H3, test: "bootstrap over beliefs of the ratio of means G(12)", rule: "Kill LB > 0.05 (precedence); Hold UB < 0.03; else Inconclusive"}
+  - {claim: "reported rows", test: "two-sided bootstrap p, Holm within {student vs BC, vs abs-frame, vs random per cell}", rule: "reported only"}
+  - {claim: secondary, test: "TOST student vs G* at +-delta_c per cell", rule: "reported only"}
+
+pre_run_gates:   # §4; no main run before G0', Cal', E', G5', Lat' and D3 pass; G1'/G2' do not block H1
+  - id: "G0'"
+    date: "2026-11-05"
+    check: "CI unit tests: 64x8 masks and costs; 32x8 bit-reproduction (v2 kappa = 0/tau = 3 set, rung_subset); relative <-> absolute round trip on 512; soft-label CE gradient check; score_vector() argmax = GStar.act on the same RNG state; regret floor and tie handling; heuristic determinism and reservation rule; latency component timers sum to L_dec (+-5%); analysis_g3_notch.py and analysis_g3_hp.py reproduce or diff the v2 files; TIME_ESTIMATE pilots (<= 5 min each)"
+    pass_rule: "all green, commit hash recorded"
+    if_fail: "nothing downstream starts; not green by 11-07 -> buffer consumed; by 11-09 escalate to owner"
+  - id: "Cal'"
+    date: "2026-11-06"
+    check: "n* (kappa = 0, tau = 4 rule) and tau_kappa for S0, S12, A12 (+ A0 recheck), 200 cal3 episodes each"
+    pass_rule: "verified mean probes within n* +- 0.3"
+    if_fail: "<= 3 bisection steps on tau_kappa; then the cell is removed (I1)"
+  - id: "E'"
+    date: "2026-11-07"
+    check: "sub 4 vs sub 8 on 8 S12 + 8 A12 pilot episodes (4 G*, 4 B-fan each, first G5' shard)"
+    pass_rule: "mean |Delta BI| <= 0.02 nats AND no success flip outside the tie band [0.45, 0.55]"
+    if_fail: "sub = 8 for every v3 number; its measured cost enters the downscale order"
+  - id: "G1'"
+    date: "2026-11-07"
+    check: "(a) notch, 5 runs; (b) zero-gap bank, 100 bank3 beliefs; (c) travel-notch, exact values by enumeration, T = 2"
+    pass_rule: "(a) mean relative gap in [0.573, 0.860] (every run reported); (b) mean in [-0.01, +0.02] and UB < 0.03; (c) exact relative gap >= 0.10 and estimate within +-20% of it"
+    if_fail: "(a)/(b) -> H3 untested on 64x8 (only 32x8 values with flatness caveat); (c) fails or not built by 11-05 -> H3 'Hold' unavailable"
+  - id: "G5'"
+    date: "2026-11-09"
+    check: "G* 500, random 200, B-spread/B-fan/B-cov 200 pilot3 episodes per primary cell; v2 §1.7 non-degeneracy; margins delta_c, epsilon_c; H-star; 64x16 report at S12 (300); A0 informativeness"
+    pass_rule: "success(G*) >= success(random) + 10 pp AND §1.7 (success(G*) in [0.15, 0.90], D_c >= 20 pp, BI saturation < 50%) per cell"
+    if_fail: "cell removed (I1); < 2 cells survive -> H1 proceeds labelled per I3. Flat' screen: H-star point success >= G* - delta_c in >= 2 cells -> owner told on 11-12 that row 1' is likely; runs proceed unchanged"
+  - id: "G2'"
+    date: "2026-11-10"
+    check: "H3 measurement (3 kappa x 100 g2v3 beliefs) + bias check (20 S12 beliefs)"
+    pass_rule: "finding either way (Kill / Hold / Inconclusive regions; downgrades per G1'(c) and bias ratio > 1.02)"
+    if_fail: "does not block H1"
+  - id: "Lat'"
+    date: "2026-11-10"
+    check: "§1.8 timing of 27 configs, student (untrained weights suffice), pruned-16, L_final on S12 pilot decisions; R_b selection on 200 S12 pilot episodes; H1-fb activation"
+    pass_rule: "protocol complete, every CI half-width <= 10% of its median; H1-fb active iff median L_dec(G* full)/L_dec(pruned-16) >= 10"
+    if_fail: "500 more decisions; then R_b and H1-fb activation frozen (H1-fb withdrawn with the x% assimilation + neighbour-list sentence if ratio < 10)"
+  - id: D3
+    date: "2026-11-12 (remedy re-check 2026-11-14)"
+    check: "S12, student seeds 501-503, chosen HP config, full recipe; 500 val3 episodes paired with G*"
+    pass_rule: "(i) Delta_hat_succ >= max(-2 pp, -delta_S12 + 1.645*SE_s*sqrt(500/1,000)); (ii) Delta_hat_BI >= max(-0.15, -epsilon_S12 + 1.645*SE_BI*sqrt(500/1,000)) nats; (iii) every seed's point Delta_hat_succ > -delta_S12"
+    if_fail: "one remedy: double round 0 and both DAgger rounds once, re-check 11-14; still failing -> H1 dead: H1-fb branch if active, else outcome row 4"
+  - id: D3-B
+    date: "2026-11-12"
+    check: "belief-input student, seeds 521-523, first 300 val3 episodes"
+    pass_rule: "same rule as D3 (report-only; feeds only the H2 encoder sentence)"
+    if_fail: "no routing"
+freeze_commit: "after the gate decision (11-12, or 11-14 with remedy): n*, tau_kappa, informative cells, delta_c, epsilon_c, H-star per cell, R_b, H1-fb activation, power-rule test sizes (projected SE_test > delta_c/2.5 -> 2,000 episodes, <= 2 cells), HP config; each as a dated status note in 07c_amendment_v3_0.md with data commit hash"
+
+outcome_map:   # §5; the owner is told which row occurred; no outcome triggers a fourth design
+  - {row: "1", outcome: "H1a, H1b, H1c pass; H3 Hold (+- H2)", statement: "Amortizing cost-aware information-gain touch selection: belief-free student within delta_c of G*, heuristics are not, no greedy configuration within 100x of its per-decision cost is as accurate; one-step rollout gains <= x% over G*; (H2) RL under-optimises its own objective", venue: "RSS Stage 1 main claim"}
+  - {row: "1'", outcome: "H1a passes, H1c 'flat' in >= 2 cells", statement: "At this probe budget the task is flat: a simple heuristic is also non-inferior to G*; contribution = measurement (H3, H2) and latency characterisation; learning claim dropped", venue: "workshop / RA-L; owner decides"}
+  - {row: "2", outcome: "row 1 but H3 Inconclusive or Kill", statement: "as row 1; measured headroom reported; 'the teacher could be improved' as limitation", venue: "RSS, weaker framing"}
+  - {row: "2b", outcome: "H1a passes, H1b fails", statement: "non-inferior, but not >= 100x cheaper than the best greedy configuration at its accuracy; full-size ratio only", venue: "RA-L / workshop"}
+  - {row: "3", outcome: "H1 fails (D3 or test), H1-fb active and passes", statement: "Learned candidate pruning for online information-gain touch selection (>= 10x per decision); 'learned' only if random-16 is demonstrably worse; H2, H3 supporting", venue: "RSS short / workshop"}
+  - {row: "4", outcome: "H1 and H1-fb fail, or H1-fb withdrawn", statement: "fallback characterisation paper: H3; learnability of RL and distillation with the same encoder with the label-fit / belief-input diagnosis; H2; evaluator observation as a methods note", venue: "owner decision (RSS Stage 1 EA or RA-L / workshop)"}
+label_rules:
+  - "kappa = 12-only failure (S12, A12) with S0 passing -> 'amortized ball greedy supported without travel; cost-aware amortization rejected'; 'cost-aware' leaves the title"
+  - "'near-optimal' may not appear in title or abstract under any outcome"
+  - "labels only from: pass / rejected / rejected as titled / flat / unresolved / inconclusive / untested / withdrawn / non-informative cell"
+  - "not allowed after the run: switching the selection metric, changing k, H-star or R_b, adding cells or kappa levels, re-running H3 on another grid, choosing between RL and distillation on test data, promoting v2 exploratory seeds"
+
+risks:
+  - risk: "Student fails D3 (honest prior: closest learned evidence, RL relative head, is ~12 pp short of G* [exploratory, 12_diag_analysis.json k12.rel_sd400-402]; D3 asks ~ -1.5 pp)"
+    mitigation: "one pre-registered remedy (double data), then H1-fb or row 4; both pre-written"
+  - risk: "Flat task (heuristic non-inferior to G*)"
+    mitigation: "H1c with Flat' screen at G5' and row 1'"
+  - risk: "Q non-empty with mid-sized greedy configurations as accurate as the student (07b §2.4 item 2)"
+    mitigation: "H1b fails honestly -> row 2b; full-size ratio and Pareto plot still reported"
+  - risk: "H1-fb ratio near the 10x threshold (op-count estimate ~11x, 07b §2.4 item 3)"
+    mitigation: "activation decided by Lat' measurement only, before any accuracy number; not pre-announced"
+  - risk: "Planning latency 1.7 s/decision at 512 is an assumption (2 x informal 0.840 s; not protocol measurements, C14 item 9)"
+    mitigation: "TIME_ESTIMATE before every sweep re-measures unit costs; downscale order applied if projection > 150 CPU-h main"
+  - risk: "Evaluator sub = 4 inadequate at kappa_hi"
+    mitigation: "E' -> sub = 8 with its cost in the downscale order"
+  - risk: "H3 estimator over-reads greedy (deflates G)"
+    mitigation: "travel-notch G1'(c) and bias check; 'Hold' unavailable if either fails"
+  - risk: "Teacher noise (argmax at near-ties) caps achievable agreement"
+    mitigation: "noise floor and tie fraction measured; no R-bar threshold is a prediction"
+  - risk: "Budget conflict with RESTRICTS.yaml (see compute_budget.restricts_reconciliation) or Actions quota cap"
+    mitigation: "main session confirms Actions quota before 11-05; if capped, downscale order first; conflict surfaced to owner, not hidden"
+  - risk: "Deadline 2026-12-04 AoE"
+    mitigation: "buffer 11-20 -> 11-22; analysis 11-23 -> 11-25; every outcome row pre-written; no fourth design"
+
+compute_budget:
+  hardware: "GitHub Actions ubuntu-latest CPU runners (public repo, standard hosted runners free; ~20 concurrent 2-vCPU jobs ~ 40 single-thread processes, <= 6 h per job, time_guard stops at 80%) + 2-vCPU sandbox for development"
+  unit_costs:   # 07_hypotheses_v3 §7; each re-measured by the TIME_ESTIMATE pilot before its sweep
+    G_star_decision_512: "~1.7 s [planning, 2 x 0.840 s informal median on 256; Lat' may lower it]"
+    decisions_per_episode: "S ~4.2, A ~3.0 [planning, v2 verified probes 3.9-4.1 / 2.75-2.97]"
+    grid_eval_per_episode: "G*-like 7.4 s (S12) [measured, v2]; passing student ~10 s [planning]; weak policies (RL, BC, abs) ~20 s [planning, measured range 10.6-26.4 s]; heuristics ~40 s [assumed]; random 66-76 s [measured, v2]"
+    G_star_test_episode: "~14.5 s S (7.4 + 1.7 x 4.2), ~12.5 s A (7.4 + 1.7 x 3.0) [derived]"
+    labelled_rollout: "~7 s (S), ~5 s (A) [planning]"
+    RL_run_2e5_on_512: "~4 CPU-h [planning; v2 0.8-1.7 CPU-h per 1e5 on 256]; at batch 128, 2e5 episodes = 1,563 PPO updates [derived; hp1's batch to be read from the reproduced hp file] (<= 5,000-step rule of hard_constraints §1 respected)"
+    student_training_run: "~0.3 CPU-h [derived, 3.6 / 12]"
+  gates_cpu_hours:   # 2026-11-05 -> 11-12
+    - {item: "TIME_ESTIMATE + G0'", conditions: "all sweeps", cpu_h: 1.5}
+    - {item: "Cal'", conditions: "4 cells (S0, S12, A12, A0) x 200 episodes", unit: "~22.5 s/episode [derived]", cpu_h: 5.0}
+    - {item: "G5' G*", conditions: "3 cells x 500", unit: "~14.4 s", cpu_h: 6.0}
+    - {item: "G5' random", conditions: "3 cells x 200", unit: "~70 s", cpu_h: 11.7}
+    - {item: "G5' heuristics", conditions: "3 heuristics x 3 cells x 200", unit: "~40 s", cpu_h: 20.0}
+    - {item: "G5' 64x16 report", conditions: "S12 x 300 (G*)", unit: "~21.6 s", cpu_h: 1.8}
+    - {item: "E'", conditions: "16 episodes x 2 evaluator settings", cpu_h: 1.0}
+    - {item: "G1'", conditions: "notch 5 runs, bank 100 beliefs, travel-notch", cpu_h: 3.0}
+    - {item: "G2' + bias check", conditions: "3 kappa x 100 beliefs + 20 beliefs", unit: "~200 s/belief [derived]", cpu_h: 17.0}
+    - {item: "D3", conditions: "round-0 labels 1,500 x S12 (2.9), HP 4 configs x 1 seed (1.0), DAgger 3 seeds x 800 (4.7), training (0.9), validation 3 seeds x 500 students (4.2) + G* 500 (2.0), noise floor (0.1)", cpu_h: 15.8}
+    - {item: "D3-B", conditions: "3 seeds belief-input (labels, training, 3 x 300 validation)", cpu_h: 8.1}
+    - {item: "Lat'", conditions: "timing 27 configs + student + pruned-16 + L_final (1.5); R_b selection <= 7 x 200 pilot (4.0)", cpu_h: 5.5}
+    - {item: "TOTAL gates", cpu_h: 96.4}
+    - {item: "D3 remedy (only if D3 fails once)", cpu_h: 13.0}
+  main_cpu_hours:   # 2026-11-13 (11-15) -> 11-19
+    - {item: "labels: round 0 S0 + A12", conditions: "2 cells x 1,500 rollouts", unit: "~7 s / ~5 s", cpu_h: 5.0}
+    - {item: "labels: DAgger", conditions: "12 seed-cells (S0 x5, A12 x5, S12 504-505) x 800 rollouts", unit: "~6.2 s [derived]", cpu_h: 16.5}
+    - {item: "student training", conditions: "12 runs", unit: "~0.3 CPU-h", cpu_h: 3.6}
+    - {item: "student test grid", conditions: "3 cells x 5 seeds x 1,000", unit: "~10 s", cpu_h: 41.7}
+    - {item: "G* test", conditions: "3 cells x 1,000", unit: "~12.5-14.5 s", cpu_h: 11.4}
+    - {item: "H-star test", conditions: "3 cells x 500", unit: "~40 s", cpu_h: 16.7}
+    - {item: "R_b test", conditions: "3 cells x 1,000", unit: "~10 s", cpu_h: 8.5}
+    - {item: "H2 RL training", conditions: "3 seeds x 2e5 episodes", unit: "~4 CPU-h/run", cpu_h: 12.0}
+    - {item: "H2 g_T", conditions: "4 methods x 500 S12 episodes (no grid evaluation)", cpu_h: 0.2}
+    - {item: "RL success read", conditions: "3 seeds x 300", unit: "~20 s", cpu_h: 5.0}
+    - {item: "random sanity", conditions: "3 cells x 100", unit: "~70 s", cpu_h: 5.8}
+    - {item: "BC row (A2)", conditions: "3 seeds x 300", unit: "~20 s", cpu_h: 5.0}
+    - {item: "absolute-frame row (A3)", conditions: "labels + training + 3 seeds x 300", cpu_h: 10.6}
+    - {item: "Gen-kappa (A10)", conditions: "3 seeds x 300", unit: "~10 s", cpu_h: 2.5}
+    - {item: "success-vs-probe curve (A11)", conditions: "2 methods x 200", cpu_h: 3.3}
+    - {item: "final latency benchmark", conditions: "500 test decisions, all timed methods", cpu_h: 1.5}
+    - {item: "TOTAL main (nominal)", cpu_h: 149.3}
+  main_after_full_downscale_cpu_hours: "126.6 [derived: 149.3 - 10.6 abs-frame - 2.9 random halved - 3.3 curve - 2.5 Gen-kappa - 1.7 BC 300->200 - 1.7 RL read 300->200]"
+  never_reduced_core_cpu_hours: "~117 [derived: labels 21.5 + training 3.6 + student test 41.7 + G* 11.4 + H-star 16.7 + R_b 8.5 + RL training 12.0 + g_T 0.2 + final latency 1.5]; 07_hypotheses_v3 §7 states 'protected core ~120' (see consistency_notes N7)"
+  reserve_cpu_hours:   # buffer 2026-11-20 -> 11-22; not both in full
+    power_rule_enlargements: "<= 2 cells x ~21 CPU-h (1,000 extra test3 episodes x (5 student seeds + G* + R_b)) = <= 42; take precedence only if row 1 is still reachable"
+    H1_fb: "pruned-16 + random-16, 3 cells x 1,000 each ~ 20 CPU-h (only if active and reached)"
+  unbudgeted_contingencies: "H1c power rule (H-star test 500 -> 1,000 in a cell, +~5.6 CPU-h per cell, <= 16.7); A0 G5' pilot (~12.6 CPU-h [derived]) and A0 as a 4th primary cell in main (~+35-40 CPU-h [derived, ~1/3 of per-cell items]); sub = 8 evaluator if E' fails (cost measured at E'). See consistency_notes N2, N3, N5."
+  programme_totals: "gates 96.4 (+13 remedy) + main 149.3 + reserve <= 42 = 245.7 (no remedy, no reserve) to ~301 CPU-h; 07_hypotheses_v3 §7: ~260-300 CPU-h"
+  pilot: "mandatory TIME_ESTIMATE pilot (<= 5 min, RESTRICTS pilot_max_minutes) before every sweep, printing 'TIME_ESTIMATE: <X>s per condition x <N> conditions x <M> seeds = <total>s total' (main.py pilot); projections > 150 CPU-h main -> downscale order"
+  downscale_order: "(1) drop the absolute-frame row; (2) random sanity 100 -> 50; (3) drop the success-vs-probe curve; (4) drop Gen-kappa; (5) BC and RL success reads 300 -> 200. Never reduced: student seeds, cells and 1,000-episode tests, G* test, H-star test, R_b test, the H2 g_T test (C5)."
+  graceful_shutdown: "every job wraps its loop in touchbed/time_guard.py; EARLY_STOP_AT_80_PCT_BUDGET marker; partial outputs are labelled, never silently used as complete"
+  restricts_reconciliation:   # stated, not hidden; the main session / owner must decide before 11-05
+    restricts_fields: {pilot_required: true, pilot_max_minutes: 5, budget_per_run_minutes: 30, budget_total_hours: 12, downscale_threshold_minutes: 45}
+    pilot: "complies (<= 5 min TIME_ESTIMATE before every sweep)."
+    budget_total_hours: "CONFLICT. RESTRICTS caps total wall-clock at 12 h; the programme is ~246-301 CPU-h. Spread over ~40 parallel single-thread processes on free GitHub-hosted runners this is ~6.2-7.5 h of saturated runner wall-clock (gates ~2.5 h + main ~4 h per §7 [derived]), i.e. inside 12 h only if 'hours' means saturated runner wall-clock, not CPU-hours and not calendar time (the work is spread over the dated windows 11-05 -> 11-22 for dependencies and queueing). Under a CPU-hour reading the plan exceeds the cap by ~20-25x and cannot be downscaled to fit without dropping never-reduced items. Not resolved here."
+    budget_per_run_minutes: "CONFLICT. Jobs are planned at <= 6 h with time_guard at 80%; a single RL run (~4 CPU-h) and the labelling jobs exceed 30 min. Complies only if a 'run' is a shard of <= 30 min (RL would need checkpoint-resume chaining, not specified in the amendment). v2 practice (TrainConfigV2.budget_minutes = 330) already exceeded 30 min. Not resolved here."
+    downscale_threshold_minutes: "CONFLICT for the same runs (RL 2e5, round-0 labelling): the pre-registered downscale order never reduces them, while RESTRICTS asks for automatic downscaling of any single run > 45 min. Not resolved here."
+    actions_quota: "main session must confirm the Actions minutes quota before 11-05; if capped, apply the downscale order first."
+
+timeline:   # today 2026-10-29; RSS 2027 Stage 1 extended abstract due 2026-12-04 23:59 AoE (RESTRICTS project.target_venue)
+  - {dates: "2026-10-28 -> 10-31", stage: "8 / 8.5", work: "hypotheses v3, 07c_amendment_v3_0 (pre-registration commit a1de0fc), literature verification"}
+  - {dates: "2026-10-29 (planned 11-01)", stage: "9", work: "this file; compute envelope"}
+  - {dates: "2026-11-01 -> 11-05", stage: "10", work: "TOUCHBED_NPHI flag, score_vector(), distill.py (loss, DAgger driver, regret), heuristics, 27-config grid + component timers, belief-summary features, travel-notch, main.py label/distill/eval2 --method student, analysis scripts; G0' green 11-05"}
+  - {dates: "2026-11-05 -> 11-12", stage: "11-12", work: "Cal' 11-06; E', G1' 11-07; G5' 11-09; Lat', G2' 11-10; D3, D3-B 11-12; gate decision 11-12 (remedy re-check 11-14); freeze commit"}
+  - {dates: "2026-11-13 (11-15) -> 11-19", stage: "13", work: "main runs"}
+  - {dates: "2026-11-20 -> 11-22", stage: "-", work: "buffer: power enlargement or H1-fb"}
+  - {dates: "2026-11-23 -> 11-25", stage: "14-15", work: "analysis and decision; if not PROCEED, escalate to owner (no further loop)"}
+  - {dates: "2026-11-26 -> 12-03", stage: "16+", work: "extended abstract (5 content pages + 1 references) for the outcome row that occurred; 12-03 owner decision"}
+  - {dates: "2026-12-04 23:59 AoE", stage: "submission", work: "RSS 2027 Stage 1 extended abstract"}
+
+consistency_notes:   # hypotheses vs amendment (amendment wins) and internal gaps; listed, not resolved
+  - id: N1
+    issue: "dagger3 index formula 1,000*r + 400*(seed-501) + j (C7) makes seed ranges overlap across rounds for seeds 503-505 (e.g. round-1 seed 503 = 1,800-2,199 vs round-2 seed 501 = 2,000-2,399), and for the 521-523 / 531-533 seeds (round-1 seed 523 = 9,800-10,199 vs round-2 seed 521 = 10,000-10,399). The stream key carries the set but not kappa, so S0 and S12 also share dagger3 states. The D3 remedy (800 rollouts per round, 3,000 round-0 episodes) has no index range or held-out split in C7."
+    handling: "formula used as frozen; overlaps reported; remedy indices need a dated status note before 11-12"
+  - id: N2
+    issue: "H1c power rule (all 1,000 test episodes if pilot gap < 12 pp) is not in the §7 budget or reserve."
+    handling: "listed as unbudgeted contingency (<= +16.7 CPU-h)"
+  - id: N3
+    issue: "A0 recheck: C3 lets A0 enter as a 4th primary cell, but the §7 G5' budget covers 3 cells and the main budget 3 cells; cells are never reduced."
+    handling: "listed as unbudgeted contingency"
+  - id: N4
+    issue: "Power rule (C5) is defined on 'a cell's D3-based success contrast', but D3 data exist only for S12; no projected SE is defined for S0 and A12."
+    handling: "not resolved; needs a status note at the freeze commit"
+  - id: N5
+    issue: "E' fail -> 'measured cost enters the downscale order' (C2), but the frozen five-step order (C5) has no slot for it."
+    handling: "not resolved"
+  - id: N6
+    issue: "The frozen HP grid has no hard-label-only configuration (lambda only in {0.5, 0}, i.e. soft-only or soft+hard), config 3 changes lambda and batch jointly, and selection is on round-0 R-bar with 1 seed. The soft-label component (C5) therefore has no task-metric ablation."
+    handling: "C5 is reported as R-bar sensitivity only; the paper may not claim soft labels are effective for success/BI"
+  - id: N7
+    issue: "§7 'protected core ~120 CPU-h' vs never-reduced items ~117 [derived] and main after full downscale ~126.6 [derived]."
+    handling: "arithmetic stated here; no rule changed"
+  - id: N8
+    issue: "H3 completion: §3.4 and B6 say 'G* completion, M = 64'; code uses greedy_M = 0 -> reduced greedy (N_LA 500, rung_subset(16, 8) = 128, M = 16)."
+    handling: "resolved by amendment C12 (documentation correction); this plan follows C12"
+  - id: N9
+    issue: "§1.3 lists 'BC-only 3 (S12)' as a seed group; C8 defines BC as round-0 checkpoints of 501-503 (no separate training)."
+    handling: "amendment followed; consistent with §7 (no BC training cost)"
+  - id: N10
+    issue: "H1-fb in the D3-fail branch uses '3 remedied-recipe seeds per cell trained in the main window' (§3.2); C8 gives no seed IDs or budget line for these."
+    handling: "not resolved"
+  - id: N11
+    issue: "hard_constraints §3 asks baselines to get the same sweep budget; RL-relative reuses v2 hp1 (selected on 32x8, kappa = 6) with no v3 sweep while the student gets a 4-config grid."
+    handling: "frozen by §2.2 as a stated limitation; E_train = 2e5 given up front"
