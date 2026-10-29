@@ -1,0 +1,92 @@
+{
+ "rule": "under-fit := train R_bar > 0.25 or train top-1 < 0.50 (end of round 2)",
+ "groups": {
+  "first_attempt": [
+   {
+    "student": "S_k12_hp0_s501_r2",
+    "train_R_bar": 0.18750506175419443,
+    "train_top1": 0.5303506346613045,
+    "train_decisions": 7957,
+    "heldout_R_bar": 0.210243923429152,
+    "heldout_top1": 0.4916387959866221,
+    "under_fit": false
+   },
+   {
+    "student": "S_k12_hp0_s502_r2",
+    "train_R_bar": 0.20635059640089864,
+    "train_top1": 0.5107452557496543,
+    "train_decisions": 7957,
+    "heldout_R_bar": 0.22525272256457654,
+    "heldout_top1": 0.48327759197324416,
+    "under_fit": false
+   },
+   {
+    "student": "S_k12_hp0_s503_r2",
+    "train_R_bar": 0.18532239837360615,
+    "train_top1": 0.5278301294132429,
+    "train_decisions": 7959,
+    "heldout_R_bar": 0.2068121839279038,
+    "heldout_top1": 0.4882943143812709,
+    "under_fit": false
+   }
+  ],
+  "remedy": [
+   {
+    "student": "S_k12_hp0_s501_r2",
+    "train_R_bar": 0.17948984135337712,
+    "train_top1": 0.5233272844348182,
+    "train_decisions": 17083,
+    "heldout_R_bar": 0.18653996379141644,
+    "heldout_top1": 0.5066889632107023,
+    "under_fit": false
+   },
+   {
+    "student": "S_k12_hp0_s502_r2",
+    "train_R_bar": 0.16874135545263538,
+    "train_top1": 0.5343909149446818,
+    "train_decisions": 17083,
+    "heldout_R_bar": 0.18408276698078424,
+    "heldout_top1": 0.5058528428093646,
+    "under_fit": false
+   },
+   {
+    "student": "S_k12_hp0_s503_r2",
+    "train_R_bar": 0.1774420885358548,
+    "train_top1": 0.5275323307390719,
+    "train_decisions": 17089,
+    "heldout_R_bar": 0.2012487063009335,
+    "heldout_top1": 0.4916387959866221,
+    "under_fit": false
+   }
+  ],
+  "belief_input": [
+   {
+    "student": "S_k12_belief_hp0_s521_r2",
+    "train_R_bar": 0.3674603706262377,
+    "train_top1": 0.33366846801558375,
+    "train_decisions": 7957,
+    "heldout_R_bar": 0.40180677585779623,
+    "heldout_top1": 0.2968227424749164,
+    "under_fit": true
+   },
+   {
+    "student": "S_k12_belief_hp0_s522_r2",
+    "train_R_bar": 0.3786827606644551,
+    "train_top1": 0.3270028927178971,
+    "train_decisions": 7951,
+    "heldout_R_bar": 0.3942234349366931,
+    "heldout_top1": 0.3085284280936455,
+    "under_fit": true
+   },
+   {
+    "student": "S_k12_belief_hp0_s523_r2",
+    "train_R_bar": 0.33803519308939456,
+    "train_top1": 0.3620364550597109,
+    "train_decisions": 7955,
+    "heldout_R_bar": 0.38424864327716574,
+    "heldout_top1": 0.30518394648829433,
+    "under_fit": true
+   }
+  ]
+ }
+}
