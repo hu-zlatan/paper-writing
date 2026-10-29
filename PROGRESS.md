@@ -867,3 +867,6 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
   (write outputs to the scratchpad and copy into results/ afterwards: a git rebase during a sandbox run lost one output
   in run 8), DAgger r1/r2 manifests from `v3_d3rem_r1/r2.json`, then E4. Generalise the analyses with a `--cell` flag
   (default = v3 behaviour). The v3 paper text (`paper/mypaper/v3/draft_v3_final.md`) is the base for the v4 paper.
+- **Run 8 end (≈ 22:15 UTC):** G5′ sub-8 re-reads 2 episodes short (A12 B-cov 198/200; follow-up manifest
+  `experiments/v3_sub8_g5_r9.json`, not yet dispatched); `12_g5_analysis.json` re-run (all cells pass; S12 flat screen,
+  H★ unchanged). Queue: `v4_rl_S2` running; `v4_label_S2`, `v4_e5_rb_test3` queued.

@@ -1,0 +1,9 @@
+{
+ "purpose": "G5' sub-8 re-read follow-ups (r9)",
+ "jobs": [
+  {
+   "id": "v3_sub8_A_k12_b_cov_000_r18_r24",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/A_k12_b_cov_000.jsonl --episodes 24 25 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/A_k12_b_cov_000_r18_r24"
+  }
+ ]
+}
