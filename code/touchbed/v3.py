@@ -63,3 +63,73 @@ def states_v3(setname: str, split: str, indices, kappa: float | None = None):
 def ep_key_v3(setname: str, split: str, kappa: float, tau: float, i: int):
     """Key of the observation / policy / decision-PF streams of one episode (v2 convention, v3 split names)."""
     return (setname, split, float(kappa), float(tau), int(i))
+
+
+# ─── v3 episode runner ────────────────────────────────────────────────────────────────────────────────────────────────
+class History:
+    """Belief-free view of an episode for policies that read only the touch history (`.hist`, as ParticleFilter)."""
+
+    def __init__(self):
+        self.hist = []
+
+    def update(self, phi, psi, obs):
+        self.hist.append((phi, psi, obs))
+
+
+def run_episode_v3(policy, lib, prior, om, s0, phi0, kappa, tau, ep_key, needs_belief=True, n_dec=2000,
+                   teacher=None, beta=0.0, mix_rng=None, evaluate=True, grid_sub=4):
+    """One v3 episode. The policy acts on the decision PF (needs_belief) or on the touch history. Observations come from
+    stream('obs', *ep_key), so histories are rebuilt exactly by gridpost.rebuild_history.
+
+    teacher: optional GStar; if given, the decision PF is always run and every visited decision is labelled with
+    teacher.score_vector (amendment v3.0 C7). beta: probability that the teacher's action is executed instead of the
+    policy's (DAgger mixing, v3.0 C7); mix_rng draws that coin. evaluate: grid-evaluator read-out (v3.0 C2)."""
+    import time
+
+    import numpy as np
+
+    from .evaluate import stream
+    from .evaluate_v2 import prior_ball_mass
+    from .likelihood import sample_obs
+    from .pf import ParticleFilter
+    from .travel import PHI, PSI, TravelState
+
+    obs_rng = stream("obs", *ep_key)
+    run_pf = needs_belief or teacher is not None
+    pf = ParticleFilter(lib, om, prior, n_dec, stream("pf_dec", *ep_key)) if run_pf else None
+    hview = History()
+    ts = TravelState(phi0, kappa, tau)
+    k0, x0, y0, t0 = s0
+    actions, lat, labels, executed_teacher = [], [], [], []
+    while not ts.done():
+        lab = None
+        if teacher is not None:
+            s, mask, a_t = teacher.score_vector(pf, ts)
+            lab = {"t": ts.n_probes, "phi_t": ts.phi, "tau_rem": ts.tau_rem, "s": s, "mask": mask, "a_teacher": a_t,
+                   "feasible": ts.feasible().copy()}
+        t_start = time.perf_counter()
+        a = int(policy.act(pf if needs_belief else hview, ts)) if policy is not None else None
+        lat.append(time.perf_counter() - t_start)
+        use_t = teacher is not None and (policy is None or (beta > 0 and mix_rng.random() < beta))
+        if use_t:
+            a = lab["a_teacher"]
+        if lab is not None:
+            lab["a_policy"] = -1 if policy is None else a
+            labels.append(lab)
+        executed_teacher.append(bool(use_t))
+        ts.step(a)
+        actions.append(a)
+        phi, psi = float(PHI[a]), float(PSI[a])
+        obs = tuple(v[0] for v in sample_obs(om, lib, obs_rng, np.array([k0]), x0, y0, t0, phi, psi))
+        hview.update(phi, psi, obs)
+        if pf is not None:
+            pf.update(phi, psi, obs)
+    out = {"actions": actions, "n_probes": ts.n_probes, "travel_rad": ts.travel, "tau_left": ts.tau_rem,
+           "latencies_s": lat, "executed_teacher": executed_teacher, "history": hview.hist}
+    if labels:
+        out["labels"] = labels
+    if evaluate:
+        from .gridpost import AdaptiveGridPosterior
+        G = AdaptiveGridPosterior(lib, prior, om, hview.hist, s0, sub=grid_sub)
+        out.update(G.readout(s0, prior_ball_mass(lib, prior, s0)))
+    return out
