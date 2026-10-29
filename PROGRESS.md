@@ -9,7 +9,7 @@
 **Topic:** Amortized, non-myopic active tactile localization (TouchBED)
 **Initialised:** 2026-10-28T07:56:44Z
 **Current version:** v3
-**Latest stage:** Stage 12 EXPERIMENT_RUN [v3] gates IN PROGRESS (Cal′ and G1′ running on Actions) → see the end of this file
+**Latest stage:** Stage 15 RESEARCH_DECISION [v3] = PROCEED (row-4 characterisation paper) → stage 16 next; see the end of this file
 
 ---
 
@@ -696,3 +696,48 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
       similar with 3 probes but BI 0.25 nats lower. Follow-up `v3_t3_m4_r1.json` running.
     - D3-B partial (147 of 300): belief students −17 pp success vs G\*; follow-up `v3_d3b_val_r2.json`.
   - Stage 13 (v3) recorded in `plans/stage_13_iterative_refine_v3.md`: no open runtime bug (1,398 logs scanned).
+- **Finished (run 7, ≈ 17:50 UTC):** row-4 main runs M1–M4 complete. M4 (`14_m4_analysis.json`, test3 0–299,
+  sub 8): G\* 42.7 %, remedied student 38.2 % (−4.4 pp, ci95 [−9.3, +0.6]), RL 35.7 % with 3.0 probes (G\* − RL
+  ci95 [+0.2, +13.7] pp); student − RL success +2.6 pp (ci95 [−3.7, +8.8]) → pre-written H2 fail reading "dense
+  supervision does not improve on RL with this head"; student − RL BI +0.29 nats (ci95 [+0.12, +0.47]); gap closure not
+  reported (LB(G\* − RL) < δ). Still running (report-only): G5′ sub-8 re-reads, D3-B to 300/300.
+- **Decision:** PROCEED → stage 13 (v3).
+
+---
+
+## Stage 13. ITERATIVE_REFINE     [v3]
+
+- **Finished:** 2026-10-29 run 7. Record: `plans/stage_13_iterative_refine_v3.md` (numpy2 0 errors; 60 tests; 1,398
+  v3 logs scanned, no NaN/Inf/traceback; 5 root-caused fixes during v3; iterative_improve not applied — D3/H2 are
+  pre-registered decisions).
+- **Decision:** PROCEED → stage 14.
+
+---
+
+## Stage 14. RESULT_ANALYSIS     [v3]
+
+- **Finished:** 2026-10-29 run 7. Outputs: `results/v3/14_analysis.md` (merged), `14_analysis_pass1.md` (fresh opus
+  analyst, template verbatim, data context `results/v3/results_v3.json` from `code/tools_results_v3.py`),
+  `14_analysis_pass2.md` (fresh opus adversarial area chair: 22 unsupported sentences, all rewrites binding; no verdict
+  changes). Key: row 4; H2 rejected as a non-detection (≈ 80 % power only for Δ ≈ 0.57 nats); H3 Hold (with the
+  bias-direction caveat); encoder sentence "generalisation / covariate shift, not capacity" weakly supported; no paired
+  heuristic row; latency 2,238× is per decision only.
+
+---
+
+## Stage 15. RESEARCH_DECISION     [v3]
+
+- **Finished:** 2026-10-29 run 7. Output: `results/v3/15_decision.md` (fresh opus subagent, template with the REFINE
+  option verbatim).
+- **Decision: PROCEED → stage 16 (conditional; row-4 characterisation paper, no method claim).** The PROCEED rule is
+  applied in its characterisation sense (every claim is a pre-registered rule's outcome decided by a margin incomplete
+  data cannot flip); no stage-8/13 loop (v3 is the last design; v1→v2 and v2→v3 were the two full loops).
+- **Conditions before stage 17 claims:** (1) exploratory paired B-fan row on test3 0–299 (readings written first in the
+  amendment status note; `experiments/v3_t3_bfan.json` dispatched; compute ≤ 7 CPU-h on free runners, recorded as
+  over the 12-h reading per the owner's default); (2) companion rows in the JSON (done: g_T G\* 5.299, random 2.618; RL
+  plateau status); (3) G5′ sub-8 and D3-B completion; optional ≤ 2 CPU-h checks (H3 V_LA bias direction, H2 variance
+  decomposition, paired first-attempt-vs-remedy bootstrap).
+- **Where to resume (run 8):** check `v3_t3_bfan`, `v3_d3b_val_r2`, `v3_sub8_g5_r7` with the follow-up tools
+  (`tools_regrid_followup.py` for regrid3, `tools_resume_manifest.py` for eval3, `tools_regrid_manifest.py` for G5′);
+  re-run `analysis_m4_v3.py`, `analysis_d3_v3.py --kind belief_student`, `analysis_g5_v3.py`, `tools_results_v3.py`;
+  then stage 16 PAPER_OUTLINE for the row-4 paper (RSS Stage 1 extended-abstract format by default; owner decides).
