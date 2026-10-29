@@ -35,12 +35,21 @@
   "frac_la_differs": 0.62,
   "n_no_budget_left": 1
  },
+ "bias_check": {
+  "n_beliefs": 20,
+  "complete": true,
+  "mean_estimator_v_greedy": 1.9395780914147713,
+  "mean_reference_v": 2.0261181653237554,
+  "ratio": 0.957287745902443,
+  "n_floored_rollouts": 3,
+  "hold_available": true
+ },
  "H3": {
   "region_raw": "Hold",
   "tested_on_64x8": true,
-  "region": "Inconclusive",
-  "downgraded": true,
+  "region": "Hold",
+  "downgraded": false,
   "ordering_G0<=G2<=G12": true,
-  "complete": false
+  "complete": true
  }
 }
