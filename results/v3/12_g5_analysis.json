@@ -1,0 +1,141 @@
+{
+ "sub": 8,
+ "cells": {
+  "S12": {
+   "gstar": {
+    "n": 476,
+    "success": 0.43067226890756305,
+    "se_success": 0.022719973392385028,
+    "bi": 6.28532899324879,
+    "sd_bi": 0.9885822310405431,
+    "sat": 0.10084033613445378
+   },
+   "random": {
+    "n": 18,
+    "success": 0.1111111111111111,
+    "se_success": 0.0762215933966706,
+    "bi": 3.686055718643279,
+    "sd_bi": 1.9457193495869496,
+    "sat": 0.0
+   },
+   "b_spread": {
+    "n": 0,
+    "success": null,
+    "se_success": null,
+    "bi": null,
+    "sd_bi": null,
+    "sat": null
+   },
+   "b_fan": {
+    "n": 0,
+    "success": null,
+    "se_success": null,
+    "bi": null,
+    "sd_bi": null,
+    "sat": null
+   },
+   "b_cov": {
+    "n": 0,
+    "success": null,
+    "se_success": null,
+    "bi": null,
+    "sd_bi": null,
+    "sat": null
+   },
+   "complete": {
+    "gstar": false,
+    "random": false,
+    "b_spread": false,
+    "b_fan": false,
+    "b_cov": false
+   },
+   "gstar_first200_success": 0.4270833333333333,
+   "gstar_last300_success": 0.43309859154929575,
+   "D_c": 0.31956115779645194,
+   "D_c_BI": 2.5992732746055105,
+   "plus10pp_ok": true,
+   "nondegenerate": {
+    "gstar_in_[0.15,0.90]": true,
+    "D_c>=0.20": true,
+    "sat<0.5": true
+   },
+   "passes": true,
+   "delta_c": 0.04,
+   "eps_c": 0.3142664496624395,
+   "H_star": "b_spread",
+   "H_star_success": -1.0,
+   "flat_screen": false
+  },
+  "A12": {
+   "gstar": {
+    "n": 404,
+    "success": 0.46782178217821785,
+    "se_success": 0.024855141725966902,
+    "bi": 6.720967117308455,
+    "sd_bi": 1.3379673484391537,
+    "sat": 0.3193069306930693
+   },
+   "random": {
+    "n": 17,
+    "success": 0.0,
+    "se_success": 0.0,
+    "bi": 2.2067723483397517,
+    "sd_bi": 1.7595752122546606,
+    "sat": 0.0
+   },
+   "b_spread": {
+    "n": 0,
+    "success": null,
+    "se_success": null,
+    "bi": null,
+    "sd_bi": null,
+    "sat": null
+   },
+   "b_fan": {
+    "n": 0,
+    "success": null,
+    "se_success": null,
+    "bi": null,
+    "sd_bi": null,
+    "sat": null
+   },
+   "b_cov": {
+    "n": 0,
+    "success": null,
+    "se_success": null,
+    "bi": null,
+    "sd_bi": null,
+    "sat": null
+   },
+   "complete": {
+    "gstar": false,
+    "random": false,
+    "b_spread": false,
+    "b_fan": false,
+    "b_cov": false
+   },
+   "gstar_first200_success": 0.4551282051282051,
+   "gstar_last300_success": 0.47580645161290325,
+   "D_c": 0.46782178217821785,
+   "D_c_BI": 4.514194768968704,
+   "plus10pp_ok": true,
+   "nondegenerate": {
+    "gstar_in_[0.15,0.90]": true,
+    "D_c>=0.20": true,
+    "sat<0.5": true
+   },
+   "passes": true,
+   "delta_c": 0.04,
+   "eps_c": 0.3360483558654228,
+   "H_star": "b_spread",
+   "H_star_success": -1.0,
+   "flat_screen": false
+  }
+ },
+ "flat_screen_cells": 0,
+ "flat_prime_likely": false,
+ "surviving_cells": [
+  "S12",
+  "A12"
+ ]
+}
