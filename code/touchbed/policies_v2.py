@@ -55,7 +55,7 @@ class GStar:
         self.phis, self.psis = (PHI, PSI) if actions is None else actions
         self.subset = np.arange(len(self.phis)) if subset is None else np.asarray(subset)
 
-    def act(self, pf, ts):
+    def _scores(self, pf, ts):
         feas = ts.feasible()
         cand = self.subset[feas[self.subset]]
         if len(cand) == 0:
@@ -66,7 +66,25 @@ class GStar:
             e = ball_eig(pf, self.phis[cand], self.psis[cand], self.M, self.rng, particles=(pf.k, pf.x, pf.y, pf.th, w), nb=nb)
         else:
             e = eig_candidates(pf, self.phis[cand], self.psis[cand], self.M, self.rng)
-        score = e / ts.costs()[cand]
+        return cand, e, ts.costs()[cand]
+
+    def act(self, pf, ts):
+        cand, e, c = self._scores(pf, ts)
+        score = e / c
         j = int(np.argmax(score))
         self.last_score = float(score[j])
         return int(cand[j])
+
+    def score_vector(self, pf, ts):
+        """Teacher label of amendment v3.0 C7: s(a) = max(0, EIG_B(a; b)) / c(a) on the scored feasible candidates, 0
+        elsewhere (float32, length |A|), the scored mask, and the action `act` would take from the same RNG state (it
+        consumes the RNG exactly like `act`). argmax s == action whenever max s > 0."""
+        cand, e, c = self._scores(pf, ts)
+        score = e / c
+        j = int(np.argmax(score))
+        self.last_score = float(score[j])
+        s = np.zeros(len(self.phis), dtype=np.float32)
+        s[cand] = (np.maximum(e, 0.0) / c).astype(np.float32)
+        mask = np.zeros(len(self.phis), dtype=bool)
+        mask[cand] = True
+        return s, mask, int(cand[j])
