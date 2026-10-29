@@ -6,10 +6,16 @@ Lat′, G2′; G1′ independent; L0 → HP → D3 (+ D3-B, RL sweep). No main r
 
 ## Tasks
 - [x] G0′: unit tests green (55 at commit 75de776; + g2v3/rl additions), TIME_ESTIMATE pilots done.
-- [ ] Cal′: n* (experiments/v3_cal.json part 1), τ_12 (part 2, n* = 4 speculative; rerun if n* changes) → status
-      note in amendment v3.0 with commit hash; then budget verification (G*, 200 per cell).
-- [ ] G1′ (a)(b)(c): experiments/v3_g1.json → analysis script `code/analysis_g1_v3.py`.
-- [ ] G5′, E′, round-0 labels S12, HP grid, D3, D3-B, RL sweep, G2′, Lat′ (later runs).
+- [x] Cal′: S n* 4 / A n* 3; τ S0 4, S12 4.9, A12 3.3; verified S12 3.96, A12 2.98 probes (run 6, status note).
+- [x] G1′ (a)(b)(c): all pass (run 6).
+- [ ] G5′ S12, S0, A12 (dispatched run 6) → `code/analysis_g5_v3.py` → margins, H★, Flat′ screen, status note.
+- [ ] Round-0 labels S12 (dispatched run 6) → HP grid (4 configs, seed 501; train shards 00–11, val 12–14).
+- [ ] E′ (regrid3 sub 8 on episodes 0–3 of the first G*/B-fan shards, S12 and A12).
+- [ ] G2′ S0/S12 + bias check (dispatched run 6; bias check implemented in run 6 as `touchbed/bias3.py`, 256 full-G*
+      rollouts per belief — the pre-registered text gives no sample count); κ = 2 after τ_2 calibration (dispatched).
+- [ ] Lat′ (one runner job, interleaved, S12 pilot3, student weights = HP-grid config student; untrained suffices).
+- [ ] D3 (DAgger rounds 1–2, seeds 501–503), D3-B, RL sweep (v3.1 D9).
+- [ ] 64 × 16 S12 report: needs a ψ-count flag; report-only, deferred.
 
 ## Output Summary
 (filled as gates complete)
