@@ -9,7 +9,7 @@
 **Topic:** Amortized, non-myopic active tactile localization (TouchBED)
 **Initialised:** 2026-10-28T07:56:44Z
 **Current version:** v3
-**Latest stage:** Stage 8.5 THEORETICAL_BOUNDS [v3] done → next: amendment v3.0 (docs/07c_amendment_v3_0.md), then stage 9 v3 (see the end of this file)
+**Latest stage:** Stage 8.5 THEORETICAL_BOUNDS [v3] + amendment v3.0 done → next: Stage 9 EXPERIMENT_DESIGN [v3] (see the end of this file)
 
 ---
 
@@ -513,3 +513,18 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
   `TouchbedProblem` defaults) completes with N_LA = 500 particles, rung (16, 8), M = 16 — as the `lookahead_tb.py`
   docstring states; (2) two informal G* latency figures disagree (0.840 s per decision on 256 in 15_decision §3.4 vs
   "≈ 2.3 s at M = 32" in the stage 10 v2 entry); neither was taken under the latency protocol — Lat′ supersedes both.
+
+---
+
+## Amendment v3.0 (pre-registration freeze)     [v3]
+
+- **Committed:** 2026-10-29 run 5, **pre-registration commit a1de0fc** (docs/07c_amendment_v3_0.md). No v3 run or v3 code
+  change exists before this commit.
+- **Content:** C1–C15 = 07_hypotheses_v3 §6.1 items 1–15: 64 × 8 via `TOUCHBED_NPHI` flag (default 32 bit-reproducible),
+  nested subsets; grid evaluator sub 4 with tie band pre-registered; cells/I-rules; calibration; split salts cal3 61,
+  pilot3 67, val3 71, test3 79, label3 83, dagger3 89, g2v3 97, bank3 101; margins; distillation recipe incl. label
+  format and HP grid (4 configs, seed 501); seeds 501–505 (student), 511–513 (RL), 521–523 (belief-input), 531–533
+  (abs-frame), BC = round-0 checkpoints; heuristics; greedy grid/latency/R_b/H1-fb; H3; tests and labels; integrity
+  corrections 1–9; deviations.
+- **Correction recorded (C12):** H3 rollouts are completed by the reduced greedy actually used in v2 G1/G2 (N_LA 500,
+  128 candidates, M = 16), not "G*, M = 64"; documentation fix, no code change.
