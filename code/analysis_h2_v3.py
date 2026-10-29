@@ -39,5 +39,17 @@ if eps:
                 "per_seed_student": {str(s): float(A[:, i].mean()) for i, s in enumerate(st)},
                 "per_seed_rl": {str(s): float(B[:, i].mean()) for i, s in enumerate(rl)},
                 "passes": bool(r["lower"] > 0.10)})
+# reported with the test (07_hypotheses_v3 §3.3): g_T of G* and random on the same episodes and draws; RL plateau
+for m in ("gstar", "random"):
+    d = load(f"S_k12_{m}*.jsonl")
+    if all(e in d for e in eps):
+        out[f"g_T_{m}"] = float(np.mean([d[e] for e in eps]))
+out["rl_training"] = {}
+for s in (511, 512, 513):
+    f = os.path.join(base, "rl", f"S_k12_rel_cfg2_sd{s}.json")
+    if os.path.exists(f):
+        m = json.load(open(f))
+        out["rl_training"][str(s)] = {"status": m["status"], "plateau_at": m.get("plateau_at"),
+                                      "episodes": m["history"][-1]["episodes"], "wall_s": m.get("wall_s")}
 print(json.dumps(out, indent=1))
 json.dump(out, open(os.path.join(base, "14_h2_analysis.json"), "w"), indent=1)

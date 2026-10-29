@@ -28,5 +28,27 @@
   "512": 5.270911054935971,
   "513": 5.177639046185968
  },
- "passes": false
+ "passes": false,
+ "g_T_gstar": 5.299300071706202,
+ "g_T_random": 2.61821885365271,
+ "rl_training": {
+  "511": {
+   "status": "max_episodes",
+   "plateau_at": 102400,
+   "episodes": 200064,
+   "wall_s": 4068.9127039909363
+  },
+  "512": {
+   "status": "max_episodes",
+   "plateau_at": 102400,
+   "episodes": 200064,
+   "wall_s": 2880.6637835502625
+  },
+  "513": {
+   "status": "max_episodes",
+   "plateau_at": 112640,
+   "episodes": 200064,
+   "wall_s": 3990.0908603668213
+  }
+ }
 }
