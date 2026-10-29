@@ -1,0 +1,53 @@
+{
+ "purpose": "D3-B (report-only, H2 encoder sentence): belief-input students seeds 521-523, DAgger round 1 at S12 (400 rollouts, beta 0.5), same recipe and HP config 0 as D3; round-0 students trained on the shared label3 data.",
+ "jobs": [
+  {
+   "id": "v3_dagger_S12_belief_s521_r1_000",
+   "cmd": "python main.py dagger3 --set S --kappa 12 --tau 4.9 --weights ../results/v3/d3b/S_k12_belief_hp0_s521_r0.npz --seed 521 --round 1 --beta 0.5 --start 0 --count 100 --budget-minutes 25 --out ../results/v3/d3b/S_k12_belief_s521_r1_000"
+  },
+  {
+   "id": "v3_dagger_S12_belief_s521_r1_100",
+   "cmd": "python main.py dagger3 --set S --kappa 12 --tau 4.9 --weights ../results/v3/d3b/S_k12_belief_hp0_s521_r0.npz --seed 521 --round 1 --beta 0.5 --start 100 --count 100 --budget-minutes 25 --out ../results/v3/d3b/S_k12_belief_s521_r1_100"
+  },
+  {
+   "id": "v3_dagger_S12_belief_s521_r1_200",
+   "cmd": "python main.py dagger3 --set S --kappa 12 --tau 4.9 --weights ../results/v3/d3b/S_k12_belief_hp0_s521_r0.npz --seed 521 --round 1 --beta 0.5 --start 200 --count 100 --budget-minutes 25 --out ../results/v3/d3b/S_k12_belief_s521_r1_200"
+  },
+  {
+   "id": "v3_dagger_S12_belief_s521_r1_300",
+   "cmd": "python main.py dagger3 --set S --kappa 12 --tau 4.9 --weights ../results/v3/d3b/S_k12_belief_hp0_s521_r0.npz --seed 521 --round 1 --beta 0.5 --start 300 --count 100 --budget-minutes 25 --out ../results/v3/d3b/S_k12_belief_s521_r1_300"
+  },
+  {
+   "id": "v3_dagger_S12_belief_s522_r1_000",
+   "cmd": "python main.py dagger3 --set S --kappa 12 --tau 4.9 --weights ../results/v3/d3b/S_k12_belief_hp0_s522_r0.npz --seed 522 --round 1 --beta 0.5 --start 0 --count 100 --budget-minutes 25 --out ../results/v3/d3b/S_k12_belief_s522_r1_000"
+  },
+  {
+   "id": "v3_dagger_S12_belief_s522_r1_100",
+   "cmd": "python main.py dagger3 --set S --kappa 12 --tau 4.9 --weights ../results/v3/d3b/S_k12_belief_hp0_s522_r0.npz --seed 522 --round 1 --beta 0.5 --start 100 --count 100 --budget-minutes 25 --out ../results/v3/d3b/S_k12_belief_s522_r1_100"
+  },
+  {
+   "id": "v3_dagger_S12_belief_s522_r1_200",
+   "cmd": "python main.py dagger3 --set S --kappa 12 --tau 4.9 --weights ../results/v3/d3b/S_k12_belief_hp0_s522_r0.npz --seed 522 --round 1 --beta 0.5 --start 200 --count 100 --budget-minutes 25 --out ../results/v3/d3b/S_k12_belief_s522_r1_200"
+  },
+  {
+   "id": "v3_dagger_S12_belief_s522_r1_300",
+   "cmd": "python main.py dagger3 --set S --kappa 12 --tau 4.9 --weights ../results/v3/d3b/S_k12_belief_hp0_s522_r0.npz --seed 522 --round 1 --beta 0.5 --start 300 --count 100 --budget-minutes 25 --out ../results/v3/d3b/S_k12_belief_s522_r1_300"
+  },
+  {
+   "id": "v3_dagger_S12_belief_s523_r1_000",
+   "cmd": "python main.py dagger3 --set S --kappa 12 --tau 4.9 --weights ../results/v3/d3b/S_k12_belief_hp0_s523_r0.npz --seed 523 --round 1 --beta 0.5 --start 0 --count 100 --budget-minutes 25 --out ../results/v3/d3b/S_k12_belief_s523_r1_000"
+  },
+  {
+   "id": "v3_dagger_S12_belief_s523_r1_100",
+   "cmd": "python main.py dagger3 --set S --kappa 12 --tau 4.9 --weights ../results/v3/d3b/S_k12_belief_hp0_s523_r0.npz --seed 523 --round 1 --beta 0.5 --start 100 --count 100 --budget-minutes 25 --out ../results/v3/d3b/S_k12_belief_s523_r1_100"
+  },
+  {
+   "id": "v3_dagger_S12_belief_s523_r1_200",
+   "cmd": "python main.py dagger3 --set S --kappa 12 --tau 4.9 --weights ../results/v3/d3b/S_k12_belief_hp0_s523_r0.npz --seed 523 --round 1 --beta 0.5 --start 200 --count 100 --budget-minutes 25 --out ../results/v3/d3b/S_k12_belief_s523_r1_200"
+  },
+  {
+   "id": "v3_dagger_S12_belief_s523_r1_300",
+   "cmd": "python main.py dagger3 --set S --kappa 12 --tau 4.9 --weights ../results/v3/d3b/S_k12_belief_hp0_s523_r0.npz --seed 523 --round 1 --beta 0.5 --start 300 --count 100 --budget-minutes 25 --out ../results/v3/d3b/S_k12_belief_s523_r1_300"
+  }
+ ]
+}
