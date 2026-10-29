@@ -683,3 +683,16 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
     (`v3_sub8_g5_r5.json`) after cancelling them for queue priority; R_b follow-up cancelled (H1-only).
   - Owner told (OWNER_TODO + push): row 4, venue decision (default: RSS Stage 1 extended abstract written honestly as a
     measurement / diagnosis paper).
+  - **Results so far (run 7):**
+    - D3 remedy complete (500 paired val3, sub 8; `12_d3_analysis_rem.json`): Δ̂_succ −4.4 pp (threshold −1.7),
+      Δ̂_BI −0.096 nats (passes −0.15), per seed −4.6 / −4.6 / −4.0 pp → FAIL confirmed. First attempt complete:
+      −5.9 pp / −0.20 nats (`12_d3_analysis.json`).
+    - M1: RL 511–513 trained to 2 × 10⁵ (plateau rule met at 1.02–1.13 × 10⁵, recorded only).
+    - M2/M3 → **H2 FAILS** (`14_h2_analysis.json`): g_T student 5.368 vs RL 5.368 nats, diff +0.0002, 90 % CI
+      [−0.31, +0.30] (rule: LB > +0.10). G\* 5.30, random 2.62. RL seeds vary (5.65 / 5.27 / 5.18).
+    - Label fit (`14_labelfit.json`): history students not under-fit (train R̄ 0.17–0.21, top-1 0.51–0.53);
+      belief-input students under-fit (train R̄ 0.34–0.38, top-1 0.33–0.36).
+    - M4 partial (151 of 300 episodes): student ≈ G\* in success on test3 (−0.2 pp, 90 % CI ±5.5 pp); RL success
+      similar with 3 probes but BI 0.25 nats lower. Follow-up `v3_t3_m4_r1.json` running.
+    - D3-B partial (147 of 300): belief students −17 pp success vs G\*; follow-up `v3_d3b_val_r2.json`.
+  - Stage 13 (v3) recorded in `plans/stage_13_iterative_refine_v3.md`: no open runtime bug (1,398 logs scanned).
