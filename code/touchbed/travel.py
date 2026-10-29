@@ -4,11 +4,17 @@ time budget tau with feasibility c(a) <= tau_rem; the episode ends when tau_rem 
 from __future__ import annotations
 
 import math
+import os
 
 import numpy as np
 
-N_PHI, N_PSI = 32, 8
-PHI_GRID = np.arange(N_PHI) * (2 * math.pi / N_PHI)                 # 0, 11.25°, ...
+# v3 (amendment v3.0 C1): the number of target angles is read once at import from TOUCHBED_NPHI (32 = v1/v2 default,
+# 64 = the v3 64 x 8 = 512-action set). Every v3 job sets TOUCHBED_NPHI=64 and records it in its output JSON.
+_NPHI_ENV = os.environ.get("TOUCHBED_NPHI", "32")
+if _NPHI_ENV not in ("32", "64"):
+    raise ValueError(f"TOUCHBED_NPHI must be 32 or 64, got {_NPHI_ENV!r}")
+N_PHI, N_PSI = int(_NPHI_ENV), 8
+PHI_GRID = np.arange(N_PHI) * (2 * math.pi / N_PHI)                 # 0, 11.25° (32) or 5.625° (64), ...
 PSI_GRID = np.deg2rad(np.arange(-35, 36, 10, dtype=float))          # -35, -25, ..., 35 degrees
 PHI = np.repeat(PHI_GRID, N_PSI)                                    # action index a = i_phi * 8 + i_psi
 PSI = np.tile(PSI_GRID, N_PHI)
@@ -31,7 +37,10 @@ def wrap(a):
 
 
 def rung_subset(n_phi: int, n_psi: int) -> np.ndarray:
-    """Nested candidate subsets for the greedy ladder: every (32/n_phi)-th angle and an evenly spread psi subset."""
+    """Nested candidate subsets for the greedy ladder: every (N_PHI/n_phi)-th angle and an evenly spread psi subset.
+    On 64 x 8 (v3.0 C1): C = 128 is rung_subset(32, 4), C = 32 is rung_subset(16, 2)."""
+    if N_PHI % n_phi:
+        raise ValueError(f"n_phi={n_phi} does not divide N_PHI={N_PHI}")
     sp = N_PHI // n_phi
     psi_idx = {8: range(8), 4: (0, 2, 5, 7), 2: (2, 5)}[n_psi]
     return np.array([i * N_PSI + j for i in range(0, N_PHI, sp) for j in psi_idx])
