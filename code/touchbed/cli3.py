@@ -185,7 +185,8 @@ def _label_loop(a, split, idx_list, policy_fn, beta, mix_key):
         key = ep_key_v3(a.set, split, a.kappa, a.tau, i)
         teacher = GStar(stream("teacher", *key), M=64)
         pol = policy_fn()
-        r = run_episode_v3(pol, lib, prior, om, s0, phi0, a.kappa, a.tau, key, needs_belief=False, n_dec=2000,
+        needs = bool(getattr(pol, "needs_belief", False))      # belief-input student (D3-B) acts on the decision PF
+        r = run_episode_v3(pol, lib, prior, om, s0, phi0, a.kappa, a.tau, key, needs_belief=needs, n_dec=2000,
                            teacher=teacher, beta=beta, mix_rng=stream("mix", *mix_key, i), evaluate=False)
         packed.append(episode_arrays(r["history"], r["labels"], T))
         summ.append({"episode": int(i), "n_probes": r["n_probes"], "executed_teacher": r["executed_teacher"],
