@@ -185,3 +185,7 @@ comparator E_train = 2 × 10⁵ from the start; H3 hold threshold 0.03 with part
   taken at sub 4 (Cal′ n\* success, G5′ pilot) are re-read at sub 8 with `regrid3` (histories rebuilt exactly; the
   sandbox re-read reproduces the runner's E′ values bit-for-bit) and the gates are decided on the sub-8 values.
 - **τ_2 = 4.7** (descriptive H3 level; 200 cal3, n\* 4, mean travel 0.726; same rule as τ_12).
+- **HP config** (Actions run 40846478310, `results/v3/hp/`): held-out R̄ (label3 1,200–1,499, 1,196 decisions, 3
+  excluded): cfg 0 **0.3827**, cfg 1 0.4194, cfg 2 0.3832, cfg 3 0.3872; cfg 0, 2, 3 within 0.01 of the best → lowest
+  index → **config 0** (lr 1e-3, β_T 4, λ 0.5, batch 256). Every round-0 run stopped by the frozen stop rule after 4–5
+  epochs. Seeds 502/503 round 0 trained in the sandbox with config 0 (R̄ 0.3867 / 0.3846; env recorded in the JSON).
