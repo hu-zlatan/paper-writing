@@ -653,3 +653,17 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
   5. G5′ decision on sub-8 values (`analysis_g5_v3.py`), G2′/H3 (`analysis_g2_v3.py`), then the gate decision and
      the freeze commit (status notes with commit hashes). The 64 × 16 S12 report
   (report-only) needs a ψ-count flag that does not exist yet — deferred.
+- **Run 7 (2026-10-29, from 14:01 UTC):**
+  - No open issues; no new owner directives.
+  - Queue priority for the D3 remedy: runs 73/80/81 (G5′ sub-8 re-reads, 129 jobs queued ahead of the remedy
+    validation) cancelled at ≈ 14:05; their follow-up `experiments/v3_sub8_g5_r4.json` (214 jobs, already re-read
+    episodes skipped) dispatched behind the remedy. The remedy validation then ran 20 jobs in parallel.
+  - D3-B: round-2 belief-input students trained in the sandbox (held-out R̄ 0.402 / 0.394 / 0.384 vs 0.21 for the
+    history students); val3 0–299 sub-8 evaluation dispatched (`v3_d3b_val.json`, report-only).
+  - RL sweep (v3.1 D9) selected: **config 2 (lr × 3)**, final validation ball-sPCE 5.67 vs 4.75 / 4.68 / 4.63
+    (`code/analysis_rl_sweep_v3.py` → `results/v3/12_rl_sweep_selection.json`; deviation kept: trainer's own
+    validation stream, not val3). The trainer stopped at plateaus by default, but the 08 plan says the plateau rule is
+    "recorded but not used to stop early" for the H2 runs → added `--no-plateau-stop` (default behaviour unchanged;
+    new test). H2 RL runs dispatched: seeds 511–513, 2 × 10⁵ episodes (`v3_rl_main.json`).
+  - Follow-ups dispatched: R_b selection (`v3_rb_r1.json`, 31 early-stopped shards), G2′ (`v3_g2_r5.json`, 5).
+  - Sandbox: remedy val shards s503 480–499 run locally (one process at a time: sub-8 read-out peaks ≈ 3.7 GB).
