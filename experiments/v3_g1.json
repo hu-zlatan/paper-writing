@@ -1,5 +1,5 @@
 {
- "purpose": "Gate G1' (07_hypotheses_v3 \u00a74; amendment v3.0 C12): (a) notch, 5 estimator runs; (b) the v2 zero-gap bank (100 beliefs, unchanged instrument, re-run on the v3 code path incl. the numpy log-sum-exp change); (c) travel-notch control, 5 runs (exact relative gap 0.7166 by enumeration, touchbed/travel_notch.py). Pass: (a) mean in [0.573, 0.860]; (b) mean in [-0.01, 0.02] and UB < 0.03; (c) estimate within +-20 % of the exact gap.",
+ "purpose": "Gate G1' (07_hypotheses_v3 \u00a74; amendment v3.0 C12): (a) notch, 5 estimator runs; (b) the v2 zero-gap bank (100 beliefs, unchanged instrument, re-run on the v3 code path; the notch problem does not use ball_eig); (c) travel-notch control, 5 runs (exact relative gap 0.7166 by enumeration, touchbed/travel_notch.py). Pass: (a) mean in [0.573, 0.860]; (b) mean in [-0.01, 0.02] and UB < 0.03; (c) estimate within +-20 % of the exact gap.",
  "jobs": [
   {
    "id": "v3_g1a_sd0",
