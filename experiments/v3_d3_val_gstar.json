@@ -1,0 +1,105 @@
+{
+ "purpose": "D3 comparator: G* on the first 500 val3 episodes at S12 (tau 4.9), grid read-out sub 8 (E' failed). Paired with the D3 students on the same episodes.",
+ "jobs": [
+  {
+   "id": "v3_d3_val_gstar_000",
+   "cmd": "python main.py eval3 --set S --method gstar --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 0 --count 20 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_gstar_000"
+  },
+  {
+   "id": "v3_d3_val_gstar_020",
+   "cmd": "python main.py eval3 --set S --method gstar --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 20 --count 20 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_gstar_020"
+  },
+  {
+   "id": "v3_d3_val_gstar_040",
+   "cmd": "python main.py eval3 --set S --method gstar --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 40 --count 20 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_gstar_040"
+  },
+  {
+   "id": "v3_d3_val_gstar_060",
+   "cmd": "python main.py eval3 --set S --method gstar --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 60 --count 20 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_gstar_060"
+  },
+  {
+   "id": "v3_d3_val_gstar_080",
+   "cmd": "python main.py eval3 --set S --method gstar --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 80 --count 20 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_gstar_080"
+  },
+  {
+   "id": "v3_d3_val_gstar_100",
+   "cmd": "python main.py eval3 --set S --method gstar --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 100 --count 20 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_gstar_100"
+  },
+  {
+   "id": "v3_d3_val_gstar_120",
+   "cmd": "python main.py eval3 --set S --method gstar --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 120 --count 20 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_gstar_120"
+  },
+  {
+   "id": "v3_d3_val_gstar_140",
+   "cmd": "python main.py eval3 --set S --method gstar --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 140 --count 20 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_gstar_140"
+  },
+  {
+   "id": "v3_d3_val_gstar_160",
+   "cmd": "python main.py eval3 --set S --method gstar --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 160 --count 20 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_gstar_160"
+  },
+  {
+   "id": "v3_d3_val_gstar_180",
+   "cmd": "python main.py eval3 --set S --method gstar --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 180 --count 20 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_gstar_180"
+  },
+  {
+   "id": "v3_d3_val_gstar_200",
+   "cmd": "python main.py eval3 --set S --method gstar --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 200 --count 20 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_gstar_200"
+  },
+  {
+   "id": "v3_d3_val_gstar_220",
+   "cmd": "python main.py eval3 --set S --method gstar --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 220 --count 20 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_gstar_220"
+  },
+  {
+   "id": "v3_d3_val_gstar_240",
+   "cmd": "python main.py eval3 --set S --method gstar --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 240 --count 20 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_gstar_240"
+  },
+  {
+   "id": "v3_d3_val_gstar_260",
+   "cmd": "python main.py eval3 --set S --method gstar --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 260 --count 20 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_gstar_260"
+  },
+  {
+   "id": "v3_d3_val_gstar_280",
+   "cmd": "python main.py eval3 --set S --method gstar --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 280 --count 20 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_gstar_280"
+  },
+  {
+   "id": "v3_d3_val_gstar_300",
+   "cmd": "python main.py eval3 --set S --method gstar --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 300 --count 20 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_gstar_300"
+  },
+  {
+   "id": "v3_d3_val_gstar_320",
+   "cmd": "python main.py eval3 --set S --method gstar --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 320 --count 20 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_gstar_320"
+  },
+  {
+   "id": "v3_d3_val_gstar_340",
+   "cmd": "python main.py eval3 --set S --method gstar --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 340 --count 20 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_gstar_340"
+  },
+  {
+   "id": "v3_d3_val_gstar_360",
+   "cmd": "python main.py eval3 --set S --method gstar --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 360 --count 20 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_gstar_360"
+  },
+  {
+   "id": "v3_d3_val_gstar_380",
+   "cmd": "python main.py eval3 --set S --method gstar --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 380 --count 20 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_gstar_380"
+  },
+  {
+   "id": "v3_d3_val_gstar_400",
+   "cmd": "python main.py eval3 --set S --method gstar --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 400 --count 20 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_gstar_400"
+  },
+  {
+   "id": "v3_d3_val_gstar_420",
+   "cmd": "python main.py eval3 --set S --method gstar --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 420 --count 20 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_gstar_420"
+  },
+  {
+   "id": "v3_d3_val_gstar_440",
+   "cmd": "python main.py eval3 --set S --method gstar --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 440 --count 20 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_gstar_440"
+  },
+  {
+   "id": "v3_d3_val_gstar_460",
+   "cmd": "python main.py eval3 --set S --method gstar --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 460 --count 20 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_gstar_460"
+  },
+  {
+   "id": "v3_d3_val_gstar_480",
+   "cmd": "python main.py eval3 --set S --method gstar --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 480 --count 20 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_gstar_480"
+  }
+ ]
+}
