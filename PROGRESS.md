@@ -9,7 +9,7 @@
 **Topic:** Amortized, non-myopic active tactile localization (TouchBED)
 **Initialised:** 2026-10-28T07:56:44Z
 **Current version:** v3
-**Latest stage:** Stage 8.5 THEORETICAL_BOUNDS [v3] + amendment v3.0 done → next: Stage 9 EXPERIMENT_DESIGN [v3] (see the end of this file)
+**Latest stage:** Stage 9 EXPERIMENT_DESIGN [v3] done (gate auto-approved) → next: Stage 10 CODE_GENERATION [v3] (see the end of this file)
 
 ---
 
@@ -528,3 +528,30 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
   corrections 1–9; deviations.
 - **Correction recorded (C12):** H3 rollouts are completed by the reduced greedy actually used in v2 G1/G2 (N_LA 500,
   128 candidates, M = 16), not "G*, M = 64"; documentation fix, no code change.
+
+---
+
+## Stage 9. EXPERIMENT_DESIGN  [GATE]     [v3]
+
+- **Started / Finished:** 2026-10-29 run 5 (commit 725880c)
+- **Inputs used:** docs/07_hypotheses_v3.md, docs/07c_amendment_v3_0.md (a1de0fc), docs/07b_theoretical_bounds_v3.md
+- **Outputs produced:** docs/08_experiment_plan_v3.yaml (fresh opus subagent, template verbatim with the PIVOT preamble);
+  docs/07c_amendment_v3_1.md (main session; closes the plan's 11 listed inconsistencies before any v3 run);
+  plans/stage_09_experiment_design_v3.md
+- **Decision:** PROCEED → stage 10 (v3). **GATE auto-approved** (AUTOPILOT §1). Evidence (script check): all 8 required
+  keys; 10 effective components C1–C10 each with a matching ablation whose `removes` names it (distillation vs RL,
+  DAgger vs BC-only, relative vs absolute frame, belief-free vs belief-input, soft labels → HP-grid regret only, amortization
+  vs 27-config grid/R_b, learned selection vs H★, learned pruning vs random-16, greedy teacher vs H3 look-ahead, per-cell
+  training vs Gen-κ); all 6 baselines have a tuning protocol (RL now gets an equal 4-config sweep, v3.1 D9); all 22
+  metrics have a formula + code pointer; compute = gates 96 (+13 remedy) + main 149 (126.6 after downscale; core ≈ 117)
+  + reserve ≤ 42 CPU-h, every sweep preceded by a ≤ 5-min TIME_ESTIMATE.
+- **Amendment v3.1 (D1–D10):** disjoint DAgger/label indices with κ in the key; H1c power rule funded first from the
+  reserve; A0 enters only if the reserve covers it; power rule for S0/A12 via scaled S12 SD; E′-failure costing;
+  no soft-label efficacy claim; D3-fail-branch students defined; RL 4-config sweep (seed 519, own objective);
+  RESTRICTS compute fields read as in v1 (12 h = saturated-runner wall-clock ≈ 6.2–7.5 h; sweeps sharded ≤ 30 min;
+  declared exception for RL/DAgger training processes, time_guard + checkpoint) — owner informed in OWNER_TODO.md.
+- **Where to resume:** stage 10 v3 code, in this order: (1) `TOUCHBED_NPHI` flag + relative `rung_subset` + 32 × 8
+  bit-reproduction test; (2) split salts / κ-keyed label streams; (3) `GStar.score_vector()` + test; (4) heuristics
+  B-spread/B-fan/B-cov with reservation rule; (5) `distill.py` (loss, regret, DAgger driver) + soft-label CE gradient
+  check; (6) greedy grid + component timers; (7) belief-summary features; (8) travel-notch; (9) provenance scripts
+  analysis_g3_notch.py / analysis_g3_hp.py; (10) main.py subcommands + manifests; G0′ green by 11-05.
