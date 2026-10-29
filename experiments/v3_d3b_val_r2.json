@@ -1,0 +1,257 @@
+{
+ "purpose": "D3-B validation follow-up (early-stopped shards, chunks of <= 4 episodes).",
+ "jobs": [
+  {
+   "id": "v3_d3b_val_s521_024_r27_r32_c32",
+   "cmd": "python main.py eval3 --set S --method belief_student --weights ../results/v3/d3b/S_k12_belief_hp0_s521_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 32 --count 4 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_belief_student_s521_r2_024_r27_r32_c32"
+  },
+  {
+   "id": "v3_d3b_val_s521_036_r39_r41_c41",
+   "cmd": "python main.py eval3 --set S --method belief_student --weights ../results/v3/d3b/S_k12_belief_hp0_s521_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 41 --count 4 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_belief_student_s521_r2_036_r39_r41_c41"
+  },
+  {
+   "id": "v3_d3b_val_s521_036_r39_r41_c45",
+   "cmd": "python main.py eval3 --set S --method belief_student --weights ../results/v3/d3b/S_k12_belief_hp0_s521_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 45 --count 3 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_belief_student_s521_r2_036_r39_r41_c45"
+  },
+  {
+   "id": "v3_d3b_val_s521_060_r64_r68_c68",
+   "cmd": "python main.py eval3 --set S --method belief_student --weights ../results/v3/d3b/S_k12_belief_hp0_s521_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 68 --count 4 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_belief_student_s521_r2_060_r64_r68_c68"
+  },
+  {
+   "id": "v3_d3b_val_s521_108_r113_r117_c117",
+   "cmd": "python main.py eval3 --set S --method belief_student --weights ../results/v3/d3b/S_k12_belief_hp0_s521_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 117 --count 3 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_belief_student_s521_r2_108_r113_r117_c117"
+  },
+  {
+   "id": "v3_d3b_val_s521_144_r146_r150_c150",
+   "cmd": "python main.py eval3 --set S --method belief_student --weights ../results/v3/d3b/S_k12_belief_hp0_s521_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 150 --count 4 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_belief_student_s521_r2_144_r146_r150_c150"
+  },
+  {
+   "id": "v3_d3b_val_s521_144_r146_r150_c154",
+   "cmd": "python main.py eval3 --set S --method belief_student --weights ../results/v3/d3b/S_k12_belief_hp0_s521_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 154 --count 2 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_belief_student_s521_r2_144_r146_r150_c154"
+  },
+  {
+   "id": "v3_d3b_val_s521_228_r236_r238_c238",
+   "cmd": "python main.py eval3 --set S --method belief_student --weights ../results/v3/d3b/S_k12_belief_hp0_s521_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 238 --count 2 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_belief_student_s521_r2_228_r236_r238_c238"
+  },
+  {
+   "id": "v3_d3b_val_s521_252_r262_c262",
+   "cmd": "python main.py eval3 --set S --method belief_student --weights ../results/v3/d3b/S_k12_belief_hp0_s521_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 262 --count 2 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_belief_student_s521_r2_252_r262_c262"
+  },
+  {
+   "id": "v3_d3b_val_s521_264_r267_c267",
+   "cmd": "python main.py eval3 --set S --method belief_student --weights ../results/v3/d3b/S_k12_belief_hp0_s521_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 267 --count 4 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_belief_student_s521_r2_264_r267_c267"
+  },
+  {
+   "id": "v3_d3b_val_s521_264_r267_c271",
+   "cmd": "python main.py eval3 --set S --method belief_student --weights ../results/v3/d3b/S_k12_belief_hp0_s521_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 271 --count 4 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_belief_student_s521_r2_264_r267_c271"
+  },
+  {
+   "id": "v3_d3b_val_s521_264_r267_c275",
+   "cmd": "python main.py eval3 --set S --method belief_student --weights ../results/v3/d3b/S_k12_belief_hp0_s521_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 275 --count 1 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_belief_student_s521_r2_264_r267_c275"
+  },
+  {
+   "id": "v3_d3b_val_s521_288_r299_c299",
+   "cmd": "python main.py eval3 --set S --method belief_student --weights ../results/v3/d3b/S_k12_belief_hp0_s521_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 299 --count 1 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_belief_student_s521_r2_288_r299_c299"
+  },
+  {
+   "id": "v3_d3b_val_s522_024_r32_c32",
+   "cmd": "python main.py eval3 --set S --method belief_student --weights ../results/v3/d3b/S_k12_belief_hp0_s522_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 32 --count 4 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_belief_student_s522_r2_024_r32_c32"
+  },
+  {
+   "id": "v3_d3b_val_s522_036_r41_c41",
+   "cmd": "python main.py eval3 --set S --method belief_student --weights ../results/v3/d3b/S_k12_belief_hp0_s522_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 41 --count 4 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_belief_student_s522_r2_036_r41_c41"
+  },
+  {
+   "id": "v3_d3b_val_s522_036_r41_c45",
+   "cmd": "python main.py eval3 --set S --method belief_student --weights ../results/v3/d3b/S_k12_belief_hp0_s522_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 45 --count 3 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_belief_student_s522_r2_036_r41_c45"
+  },
+  {
+   "id": "v3_d3b_val_s522_060_r70_c70",
+   "cmd": "python main.py eval3 --set S --method belief_student --weights ../results/v3/d3b/S_k12_belief_hp0_s522_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 70 --count 2 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_belief_student_s522_r2_060_r70_c70"
+  },
+  {
+   "id": "v3_d3b_val_s522_072_r82_c82",
+   "cmd": "python main.py eval3 --set S --method belief_student --weights ../results/v3/d3b/S_k12_belief_hp0_s522_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 82 --count 2 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_belief_student_s522_r2_072_r82_c82"
+  },
+  {
+   "id": "v3_d3b_val_s522_084_r90_c90",
+   "cmd": "python main.py eval3 --set S --method belief_student --weights ../results/v3/d3b/S_k12_belief_hp0_s522_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 90 --count 4 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_belief_student_s522_r2_084_r90_c90"
+  },
+  {
+   "id": "v3_d3b_val_s522_084_r90_c94",
+   "cmd": "python main.py eval3 --set S --method belief_student --weights ../results/v3/d3b/S_k12_belief_hp0_s522_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 94 --count 2 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_belief_student_s522_r2_084_r90_c94"
+  },
+  {
+   "id": "v3_d3b_val_s522_096_r104_c104",
+   "cmd": "python main.py eval3 --set S --method belief_student --weights ../results/v3/d3b/S_k12_belief_hp0_s522_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 104 --count 4 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_belief_student_s522_r2_096_r104_c104"
+  },
+  {
+   "id": "v3_d3b_val_s522_108_r114_c114",
+   "cmd": "python main.py eval3 --set S --method belief_student --weights ../results/v3/d3b/S_k12_belief_hp0_s522_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 114 --count 4 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_belief_student_s522_r2_108_r114_c114"
+  },
+  {
+   "id": "v3_d3b_val_s522_108_r114_c118",
+   "cmd": "python main.py eval3 --set S --method belief_student --weights ../results/v3/d3b/S_k12_belief_hp0_s522_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 118 --count 2 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_belief_student_s522_r2_108_r114_c118"
+  },
+  {
+   "id": "v3_d3b_val_s522_180_r189_c189",
+   "cmd": "python main.py eval3 --set S --method belief_student --weights ../results/v3/d3b/S_k12_belief_hp0_s522_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 189 --count 3 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_belief_student_s522_r2_180_r189_c189"
+  },
+  {
+   "id": "v3_d3b_val_s522_204_r215_c215",
+   "cmd": "python main.py eval3 --set S --method belief_student --weights ../results/v3/d3b/S_k12_belief_hp0_s522_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 215 --count 1 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_belief_student_s522_r2_204_r215_c215"
+  },
+  {
+   "id": "v3_d3b_val_s522_240_r250_c250",
+   "cmd": "python main.py eval3 --set S --method belief_student --weights ../results/v3/d3b/S_k12_belief_hp0_s522_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 250 --count 2 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_belief_student_s522_r2_240_r250_c250"
+  },
+  {
+   "id": "v3_d3b_val_s522_264_r271_c271",
+   "cmd": "python main.py eval3 --set S --method belief_student --weights ../results/v3/d3b/S_k12_belief_hp0_s522_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 271 --count 4 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_belief_student_s522_r2_264_r271_c271"
+  },
+  {
+   "id": "v3_d3b_val_s522_264_r271_c275",
+   "cmd": "python main.py eval3 --set S --method belief_student --weights ../results/v3/d3b/S_k12_belief_hp0_s522_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 275 --count 1 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_belief_student_s522_r2_264_r271_c275"
+  },
+  {
+   "id": "v3_d3b_val_s522_288_r299_c299",
+   "cmd": "python main.py eval3 --set S --method belief_student --weights ../results/v3/d3b/S_k12_belief_hp0_s522_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 299 --count 1 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_belief_student_s522_r2_288_r299_c299"
+  },
+  {
+   "id": "v3_d3b_val_s523_012_r21_c21",
+   "cmd": "python main.py eval3 --set S --method belief_student --weights ../results/v3/d3b/S_k12_belief_hp0_s523_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 21 --count 3 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_belief_student_s523_r2_012_r21_c21"
+  },
+  {
+   "id": "v3_d3b_val_s523_024_r30_c30",
+   "cmd": "python main.py eval3 --set S --method belief_student --weights ../results/v3/d3b/S_k12_belief_hp0_s523_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 30 --count 4 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_belief_student_s523_r2_024_r30_c30"
+  },
+  {
+   "id": "v3_d3b_val_s523_024_r30_c34",
+   "cmd": "python main.py eval3 --set S --method belief_student --weights ../results/v3/d3b/S_k12_belief_hp0_s523_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 34 --count 2 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_belief_student_s523_r2_024_r30_c34"
+  },
+  {
+   "id": "v3_d3b_val_s523_036_r42_c42",
+   "cmd": "python main.py eval3 --set S --method belief_student --weights ../results/v3/d3b/S_k12_belief_hp0_s523_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 42 --count 4 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_belief_student_s523_r2_036_r42_c42"
+  },
+  {
+   "id": "v3_d3b_val_s523_036_r42_c46",
+   "cmd": "python main.py eval3 --set S --method belief_student --weights ../results/v3/d3b/S_k12_belief_hp0_s523_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 46 --count 2 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_belief_student_s523_r2_036_r42_c46"
+  },
+  {
+   "id": "v3_d3b_val_s523_048_r57_c57",
+   "cmd": "python main.py eval3 --set S --method belief_student --weights ../results/v3/d3b/S_k12_belief_hp0_s523_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 57 --count 3 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_belief_student_s523_r2_048_r57_c57"
+  },
+  {
+   "id": "v3_d3b_val_s523_060_r63_c63",
+   "cmd": "python main.py eval3 --set S --method belief_student --weights ../results/v3/d3b/S_k12_belief_hp0_s523_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 63 --count 4 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_belief_student_s523_r2_060_r63_c63"
+  },
+  {
+   "id": "v3_d3b_val_s523_060_r63_c67",
+   "cmd": "python main.py eval3 --set S --method belief_student --weights ../results/v3/d3b/S_k12_belief_hp0_s523_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 67 --count 4 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_belief_student_s523_r2_060_r63_c67"
+  },
+  {
+   "id": "v3_d3b_val_s523_060_r63_c71",
+   "cmd": "python main.py eval3 --set S --method belief_student --weights ../results/v3/d3b/S_k12_belief_hp0_s523_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 71 --count 1 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_belief_student_s523_r2_060_r63_c71"
+  },
+  {
+   "id": "v3_d3b_val_s523_072_r81_c81",
+   "cmd": "python main.py eval3 --set S --method belief_student --weights ../results/v3/d3b/S_k12_belief_hp0_s523_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 81 --count 3 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_belief_student_s523_r2_072_r81_c81"
+  },
+  {
+   "id": "v3_d3b_val_s523_084_r90_c90",
+   "cmd": "python main.py eval3 --set S --method belief_student --weights ../results/v3/d3b/S_k12_belief_hp0_s523_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 90 --count 4 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_belief_student_s523_r2_084_r90_c90"
+  },
+  {
+   "id": "v3_d3b_val_s523_084_r90_c94",
+   "cmd": "python main.py eval3 --set S --method belief_student --weights ../results/v3/d3b/S_k12_belief_hp0_s523_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 94 --count 2 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_belief_student_s523_r2_084_r90_c94"
+  },
+  {
+   "id": "v3_d3b_val_s523_096_r104_c104",
+   "cmd": "python main.py eval3 --set S --method belief_student --weights ../results/v3/d3b/S_k12_belief_hp0_s523_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 104 --count 4 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_belief_student_s523_r2_096_r104_c104"
+  },
+  {
+   "id": "v3_d3b_val_s523_108_r114_c114",
+   "cmd": "python main.py eval3 --set S --method belief_student --weights ../results/v3/d3b/S_k12_belief_hp0_s523_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 114 --count 4 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_belief_student_s523_r2_108_r114_c114"
+  },
+  {
+   "id": "v3_d3b_val_s523_108_r114_c118",
+   "cmd": "python main.py eval3 --set S --method belief_student --weights ../results/v3/d3b/S_k12_belief_hp0_s523_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 118 --count 2 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_belief_student_s523_r2_108_r114_c118"
+  },
+  {
+   "id": "v3_d3b_val_s523_120_r129_c129",
+   "cmd": "python main.py eval3 --set S --method belief_student --weights ../results/v3/d3b/S_k12_belief_hp0_s523_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 129 --count 3 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_belief_student_s523_r2_120_r129_c129"
+  },
+  {
+   "id": "v3_d3b_val_s523_132_r142_c142",
+   "cmd": "python main.py eval3 --set S --method belief_student --weights ../results/v3/d3b/S_k12_belief_hp0_s523_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 142 --count 2 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_belief_student_s523_r2_132_r142_c142"
+  },
+  {
+   "id": "v3_d3b_val_s523_156_r161_c161",
+   "cmd": "python main.py eval3 --set S --method belief_student --weights ../results/v3/d3b/S_k12_belief_hp0_s523_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 161 --count 4 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_belief_student_s523_r2_156_r161_c161"
+  },
+  {
+   "id": "v3_d3b_val_s523_156_r161_c165",
+   "cmd": "python main.py eval3 --set S --method belief_student --weights ../results/v3/d3b/S_k12_belief_hp0_s523_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 165 --count 3 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_belief_student_s523_r2_156_r161_c165"
+  },
+  {
+   "id": "v3_d3b_val_s523_168_r177_c177",
+   "cmd": "python main.py eval3 --set S --method belief_student --weights ../results/v3/d3b/S_k12_belief_hp0_s523_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 177 --count 3 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_belief_student_s523_r2_168_r177_c177"
+  },
+  {
+   "id": "v3_d3b_val_s523_180_r190_c190",
+   "cmd": "python main.py eval3 --set S --method belief_student --weights ../results/v3/d3b/S_k12_belief_hp0_s523_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 190 --count 2 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_belief_student_s523_r2_180_r190_c190"
+  },
+  {
+   "id": "v3_d3b_val_s523_192_r200_c200",
+   "cmd": "python main.py eval3 --set S --method belief_student --weights ../results/v3/d3b/S_k12_belief_hp0_s523_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 200 --count 4 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_belief_student_s523_r2_192_r200_c200"
+  },
+  {
+   "id": "v3_d3b_val_s523_204_r211_c211",
+   "cmd": "python main.py eval3 --set S --method belief_student --weights ../results/v3/d3b/S_k12_belief_hp0_s523_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 211 --count 4 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_belief_student_s523_r2_204_r211_c211"
+  },
+  {
+   "id": "v3_d3b_val_s523_204_r211_c215",
+   "cmd": "python main.py eval3 --set S --method belief_student --weights ../results/v3/d3b/S_k12_belief_hp0_s523_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 215 --count 1 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_belief_student_s523_r2_204_r211_c215"
+  },
+  {
+   "id": "v3_d3b_val_s523_216_r219_c219",
+   "cmd": "python main.py eval3 --set S --method belief_student --weights ../results/v3/d3b/S_k12_belief_hp0_s523_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 219 --count 4 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_belief_student_s523_r2_216_r219_c219"
+  },
+  {
+   "id": "v3_d3b_val_s523_216_r219_c223",
+   "cmd": "python main.py eval3 --set S --method belief_student --weights ../results/v3/d3b/S_k12_belief_hp0_s523_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 223 --count 4 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_belief_student_s523_r2_216_r219_c223"
+  },
+  {
+   "id": "v3_d3b_val_s523_216_r219_c227",
+   "cmd": "python main.py eval3 --set S --method belief_student --weights ../results/v3/d3b/S_k12_belief_hp0_s523_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 227 --count 1 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_belief_student_s523_r2_216_r219_c227"
+  },
+  {
+   "id": "v3_d3b_val_s523_228_r236_c236",
+   "cmd": "python main.py eval3 --set S --method belief_student --weights ../results/v3/d3b/S_k12_belief_hp0_s523_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 236 --count 4 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_belief_student_s523_r2_228_r236_c236"
+  },
+  {
+   "id": "v3_d3b_val_s523_240_r249_c249",
+   "cmd": "python main.py eval3 --set S --method belief_student --weights ../results/v3/d3b/S_k12_belief_hp0_s523_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 249 --count 3 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_belief_student_s523_r2_240_r249_c249"
+  },
+  {
+   "id": "v3_d3b_val_s523_252_r260_c260",
+   "cmd": "python main.py eval3 --set S --method belief_student --weights ../results/v3/d3b/S_k12_belief_hp0_s523_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 260 --count 4 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_belief_student_s523_r2_252_r260_c260"
+  },
+  {
+   "id": "v3_d3b_val_s523_264_r269_c269",
+   "cmd": "python main.py eval3 --set S --method belief_student --weights ../results/v3/d3b/S_k12_belief_hp0_s523_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 269 --count 4 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_belief_student_s523_r2_264_r269_c269"
+  },
+  {
+   "id": "v3_d3b_val_s523_264_r269_c273",
+   "cmd": "python main.py eval3 --set S --method belief_student --weights ../results/v3/d3b/S_k12_belief_hp0_s523_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 273 --count 3 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_belief_student_s523_r2_264_r269_c273"
+  },
+  {
+   "id": "v3_d3b_val_s523_276_r284_c284",
+   "cmd": "python main.py eval3 --set S --method belief_student --weights ../results/v3/d3b/S_k12_belief_hp0_s523_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 284 --count 4 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_belief_student_s523_r2_276_r284_c284"
+  },
+  {
+   "id": "v3_d3b_val_s523_288_r299_c299",
+   "cmd": "python main.py eval3 --set S --method belief_student --weights ../results/v3/d3b/S_k12_belief_hp0_s523_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 299 --count 1 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_belief_student_s523_r2_288_r299_c299"
+  }
+ ]
+}
