@@ -1,0 +1,101 @@
+{
+ "purpose": "D3 remedy: DAgger round 2 (800 per seed, beta 0) from the remedy round-1 students (R-bar 0.203 / 0.197 / 0.191).",
+ "jobs": [
+  {
+   "id": "v3_d3rem_S12_s501_r2_000",
+   "cmd": "python main.py dagger3 --set S --kappa 12 --tau 4.9 --weights ../results/v3/d3rem/S_k12_hp0_s501_r1.npz --seed 501 --round 2 --beta 0 --start 0 --count 100 --budget-minutes 25 --out ../results/v3/d3rem/S_k12_s501_r2_000"
+  },
+  {
+   "id": "v3_d3rem_S12_s501_r2_100",
+   "cmd": "python main.py dagger3 --set S --kappa 12 --tau 4.9 --weights ../results/v3/d3rem/S_k12_hp0_s501_r1.npz --seed 501 --round 2 --beta 0 --start 100 --count 100 --budget-minutes 25 --out ../results/v3/d3rem/S_k12_s501_r2_100"
+  },
+  {
+   "id": "v3_d3rem_S12_s501_r2_200",
+   "cmd": "python main.py dagger3 --set S --kappa 12 --tau 4.9 --weights ../results/v3/d3rem/S_k12_hp0_s501_r1.npz --seed 501 --round 2 --beta 0 --start 200 --count 100 --budget-minutes 25 --out ../results/v3/d3rem/S_k12_s501_r2_200"
+  },
+  {
+   "id": "v3_d3rem_S12_s501_r2_300",
+   "cmd": "python main.py dagger3 --set S --kappa 12 --tau 4.9 --weights ../results/v3/d3rem/S_k12_hp0_s501_r1.npz --seed 501 --round 2 --beta 0 --start 300 --count 100 --budget-minutes 25 --out ../results/v3/d3rem/S_k12_s501_r2_300"
+  },
+  {
+   "id": "v3_d3rem_S12_s501_r2_400",
+   "cmd": "python main.py dagger3 --set S --kappa 12 --tau 4.9 --weights ../results/v3/d3rem/S_k12_hp0_s501_r1.npz --seed 501 --round 2 --beta 0 --start 400 --count 100 --budget-minutes 25 --out ../results/v3/d3rem/S_k12_s501_r2_400"
+  },
+  {
+   "id": "v3_d3rem_S12_s501_r2_500",
+   "cmd": "python main.py dagger3 --set S --kappa 12 --tau 4.9 --weights ../results/v3/d3rem/S_k12_hp0_s501_r1.npz --seed 501 --round 2 --beta 0 --start 500 --count 100 --budget-minutes 25 --out ../results/v3/d3rem/S_k12_s501_r2_500"
+  },
+  {
+   "id": "v3_d3rem_S12_s501_r2_600",
+   "cmd": "python main.py dagger3 --set S --kappa 12 --tau 4.9 --weights ../results/v3/d3rem/S_k12_hp0_s501_r1.npz --seed 501 --round 2 --beta 0 --start 600 --count 100 --budget-minutes 25 --out ../results/v3/d3rem/S_k12_s501_r2_600"
+  },
+  {
+   "id": "v3_d3rem_S12_s501_r2_700",
+   "cmd": "python main.py dagger3 --set S --kappa 12 --tau 4.9 --weights ../results/v3/d3rem/S_k12_hp0_s501_r1.npz --seed 501 --round 2 --beta 0 --start 700 --count 100 --budget-minutes 25 --out ../results/v3/d3rem/S_k12_s501_r2_700"
+  },
+  {
+   "id": "v3_d3rem_S12_s502_r2_000",
+   "cmd": "python main.py dagger3 --set S --kappa 12 --tau 4.9 --weights ../results/v3/d3rem/S_k12_hp0_s502_r1.npz --seed 502 --round 2 --beta 0 --start 0 --count 100 --budget-minutes 25 --out ../results/v3/d3rem/S_k12_s502_r2_000"
+  },
+  {
+   "id": "v3_d3rem_S12_s502_r2_100",
+   "cmd": "python main.py dagger3 --set S --kappa 12 --tau 4.9 --weights ../results/v3/d3rem/S_k12_hp0_s502_r1.npz --seed 502 --round 2 --beta 0 --start 100 --count 100 --budget-minutes 25 --out ../results/v3/d3rem/S_k12_s502_r2_100"
+  },
+  {
+   "id": "v3_d3rem_S12_s502_r2_200",
+   "cmd": "python main.py dagger3 --set S --kappa 12 --tau 4.9 --weights ../results/v3/d3rem/S_k12_hp0_s502_r1.npz --seed 502 --round 2 --beta 0 --start 200 --count 100 --budget-minutes 25 --out ../results/v3/d3rem/S_k12_s502_r2_200"
+  },
+  {
+   "id": "v3_d3rem_S12_s502_r2_300",
+   "cmd": "python main.py dagger3 --set S --kappa 12 --tau 4.9 --weights ../results/v3/d3rem/S_k12_hp0_s502_r1.npz --seed 502 --round 2 --beta 0 --start 300 --count 100 --budget-minutes 25 --out ../results/v3/d3rem/S_k12_s502_r2_300"
+  },
+  {
+   "id": "v3_d3rem_S12_s502_r2_400",
+   "cmd": "python main.py dagger3 --set S --kappa 12 --tau 4.9 --weights ../results/v3/d3rem/S_k12_hp0_s502_r1.npz --seed 502 --round 2 --beta 0 --start 400 --count 100 --budget-minutes 25 --out ../results/v3/d3rem/S_k12_s502_r2_400"
+  },
+  {
+   "id": "v3_d3rem_S12_s502_r2_500",
+   "cmd": "python main.py dagger3 --set S --kappa 12 --tau 4.9 --weights ../results/v3/d3rem/S_k12_hp0_s502_r1.npz --seed 502 --round 2 --beta 0 --start 500 --count 100 --budget-minutes 25 --out ../results/v3/d3rem/S_k12_s502_r2_500"
+  },
+  {
+   "id": "v3_d3rem_S12_s502_r2_600",
+   "cmd": "python main.py dagger3 --set S --kappa 12 --tau 4.9 --weights ../results/v3/d3rem/S_k12_hp0_s502_r1.npz --seed 502 --round 2 --beta 0 --start 600 --count 100 --budget-minutes 25 --out ../results/v3/d3rem/S_k12_s502_r2_600"
+  },
+  {
+   "id": "v3_d3rem_S12_s502_r2_700",
+   "cmd": "python main.py dagger3 --set S --kappa 12 --tau 4.9 --weights ../results/v3/d3rem/S_k12_hp0_s502_r1.npz --seed 502 --round 2 --beta 0 --start 700 --count 100 --budget-minutes 25 --out ../results/v3/d3rem/S_k12_s502_r2_700"
+  },
+  {
+   "id": "v3_d3rem_S12_s503_r2_000",
+   "cmd": "python main.py dagger3 --set S --kappa 12 --tau 4.9 --weights ../results/v3/d3rem/S_k12_hp0_s503_r1.npz --seed 503 --round 2 --beta 0 --start 0 --count 100 --budget-minutes 25 --out ../results/v3/d3rem/S_k12_s503_r2_000"
+  },
+  {
+   "id": "v3_d3rem_S12_s503_r2_100",
+   "cmd": "python main.py dagger3 --set S --kappa 12 --tau 4.9 --weights ../results/v3/d3rem/S_k12_hp0_s503_r1.npz --seed 503 --round 2 --beta 0 --start 100 --count 100 --budget-minutes 25 --out ../results/v3/d3rem/S_k12_s503_r2_100"
+  },
+  {
+   "id": "v3_d3rem_S12_s503_r2_200",
+   "cmd": "python main.py dagger3 --set S --kappa 12 --tau 4.9 --weights ../results/v3/d3rem/S_k12_hp0_s503_r1.npz --seed 503 --round 2 --beta 0 --start 200 --count 100 --budget-minutes 25 --out ../results/v3/d3rem/S_k12_s503_r2_200"
+  },
+  {
+   "id": "v3_d3rem_S12_s503_r2_300",
+   "cmd": "python main.py dagger3 --set S --kappa 12 --tau 4.9 --weights ../results/v3/d3rem/S_k12_hp0_s503_r1.npz --seed 503 --round 2 --beta 0 --start 300 --count 100 --budget-minutes 25 --out ../results/v3/d3rem/S_k12_s503_r2_300"
+  },
+  {
+   "id": "v3_d3rem_S12_s503_r2_400",
+   "cmd": "python main.py dagger3 --set S --kappa 12 --tau 4.9 --weights ../results/v3/d3rem/S_k12_hp0_s503_r1.npz --seed 503 --round 2 --beta 0 --start 400 --count 100 --budget-minutes 25 --out ../results/v3/d3rem/S_k12_s503_r2_400"
+  },
+  {
+   "id": "v3_d3rem_S12_s503_r2_500",
+   "cmd": "python main.py dagger3 --set S --kappa 12 --tau 4.9 --weights ../results/v3/d3rem/S_k12_hp0_s503_r1.npz --seed 503 --round 2 --beta 0 --start 500 --count 100 --budget-minutes 25 --out ../results/v3/d3rem/S_k12_s503_r2_500"
+  },
+  {
+   "id": "v3_d3rem_S12_s503_r2_600",
+   "cmd": "python main.py dagger3 --set S --kappa 12 --tau 4.9 --weights ../results/v3/d3rem/S_k12_hp0_s503_r1.npz --seed 503 --round 2 --beta 0 --start 600 --count 100 --budget-minutes 25 --out ../results/v3/d3rem/S_k12_s503_r2_600"
+  },
+  {
+   "id": "v3_d3rem_S12_s503_r2_700",
+   "cmd": "python main.py dagger3 --set S --kappa 12 --tau 4.9 --weights ../results/v3/d3rem/S_k12_hp0_s503_r1.npz --seed 503 --round 2 --beta 0 --start 700 --count 100 --budget-minutes 25 --out ../results/v3/d3rem/S_k12_s503_r2_700"
+  }
+ ]
+}
