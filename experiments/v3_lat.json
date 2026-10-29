@@ -1,0 +1,9 @@
+{
+ "purpose": "Lat' (07_hypotheses_v3 \u00a71.8, \u00a74): interleaved timing of the 27 greedy configurations, the student (round-0 seed 501 weights; latency does not depend on the weights), pruned-16/random-16 and L_final on S12 pilot3 decision states driven by full G*; 20 warm-up + 500 timed decisions, one runner, single thread. Timing is one process by design (same machine for every method); declared long-process exception (v3.1 D10).",
+ "jobs": [
+  {
+   "id": "v3_lat_S12_pilot",
+   "cmd": "python main.py latency3 --set S --kappa 12 --tau 4.9 --split pilot3 --start 0 --count 300 --weights ../results/v3/d3/S_k12_hp0_s501_r0.npz --warmup 20 --decisions 500 --budget-minutes 330 --out ../results/v3/lat/S_k12_pilot"
+  }
+ ]
+}
