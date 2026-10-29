@@ -206,3 +206,10 @@ comparator E_train = 2 × 10⁵ from the start; H3 hold threshold 0.03 with part
   (2,238×); pruned-16 283 ms → ratio **3.2 < 10 → H1-fb withdrawn** (with the assimilation + neighbour-list sentence).
   **Q** = 14 configurations; **R_b candidates** (maximal elements): g125_128_64, g125_512_16, g500_32_64, g500_128_16,
   g500_512_4 → each run on the first 200 S12 pilot3 episodes at sub 8 (`experiments/v3_rb.json`).
+- **D3 (first attempt) FAILS** (`results/v3/12_d3_analysis.json`; 468 of the 500 paired val3 episodes read when
+  recorded, sub 8): Δ̂_succ = −6.8 pp (rule (i) threshold ≈ −1.5 pp), Δ̂_BI = −0.19 nats (threshold −0.15), per-seed
+  Δ̂_succ −5.1 / −8.5 / −6.6 pp (all ≤ −δ = −4 pp, rule (iii)). δ_S12 = 4 pp (cap) and ε_S12 ≈ 0.31 from the sub-8
+  G5′ values available then; neither can move the decision. → **the one remedy** (round 0 doubled: label3 0–2,999
+  minus the held-out 1,200–1,499; DAgger rounds of 800 from fresh remedy students; held-out set unchanged), re-checked
+  on the same 500 val3 episodes with the same rule. The remedy data were collected from the moment the partial read
+  pointed to a fail; nothing from them was looked at before this note.

@@ -1,0 +1,509 @@
+{
+ "purpose": "D3 remedy re-check (07_hypotheses_v3 \u00a74): remedy round-2 students seeds 501-503 on the same first 500 val3 episodes at S12, sub 8; paired with the same G* val3 runs; same D3 rule (code/analysis_d3_v3.py --tag rem).",
+ "jobs": [
+  {
+   "id": "v3_d3rem_val_s501_000",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s501_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 0 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s501_rem_000"
+  },
+  {
+   "id": "v3_d3rem_val_s501_012",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s501_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 12 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s501_rem_012"
+  },
+  {
+   "id": "v3_d3rem_val_s501_024",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s501_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 24 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s501_rem_024"
+  },
+  {
+   "id": "v3_d3rem_val_s501_036",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s501_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 36 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s501_rem_036"
+  },
+  {
+   "id": "v3_d3rem_val_s501_048",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s501_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 48 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s501_rem_048"
+  },
+  {
+   "id": "v3_d3rem_val_s501_060",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s501_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 60 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s501_rem_060"
+  },
+  {
+   "id": "v3_d3rem_val_s501_072",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s501_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 72 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s501_rem_072"
+  },
+  {
+   "id": "v3_d3rem_val_s501_084",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s501_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 84 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s501_rem_084"
+  },
+  {
+   "id": "v3_d3rem_val_s501_096",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s501_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 96 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s501_rem_096"
+  },
+  {
+   "id": "v3_d3rem_val_s501_108",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s501_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 108 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s501_rem_108"
+  },
+  {
+   "id": "v3_d3rem_val_s501_120",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s501_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 120 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s501_rem_120"
+  },
+  {
+   "id": "v3_d3rem_val_s501_132",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s501_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 132 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s501_rem_132"
+  },
+  {
+   "id": "v3_d3rem_val_s501_144",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s501_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 144 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s501_rem_144"
+  },
+  {
+   "id": "v3_d3rem_val_s501_156",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s501_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 156 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s501_rem_156"
+  },
+  {
+   "id": "v3_d3rem_val_s501_168",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s501_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 168 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s501_rem_168"
+  },
+  {
+   "id": "v3_d3rem_val_s501_180",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s501_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 180 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s501_rem_180"
+  },
+  {
+   "id": "v3_d3rem_val_s501_192",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s501_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 192 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s501_rem_192"
+  },
+  {
+   "id": "v3_d3rem_val_s501_204",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s501_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 204 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s501_rem_204"
+  },
+  {
+   "id": "v3_d3rem_val_s501_216",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s501_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 216 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s501_rem_216"
+  },
+  {
+   "id": "v3_d3rem_val_s501_228",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s501_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 228 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s501_rem_228"
+  },
+  {
+   "id": "v3_d3rem_val_s501_240",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s501_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 240 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s501_rem_240"
+  },
+  {
+   "id": "v3_d3rem_val_s501_252",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s501_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 252 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s501_rem_252"
+  },
+  {
+   "id": "v3_d3rem_val_s501_264",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s501_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 264 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s501_rem_264"
+  },
+  {
+   "id": "v3_d3rem_val_s501_276",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s501_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 276 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s501_rem_276"
+  },
+  {
+   "id": "v3_d3rem_val_s501_288",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s501_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 288 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s501_rem_288"
+  },
+  {
+   "id": "v3_d3rem_val_s501_300",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s501_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 300 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s501_rem_300"
+  },
+  {
+   "id": "v3_d3rem_val_s501_312",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s501_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 312 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s501_rem_312"
+  },
+  {
+   "id": "v3_d3rem_val_s501_324",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s501_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 324 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s501_rem_324"
+  },
+  {
+   "id": "v3_d3rem_val_s501_336",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s501_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 336 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s501_rem_336"
+  },
+  {
+   "id": "v3_d3rem_val_s501_348",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s501_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 348 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s501_rem_348"
+  },
+  {
+   "id": "v3_d3rem_val_s501_360",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s501_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 360 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s501_rem_360"
+  },
+  {
+   "id": "v3_d3rem_val_s501_372",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s501_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 372 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s501_rem_372"
+  },
+  {
+   "id": "v3_d3rem_val_s501_384",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s501_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 384 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s501_rem_384"
+  },
+  {
+   "id": "v3_d3rem_val_s501_396",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s501_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 396 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s501_rem_396"
+  },
+  {
+   "id": "v3_d3rem_val_s501_408",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s501_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 408 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s501_rem_408"
+  },
+  {
+   "id": "v3_d3rem_val_s501_420",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s501_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 420 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s501_rem_420"
+  },
+  {
+   "id": "v3_d3rem_val_s501_432",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s501_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 432 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s501_rem_432"
+  },
+  {
+   "id": "v3_d3rem_val_s501_444",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s501_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 444 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s501_rem_444"
+  },
+  {
+   "id": "v3_d3rem_val_s501_456",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s501_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 456 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s501_rem_456"
+  },
+  {
+   "id": "v3_d3rem_val_s501_468",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s501_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 468 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s501_rem_468"
+  },
+  {
+   "id": "v3_d3rem_val_s501_480",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s501_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 480 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s501_rem_480"
+  },
+  {
+   "id": "v3_d3rem_val_s501_492",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s501_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 492 --count 8 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s501_rem_492"
+  },
+  {
+   "id": "v3_d3rem_val_s502_000",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s502_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 0 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s502_rem_000"
+  },
+  {
+   "id": "v3_d3rem_val_s502_012",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s502_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 12 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s502_rem_012"
+  },
+  {
+   "id": "v3_d3rem_val_s502_024",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s502_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 24 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s502_rem_024"
+  },
+  {
+   "id": "v3_d3rem_val_s502_036",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s502_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 36 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s502_rem_036"
+  },
+  {
+   "id": "v3_d3rem_val_s502_048",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s502_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 48 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s502_rem_048"
+  },
+  {
+   "id": "v3_d3rem_val_s502_060",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s502_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 60 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s502_rem_060"
+  },
+  {
+   "id": "v3_d3rem_val_s502_072",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s502_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 72 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s502_rem_072"
+  },
+  {
+   "id": "v3_d3rem_val_s502_084",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s502_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 84 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s502_rem_084"
+  },
+  {
+   "id": "v3_d3rem_val_s502_096",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s502_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 96 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s502_rem_096"
+  },
+  {
+   "id": "v3_d3rem_val_s502_108",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s502_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 108 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s502_rem_108"
+  },
+  {
+   "id": "v3_d3rem_val_s502_120",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s502_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 120 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s502_rem_120"
+  },
+  {
+   "id": "v3_d3rem_val_s502_132",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s502_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 132 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s502_rem_132"
+  },
+  {
+   "id": "v3_d3rem_val_s502_144",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s502_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 144 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s502_rem_144"
+  },
+  {
+   "id": "v3_d3rem_val_s502_156",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s502_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 156 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s502_rem_156"
+  },
+  {
+   "id": "v3_d3rem_val_s502_168",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s502_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 168 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s502_rem_168"
+  },
+  {
+   "id": "v3_d3rem_val_s502_180",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s502_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 180 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s502_rem_180"
+  },
+  {
+   "id": "v3_d3rem_val_s502_192",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s502_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 192 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s502_rem_192"
+  },
+  {
+   "id": "v3_d3rem_val_s502_204",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s502_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 204 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s502_rem_204"
+  },
+  {
+   "id": "v3_d3rem_val_s502_216",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s502_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 216 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s502_rem_216"
+  },
+  {
+   "id": "v3_d3rem_val_s502_228",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s502_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 228 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s502_rem_228"
+  },
+  {
+   "id": "v3_d3rem_val_s502_240",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s502_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 240 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s502_rem_240"
+  },
+  {
+   "id": "v3_d3rem_val_s502_252",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s502_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 252 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s502_rem_252"
+  },
+  {
+   "id": "v3_d3rem_val_s502_264",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s502_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 264 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s502_rem_264"
+  },
+  {
+   "id": "v3_d3rem_val_s502_276",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s502_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 276 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s502_rem_276"
+  },
+  {
+   "id": "v3_d3rem_val_s502_288",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s502_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 288 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s502_rem_288"
+  },
+  {
+   "id": "v3_d3rem_val_s502_300",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s502_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 300 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s502_rem_300"
+  },
+  {
+   "id": "v3_d3rem_val_s502_312",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s502_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 312 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s502_rem_312"
+  },
+  {
+   "id": "v3_d3rem_val_s502_324",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s502_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 324 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s502_rem_324"
+  },
+  {
+   "id": "v3_d3rem_val_s502_336",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s502_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 336 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s502_rem_336"
+  },
+  {
+   "id": "v3_d3rem_val_s502_348",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s502_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 348 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s502_rem_348"
+  },
+  {
+   "id": "v3_d3rem_val_s502_360",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s502_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 360 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s502_rem_360"
+  },
+  {
+   "id": "v3_d3rem_val_s502_372",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s502_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 372 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s502_rem_372"
+  },
+  {
+   "id": "v3_d3rem_val_s502_384",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s502_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 384 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s502_rem_384"
+  },
+  {
+   "id": "v3_d3rem_val_s502_396",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s502_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 396 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s502_rem_396"
+  },
+  {
+   "id": "v3_d3rem_val_s502_408",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s502_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 408 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s502_rem_408"
+  },
+  {
+   "id": "v3_d3rem_val_s502_420",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s502_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 420 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s502_rem_420"
+  },
+  {
+   "id": "v3_d3rem_val_s502_432",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s502_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 432 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s502_rem_432"
+  },
+  {
+   "id": "v3_d3rem_val_s502_444",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s502_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 444 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s502_rem_444"
+  },
+  {
+   "id": "v3_d3rem_val_s502_456",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s502_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 456 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s502_rem_456"
+  },
+  {
+   "id": "v3_d3rem_val_s502_468",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s502_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 468 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s502_rem_468"
+  },
+  {
+   "id": "v3_d3rem_val_s502_480",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s502_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 480 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s502_rem_480"
+  },
+  {
+   "id": "v3_d3rem_val_s502_492",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s502_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 492 --count 8 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s502_rem_492"
+  },
+  {
+   "id": "v3_d3rem_val_s503_000",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s503_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 0 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s503_rem_000"
+  },
+  {
+   "id": "v3_d3rem_val_s503_012",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s503_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 12 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s503_rem_012"
+  },
+  {
+   "id": "v3_d3rem_val_s503_024",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s503_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 24 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s503_rem_024"
+  },
+  {
+   "id": "v3_d3rem_val_s503_036",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s503_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 36 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s503_rem_036"
+  },
+  {
+   "id": "v3_d3rem_val_s503_048",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s503_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 48 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s503_rem_048"
+  },
+  {
+   "id": "v3_d3rem_val_s503_060",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s503_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 60 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s503_rem_060"
+  },
+  {
+   "id": "v3_d3rem_val_s503_072",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s503_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 72 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s503_rem_072"
+  },
+  {
+   "id": "v3_d3rem_val_s503_084",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s503_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 84 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s503_rem_084"
+  },
+  {
+   "id": "v3_d3rem_val_s503_096",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s503_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 96 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s503_rem_096"
+  },
+  {
+   "id": "v3_d3rem_val_s503_108",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s503_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 108 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s503_rem_108"
+  },
+  {
+   "id": "v3_d3rem_val_s503_120",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s503_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 120 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s503_rem_120"
+  },
+  {
+   "id": "v3_d3rem_val_s503_132",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s503_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 132 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s503_rem_132"
+  },
+  {
+   "id": "v3_d3rem_val_s503_144",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s503_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 144 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s503_rem_144"
+  },
+  {
+   "id": "v3_d3rem_val_s503_156",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s503_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 156 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s503_rem_156"
+  },
+  {
+   "id": "v3_d3rem_val_s503_168",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s503_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 168 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s503_rem_168"
+  },
+  {
+   "id": "v3_d3rem_val_s503_180",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s503_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 180 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s503_rem_180"
+  },
+  {
+   "id": "v3_d3rem_val_s503_192",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s503_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 192 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s503_rem_192"
+  },
+  {
+   "id": "v3_d3rem_val_s503_204",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s503_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 204 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s503_rem_204"
+  },
+  {
+   "id": "v3_d3rem_val_s503_216",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s503_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 216 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s503_rem_216"
+  },
+  {
+   "id": "v3_d3rem_val_s503_228",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s503_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 228 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s503_rem_228"
+  },
+  {
+   "id": "v3_d3rem_val_s503_240",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s503_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 240 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s503_rem_240"
+  },
+  {
+   "id": "v3_d3rem_val_s503_252",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s503_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 252 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s503_rem_252"
+  },
+  {
+   "id": "v3_d3rem_val_s503_264",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s503_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 264 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s503_rem_264"
+  },
+  {
+   "id": "v3_d3rem_val_s503_276",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s503_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 276 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s503_rem_276"
+  },
+  {
+   "id": "v3_d3rem_val_s503_288",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s503_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 288 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s503_rem_288"
+  },
+  {
+   "id": "v3_d3rem_val_s503_300",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s503_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 300 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s503_rem_300"
+  },
+  {
+   "id": "v3_d3rem_val_s503_312",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s503_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 312 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s503_rem_312"
+  },
+  {
+   "id": "v3_d3rem_val_s503_324",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s503_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 324 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s503_rem_324"
+  },
+  {
+   "id": "v3_d3rem_val_s503_336",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s503_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 336 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s503_rem_336"
+  },
+  {
+   "id": "v3_d3rem_val_s503_348",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s503_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 348 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s503_rem_348"
+  },
+  {
+   "id": "v3_d3rem_val_s503_360",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s503_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 360 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s503_rem_360"
+  },
+  {
+   "id": "v3_d3rem_val_s503_372",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s503_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 372 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s503_rem_372"
+  },
+  {
+   "id": "v3_d3rem_val_s503_384",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s503_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 384 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s503_rem_384"
+  },
+  {
+   "id": "v3_d3rem_val_s503_396",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s503_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 396 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s503_rem_396"
+  },
+  {
+   "id": "v3_d3rem_val_s503_408",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s503_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 408 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s503_rem_408"
+  },
+  {
+   "id": "v3_d3rem_val_s503_420",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s503_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 420 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s503_rem_420"
+  },
+  {
+   "id": "v3_d3rem_val_s503_432",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s503_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 432 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s503_rem_432"
+  },
+  {
+   "id": "v3_d3rem_val_s503_444",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s503_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 444 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s503_rem_444"
+  },
+  {
+   "id": "v3_d3rem_val_s503_456",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s503_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 456 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s503_rem_456"
+  },
+  {
+   "id": "v3_d3rem_val_s503_468",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s503_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 468 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s503_rem_468"
+  },
+  {
+   "id": "v3_d3rem_val_s503_480",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s503_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 480 --count 12 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s503_rem_480"
+  },
+  {
+   "id": "v3_d3rem_val_s503_492",
+   "cmd": "python main.py eval3 --set S --method student --weights ../results/v3/d3rem/S_k12_hp0_s503_r2.npz --kappa 12 --tau 4.9 --n-star 4 --split val3 --start 492 --count 8 --sub 8 --budget-minutes 25 --out ../results/v3/d3_val/S_k12_student_s503_rem_492"
+  }
+ ]
+}
