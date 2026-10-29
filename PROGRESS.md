@@ -861,3 +861,9 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
   remedy-size DAgger, seeds 601–603), RL seeds 611–613, rule D4 (= D3 form, δ 4 pp), H2-S2; E5 reduced G\* on S12 test3.
 - **Next stage:** 13 ITERATIVE_REFINE → 12-style runs (E1–E5) → 14 → 15 → 16–20.
 - **Resuming under version:** v4
+- **Where to resume (run 9, v4 stage 13):** dispatched in run 8: `v4_label_S2` (60 jobs), `v4_rl_S2` (3), `v4_e5_rb_test3`
+  (100), plus v3 `v3_sub8_g5_r8` (61, report-only). Next: follow-ups for early-stopped label shards
+  (`tools_resume_manifest.py` handles label3? — check; else re-issue missing indices), then E2 round 0 in the sandbox
+  (write outputs to the scratchpad and copy into results/ afterwards: a git rebase during a sandbox run lost one output
+  in run 8), DAgger r1/r2 manifests from `v3_d3rem_r1/r2.json`, then E4. Generalise the analyses with a `--cell` flag
+  (default = v3 behaviour). The v3 paper text (`paper/mypaper/v3/draft_v3_final.md`) is the base for the v4 paper.
