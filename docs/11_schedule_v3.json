@@ -1,0 +1,229 @@
+{
+ "generated": "2026-10-29",
+ "prompt": "pipeline/references/stage_prompts/resource_planning.md (schema {tasks:[{id,name,depends_on,gpu_count,estimated_minutes,priority}], total_gpu_budget, generated}); exp_plan = docs/08_experiment_plan_v3.yaml + amendments v3.0/v3.1",
+ "pilot_measurements": {
+  "source": "results/v3/pilot/time_estimate_{S_k12,S_k0,A_k12}.json (GitHub Actions run 40807921186, 2026-10-29); tau uncalibrated (S12 tau 6, A12 tau 4, S0 tau 4)",
+  "TIME_ESTIMATE_lines": [
+   "S12: label 7.5 s per G*-labelled episode (5 decisions); grid read-out 4.5 s",
+   "S0: label 22.2 s (4 decisions, all 512 actions feasible -> ~5.5 s per G* decision); grid 3.6 s",
+   "A12: label 2.0 s (3 decisions); grid 5.4 s"
+  ],
+  "note": "G* per decision at kappa = 0 (all 512 feasible) is ~5.5 s on the runner vs the 1.7 s planning value of 07_hypotheses_v3 \u00a77 (that value was 2 x an informal 256-action median); at kappa = 12 the feasible set is smaller and the measured cost (~1.5 s) is close to plan. S0 labelling therefore costs ~3x the plan."
+ },
+ "total_gpu_budget": 0,
+ "hardware": "CPU only: GitHub Actions ubuntu-latest (2 vCPU), max-parallel 20, <= 350 min per job; sweeps sharded <= 30 min (amendment v3.1 D10)",
+ "tasks": [
+  {
+   "id": "P0",
+   "name": "TIME_ESTIMATE pilots (3 cells)",
+   "depends_on": [],
+   "gpu_count": 0,
+   "estimated_minutes": 2,
+   "priority": 1,
+   "estimate_source": "measured, results/v3/pilot"
+  },
+  {
+   "id": "C1",
+   "name": "Cal' n* (G* kappa=0 tau=4, 200 cal3 per set, grid)",
+   "depends_on": [
+    "P0"
+   ],
+   "gpu_count": 0,
+   "estimated_minutes": 127,
+   "priority": 1,
+   "estimate_source": "S0 measured; A0 assumed 0.3x S0 decision cost (A12 measured ratio)"
+  },
+  {
+   "id": "C2",
+   "name": "Cal' tau_12 (G* unbudgeted n*=4, 200 per set)",
+   "depends_on": [
+    "P0"
+   ],
+   "gpu_count": 0,
+   "estimated_minutes": 149,
+   "priority": 1,
+   "estimate_source": "unbudgeted G* ~ kappa=0 decision cost (all 512 feasible)"
+  },
+  {
+   "id": "C3",
+   "name": "Cal' verification with budget (G*, 200 per cell, no grid)",
+   "depends_on": [
+    "C1",
+    "C2"
+   ],
+   "gpu_count": 0,
+   "estimated_minutes": 106,
+   "priority": 1,
+   "estimate_source": "measured label cost ~ G* rollout cost"
+  },
+  {
+   "id": "G1",
+   "name": "G1' notch (5) + bank (100) + travel-notch (5)",
+   "depends_on": [],
+   "gpu_count": 0,
+   "estimated_minutes": 650,
+   "priority": 1,
+   "estimate_source": "v2 logs: g1a ~300 s, g1b ~130-370 s/belief"
+  },
+  {
+   "id": "G5",
+   "name": "G5' G* 500 + random 200 + 3 heuristics x 200 per cell (+64x16 report)",
+   "depends_on": [
+    "C3"
+   ],
+   "gpu_count": 0,
+   "estimated_minutes": 2386,
+   "priority": 1,
+   "estimate_source": "G* measured; random 70 s/ep and heuristics 40 s/ep from 07_hypotheses_v3 \u00a77 (grid of weak policies)"
+  },
+  {
+   "id": "E1",
+   "name": "E' sub 4 vs 8 (16 episodes)",
+   "depends_on": [
+    "G5"
+   ],
+   "gpu_count": 0,
+   "estimated_minutes": 60,
+   "priority": 2,
+   "estimate_source": "plan"
+  },
+  {
+   "id": "L0",
+   "name": "Round-0 labels S12 (1,500)",
+   "depends_on": [
+    "C3"
+   ],
+   "gpu_count": 0,
+   "estimated_minutes": 188,
+   "priority": 1,
+   "estimate_source": "measured"
+  },
+  {
+   "id": "H0",
+   "name": "HP grid (4 configs, seed 501, round 0)",
+   "depends_on": [
+    "L0"
+   ],
+   "gpu_count": 0,
+   "estimated_minutes": 60,
+   "priority": 1,
+   "estimate_source": "plan"
+  },
+  {
+   "id": "D1",
+   "name": "D3: DAgger rounds 1-2 for seeds 501-503 at S12 (2 x 400 x 3)",
+   "depends_on": [
+    "H0"
+   ],
+   "gpu_count": 0,
+   "estimated_minutes": 301,
+   "priority": 1,
+   "estimate_source": "measured label cost"
+  },
+  {
+   "id": "D2",
+   "name": "D3 training + 500 validation students x3 + G* 500 (grid)",
+   "depends_on": [
+    "D1"
+   ],
+   "gpu_count": 0,
+   "estimated_minutes": 654,
+   "priority": 1,
+   "estimate_source": "student grid 20 s/ep (weak-policy range, plan)"
+  },
+  {
+   "id": "D3B",
+   "name": "D3-B belief-input students (3 seeds)",
+   "depends_on": [
+    "D1"
+   ],
+   "gpu_count": 0,
+   "estimated_minutes": 486,
+   "priority": 2,
+   "estimate_source": "plan"
+  },
+  {
+   "id": "RLS",
+   "name": "RL sweep (4 configs x 5e4, S12) [v3.1 D9]",
+   "depends_on": [
+    "C3"
+   ],
+   "gpu_count": 0,
+   "estimated_minutes": 240,
+   "priority": 2,
+   "estimate_source": "v2 0.8-1.7 CPU-h per 1e5 on 256"
+  },
+  {
+   "id": "G2",
+   "name": "G2'/H3 (3 kappa x 100 beliefs) + bias check",
+   "depends_on": [
+    "C3",
+    "G1"
+   ],
+   "gpu_count": 0,
+   "estimated_minutes": 1020,
+   "priority": 2,
+   "estimate_source": "plan (15_decision estimate)"
+  },
+  {
+   "id": "LAT",
+   "name": "Lat' timing + R_b pilot selection",
+   "depends_on": [
+    "H0",
+    "G5"
+   ],
+   "gpu_count": 0,
+   "estimated_minutes": 330,
+   "priority": 2,
+   "estimate_source": "plan"
+  },
+  {
+   "id": "M1",
+   "name": "Main: labels S0 + A12 round 0",
+   "depends_on": [
+    "D2"
+   ],
+   "gpu_count": 0,
+   "estimated_minutes": 606,
+   "priority": 1,
+   "estimate_source": "measured"
+  },
+  {
+   "id": "M2",
+   "name": "Main: DAgger 12 seed-cells x 800",
+   "depends_on": [
+    "M1"
+   ],
+   "gpu_count": 0,
+   "estimated_minutes": 1494,
+   "priority": 1,
+   "estimate_source": "measured label costs (S0 dominates)"
+  },
+  {
+   "id": "M3",
+   "name": "Main: student test grid 5 seeds x 3 cells x 1,000 + G* test + H* test + R_b test",
+   "depends_on": [
+    "M2",
+    "LAT"
+   ],
+   "gpu_count": 0,
+   "estimated_minutes": 4769,
+   "priority": 1,
+   "estimate_source": "G* measured; rest plan"
+  },
+  {
+   "id": "M4",
+   "name": "Main: H2 RL 3 x 2e5, g_T, RL success reads; rows (random, BC, abs-frame, Gen-kappa, curve, latency)",
+   "depends_on": [
+    "RLS",
+    "D2"
+   ],
+   "gpu_count": 0,
+   "estimated_minutes": 2754,
+   "priority": 2,
+   "estimate_source": "plan"
+  }
+ ],
+ "total_cpu_hours_estimate": 273.0,
+ "downscale": "If the re-estimated main exceeds 150 CPU-h, apply the frozen downscale order (amendment v3.0 C5 / 07_hypotheses_v3 \u00a77) step by step; never-reduced items stay."
+}
