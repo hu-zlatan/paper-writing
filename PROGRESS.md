@@ -9,7 +9,7 @@
 **Topic:** Amortized, non-myopic active tactile localization (TouchBED)
 **Initialised:** 2026-10-28T07:56:44Z
 **Current version:** v3
-**Latest stage:** Stage 9 EXPERIMENT_DESIGN [v3] done (gate auto-approved) → next: Stage 10 CODE_GENERATION [v3] (see the end of this file)
+**Latest stage:** Stage 10 CODE_GENERATION [v3] IN PROGRESS (items 1–5 of plans/stage_10_code_generation_v3.md done) → continue at item 6 (see the end of this file)
 
 ---
 
@@ -555,3 +555,17 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
   B-spread/B-fan/B-cov with reservation rule; (5) `distill.py` (loss, regret, DAgger driver) + soft-label CE gradient
   check; (6) greedy grid + component timers; (7) belief-summary features; (8) travel-notch; (9) provenance scripts
   analysis_g3_notch.py / analysis_g3_hp.py; (10) main.py subcommands + manifests; G0′ green by 11-05.
+
+---
+
+## Stage 10. CODE_GENERATION     [v3]   (IN PROGRESS — no Finished timestamp yet)
+
+- **Started:** 2026-10-29 run 5
+- **Done so far (each with tests; full suite was 29/29 green before v3 changes):** (1) `TOUCHBED_NPHI` flag, 64 × 8 =
+  512, `rung_subset` relative, 32 × 8 bit-identity test; (2) v3 split salts + κ-keyed label/DAgger streams
+  (`touchbed/v3.py`), disjointness tests; (3) `GStar.score_vector()` (argmax = act test); (4) heuristics
+  B-spread/B-fan/B-cov with reservation rule (`touchbed/heuristics.py`); (5) `run_episode_v3` (teacher labelling,
+  DAgger β-mixing, grid read-out) and `touchbed/distill.py` (soft-label CE with finite-difference gradient check,
+  floored regret, Student, training round with the R̄ stop rule).
+- **Remaining:** (6) 27-config greedy grid + component timers; (7) belief-summary features; (8) travel-notch;
+  (9) provenance scripts; (10) main.py subcommands + manifests + TIME_ESTIMATE pilots; numpy2 / forbidden-pattern checks.
