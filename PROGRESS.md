@@ -780,3 +780,41 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
   clean. Open markers: 4 `[CONST?:…]` (runner CPU model, numpy versions, PPO clip/epochs — the code has clip 0.2 and
   4 epochs; to be filled from code in stage 19), `[PENDING:…]` for G5′ and D3-B.
 - **Decision:** PROCEED → stage 18.
+
+---
+
+## Stage 18. PEER_REVIEW     [v3]
+
+- **Finished:** 2026-10-29 run 8. Record `plans/stage_18_peer_review_v3.md`, merged `paper/mypaper/18_peer_review.md`
+  (runs `18_review_run1.md`, `18_review_run2.md`; template verbatim, two fresh opus reviewer pairs with repo access).
+- Scores 4 / 3 and 3 / 4 (reject / borderline). **CRITICAL_FABRICATION: no** (43 spot-checks). Factual text mismatches
+  (stale random-row counts, "pinned core", E′ scope, latency checkpoint, CONSTs) fixed in stage 19 (option b, incidental).
+- Main substantive point: **in the tested cell (S, κ = 12, τ = 4.9) the planner barely travels** — G\* moves the finger
+  between probes in 21 % of decisions (> 1 grid step 6 %), mean logged travel 6.1° per episode; students 1.5–2.0°,
+  B-fan 1.5°, RL 23–26° with always 3 probes (`code/analysis_behaviour_v3.py` → `results/v3/14_behaviour.json`).
+  Other asks: under-trained students (4–16 epochs), H3 screens 32 of ≤ 512 first actions, thin RL sweep, H2 power,
+  reduced-G\* accuracy, disclose v2 G(12) = 0.0146.
+- New exploratory row (readings written first, amendment v3.0): long-training students, 200 fixed epochs, same data
+  (`distill3 --fixed-epochs`, new flag, default unchanged): held-out R̄ 0.181 / 0.164 / 0.173 (remedied 0.187 / 0.184 /
+  0.201); test3 0–299 sub-8 re-read dispatched (`experiments/v3_t3_long.json`, 114 jobs); block
+  `exploratory_long_student` in `analysis_m4_v3.py`.
+- **Decision:** PROCEED → stage 19 (no fabrication). Items needing new design → OWNER_TODO.
+
+---
+
+## Stage 19. PAPER_REVISION     [v3]
+
+- **Finished:** 2026-10-29 run 8. Pre-revision snapshot `paper/mypaper/v3/draft_v3_stage17.md`. Template verbatim
+  (fresh opus subagent, prompt files `paper/mypaper/prompts/stage19_*.txt`); a data block with the new JSON keys
+  (14_behaviour, 14_derived, provisional G5′/D3-B, v2 G values, run-config facts) was appended to {reviews} because the
+  reviews ask for diagnostics computed after the draft.
+- Output `paper/mypaper/sections/draft_v3.md`: Abstract 249, Intro 964, Related 587, Method 1,880, Protocol 1,064,
+  Results 2,914, Discussion 756, Limitations 552, Conclusion 290, Appendix A (gate record) 500; body 9,007 words
+  (> 8 pages: the Stage 1 extended abstract and the Stage 2 paper will be condensed exports in stage 22).
+- Checks: number audit 0 unmatched (audit now also accepts results/v2/12_g2_analysis.json and rad→deg); never-write list
+  clean; one placeholder `[PENDING:long_student]`.
+- Revision added > 30 % words → per template, **second stage-18 pass** after the long-student row is filled.
+- **Where to resume (run 9):** (1) check `v3_t3_long` (follow-ups with `code/tools_regrid_followup.py
+  experiments/v3_t3_long.json …`), then `python code/analysis_m4_v3.py && python code/tools_results_v3.py`, read the
+  pre-written reading, fill `[PENDING:long_student]` in draft_v3.md (and the labelfit numbers if added); (2) G5′ sub-8
+  (`v3_sub8_g5_r7` follow-ups) and D3-B (1 job) completion → replace provisional values; (3) stage 18 pass 2 → 19 → 20.

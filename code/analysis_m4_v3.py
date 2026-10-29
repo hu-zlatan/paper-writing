@@ -71,5 +71,21 @@ if eps_h:
             r95 = crossed_bootstrap_diff(arr(a, key), arr(b, key), alpha=0.025)
             out["exploratory_b_fan"][f"{a}-{b}:{key}"] = {"diff": r95["diff"], "ci95": [r95["lower"], r95["upper"]]}
     eps = eps_all
+# exploratory long-training student row (stage 18 v3; status note in amendment v3.0, readings written first)
+long = [load(f"S_k12_student_long_s{s}_*.jsonl") for s in (501, 502, 503)]
+eps_l = [e for e in eps if all(e in d for d in long)]
+out["exploratory_long_student"] = {"n_episodes": len(eps_l), "complete": len(eps_l) == N}
+if eps_l:
+    meth["student_long"] = long
+    eps_all, eps = eps, eps_l
+    blk = out["exploratory_long_student"]
+    blk["success"] = float(arr("student_long", "success").mean())
+    blk["ball_info"] = float(arr("student_long", "ball_info").mean())
+    blk["per_seed_success"] = [float(arr("student_long", "success")[:, i].mean()) for i in range(3)]
+    for a, b in (("student_long", "student"), ("student_long", "gstar")):
+        for key in ("success", "ball_info"):
+            r95 = crossed_bootstrap_diff(arr(a, key), arr(b, key), alpha=0.025)
+            blk[f"{a}-{b}:{key}"] = {"diff": r95["diff"], "ci95": [r95["lower"], r95["upper"]]}
+    eps = eps_all
 print(json.dumps(out, indent=1))
 json.dump(out, open(os.path.join(base, "14_m4_analysis.json"), "w"), indent=1)
