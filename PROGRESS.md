@@ -600,5 +600,10 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
 - **G0′:** unit tests green; TIME_ESTIMATE pilots done (above).
 - **Dispatched:** experiments/v3_cal.json (Cal′: n* at κ = 0/τ = 4 on 200 cal3 episodes per set with grid read-out;
   τ_12 with n* = 4 — speculative, re-run if the n* rule changes n*); experiments/v3_g1.json (G1′ a/b/c).
-- **Next:** analyse Cal′ (n* rule, τ_12 = n* + mean travel time rounded to 0.1) → status note in amendment v3.0 →
-  budget verification run (G*, 200 per cell, mean probes within n* ± 0.3) → G5′ / E′ / round-0 labels S12.
+- **Run 6 (2026-10-29):** Cal′: S n* = 4, A n* = 3; τ: S0 4, S12 4.9, A12 3.3 (A12 re-calibrated with n* = 3);
+  S12 verification 3.96 probes (pass); A12 verification dispatched. G1′ (a)(b)(c) all pass (status note in amendment
+  v3.0). Fixed `analysis_cal_v3.py` (n* = 3 shards were not globbed) and output-dir creation in `save_shard` /
+  `save_student` (label3 crashed on a fresh directory; I/O only, 56 tests pass). Dispatched: A12 verification,
+  S12 round-0 labels (label3 0–1,499), G5′ S12 and S0 (G* 500, random 200, 3 heuristics × 200, pilot3, grid sub 4).
+- **Next:** G5′ A12 after the A12 verification; HP grid on the S12 labels; E′ on the first G5′ episodes; G2′; Lat′;
+  D3. The 64 × 16 S12 report (report-only) needs a `TOUCHBED_NPSI` flag that does not exist yet — deferred, recorded.

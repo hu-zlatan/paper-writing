@@ -160,3 +160,17 @@ comparator E_train = 2 × 10⁵ from the start; H3 hold threshold 0.03 with part
 
 ## Status notes
 (added after gates, dated, each citing the commit hash of the data used)
+
+### 2026-10-29 (run 6) — Cal′ and G1′
+- **Cal′ n\*** (data commit 949d247, `results/v3/12_cal_analysis.json`): S: G\* success 0.605 at κ = 0, τ = 4 on 200
+  cal3 → **n\* = 4**; A: 0.985 > 0.88 → **n\* = 3**. τ_0 = n\*: **S0 τ = 4**, A0 τ = 3.
+- **τ_12** (same file, regenerated at 635d045 after including the n\* = 3 shards): **S12 τ = 4.9** (n\* 4, mean travel
+  0.939, 200 cal3); **A12 τ = 3.3** (n\* 3, mean travel 0.260, 200 cal3). The speculative A12 n\* = 4 value (τ 5.0) is
+  kept in the JSON and not used.
+- **Verification:** S12 at τ 4.9: mean executed probes **3.96** (200 cal3) — within 4 ± 0.3, **pass**. S0 at τ = n\* = 4
+  with κ = 0: every episode executes exactly 4 probes (mean 4.0 on the 200 n\* episodes) — pass by construction. A12 at
+  τ 3.3: dispatched (`experiments/v3_cal_verify_A.json`).
+- **G1′** (`results/v3/12_g1_analysis.json`, all files complete): (a) notch mean 0.829 ∈ [0.573, 0.860] — pass;
+  (b) zero-gap bank, 100 beliefs, mean 0.0025, UB 0.0037 — pass; (c) travel-notch exact 0.717, mean estimate 0.744
+  ∈ ±20 % — pass. As recorded at stage 10, (c) checks the estimator's travel/feasibility handling; it does not show
+  travel-created headroom.
