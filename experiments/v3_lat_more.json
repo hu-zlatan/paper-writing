@@ -1,9 +1,9 @@
 {
- "purpose": "Lat' if_fail rule: two configurations (g500_512_64, g125_512_64) had CI half-widths > 10 % of the median on the first 500 decisions -> 500 more decisions on new S12 pilot3 decision states (episodes from 127, after the 127 used), same protocol; then R_b candidates and H1-fb activation are frozen on the pooled 1,000 decisions.",
+ "purpose": "Lat' if_fail rule: two configurations (g500_512_64, g125_512_64) had CI half-widths > 10 % of the median on the first 500 decisions -> 500 more decisions on new S12 pilot3 decision states (episodes from 132, after episodes 0-131 used by the first pass), same protocol; then R_b candidates and H1-fb activation are frozen on the pooled 1,000 decisions.",
  "jobs": [
   {
    "id": "v3_lat_S12_pilot_more",
-   "cmd": "python main.py latency3 --set S --kappa 12 --tau 4.9 --split pilot3 --start 127 --count 300 --weights ../results/v3/d3/S_k12_hp0_s501_r0.npz --warmup 20 --decisions 500 --budget-minutes 330 --out ../results/v3/lat/S_k12_pilot_more"
+   "cmd": "python main.py latency3 --set S --kappa 12 --tau 4.9 --split pilot3 --start 132 --count 300 --weights ../results/v3/d3/S_k12_hp0_s501_r0.npz --warmup 20 --decisions 500 --budget-minutes 330 --out ../results/v3/lat/S_k12_pilot_more"
   }
  ]
 }
