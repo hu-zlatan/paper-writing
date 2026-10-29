@@ -605,5 +605,14 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
   v3.0). Fixed `analysis_cal_v3.py` (n* = 3 shards were not globbed) and output-dir creation in `save_shard` /
   `save_student` (label3 crashed on a fresh directory; I/O only, 56 tests pass). Dispatched: A12 verification,
   S12 round-0 labels (label3 0–1,499), G5′ S12 and S0 (G* 500, random 200, 3 heuristics × 200, pilot3, grid sub 4).
-- **Next:** G5′ A12 after the A12 verification; HP grid on the S12 labels; E′ on the first G5′ episodes; G2′; Lat′;
-  D3. The 64 × 16 S12 report (report-only) needs a `TOUCHBED_NPSI` flag that does not exist yet — deferred, recorded.
+- **Run 6, later:** A12 verification 2.98 probes (pass) → **Cal′ complete**. τ_2 = 4.7 (descriptive H3 level).
+  S12 round-0 labels: 1,500 episodes complete (shard 09 re-run in the sandbox after its Actions push failed; .gitignore
+  now keeps results/v3/**/*.npz — the first label run lost its .npz files and was cancelled/re-run). HP grid dispatched.
+  **E′ FAILED** (1 counted success flip in 16; mean |ΔBI| 0.0126) → sub = 8 for every v3 number (C2); sub-8 re-read of
+  Cal′ n* and G5′ pilot episodes dispatched (`regrid3`, time guard added; `code/tools_regrid_manifest.py`). Compute
+  re-estimate ≈ 526 CPU-h (gates ≈ 190, main after full downscale ≈ 336) → owner informed (OWNER_TODO) with a default.
+  G2′ (S0, S12, κ = 2) + bias check dispatched; bias check implemented (`touchbed/bias3.py`, 256 full-G* rollouts per
+  belief — sample count chosen before any G2′ number, since the pre-registered text gives none).
+- **Next:** G5′ decision on sub-8 values (`code/analysis_g5_v3.py` → point it at g5_sub8); HP selection → Lat′ (one
+  runner job) → DAgger rounds 1–2 (seeds 501–503) → D3 validation at sub 8; G2′ analysis. The 64 × 16 S12 report
+  (report-only) needs a ψ-count flag that does not exist yet — deferred.

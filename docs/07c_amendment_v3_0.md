@@ -176,3 +176,12 @@ comparator E_train = 2 × 10⁵ from the start; H3 hold threshold 0.03 with part
   travel-created headroom.
 - **Cal′ A12 verification** (Actions run 40839618917): mean executed probes **2.98** on the 200 cal3 episodes at
   τ 3.3 — within 3 ± 0.3, **pass**. Cal′ is complete for S0, S12, A12 (A0 not run; it enters only via the reserve, v3.1 D3).
+- **E′** (Actions run 40844118214, `results/v3/12_e_analysis.json`): 16 episodes (S12/A12 × G\*/B-fan × 4). Mean |ΔBI|
+  0.0126 nats (≤ 0.02, max 0.052), but **one counted success flip** (A12 B-fan episode 1: sub 4 fail → sub 8 success,
+  true-identity mass 0.228 under both settings, i.e. outside the tie band); a second flip (S12 B-fan episode 3) is inside
+  the tie band (mass 0.4999) and does not count. **E′ FAILS → sub = 8 for every v3 number** (C2). Measured sub-8
+  read-out cost: 40.6 s per episode on these 16 (3.6 × the recorded sub-4 eval3 wall time); a random-policy episode at
+  sub 8 did not finish within the 5-minute sandbox pilot (sub 4 on the runner: 120 s). All v3 evaluator numbers already
+  taken at sub 4 (Cal′ n\* success, G5′ pilot) are re-read at sub 8 with `regrid3` (histories rebuilt exactly; the
+  sandbox re-read reproduces the runner's E′ values bit-for-bit) and the gates are decided on the sub-8 values.
+- **τ_2 = 4.7** (descriptive H3 level; 200 cal3, n\* 4, mean travel 0.726; same rule as τ_12).
