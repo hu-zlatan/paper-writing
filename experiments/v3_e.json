@@ -1,0 +1,13 @@
+{
+ "purpose": "Gate E' (amendment v3.0 C2): grid evaluator sub 4 vs sub 8 on 8 S12 + 8 A12 pilot3 episodes (episodes 0-3 of the first G5' shard of G* and B-fan per cell). Pass: mean |Delta BI| <= 0.02 nats AND no success flip outside the tie band [0.45, 0.55]; else sub = 8 for every v3 number.",
+ "jobs": [
+  {
+   "id": "v3_e_S_k12",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k12_gstar_000.jsonl ../results/v3/g5/S_k12_b_fan_000.jsonl --episodes 0 1 2 3 --sub 8 --out ../results/v3/e/S_k12_sub8"
+  },
+  {
+   "id": "v3_e_A_k12",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/A_k12_gstar_000.jsonl ../results/v3/g5/A_k12_b_fan_000.jsonl --episodes 0 1 2 3 --sub 8 --out ../results/v3/e/A_k12_sub8"
+  }
+ ]
+}
