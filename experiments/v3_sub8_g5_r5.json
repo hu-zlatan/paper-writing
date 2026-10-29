@@ -1,0 +1,813 @@
+{
+ "purpose": "Sub-8 re-read of the G5' pilots (follow-up after cancelling run 84 for RL / test3 priority; already re-read episodes skipped). Context rows for the row-4 paper (heuristics vs G*).",
+ "jobs": [
+  {
+   "id": "v3_sub8_S_k12_random_004",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k12_random_000.jsonl --episodes 4 5 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k12_random_004"
+  },
+  {
+   "id": "v3_sub8_S_k12_random_022",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k12_random_016.jsonl --episodes 22 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k12_random_022"
+  },
+  {
+   "id": "v3_sub8_S_k12_random_037",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k12_random_032.jsonl --episodes 37 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k12_random_037"
+  },
+  {
+   "id": "v3_sub8_S_k12_random_045",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k12_random_040.jsonl --episodes 45 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k12_random_045"
+  },
+  {
+   "id": "v3_sub8_S_k12_random_070",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k12_random_064.jsonl --episodes 70 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k12_random_070"
+  },
+  {
+   "id": "v3_sub8_S_k12_random_116",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k12_random_112.jsonl --episodes 116 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k12_random_116"
+  },
+  {
+   "id": "v3_sub8_S_k12_random_130",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k12_random_128.jsonl --episodes 130 132 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k12_random_130"
+  },
+  {
+   "id": "v3_sub8_S_k12_random_141",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k12_random_136.jsonl --episodes 141 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k12_random_141"
+  },
+  {
+   "id": "v3_sub8_S_k12_random_156",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k12_random_152.jsonl --episodes 156 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k12_random_156"
+  },
+  {
+   "id": "v3_sub8_S_k12_random_158",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k12_random_152.jsonl --episodes 158 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k12_random_158"
+  },
+  {
+   "id": "v3_sub8_S_k12_random_163",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k12_random_160.jsonl --episodes 163 166 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k12_random_163"
+  },
+  {
+   "id": "v3_sub8_S_k12_random_171",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k12_random_168.jsonl --episodes 171 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k12_random_171"
+  },
+  {
+   "id": "v3_sub8_S_k12_random_176",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k12_random_176.jsonl --episodes 176 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k12_random_176"
+  },
+  {
+   "id": "v3_sub8_S_k12_random_179",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k12_random_176.jsonl --episodes 179 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k12_random_179"
+  },
+  {
+   "id": "v3_sub8_S_k12_random_180",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k12_random_176.jsonl --episodes 180 181 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k12_random_180"
+  },
+  {
+   "id": "v3_sub8_S_k12_random_182",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k12_random_176.jsonl --episodes 182 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k12_random_182"
+  },
+  {
+   "id": "v3_sub8_S_k12_random_176_183",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k12_random_176_r183.jsonl --episodes 183 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k12_random_176_183"
+  },
+  {
+   "id": "v3_sub8_S_k12_random_184",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k12_random_184.jsonl --episodes 184 185 186 187 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k12_random_184"
+  },
+  {
+   "id": "v3_sub8_S_k12_random_188",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k12_random_184.jsonl --episodes 188 189 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k12_random_188"
+  },
+  {
+   "id": "v3_sub8_S_k12_random_190",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k12_random_184.jsonl --episodes 190 191 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k12_random_190"
+  },
+  {
+   "id": "v3_sub8_S_k12_random_192",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k12_random_192.jsonl --episodes 192 193 194 195 196 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k12_random_192"
+  },
+  {
+   "id": "v3_sub8_S_k12_random_197",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k12_random_192.jsonl --episodes 197 198 199 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k12_random_197"
+  },
+  {
+   "id": "v3_sub8_S_k12_b_spread_000",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k12_b_spread_000.jsonl --episodes 0 1 2 3 4 5 6 7 8 9 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k12_b_spread_000"
+  },
+  {
+   "id": "v3_sub8_S_k12_b_spread_010",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k12_b_spread_000.jsonl --episodes 10 11 12 13 14 15 16 17 18 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k12_b_spread_010"
+  },
+  {
+   "id": "v3_sub8_S_k12_b_spread_019",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k12_b_spread_000.jsonl --episodes 19 20 21 22 23 24 25 26 27 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k12_b_spread_019"
+  },
+  {
+   "id": "v3_sub8_S_k12_b_spread_028",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k12_b_spread_000.jsonl --episodes 28 29 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k12_b_spread_028"
+  },
+  {
+   "id": "v3_sub8_S_k12_b_spread_030",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k12_b_spread_030.jsonl --episodes 30 31 32 33 34 35 36 37 38 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k12_b_spread_030"
+  },
+  {
+   "id": "v3_sub8_S_k12_b_spread_039",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k12_b_spread_030.jsonl --episodes 39 40 41 42 43 44 45 46 47 48 49 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k12_b_spread_039"
+  },
+  {
+   "id": "v3_sub8_S_k12_b_spread_050",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k12_b_spread_030.jsonl --episodes 50 51 52 53 54 55 56 57 58 59 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k12_b_spread_050"
+  },
+  {
+   "id": "v3_sub8_S_k12_b_spread_060",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k12_b_spread_060.jsonl --episodes 60 61 62 63 64 65 66 67 68 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k12_b_spread_060"
+  },
+  {
+   "id": "v3_sub8_S_k12_b_spread_069",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k12_b_spread_060.jsonl --episodes 69 70 71 72 73 74 75 76 77 78 79 80 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k12_b_spread_069"
+  },
+  {
+   "id": "v3_sub8_S_k12_b_spread_081",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k12_b_spread_060.jsonl --episodes 81 82 83 84 85 86 87 88 89 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k12_b_spread_081"
+  },
+  {
+   "id": "v3_sub8_S_k12_b_spread_090",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k12_b_spread_090.jsonl --episodes 90 91 92 93 94 95 96 97 98 99 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k12_b_spread_090"
+  },
+  {
+   "id": "v3_sub8_S_k12_b_spread_100",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k12_b_spread_090.jsonl --episodes 100 101 102 103 104 105 106 107 108 109 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k12_b_spread_100"
+  },
+  {
+   "id": "v3_sub8_S_k12_b_spread_110",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k12_b_spread_090.jsonl --episodes 110 111 112 113 114 115 116 117 118 119 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k12_b_spread_110"
+  },
+  {
+   "id": "v3_sub8_S_k12_b_spread_120",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k12_b_spread_120.jsonl --episodes 120 121 122 123 124 125 126 127 128 129 130 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k12_b_spread_120"
+  },
+  {
+   "id": "v3_sub8_S_k12_b_spread_131",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k12_b_spread_120.jsonl --episodes 131 132 133 134 135 136 137 138 139 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k12_b_spread_131"
+  },
+  {
+   "id": "v3_sub8_S_k12_b_spread_140",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k12_b_spread_120.jsonl --episodes 140 141 142 143 144 145 146 147 148 149 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k12_b_spread_140"
+  },
+  {
+   "id": "v3_sub8_S_k12_b_spread_150",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k12_b_spread_150.jsonl --episodes 150 151 152 153 154 155 156 157 158 159 160 161 162 163 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k12_b_spread_150"
+  },
+  {
+   "id": "v3_sub8_S_k12_b_spread_164",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k12_b_spread_150.jsonl --episodes 164 165 166 167 168 169 170 171 172 173 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k12_b_spread_164"
+  },
+  {
+   "id": "v3_sub8_S_k12_b_spread_174",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k12_b_spread_150.jsonl --episodes 174 175 176 177 178 179 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k12_b_spread_174"
+  },
+  {
+   "id": "v3_sub8_S_k12_b_spread_180",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k12_b_spread_180.jsonl --episodes 180 181 182 183 184 185 186 187 188 189 190 191 192 193 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k12_b_spread_180"
+  },
+  {
+   "id": "v3_sub8_S_k12_b_spread_194",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k12_b_spread_180.jsonl --episodes 194 195 196 197 198 199 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k12_b_spread_194"
+  },
+  {
+   "id": "v3_sub8_S_k12_b_fan_000",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k12_b_fan_000.jsonl --episodes 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k12_b_fan_000"
+  },
+  {
+   "id": "v3_sub8_S_k12_b_fan_022",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k12_b_fan_000.jsonl --episodes 22 23 24 25 26 27 28 29 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k12_b_fan_022"
+  },
+  {
+   "id": "v3_sub8_S_k12_b_fan_030",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k12_b_fan_030.jsonl --episodes 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k12_b_fan_030"
+  },
+  {
+   "id": "v3_sub8_S_k12_b_fan_051",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k12_b_fan_030.jsonl --episodes 51 52 53 54 55 56 57 58 59 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k12_b_fan_051"
+  },
+  {
+   "id": "v3_sub8_S_k12_b_fan_060",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k12_b_fan_060.jsonl --episodes 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k12_b_fan_060"
+  },
+  {
+   "id": "v3_sub8_S_k12_b_fan_084",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k12_b_fan_060.jsonl --episodes 84 85 86 87 88 89 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k12_b_fan_084"
+  },
+  {
+   "id": "v3_sub8_S_k12_b_fan_090",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k12_b_fan_090.jsonl --episodes 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k12_b_fan_090"
+  },
+  {
+   "id": "v3_sub8_S_k12_b_fan_118",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k12_b_fan_090.jsonl --episodes 118 119 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k12_b_fan_118"
+  },
+  {
+   "id": "v3_sub8_S_k12_b_fan_120",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k12_b_fan_120.jsonl --episodes 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k12_b_fan_120"
+  },
+  {
+   "id": "v3_sub8_S_k12_b_fan_150",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k12_b_fan_150.jsonl --episodes 150 151 152 153 154 155 156 157 158 159 160 161 162 163 164 165 166 167 168 169 170 171 172 173 174 175 176 177 178 179 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k12_b_fan_150"
+  },
+  {
+   "id": "v3_sub8_S_k12_b_fan_180",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k12_b_fan_180.jsonl --episodes 180 181 182 183 184 185 186 187 188 189 190 191 192 193 194 195 196 197 198 199 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k12_b_fan_180"
+  },
+  {
+   "id": "v3_sub8_S_k12_b_cov_000",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k12_b_cov_000.jsonl --episodes 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k12_b_cov_000"
+  },
+  {
+   "id": "v3_sub8_S_k12_b_cov_024",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k12_b_cov_000.jsonl --episodes 24 25 26 27 28 29 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k12_b_cov_024"
+  },
+  {
+   "id": "v3_sub8_S_k12_b_cov_030",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k12_b_cov_030.jsonl --episodes 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k12_b_cov_030"
+  },
+  {
+   "id": "v3_sub8_S_k12_b_cov_060",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k12_b_cov_060.jsonl --episodes 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k12_b_cov_060"
+  },
+  {
+   "id": "v3_sub8_S_k12_b_cov_079",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k12_b_cov_060.jsonl --episodes 79 80 81 82 83 84 85 86 87 88 89 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k12_b_cov_079"
+  },
+  {
+   "id": "v3_sub8_S_k12_b_cov_090",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k12_b_cov_090.jsonl --episodes 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k12_b_cov_090"
+  },
+  {
+   "id": "v3_sub8_S_k12_b_cov_107",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k12_b_cov_090.jsonl --episodes 107 108 109 110 111 112 113 114 115 116 117 118 119 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k12_b_cov_107"
+  },
+  {
+   "id": "v3_sub8_S_k12_b_cov_120",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k12_b_cov_120.jsonl --episodes 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k12_b_cov_120"
+  },
+  {
+   "id": "v3_sub8_S_k12_b_cov_142",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k12_b_cov_120.jsonl --episodes 142 143 144 145 146 147 148 149 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k12_b_cov_142"
+  },
+  {
+   "id": "v3_sub8_S_k12_b_cov_150",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k12_b_cov_150.jsonl --episodes 150 151 152 153 154 155 156 157 158 159 160 161 162 163 164 165 166 167 168 169 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k12_b_cov_150"
+  },
+  {
+   "id": "v3_sub8_S_k12_b_cov_170",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k12_b_cov_150.jsonl --episodes 170 171 172 173 174 175 176 177 178 179 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k12_b_cov_170"
+  },
+  {
+   "id": "v3_sub8_S_k12_b_cov_180",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k12_b_cov_180.jsonl --episodes 180 181 182 183 184 185 186 187 188 189 190 191 192 193 194 195 196 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k12_b_cov_180"
+  },
+  {
+   "id": "v3_sub8_S_k12_b_cov_197",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k12_b_cov_180.jsonl --episodes 197 198 199 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k12_b_cov_197"
+  },
+  {
+   "id": "v3_sub8_A_k12_gstar_066",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/A_k12_gstar_000.jsonl --episodes 66 67 68 69 70 71 72 99 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/A_k12_gstar_066"
+  },
+  {
+   "id": "v3_sub8_A_k12_gstar_297",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/A_k12_gstar_200.jsonl --episodes 297 298 299 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/A_k12_gstar_297"
+  },
+  {
+   "id": "v3_sub8_A_k12_gstar_463",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/A_k12_gstar_400.jsonl --episodes 463 464 465 476 498 499 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/A_k12_gstar_463"
+  },
+  {
+   "id": "v3_sub8_A_k12_random_004",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/A_k12_random_000.jsonl --episodes 4 5 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/A_k12_random_004"
+  },
+  {
+   "id": "v3_sub8_A_k12_random_023",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/A_k12_random_016.jsonl --episodes 23 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/A_k12_random_023"
+  },
+  {
+   "id": "v3_sub8_A_k12_random_045",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/A_k12_random_040.jsonl --episodes 45 46 47 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/A_k12_random_045"
+  },
+  {
+   "id": "v3_sub8_A_k12_random_058",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/A_k12_random_056.jsonl --episodes 58 59 60 61 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/A_k12_random_058"
+  },
+  {
+   "id": "v3_sub8_A_k12_random_070",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/A_k12_random_064.jsonl --episodes 70 71 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/A_k12_random_070"
+  },
+  {
+   "id": "v3_sub8_A_k12_random_074",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/A_k12_random_072.jsonl --episodes 74 75 78 79 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/A_k12_random_074"
+  },
+  {
+   "id": "v3_sub8_A_k12_random_084",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/A_k12_random_080.jsonl --episodes 84 87 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/A_k12_random_084"
+  },
+  {
+   "id": "v3_sub8_A_k12_random_090",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/A_k12_random_088.jsonl --episodes 90 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/A_k12_random_090"
+  },
+  {
+   "id": "v3_sub8_A_k12_random_099",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/A_k12_random_096.jsonl --episodes 99 102 103 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/A_k12_random_099"
+  },
+  {
+   "id": "v3_sub8_A_k12_random_107",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/A_k12_random_104.jsonl --episodes 107 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/A_k12_random_107"
+  },
+  {
+   "id": "v3_sub8_A_k12_random_115",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/A_k12_random_112.jsonl --episodes 115 116 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/A_k12_random_115"
+  },
+  {
+   "id": "v3_sub8_A_k12_random_122",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/A_k12_random_120.jsonl --episodes 122 123 124 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/A_k12_random_122"
+  },
+  {
+   "id": "v3_sub8_A_k12_random_133",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/A_k12_random_128.jsonl --episodes 133 134 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/A_k12_random_133"
+  },
+  {
+   "id": "v3_sub8_A_k12_random_146",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/A_k12_random_144.jsonl --episodes 146 147 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/A_k12_random_146"
+  },
+  {
+   "id": "v3_sub8_A_k12_random_155",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/A_k12_random_152.jsonl --episodes 155 156 157 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/A_k12_random_155"
+  },
+  {
+   "id": "v3_sub8_A_k12_random_162",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/A_k12_random_160.jsonl --episodes 162 163 164 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/A_k12_random_162"
+  },
+  {
+   "id": "v3_sub8_A_k12_random_172",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/A_k12_random_168.jsonl --episodes 172 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/A_k12_random_172"
+  },
+  {
+   "id": "v3_sub8_A_k12_random_178",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/A_k12_random_176.jsonl --episodes 178 179 183 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/A_k12_random_178"
+  },
+  {
+   "id": "v3_sub8_A_k12_random_187",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/A_k12_random_184.jsonl --episodes 187 191 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/A_k12_random_187"
+  },
+  {
+   "id": "v3_sub8_A_k12_random_195",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/A_k12_random_192.jsonl --episodes 195 196 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/A_k12_random_195"
+  },
+  {
+   "id": "v3_sub8_A_k12_b_spread_016",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/A_k12_b_spread_000.jsonl --episodes 16 17 18 19 20 21 22 23 24 25 26 27 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/A_k12_b_spread_016"
+  },
+  {
+   "id": "v3_sub8_A_k12_b_spread_044",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/A_k12_b_spread_030.jsonl --episodes 44 45 46 47 48 49 50 51 52 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/A_k12_b_spread_044"
+  },
+  {
+   "id": "v3_sub8_A_k12_b_spread_069",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/A_k12_b_spread_060.jsonl --episodes 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/A_k12_b_spread_069"
+  },
+  {
+   "id": "v3_sub8_A_k12_b_spread_092",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/A_k12_b_spread_090.jsonl --episodes 92 93 94 95 96 97 103 104 105 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/A_k12_b_spread_092"
+  },
+  {
+   "id": "v3_sub8_A_k12_b_spread_106",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/A_k12_b_spread_090.jsonl --episodes 106 107 108 109 110 111 112 113 114 115 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/A_k12_b_spread_106"
+  },
+  {
+   "id": "v3_sub8_A_k12_b_spread_122",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/A_k12_b_spread_120.jsonl --episodes 122 123 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/A_k12_b_spread_122"
+  },
+  {
+   "id": "v3_sub8_A_k12_b_spread_125",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/A_k12_b_spread_120.jsonl --episodes 125 126 127 128 129 130 131 132 133 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/A_k12_b_spread_125"
+  },
+  {
+   "id": "v3_sub8_A_k12_b_spread_138",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/A_k12_b_spread_120.jsonl --episodes 138 139 140 141 142 146 147 148 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/A_k12_b_spread_138"
+  },
+  {
+   "id": "v3_sub8_A_k12_b_spread_149",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/A_k12_b_spread_120.jsonl --episodes 149 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/A_k12_b_spread_149"
+  },
+  {
+   "id": "v3_sub8_A_k12_b_spread_152",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/A_k12_b_spread_150.jsonl --episodes 152 153 154 155 156 157 158 159 160 161 162 163 164 165 166 167 168 169 172 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/A_k12_b_spread_152"
+  },
+  {
+   "id": "v3_sub8_A_k12_b_spread_173",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/A_k12_b_spread_150.jsonl --episodes 173 174 175 176 177 178 179 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/A_k12_b_spread_173"
+  },
+  {
+   "id": "v3_sub8_A_k12_b_spread_181",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/A_k12_b_spread_180.jsonl --episodes 181 182 183 184 185 186 187 188 189 190 191 192 193 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/A_k12_b_spread_181"
+  },
+  {
+   "id": "v3_sub8_A_k12_b_spread_194",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/A_k12_b_spread_180.jsonl --episodes 194 195 196 197 198 199 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/A_k12_b_spread_194"
+  },
+  {
+   "id": "v3_sub8_A_k12_b_fan_000",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/A_k12_b_fan_000.jsonl --episodes 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/A_k12_b_fan_000"
+  },
+  {
+   "id": "v3_sub8_A_k12_b_fan_030",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/A_k12_b_fan_030.jsonl --episodes 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/A_k12_b_fan_030"
+  },
+  {
+   "id": "v3_sub8_A_k12_b_fan_060",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/A_k12_b_fan_060.jsonl --episodes 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/A_k12_b_fan_060"
+  },
+  {
+   "id": "v3_sub8_A_k12_b_fan_090",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/A_k12_b_fan_090.jsonl --episodes 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/A_k12_b_fan_090"
+  },
+  {
+   "id": "v3_sub8_A_k12_b_fan_120",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/A_k12_b_fan_120.jsonl --episodes 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/A_k12_b_fan_120"
+  },
+  {
+   "id": "v3_sub8_A_k12_b_fan_148",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/A_k12_b_fan_120.jsonl --episodes 148 149 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/A_k12_b_fan_148"
+  },
+  {
+   "id": "v3_sub8_A_k12_b_fan_150",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/A_k12_b_fan_150.jsonl --episodes 150 151 152 153 154 155 156 157 158 159 160 161 162 163 164 165 166 167 168 169 170 171 172 173 174 175 176 177 178 179 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/A_k12_b_fan_150"
+  },
+  {
+   "id": "v3_sub8_A_k12_b_fan_180",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/A_k12_b_fan_180.jsonl --episodes 180 181 182 183 184 185 186 187 188 189 190 191 192 193 194 195 196 197 198 199 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/A_k12_b_fan_180"
+  },
+  {
+   "id": "v3_sub8_A_k12_b_cov_000",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/A_k12_b_cov_000.jsonl --episodes 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/A_k12_b_cov_000"
+  },
+  {
+   "id": "v3_sub8_A_k12_b_cov_026",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/A_k12_b_cov_000.jsonl --episodes 26 27 28 29 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/A_k12_b_cov_026"
+  },
+  {
+   "id": "v3_sub8_A_k12_b_cov_030",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/A_k12_b_cov_030.jsonl --episodes 30 31 32 33 34 35 36 37 38 39 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/A_k12_b_cov_030"
+  },
+  {
+   "id": "v3_sub8_A_k12_b_cov_040",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/A_k12_b_cov_030.jsonl --episodes 40 41 42 43 44 45 46 47 48 49 50 51 52 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/A_k12_b_cov_040"
+  },
+  {
+   "id": "v3_sub8_A_k12_b_cov_053",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/A_k12_b_cov_030.jsonl --episodes 53 54 55 56 57 58 59 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/A_k12_b_cov_053"
+  },
+  {
+   "id": "v3_sub8_A_k12_b_cov_060",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/A_k12_b_cov_060.jsonl --episodes 60 61 62 63 64 65 66 67 68 69 70 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/A_k12_b_cov_060"
+  },
+  {
+   "id": "v3_sub8_A_k12_b_cov_071",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/A_k12_b_cov_060.jsonl --episodes 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/A_k12_b_cov_071"
+  },
+  {
+   "id": "v3_sub8_A_k12_b_cov_090",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/A_k12_b_cov_090.jsonl --episodes 90 91 92 93 94 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/A_k12_b_cov_090"
+  },
+  {
+   "id": "v3_sub8_A_k12_b_cov_095",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/A_k12_b_cov_090.jsonl --episodes 95 96 97 98 99 100 101 102 103 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/A_k12_b_cov_095"
+  },
+  {
+   "id": "v3_sub8_A_k12_b_cov_104",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/A_k12_b_cov_090.jsonl --episodes 104 105 106 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/A_k12_b_cov_104"
+  },
+  {
+   "id": "v3_sub8_A_k12_b_cov_107",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/A_k12_b_cov_090.jsonl --episodes 107 108 109 110 111 112 113 114 115 116 117 118 119 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/A_k12_b_cov_107"
+  },
+  {
+   "id": "v3_sub8_A_k12_b_cov_120",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/A_k12_b_cov_120.jsonl --episodes 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/A_k12_b_cov_120"
+  },
+  {
+   "id": "v3_sub8_A_k12_b_cov_136",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/A_k12_b_cov_120.jsonl --episodes 136 137 138 139 140 141 142 143 144 145 146 147 148 149 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/A_k12_b_cov_136"
+  },
+  {
+   "id": "v3_sub8_A_k12_b_cov_150",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/A_k12_b_cov_150.jsonl --episodes 150 151 152 153 154 155 156 157 158 159 160 161 162 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/A_k12_b_cov_150"
+  },
+  {
+   "id": "v3_sub8_A_k12_b_cov_163",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/A_k12_b_cov_150.jsonl --episodes 163 164 165 166 167 168 169 170 171 172 173 174 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/A_k12_b_cov_163"
+  },
+  {
+   "id": "v3_sub8_A_k12_b_cov_175",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/A_k12_b_cov_150.jsonl --episodes 175 176 177 178 179 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/A_k12_b_cov_175"
+  },
+  {
+   "id": "v3_sub8_A_k12_b_cov_180",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/A_k12_b_cov_180.jsonl --episodes 180 181 182 183 184 185 186 187 188 189 190 191 192 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/A_k12_b_cov_180"
+  },
+  {
+   "id": "v3_sub8_A_k12_b_cov_193",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/A_k12_b_cov_180.jsonl --episodes 193 194 195 196 197 198 199 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/A_k12_b_cov_193"
+  },
+  {
+   "id": "v3_sub8_S_k0_random_018",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k0_random_016.jsonl --episodes 18 20 21 23 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k0_random_018"
+  },
+  {
+   "id": "v3_sub8_S_k0_random_024",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k0_random_024.jsonl --episodes 24 25 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k0_random_024"
+  },
+  {
+   "id": "v3_sub8_S_k0_random_037",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k0_random_032.jsonl --episodes 37 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k0_random_037"
+  },
+  {
+   "id": "v3_sub8_S_k0_random_041",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k0_random_040.jsonl --episodes 41 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k0_random_041"
+  },
+  {
+   "id": "v3_sub8_S_k0_random_042",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k0_random_040.jsonl --episodes 42 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k0_random_042"
+  },
+  {
+   "id": "v3_sub8_S_k0_random_051",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k0_random_048.jsonl --episodes 51 52 53 54 55 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k0_random_051"
+  },
+  {
+   "id": "v3_sub8_S_k0_random_059",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k0_random_056.jsonl --episodes 59 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k0_random_059"
+  },
+  {
+   "id": "v3_sub8_S_k0_random_062",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k0_random_056.jsonl --episodes 62 63 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k0_random_062"
+  },
+  {
+   "id": "v3_sub8_S_k0_random_069",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k0_random_064.jsonl --episodes 69 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k0_random_069"
+  },
+  {
+   "id": "v3_sub8_S_k0_random_074",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k0_random_072.jsonl --episodes 74 75 76 77 78 79 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k0_random_074"
+  },
+  {
+   "id": "v3_sub8_S_k0_random_083",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k0_random_080.jsonl --episodes 83 84 85 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k0_random_083"
+  },
+  {
+   "id": "v3_sub8_S_k0_random_087",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k0_random_080.jsonl --episodes 87 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k0_random_087"
+  },
+  {
+   "id": "v3_sub8_S_k0_random_088",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k0_random_088.jsonl --episodes 88 89 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k0_random_088"
+  },
+  {
+   "id": "v3_sub8_S_k0_random_092",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k0_random_088.jsonl --episodes 92 93 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k0_random_092"
+  },
+  {
+   "id": "v3_sub8_S_k0_random_094",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k0_random_088.jsonl --episodes 94 95 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k0_random_094"
+  },
+  {
+   "id": "v3_sub8_S_k0_random_096",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k0_random_096.jsonl --episodes 96 97 98 99 100 101 102 103 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k0_random_096"
+  },
+  {
+   "id": "v3_sub8_S_k0_random_104",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k0_random_104.jsonl --episodes 104 105 106 107 108 109 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k0_random_104"
+  },
+  {
+   "id": "v3_sub8_S_k0_random_110",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k0_random_104.jsonl --episodes 110 111 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k0_random_110"
+  },
+  {
+   "id": "v3_sub8_S_k0_random_112",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k0_random_112.jsonl --episodes 112 113 114 115 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k0_random_112"
+  },
+  {
+   "id": "v3_sub8_S_k0_random_116",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k0_random_112.jsonl --episodes 116 117 118 119 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k0_random_116"
+  },
+  {
+   "id": "v3_sub8_S_k0_random_120",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k0_random_120.jsonl --episodes 120 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k0_random_120"
+  },
+  {
+   "id": "v3_sub8_S_k0_random_121",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k0_random_120.jsonl --episodes 121 122 123 124 125 126 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k0_random_121"
+  },
+  {
+   "id": "v3_sub8_S_k0_random_127",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k0_random_120.jsonl --episodes 127 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k0_random_127"
+  },
+  {
+   "id": "v3_sub8_S_k0_random_128",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k0_random_128.jsonl --episodes 128 129 130 131 132 133 134 135 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k0_random_128"
+  },
+  {
+   "id": "v3_sub8_S_k0_random_136",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k0_random_136.jsonl --episodes 136 137 138 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k0_random_136"
+  },
+  {
+   "id": "v3_sub8_S_k0_random_139",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k0_random_136.jsonl --episodes 139 140 141 142 143 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k0_random_139"
+  },
+  {
+   "id": "v3_sub8_S_k0_random_144",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k0_random_144.jsonl --episodes 144 145 146 147 148 149 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k0_random_144"
+  },
+  {
+   "id": "v3_sub8_S_k0_random_150",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k0_random_144.jsonl --episodes 150 151 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k0_random_150"
+  },
+  {
+   "id": "v3_sub8_S_k0_random_152",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k0_random_152.jsonl --episodes 152 153 154 155 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k0_random_152"
+  },
+  {
+   "id": "v3_sub8_S_k0_random_156",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k0_random_152.jsonl --episodes 156 157 158 159 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k0_random_156"
+  },
+  {
+   "id": "v3_sub8_S_k0_random_160",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k0_random_160.jsonl --episodes 160 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k0_random_160"
+  },
+  {
+   "id": "v3_sub8_S_k0_random_161",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k0_random_160.jsonl --episodes 161 162 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k0_random_161"
+  },
+  {
+   "id": "v3_sub8_S_k0_random_163",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k0_random_160.jsonl --episodes 163 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k0_random_163"
+  },
+  {
+   "id": "v3_sub8_S_k0_random_164",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k0_random_160.jsonl --episodes 164 165 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k0_random_164"
+  },
+  {
+   "id": "v3_sub8_S_k0_random_160_166",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k0_random_160_r166.jsonl --episodes 166 167 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k0_random_160_166"
+  },
+  {
+   "id": "v3_sub8_S_k0_random_168",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k0_random_168.jsonl --episodes 168 169 170 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k0_random_168"
+  },
+  {
+   "id": "v3_sub8_S_k0_random_171",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k0_random_168.jsonl --episodes 171 172 173 174 175 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k0_random_171"
+  },
+  {
+   "id": "v3_sub8_S_k0_random_176",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k0_random_176.jsonl --episodes 176 177 178 179 180 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k0_random_176"
+  },
+  {
+   "id": "v3_sub8_S_k0_random_181",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k0_random_176.jsonl --episodes 181 182 183 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k0_random_181"
+  },
+  {
+   "id": "v3_sub8_S_k0_random_184",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k0_random_184.jsonl --episodes 184 185 186 187 188 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k0_random_184"
+  },
+  {
+   "id": "v3_sub8_S_k0_random_189",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k0_random_184.jsonl --episodes 189 190 191 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k0_random_189"
+  },
+  {
+   "id": "v3_sub8_S_k0_random_192",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k0_random_192.jsonl --episodes 192 193 194 195 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k0_random_192"
+  },
+  {
+   "id": "v3_sub8_S_k0_random_196",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k0_random_192.jsonl --episodes 196 197 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k0_random_196"
+  },
+  {
+   "id": "v3_sub8_S_k0_random_198",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k0_random_192.jsonl --episodes 198 199 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k0_random_198"
+  },
+  {
+   "id": "v3_sub8_S_k0_b_spread_000",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k0_b_spread_000.jsonl --episodes 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k0_b_spread_000"
+  },
+  {
+   "id": "v3_sub8_S_k0_b_spread_030",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k0_b_spread_030.jsonl --episodes 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k0_b_spread_030"
+  },
+  {
+   "id": "v3_sub8_S_k0_b_spread_060",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k0_b_spread_060.jsonl --episodes 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k0_b_spread_060"
+  },
+  {
+   "id": "v3_sub8_S_k0_b_spread_090",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k0_b_spread_090.jsonl --episodes 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k0_b_spread_090"
+  },
+  {
+   "id": "v3_sub8_S_k0_b_spread_120",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k0_b_spread_120.jsonl --episodes 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k0_b_spread_120"
+  },
+  {
+   "id": "v3_sub8_S_k0_b_spread_150",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k0_b_spread_150.jsonl --episodes 150 151 152 153 154 155 156 157 158 159 160 161 162 163 164 165 166 167 168 169 170 171 172 173 174 175 176 177 178 179 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k0_b_spread_150"
+  },
+  {
+   "id": "v3_sub8_S_k0_b_spread_180",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k0_b_spread_180.jsonl --episodes 180 181 182 183 184 185 186 187 188 189 190 191 192 193 194 195 196 197 198 199 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k0_b_spread_180"
+  },
+  {
+   "id": "v3_sub8_S_k0_b_fan_000",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k0_b_fan_000.jsonl --episodes 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k0_b_fan_000"
+  },
+  {
+   "id": "v3_sub8_S_k0_b_fan_026",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k0_b_fan_000.jsonl --episodes 26 27 28 29 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k0_b_fan_026"
+  },
+  {
+   "id": "v3_sub8_S_k0_b_fan_030",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k0_b_fan_030.jsonl --episodes 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k0_b_fan_030"
+  },
+  {
+   "id": "v3_sub8_S_k0_b_fan_058",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k0_b_fan_030.jsonl --episodes 58 59 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k0_b_fan_058"
+  },
+  {
+   "id": "v3_sub8_S_k0_b_fan_060",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k0_b_fan_060.jsonl --episodes 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k0_b_fan_060"
+  },
+  {
+   "id": "v3_sub8_S_k0_b_fan_082",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k0_b_fan_060.jsonl --episodes 82 83 84 85 86 87 88 89 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k0_b_fan_082"
+  },
+  {
+   "id": "v3_sub8_S_k0_b_fan_090",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k0_b_fan_090.jsonl --episodes 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k0_b_fan_090"
+  },
+  {
+   "id": "v3_sub8_S_k0_b_fan_120",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k0_b_fan_120.jsonl --episodes 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k0_b_fan_120"
+  },
+  {
+   "id": "v3_sub8_S_k0_b_fan_150",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k0_b_fan_150.jsonl --episodes 150 151 152 153 154 155 156 157 158 159 160 161 162 163 164 165 166 167 168 169 170 171 172 173 174 175 176 177 178 179 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k0_b_fan_150"
+  },
+  {
+   "id": "v3_sub8_S_k0_b_fan_180",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k0_b_fan_180.jsonl --episodes 180 181 182 183 184 185 186 187 188 189 190 191 192 193 194 195 196 197 198 199 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k0_b_fan_180"
+  },
+  {
+   "id": "v3_sub8_S_k0_b_cov_000",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k0_b_cov_000.jsonl --episodes 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k0_b_cov_000"
+  },
+  {
+   "id": "v3_sub8_S_k0_b_cov_025",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k0_b_cov_000.jsonl --episodes 25 26 27 28 29 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k0_b_cov_025"
+  },
+  {
+   "id": "v3_sub8_S_k0_b_cov_030",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k0_b_cov_030.jsonl --episodes 30 31 32 33 34 35 36 37 38 39 40 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k0_b_cov_030"
+  },
+  {
+   "id": "v3_sub8_S_k0_b_cov_041",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k0_b_cov_030.jsonl --episodes 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k0_b_cov_041"
+  },
+  {
+   "id": "v3_sub8_S_k0_b_cov_059",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k0_b_cov_030.jsonl --episodes 59 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k0_b_cov_059"
+  },
+  {
+   "id": "v3_sub8_S_k0_b_cov_060",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k0_b_cov_060.jsonl --episodes 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k0_b_cov_060"
+  },
+  {
+   "id": "v3_sub8_S_k0_b_cov_088",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k0_b_cov_060.jsonl --episodes 88 89 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k0_b_cov_088"
+  },
+  {
+   "id": "v3_sub8_S_k0_b_cov_090",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k0_b_cov_090.jsonl --episodes 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k0_b_cov_090"
+  },
+  {
+   "id": "v3_sub8_S_k0_b_cov_120",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k0_b_cov_120.jsonl --episodes 120 121 122 123 124 125 126 127 128 129 130 131 132 133 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k0_b_cov_120"
+  },
+  {
+   "id": "v3_sub8_S_k0_b_cov_134",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k0_b_cov_120.jsonl --episodes 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k0_b_cov_134"
+  },
+  {
+   "id": "v3_sub8_S_k0_b_cov_150",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k0_b_cov_150.jsonl --episodes 150 151 152 153 154 155 156 157 158 159 160 161 162 163 164 165 166 167 168 169 170 171 172 173 174 175 176 177 178 179 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k0_b_cov_150"
+  },
+  {
+   "id": "v3_sub8_S_k0_b_cov_180",
+   "cmd": "python main.py regrid3 --src ../results/v3/g5/S_k0_b_cov_180.jsonl --episodes 180 181 182 183 184 185 186 187 188 189 190 191 192 193 194 195 196 197 198 199 --sub 8 --budget-minutes 25 --out ../results/v3/g5_sub8/S_k0_b_cov_180"
+  }
+ ]
+}
