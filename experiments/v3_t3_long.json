@@ -1,0 +1,461 @@
+{
+ "purpose": "Stage 18 v3 exploratory long-training student row: sub-8 success/BI re-read of test3 0-299 (amendment v3.0 status note, readings written first).",
+ "jobs": [
+  {
+   "id": "v3_t3_long_s501_000",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s501_000.jsonl --episodes 0 1 2 3 4 5 6 7 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s501_000"
+  },
+  {
+   "id": "v3_t3_long_s501_008",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s501_000.jsonl --episodes 8 9 10 11 12 13 14 15 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s501_008"
+  },
+  {
+   "id": "v3_t3_long_s501_016",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s501_000.jsonl --episodes 16 17 18 19 20 21 22 23 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s501_016"
+  },
+  {
+   "id": "v3_t3_long_s501_024",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s501_000.jsonl --episodes 24 25 26 27 28 29 30 31 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s501_024"
+  },
+  {
+   "id": "v3_t3_long_s501_032",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s501_000.jsonl --episodes 32 33 34 35 36 37 38 39 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s501_032"
+  },
+  {
+   "id": "v3_t3_long_s501_040",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s501_000.jsonl --episodes 40 41 42 43 44 45 46 47 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s501_040"
+  },
+  {
+   "id": "v3_t3_long_s501_048",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s501_000.jsonl --episodes 48 49 50 51 52 53 54 55 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s501_048"
+  },
+  {
+   "id": "v3_t3_long_s501_056",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s501_000.jsonl --episodes 56 57 58 59 60 61 62 63 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s501_056"
+  },
+  {
+   "id": "v3_t3_long_s501_064",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s501_000.jsonl --episodes 64 65 66 67 68 69 70 71 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s501_064"
+  },
+  {
+   "id": "v3_t3_long_s501_072",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s501_000.jsonl --episodes 72 73 74 75 76 77 78 79 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s501_072"
+  },
+  {
+   "id": "v3_t3_long_s501_080",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s501_000.jsonl --episodes 80 81 82 83 84 85 86 87 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s501_080"
+  },
+  {
+   "id": "v3_t3_long_s501_088",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s501_000.jsonl --episodes 88 89 90 91 92 93 94 95 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s501_088"
+  },
+  {
+   "id": "v3_t3_long_s501_096",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s501_000.jsonl --episodes 96 97 98 99 100 101 102 103 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s501_096"
+  },
+  {
+   "id": "v3_t3_long_s501_104",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s501_000.jsonl --episodes 104 105 106 107 108 109 110 111 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s501_104"
+  },
+  {
+   "id": "v3_t3_long_s501_112",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s501_000.jsonl --episodes 112 113 114 115 116 117 118 119 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s501_112"
+  },
+  {
+   "id": "v3_t3_long_s501_120",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s501_000.jsonl --episodes 120 121 122 123 124 125 126 127 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s501_120"
+  },
+  {
+   "id": "v3_t3_long_s501_128",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s501_000.jsonl --episodes 128 129 130 131 132 133 134 135 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s501_128"
+  },
+  {
+   "id": "v3_t3_long_s501_136",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s501_000.jsonl --episodes 136 137 138 139 140 141 142 143 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s501_136"
+  },
+  {
+   "id": "v3_t3_long_s501_144",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s501_000.jsonl --episodes 144 145 146 147 148 149 150 151 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s501_144"
+  },
+  {
+   "id": "v3_t3_long_s501_152",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s501_000.jsonl --episodes 152 153 154 155 156 157 158 159 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s501_152"
+  },
+  {
+   "id": "v3_t3_long_s501_160",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s501_000.jsonl --episodes 160 161 162 163 164 165 166 167 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s501_160"
+  },
+  {
+   "id": "v3_t3_long_s501_168",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s501_000.jsonl --episodes 168 169 170 171 172 173 174 175 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s501_168"
+  },
+  {
+   "id": "v3_t3_long_s501_176",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s501_000.jsonl --episodes 176 177 178 179 180 181 182 183 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s501_176"
+  },
+  {
+   "id": "v3_t3_long_s501_184",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s501_000.jsonl --episodes 184 185 186 187 188 189 190 191 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s501_184"
+  },
+  {
+   "id": "v3_t3_long_s501_192",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s501_000.jsonl --episodes 192 193 194 195 196 197 198 199 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s501_192"
+  },
+  {
+   "id": "v3_t3_long_s501_200",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s501_000.jsonl --episodes 200 201 202 203 204 205 206 207 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s501_200"
+  },
+  {
+   "id": "v3_t3_long_s501_208",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s501_000.jsonl --episodes 208 209 210 211 212 213 214 215 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s501_208"
+  },
+  {
+   "id": "v3_t3_long_s501_216",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s501_000.jsonl --episodes 216 217 218 219 220 221 222 223 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s501_216"
+  },
+  {
+   "id": "v3_t3_long_s501_224",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s501_000.jsonl --episodes 224 225 226 227 228 229 230 231 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s501_224"
+  },
+  {
+   "id": "v3_t3_long_s501_232",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s501_000.jsonl --episodes 232 233 234 235 236 237 238 239 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s501_232"
+  },
+  {
+   "id": "v3_t3_long_s501_240",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s501_000.jsonl --episodes 240 241 242 243 244 245 246 247 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s501_240"
+  },
+  {
+   "id": "v3_t3_long_s501_248",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s501_000.jsonl --episodes 248 249 250 251 252 253 254 255 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s501_248"
+  },
+  {
+   "id": "v3_t3_long_s501_256",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s501_000.jsonl --episodes 256 257 258 259 260 261 262 263 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s501_256"
+  },
+  {
+   "id": "v3_t3_long_s501_264",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s501_000.jsonl --episodes 264 265 266 267 268 269 270 271 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s501_264"
+  },
+  {
+   "id": "v3_t3_long_s501_272",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s501_000.jsonl --episodes 272 273 274 275 276 277 278 279 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s501_272"
+  },
+  {
+   "id": "v3_t3_long_s501_280",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s501_000.jsonl --episodes 280 281 282 283 284 285 286 287 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s501_280"
+  },
+  {
+   "id": "v3_t3_long_s501_288",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s501_000.jsonl --episodes 288 289 290 291 292 293 294 295 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s501_288"
+  },
+  {
+   "id": "v3_t3_long_s501_296",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s501_000.jsonl --episodes 296 297 298 299 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s501_296"
+  },
+  {
+   "id": "v3_t3_long_s502_000",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s502_000.jsonl --episodes 0 1 2 3 4 5 6 7 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s502_000"
+  },
+  {
+   "id": "v3_t3_long_s502_008",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s502_000.jsonl --episodes 8 9 10 11 12 13 14 15 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s502_008"
+  },
+  {
+   "id": "v3_t3_long_s502_016",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s502_000.jsonl --episodes 16 17 18 19 20 21 22 23 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s502_016"
+  },
+  {
+   "id": "v3_t3_long_s502_024",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s502_000.jsonl --episodes 24 25 26 27 28 29 30 31 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s502_024"
+  },
+  {
+   "id": "v3_t3_long_s502_032",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s502_000.jsonl --episodes 32 33 34 35 36 37 38 39 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s502_032"
+  },
+  {
+   "id": "v3_t3_long_s502_040",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s502_000.jsonl --episodes 40 41 42 43 44 45 46 47 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s502_040"
+  },
+  {
+   "id": "v3_t3_long_s502_048",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s502_000.jsonl --episodes 48 49 50 51 52 53 54 55 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s502_048"
+  },
+  {
+   "id": "v3_t3_long_s502_056",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s502_000.jsonl --episodes 56 57 58 59 60 61 62 63 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s502_056"
+  },
+  {
+   "id": "v3_t3_long_s502_064",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s502_000.jsonl --episodes 64 65 66 67 68 69 70 71 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s502_064"
+  },
+  {
+   "id": "v3_t3_long_s502_072",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s502_000.jsonl --episodes 72 73 74 75 76 77 78 79 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s502_072"
+  },
+  {
+   "id": "v3_t3_long_s502_080",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s502_000.jsonl --episodes 80 81 82 83 84 85 86 87 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s502_080"
+  },
+  {
+   "id": "v3_t3_long_s502_088",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s502_000.jsonl --episodes 88 89 90 91 92 93 94 95 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s502_088"
+  },
+  {
+   "id": "v3_t3_long_s502_096",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s502_000.jsonl --episodes 96 97 98 99 100 101 102 103 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s502_096"
+  },
+  {
+   "id": "v3_t3_long_s502_104",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s502_000.jsonl --episodes 104 105 106 107 108 109 110 111 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s502_104"
+  },
+  {
+   "id": "v3_t3_long_s502_112",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s502_000.jsonl --episodes 112 113 114 115 116 117 118 119 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s502_112"
+  },
+  {
+   "id": "v3_t3_long_s502_120",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s502_000.jsonl --episodes 120 121 122 123 124 125 126 127 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s502_120"
+  },
+  {
+   "id": "v3_t3_long_s502_128",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s502_000.jsonl --episodes 128 129 130 131 132 133 134 135 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s502_128"
+  },
+  {
+   "id": "v3_t3_long_s502_136",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s502_000.jsonl --episodes 136 137 138 139 140 141 142 143 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s502_136"
+  },
+  {
+   "id": "v3_t3_long_s502_144",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s502_000.jsonl --episodes 144 145 146 147 148 149 150 151 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s502_144"
+  },
+  {
+   "id": "v3_t3_long_s502_152",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s502_000.jsonl --episodes 152 153 154 155 156 157 158 159 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s502_152"
+  },
+  {
+   "id": "v3_t3_long_s502_160",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s502_000.jsonl --episodes 160 161 162 163 164 165 166 167 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s502_160"
+  },
+  {
+   "id": "v3_t3_long_s502_168",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s502_000.jsonl --episodes 168 169 170 171 172 173 174 175 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s502_168"
+  },
+  {
+   "id": "v3_t3_long_s502_176",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s502_000.jsonl --episodes 176 177 178 179 180 181 182 183 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s502_176"
+  },
+  {
+   "id": "v3_t3_long_s502_184",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s502_000.jsonl --episodes 184 185 186 187 188 189 190 191 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s502_184"
+  },
+  {
+   "id": "v3_t3_long_s502_192",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s502_000.jsonl --episodes 192 193 194 195 196 197 198 199 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s502_192"
+  },
+  {
+   "id": "v3_t3_long_s502_200",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s502_000.jsonl --episodes 200 201 202 203 204 205 206 207 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s502_200"
+  },
+  {
+   "id": "v3_t3_long_s502_208",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s502_000.jsonl --episodes 208 209 210 211 212 213 214 215 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s502_208"
+  },
+  {
+   "id": "v3_t3_long_s502_216",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s502_000.jsonl --episodes 216 217 218 219 220 221 222 223 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s502_216"
+  },
+  {
+   "id": "v3_t3_long_s502_224",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s502_000.jsonl --episodes 224 225 226 227 228 229 230 231 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s502_224"
+  },
+  {
+   "id": "v3_t3_long_s502_232",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s502_000.jsonl --episodes 232 233 234 235 236 237 238 239 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s502_232"
+  },
+  {
+   "id": "v3_t3_long_s502_240",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s502_000.jsonl --episodes 240 241 242 243 244 245 246 247 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s502_240"
+  },
+  {
+   "id": "v3_t3_long_s502_248",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s502_000.jsonl --episodes 248 249 250 251 252 253 254 255 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s502_248"
+  },
+  {
+   "id": "v3_t3_long_s502_256",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s502_000.jsonl --episodes 256 257 258 259 260 261 262 263 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s502_256"
+  },
+  {
+   "id": "v3_t3_long_s502_264",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s502_000.jsonl --episodes 264 265 266 267 268 269 270 271 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s502_264"
+  },
+  {
+   "id": "v3_t3_long_s502_272",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s502_000.jsonl --episodes 272 273 274 275 276 277 278 279 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s502_272"
+  },
+  {
+   "id": "v3_t3_long_s502_280",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s502_000.jsonl --episodes 280 281 282 283 284 285 286 287 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s502_280"
+  },
+  {
+   "id": "v3_t3_long_s502_288",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s502_000.jsonl --episodes 288 289 290 291 292 293 294 295 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s502_288"
+  },
+  {
+   "id": "v3_t3_long_s502_296",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s502_000.jsonl --episodes 296 297 298 299 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s502_296"
+  },
+  {
+   "id": "v3_t3_long_s503_000",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s503_000.jsonl --episodes 0 1 2 3 4 5 6 7 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s503_000"
+  },
+  {
+   "id": "v3_t3_long_s503_008",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s503_000.jsonl --episodes 8 9 10 11 12 13 14 15 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s503_008"
+  },
+  {
+   "id": "v3_t3_long_s503_016",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s503_000.jsonl --episodes 16 17 18 19 20 21 22 23 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s503_016"
+  },
+  {
+   "id": "v3_t3_long_s503_024",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s503_000.jsonl --episodes 24 25 26 27 28 29 30 31 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s503_024"
+  },
+  {
+   "id": "v3_t3_long_s503_032",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s503_000.jsonl --episodes 32 33 34 35 36 37 38 39 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s503_032"
+  },
+  {
+   "id": "v3_t3_long_s503_040",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s503_000.jsonl --episodes 40 41 42 43 44 45 46 47 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s503_040"
+  },
+  {
+   "id": "v3_t3_long_s503_048",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s503_000.jsonl --episodes 48 49 50 51 52 53 54 55 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s503_048"
+  },
+  {
+   "id": "v3_t3_long_s503_056",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s503_000.jsonl --episodes 56 57 58 59 60 61 62 63 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s503_056"
+  },
+  {
+   "id": "v3_t3_long_s503_064",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s503_000.jsonl --episodes 64 65 66 67 68 69 70 71 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s503_064"
+  },
+  {
+   "id": "v3_t3_long_s503_072",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s503_000.jsonl --episodes 72 73 74 75 76 77 78 79 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s503_072"
+  },
+  {
+   "id": "v3_t3_long_s503_080",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s503_000.jsonl --episodes 80 81 82 83 84 85 86 87 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s503_080"
+  },
+  {
+   "id": "v3_t3_long_s503_088",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s503_000.jsonl --episodes 88 89 90 91 92 93 94 95 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s503_088"
+  },
+  {
+   "id": "v3_t3_long_s503_096",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s503_000.jsonl --episodes 96 97 98 99 100 101 102 103 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s503_096"
+  },
+  {
+   "id": "v3_t3_long_s503_104",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s503_000.jsonl --episodes 104 105 106 107 108 109 110 111 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s503_104"
+  },
+  {
+   "id": "v3_t3_long_s503_112",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s503_000.jsonl --episodes 112 113 114 115 116 117 118 119 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s503_112"
+  },
+  {
+   "id": "v3_t3_long_s503_120",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s503_000.jsonl --episodes 120 121 122 123 124 125 126 127 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s503_120"
+  },
+  {
+   "id": "v3_t3_long_s503_128",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s503_000.jsonl --episodes 128 129 130 131 132 133 134 135 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s503_128"
+  },
+  {
+   "id": "v3_t3_long_s503_136",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s503_000.jsonl --episodes 136 137 138 139 140 141 142 143 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s503_136"
+  },
+  {
+   "id": "v3_t3_long_s503_144",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s503_000.jsonl --episodes 144 145 146 147 148 149 150 151 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s503_144"
+  },
+  {
+   "id": "v3_t3_long_s503_152",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s503_000.jsonl --episodes 152 153 154 155 156 157 158 159 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s503_152"
+  },
+  {
+   "id": "v3_t3_long_s503_160",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s503_000.jsonl --episodes 160 161 162 163 164 165 166 167 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s503_160"
+  },
+  {
+   "id": "v3_t3_long_s503_168",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s503_000.jsonl --episodes 168 169 170 171 172 173 174 175 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s503_168"
+  },
+  {
+   "id": "v3_t3_long_s503_176",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s503_000.jsonl --episodes 176 177 178 179 180 181 182 183 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s503_176"
+  },
+  {
+   "id": "v3_t3_long_s503_184",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s503_000.jsonl --episodes 184 185 186 187 188 189 190 191 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s503_184"
+  },
+  {
+   "id": "v3_t3_long_s503_192",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s503_000.jsonl --episodes 192 193 194 195 196 197 198 199 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s503_192"
+  },
+  {
+   "id": "v3_t3_long_s503_200",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s503_000.jsonl --episodes 200 201 202 203 204 205 206 207 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s503_200"
+  },
+  {
+   "id": "v3_t3_long_s503_208",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s503_000.jsonl --episodes 208 209 210 211 212 213 214 215 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s503_208"
+  },
+  {
+   "id": "v3_t3_long_s503_216",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s503_000.jsonl --episodes 216 217 218 219 220 221 222 223 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s503_216"
+  },
+  {
+   "id": "v3_t3_long_s503_224",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s503_000.jsonl --episodes 224 225 226 227 228 229 230 231 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s503_224"
+  },
+  {
+   "id": "v3_t3_long_s503_232",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s503_000.jsonl --episodes 232 233 234 235 236 237 238 239 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s503_232"
+  },
+  {
+   "id": "v3_t3_long_s503_240",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s503_000.jsonl --episodes 240 241 242 243 244 245 246 247 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s503_240"
+  },
+  {
+   "id": "v3_t3_long_s503_248",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s503_000.jsonl --episodes 248 249 250 251 252 253 254 255 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s503_248"
+  },
+  {
+   "id": "v3_t3_long_s503_256",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s503_000.jsonl --episodes 256 257 258 259 260 261 262 263 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s503_256"
+  },
+  {
+   "id": "v3_t3_long_s503_264",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s503_000.jsonl --episodes 264 265 266 267 268 269 270 271 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s503_264"
+  },
+  {
+   "id": "v3_t3_long_s503_272",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s503_000.jsonl --episodes 272 273 274 275 276 277 278 279 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s503_272"
+  },
+  {
+   "id": "v3_t3_long_s503_280",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s503_000.jsonl --episodes 280 281 282 283 284 285 286 287 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s503_280"
+  },
+  {
+   "id": "v3_t3_long_s503_288",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s503_000.jsonl --episodes 288 289 290 291 292 293 294 295 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s503_288"
+  },
+  {
+   "id": "v3_t3_long_s503_296",
+   "cmd": "python main.py regrid3 --src ../results/v3/test3/S_k12_student_long_s503_000.jsonl --episodes 296 297 298 299 --sub 8 --budget-minutes 25 --out ../results/v3/test3_sub8/S_k12_student_long_s503_296"
+  }
+ ]
+}
