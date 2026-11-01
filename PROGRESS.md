@@ -943,3 +943,17 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
   val3/test3 pipeline check. Pass-2 rewrites bind the wording. If stage 20 fails again → owner decides (no loop left).
 - **Where to resume (run 10):** stage 16 PAPER_OUTLINE [v4] (base: `paper/mypaper/v3/draft_v3_final.md` + S2/E5 rows;
   RSS 2027 Stage 1 extended-abstract target), plus the report-only tasks above.
+
+---
+
+## Stage 16. PAPER_OUTLINE     [v4]
+
+- **Finished:** 2026-11-01 run 9. Template verbatim (fresh opus subagent; prompts `paper/mypaper/prompts/stage16_*`),
+  {feedback} = v3 stage-18 summary + v3 stage-20 gate JSON. Output `paper/mypaper/sections/00_outline.md` (v3 outline
+  snapshotted in `paper/mypaper/v3/00_outline_v3.md`). RSS Stage 1 format, body ≈ 3,420 words, contributions C1–C5,
+  results rows R1–R24 mapped to JSON keys, Figure 1 "same planner, two regimes"; no missing citations.
+- **Where to resume (run 10): stage 17 PAPER_DRAFT [v4]** from the v3 final draft + outline; before it: (1) random
+  anchor follow-up (`python code/tools_regrid_followup.py experiments/v4_e4_rg_random.json experiments/v4_e4_rg_random_r1.json "…"`,
+  dispatch, then re-run `code/analysis_s2_v4.py` and `code/tools_results_v4.py`); (2) check G2′ κ = 2 τ in
+  `docs/07c_amendment_v3_0.md`; (3) put the "do not cite yet" pass-2 checks into code/JSON or leave them out.
+- **Run 9 end (≈ 12:25 UTC).**
