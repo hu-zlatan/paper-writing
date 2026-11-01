@@ -957,3 +957,15 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
   dispatch, then re-run `code/analysis_s2_v4.py` and `code/tools_results_v4.py`); (2) check G2′ κ = 2 τ in
   `docs/07c_amendment_v3_0.md`; (3) put the "do not cite yet" pass-2 checks into code/JSON or leave them out.
 - **Run 9 end (≈ 12:25 UTC).**
+
+---
+
+## Stage 17. PAPER_DRAFT     [v4]
+
+- **Run 10 (2026-11-01, from ≈ 13:50 UTC).** No open issues; no new owner directives.
+- Pre-work: random-anchor sub-8 follow-up dispatched (`experiments/v4_e4_rg_random_r1.json`, 53 jobs / 66 episodes,
+  Actions run 41313613262); G2′ κ = 2 row confirmed to be the S2 cell (τ 4.7, n\* 4, set S, from the shard header).
+- **Finished:** template verbatim, fresh opus subagent (`paper/mypaper/prompts/stage17_v4_*`), output
+  `paper/mypaper/sections/draft_v4.md` (body 7,706 words, all RESTRICTS floors met), Figure 1 prompt updated.
+  Number audit: 0 unexplained numbers (2 benign derived/constant). Plan + checks: `plans/stage_17_paper_draft_v4.md`.
+- **Next: stage 18 PEER_REVIEW [v4]** (two fresh-context reviewers + adversarial pass, as v3), then 19 → 20.
