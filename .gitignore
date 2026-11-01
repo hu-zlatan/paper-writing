@@ -35,3 +35,6 @@ paper/mypaper/*.synctex.gz
 !results/v2/**/*.npz
 # v3 label / DAgger shards and student weights are the training data and models of record (amendment v3.0 C7)
 !results/v3/**/*.npz
+# v4 label / DAgger shards, student and RL weights are the training data and models of record (amendment v4.0);
+# they were dropped by the *.npz rule in the first v4 dispatch (run 8) and are regenerated in run 9
+!results/v4/**/*.npz

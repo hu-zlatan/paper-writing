@@ -18,3 +18,12 @@ Run the evidence-level additions required by stage 20 v3, as frozen in `docs/07c
 
 ## Not in v4 (stated as limitations)
 H3 full-512 / local-offset screen, in-domain positive control, more seeds than 3, wider sweeps.
+
+## Run 9 (2026-11-01) update
+- Finding: the run-8 dispatches of E1 (labels) and E3 (RL) completed (Actions 40963075142, 40963071342), but only their
+  JSON summaries reached `results/v4/`: `.gitignore` drops `*.npz` and only v2/v3 were whitelisted. The label shards
+  (training data) and RL weights were therefore lost. E5 (jsonl) is complete (100/100 files).
+- Fix: whitelist `results/v4/**/*.npz`; re-dispatch the **unchanged** manifests `v4_label_S2.json` and `v4_rl_S2.json`
+  (same seeds and commands). The run-8 JSON summaries are kept in git history; the re-run's JSONs serve as a
+  determinism check (actions per episode must match exactly; RL histories should match up to timing fields).
+- Meanwhile: E5 analysis (S12 test3, sandbox), `--cell` generalisation of the analyses, DAgger manifests.

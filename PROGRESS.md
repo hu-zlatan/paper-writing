@@ -870,3 +870,14 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
 - **Run 8 end (≈ 22:15 UTC):** G5′ sub-8 re-reads 2 episodes short (A12 B-cov 198/200; follow-up manifest
   `experiments/v3_sub8_g5_r9.json`, not yet dispatched); `12_g5_analysis.json` re-run (all cells pass; S12 flat screen,
   H★ unchanged). Queue: `v4_rl_S2` running; `v4_label_S2`, `v4_e5_rb_test3` queued.
+
+---
+
+## Stage 13. ITERATIVE_REFINE     [v4]   (IN PROGRESS)
+
+- **Run 9 (2026-11-01, from ≈ 09:5x UTC).** No open issues; no new owner directives. No commits between 10-29 23:14 and
+  this run (the intervening scheduled runs left no trace).
+- All run-8 dispatches finished (E1 labels 60/60, E3 RL 3/3, E5 100/100). **Defect found:** `.gitignore` excludes `*.npz`
+  outside v2/v3, so the E1 label shards and E3 RL weights were not committed (JSON summaries only). Fixed by whitelisting
+  `results/v4/**/*.npz`; E1 and E3 re-dispatched with the unchanged manifests (same seeds). The re-run JSONs are compared
+  with the run-8 JSONs (git history) as a determinism check.
