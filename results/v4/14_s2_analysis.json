@@ -1,0 +1,62 @@
+{
+ "cell": "S2",
+ "note": "exploratory, one cell; ci95 two-sided; no multiplicity correction",
+ "test3_sub8": {
+  "n_episodes": 0,
+  "complete": false,
+  "n_per_row": {
+   "gstar": [
+    0
+   ],
+   "student": [
+    0,
+    0,
+    0
+   ],
+   "rl": [
+    0,
+    0,
+    0
+   ],
+   "b_fan": [
+    0
+   ],
+   "random": [
+    0
+   ]
+  },
+  "rows": {},
+  "diffs": {}
+ },
+ "h2": {
+  "n_episodes": 0,
+  "complete": false,
+  "threshold_nats": 0.1
+ },
+ "behaviour": {
+  "n_episodes": 0
+ },
+ "rl_training": {
+  "611": {
+   "status": "max_episodes",
+   "plateau_at": 102400,
+   "episodes": 200064,
+   "g_T_mean_last": 6.339721275855316,
+   "wall_s": 2869.231419801712
+  },
+  "612": {
+   "status": "max_episodes",
+   "plateau_at": 102400,
+   "episodes": 200064,
+   "g_T_mean_last": 6.2339192072737735,
+   "wall_s": 2553.639364719391
+  },
+  "613": {
+   "status": "max_episodes",
+   "plateau_at": 102400,
+   "episodes": 200064,
+   "g_T_mean_last": 5.989489997624947,
+   "wall_s": 4133.574550151825
+  }
+ }
+}
