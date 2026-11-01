@@ -6,7 +6,7 @@ import os
 here = os.path.dirname(os.path.abspath(__file__))
 b = os.path.join(here, "..", "results", "v4")
 out = {"note": "v4 (docs/07c_amendment_v4_0.md); every block is the unchanged content of the named file"}
-for name in ("12_d4_analysis.json", "14_s2_analysis.json", "14_e5_analysis.json", "14_travel_split.json", "14_diag_s2.json"):
+for name in ("12_d4_analysis.json", "14_s2_analysis.json", "14_e5_analysis.json", "14_travel_split.json", "14_diag_s2.json", "14_review2_checks.json"):
     p = os.path.join(b, name)
     out[name] = json.load(open(p)) if os.path.exists(p) else None
 rb = {}

@@ -1,0 +1,111 @@
+{
+ "note": "report-only (stage 18 v4 pass 2)",
+ "students_S2_curves": {
+  "s601_r0": {
+   "n_epochs_logged": 200,
+   "best_epoch": 34,
+   "best_val_R_bar": 0.28803519897601815,
+   "final_val_R_bar": 0.30844667215870225,
+   "rise_to_final": 0.020411473182684103,
+   "train_loss_last": 4.456088568810436,
+   "train_loss_minus20": 4.496016920582531,
+   "train_loss_falling_last20": true
+  },
+  "s601_r1": {
+   "n_epochs_logged": 200,
+   "best_epoch": 35,
+   "best_val_R_bar": 0.3028158062835364,
+   "final_val_R_bar": 0.319261214624996,
+   "rise_to_final": 0.016445408341459633,
+   "train_loss_last": 4.281373444778122,
+   "train_loss_minus20": 4.311848251623064,
+   "train_loss_falling_last20": true
+  },
+  "s601_r2": {
+   "n_epochs_logged": 200,
+   "best_epoch": 42,
+   "best_val_R_bar": 0.3083646639678392,
+   "final_val_R_bar": 0.32163869345984764,
+   "rise_to_final": 0.013274029492008455,
+   "train_loss_last": 4.272464513363932,
+   "train_loss_minus20": 4.288158987627291,
+   "train_loss_falling_last20": true
+  },
+  "s602_r0": {
+   "n_epochs_logged": 200,
+   "best_epoch": 74,
+   "best_val_R_bar": 0.2772129197709259,
+   "final_val_R_bar": 0.29985719673131916,
+   "rise_to_final": 0.022644276960393284,
+   "train_loss_last": 4.439654447358517,
+   "train_loss_minus20": 4.499022838992467,
+   "train_loss_falling_last20": true
+  },
+  "s602_r1": {
+   "n_epochs_logged": 200,
+   "best_epoch": 25,
+   "best_val_R_bar": 0.2859673935870354,
+   "final_val_R_bar": 0.30537050787163805,
+   "rise_to_final": 0.019403114284602674,
+   "train_loss_last": 4.269845169307409,
+   "train_loss_minus20": 4.300439038631813,
+   "train_loss_falling_last20": true
+  },
+  "s602_r2": {
+   "n_epochs_logged": 200,
+   "best_epoch": 130,
+   "best_val_R_bar": 0.2907625849197828,
+   "final_val_R_bar": 0.2975293691488152,
+   "rise_to_final": 0.00676678422903243,
+   "train_loss_last": 4.244641580348936,
+   "train_loss_minus20": 4.261395207544396,
+   "train_loss_falling_last20": true
+  },
+  "s603_r0": {
+   "n_epochs_logged": 200,
+   "best_epoch": 29,
+   "best_val_R_bar": 0.28557373666714414,
+   "final_val_R_bar": 0.3119834044781902,
+   "rise_to_final": 0.026409667811046034,
+   "train_loss_last": 4.420801745597253,
+   "train_loss_minus20": 4.468120543186639,
+   "train_loss_falling_last20": true
+  },
+  "s603_r1": {
+   "n_epochs_logged": 200,
+   "best_epoch": 22,
+   "best_val_R_bar": 0.30050090557123726,
+   "final_val_R_bar": 0.31459971850967816,
+   "rise_to_final": 0.014098812938440897,
+   "train_loss_last": 4.2477931147669095,
+   "train_loss_minus20": 4.272472692151081,
+   "train_loss_falling_last20": true
+  },
+  "s603_r2": {
+   "n_epochs_logged": 200,
+   "best_epoch": 64,
+   "best_val_R_bar": 0.3014111167428048,
+   "final_val_R_bar": 0.3100756574599907,
+   "rise_to_final": 0.00866454071718592,
+   "train_loss_last": 4.240745035453584,
+   "train_loss_minus20": 4.259666133090728,
+   "train_loss_falling_last20": true
+  }
+ },
+ "students_S2_curves_summary": {
+  "best_epoch_range": [
+   22,
+   130
+  ],
+  "rise_range": [
+   0.00676678422903243,
+   0.026409667811046034
+  ],
+  "all_train_loss_falling_last20": true
+ },
+ "S12_gstar_test3_0_299": {
+  "n_episodes": 300,
+  "n_between_probe_moves": 889,
+  "frac_between_probe_moves_eq_0": 0.8087739032620922
+ }
+}

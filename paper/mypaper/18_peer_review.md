@@ -35,3 +35,29 @@ Refine cycles are exhausted (3 of 3), so no new pre-registered experiment. Class
   selection-bias re-estimate, S2 B-spread/B-cov and an S2 H★, S2 student/RL sweeps, probe-count-constrained RL,
   belief-input capacity fix, regret on student-visited states, sub-16 evaluator check, more cells/seeds, held-out
   shapes, 3D/contact dynamics, hardware.
+
+---
+
+# Second pass (stage 19 pass-1 revision grew the body > 30 %) — run 10
+
+Prompt `paper/mypaper/prompts/stage18_v4_pass2_user.txt` (revised draft, current `results_v4.json`), two fresh opus
+reviewers: `18_review_v4_pass2_run1.md`, `18_review_v4_pass2_run2.md`. Scores 4/3 and 4/3; **CRITICAL_FABRICATION: no**
+in both (all counts, the bootstrap, H2-S2, D4, the S2 Cal′ 3.875 probes and S2 travel reproduced from raw files).
+
+## Mismatches (fix in stage 19 pass 2)
+| id | location | issue | fix |
+|---|---|---|---|
+| P1 | Abstract, §6, §8 | g_T-vs-grid ordering stated "in both cells"; S12 is marginal (G\* 5.299 vs 5.368; 3 of 6 seeds below G\*; BI ci95 includes 0) | state for S2; S12 marginal |
+| P2 | §1 | 79.3 % zero moves attributed to test3 0–299; it is 0–499 (0–299: 80.9 %, `14_review2_checks`) | fix range / number |
+| P3 | §5.3 | "≈ 2.0 combined SE" not labelled derived | label |
+| P4 | §4, §5.4, Abstract | post-hoc 7.5 pp "BI first" rule: flip rate is per-episode, not a contrast bound; applied unevenly (S12 G\* − RL +7.0 pp); S2 student − B-fan +8.1 pp clears it by 0.6 pp | drop the numeric threshold; lead with BI everywhere and mark every success contrast with its CI; abstract calls +8.1 pp exploratory |
+| P5 | §4, Tables 2/5, §7 | random anchor PENDING | fill from final JSON |
+| P6 | §1 vs §5.6 | 0.16–0.23 vs 0.16–0.27 nats | say which comparison |
+| P7 | §5.2 | random travels "most" in first leg (S2 52 %) | fix |
+| P8 | §5.3, §6, §7 | S2 students over-fit: held-out R̄ lowest at epochs 22–130, rises 0.007–0.026 to the kept epoch-200 checkpoint, train loss still falling (`14_review2_checks`) | report; the fixed-200-epoch recipe (pre-registered) keeps the last checkpoint |
+| P9 | Abstract, §8 | E5 cell not named | "in S12" |
+| P10 | §4, Table 2 R2 | the one counted E′ flip came from set A (A12 B-fan) | state |
+| P11 | §5.4 | "cap saturation is rare" counts exact-cap only; RL end-of-training 23–31 % within 0.5 nats of the cap | qualify, cite `v3:14_behaviour.rl_final` |
+| P12 | Abstract, §1 | 4.3° / 44.8° come from a report-only post-review analysis | label |
+| P13 | §4 | D-gate SE·√0.5 ≈ 88 % one-sided, G\* run once per episode | explain (pre-registered formula, unchanged) |
+| P14 | §4 | H3 0.03 threshold registered with a near-identical estimate known | already labelled; keep |
