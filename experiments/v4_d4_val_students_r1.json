@@ -1,0 +1,9 @@
+{
+ "purpose": "v4 D4 follow-up: early-stopped student val3 episodes",
+ "jobs": [
+  {
+   "id": "v4_d4_val_s601_320_r337",
+   "cmd": "python main.py eval3 --set S --kappa 2 --tau 4.7 --n-star 4 --method student --weights ../results/v4/d4/S_k2_s601_r2.npz --split val3 --start 337 --count 3 --sub 8 --budget-minutes 25 --out ../results/v4/d4_val/S_k2_student_s601_r2_320_r337"
+  }
+ ]
+}
