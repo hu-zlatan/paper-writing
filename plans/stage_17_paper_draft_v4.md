@@ -1,0 +1,40 @@
+# Stage 17 PAPER_DRAFT [v4] — plan (run 10, 2026-11-01)
+
+## Goal
+Full markdown master draft of the v4 row-4 characterisation paper (S12 + S2 cells, E5) from
+`paper/mypaper/sections/00_outline.md`; every number traceable to `results/v4/results_v4.json` or
+`results/v3/results_v3.json`.
+
+## Preconditions (stage 16 v4 open items)
+- [x] (1) Random anchor sub-8 re-read: follow-up manifest `experiments/v4_e4_rg_random_r1.json` (53 jobs, 66 episodes)
+  dispatched this run. The random row enters no contrast; the draft marks its success/BI cell
+  `[PENDING:v4:14_s2_analysis.test3_sub8.rows.random]`, filled in stage 19 from the final JSON.
+- [x] (2) G2′ κ = 2 used τ = 4.7, n\* = 4, set S (header of `results/v3/g2/S_k2_000.jsonl`: `"kappa": 2.0, "tau": 4.7,
+  "n_star": 4`) = the S2 cell definition in `docs/07c_amendment_v4_0.md`. The κ = 2 H3 row may be called "the S2 cell".
+- [x] (3) Pass-2 checks: travel coupling (`behaviour.student_vs_gstar_travel_pearson_r`, identical-sequence counts) and
+  per-seed g_T are in `14_s2_analysis.json` (commit 4242228) and so in `results_v4.json`. The rest of the outline's
+  "do not cite" list (first-action agreement, per-seed travel medians, B-fan sequence identity, g125-vs-v3-B-fan) is
+  not in JSON → the draft must not use it.
+- [x] Citations: 60 cards, cite-key list identical to the v3 stage-17 prompt; outline reports no [CITE-MISSING].
+
+## Length decision (same as v3, recorded)
+Master draft meets the `RESTRICTS.yaml` writing floors (total ≥ 4,000 words; intro 700, related 500, method 800,
+experiments 600, results 500, discussion 300, limitations 200, conclusion 150), which target the 8-page Stage 2 paper.
+The 5-page RSS Stage 1 extended abstract is condensed in stage 22 as a separate export, so stage 19's never-shorten rule
+still holds for the master draft.
+
+## Execution
+- Fresh-context opus subagent; template `pipeline/references/stage_prompts/paper_draft.md` verbatim (system + user).
+  Placeholders: {preamble} (venue, length decision, row-4 framing, v4 additions, pending marker, v3 final draft
+  appended as wording source with the instruction that the outline's binding sentences override it),
+  {topic_constraint} (block from `stage16_v4_user.txt`, two-regime topic), {exp_metrics_instruction}
+  (`results_v4.json` and `results_v3.json` in full), {citation_instruction} (60 cite_keys, same as v3), {outline}.
+- Prompt files: `paper/mypaper/prompts/stage17_v4_{system,user}.txt`. Figure 1 prompt first →
+  `paper/mypaper/figures/figure1_prompt.txt` (v3 version kept in git history).
+- Output: `paper/mypaper/sections/draft_v4.md`.
+
+## Checks (main session, after the subagent)
+- [ ] Number audit (`code/tools_number_audit.py`) against both JSONs + design constants.
+- [ ] Every \cite key exists in the cards.
+- [ ] Word counts vs RESTRICTS floors.
+- [ ] Outline never-write list respected; no claim from the "do not cite" list.
