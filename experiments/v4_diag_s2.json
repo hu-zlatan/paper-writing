@@ -1,0 +1,33 @@
+{
+ "purpose": "v4 stage-18 report-only diagnostics (results/v4/15_decision.md allows <= 4 CPU-h): (1) Cal' verification for S2 (review M2): G* mean executed probes at tau 4.7 on cal3 0-199, rule n* +- 0.3, same protocol as v3_cal_verify_S; (2) pipeline check for the S2 val/test gap (review M6), step 1: val3 0-49 no-grid actions for G* and student s601 r2 (the test3 pipeline); step 2 (separate manifest) re-reads them with regrid3 sub 8 for an episode-by-episode comparison with the inline-scored D4 val3 rows.",
+ "jobs": [
+  {
+   "id": "v4_cal_verify_S_k2_sh0",
+   "cmd": "python main.py eval3 --set S --method gstar --kappa 2 --tau 4.7 --n-star 4 --split cal3 --start 0 --count 50 --no-grid --budget-minutes 25 --out ../results/v4/cal/verify_S_k2_sh0"
+  },
+  {
+   "id": "v4_cal_verify_S_k2_sh1",
+   "cmd": "python main.py eval3 --set S --method gstar --kappa 2 --tau 4.7 --n-star 4 --split cal3 --start 50 --count 50 --no-grid --budget-minutes 25 --out ../results/v4/cal/verify_S_k2_sh1"
+  },
+  {
+   "id": "v4_cal_verify_S_k2_sh2",
+   "cmd": "python main.py eval3 --set S --method gstar --kappa 2 --tau 4.7 --n-star 4 --split cal3 --start 100 --count 50 --no-grid --budget-minutes 25 --out ../results/v4/cal/verify_S_k2_sh2"
+  },
+  {
+   "id": "v4_cal_verify_S_k2_sh3",
+   "cmd": "python main.py eval3 --set S --method gstar --kappa 2 --tau 4.7 --n-star 4 --split cal3 --start 150 --count 50 --no-grid --budget-minutes 25 --out ../results/v4/cal/verify_S_k2_sh3"
+  },
+  {
+   "id": "v4_pipe_val3_gstar_000",
+   "cmd": "python main.py eval3 --set S --kappa 2 --tau 4.7 --n-star 4 --method gstar --split val3 --start 0 --count 25 --no-grid --budget-minutes 25 --out ../results/v4/pipe/val3_nogrid/S_k2_gstar_000"
+  },
+  {
+   "id": "v4_pipe_val3_gstar_025",
+   "cmd": "python main.py eval3 --set S --kappa 2 --tau 4.7 --n-star 4 --method gstar --split val3 --start 25 --count 25 --no-grid --budget-minutes 25 --out ../results/v4/pipe/val3_nogrid/S_k2_gstar_025"
+  },
+  {
+   "id": "v4_pipe_val3_student_s601_000",
+   "cmd": "python main.py eval3 --set S --kappa 2 --tau 4.7 --n-star 4 --method student --weights ../results/v4/d4/S_k2_s601_r2.npz --split val3 --start 0 --count 50 --no-grid --budget-minutes 25 --out ../results/v4/pipe/val3_nogrid/S_k2_student_s601_r2_000"
+  }
+ ]
+}
