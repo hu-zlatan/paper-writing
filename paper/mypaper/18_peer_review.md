@@ -1,40 +1,37 @@
-# Stage 18 PEER_REVIEW [v3] — merged record (run 8, 2026-10-29)
+# Stage 18 PEER_REVIEW [v4] — merged record (run 10, 2026-11-01)
 
-Two independent runs of the stage-18 template (fresh opus subagents; full reviews in `18_review_run1.md`,
-`18_review_run2.md`). Four reviewer perspectives in total.
+Draft: `paper/mypaper/sections/draft_v4.md`. Template verbatim (prompts `paper/mypaper/prompts/stage18_v4_*`), two
+fresh opus subagents; run 2 as a strict RSS/CoRL pair. Full reviews: `18_review_v4_run1.md`, `18_review_v4_run2.md`.
+v3 record: `v3/18_peer_review_v3.md`.
 
-| run | reviewer | score | verdict |
+## Verdict
+- Scores: run 1 A 4 / B 3; run 2 A 4 / B 3 (v3: 4/3, 3/4). **CRITICAL_FABRICATION: no** in both runs (> 100 numbers,
+  all trial/episode/seed counts, the crossed bootstrap B = 10,000, the D3/D3-B/D4 thresholds, H2-S2 and E5 recomputed
+  from raw per-episode files; Holm/TOST correctly described as not run).
+- → stage 19 (no rollback). All mismatches are incidental text errors → option (b) (fix the claim).
+
+## Mismatches (fix in stage 19)
+| id | location | issue | fix |
 |---|---|---|---|
-| 1 | A (methodology) | 4 / 10 | borderline, leaning reject |
-| 1 | B (significance) | 3 / 10 | reject |
-| 2 | A (significance, RSS/CoRL) | 3 / 10 | reject |
-| 2 | B (methodology–evidence) | 4 / 10 | borderline reject |
+| M1 | §3.1 | "K = 8 … base/variant pairs" — code has 4 bases + 4 variants | "K = 8 identities (4 base/variant pairs)" |
+| M2 | Table 2 R1, §1, §3.1 | S2 Cal′ reported "pass"; no S_k2 verify run exists (only S_k12, A_k12) | state τ set by the Cal′ rule, probe-count verification not run (or run it); test3 G\* 3.873 probes reported as observation |
+| M3 | §4, §7, Table 5, Fig. 1D | random anchor "215 of 300" stale; follow-up running | fill from final JSON |
+| M4 | Table 4, §5.2, Fig. 1B | travel definition omitted; logged travel includes the initial snap onto the 5.625° grid (≈ 1.4° for every policy) | define travel; add discretionary travel (computed from logs by code) |
+| M5 | Table 1 | "batch 256" is decisions-equivalent (256 // T episodes per step) | state it |
+| M6 | §5.3, §7 | S2 val3 scored inline (`eval3`), S2 test3 by `regrid3` re-read — not named as a candidate cause of the val/test gap | name it; run a pipeline check if cheap |
+| M7 | §5.4 | "2.9 half-widths (0.293)": lower half-width is 0.303 → ratio 2.8 | use 0.303 / 2.8 |
+| M8 | Table 2 R6, §5.4 | "H2 is rejected" overstates; should be "not detected" (same term as H2-S2) | reword |
+| M9 | draft | Figure 1 generation prompt inside the manuscript | keep only in `figures/figure1_prompt.txt` (LaTeX comment in stage 22) |
 
-**CRITICAL_FABRICATION: no** (both runs; 43 spot-checks against code and result files). Trial counts, statistical tests,
-hyperparameters and headline numbers match. → no rollback; proceed to stage 19 with the fixes below.
-
-## Factual mismatches (must fix in stage 19)
-1. Random-row counts "62 / 199 / 161 of 200" are stale → 162 / 199 / 197 (`12_g5_analysis`, sub 8).
-2. "One pinned core" — v3 `latency3` does not pin a core (threads = 1 only). Rewrite.
-3. E′ covers S12 **and** A12 (16 episodes), and the counted flip is A12/B-fan — fix the table heading.
-4. The latency student is the round-0 checkpoint — say so.
-5. `[CONST?]` values exist: PPO clip 0.2, 4 epochs (`results/v3/rl/*.json` config); Python 3.12.15, numpy 2.5.4
-   (run headers); runner CPU model is not logged → say "GitHub-hosted standard runners, model not logged".
-6. `[PENDING]`: fill G5′ / D3-B with the current (provisional, marked incomplete) values or drop the cells.
-7. Student context also contains absolute φ_t (cos, sin) — document.
-
-## Substantive points and triage
-| # | point (reviewers) | action |
-|---|---|---|
-| S1 | Travel barely happens in the tested cell: G\* moves the finger between probes in 21 % of decisions, > 1 grid step in 6 %; mean logged travel 6.1° per episode; students 1.5–2.0°, B-fan 1.5°, RL 23–26°, random 38° (all 4 runs) | **Report** (`14_behaviour.json`) and re-frame: at κ = 12 with τ = 4.9 travel is so costly that the cost-aware planner mostly stays; the learnability findings are for this "stay-and-probe" regime. Title/abstract get the regime qualifier. A travel-binding cell is new design → owner (OWNER_TODO). |
-| S2 | Students stop after 4–16 epochs (3–28 s) → under-training? | **Exploratory row run now** (amendment v3.0 status note, readings written first): 200 fixed epochs, same data. |
-| S3 | H3 estimator screens 32 of ≤ 512 first actions; checks (a)/(c) share one construction | **Narrow** C1/abstract wording to the screened set; describe (a)/(c) as one construction re-used from v2 plus a zero-gap bank. A full-512 screen → owner/next loop. |
-| S4 | Disclose v2 G(12) = 0.0146 (UB 0.0208), known before the v3 threshold | **Report** (results/v2/12_g2_analysis.json); call H3 a replication on the 64 × 8 action set. |
-| S5 | g_T vs BI disagree; saturation | **Report** saturation at log(L+1): G\* 5.8 %, students 2.4–3.4 %, RL 0.4–1.2 % on test3 0–499 (exact cap; the reviewer's 15–26 % could not be reproduced with this definition and is not used; the RL trainer's own `sat_frac` on its last training batch is 22.7–31.3 %, a different quantity). RL always uses 3 probes, final entropy 0.002–0.013. |
-| S6 | RL sweep thin (4 configs × 1 seed; winner at the lr edge); H2 under-powered | **Limitations** (state edge-of-grid and power ≈ 80 % only at 0.57 nats). Extension → owner. |
-| S7 | Reduced-G\* configurations (4–40 ms) are a cheaper baseline; latency ratio vs full G\* overstates amortization value | **Report** as a frontier in words: accuracy of reduced G\* was not measured → state in Limitations; ratio sentence keeps "per decision, vs full G\*". |
-| S8 | Both learners tie the stay-and-fan heuristic (B-fan) | **Abstract + Discussion** with pre-written reading (b). |
-| S9 | Move gate bookkeeping to an appendix; demote evaluator note from contribution | **Do** in stage 19. |
-| S10 | List pre-registered but unexecuted items (Holm, TOST, BC/abs-frame rows, R_b) with routing reason | **Do** (one paragraph). |
-| S11 | Teacher tie fraction | **Report**: 0.0 in all 210 logged evaluations. |
-| S12 | More cells / seeds; in-domain positive control for H3 | → owner / next loop. |
+## Triage of substantive asks
+Refine cycles are exhausted (3 of 3), so no new pre-registered experiment. Classified as:
+- **Text / analysis of existing logs (stage 19):** M1–M9; BI as the primary metric where success contrasts are within
+  the 7.5 % flip rate; consolidate hedging into Limitations; demote C4 (instrument notes) from the contribution list;
+  post-hoc minimum detectable effect for H2/D4 from the observed SE (labelled post hoc); test-split reuse disclosed.
+- **Cheap report-only diagnostics (allowed by `results/v4/15_decision.md`, ≤ 4 CPU-h):** S_k2 Cal′ verification
+  (probe count at τ = 4.7); val3 subset re-read through the test pipeline (M6). Added if they finish before stage 20;
+  otherwise listed as not run.
+- **Out of scope for this cycle (Limitations / future work):** 512-action or structured two-step H3 screen, V_LA
+  selection-bias re-estimate, S2 B-spread/B-cov and an S2 H★, S2 student/RL sweeps, probe-count-constrained RL,
+  belief-input capacity fix, regret on student-visited states, sub-16 evaluator check, more cells/seeds, held-out
+  shapes, 3D/contact dynamics, hardware.
