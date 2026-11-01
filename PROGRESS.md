@@ -8,8 +8,8 @@
 **Target venue:** RSS 2027 — Stage 1 extended abstract 2026-12-04 23:59 AoE; Stage 2 full paper (invited) 2027-04-16 23:59 AoE (verified 2026-10-28 at https://roboticsconference.org/information/cfp/)
 **Topic:** Amortized, non-myopic active tactile localization (TouchBED)
 **Initialised:** 2026-10-28T07:56:44Z
-**Current version:** v3
-**Latest stage:** Stage 16 PAPER_OUTLINE [v3] done (row-4 characterisation paper) → stage 17 next; see the end of this file
+**Current version:** v4
+**Latest stage:** Stage 21 KNOWLEDGE_ARCHIVE [v4] done; stage 20 v4 FAILED (5.0/10), refine cap used, owner decision pending (OWNER_TODO); see the end of this file
 
 ---
 
@@ -1027,3 +1027,23 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
 - **Where to resume (run 11):** read the owner's answer to the stage-20 escalation in OWNER_TODO / AUTOPILOT §1.
   No answer → low-risk only: stage 21 KNOWLEDGE_ARCHIVE [v4] (`docs/21_retrospective.md`), wording tightening that
   changes no claim; Figure 1 is still a placeholder (prompt in `paper/mypaper/figures/figure1_prompt.txt`).
+
+---
+
+## Stage 21. KNOWLEDGE_ARCHIVE     [v4]
+
+- **Run 11 (2026-11-01, from ≈ 19:50 UTC).** No open issues; AUTOPILOT §1 has no new owner directive; `RESTRICTS.yaml`
+  max_refine_cycles still 3 → the stage-20 escalation is unanswered, so only low-risk work (OWNER_TODO default).
+- **Finished:** template `knowledge_archive.md` verbatim (prompts `docs/prompts/stage21_v4_{system,user}.txt`;
+  {decision} = `results/v4/15_decision.md`, {analysis} = `results/v4/14_analysis.md`, {revised} =
+  `paper/mypaper/sections/draft_v4.md`), fresh opus subagent → `docs/21_retrospective.md`. Changes no claim or number;
+  states the paper is NOT done.
+- **Checks:** all 142 numeric tokens in the archive occur in the prompt or in the cited repo files (PROGRESS hardware
+  line, requirements, workflow, amendments v3.0/v3.1/v4.0, `results_v4.json`); all cited paths exist. Two facts written
+  as "not recorded" (runner CPU model, measured total v4 wall clock). Noted: `code/requirements.txt` has lower bounds
+  only (no exact pins) — listed as an open item, not changed now.
+- **Not done (by design):** no stage 22 export, no new loop, no DONE mark.
+- **Where to resume (run 12):** read the owner's answer to the stage-20 escalation (OWNER_TODO / AUTOPILOT §1 / issues).
+  No answer → low-risk only (wording that changes no claim; Figure 1 remains a placeholder prompt). With (a)/(b) → stage
+  21 is done, go to stage 22 under the chosen target; with (c) → LOOP MARKER v4 → v5 at stage 13 after the owner raises
+  the cap; with (d) → stage 8.
