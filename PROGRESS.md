@@ -1005,3 +1005,18 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
 - Random anchor: 293/300 re-read; last 7 episodes in Actions (`v4_e4_rg_random_r2.json` + one r1 job). It enters no
   contrast; the marker is filled when complete.
 - **Next: stage 20 QUALITY_GATE [v4].** No refine cycle left: a FAIL goes to the owner (OWNER_TODO).
+
+---
+
+## Stage 20. QUALITY_GATE     [v4]  — FAIL (escalated to the owner)
+
+- **Run 10.** Template verbatim (fresh opus subagent, json mode; prompts `paper/mypaper/prompts/stage20_v4_*`,
+  threshold 7.5). Output `paper/mypaper/20_quality_gate.json`. **Score 5.0 < 7.5** (v3: 5.5).
+- Required actions: 1 paper-level (fill the random row / Figure 1), 1 writing; 9 evidence-level (more cells and seeds,
+  g_T inversion intervals and an S2-tuned / probe-aware RL, 512-action H3 screen + V_LA bias, sub-16 evaluator, fresh
+  test split, S2 val/test gap + early stopping, S2 B-spread/B-cov, belief/attention head, Lat′ frontier).
+- **Not auto-approved** (the gate failed). Decision table → evidence-level → stage 13, but the refine cap (3 of 3,
+  `RESTRICTS.yaml`) is used up; per AUTOPILOT §5 and the stage-15 v4 pre-commitment the decision goes to the owner
+  (OWNER_TODO, 2026-11-01 run 10). No new loop is opened by the pipeline.
+- **Until the owner decides (default):** only low-risk work — fill the random anchor row when its re-read finishes,
+  paper-level tightening that changes no claim, stage 21 knowledge archive. No stage 22 export, no DONE mark.
