@@ -1,0 +1,29 @@
+{
+ "purpose": "v4 E4 second follow-up: random anchor sub-8 re-read, single episodes left after early stops in v4_e4_rg_random_r1 (288_r290 still running when this was written)",
+ "jobs": [
+  {
+   "id": "v4_e4_rg_random_009_r10_r11",
+   "cmd": "python main.py regrid3 --src ../results/v4/test3/S_k2_random_000.jsonl --episodes 11 --sub 8 --budget-minutes 25 --out ../results/v4/test3_sub8/S_k2_random_009_r10_r11"
+  },
+  {
+   "id": "v4_e4_rg_random_045_r46_r47",
+   "cmd": "python main.py regrid3 --src ../results/v4/test3/S_k2_random_000.jsonl --episodes 47 --sub 8 --budget-minutes 25 --out ../results/v4/test3_sub8/S_k2_random_045_r46_r47"
+  },
+  {
+   "id": "v4_e4_rg_random_102_r103_r104",
+   "cmd": "python main.py regrid3 --src ../results/v4/test3/S_k2_random_000.jsonl --episodes 104 --sub 8 --budget-minutes 25 --out ../results/v4/test3_sub8/S_k2_random_102_r103_r104"
+  },
+  {
+   "id": "v4_e4_rg_random_180_r181_r182",
+   "cmd": "python main.py regrid3 --src ../results/v4/test3/S_k2_random_000.jsonl --episodes 182 --sub 8 --budget-minutes 25 --out ../results/v4/test3_sub8/S_k2_random_180_r181_r182"
+  },
+  {
+   "id": "v4_e4_rg_random_201_r202_r203",
+   "cmd": "python main.py regrid3 --src ../results/v4/test3/S_k2_random_000.jsonl --episodes 203 --sub 8 --budget-minutes 25 --out ../results/v4/test3_sub8/S_k2_random_201_r202_r203"
+  },
+  {
+   "id": "v4_e4_rg_random_282_r283_r284",
+   "cmd": "python main.py regrid3 --src ../results/v4/test3/S_k2_random_000.jsonl --episodes 284 --sub 8 --budget-minutes 25 --out ../results/v4/test3_sub8/S_k2_random_282_r283_r284"
+  }
+ ]
+}
