@@ -979,3 +979,18 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
   "pass" without a verify run; travel includes the initial grid snap) → fixed in stage 19 (option b). Merged record and
   triage: `paper/mypaper/18_peer_review.md`.
 - **Next:** report-only diagnostics (S_k2 Cal′ verify; val3 re-read through the test pipeline), then stage 19.
+
+---
+
+## Stage 19. PAPER_REVISION     [v4]   (IN PROGRESS)
+
+- **Run 10.** Report-only diagnostics for review items (allowed by `results/v4/15_decision.md`): travel split
+  (`code/analysis_travel_split_v4.py` → `results/v4/14_travel_split.json`; G\* between-probe travel 4.3° in S12 vs
+  44.8° in S2 on test3 0–299; B-fan's 1.454° is the unavoidable first grid snap); S2 Cal′ verify and the val3 pipeline
+  check (`experiments/v4_diag_s2.json`, step 2 `v4_diag_s2_rg.json`; `code/analysis_diag_s2_v4.py` →
+  `results/v4/14_diag_s2.json`). First reading: the no-grid (test-pipeline) val3 0–49 action sequences are identical
+  to the inline D4 runs for G\* and student s601 (50/50 each), so the val/test gap is not an action-generation
+  artefact; the sub-8 re-read comparison is running.
+- Pass 1 of the revision done (template verbatim, fresh opus subagent; snapshot `paper/mypaper/v4/draft_v4_stage17.md`).
+  Body +43 % → a second stage-18 pass after the PENDING markers (random anchor, Cal′ S2, pipeline check) are filled.
+- Duplicate Actions run 41313609610 (an MCP dispatch that reported a network error but had queued) was cancelled.
