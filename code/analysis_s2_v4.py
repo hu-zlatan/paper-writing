@@ -41,19 +41,22 @@ def rows(sub, n, key=None):
             "random": [load(sub, "S_k2_random*.jsonl", n, key)]}
 
 
-def common(meth, n):
-    return [e for e in range(n) if all(e in d for ds in meth.values() for d in ds)]
+def common(meth, n, skip=()):
+    return [e for e in range(n) if all(e in d for m, ds in meth.items() if m not in skip for d in ds)]
 
 
 out = {"cell": "S2", "note": "exploratory, one cell; ci95 two-sided; no multiplicity correction"}
 meth = rows("test3_sub8", N_SUB)
-eps = common(meth, N_SUB)
+eps = common(meth, N_SUB, skip=("random",))     # random (an anchor, in no paired contrast) does not restrict the set
 out["test3_sub8"] = {"n_episodes": len(eps), "complete": len(eps) == N_SUB,
                      "n_per_row": {m: [len(d) for d in ds] for m, ds in meth.items()}, "rows": {}, "diffs": {}}
 if eps:
-    def arr(m, key):
-        return np.array([[float(d[e][key]) for d in meth[m]] for e in eps])
-    for m in meth:
+    def arr(m, key, ee=None):
+        return np.array([[float(d[e][key]) for d in meth[m]] for e in (eps if ee is None else ee)])
+    er = [e for e in eps if e in meth["random"][0]]
+    out["test3_sub8"]["random_on_available"] = {"n": len(er), "success": float(arr("random", "success", er).mean()),
+                                                 "ball_info": float(arr("random", "ball_info", er).mean())} if er else None
+    for m in [k for k in meth if k != "random"]:
         out["test3_sub8"]["rows"][m] = {"success": float(arr(m, "success").mean()),
                                         "ball_info": float(arr(m, "ball_info").mean()),
                                         "per_seed_success": [float(x) for x in arr(m, "success").mean(0)]}

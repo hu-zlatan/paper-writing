@@ -1,0 +1,13 @@
+{
+ "purpose": "v4 E4 follow-up: early-stopped student sub-8 re-reads (13 episodes)",
+ "jobs": [
+  {
+   "id": "v4_e4_rg_student_s601_100_r114",
+   "cmd": "python main.py regrid3 --src ../results/v4/test3/S_k2_student_s601_000.jsonl --episodes 114 115 116 117 118 119 120 121 122 123 124 --sub 8 --budget-minutes 25 --out ../results/v4/test3_sub8/S_k2_student_s601_100_r114"
+  },
+  {
+   "id": "v4_e4_rg_student_s603_150_r173",
+   "cmd": "python main.py regrid3 --src ../results/v4/test3/S_k2_student_s603_000.jsonl --episodes 173 174 --sub 8 --budget-minutes 25 --out ../results/v4/test3_sub8/S_k2_student_s603_150_r173"
+  }
+ ]
+}
