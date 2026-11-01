@@ -412,6 +412,96 @@
    }
   }
  },
+ "14_travel_split.json": {
+  "note": "report-only (stage 18 v4 M4); degrees; test3 episodes 0-299; seeds pooled for learners",
+  "grid_step_deg": 5.625,
+  "cells": {
+   "S12": {
+    "gstar": {
+     "n_episode_seed": 300,
+     "travel_deg_mean": 5.747953012800678,
+     "first_leg_deg_mean": 1.4917030128006759,
+     "between_probe_deg_mean": 4.256250000000001,
+     "snap_floor_deg_mean": 1.454160502737537,
+     "frac_first_leg_is_snap": 0.9433333333333334
+    },
+    "b_fan": {
+     "n_episode_seed": 300,
+     "travel_deg_mean": 1.454160502737537,
+     "first_leg_deg_mean": 1.454160502737537,
+     "between_probe_deg_mean": 0.0,
+     "snap_floor_deg_mean": 1.454160502737537,
+     "frac_first_leg_is_snap": 1.0
+    },
+    "random": {
+     "n_episode_seed": 300,
+     "travel_deg_mean": 38.988208832729974,
+     "first_leg_deg_mean": 31.00070883272998,
+     "between_probe_deg_mean": 7.987500000000002,
+     "snap_floor_deg_mean": 1.454160502737537,
+     "frac_first_leg_is_snap": 0.03666666666666667
+    },
+    "student_rem": {
+     "n_episode_seed": 900,
+     "travel_deg_mean": 1.7666605027375373,
+     "first_leg_deg_mean": 1.454160502737537,
+     "between_probe_deg_mean": 0.3125,
+     "snap_floor_deg_mean": 1.454160502737537,
+     "frac_first_leg_is_snap": 1.0
+    },
+    "rl": {
+     "n_episode_seed": 900,
+     "travel_deg_mean": 24.803470167579185,
+     "first_leg_deg_mean": 7.984720167579178,
+     "between_probe_deg_mean": 16.81875,
+     "snap_floor_deg_mean": 1.454160502737537,
+     "frac_first_leg_is_snap": 0.3333333333333333
+    }
+   },
+   "S2": {
+    "gstar": {
+     "n_episode_seed": 300,
+     "travel_deg_mean": 46.910480537843654,
+     "first_leg_deg_mean": 2.1167305378436514,
+     "between_probe_deg_mean": 44.79375,
+     "snap_floor_deg_mean": 1.454160502737537,
+     "frac_first_leg_is_snap": 0.74
+    },
+    "b_fan": {
+     "n_episode_seed": 300,
+     "travel_deg_mean": 1.454160502737537,
+     "first_leg_deg_mean": 1.454160502737537,
+     "between_probe_deg_mean": 0.0,
+     "snap_floor_deg_mean": 1.454160502737537,
+     "frac_first_leg_is_snap": 1.0
+    },
+    "random": {
+     "n_episode_seed": 300,
+     "travel_deg_mean": 172.20427344261515,
+     "first_leg_deg_mean": 89.83552344261513,
+     "between_probe_deg_mean": 82.36875,
+     "snap_floor_deg_mean": 1.454160502737537,
+     "frac_first_leg_is_snap": 0.01
+    },
+    "student": {
+     "n_episode_seed": 900,
+     "travel_deg_mean": 39.13592938434242,
+     "first_leg_deg_mean": 1.473429384342413,
+     "between_probe_deg_mean": 37.6625,
+     "snap_floor_deg_mean": 1.454160502737537,
+     "frac_first_leg_is_snap": 0.9522222222222222
+    },
+    "rl": {
+     "n_episode_seed": 900,
+     "travel_deg_mean": 136.81994904757653,
+     "first_leg_deg_mean": 28.069949047576515,
+     "between_probe_deg_mean": 108.75,
+     "snap_floor_deg_mean": 1.454160502737537,
+     "frac_first_leg_is_snap": 0.0
+    }
+   }
+  }
+ },
  "students_S2_training": {
   "s601_r0": {
    "val_R_bar": 0.30844667215870225,
