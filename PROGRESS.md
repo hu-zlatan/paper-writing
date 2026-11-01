@@ -1020,3 +1020,10 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
   (OWNER_TODO, 2026-11-01 run 10). No new loop is opened by the pipeline.
 - **Until the owner decides (default):** only low-risk work — fill the random anchor row when its re-read finishes,
   paper-level tightening that changes no claim, stage 21 knowledge archive. No stage 22 export, no DONE mark.
+- **Run 10 end (low-risk follow-up).** S2 random anchor re-read complete (300/300; success 0.1167, BI 3.622; no
+  contrast) → JSON regenerated, the three PENDING markers in `draft_v4.md` replaced (0 left; number audit unchanged:
+  7 benign). The duplicate MCP dispatch had committed 11 of the follow-up outputs first, so 11 jobs of the original run
+  failed only at "Commit outputs" (no data loss).
+- **Where to resume (run 11):** read the owner's answer to the stage-20 escalation in OWNER_TODO / AUTOPILOT §1.
+  No answer → low-risk only: stage 21 KNOWLEDGE_ARCHIVE [v4] (`docs/21_retrospective.md`), wording tightening that
+  changes no claim; Figure 1 is still a placeholder (prompt in `paper/mypaper/figures/figure1_prompt.txt`).

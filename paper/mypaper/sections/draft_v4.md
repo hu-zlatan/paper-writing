@@ -470,8 +470,8 @@ configuration, we report both.
 | R7 | H3 | UB95 G(12) = 0.0221; bias ratio 0.957 | UB < 0.03; ratio ≤ 1.02 | Hold |
 | R8 | S2 val3 0–49 re-read through the test pipeline (report-only) | identical actions 50/50, identical success 50/50 (G\* and student s601) | report-only | pipelines equivalent |
 
-All D4, test3, H2 and E5 blocks are complete. The S2 test3 random anchor is not yet complete
-([PENDING:v4:14_s2_analysis.test3_sub8.rows.random]), so it enters no contrast. The S2 Cal′ verification (R1) and the
+All D4, test3, H2 and E5 blocks are complete, including the S2 test3 random anchor (300 of 300 episodes), which is
+an anchor only and enters no contrast. The S2 Cal′ verification (R1) and the
 pipeline check (R8) are report-only diagnostics; neither can change a registered verdict.
 
 ## 5 Results
@@ -638,7 +638,7 @@ study, S2 rows from the v4 amendment; no cross-cell test.**
 | Student (per-seed success) | 0.3822 (0.3833 / 0.3767 / 0.3867) | 6.200 | 5.368 | 0.4511 (0.4633 / 0.4133 / 0.4767) | 6.490 | 5.534 |
 | RL (per-seed success) | 0.3567 (0.3667 / 0.3900 / 0.3133) | 5.910 | 5.368 | 0.4233 (0.3967 / 0.4200 / 0.4533) | 6.310 | 5.979 |
 | B-fan (exploratory) | 0.36 | 5.973 | — | 0.37 | 5.962 | 5.263 |
-| Random | — | — | 2.618 | [PENDING:v4:14_s2_analysis.test3_sub8.rows.random] | [PENDING:v4:14_s2_analysis.test3_sub8.rows.random] | 3.510 |
+| Random | — | — | 2.618 | 0.1167 | 3.622 | 3.510 |
 
 | Paired contrast (ci95) | S12 success | S12 BI | S2 success | S2 BI |
 |---|---|---|---|---|
@@ -792,8 +792,8 @@ The qualifiers that the body states once are collected here; each applies to eve
 - **Covariate shift not measured.** Regret on student-visited states was not computed.
 - **Latency.** The Lat′ protocol is incomplete (several configurations exceeded the CI-width criterion, two runner jobs
   pooled), and E5 latencies are logged during evaluation on free runners, not Lat′ measurements.
-- **Incomplete random anchor.** The S2 test3 random row is not yet complete
-  ([PENDING:v4:14_s2_analysis.test3_sub8.rows.random]) and enters no contrast.
+- **Random anchor scored late.** The S2 test3 random row (success 0.1167, BI 3.622 nats over 300 episodes) was
+  completed after the other rows, through several follow-up re-read jobs; it enters no contrast.
 - **Test-split reuse.** test3 is reused by exploratory rows (the long student, B-fan, S2 rows and E5), so it is no
   longer untouched.
 - **Travel definition.** Logged travel includes a first-leg grid snap that no policy chooses; the between-probe split is
