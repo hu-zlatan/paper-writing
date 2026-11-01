@@ -86,6 +86,15 @@ if e3:
         tr = [math.degrees(d[e]["travel_rad"]) for d in beh[m] for e in e3]
         pr = [len(d[e]["actions"]) for d in beh[m] for e in e3]
         out["behaviour"][m] = {"travel_deg_mean": float(np.mean(tr)), "probes_mean": float(np.mean(pr))}
+    # stage 14 v4 pass 2 (S3): per-episode coupling of student and G* travel, and identical action sequences
+    tg = np.array([math.degrees(beh["gstar"][0][e]["travel_rad"]) for e in e3])
+    out["behaviour"]["student_vs_gstar_travel_pearson_r"] = [
+        float(np.corrcoef(tg, [math.degrees(d[e]["travel_rad"]) for e in e3])[0, 1]) for d in beh["student"]]
+    out["behaviour"]["student_identical_action_sequence_to_gstar"] = [
+        int(sum(d[e]["actions"] == beh["gstar"][0][e]["actions"] for e in e3)) for d in beh["student"]]
+if e2:
+    out["h2"]["per_seed_student"] = {str(s): float(np.mean([g["student"][i][e] for e in e2])) for i, s in enumerate(ST)}
+    out["h2"]["per_seed_rl"] = {str(s): float(np.mean([g["rl"][i][e] for e in e2])) for i, s in enumerate(RL)}
 out["rl_training"] = {}
 for s in RL:
     f = os.path.join(base, "rl", f"S_k2_rel_cfg2_sd{s}.json")
