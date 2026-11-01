@@ -904,3 +904,11 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
   G\* 6.1°). **H2-S2 complete (pre-registered rule):** g_T student − RL −0.445 nats, one-sided 95 % LB −0.749 < +0.10 →
   "not detected"; RL scores higher on its own objective in S2 (RL 5.979, student 5.534, G\* 5.397, B-fan 5.263,
   random 3.510). Pending: D4 val3 students (75 jobs), sub-8 test3 re-reads of students (36 jobs) and random (100 jobs, ~30 done).
+- **Stage 13 [v4] finished (run 9, ≈ 12:30 UTC)** except the random anchor's sub-8 re-read (190/300, still running;
+  it enters no contrast). **D4 (pre-registered, val3 0–499 sub 8, complete 500/500): FAIL** — (i) Δ̂_succ −2.8 pp <
+  threshold −1.46 pp (student 0.486, G\* 0.514; SE 2.2 pp); (ii) Δ̂_BI −0.105 ≥ −0.15 passes; (iii) every seed > −4 pp
+  passes (−3.6 / −2.8 / −2.0). Reading fixed in the amendment: "not shown to reach G\* in S2 either" (no remedy round).
+  S2 test3 0–299 sub 8 (complete 300/300 paired): success G\* 0.553, students 0.451, RL 0.423, B-fan 0.370; student − G\*
+  −10.2 pp [−16.6, −4.3], student − RL +2.8 pp [−4.1, +9.6], G\* − RL +13.0 pp [+6.4, +19.4], student − B-fan +8.1 pp
+  [+1.7, +14.7]; BI student − RL +0.18 [+0.09, +0.27]. Note the val/test gap of the student − G\* contrast (−2.8 vs
+  −10.2 pp): both are pre-registered read-outs, both reported. All in `results/v4/results_v4.json`.
