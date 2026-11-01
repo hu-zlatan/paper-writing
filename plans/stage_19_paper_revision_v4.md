@@ -18,3 +18,13 @@
 - Checks: number audit — 6 unmatched, all benign (97.5 quantile; z = 0.842; SE = 0.311/1.645 derived); 31 cite keys
   all in cards; PENDING markers: random anchor, S2 Cal′ verify, val3 pipeline check.
 - Body grew > 30 % → second stage-18 pass after the PENDING markers are filled.
+
+## Pass 2 (run 10, after the second stage-18 pass)
+- Snapshot `paper/mypaper/v4/draft_v4_stage19pass1.md`; prompt `paper/mypaper/prompts/stage19_v4_pass2_user.txt`
+  (template verbatim; reviews = pass-2 record + both pass-2 reviews + binding block with `14_review2_checks.json`).
+- Fresh opus subagent, targeted edits: P1–P4, P6–P13 fixed (g_T inversion claimed for S2 only; numeric 7.5 pp rule
+  removed, BI first with ci95 everywhere; S2 student over-fitting under the registered recipe reported; E5 cell named;
+  E′ flip from set A; near-cap fraction; √0.5 gate margin explained). P5 (random anchor) filled by the pipeline.
+- Words: body ≈ 12,000 (+8 %), no section shorter. Number audit: 7 unmatched, all z-constants / labelled derivations.
+  `sat_frac` definition (g_T > cap − 0.5) checked in `code/touchbed/train_v2.py:241`.
+- < 30 % growth → stage 20 next (no third stage-18 pass).

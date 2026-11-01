@@ -8,13 +8,14 @@ over greedy cost-aware information-gain touch selection (G\*), and whether G\* c
 from it or trained by reinforcement learning (RL) on the same objective. The task uses a joint identity × planar-pose
 particle belief and a finger on a stand-off circle with travel cost $c(a) = 1 + \kappa|\Delta\phi|/\pi$. We study two
 cells: S12 (κ = 12), a stay-and-probe regime where G\* moves the finger 4.3° between probes per episode, and S2
-(κ = 2), in which it moves 44.8°. Over 32 screened first actions, one-step rollout over a reduced greedy completion
+(κ = 2), in which it moves 44.8° (report-only travel decomposition, added after the runs). Over 32 screened first actions, one-step rollout over a reduced greedy completion
 gains at most 2.2 % of the remaining expected ball information at κ = 12 (one-sided 95 % bound). With one belief-free
 DeepSets head, neither the DAgger-distilled student nor PPO was shown to reach G\* in either cell: the student failed its
 pre-registered non-inferiority gate twice in S12 and once in S2. Distillation had no detected advantage over RL on
-RL's own contrastive objective, which ranks G\* below both learners, unlike the grid posterior. In S2 the
-student exceeds a stay-and-fan heuristic on ball information (+0.53 nats) and success (+8.1 pp). Reduced-size G\* at
-21–46 ms per decision trails the students on ball information. The study is pre-registered, with one cell per regime;
+RL's own contrastive objective; in S2 that objective ranks G\* below both learners, unlike the grid posterior, while
+in S12 the ordering is marginal. In S2, in an exploratory comparison, the student exceeds a stay-and-fan heuristic on
+ball information (+0.53 nats) and success (+8.1 pp, ci95 [+1.7, +14.7]). In S12, reduced-size G\* at 21–46 ms per
+decision trails the students on ball information. The study is pre-registered, with one cell per regime;
 results are preliminary.
 
 ## 1 Introduction
@@ -50,8 +51,9 @@ third, less obvious question is hidden inside the second: whether RL's own objec
 information, orders policies the same way as the posterior that is used to judge localization.
 
 **Two regimes.** Our first design iteration studied one cell, S12 (shape set S, κ = 12, four probes). It turned out to
-be a *stay-and-probe* regime: on test, 79.3 % of the planner's between-probe moves are zero, and the finger moves on
-average 4.3° per episode between probes (test3 episodes 0–299). The logged total travel is slightly larger, 5.7° on
+be a *stay-and-probe* regime: on test3 episodes 0–299, 80.9 % of the planner's between-probe moves are zero (79.3 % on
+episodes 0–499), and the finger moves on average 4.3° per episode between probes. These between-probe figures, here
+and for S2 below, come from a report-only travel decomposition added after all runs, in response to review. The logged total travel is slightly larger, 5.7° on
 episodes 0–299 and 6.1° on episodes 0–499, because every episode starts from a continuous start angle and its first
 move includes a snap onto the 5.625° action grid that no policy chooses (Section 3.1). Either way, the motivating
 scenario of a finger stranded far from the informative region has little room to occur. We therefore added a second
@@ -73,12 +75,15 @@ to reach G\* in either regime. In S12 the distilled student failed its pre-regis
 after its one remedy. In S2 it failed again: on validation the success deficit was −2.80 pp against a threshold of
 −1.46 pp, and on test episodes 0–299 the student trails G\* by 0.183 nats of ball information (ci95 [−0.269, −0.094])
 and by 10.2 pp in success (ci95 [−16.6, −4.3]). On RL's own objective, the contrastive return $g_T$, no advantage of
-distillation was detected in either cell, and in S2 the point estimate favours RL by 0.445 nats. That objective,
-however, ranks G\* below both learners, whereas the grid posterior ranks G\* above both, and on the grid posterior the
-student leads RL on ball information in both cells (+0.289 and +0.180 nats). In S2 the student exceeds a belief-free
-stay-and-fan heuristic on ball information (+0.528 nats) and on success (+8.1 pp), whereas in S12 it exceeded the
-heuristic only on ball information. Two reduced-size G\* configurations, at logged median per-decision latencies of
-20.8 and 46.0 ms, trail the distilled student on ball information by 0.16–0.23 nats, with success unresolved.
+distillation was detected in either cell, and in S2 the point estimate favours RL by 0.445 nats. In S2 that
+objective, however, ranks G\* below both learners, whereas the grid posterior ranks G\* above both; in S12 the $g_T$
+ordering is marginal and the student − G\* BI interval includes 0. On the grid posterior the student leads RL on ball
+information in both cells (+0.289 and +0.180 nats). In S2, in an exploratory comparison on a reused test split, the
+student exceeds a belief-free stay-and-fan heuristic on ball information (+0.528 nats, ci95 [+0.420, +0.637]) and on
+success (+8.1 pp, ci95 [+1.7, +14.7]), whereas in S12 it exceeded the heuristic only on ball information. In S12, two
+reduced-size G\* configurations, at logged median per-decision latencies of 20.8 and 46.0 ms, trail the remedied
+distilled student on ball information by 0.16–0.23 nats (and the exploratory long student by 0.20–0.27 nats), with
+every success ci95 against the remedied student including 0.
 
 **Contributions.**
 - **C1.** A pre-registered bound on one-step look-ahead headroom over cost-aware greedy touch selection at κ = 12 over
@@ -88,8 +93,8 @@ heuristic only on ball information. Two reduced-size G\* configurations, at logg
   travelling cell (one gate), with a behavioural diagnosis of finger travel, split into the unavoidable grid snap and
   discretionary between-probe travel, and of probe use.
 - **C3.** A comparison of planner distillation against RL on RL's own objective in both cells, together with the
-  observation that this contrastive objective and the grid posterior order the planner and the learners differently,
-  and an exploratory separation of the student from a stay-and-fan heuristic in S2.
+  observation that this contrastive objective and the grid posterior order the planner and the learners differently
+  (clearly in S2, marginally in S12), and an exploratory separation of the student from a stay-and-fan heuristic in S2.
 - **C4.** A per-decision cost analysis: a latency decomposition of G\* and an exploratory comparison of reduced-size
   G\* with the students at logged latency, cross-checked against the latency protocol where it covers the same
   configurations.
@@ -217,8 +222,8 @@ $$\mathrm{BI}(h) = \log \hat P(B(s_0) \mid h) - \log P(B(s_0)) \quad \text{[nats
 
 BI is the shared information target of every information-based method below. It is also the more stable of the two
 evaluation metrics: success is a thresholded event that depends on whether posterior mass near the ball boundary falls
-inside or outside it, whereas BI changes smoothly with that mass. For this reason BI is the primary metric wherever a
-success contrast is within the evaluator's resolution (Section 4).
+inside or outside it, whereas BI changes smoothly with that mass. For this reason BI is the primary metric throughout,
+and every success contrast is reported second, with its ci95 (Section 4).
 
 ### 3.2 Cost-aware greedy planner G\*
 
@@ -364,15 +369,19 @@ is exploratory.
 
 **Evaluator.** Success and BI are read from an adaptive grid posterior that rebuilds each history exactly. Its gate E′
 compared grid subdivision 4 with 8 on 16 episodes and failed: one counted success flip occurred (mean |ΔBI| 0.0126
-nats, maximum 0.0523). Subdivision 8 is therefore used for every reported success and BI number. Between subdivisions 4
+nats, maximum 0.0523). Half of the 16 episodes came from a second shape set, A, at κ = 12, which is outside this
+study; the counted flip was a set-A B-fan episode, and the one set-S flip (also B-fan) did not count under the gate
+rule. Subdivision 8 is therefore used for every reported success and BI number. Between subdivisions 4
 and 8 the success outcome flips on 7.5 % of 200 set-S calibration episodes (mean |ΔBI| 0.0060 nats on the same
 episodes), and no finer grid was checked. $g_T$, H3, latency and label fit do not use the grid.
 
-**Reading rule: BI first.** Because a per-episode success flip rate of 7.5 % between two grid resolutions is of the same
-order as many success contrasts, we read any success contrast whose magnitude is below 7.5 pp as within the
-evaluator's resolution. For such contrasts BI is the primary metric and success is reported second. The rule is
-conservative (flips between resolutions need not all move in one direction), it was fixed in this revision rather than
-pre-registered, and it changes no gate verdict; the D3/D4 gates keep their registered success and BI clauses.
+**Reading success contrasts: BI first.** BI is the primary metric for every comparison, and every success contrast is
+reported second, with its ci95. No numeric resolution threshold is applied to success. One property of the evaluator
+should nevertheless be kept in mind: between grid subdivisions 4 and 8 the success outcome flips on 7.5 % of the 200
+set-S calibration episodes. That is a per-episode discordance rate between two resolutions, not a bound on the error
+of a paired contrast between methods scored by the same evaluator, but it means that success contrasts of a few pp
+should be read with the evaluator's finite resolution in mind. This reading convention is not pre-registered and
+changes no gate verdict; the D3/D4 gates keep their registered success and BI clauses.
 
 **Scoring pipelines.** Two code paths produce success and BI. In S2, the val3 episodes for D4 were scored inline by the
 evaluation runner (eval3) at subdivision 8, whereas every S2 test3 row is a re-read (regrid3) of runs that were first
@@ -402,7 +411,12 @@ a normal approximation, labelled post hoc and derived, and used only to describe
 $\hat\Delta_{\mathrm{succ}} \ge \max(-2\,\mathrm{pp},\ -\delta + 1.645\,\mathrm{SE}\sqrt{0.5})$; (ii) the same for BI
 with ε and a −0.15-nat floor; (iii) every seed's $\hat\Delta_{\mathrm{succ}} > -\delta$. Here δ = 0.04 (the cap). S2 has
 no pilot margin cell, so δ is borrowed from S12 and only the −0.15 BI floor applies. Because the margin in (i) adds
-$1.645\,\mathrm{SE}\sqrt{0.5}$ to −δ, the threshold becomes stricter as the paired standard error grows.
+$1.645\,\mathrm{SE}\sqrt{0.5}$ to −δ, the threshold becomes stricter as the paired standard error grows. The factor
+$\sqrt{0.5} = \sqrt{500/1000}$ is part of the pre-registered formula, which is unchanged: it projects the observed SE
+from 500 to 1,000 episodes, so on the observed SE the margin corresponds to $z = 1.645\sqrt{0.5} \approx 1.16$, about
+an 88 % one-sided bound rather than a 95 % one (derived). G\* is a Monte Carlo planner run once per episode, so the SE
+resamples episodes and student seeds but contains no Monte Carlo variance of the teacher. Neither point changes a
+verdict, since every D gate failed.
 
 **H2 and H3 rules.** H2 (and H2-S2) passes iff the one-sided 95 % lower bound of $g_T(\text{student}) - g_T(\text{RL})$
 on test3 0–499 exceeds +0.10 nats; otherwise the advantage is "not detected". H3 is Hold iff the one-sided 95 % UB of
@@ -444,7 +458,7 @@ configuration, we report both.
 | Row | Item | Measured | Rule | Outcome |
 |---|---|---|---|---|
 | R1 | Cal′ budgets | S12 τ = 4.9 (G\* 3.96 probes over 200 calibration episodes); S2 τ = 4.7 (G\* 3.875 probes over 200 calibration episodes, verified after the S2 runs) | G\* mean executed probes on cal3 0–199 within 4 ± 0.3 | S12 pass; S2 pass (verified post hoc) |
-| R2 | E′ evaluator | mean \|ΔBI\| 0.0126 nats; 1 counted flip | no counted flip | fail → sub 8 |
+| R2 | E′ evaluator | mean \|ΔBI\| 0.0126 nats; 1 counted flip (set A, B-fan; the set-S flip did not count) | no counted flip | fail → sub 8 |
 | R3 | G5′ S12 pilot | G\* 0.426 (n = 500), random 0.075 (n = 200); D_c 0.351; H★ B-fan | G\* ≥ random + 10 pp | pass |
 | R4 | Lat′ / H1-fb | full G\* / pruned-16 = 3.22 | ≥ 10 | H1-fb withdrawn |
 | R5a | D3 S12, first attempt | Δ̂_succ −5.87 pp (thr −1.43); Δ̂_BI −0.199 (thr −0.15); seeds −4.2 / −8.0 / −5.4 pp | (i)–(iii) | fail |
@@ -500,12 +514,13 @@ whole of B-fan's logged travel (1.454° in both cells), because B-fan never move
 
 In S12, G\* moves the finger 4.3° per episode between probes on test3 0–299 (logged 5.7° on the same episodes, and
 6.1° on test3 0–499 in the behaviour log); 79.3 % of its between-probe moves are zero and it executes 3.962 probes
-(0–499). Removing the snap therefore makes the stay-and-probe character of S12 slightly stronger than the logged figure
+(0–499; on 0–299, 80.9 % of its 889 between-probe moves are zero). Removing the snap therefore makes the stay-and-probe character of S12 slightly stronger than the logged figure
 suggests. In S2, G\* moves 44.8° between probes (logged 46.9°) and executes 3.873 probes. Its first leg is only the grid
 snap in 74 % of S2 episodes, against 94 % in S12, so in S2 G\* also chooses to move away from the start angle on its
 first decision in about a quarter of episodes (26 %, derived as 1 − 0.74). RL ends at exactly 3 probes in both cells;
 it moves 108.8° between probes in S2 and 16.8° in S12 (seeds pooled, test3 0–299), and its first leg is never only the
-snap in S2. Random moves 82.4° between probes in S2 and 8.0° in S12, with most of its travel in its first leg.
+snap in S2. Random moves 82.4° between probes in S2 and 8.0° in S12. Its first leg accounts for most of its logged travel in S12
+(31.0° of 39.0°) but only about half in S2 (89.8° of 172.2°, 52 %, derived).
 
 **Table 4. Behaviour (report-only). Logged travel includes the first-leg grid snap (floor 1.454° on test3 0–299);
 between-probe travel excludes the first leg. S12 logged travel, probes and zero moves: test3 0–499 (B-fan 0–299), per
@@ -531,7 +546,7 @@ decisions.
 of −0.15 and Δ̂_succ = −5.87 pp against a threshold of −1.43 pp. After the remedy, BI was −0.096 (pass), success was
 −4.40 pp against −1.68 pp (fail) and per-seed success −4.6 / −4.6 / −4.0 pp (fail), so H1 is dead. On test3 0–299 the
 remedied student trails G\* by 0.049 nats BI (ci95 [−0.114, +0.019]) and by 4.4 pp success (ci90 [−8.6, −0.3], ci95
-[−9.3, +0.6]); the success contrast is within the evaluator's resolution, and neither ci95 excludes 0. An exploratory,
+[−9.3, +0.6]); neither ci95 excludes 0. An exploratory,
 post-freeze student trained for 200 epochs on the remedied data was not shown to differ from G\* on test3 (BI −0.008,
 ci95 [−0.083, +0.066]; success −1.7 pp, ci95 [−6.8, +3.4]; long − remedied BI +0.041, ci95 [−0.016, +0.098], success
 +2.8 pp, ci95 [−1.0, +6.7]), so in S12 the optimisation budget is left open as an explanation.
@@ -539,14 +554,14 @@ ci95 [−0.083, +0.066]; success −1.7 pp, ci95 [−6.8, +3.4]; long − remedi
 **S2 (D4).** The S2 student failed D4: on val3 the success deficit was −2.80 pp against a threshold of −1.46 pp, while
 the BI clause (−0.105 nats, SE 0.039, against the −0.15 floor) and the per-seed clause passed. The val3 means are 0.486
 (student) and 0.514 (G\*) for success and 6.563 and 6.667 nats for BI. On test3 0–299 the student trails G\* by 0.183
-nats BI (ci95 [−0.269, −0.094]) and by 10.2 pp success (ci95 [−16.6, −4.3]); both intervals exclude 0, and the success
-gap exceeds the evaluator's resolution. The test gap is wider than the val3 gap for every seed (by 5.4, 11.2 and
+nats BI (ci95 [−0.269, −0.094]) and by 10.2 pp success (ci95 [−16.6, −4.3]); both intervals exclude 0. The test gap is wider than the val3 gap for every seed (by 5.4, 11.2 and
 5.7 pp); both the G\* row (+3.9 pp from val3 to test3) and the student row (−3.5 pp) move, and the difference is ≈ 2.0
-combined SE under independence (conservative given shared students). Its cause is not identified. The scoring path is ruled out on val3 0–49: re-running those
+combined SE under independence (derived, post hoc, from the val3 SE and a test SE back-computed from the ci95 width;
+conservative given shared students). Its cause is not identified. The scoring path is ruled out on val3 0–49: re-running those
 episodes through the test pipeline reproduces the inline actions, success and BI exactly (Section 4). What remains
 is split-to-split variation in which episodes are hard, which three seeds and 500/300 episodes cannot resolve. No interval was computed for the val3 BI deficit beyond its SE. The S2 recipe already was
-the budget-matched 200-epoch recipe, so the optimisation-budget explanation left open in S12 does not account for the
-S2 result in the same way.
+the budget-matched 200-epoch recipe, so the under-training explanation left open in S12 does not account for the S2
+result in the same way; the S2 training record below instead points to over-fitting at the kept checkpoint.
 
 **Post-hoc sensitivity of the D gates (derived, not pre-registered).** Taking the observed SE as fixed, clause (i)
 passes with 80 % probability only if the true success difference is at least the threshold plus 0.842 SE: about
@@ -556,7 +571,13 @@ of D4 is looser in the same sense (−0.150 + 0.842 × 0.039 ≈ −0.12 nats), 
 
 **S2 training record.** Every S2 round ran to its 200-epoch cap. Held-out $\bar R$ did not improve over DAgger: it was
 0.300–0.312 after round 0 and 0.298–0.322 after round 2 across the three seeds. Training $\bar R$ was not logged in S2,
-so the S12 label-fit rule cannot be applied there, and under-fitting in S2 cannot be ruled out from the record.
+so the S12 label-fit rule cannot be applied there. The per-epoch record (report-only, read after review) shows
+over-fitting rather than under-fitting under the registered recipe: in all nine seed × round runs, held-out $\bar R$
+was lowest at an epoch between 22 and 130 (minima 0.277–0.308) and then rose by 0.007–0.026 to the kept epoch-200
+checkpoint, while training loss was still falling over the last 20 epochs (for example, seed 601 round 0: held-out
+$\bar R$ 0.288 at epoch 34 and 0.308 at epoch 200). The fixed 200-epoch, last-checkpoint recipe was pre-registered in
+the S2 amendment and is not changed here; early stopping on held-out $\bar R$ is an untested alternative, and whether
+it would change D4 is unknown.
 
 **S12 label fit and belief input.** All six S12 history students fit their training labels by the registered rule
 (train top-1 0.511–0.534, train $\bar R$ 0.169–0.206; under-fit requires $\bar R$ > 0.25 or top-1 < 0.50), which
@@ -584,8 +605,8 @@ tests could therefore detect only advantages of roughly half a nat.
 
 **Success and BI (Table 5).** On BI, the student leads RL by +0.289 nats (ci95 [+0.117, +0.465]) in S12 and +0.180
 nats (ci95 [+0.091, +0.273]) in S2; on success, student − RL is +2.6 pp (ci95 [−3.7, +8.8]) in S12 and +2.8 pp (ci95
-[−4.1, +9.6]) in S2, both within the evaluator's resolution. G\* − RL is +0.338 nats BI (ci95 [+0.158, +0.520]) and
-+7.0 pp success (ci95 [+0.2, +13.7]) in S12, and +0.363 nats BI (ci95 [+0.263, +0.467]) and +13.0 pp success (ci95
+[−4.1, +9.6]) in S2, both ci95 including 0. G\* − RL is +0.338 nats BI (ci95 [+0.158, +0.520]) and
++7.0 pp success (ci95 [+0.2, +13.7], lower end close to 0) in S12, and +0.363 nats BI (ci95 [+0.263, +0.467]) and +13.0 pp success (ci95
 [+6.4, +19.4]) in S2. RL ends at 3 probes and travels several times G\*'s distance in both cells (logged travel 2.9×
 in S2 and about 4× in S12), so the record does not identify why the success gap differs between cells, and no
 cross-cell test of it exists.
@@ -598,10 +619,15 @@ in S12 and not re-tuned for S2) rather than of RL in general; H2 and H2-S2 compa
 
 **Instrument ordering.** On seed-averaged point estimates $g_T$(G\*) is below both learned policies in S2 (5.40 vs
 5.53 / 5.98) and marginally in S12 (5.30 vs 5.37, with 3 of 6 S12 learner seeds below G\*); every S2 learner seed is
-above 5.397; no interval exists for these contrasts. The grid posterior orders G\* above both learners in both cells,
-and the student above RL on BI. In S12, cap saturation of $g_T$ is rare (5.8 % of G\* episodes, 0.4–3.4 % for the
-learners) and ordered like BI, so the cap alone is unlikely to explain the inversion. We record this as a methods
-observation, not a mechanism.
+above 5.397; no interval exists for these contrasts. The grid posterior orders G\* above both learners in both cells
+on point estimates (in S2 both ci95 exclude 0; in S12 the student − G\* BI ci95 includes 0), and the student above RL
+on BI. The inversion is therefore supported in S2 and marginal in S12, where it rests on two orderings, neither
+resolved. In S12, exact cap saturation of $g_T$ on test is rare (5.8 % of G\* episodes, 0.4–3.4 % for the learners)
+and ordered like BI. That count covers only episodes at the cap: at the end of training, 23–31 % of the S12 RL
+policies' last-batch episodes were within 0.5 nats of the cap (trainer record `v3:14_behaviour.rl_final`), and near-cap
+compression was not measured on test, so the cap is not ruled out as a contributor. The policies also differ in probe
+count (RL always 3) and travel, so the record cannot separate a property of the bound from RL's particular way of
+scoring well on it. We record this as a methods observation, not a mechanism.
 
 **Table 5. Test rows. Success and BI on test3 0–299 (sub-8 grid); $g_T$ on test3 0–499. S12 rows are from the S12
 study, S2 rows from the v4 amendment; no cross-cell test.**
@@ -631,10 +657,11 @@ comparable to the test3 rows.
 ### 5.5 Learned policies against the stay-and-fan heuristic (exploratory)
 
 On S2 test3 the student exceeds B-fan on BI (+0.53 nats, ci95 [+0.42, +0.64]) and on success (+8.1 pp, ci95
-[+1.7, +14.7]); the success contrast is just above the evaluator's resolution. In S12 it exceeded B-fan on BI (+0.23,
+[+1.7, +14.7]); the success interval excludes 0 but its lower end is small next to the evaluator's 7.5 % calibration
+flip rate (Section 4), and the comparison is on a reused test split. In S12 it exceeded B-fan on BI (+0.23,
 ci95 [+0.14, +0.31]) but not on success (+2.2 pp, ci95 [−2.8, +7.3]), so S2 adds a success separation; the comparison
-across cells is untested. B-fan − G\* is −0.711 nats BI and −18.3 pp success in S2, against −0.275 nats and −6.7 pp in
-S12. In S12, RL is not distinguishable from B-fan on either metric (BI −0.063, ci95 [−0.246, +0.120]; success −0.3 pp,
+across cells is untested. B-fan − G\* is −0.711 nats BI (ci95 [−0.830, −0.594]) and −18.3 pp success (ci95 [−24.7, −12.0]) in S2, against
+−0.275 nats (ci95 [−0.367, −0.184]) and −6.7 pp (ci95 [−12, −1]) in S12. In S12, RL is not distinguishable from B-fan on either metric (BI −0.063, ci95 [−0.246, +0.120]; success −0.3 pp,
 ci95 [−6.9, +6.3]); in S2 no RL − B-fan interval was computed, so it is not reported as a contrast. B-fan is the only
 heuristic run in S2, and it was chosen as H★ on S12 pilot data, so the S2 separation is from the stay-and-fan heuristic,
 not from the best available heuristic in the travelling regime.
@@ -657,8 +684,9 @@ eval3-logged per-decision latencies on free runners (not Lat′).**
 | g500_512_4 | 0.3767 | 6.037 | 3.777 | 46.0 ms | −0.6 pp [−5.8, +4.8]; −0.162 [−0.261, −0.065] | −3.3 pp [−8.9, +2.3]; −0.203 [−0.304, −0.099] | −5.0 pp [−11.0, +1.3]; −0.211 [−0.314, −0.108] |
 
 At logged median per-decision latencies of 20.8 and 46.0 ms (eval3, free runners), neither reduced G\* exceeds the
-distilled students: both are lower on BI by 0.16–0.27 nats (ci95 exclude 0), and every success contrast with the
-students is within the evaluator's resolution and unresolved. Lat′ also timed these two configurations on the S12
+distilled students: both are lower on BI by 0.16–0.27 nats (ci95 exclude 0; 0.16–0.23 against the remedied student,
+0.20–0.27 against the long student), and every success ci95 against the students includes 0, so success is
+unresolved. Lat′ also timed these two configurations on the S12
 pilot decision states: 20.2 ms for g125_512_16 and 40.0 ms for g500_512_4 (relative CI half-widths 1.6 % and 6.2 %),
 close to the eval3-logged medians; against the student's Lat′ median of 0.408 ms these are about 49× and 98× slower
 (derived). On a different split (pilot3, n = 186 / 177, incomplete) the same configurations scored 0.382 / 0.390
@@ -677,7 +705,10 @@ relevant evidence that travel cost does not open a large one-step gap, and it to
 **Making the planner travel did not make it learnable to non-inferiority.** S12 left open the explanation that the
 student failed because the registered stopping rule under-trained it, since the exploratory 200-epoch student was not
 shown to differ from G\* on test. S2 was trained with that budget-matched recipe from the start and still failed its
-gate, and on test its success deficit is larger than on validation for every seed; the pooled BI deficit also grows
+gate, and its training record shows that 200 epochs overshot the held-out optimum rather than falling short of it
+(held-out $\bar R$ lowest at epochs 22–130 and 0.007–0.026 higher at the kept checkpoint, while training loss still
+fell). Under-training therefore does not explain S2, but over-fitting under the registered last-checkpoint rule may
+contribute, and a checkpoint chosen by held-out $\bar R$ was not tested. On test, the S2 student's success deficit is larger than on validation for every seed; the pooled BI deficit also grows
 (−0.183 nats on test3 against −0.105 on val3). The behavioural
 record locates part of the difficulty. In S2 the student moves a G\*-like amount between probes on average, so it is
 not merely a stay-and-probe policy, but its travel is only weakly correlated with G\*'s episode by episode: it travels,
@@ -688,17 +719,20 @@ standard errors, could be passed reliably only by a student at parity with G\*, 
 rather than a tolerance of a few points.
 
 **What learning buys over no learning.** Where staying is cheap (S12), neither learner was shown to exceed the
-travel-nearest stay-and-fan heuristic on success, and RL was not distinguishable from it on BI either. In S2 the student
-exceeds it on both BI and success, while the heuristic falls further behind G\*. One reading is that the learned head
+travel-nearest stay-and-fan heuristic on success, and RL was not distinguishable from it on BI either. In S2, in an exploratory comparison on a
+reused test split, the student exceeds it on BI and on success (+8.1 pp, ci95 [+1.7, +14.7]), while the heuristic falls further behind G\*. One reading is that the learned head
 captures some belief-dependent structure of the planner's choices that a belief-free rule cannot, and that this
 becomes visible on success only when the planner's own strategy departs from staying. We did not test this across
 cells, and S2 compares against B-fan only.
 
-**$g_T$ as a yardstick.** This is the most transferable observation of the study. The contrastive objective that RL
-optimises ranks G\* below both learners in both cells, whereas the grid posterior ranks it above, and on the grid
-posterior the student leads RL on BI in both cells. In S2 the point estimate on $g_T$ favours RL by 0.445 nats while
-every BI contrast between the learners favours the student and every success contrast is within the evaluator's
-resolution. Consequently, "no advantage on RL's own objective" carries little information about localization quality,
+**$g_T$ as a yardstick.** This is potentially the most transferable observation of the study, but it rests on one
+cell. In S2 the contrastive objective that RL optimises ranks G\* below both learners (every learner seed above G\*),
+whereas the grid posterior ranks it above both (the student − G\* and G\* − RL ci95 exclude 0). In S12 the $g_T$
+ordering is marginal (5.30 vs 5.37, with 3 of 6 learner seeds below G\*) and the student − G\* BI ci95 includes 0, so
+S12 neither confirms nor contradicts it. No interval for $g_T$(G\*) − $g_T$(learner) was computed in either cell, and
+near-cap compression of $g_T$ was not measured on test. On the grid posterior the student leads RL on BI in both
+cells. In S2 the point estimate on $g_T$ favours RL by 0.445 nats while every BI contrast between the learners favours
+the student and the success ci95 between the learners includes 0. Consequently, "no advantage on RL's own objective" carries little information about localization quality,
 and H2 and H2-S2 are best read as findings about that proxy. The RL policies also show what optimising this proxy
 under a budget can produce: all of them stop at three probes and travel several times as far as G\*. For amortized
 design work that reports sPCE-type bounds as the quality of a learned policy, our record suggests checking the
@@ -731,6 +765,11 @@ The qualifiers that the body states once are collected here; each applies to eve
   non-detection is not evidence of equality.
 - **No multiplicity correction; exploratory rows.** No contrast is corrected for multiplicity, and the S2 test rows,
   B-fan rows, the long student and E5 are exploratory.
+- **$g_T$/posterior disagreement supported in one cell.** The inversion holds on point estimates in S2 only; in S12 it
+  is marginal, no interval for $g_T$(G\*) − $g_T$(learner) was computed in either cell, near-cap compression of $g_T$
+  was not measured on test, and RL's fixed three-probe behaviour is not separated from a property of the bound.
+- **Gate level and teacher variance.** The pre-registered $\sqrt{0.5}$ factor makes the D-gate margin about an 88 %
+  one-sided bound on the observed SE, and the SE contains no Monte Carlo variance of G\*, which is run once per episode.
 - **Evaluator not shown converged.** The evaluator gate failed and sub 8 is used without a finer (for example sub-16)
   check; success flips on 7.5 % of calibration episodes between sub 4 and sub 8, which is the order of most success
   contrasts. S2 test3 rows were produced on more than one machine and pipeline.
@@ -740,7 +779,9 @@ The qualifiers that the body states once are collected here; each applies to eve
 - **S2 calibration verified only after the fact.** The S2 budget was set by the Cal′ rule, and its probe-count
   verification (3.875 probes, within 4 ± 0.3) was run after the S2 experiments rather than before them, as it was in S12.
 - **Comparators not shown tuned.** No S2 hyperparameter grid was run, and training $\bar R$ was not logged in S2, so
-  under-fitting there cannot be ruled out; RL was not re-tuned for S2 (config 2 was chosen on the trainer's val_v2 stream
+  the S12 label-fit rule cannot be applied there; the per-epoch held-out record instead shows over-fitting under the
+  registered fixed-200-epoch, last-checkpoint recipe (held-out $\bar R$ lowest at epochs 22–130 and 0.007–0.026 higher
+  at the kept checkpoint), and early stopping on held-out $\bar R$ was not tried; RL was not re-tuned for S2 (config 2 was chosen on the trainer's val_v2 stream
   and sits at the edge of the learning-rate grid), and every RL policy collapses to exactly three probes, so H2 and
   H2-S2 compare against this RL setup, not against RL in general. No probe-count-aware RL variant was run.
 - **Representation question open.** The belief-input control is under-fit and isolates nothing; no larger or
@@ -775,10 +816,12 @@ planner moves 44.8° between probes rather than 4.3°, is also small. Second, ne
 planner in either regime with one belief-free head; in the travelling regime the distilled student moves the finger
 about as much as the planner on average, but its travel is only weakly correlated with the planner's, and it trails
 the planner on ball information on test. Third, no advantage of distillation over RL was detected on RL's own
-objective in either regime, and that contrastive objective orders the planner and the learners differently from the
-grid posterior, on which the student leads RL in both cells; we regard this disagreement as the study's most
-transferable lesson for amortized active sensing. Fourth, at tens of milliseconds per decision, reduced-size planners
-trail the students on ball information with success unresolved; nothing was compared at matched accuracy. Concrete
+objective in either regime; in the travelling regime that contrastive objective orders the planner and the learners
+differently from the grid posterior, while in the stay-and-probe regime the ordering is marginal, and on the grid
+posterior the student leads RL in both cells. Supported in one cell, this disagreement is an observation that amortized
+active sensing work should check rather than an established lesson. Fourth, in S12, the only cell where they were run,
+reduced-size planners at tens of milliseconds per decision trail the students on ball information with success
+unresolved; nothing was compared at matched accuracy. Concrete
 next steps are more cells and seeds per regime, regret on student-visited states, a full-action screen for the
 headroom estimator, a resolution of the S2 validation/test
 discrepancy, a probe-count-aware RL comparator, and reduced planners timed under the latency protocol alongside the
