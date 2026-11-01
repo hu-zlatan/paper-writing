@@ -30,10 +30,16 @@ def require_v3_actions():
 
 
 def dagger_index(round_: int, seed: int, j: int) -> int:
-    """Amendment v3.1 D1: index = 100,000·r + 1,000·(seed − 500) + j, r ∈ {1, 2}, j ∈ [0, 800)."""
-    if round_ not in (1, 2) or not 0 <= j < 800 or not 501 <= seed <= 599:
+    """Amendment v3.1 D1: index = 100,000·r + 1,000·(seed − 500) + j, r ∈ {1, 2}, j ∈ [0, 800), seeds 501-599 (v3).
+    v4 students (amendment v4.0 E2), seeds 601-699: index = 1,000,000 + 100,000·r + 1,000·(seed − 600) + j, a range
+    disjoint from every v3 index (the dagger3 split is also kappa-keyed)."""
+    if round_ not in (1, 2) or not 0 <= j < 800:
         raise ValueError((round_, seed, j))
-    return 100_000 * round_ + 1_000 * (seed - 500) + j
+    if 501 <= seed <= 599:
+        return 100_000 * round_ + 1_000 * (seed - 500) + j
+    if 601 <= seed <= 699:
+        return 1_000_000 + 100_000 * round_ + 1_000 * (seed - 600) + j
+    raise ValueError((round_, seed, j))
 
 
 def state_v3(setname: str, split: str, i: int, kappa: float | None = None, prior=None):

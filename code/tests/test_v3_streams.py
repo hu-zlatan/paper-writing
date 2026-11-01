@@ -28,10 +28,12 @@ def test_training_split_needs_kappa_and_differs_by_kappa():
 def test_dagger_indices_disjoint():
     seen = set()
     for r in (1, 2):
-        for seed in list(range(501, 506)) + [521, 522, 523, 531, 532, 533]:
+        for seed in list(range(501, 506)) + [521, 522, 523, 531, 532, 533, 601, 602, 603]:
             for j in range(800):
                 i = dagger_index(r, seed, j)
                 assert i not in seen
                 seen.add(i)
     with pytest.raises(ValueError):
         dagger_index(3, 501, 0)
+    with pytest.raises(ValueError):
+        dagger_index(1, 600, 0)
