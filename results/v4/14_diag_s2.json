@@ -1,0 +1,30 @@
+{
+ "note": "report-only diagnostics (stage 18 v4 review M2, M6); no gate",
+ "cal_verify_S_k2": {
+  "n_episodes": 200,
+  "complete": true,
+  "mean_probes": 3.875,
+  "rule": "mean probes within 4 +- 0.3",
+  "passes": true
+ },
+ "pipe_check_val3_0_49": {
+  "gstar": {
+   "n_episodes": 50,
+   "identical_actions": 50,
+   "n_reread": 50,
+   "same_success": 50,
+   "max_abs_bi_diff": 5.329070518200751e-15,
+   "success_inline": 0.5,
+   "success_reread": 0.5
+  },
+  "student_s601": {
+   "n_episodes": 50,
+   "identical_actions": 50,
+   "n_reread": 50,
+   "same_success": 50,
+   "max_abs_bi_diff": 1.7763568394002505e-15,
+   "success_inline": 0.46,
+   "success_reread": 0.46
+  }
+ }
+}
