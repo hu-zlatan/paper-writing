@@ -1,0 +1,13 @@
+{
+ "purpose": "v4 E5 follow-up (run 9): 4 early-stopped g125_512_16 episodes",
+ "jobs": [
+  {
+   "id": "v4_e5_g125_512_16_102_r107",
+   "cmd": "python main.py eval3 --set S --method g125_512_16 --kappa 12 --tau 4.9 --n-star 4 --split test3 --start 107 --count 1 --sub 8 --budget-minutes 25 --out ../results/v4/e5/S_k12_g125_512_16_102_r107"
+  },
+  {
+   "id": "v4_e5_g125_512_16_246_r249",
+   "cmd": "python main.py eval3 --set S --method g125_512_16 --kappa 12 --tau 4.9 --n-star 4 --split test3 --start 249 --count 3 --sub 8 --budget-minutes 25 --out ../results/v4/e5/S_k12_g125_512_16_246_r249"
+  }
+ ]
+}
