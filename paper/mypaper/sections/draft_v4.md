@@ -55,9 +55,9 @@ average 4.3° per episode between probes (test3 episodes 0–299). The logged to
 episodes 0–299 and 6.1° on episodes 0–499, because every episode starts from a continuous start angle and its first
 move includes a snap onto the 5.625° action grid that no policy chooses (Section 3.1). Either way, the motivating
 scenario of a finger stranded far from the informative region has little room to occur. We therefore added a second
-cell, S2 (κ = 2), whose budget was set by the same calibration rule for four probes; that rule's probe-count
-verification for S2 has not yet been completed ([PENDING:v4:cal_verify_S_k2]), and on test the planner executes
-3.873 probes on average. In S2 the planner moves 44.8° between probes per episode (46.9° logged). Both cells use the
+cell, S2 (κ = 2), whose budget was set by the same calibration rule for four probes; the rule's probe-count
+verification for S2, run after the S2 experiments, gives 3.875 probes on 200 calibration episodes (within 4 ± 0.3),
+and on test the planner executes 3.873 probes on average. In S2 the planner moves 44.8° between probes per episode (46.9° logged). Both cells use the
 same planner, the same learners and the same head, so the price of moving is the only design variable that changes
 between them.
 
@@ -201,8 +201,9 @@ episodes cal3 0–199). The two cells differ only in the price of moving:
   remains beyond four unit-cost probes, so any substantial move costs a probe.
 - **S2** = (S, κ = 2, τ = 4.7, $n^\* = 4$). τ was set by the Cal′ rule from a mean unbudgeted travel time of 0.7257
   stroke-units for G\* over the calibration episodes, and a move across the circle costs at most 2 stroke-units. The
-  Cal′ probe-count verification for S2 is pending: [PENDING:v4:cal_verify_S_k2]. As an observation, not a gate
-  result, G\* executes 3.873 probes on average on S2 test3 episodes 0–299.
+  Cal′ probe-count verification for S2 was run after the S2 experiments (report-only, same protocol as S12): with the
+  budget enforced, G\* executes 3.875 probes on average over cal3 episodes 0–199, within the rule's 4 ± 0.3. On S2
+  test3 episodes 0–299 it executes 3.873 probes on average.
 
 The H3 row at κ = 2 was measured with exactly this configuration (set S, κ = 2, τ = 4.7, $n^\* = 4$), so it is the S2
 cell's headroom evidence.
@@ -375,18 +376,20 @@ pre-registered, and it changes no gate verdict; the D3/D4 gates keep their regis
 
 **Scoring pipelines.** Two code paths produce success and BI. In S2, the val3 episodes for D4 were scored inline by the
 evaluation runner (eval3) at subdivision 8, whereas every S2 test3 row is a re-read (regrid3) of runs that were first
-executed without the grid, and the test3 rows were produced on more than one machine. This val/test asymmetry is a
+executed without the grid, and the test3 rows were produced on more than one machine. This val/test asymmetry was a
 candidate cause of the S2 validation/test discrepancy reported in Section 5.3. The same two paths were also used for
-S12, where the remedied student's validation and test deficits agree (−4.40 pp and −4.4 pp), which makes the
-asymmetry an unlikely but untested cause. A report-only check re-reads val3 episodes 0–49 through the test pipeline:
-[PENDING:v4:pipe_check].
+S12, where the remedied student's validation and test deficits agree (−4.40 pp and −4.4 pp). A report-only check
+re-ran val3 episodes 0–49 through the test pipeline (no-grid execution on a different runner, then the sub-8 re-read)
+for G\* and student seed 601: the action sequences are identical to the inline D4 runs on 50 of 50 episodes for both
+policies, success agrees on 50 of 50, and the largest BI difference is below $10^{-14}$ nats. On these episodes the two
+pipelines are equivalent, so the scoring path does not explain the S2 validation/test discrepancy.
 
 **Methods notes.** Three properties of the instruments matter for reading the results, and we record them here rather
 than as contributions. (i) The evaluator has a finite resolution, as above. (ii) The contrastive return $g_T$ and the
 grid posterior do not order the policies in the same way (Section 5.4); $g_T$ is RL's objective by construction and
 is reported for H2 and H2-S2, but it is not used as a localization metric. (iii) In S2 the student's deficit to G\* on
-test3 is larger than on val3 for every seed (Section 5.3); its cause is untested and the pipeline check above is
-pending.
+test3 is larger than on val3 for every seed (Section 5.3); its cause is not identified, and the pipeline check above
+rules out the scoring path.
 
 **Statistics.** Paired differences use a crossed episode × seed bootstrap with B = 10,000. H2 bounds are the 5 % / 95 %
 quantiles (one-sided 95 %); ci95 contrasts are the 2.5 % / 97.5 % quantiles (two-sided); the D3/D4 standard error is
@@ -440,7 +443,7 @@ configuration, we report both.
 
 | Row | Item | Measured | Rule | Outcome |
 |---|---|---|---|---|
-| R1 | Cal′ budgets | S12 τ = 4.9 (G\* 3.96 probes over 200 calibration episodes); S2 τ = 4.7, verification [PENDING:v4:cal_verify_S_k2] | G\* mean executed probes on cal3 0–199 within 4 ± 0.3 | S12 pass; S2: τ set by the Cal′ rule; verification pending |
+| R1 | Cal′ budgets | S12 τ = 4.9 (G\* 3.96 probes over 200 calibration episodes); S2 τ = 4.7 (G\* 3.875 probes over 200 calibration episodes, verified after the S2 runs) | G\* mean executed probes on cal3 0–199 within 4 ± 0.3 | S12 pass; S2 pass (verified post hoc) |
 | R2 | E′ evaluator | mean \|ΔBI\| 0.0126 nats; 1 counted flip | no counted flip | fail → sub 8 |
 | R3 | G5′ S12 pilot | G\* 0.426 (n = 500), random 0.075 (n = 200); D_c 0.351; H★ B-fan | G\* ≥ random + 10 pp | pass |
 | R4 | Lat′ / H1-fb | full G\* / pruned-16 = 3.22 | ≥ 10 | H1-fb withdrawn |
@@ -451,7 +454,7 @@ configuration, we report both.
 | R6 | H2 S12 | Δg_T +0.0002 nats, LB −0.3103 | LB > +0.10 | not detected |
 | R6b | H2-S2 | Δg_T −0.4452 nats, LB −0.7485, UB −0.1616 | LB > +0.10 | not detected |
 | R7 | H3 | UB95 G(12) = 0.0221; bias ratio 0.957 | UB < 0.03; ratio ≤ 1.02 | Hold |
-| R8 | S2 val3 0–49 re-read through the test pipeline (report-only) | [PENDING:v4:pipe_check] | report-only | pending |
+| R8 | S2 val3 0–49 re-read through the test pipeline (report-only) | identical actions 50/50, identical success 50/50 (G\* and student s601) | report-only | pipelines equivalent |
 
 All D4, test3, H2 and E5 blocks are complete. The S2 test3 random anchor is not yet complete
 ([PENDING:v4:14_s2_analysis.test3_sub8.rows.random]), so it enters no contrast. The S2 Cal′ verification (R1) and the
@@ -539,9 +542,9 @@ the BI clause (−0.105 nats, SE 0.039, against the −0.15 floor) and the per-s
 nats BI (ci95 [−0.269, −0.094]) and by 10.2 pp success (ci95 [−16.6, −4.3]); both intervals exclude 0, and the success
 gap exceeds the evaluator's resolution. The test gap is wider than the val3 gap for every seed (by 5.4, 11.2 and
 5.7 pp); both the G\* row (+3.9 pp from val3 to test3) and the student row (−3.5 pp) move, and the difference is ≈ 2.0
-combined SE under independence (conservative given shared students). Its cause is untested: the val3 rows were scored
-inline and the test3 rows by a re-read on more than one machine (Section 4), and the pipeline check is pending
-([PENDING:v4:pipe_check]). No interval was computed for the val3 BI deficit beyond its SE. The S2 recipe already was
+combined SE under independence (conservative given shared students). Its cause is not identified. The scoring path is ruled out on val3 0–49: re-running those
+episodes through the test pipeline reproduces the inline actions, success and BI exactly (Section 4). What remains
+is split-to-split variation in which episodes are hard, which three seeds and 500/300 episodes cannot resolve. No interval was computed for the val3 BI deficit beyond its SE. The S2 recipe already was
 the budget-matched 200-epoch recipe, so the optimisation-budget explanation left open in S12 does not account for the
 S2 result in the same way.
 
@@ -710,7 +713,7 @@ two configurations agree with the logged ones. The relevant comparison for pract
 full-size G\* but along a latency–accuracy frontier that is only partly mapped.
 
 **Open questions.** Does regret measured on student-visited states confirm covariate shift? Does the S2 validation/test
-discrepancy survive the pipeline check and persist with more episodes and seeds? Do the findings hold in more cells per
+discrepancy, which is not a scoring-pipeline artefact, persist with more episodes and seeds? Do the findings hold in more cells per
 regime? Would a full 512-action screen, or a structured travel-then-fan candidate family, change H3? Would a
 probe-count-aware RL objective or an S2-tuned RL configuration change H2-S2? Would a belief-input head that fits its
 labels close the learnability gap? Where do the learners sit on a reduced-planner frontier timed under Lat′?
@@ -732,10 +735,10 @@ The qualifiers that the body states once are collected here; each applies to eve
   check; success flips on 7.5 % of calibration episodes between sub 4 and sub 8, which is the order of most success
   contrasts. S2 test3 rows were produced on more than one machine and pipeline.
 - **Unexplained S2 validation/test gap.** The S2 test gap is wider than the validation gap for every seed, and its
-  cause is untested. The val3 rows were scored inline and the test3 rows by a re-read; the check that would rule this
-  out is pending ([PENDING:v4:pipe_check]).
-- **S2 calibration not verified.** The S2 budget was set by the Cal′ rule, but its probe-count verification is pending
-  ([PENDING:v4:cal_verify_S_k2]); the test3 figure of 3.873 probes is an observation, not a gate result.
+  cause is not identified. A check on val3 0–49 rules out the scoring pipeline (identical actions, success and BI
+  through both paths), but it covers 50 episodes and two policies, not every row.
+- **S2 calibration verified only after the fact.** The S2 budget was set by the Cal′ rule, and its probe-count
+  verification (3.875 probes, within 4 ± 0.3) was run after the S2 experiments rather than before them, as it was in S12.
 - **Comparators not shown tuned.** No S2 hyperparameter grid was run, and training $\bar R$ was not logged in S2, so
   under-fitting there cannot be ruled out; RL was not re-tuned for S2 (config 2 was chosen on the trainer's val_v2 stream
   and sits at the edge of the learning-rate grid), and every RL policy collapses to exactly three probes, so H2 and
@@ -777,6 +780,6 @@ grid posterior, on which the student leads RL in both cells; we regard this disa
 transferable lesson for amortized active sensing. Fourth, at tens of milliseconds per decision, reduced-size planners
 trail the students on ball information with success unresolved; nothing was compared at matched accuracy. Concrete
 next steps are more cells and seeds per regime, regret on student-visited states, a full-action screen for the
-headroom estimator, completion of the S2 calibration and pipeline checks, a resolution of the S2 validation/test
+headroom estimator, a resolution of the S2 validation/test
 discrepancy, a probe-count-aware RL comparator, and reduced planners timed under the latency protocol alongside the
 learners.
