@@ -34,11 +34,11 @@ def load(sub, pat, n, key=None):
 
 
 def rows(sub, n, key=None):
-    return {"gstar": [load(sub, "S_k2_gstar_*.jsonl", n, key)],
-            "student": [load(sub, f"S_k2_student_s{s}_*.jsonl", n, key) for s in ST],
-            "rl": [load(sub, f"S_k2_rl_s{s}_*.jsonl", n, key) for s in RL],
-            "b_fan": [load(sub, "S_k2_b_fan_*.jsonl", n, key)],
-            "random": [load(sub, "S_k2_random_*.jsonl", n, key)]}
+    return {"gstar": [load(sub, "S_k2_gstar*.jsonl", n, key)],
+            "student": [load(sub, f"S_k2_student_s{s}*.jsonl", n, key) for s in ST],
+            "rl": [load(sub, f"S_k2_rl_s{s}*.jsonl", n, key) for s in RL],
+            "b_fan": [load(sub, "S_k2_b_fan*.jsonl", n, key)],
+            "random": [load(sub, "S_k2_random*.jsonl", n, key)]}
 
 
 def common(meth, n):

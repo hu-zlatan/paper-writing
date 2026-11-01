@@ -6,7 +6,7 @@
   "complete": false,
   "n_per_row": {
    "gstar": [
-    0
+    300
    ],
    "student": [
     0,
@@ -14,27 +14,66 @@
     0
    ],
    "rl": [
-    0,
-    0,
-    0
+    300,
+    300,
+    300
    ],
    "b_fan": [
-    0
+    300
    ],
    "random": [
-    0
+    71
    ]
   },
   "rows": {},
   "diffs": {}
  },
  "h2": {
-  "n_episodes": 0,
-  "complete": false,
-  "threshold_nats": 0.1
+  "n_episodes": 500,
+  "complete": true,
+  "threshold_nats": 0.1,
+  "student_mean": 5.534063047725821,
+  "rl_mean": 5.979264623921144,
+  "bootstrap": {
+   "diff": -0.4452015761953215,
+   "lower": -0.7485350612282378,
+   "upper": -0.1615985818911899,
+   "p_greater": 0.9936,
+   "p_less": 0.0064,
+   "n_episodes": 500,
+   "n_seeds": [
+    3,
+    3
+   ],
+   "n_boot": 10000
+  },
+  "passes": false,
+  "g_T_gstar": 5.397224651416117,
+  "g_T_b_fan": 5.263063275616296,
+  "g_T_random": 3.5099664804093176
  },
  "behaviour": {
-  "n_episodes": 0
+  "n_episodes": 300,
+  "gstar": {
+   "travel_deg_mean": 46.910480537843654,
+   "probes_mean": 3.8733333333333335
+  },
+  "student": {
+   "travel_deg_mean": 39.13592938434242,
+   "probes_mean": 3.9255555555555555
+  },
+  "rl": {
+   "travel_deg_mean": 136.81994904757653,
+   "probes_mean": 3.0
+  },
+  "b_fan": {
+   "travel_deg_mean": 1.454160502737537,
+   "probes_mean": 4.0
+  },
+  "random": {
+   "travel_deg_mean": 172.20427344261515,
+   "probes_mean": 2.3666666666666667
+  }
  },
  "rl_training": {
   "611": {
@@ -42,21 +81,21 @@
    "plateau_at": 102400,
    "episodes": 200064,
    "g_T_mean_last": 6.339721275855316,
-   "wall_s": 2869.231419801712
+   "wall_s": 3601.3208854198456
   },
   "612": {
    "status": "max_episodes",
    "plateau_at": 102400,
    "episodes": 200064,
-   "g_T_mean_last": 6.2339192072737735,
-   "wall_s": 2553.639364719391
+   "g_T_mean_last": 6.243303316079391,
+   "wall_s": 3544.451551437378
   },
   "613": {
    "status": "max_episodes",
    "plateau_at": 102400,
    "episodes": 200064,
    "g_T_mean_last": 5.989489997624947,
-   "wall_s": 4133.574550151825
+   "wall_s": 3050.5204360485077
   }
  }
 }
