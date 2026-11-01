@@ -926,3 +926,20 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
 - **Next (run 10): stage 15 RESEARCH_DECISION [v4]** with `results/v4/14_analysis.md`. v4 was the last refine cycle
   (3 of 3): a non-PROCEED decision goes to the owner (OWNER_TODO) rather than a new loop. Random anchor re-read
   (`v4_e4_rg_random.json`) may still need a follow-up: `python code/tools_regrid_followup.py experiments/v4_e4_rg_random.json …`.
+
+---
+
+## Stage 15. RESEARCH_DECISION     [v4]
+
+- **Finished:** 2026-11-01 run 9. Template verbatim with the REFINE option (fresh opus subagent; prompts
+  `results/v4/prompts/stage15_*.txt`) → `results/v4/15_decision.md`.
+- **Decision: PROCEED → stage 16, characterisation sense only (outcome row 4 + S2 cell as exploratory evidence; no
+  method claim).** The template's method-sense PROCEED rule is not met (D4 fails; student vs RL success +2.8 pp, ci95
+  contains 0; H2-S2 not detected) and is stated as such. REFINE/PIVOT are not available (refine cycle 3 of 3 used) and
+  would not fit (REFINE presumes the hypothesis holds; a fourth design is outside the pre-registration). Not a gate
+  stage, so no auto-approval was needed.
+- **Report-only tasks before stage 17 claims (by ≈ 11-08):** complete the random anchor re-read; add pass-2 per-episode
+  checks (student/G\* travel correlation, per-seed test3 g_T) to `results_v4.json` via code; optional ≤ 4 CPU-h
+  val3/test3 pipeline check. Pass-2 rewrites bind the wording. If stage 20 fails again → owner decides (no loop left).
+- **Where to resume (run 10):** stage 16 PAPER_OUTLINE [v4] (base: `paper/mypaper/v3/draft_v3_final.md` + S2/E5 rows;
+  RSS 2027 Stage 1 extended-abstract target), plus the report-only tasks above.
