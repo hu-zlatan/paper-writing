@@ -982,7 +982,7 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
 
 ---
 
-## Stage 19. PAPER_REVISION     [v4]   (IN PROGRESS)
+## Stage 19. PAPER_REVISION     [v4]
 
 - **Run 10.** Report-only diagnostics for review items (allowed by `results/v4/15_decision.md`): travel split
   (`code/analysis_travel_split_v4.py` → `results/v4/14_travel_split.json`; G\* between-probe travel 4.3° in S12 vs
@@ -994,3 +994,14 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
 - Pass 1 of the revision done (template verbatim, fresh opus subagent; snapshot `paper/mypaper/v4/draft_v4_stage17.md`).
   Body +43 % → a second stage-18 pass after the PENDING markers (random anchor, Cal′ S2, pipeline check) are filled.
 - Duplicate Actions run 41313609610 (an MCP dispatch that reported a network error but had queued) was cancelled.
+- **Diagnostics complete:** S2 Cal′ verify 3.875 probes on cal3 0–199 (pass, run after the S2 experiments); val3 0–49
+  through the test pipeline: identical actions, success and BI (50/50) for G\* and student s601 → the S2 val/test gap
+  is not a scoring-pipeline artefact.
+- **Second stage-18 pass** (body had grown > 30 %): two fresh opus reviewers, 4/3 and 4/3, CRITICAL_FABRICATION no;
+  P1–P14 (`paper/mypaper/18_peer_review.md`). New report-only checks `results/v4/14_review2_checks.json` (S2 students
+  over-fit under the registered fixed-200-epoch recipe: held-out R̄ lowest at epochs 22–130, +0.007–0.026 by epoch 200).
+- **Pass 2 of the revision done** (snapshot `paper/mypaper/v4/draft_v4_stage19pass1.md`): P1–P13 fixed; body ≈ 12,000
+  words (master draft; Stage 1 extended abstract is condensed in stage 22).
+- Random anchor: 293/300 re-read; last 7 episodes in Actions (`v4_e4_rg_random_r2.json` + one r1 job). It enters no
+  contrast; the marker is filled when complete.
+- **Next: stage 20 QUALITY_GATE [v4].** No refine cycle left: a FAIL goes to the owner (OWNER_TODO).
