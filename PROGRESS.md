@@ -896,3 +896,11 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
   students 0.382, 6.20; long students 0.410, 6.24. Reduced G\* − remedied student: success −2.2 pp [−6.9, +2.4] and
   −0.6 pp [−5.8, +4.8]; BI −0.23 [−0.32, −0.15] and −0.16 [−0.26, −0.06] nats (reading per amendment: reported, no
   claim beyond "at its logged latency").
+- **Run 9 progress (≈ 10:45 UTC).** E2 complete: DAgger r1 and r2 60/60 shards each (Actions, β 0.5 / 0); students
+  retrained 200 fixed epochs per round with warm start (sandbox): held-out R̄ r1 0.319 / 0.305 / 0.315, r2 (final)
+  0.322 / 0.298 / 0.310 (3,500 → 4,300 training episodes; R̄ is on label-distribution validation shards).
+  E3 RL S2 test3 0–499 no-grid + g_T (sandbox). Behaviour on test3 0–299 (logged travel per episode): G\* 46.9°,
+  students 39.1°, RL 136.8° (always 3 probes), B-fan 1.5°, random 172.2° — S2 is a travelling regime as designed (S12
+  G\* 6.1°). **H2-S2 complete (pre-registered rule):** g_T student − RL −0.445 nats, one-sided 95 % LB −0.749 < +0.10 →
+  "not detected"; RL scores higher on its own objective in S2 (RL 5.979, student 5.534, G\* 5.397, B-fan 5.263,
+  random 3.510). Pending: D4 val3 students (75 jobs), sub-8 test3 re-reads of students (36 jobs) and random (100 jobs, ~30 done).
