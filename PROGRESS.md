@@ -969,3 +969,13 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
   `paper/mypaper/sections/draft_v4.md` (body 7,706 words, all RESTRICTS floors met), Figure 1 prompt updated.
   Number audit: 0 unexplained numbers (2 benign derived/constant). Plan + checks: `plans/stage_17_paper_draft_v4.md`.
 - **Next: stage 18 PEER_REVIEW [v4]** (two fresh-context reviewers + adversarial pass, as v3), then 19 → 20.
+
+---
+
+## Stage 18. PEER_REVIEW     [v4]
+
+- **Finished:** 2026-11-01 run 10. Two fresh opus reviewers (template verbatim). Scores 4/3 and 4/3;
+  **CRITICAL_FABRICATION: no** (both). Nine incidental mismatches (M1–M9, e.g. "K = 8 pairs" → 4 pairs; S2 Cal′
+  "pass" without a verify run; travel includes the initial grid snap) → fixed in stage 19 (option b). Merged record and
+  triage: `paper/mypaper/18_peer_review.md`.
+- **Next:** report-only diagnostics (S_k2 Cal′ verify; val3 re-read through the test pipeline), then stage 19.
