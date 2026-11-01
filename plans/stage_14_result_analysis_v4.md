@@ -14,3 +14,7 @@
 
 **Precondition.** D4 complete (val3 0–499, 3 seeds) and the S2 test3 sub-8 rows complete for G*, students, RL,
 B-fan; random may still be partial (stated in {context}; its block is then marked incomplete).
+
+## Done (run 9)
+Pass 1 → `results/v4/14_analysis_pass1.md`, pass 2 → `14_analysis_pass2.md` (3 S / 3 M / 9 m items, no verdict
+wrong), merged `14_analysis.md`. Random anchor still partial at merge time (stated).

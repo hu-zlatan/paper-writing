@@ -1,0 +1,475 @@
+This is iteration v4, the third and last REFINE loop allowed by RESTRICTS.yaml (stage 20 v3 scored 5.5/10 and sent the loop to stage 13). v4 adds rows; it changes no v3 verdict. v4 adds (a) a second learner cell S2 = (set S, kappa 2, tau 4.7) chosen so that the cost-aware planner G* actually travels, with budget-matched distilled students (seeds 601-603) under the pre-registered rule D4, RL-relative (seeds 611-613), B-fan and random rows and the H2-S2 test; (b) E5, two reduced-compute G* variants on the v3 cell S12 test set, paired with the v3 rows. All rules are in docs/07c_amendment_v4_0.md (written before any v4 run). Compare against v3 (results/v3/14_analysis.md and results/v3/results_v3.json), whose verdicts were: D3 failed twice (row 4, characterisation paper), H2 rejected in S12, H3 Hold.
+
+
+```json
+{
+ "note": "v4 (docs/07c_amendment_v4_0.md); every block is the unchanged content of the named file",
+ "12_d4_analysis.json": {
+  "cell": "S2",
+  "n_episodes": 500,
+  "complete": true,
+  "delta": 0.04,
+  "succ": {
+   "delta_hat": -0.028000000000000018,
+   "se": 0.021803907740773572,
+   "threshold": -0.014637898272319032,
+   "passes": false,
+   "student_mean": 0.486,
+   "gstar_mean": 0.514,
+   "per_seed": {
+    "601": -0.036,
+    "602": -0.028,
+    "603": -0.02
+   }
+  },
+  "bi": {
+   "delta_hat": -0.10487448559848091,
+   "se": 0.03855195341947986,
+   "threshold": -0.15,
+   "passes": true,
+   "student_mean": 6.562559222423111,
+   "gstar_mean": 6.6674337080215915,
+   "per_seed": {
+    "601": -0.1184414963963222,
+    "602": -0.12271473009368936,
+    "603": -0.07346723030543109
+   }
+  },
+  "seeds_ok": {
+   "601": true,
+   "602": true,
+   "603": true
+  },
+  "passes": false
+ },
+ "14_s2_analysis.json": {
+  "cell": "S2",
+  "note": "exploratory, one cell; ci95 two-sided; no multiplicity correction",
+  "test3_sub8": {
+   "n_episodes": 300,
+   "complete": true,
+   "n_per_row": {
+    "gstar": [
+     300
+    ],
+    "student": [
+     300,
+     300,
+     300
+    ],
+    "rl": [
+     300,
+     300,
+     300
+    ],
+    "b_fan": [
+     300
+    ],
+    "random": [
+     190
+    ]
+   },
+   "rows": {
+    "gstar": {
+     "success": 0.5533333333333333,
+     "ball_info": 6.673118099478876,
+     "per_seed_success": [
+      0.5533333333333333
+     ]
+    },
+    "student": {
+     "success": 0.45111111111111113,
+     "ball_info": 6.490085490588118,
+     "per_seed_success": [
+      0.4633333333333333,
+      0.41333333333333333,
+      0.4766666666666667
+     ]
+    },
+    "rl": {
+     "success": 0.42333333333333334,
+     "ball_info": 6.310339015828564,
+     "per_seed_success": [
+      0.39666666666666667,
+      0.42,
+      0.4533333333333333
+     ]
+    },
+    "b_fan": {
+     "success": 0.37,
+     "ball_info": 5.9619463197087805,
+     "per_seed_success": [
+      0.37
+     ]
+    }
+   },
+   "diffs": {
+    "student-gstar:success": {
+     "diff": -0.10222222222222226,
+     "ci95": [
+      -0.16555555555555557,
+      -0.043333333333333335
+     ]
+    },
+    "student-gstar:ball_info": {
+     "diff": -0.18303260889075815,
+     "ci95": [
+      -0.2693747231509705,
+      -0.09444091406938493
+     ]
+    },
+    "student-rl:success": {
+     "diff": 0.02777777777777778,
+     "ci95": [
+      -0.0411111111111111,
+      0.09555555555555559
+     ]
+    },
+    "student-rl:ball_info": {
+     "diff": 0.17974647475955394,
+     "ci95": [
+      0.09082283291603654,
+      0.2731863712178114
+     ]
+    },
+    "gstar-rl:success": {
+     "diff": 0.13000000000000006,
+     "ci95": [
+      0.06444444444444447,
+      0.19444444444444448
+     ]
+    },
+    "gstar-rl:ball_info": {
+     "diff": 0.3627790836503121,
+     "ci95": [
+      0.2633763781707718,
+      0.46719450918668226
+     ]
+    },
+    "student-b_fan:success": {
+     "diff": 0.08111111111111108,
+     "ci95": [
+      0.01666666666666665,
+      0.14666666666666667
+     ]
+    },
+    "student-b_fan:ball_info": {
+     "diff": 0.5281391708793367,
+     "ci95": [
+      0.4202460308153286,
+      0.6370877108227458
+     ]
+    },
+    "b_fan-gstar:success": {
+     "diff": -0.18333333333333332,
+     "ci95": [
+      -0.24666666666666667,
+      -0.12
+     ]
+    },
+    "b_fan-gstar:ball_info": {
+     "diff": -0.7111717797700948,
+     "ci95": [
+      -0.8298619562404378,
+      -0.5936305749601606
+     ]
+    }
+   },
+   "random_on_available": {
+    "n": 190,
+    "success": 0.13157894736842105,
+    "ball_info": 3.7103710374416172
+   }
+  },
+  "h2": {
+   "n_episodes": 500,
+   "complete": true,
+   "threshold_nats": 0.1,
+   "student_mean": 5.534063047725821,
+   "rl_mean": 5.979264623921144,
+   "bootstrap": {
+    "diff": -0.4452015761953215,
+    "lower": -0.7485350612282378,
+    "upper": -0.1615985818911899,
+    "p_greater": 0.9936,
+    "p_less": 0.0064,
+    "n_episodes": 500,
+    "n_seeds": [
+     3,
+     3
+    ],
+    "n_boot": 10000
+   },
+   "passes": false,
+   "g_T_gstar": 5.397224651416117,
+   "g_T_b_fan": 5.263063275616296,
+   "g_T_random": 3.5099664804093176
+  },
+  "behaviour": {
+   "n_episodes": 300,
+   "gstar": {
+    "travel_deg_mean": 46.910480537843654,
+    "probes_mean": 3.8733333333333335
+   },
+   "student": {
+    "travel_deg_mean": 39.13592938434242,
+    "probes_mean": 3.9255555555555555
+   },
+   "rl": {
+    "travel_deg_mean": 136.81994904757653,
+    "probes_mean": 3.0
+   },
+   "b_fan": {
+    "travel_deg_mean": 1.454160502737537,
+    "probes_mean": 4.0
+   },
+   "random": {
+    "travel_deg_mean": 172.20427344261515,
+    "probes_mean": 2.3666666666666667
+   }
+  },
+  "rl_training": {
+   "611": {
+    "status": "max_episodes",
+    "plateau_at": 102400,
+    "episodes": 200064,
+    "g_T_mean_last": 6.339721275855316,
+    "wall_s": 3601.3208854198456
+   },
+   "612": {
+    "status": "max_episodes",
+    "plateau_at": 102400,
+    "episodes": 200064,
+    "g_T_mean_last": 6.243303316079391,
+    "wall_s": 3544.451551437378
+   },
+   "613": {
+    "status": "max_episodes",
+    "plateau_at": 102400,
+    "episodes": 200064,
+    "g_T_mean_last": 5.989489997624947,
+    "wall_s": 3050.5204360485077
+   }
+  }
+ },
+ "14_e5_analysis.json": {
+  "note": "E5, exploratory: reduced G* on S12 test3 0-299 sub 8, paired with v3 rows; ci95 two-sided, no multiplicity correction; latency = median of eval3-logged per-decision latencies (free runners)",
+  "n_episodes": 300,
+  "complete": true,
+  "n_per_row": {
+   "g125_512_16": [
+    300
+   ],
+   "g500_512_4": [
+    300
+   ],
+   "gstar": [
+    300
+   ],
+   "student_rem": [
+    300,
+    300,
+    300
+   ],
+   "student_long": [
+    300,
+    300,
+    300
+   ]
+  },
+  "rows": {
+   "g125_512_16": {
+    "success": 0.36,
+    "ball_info": 5.968998164863703,
+    "probes": 3.8433333333333333,
+    "decision_latency_median_s": 0.020760080999991715
+   },
+   "g500_512_4": {
+    "success": 0.37666666666666665,
+    "ball_info": 6.037299008556644,
+    "probes": 3.776666666666667,
+    "decision_latency_median_s": 0.045991609999987304
+   },
+   "gstar": {
+    "success": 0.4266666666666667,
+    "ball_info": 6.248257789255915,
+    "probes": 3.9633333333333334,
+    "decision_latency_median_s": null
+   },
+   "student_rem": {
+    "success": 0.38222222222222224,
+    "ball_info": 6.199559494150433,
+    "probes": 4.0,
+    "decision_latency_median_s": null
+   },
+   "student_long": {
+    "success": 0.41,
+    "ball_info": 6.2401749755314935,
+    "probes": 3.9944444444444445,
+    "decision_latency_median_s": null
+   }
+  },
+  "diffs": {
+   "g125_512_16-student_rem:success": {
+    "diff": -0.022222222222222213,
+    "ci95": [
+     -0.06891666666666663,
+     0.024444444444444453
+    ]
+   },
+   "g125_512_16-student_rem:ball_info": {
+    "diff": -0.23056132928672896,
+    "ci95": [
+     -0.317847215943453,
+     -0.145127914846348
+    ]
+   },
+   "g125_512_16-student_long:success": {
+    "diff": -0.04999999999999999,
+    "ci95": [
+     -0.1011111111111111,
+     0.001111111111111125
+    ]
+   },
+   "g125_512_16-student_long:ball_info": {
+    "diff": -0.2711768106677901,
+    "ci95": [
+     -0.3709142815941182,
+     -0.17436435079349225
+    ]
+   },
+   "g125_512_16-gstar:success": {
+    "diff": -0.06666666666666667,
+    "ci95": [
+     -0.12,
+     -0.01
+    ]
+   },
+   "g125_512_16-gstar:ball_info": {
+    "diff": -0.27925962439221136,
+    "ci95": [
+     -0.38086438175524107,
+     -0.1790542534311609
+    ]
+   },
+   "g500_512_4-student_rem:success": {
+    "diff": -0.005555555555555548,
+    "ci95": [
+     -0.057777777777777775,
+     0.04777777777777779
+    ]
+   },
+   "g500_512_4-student_rem:ball_info": {
+    "diff": -0.16226048559378764,
+    "ci95": [
+     -0.2607042041168939,
+     -0.06494624104751312
+    ]
+   },
+   "g500_512_4-student_long:success": {
+    "diff": -0.03333333333333332,
+    "ci95": [
+     -0.08888888888888886,
+     0.023333333333333334
+    ]
+   },
+   "g500_512_4-student_long:ball_info": {
+    "diff": -0.20287596697484875,
+    "ci95": [
+     -0.3038837696564169,
+     -0.09866340188626822
+    ]
+   },
+   "g500_512_4-gstar:success": {
+    "diff": -0.05,
+    "ci95": [
+     -0.11,
+     0.013333333333333334
+    ]
+   },
+   "g500_512_4-gstar:ball_info": {
+    "diff": -0.21095878069927002,
+    "ci95": [
+     -0.3135802405371208,
+     -0.10778869898580777
+    ]
+   }
+  }
+ },
+ "students_S2_training": {
+  "s601_r0": {
+   "val_R_bar": 0.30844667215870225,
+   "n_train_episodes": 2700,
+   "n_train_decisions": 10499,
+   "status": "max_epochs"
+  },
+  "s601_r1": {
+   "val_R_bar": 0.319261214624996,
+   "n_train_episodes": 3500,
+   "n_train_decisions": 13616,
+   "status": "max_epochs"
+  },
+  "s601_r2": {
+   "val_R_bar": 0.32163869345984764,
+   "n_train_episodes": 4300,
+   "n_train_decisions": 16761,
+   "status": "max_epochs"
+  },
+  "s602_r0": {
+   "val_R_bar": 0.29985719673131916,
+   "n_train_episodes": 2700,
+   "n_train_decisions": 10499,
+   "status": "max_epochs"
+  },
+  "s602_r1": {
+   "val_R_bar": 0.30537050787163805,
+   "n_train_episodes": 3500,
+   "n_train_decisions": 13636,
+   "status": "max_epochs"
+  },
+  "s602_r2": {
+   "val_R_bar": 0.2975293691488152,
+   "n_train_episodes": 4300,
+   "n_train_decisions": 16793,
+   "status": "max_epochs"
+  },
+  "s603_r0": {
+   "val_R_bar": 0.3119834044781902,
+   "n_train_episodes": 2700,
+   "n_train_decisions": 10499,
+   "status": "max_epochs"
+  },
+  "s603_r1": {
+   "val_R_bar": 0.31459971850967816,
+   "n_train_episodes": 3500,
+   "n_train_decisions": 13609,
+   "status": "max_epochs"
+  },
+  "s603_r2": {
+   "val_R_bar": 0.3100756574599907,
+   "n_train_episodes": 4300,
+   "n_train_decisions": 16729,
+   "status": "max_epochs"
+  }
+ }
+}
+```
+
+
+Analyze run metrics and produce markdown report with statistical interpretation.
+
+Use the ACTUAL quantitative values provided above — do NOT invent numbers.
+
+Required sections: Metrics Summary (with real values), Comparative Findings, Statistical Checks, Limitations, Conclusion.
+
+Run context:
+
+- Pre-registered v4 rules (docs/07c_amendment_v4_0.md): D4 pass iff (i) Delta_succ(student - G*) >= max(-2 pp, -delta + 1.645*SE*sqrt(0.5)) with delta = 4 pp, (ii) Delta_BI >= -0.15 nats, (iii) every seed's Delta_succ > -delta; pass -> "in a cell where the cost-aware planner travels, a budget-matched distilled student was within delta of G* on validation (one cell)"; fail -> "not shown to reach G* in S2 either"; no remedy round. H2-S2: one-sided 95 % crossed-bootstrap LB of g_T(student) - g_T(RL) > +0.10 nats -> "distillation scores higher on RL's own objective", else "not detected". E5: reduced-G* - student success/BI ci95 reported, no claim beyond "at its logged latency". S2 test rows and E5 are exploratory: ci95, no multiplicity correction; S2 is one cell.
+- Statistics implemented in code: paired crossed bootstrap over episodes and seeds (code/touchbed/stats.py crossed_bootstrap_diff, 10,000 resamples, seed 0); D4 SE = SD of that bootstrap (code/analysis_d4_v4.py). No t-tests are implemented.
+- Evaluator: success and ball information (BI) are read on the sub = 8 grid evaluator (the v3 E' gate failed, so sub 8 everywhere). test3 rows: actions recorded without grid (eval3 --no-grid), then re-read at sub 8 (regrid3) for episodes 0-299; g_T (H2) on episodes 0-499 with fixed per-episode contrastive draws (J 16, L 4,095).
+- Students: same head and hp 0 as v3 (no new HP grid: a stated deviation), fixed 200 epochs per round, round 0 on 2,700 label episodes, DAgger 2 rounds x 800 episodes (beta 0.5 then 0), warm start, last checkpoint kept. students_S2_training.val_R_bar is mean regret on label-distribution validation shards (episodes 1,200-1,499), not on the val3 split used by D4.
+- RL: v3 config 2 (lr 1.09e-3, entropy 1.33e-4, batch 128, critic lr 1.43e-3), 2e5 episodes, plateau recorded, not used.
+- Behaviour (logged finger travel per episode, test3 0-299 no-grid, degrees): G* 46.9, students 39.1, RL 136.8 (always 3 probes), B-fan 1.5, random 172.2; v3 S12 G* was 6.1. These are in 14_s2_analysis.behaviour.
+- Runtimes: labels, DAgger collection, val3/test3 G* and B-fan/random evaluation and all sub-8 re-reads ran on free GitHub Actions runners (Python 3.12.15, numpy 2.5.4, 1 thread per job); distillation training, the students' and RL's no-grid test3 actions and all g_T read-outs ran in the session sandbox (Python 3.13.18, numpy 2.5.3), as in v3. Compute about 100 CPU-hours in total.
+- Anomalies: (1) the first E1/E3 dispatch (run 8) lost the label shards and RL weights to a .gitignore rule; both were re-run with the same manifests: the 60 label shards reproduced exactly, the RL histories differ from the first row onward in the last floating-point digits (runner image glibc 2.39 -> 2.43), final training g_T within about 0.01 nats; the re-run weights are the models of record. (2) Early-stopped jobs (80 % time budget) were completed with follow-up jobs for the missing episodes; nothing was dropped. (3) The random anchor's sub-8 re-read on test3 is incomplete (random_on_available.n < 300) and is still running; it enters no paired contrast. (4) The student - G* success gap is -2.8 pp on val3 (D4) and -10.2 pp on test3 0-299; both are pre-registered read-outs on disjoint episode splits.
+- Not in v4 (limitations already declared): H3 full-512 / local-offset screen, in-domain positive control, more than 3 seeds, wider sweeps, latency of the reduced G* under the Lat' protocol.

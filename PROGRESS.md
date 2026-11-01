@@ -912,3 +912,17 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
   −10.2 pp [−16.6, −4.3], student − RL +2.8 pp [−4.1, +9.6], G\* − RL +13.0 pp [+6.4, +19.4], student − B-fan +8.1 pp
   [+1.7, +14.7]; BI student − RL +0.18 [+0.09, +0.27]. Note the val/test gap of the student − G\* contrast (−2.8 vs
   −10.2 pp): both are pre-registered read-outs, both reported. All in `results/v4/results_v4.json`.
+
+---
+
+## Stage 14. RESULT_ANALYSIS     [v4]
+
+- **Finished:** 2026-11-01 run 9. Template verbatim, two fresh opus subagents (pass 1 analyst, pass 2 adversarial AC);
+  merged `results/v4/14_analysis.md` (pass-2 items binding).
+- Verdicts: D4 FAIL (clause i only), H2-S2 not detected, E5 reported (reduced G\* lower BI than both students at
+  21 / 46 ms logged latency, success differences unresolved), v3 verdicts unchanged. Pass 2: S12 student already beat
+  B-fan on BI in v3 (+0.226 [+0.141, +0.311]) — "first such evidence" wording withdrawn; "student imitates travel" and
+  "RL loses ground because it travels" unsupported; val/test gap widens on all seeds.
+- **Next (run 10): stage 15 RESEARCH_DECISION [v4]** with `results/v4/14_analysis.md`. v4 was the last refine cycle
+  (3 of 3): a non-PROCEED decision goes to the owner (OWNER_TODO) rather than a new loop. Random anchor re-read
+  (`v4_e4_rg_random.json`) may still need a follow-up: `python code/tools_regrid_followup.py experiments/v4_e4_rg_random.json …`.
