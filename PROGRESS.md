@@ -881,3 +881,18 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
   outside v2/v3, so the E1 label shards and E3 RL weights were not committed (JSON summaries only). Fixed by whitelisting
   `results/v4/**/*.npz`; E1 and E3 re-dispatched with the unchanged manifests (same seeds). The re-run JSONs are compared
   with the run-8 JSONs (git history) as a determinism check.
+- **Run 9 progress (≈ 09:10 UTC).** E1 re-run: 60/60 shards, actions and summaries **identical** to run 8 (determinism
+  check passed). E3 re-run: RL histories differ from run 8 from the first log row in the last bits (runner image glibc
+  2.39 → 2.43; same Python 3.12.15 / numpy 2.5.4), final g_T within ≈ 0.01 nats (e.g. sd612 6.243 vs 6.234): RL is not
+  bitwise reproducible across runner images; the re-run weights (committed) are the models of record.
+  E2 round 0 (sandbox, Python 3.13.18 / numpy 2.5.3, as all v3 distillation): seeds 601–603, 200 fixed epochs, 2,700
+  training episodes, held-out R̄ 0.308 / 0.300 / 0.312 (`results/v4/d4/`, script `code/dev/v4_distill_r0.sh`).
+  `dagger_index` extended to seeds 601–699 in a range disjoint from v3 (test extended; suite 60 passed). DAgger r1
+  dispatched (`experiments/v4_dag_S2_r1.json`, 60 × 40 episodes). E4 teacher/baseline side complete: val3 0–499 sub-8
+  G\* (500/500), test3 0–499 no-grid G\*/B-fan/random (500 each); g_T (gt3, sandbox) for those three in `results/v4/h2/`;
+  sub-8 re-read of test3 0–299 G\*/B-fan dispatched (`v4_e4_rg_base.json`), random queued for later (`v4_e4_rg_random.json`).
+  **E5 complete** (300/300 paired, `code/analysis_e5_v4.py` → `results/v4/14_e5_analysis.json`): g125_512_16 success
+  0.360, BI 5.97 nats at 21 ms median logged latency; g500_512_4 0.377, 6.04 at 46 ms; full G\* 0.427, 6.25; remedied
+  students 0.382, 6.20; long students 0.410, 6.24. Reduced G\* − remedied student: success −2.2 pp [−6.9, +2.4] and
+  −0.6 pp [−5.8, +4.8]; BI −0.23 [−0.32, −0.15] and −0.16 [−0.26, −0.06] nats (reading per amendment: reported, no
+  claim beyond "at its logged latency").
