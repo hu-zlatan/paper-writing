@@ -38,3 +38,16 @@ still holds for the master draft.
 - [ ] Every \cite key exists in the cards.
 - [ ] Word counts vs RESTRICTS floors.
 - [ ] Outline never-write list respected; no claim from the "do not cite" list.
+
+## Done (run 10)
+- Draft `paper/mypaper/sections/draft_v4.md` (fresh opus subagent, prompt files above): main body 7,706 words
+  (abstract 244; intro 904, related 623, method 1,655, experiments 1,272, results 2,182, discussion 549, limitations 290,
+  conclusion 231) — all RESTRICTS floors met; stage 22 condenses to the 5-page Stage 1 abstract.
+- Figure 1 prompt → `paper/mypaper/figures/figure1_prompt.txt`.
+- Checks: number audit (now also reads `results_v4.json`) against the v3/v4 JSONs + frozen design docs only:
+  2 unmatched, both benign — 97.5 (bootstrap quantile) and 0.293 (= (UB − LB)/2 of the H2-S2 one-sided bounds,
+  derived as in `results/v4/14_analysis.md` §H2 power). 31 cite keys, all in the cards. No "do not cite" item used
+  ("first action" occurrences are the H3 screened-first-action instrument). Random anchor marked [PENDING] (3×).
+- Subagent's flagged items: v3-draft design constants (K = 8, ±15 mm prior, σ_p/σ_n, 5 mm/5° success, distillation
+  hyper-parameters, L = 4095, J = 16, 1.02 guard) — reused from the v3 text that passed stage 18 audit; G5′ S12 written
+  as "pass" (v3 JSON now complete 200/200 on every baseline, so the outline's INC tag is stale). Stage 18 re-audits.

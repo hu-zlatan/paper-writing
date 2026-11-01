@@ -43,6 +43,9 @@ def main():
     draft = re.sub(r"<!--.*?-->", "", draft, flags=re.S)                       # comments (figure prompt, counts)
     vals = flat(json.load(open(os.path.join(root, "results/v3/results_v3.json"))), [])
     vals = flat(json.load(open(os.path.join(root, "results/v2/12_g2_analysis.json"))), vals)   # previous-iteration H3
+    v4 = os.path.join(root, "results/v4/results_v4.json")
+    if os.path.exists(v4):                                                      # v4 rows (S2 cell, E5)
+        vals = flat(json.load(open(v4)), vals)
     design = " ".join(open(p).read() for p in sys.argv[2:])
     bad = []
     for m in re.finditer(r"(?<![\w.\[])[−-]?\d[\d,]*\.\d+", draft):          # decimals only; integers are counts/consts
