@@ -232,3 +232,18 @@ Scientific questions left open by the record (none answered here):
 
 Housekeeping before any further work: pin package versions, record runner CPU models, produce Figure 1, and record a
 measured total wall-clock for the v4 jobs.
+
+---
+
+## Addendum (2026-11-02, run 12): environment record
+
+The "pin the environment" housekeeping item is partly closed, without changing any result or the workflows:
+
+- `code/requirements-lock.txt` lists the exact versions from the install log of Actions job 124884356660 (run
+  41318760187, 2026-11-01; CPython 3.12.15, ubuntu-26.04 image 20261025.179.1). The experiments workflow still installs
+  `code/requirements.txt`.
+- `code/tools_env_census.py` → `results/v4/env_census.json` counts the `env` header of every result shard. All 590 v4
+  shards carry one: 574 runner shards (Python 3.12.15, numpy 2.5.4) and 16 sandbox shards (Python 3.13.18, numpy 2.5.3).
+  v1/v2 shards and 62 v3 shards predate the header.
+- Still open: versions of scipy / shapely / mujoco for runner jobs before 2026-11-01 are not recorded; runner CPU models
+  are not recorded.

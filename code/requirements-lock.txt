@@ -1,0 +1,25 @@
+# Exact package versions observed on a GitHub Actions runner (record, not yet wired into any workflow).
+# Source: "pip install -r code/requirements.txt" log of Actions job 124884356660 (run 41318760187, 2026-11-01),
+#         image ubuntu-26.04 20261025.179.1, actions/setup-python@v5 -> CPython 3.12.15.
+# Coverage: python 3.12.15 / numpy 2.5.4 match the "env" header of every runner-produced v3 and v4 shard
+#           (results/v4/env_census.json). Versions of the other packages are confirmed only for that job's date;
+#           earlier runner jobs resolved code/requirements.txt (lower bounds) at their own install time.
+# Sandbox-produced shards (python 3.13.18, numpy 2.5.3) are listed separately in results/v4/env_census.json.
+# Reproduce with: pip install -r code/requirements-lock.txt   (Python 3.12)
+numpy==2.5.4
+scipy==1.18.1
+shapely==2.2.0
+mujoco==3.17.0
+pytest==9.2.0
+absl-py==2.5.1
+etils==1.14.0
+fsspec==2026.9.0
+glfw==2.11.0
+iniconfig==2.3.1
+packaging==26.3
+pluggy==1.7.0
+pygments==2.21.0
+pyopengl==3.1.10
+typing_extensions==4.16.0
+websockets==17.4
+zipp==4.1.2

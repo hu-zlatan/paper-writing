@@ -1,0 +1,64 @@
+{
+ "source": "header line of results/**/*.jsonl",
+ "groups": [
+  {
+   "dir": "v3",
+   "python": "3.12.15",
+   "numpy": "2.5.4",
+   "OMP_NUM_THREADS": "1",
+   "OPENBLAS_NUM_THREADS": "1",
+   "MKL_NUM_THREADS": "1",
+   "shards": 1803
+  },
+  {
+   "dir": "v3",
+   "python": "3.13.18",
+   "numpy": "2.5.3",
+   "OMP_NUM_THREADS": "1",
+   "OPENBLAS_NUM_THREADS": "1",
+   "MKL_NUM_THREADS": null,
+   "shards": 20
+  },
+  {
+   "dir": "v3",
+   "python": "3.13.18",
+   "numpy": "2.5.3",
+   "OMP_NUM_THREADS": "1",
+   "OPENBLAS_NUM_THREADS": "1",
+   "MKL_NUM_THREADS": "1",
+   "shards": 2
+  },
+  {
+   "dir": "v4",
+   "python": "3.12.15",
+   "numpy": "2.5.4",
+   "OMP_NUM_THREADS": "1",
+   "OPENBLAS_NUM_THREADS": "1",
+   "MKL_NUM_THREADS": "1",
+   "shards": 574
+  },
+  {
+   "dir": "v4",
+   "python": "3.13.18",
+   "numpy": "2.5.3",
+   "OMP_NUM_THREADS": null,
+   "OPENBLAS_NUM_THREADS": "1",
+   "MKL_NUM_THREADS": null,
+   "shards": 9
+  },
+  {
+   "dir": "v4",
+   "python": "3.13.18",
+   "numpy": "2.5.3",
+   "OMP_NUM_THREADS": "1",
+   "OPENBLAS_NUM_THREADS": "1",
+   "MKL_NUM_THREADS": null,
+   "shards": 7
+  }
+ ],
+ "shards_without_env_header": {
+  "v1": 48,
+  "v2": 846,
+  "v3": 62
+ }
+}
