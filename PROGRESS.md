@@ -1069,3 +1069,22 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
   experiment, claim or number changed; panels A–C remain a generator prompt, `draft_v4.md` still shows the placeholder.
 - **Where to resume (run 14):** unchanged — read the owner's answer (OWNER_TODO / AUTOPILOT §1 / issues). No answer →
   low-risk only. RSS Stage 1 deadline 2026-12-04 AoE: if (b) arrives, stage 22 needs the ≤ 5-page condensation.
+
+- **Run 14 (2026-11-02, from ≈ 14:49 UTC).** No open issues; AUTOPILOT §1 has no new owner directive; `max_refine_cycles`
+  still 3 → the stage-20 escalation is still unanswered, so low-risk work only. No stage advanced, no claim, number or
+  draft text changed. `add_repo` again unavailable; same stale shallow checkout as run 13 (`git fetch --unshallow`, ff to
+  origin/main; dabde70 confirmed an ancestor, 720 commits behind, no rewrite). Read the pipeline state from origin/main,
+  not from the local `main` ref, which is stale at session start.
+- **Health checks on main (no code change):** `tools_number_audit.py` on `draft_v4.md`: 7 unmatched, same as run 10; each
+  re-derived by hand (97.5 quantile, 1.16, 0.842 and 0.189 are constants or arithmetic on reported values); 0 PENDING
+  markers. Unit tests: every file in `code/tests/` passes run on its own (60 tests, sandbox Py 3.13 / numpy 2.5.3).
+  Caveat: one all-files `pytest tests` call was killed at its 500 s limit with no output and was not retried, so a full
+  single-process pass is not established (per-file times sum to ≈ 170 s; cause unknown). `run_checks.py` not re-run.
+- **RSS CFP re-read (WebFetch):** Stage 1 2026-12-04 AoE, 6 pages (5 content + 1 references); Stage 2 2027-04-16 AoE,
+  8 pages excluding references; "use of LLMs is permitted for both authors and reviewers", disclosure encouraged,
+  hallucinated citations → desk reject. Unchanged. The older authorinfo page contradiction remains an owner item.
+- **Owner notified by push once this run** (32 days to Stage 1). Later runs: stay silent on this unless something new
+  happens; the next reminder is at the 2026-11-20 decision date proposed in OWNER_TODO.
+- **Where to resume (run 15):** unchanged — read the owner's answer (OWNER_TODO / AUTOPILOT §1 / issues). No answer →
+  low-risk only; there is little low-risk work left, so short runs are expected. With (a)/(b) → stage 22; with (c) →
+  LOOP MARKER v4 → v5 at stage 13 after the owner raises the cap; with (d) → stage 8.
