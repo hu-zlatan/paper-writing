@@ -1088,3 +1088,16 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
 - **Where to resume (run 15):** unchanged — read the owner's answer (OWNER_TODO / AUTOPILOT §1 / issues). No answer →
   low-risk only; there is little low-risk work left, so short runs are expected. With (a)/(b) → stage 22; with (c) →
   LOOP MARKER v4 → v5 at stage 13 after the owner raises the cap; with (d) → stage 8.
+
+- **Run 15 (2026-11-02, from ≈ 19:50 UTC).** No open issues (GitHub MCP; WebFetch of the issues page was refused this run);
+  AUTOPILOT §1 has no new owner directive; `max_refine_cycles` still 3 → the stage-20 escalation is still unanswered, so
+  low-risk work only. No stage advanced; no claim, number or draft text changed. `add_repo` again unavailable; checkout
+  was shallow but already at origin/main (13cd849), detached HEAD.
+- **Closed run 14's test caveat:** with `code/requirements-lock.txt` installed (numpy 2.5.4, shapely 2.2.0, mujoco 3.17.0;
+  sandbox Python 3.13, not the runner's 3.12) and `OMP/OPENBLAS/MKL_NUM_THREADS=1`, `pytest tests` in one process:
+  60 passed in 106 s. Why run 14's call hit its 500 s limit is not established: the thread limit and the numpy version
+  both differed, and neither was tested alone. `run_checks.py` not re-run.
+- **No push notification** (nothing new, per run 14). Next reminder stays at the 2026-11-20 date proposed in OWNER_TODO.
+- **Where to resume (run 16):** unchanged — read the owner's answer (OWNER_TODO / AUTOPILOT §1 / issues). No answer →
+  low-risk only; short runs expected. With (a)/(b) → stage 22; with (c) → LOOP MARKER v4 → v5 at stage 13 after the owner
+  raises the cap; with (d) → stage 8.
