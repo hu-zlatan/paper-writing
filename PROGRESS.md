@@ -1057,3 +1057,15 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
   `docs/21_retrospective.md`. Workflows unchanged; no claim or number in the paper changed.
 - **Where to resume (run 13):** unchanged — read the owner's answer (OWNER_TODO / AUTOPILOT §1 / issues). No answer →
   low-risk only. RSS Stage 1 deadline 2026-12-04 AoE: if (b) arrives, stage 22 needs the ≤ 5-page condensation.
+
+- **Run 13 (2026-11-02, from ≈ 07:54 UTC).** No open issues; AUTOPILOT §1 has no new owner directive; `max_refine_cycles`
+  still 3 → the stage-20 escalation is still unanswered, so low-risk work only. The `add_repo` tool was not available
+  this run; the session started with a pre-cloned (shallow, stale) checkout, so `git fetch --unshallow` then ff to
+  origin/main. The fetch's "forced update" note was a shallow-clone artefact: the old ref is an ancestor of main, no
+  history was rewritten.
+- **Figure 1 panel D inset (plan `plans/stage_21c_figure1_panelD_v4.md`):** `code/plot_figure1_panelD.py` reads the
+  values from the v3/v4 results JSONs, asserts them against the numbers printed in `figure1_prompt.txt`, and writes
+  `paper/mypaper/figures/figure1_panelD.{pdf,png}`. Stale "random row incomplete" line in the prompt corrected. No
+  experiment, claim or number changed; panels A–C remain a generator prompt, `draft_v4.md` still shows the placeholder.
+- **Where to resume (run 14):** unchanged — read the owner's answer (OWNER_TODO / AUTOPILOT §1 / issues). No answer →
+  low-risk only. RSS Stage 1 deadline 2026-12-04 AoE: if (b) arrives, stage 22 needs the ≤ 5-page condensation.
