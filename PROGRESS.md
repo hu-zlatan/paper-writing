@@ -1047,3 +1047,13 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
   No answer → low-risk only (wording that changes no claim; Figure 1 remains a placeholder prompt). With (a)/(b) → stage
   21 is done, go to stage 22 under the chosen target; with (c) → LOOP MARKER v4 → v5 at stage 13 after the owner raises
   the cap; with (d) → stage 8.
+
+- **Run 12 (2026-11-02).** No open issues; AUTOPILOT §1 has no new owner directive; `max_refine_cycles` still 3 → the
+  stage-20 escalation is still unanswered, so low-risk work only (OWNER_TODO default).
+- **Environment record (plan `plans/stage_21b_env_record_v4.md`):** `code/requirements-lock.txt` copied from the pip log
+  of Actions job 124884356660 (numpy 2.5.4, scipy 1.18.1, shapely 2.2.0, mujoco 3.17.0, CPython 3.12.15; all four
+  versions confirmed on PyPI from the sandbox); `code/tools_env_census.py` → `results/v4/env_census.json` (all 590 v4
+  shards carry an env header: 574 runner Py 3.12.15 / numpy 2.5.4, 16 sandbox Py 3.13.18 / numpy 2.5.3). Addendum in
+  `docs/21_retrospective.md`. Workflows unchanged; no claim or number in the paper changed.
+- **Where to resume (run 13):** unchanged — read the owner's answer (OWNER_TODO / AUTOPILOT §1 / issues). No answer →
+  low-risk only. RSS Stage 1 deadline 2026-12-04 AoE: if (b) arrives, stage 22 needs the ≤ 5-page condensation.
