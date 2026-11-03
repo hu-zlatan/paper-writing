@@ -1135,3 +1135,12 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
 - **Where to resume (run 18):** unchanged — read the owner's answer (OWNER_TODO / AUTOPILOT §1 / issues). No answer →
   low-risk only; little is left, so a run with nothing to do should only check and log. With (a)/(b) → stage 22, starting
   from `draft_v4_condensed.md`; with (c) → LOOP MARKER v4 → v5 at stage 13 after the owner raises the cap; with (d) → stage 8.
+
+- **Run 18 (2026-11-03, from ≈ 13:50 UTC).** Check-and-log only. No open issues (GitHub MCP; WebFetch of the issues page was
+  refused again); AUTOPILOT §1 has no new owner directive; `max_refine_cycles` still 3 → the stage-20 escalation is still
+  unanswered. No stage advanced; no draft, claim or number changed. `add_repo` again unavailable; checkout already at
+  origin/main (fa068e0), detached HEAD; the fetch's "forced update" on dabde70 is the same stale-ref artefact as runs 13–14.
+  No workflow running (last run 2026-11-01). `tools_number_audit.py`: `draft_v4_condensed.md` 0 unmatched, `draft_v4.md` 7
+  (same as run 14). CFP not re-read this run (last read run 14).
+- **No push notification** (nothing new, per run 14). Next reminder stays at 2026-11-20.
+- **Where to resume (run 19):** unchanged from run 18's entry above: read the owner's answer; none → check and log only.
