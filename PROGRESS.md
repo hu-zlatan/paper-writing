@@ -1143,4 +1143,4 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
   No workflow running (last run 2026-11-01). `tools_number_audit.py`: `draft_v4_condensed.md` 0 unmatched, `draft_v4.md` 7
   (same as run 14). CFP not re-read this run (last read run 14).
 - **No push notification** (nothing new, per run 14). Next reminder stays at 2026-11-20.
-- **Where to resume (run 19):** unchanged from run 18's entry above: read the owner's answer; none → check and log only.
+- **Where to resume (run 19):** unchanged from run 17's entry above: read the owner's answer; none → check and log only.
