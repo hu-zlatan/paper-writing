@@ -1114,6 +1114,8 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
   compared the two texts in full: no numeric errors, 12 status/strength findings and 2 borderline ones (for example D4 worded
   as testing H1, report-only labels dropped, the 7.5 % flip rate read as an error bar). All 14 fixed, then the token and
   audit checks were re-run; the fixes were not re-reviewed by a second subagent.
+- **Correction:** commit 9760b87 logged these fixes as done, but its fix script had aborted, so that commit holds the unfixed
+  text. The next commit applies all 14 and re-runs the checks; read this entry against that commit.
 - **No push notification for this** (nothing the owner must act on sooner; run 14's rule). Next reminder stays at 2026-11-20.
 - **Where to resume (run 17):** unchanged — read the owner's answer (OWNER_TODO / AUTOPILOT §1 / issues). No answer →
   low-risk only; short runs expected. With (a)/(b) → stage 22, starting from `draft_v4_condensed.md`; with (c) → LOOP MARKER
