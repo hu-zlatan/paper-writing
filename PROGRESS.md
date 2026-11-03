@@ -1101,3 +1101,20 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
 - **Where to resume (run 16):** unchanged — read the owner's answer (OWNER_TODO / AUTOPILOT §1 / issues). No answer →
   low-risk only; short runs expected. With (a)/(b) → stage 22; with (c) → LOOP MARKER v4 → v5 at stage 13 after the owner
   raises the cap; with (d) → stage 8.
+
+- **Run 16 (2026-11-03, from ≈ 01:50 UTC).** No open issues (GitHub MCP; WebFetch of the issues page was refused again);
+  AUTOPILOT §1 has no new owner directive; `max_refine_cycles` still 3 → the stage-20 escalation is still unanswered, so
+  low-risk work only. No stage advanced; the master `draft_v4.md`, every claim and every number are unchanged. `add_repo`
+  again unavailable; shallow checkout already at origin/main (f99af6a), detached HEAD.
+- **Condensed draft (plan `plans/stage_21d_condensation_v4.md`):** `paper/mypaper/sections/draft_v4_condensed.md`, about
+  2,500 words, under the OWNER_TODO default's "text condensation that changes no conclusion". Preparation for (a)/(b) only;
+  NOT a stage 22 output: no template, no LaTeX, page count unknown (only a compiled PDF decides), and the file header says
+  the gate failed and it is not cleared for submission. Below the `section_floors` by design; master keeps those.
+- **Checks:** no numeric token or cite key absent from the master; `tools_number_audit.py` 0 unmatched. A fresh subagent
+  compared the two texts in full: no numeric errors, 12 status/strength findings and 2 borderline ones (for example D4 worded
+  as testing H1, report-only labels dropped, the 7.5 % flip rate read as an error bar). All 14 fixed, then the token and
+  audit checks were re-run; the fixes were not re-reviewed by a second subagent.
+- **No push notification for this** (nothing the owner must act on sooner; run 14's rule). Next reminder stays at 2026-11-20.
+- **Where to resume (run 17):** unchanged — read the owner's answer (OWNER_TODO / AUTOPILOT §1 / issues). No answer →
+  low-risk only; short runs expected. With (a)/(b) → stage 22, starting from `draft_v4_condensed.md`; with (c) → LOOP MARKER
+  v4 → v5 at stage 13 after the owner raises the cap; with (d) → stage 8.
