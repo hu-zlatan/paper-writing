@@ -1,6 +1,6 @@
 <!-- Condensed from draft_v4.md (the master, which stays the source of truth). Preparation only: not a stage 22 output,
 not compiled, page count unknown. The stage 20 gate FAILED (5.0 / 10) and the owner has not chosen a direction, so this
-text is not cleared for submission. It adds no number, claim or citation that is not in draft_v4.md. -->
+text is not cleared for submission. The paper text below adds no number, claim or citation that is not in draft_v4.md. -->
 
 # Cost-Aware Information-Gain Touch Selection under Travel Cost: Look-Ahead Headroom and Learnability in a Stay-and-Probe and a Travelling Regime
 
@@ -30,13 +30,13 @@ Two questions follow. First, planning depth: greedy information gathering is bac
 \cite{chen2015submodular, esfandiari2019adaptivity}, and travel cost is such a coupling, because where the finger ends
 up determines what the next probe costs. Second, amortization: online information gain re-optimises at every decision.
 Amortized experimental design replaces this with a policy trained once, by RL on contrastive information bounds or related objectives \cite{foster2021deep, blau2022optimizing, ivanova2021implicit, rainforth2024modern}. A validated planner offers a second
-route, DAgger on the planner's dense per-action scores \cite{ross2011reduction, choudhury2017adaptive}, with PPO
+route: supervising the policy with the planner's dense per-action scores through DAgger \cite{ross2011reduction}, in the spirit of imitating an information-gathering expert \cite{choudhury2017adaptive}, with PPO
 \cite{schulman2017proximal} on the same objective as the natural comparator. Inside the second question sits a third:
 whether RL's objective, a contrastive bound on information, orders policies the same way as the posterior used to judge
 localization.
 
-**Contributions.** (C1) A pre-registered bound on one-step look-ahead headroom over cost-aware greedy touch selection,
-with instrument checks. (C2) A learnability study of one belief-free head in a stay-and-probe cell and a travelling
+**Contributions.** (C1) A pre-registered bound on one-step look-ahead headroom over cost-aware greedy touch selection
+at κ = 12 over the screened first actions with a reduced greedy completion, with instrument checks. (C2) A learnability study of one belief-free head in a stay-and-probe cell and a travelling
 cell, with a behavioural diagnosis of finger travel. (C3) A comparison of planner distillation against RL on RL's own
 objective in both cells, with the observation that this objective and the grid posterior order the planner and the
 learners differently (clearly in S2, marginally in S12). (C4) A per-decision cost analysis, including an exploratory
@@ -87,8 +87,7 @@ S12 pilot data and is the only heuristic run in S2.
 **Protocol.** Hypotheses, thresholds and an outcome map were frozen before any S12 run; an amendment written before any
 S2 run fixed the S2 readings and allowed no remedy round. H1: a student non-inferior to G\*, gated by D3 (S12); D4 (S2, same rule) is the amendment's learnability reading; both use 500 paired val3 episodes. H2 and H2-S2: lower one-sided 95 % bound of $g_T$(student) − $g_T$(RL)
 above +0.10 nats. H3: Hold iff the one-sided 95 % upper bound of G(12) is below 0.03; a near-identical earlier estimate was known when that threshold was set, so H3 is a pre-registered replication. Within a split all methods run
-on the same episodes. Success and BI are read from an adaptive grid posterior at subdivision 8, after its gate E′ failed
-at subdivision 4; no finer grid was checked. Contrasts use a crossed episode × seed bootstrap with B = 10,000 and no
+on the same episodes. Success and BI are read from an adaptive grid posterior at subdivision 8, after its gate E′, comparing subdivisions 4 and 8, failed; no finer grid was checked. Contrasts use a crossed episode × seed bootstrap with B = 10,000 and no
 multiplicity correction. test3 episodes 0–299 were reused for the S2 rows and later exploratory rows, so those rows are
 exploratory.
 
@@ -108,7 +107,7 @@ its one remedy (−4.40 pp against −1.68 pp), so H1 was never tested on test. 
 0.183 nats BI (ci95 [−0.269, −0.094]) and 10.2 pp success (ci95 [−16.6, −4.3]); the S12 remedied student trails by
 0.049 nats (ci95 [−0.114, +0.019]) and 4.4 pp (ci95 [−9.3, +0.6]), neither interval excluding 0. The S2 test gap is wider
 than the validation gap for every seed and its cause is not identified; a report-only re-run of val3 0–49 through the test pipeline
-rules out the scoring path on those episodes. Under-training does not explain S2: in the per-epoch record (report-only, read after review), in all nine seed × round runs,
+rules out the scoring path on those episodes. In S12 an exploratory post-freeze 200-epoch student was not shown to differ from G\* on test3, so the optimisation budget stays open there. Under-training does not explain S2: in the per-epoch record (report-only, read after review), in all nine seed × round runs,
 held-out regret was lowest at an epoch between 22 and 130 and rose by 0.007–0.026 to the kept checkpoint. Early stopping
 was not tested.
 
@@ -126,8 +125,7 @@ was not tested.
 (Δ$g_T$ −0.4452 nats, LB −0.7485; the point estimate favours RL). No equivalence test was run, and post hoc both tests
 could detect only advantages of roughly half a nat. On the grid posterior the student leads RL on BI in both cells
 (+0.289 nats, ci95 [+0.117, +0.465]; +0.180 nats, ci95 [+0.091, +0.273]), and the success ci95 between them includes 0
-in both. All six PPO policies converge to exactly 3 probes. We read this as a property of this RL setup, not of RL in
-general.
+in both. All six PPO policies converge to exactly 3 probes. We read this as a property of this RL setup, not of RL in general; H2 and H2-S2 compare against this setup only.
 
 **Instrument ordering.** On seed-averaged point estimates $g_T$(G\*) is below both learners in S2 (5.40 vs 5.53 / 5.98)
 and marginally in S12 (5.30 vs 5.37, with 3 of 6 S12 learner seeds below G\*), whereas the grid posterior orders G\*
@@ -143,7 +141,7 @@ exceeded it on BI only (+0.23, ci95 [+0.14, +0.31]; success +2.2 pp, ci95 [−2.
 
 **Cost.** The student's median latency (0.408 ms) is about 2,200× below full-size G\* (0.9135 s), not compared at
 matched accuracy. Pruning candidates cannot reach the registered 10×, since assimilation and neighbour lists do not
-depend on the number of scored candidates (measured full / pruned-16 is 3.22). In S12 only, at logged median latencies
+depend on the number of scored candidates (measured full / pruned-16 is 3.22, which withdrew the registered pruning fallback). In S12 only, at logged median latencies
 of 20.8 and 46.0 ms, two reduced-size G\* trail the remedied student on BI by 0.16–0.23 nats, with every success ci95
 against it including 0. These comparisons are exploratory and map a latency–accuracy frontier only partly.
 
@@ -168,7 +166,7 @@ circle, Gaussian noise and no contact dynamics, with no held-out shapes, 3D obje
 In a pre-registered characterisation with one cell per regime, one-step headroom over cost-aware greedy touch selection
 is small among the screened first actions. Neither learner was shown to reach the planner with one belief-free head. No
 advantage of distillation over RL was detected on RL's own objective, and in the travelling regime that objective orders
-the planner and learners differently from the grid posterior, which amortized active sensing work should check rather
-than treat as an established lesson. Next steps are more cells and seeds per regime, regret on student-visited states, a
+the planner and learners differently from the grid posterior, while in the stay-and-probe regime the ordering is marginal. Supported in one cell, this
+disagreement is an observation that amortized active sensing work should check rather than an established lesson. Next steps are more cells and seeds per regime, regret on student-visited states, a
 full-action screen, a resolution of the S2 validation/test discrepancy, a probe-count-aware RL comparator, and reduced
 planners timed under the latency protocol alongside the learners.

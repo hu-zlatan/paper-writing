@@ -1120,3 +1120,18 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
 - **Where to resume (run 17):** unchanged — read the owner's answer (OWNER_TODO / AUTOPILOT §1 / issues). No answer →
   low-risk only; short runs expected. With (a)/(b) → stage 22, starting from `draft_v4_condensed.md`; with (c) → LOOP MARKER
   v4 → v5 at stage 13 after the owner raises the cap; with (d) → stage 8.
+
+- **Run 17 (2026-11-03, from ≈ 07:50 UTC).** No open issues (GitHub MCP; WebFetch of the issues page was refused again);
+  AUTOPILOT §1 has no new owner directive; `max_refine_cycles` still 3 → the stage-20 escalation is still unanswered, so
+  low-risk work only. No stage advanced; the master `draft_v4.md`, every claim and every number are unchanged. `add_repo`
+  again unavailable; shallow checkout already at origin/main (ef14d8f), detached HEAD. No workflow running or queued in the
+  latest list (last run 2026-11-01).
+- **Closed run 16's caveat on the condensed draft:** a second fresh subagent, given only the two texts, compared them after
+  the 14 fixes: no must-fix, 7 borderline (5 dropped qualifiers or scope, 1 citation attached to a firmer claim than the
+  master, 1 loose gate description), plus the header comment's "adds no number" not covering the comment itself. I checked each
+  against the master and applied all 8 to `draft_v4_condensed.md` (now about 2,540 words). Re-run: no numeric token or cite
+  key absent from the master; `tools_number_audit.py` 0 unmatched. These last edits were not reviewed by a third subagent.
+- **No push notification** (nothing new, per run 14). Next reminder stays at 2026-11-20.
+- **Where to resume (run 18):** unchanged — read the owner's answer (OWNER_TODO / AUTOPILOT §1 / issues). No answer →
+  low-risk only; little is left, so a run with nothing to do should only check and log. With (a)/(b) → stage 22, starting
+  from `draft_v4_condensed.md`; with (c) → LOOP MARKER v4 → v5 at stage 13 after the owner raises the cap; with (d) → stage 8.
