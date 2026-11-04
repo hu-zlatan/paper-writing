@@ -1169,3 +1169,12 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
   (same as runs 14, 18–20). CFP not re-read: WebFetch of the CFP page was refused this run (last read run 14).
 - **No push notification** (nothing new, per run 14). Next reminder stays at 2026-11-20.
 - **Where to resume (run 22):** unchanged from run 17's entry: read the owner's answer; none → check and log only.
+
+- **Run 22 (2026-11-04, from ≈ 13:49 UTC).** Check-and-log only. No open issues (GitHub MCP; WebFetch of the issues page was
+  refused again); AUTOPILOT §1 has no new owner directive; `max_refine_cycles` still 3 → the stage-20 escalation is still
+  unanswered. No stage advanced; no draft, claim or number changed. `add_repo` again unavailable; checkout already at
+  origin/main (2893ed9), detached HEAD; the fetch's "forced update" on dabde70 is the same stale-ref artefact as earlier runs.
+  No workflow running (last run 2026-11-01). `tools_number_audit.py`: `draft_v4_condensed.md` 0 unmatched, `draft_v4.md` 7
+  (same as runs 14, 18–21). CFP not re-read this run (last read run 14).
+- **No push notification** (nothing new, per run 14). Next reminder stays at 2026-11-20.
+- **Where to resume (run 23):** unchanged from run 17's entry: read the owner's answer; none → check and log only.
