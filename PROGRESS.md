@@ -1206,3 +1206,12 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
   no RSS 2027 CFP page, so the deadline is neither re-confirmed nor contradicted (last read run 14).
 - **No push notification** (nothing new, per run 14). Next reminder stays at 2026-11-20.
 - **Where to resume (run 26):** unchanged from run 17's entry: read the owner's answer; none → check and log only.
+
+- **Run 26 (2026-11-05, from ≈ 13:50 UTC).** Check-and-log only. No open issues, and no issue closed since 10-25 (GitHub MCP;
+  WebFetch not available as a direct tool this run); AUTOPILOT §1 has no new owner directive; `max_refine_cycles` still 3 → the
+  stage-20 escalation is still unanswered. No stage advanced; no draft, claim or number changed. `add_repo` again unavailable;
+  checkout already at origin/main (6088053), detached HEAD. No workflow running (last run 2026-11-01). `tools_number_audit.py`:
+  `draft_v4_condensed.md` 0 unmatched, `draft_v4.md` 7 (same as runs 14, 18–25). CFP page not re-read; one WebSearch returned
+  no RSS 2027 CFP page, so the deadline is neither re-confirmed nor contradicted (last read run 14).
+- **No push notification** (nothing new, per run 14). Next reminder stays at 2026-11-20.
+- **Where to resume (run 27):** unchanged from run 17's entry: read the owner's answer; none → check and log only.
