@@ -1301,9 +1301,18 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
   - Pilot TIME_ESTIMATE S4 / S8 in the sandbox (`results/v5/pilot/`).
   - **Dispatched:** round-0 re-run (done), A16 keep + τ (18 jobs), RL cfg 6 × seeds 711–715 × S2/S12/S4/S8 (20),
     labels S4/S8 0–2,999 (120), rl_success S2/S12 × 5 seeds (10), DAgger r1 S2/S12 × 5 seeds × 800 episodes (200).
-  - **Where to resume (run 31):** (1) A16 keep result → if kept: τ from `tau_A16_k2_*` (extend `analysis_cal_v5.py`),
-    then A16-2 labels + RL; if dropped: record it in amendment v5.1 and in PROGRESS. (2) When DAgger r1 lands: r1
-    distill per seed (r0 label shards + r1 shards, `--init` r0 best, `--fixed-epochs 200 --keep best`; v4 pattern in
-    `results/v4/d4/S_k2_s601_r1.json`), then DAgger r2 (β 0) and r2 distill. (3) When S4/S8 labels land: round-0
-    students (copy `experiments/v5_d5_r0_S2_S12.json`; held-out = shards 1200–1450). (4) RL / rl_success: nothing until
-    they land.
+  - **Later in run 30:** A16 keep check complete: G\* sub-8 success 0.800 at κ 0, τ 3 (200 episodes) → **A16-2 kept**;
+    τ(A16, κ 2) = 3 + 0.351 = **3.4** (amendment v5.1 updated). Dispatched A16-2 labels (60) + RL cfg 6 × 5 seeds,
+    G\* val3 0–499 in S4/S8/A16-2 (75 jobs; S2/S12 re-use v4/v3 G\* val3 records, addendum v5.1b, stated before any
+    v5 val3 job), heuristic baselines B-fan/B-spread/B-cov on pilot3 0–199 in all 5 cells (150 jobs, shards of 20
+    because one A16 sub-8 episode took > 2 min in the sandbox). Pre-written: `code/analysis_d5_v5.py` (D5 per cell),
+    `code/tools_v5_manifests.py` (round-0 / dag2 / distill1 / distill2 manifests with input-existence checks; it
+    reproduces the dispatched S2/S12 round-0 manifest exactly).
+  - **Queue at run end (≈ 640 jobs, 20 concurrent):** RL S-cells (20), S4/S8 labels (120), rl_success (10), DAgger r1
+    S2/S12 (200), A16 labels + RL (65), G\* val3 new cells (75), baselines (150). Expect ≈ 12–15 h of wall time.
+  - **Where to resume (run 31):** (1) DAgger r1 S2/S12 landed → `python tools_v5_manifests.py distill1 S2 S12` → dispatch
+    → then `dag2 S2 S12` → `distill2`. (2) S4/S8 labels landed → `tools_v5_manifests.py r0 S4 S8`; A16 labels landed →
+    `r0 A16-2`; then r1 DAgger for those cells (adapt the r1 manifest: weights `_r0.npz`, β 0.5, `--round 1`). (3) Any
+    shard that hit its time budget → follow-up manifest (`code/tools_resume_manifest.py`). (4) Baselines landed → H\*
+    per cell (write `analysis_base_v5.py`). (5) Students r2 → val3 eval (students, sub 8, 20-episode shards) →
+    `analysis_d5_v5.py`. test5 stays untouched until the freeze commit.

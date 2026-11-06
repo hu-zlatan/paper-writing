@@ -14,3 +14,8 @@ Make the code ready for the v5 rows of `docs/07c_amendment_v5_0.md` without chan
 
 ## Red lines
 No v3/v4 output changed; test5 not touched before the freeze; all numbers from committed results.
+
+## Status (run 30)
+Steps 1–3 done (chat session). Step 4: P0 analysed (`results/v5/12_cal_analysis.json`), amendment v5.1 written
+(+ addenda a: rl_success; b: G* val3 re-use). Main runs E1/E2/E3 dispatched; stage 13 continues as the execution
+stage of the v5 rows until test5 is frozen and evaluated, then stage 14.
