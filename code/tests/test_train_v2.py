@@ -55,3 +55,22 @@ def test_plateau_recorded_without_stopping():
             assert status == "plateau" and tr.episodes == 8 * 4
         else:
             assert status == "max_episodes" and tr.episodes == 8 * 14 and tr.plateau_at == 8 * 4
+
+
+def test_rl_success_terminal_reward_v5():
+    """amendment v5.0 E3 iii: rl_success puts a 0/1 reward on the last live step only; validation stays PF-free and
+    gives the same value as spce_total for the same weights (same val stream)."""
+    cfg = TrainConfigV2(method="rl_success", kappa=2.0, tau=4.7, L=63, J=4, batch=4, val_episodes=4,
+                        extra={"frame": "rel", "train_pf_n": 100})
+    tr = TrainerV2(cfg)
+    ro = tr.rollout(np.random.default_rng(3))
+    R, alive = ro["R"], ro["alive"]
+    for b in range(4):
+        T_b = int(alive[b].sum())
+        assert set(np.unique(R[b])) <= {0.0, 1.0}
+        assert np.all(R[b, :T_b - 1] == 0) and np.all(R[b, T_b:] == 0)
+    tr.update(ro)
+    cfg2 = TrainConfigV2(method="spce_total", kappa=2.0, tau=4.7, L=63, J=4, batch=4, val_episodes=4, extra={"frame": "rel"})
+    tr2 = TrainerV2(cfg2)
+    tr2.pi = tr.pi
+    assert abs(tr.validate() - tr2.validate()) < 1e-12

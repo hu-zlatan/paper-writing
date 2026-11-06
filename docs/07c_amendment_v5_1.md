@@ -37,3 +37,14 @@ test5 500 episodes per cell, val3 500, S8 kept, E7 decided after the pilot timin
   PF). The 64 × 8 relative-frame trainer (`train_v2.py`) needs the same reward added before E3 (iii) runs; until then
   E3 (iii) is pending. Its definition will follow the v1 one (terminal 1[success] of the PF estimate), stated in a
   short addendum before any `rl_success` job.
+
+## Addendum v5.1a — `rl_success` in the 64 × 8 relative-frame trainer (run 30, before any `rl_success` job)
+- `touchbed/train_v2.py`, method `rl_success`: reward 0 at every step except the last executed probe, where it is
+  1[success] of a training PF (N = 1,000 particles, 3 MH steps, `estimate(refine_iters=10)`, success tolerance 5 mm /
+  5°) run on that episode's executed probes — the v1 definition (`touchbed/train.py`). γ = 1, PPO and network as
+  `spce_total`; config = selected cfg 6. The trainer-validation value (ball-sPCE, PF-free) uses the same stream as
+  `spce_total`, so it is comparable; it is logged, not used for selection. Test: `tests/test_train_v2.py`.
+- Cost measured in the sandbox: ≈ 0.05 s per PF episode → ≈ 2.8 CPU-h of PF per 2 × 10⁵-episode run on top of the
+  RL run itself; inside the 330-min job budget (the time guard stops and saves if not).
+- Runs: S2 and S12, seeds 711–715 (`experiments/v5_e3_rlsucc.json`).
+- Pilot TIME_ESTIMATE (sandbox, sub-4 grid, design info only; `results/v5/pilot/`): S4 label 9.8 s / episode, S8 5.6 s.

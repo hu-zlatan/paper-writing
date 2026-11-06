@@ -1,0 +1,45 @@
+{
+ "purpose": "v5 E3(iii) (amendment v5.1a): rl_success control, cfg 6, seeds 711-715, 2e5 episodes, S2 and S12",
+ "jobs": [
+  {
+   "id": "v5_rlsucc_S2_sd711",
+   "cmd": "python main.py train3rl --set S --method rl_success --frame rel --kappa 2 --tau 4.7 --lr 0.0012568992994131244 --ent-coef 0.0009504303482968091 --batch 256 --critic-lr 0.0004925268976336745 --seed 711 --max-episodes 200000 --no-plateau-stop --budget-minutes 330 --out ../results/v5/rl/S_k2_rlsucc_cfg6_sd711"
+  },
+  {
+   "id": "v5_rlsucc_S2_sd712",
+   "cmd": "python main.py train3rl --set S --method rl_success --frame rel --kappa 2 --tau 4.7 --lr 0.0012568992994131244 --ent-coef 0.0009504303482968091 --batch 256 --critic-lr 0.0004925268976336745 --seed 712 --max-episodes 200000 --no-plateau-stop --budget-minutes 330 --out ../results/v5/rl/S_k2_rlsucc_cfg6_sd712"
+  },
+  {
+   "id": "v5_rlsucc_S2_sd713",
+   "cmd": "python main.py train3rl --set S --method rl_success --frame rel --kappa 2 --tau 4.7 --lr 0.0012568992994131244 --ent-coef 0.0009504303482968091 --batch 256 --critic-lr 0.0004925268976336745 --seed 713 --max-episodes 200000 --no-plateau-stop --budget-minutes 330 --out ../results/v5/rl/S_k2_rlsucc_cfg6_sd713"
+  },
+  {
+   "id": "v5_rlsucc_S2_sd714",
+   "cmd": "python main.py train3rl --set S --method rl_success --frame rel --kappa 2 --tau 4.7 --lr 0.0012568992994131244 --ent-coef 0.0009504303482968091 --batch 256 --critic-lr 0.0004925268976336745 --seed 714 --max-episodes 200000 --no-plateau-stop --budget-minutes 330 --out ../results/v5/rl/S_k2_rlsucc_cfg6_sd714"
+  },
+  {
+   "id": "v5_rlsucc_S2_sd715",
+   "cmd": "python main.py train3rl --set S --method rl_success --frame rel --kappa 2 --tau 4.7 --lr 0.0012568992994131244 --ent-coef 0.0009504303482968091 --batch 256 --critic-lr 0.0004925268976336745 --seed 715 --max-episodes 200000 --no-plateau-stop --budget-minutes 330 --out ../results/v5/rl/S_k2_rlsucc_cfg6_sd715"
+  },
+  {
+   "id": "v5_rlsucc_S12_sd711",
+   "cmd": "python main.py train3rl --set S --method rl_success --frame rel --kappa 12 --tau 4.9 --lr 0.0012568992994131244 --ent-coef 0.0009504303482968091 --batch 256 --critic-lr 0.0004925268976336745 --seed 711 --max-episodes 200000 --no-plateau-stop --budget-minutes 330 --out ../results/v5/rl/S_k12_rlsucc_cfg6_sd711"
+  },
+  {
+   "id": "v5_rlsucc_S12_sd712",
+   "cmd": "python main.py train3rl --set S --method rl_success --frame rel --kappa 12 --tau 4.9 --lr 0.0012568992994131244 --ent-coef 0.0009504303482968091 --batch 256 --critic-lr 0.0004925268976336745 --seed 712 --max-episodes 200000 --no-plateau-stop --budget-minutes 330 --out ../results/v5/rl/S_k12_rlsucc_cfg6_sd712"
+  },
+  {
+   "id": "v5_rlsucc_S12_sd713",
+   "cmd": "python main.py train3rl --set S --method rl_success --frame rel --kappa 12 --tau 4.9 --lr 0.0012568992994131244 --ent-coef 0.0009504303482968091 --batch 256 --critic-lr 0.0004925268976336745 --seed 713 --max-episodes 200000 --no-plateau-stop --budget-minutes 330 --out ../results/v5/rl/S_k12_rlsucc_cfg6_sd713"
+  },
+  {
+   "id": "v5_rlsucc_S12_sd714",
+   "cmd": "python main.py train3rl --set S --method rl_success --frame rel --kappa 12 --tau 4.9 --lr 0.0012568992994131244 --ent-coef 0.0009504303482968091 --batch 256 --critic-lr 0.0004925268976336745 --seed 714 --max-episodes 200000 --no-plateau-stop --budget-minutes 330 --out ../results/v5/rl/S_k12_rlsucc_cfg6_sd714"
+  },
+  {
+   "id": "v5_rlsucc_S12_sd715",
+   "cmd": "python main.py train3rl --set S --method rl_success --frame rel --kappa 12 --tau 4.9 --lr 0.0012568992994131244 --ent-coef 0.0009504303482968091 --batch 256 --critic-lr 0.0004925268976336745 --seed 715 --max-episodes 200000 --no-plateau-stop --budget-minutes 330 --out ../results/v5/rl/S_k12_rlsucc_cfg6_sd715"
+  }
+ ]
+}

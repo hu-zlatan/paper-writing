@@ -6,6 +6,8 @@ method:
   spce_myopic_rate  gamma = 0, reward r_t / c(a_t)                                   (ablation A1 / H2 comparator)
   full_state        spce_total with the v1 full-state numerator p(h|s0)              (ablation A2)
   no_nc_input       spce_total with no-contact touches removed from the DeepSets sum (ablation A3)
+  rl_success        sparse terminal reward 1[success] of a 1,000-particle training PF after the last executed probe
+                    (the v1 definition, touchbed/train.py; added for amendment v5.0 E3 iii); gamma = 1
 """
 from __future__ import annotations
 
@@ -22,7 +24,7 @@ from .evaluate import stream
 from .geometry import Library, cast
 from .likelihood import ObsModel, loglik_from_pred, sample_obs
 from .nn import FEAT_DIM, MLP, Adam, obs_features
-from .pf import Prior
+from .pf import ParticleFilter, Prior, success
 from .shapes import get_set
 from .travel import A, PHI, PSI, cost
 from .relframe import RelDeepSets, rel_ctx, rel_features
@@ -118,7 +120,7 @@ class TrainerV2:
         cat = lambda a, b: np.concatenate([a, b], axis=1)
         return (k0, x0, y0, t0), J, (cat(kb, kc), cat(xb, xc), cat(yb, yc), cat(tb, tc))
 
-    def rollout(self, rng, B=None, greedy=False):
+    def rollout(self, rng, B=None, greedy=False, terminal_reward=True):
         cfg, om, lib = self.cfg, self.om, self.lib
         B = B or cfg.batch
         T = self.Tmax
@@ -165,6 +167,8 @@ class TrainerV2:
             RAW[:, t] = np.stack([phi, psi, *(np.asarray(v, dtype=float) for v in o)], axis=1)
             tau_rem = np.where(live, tau_rem - c, tau_rem)
             phi_t = np.where(live, phi, phi_t)
+        if cfg.method == "rl_success" and terminal_reward:  # validation skips the PF: same val stream as spce_total
+            R = self._success_reward(rng, (k0, x0, y0, t0), RAW, alive)
         return dict(F=F, CTX=CTX, MASK=MASK, ACT=ACT, R=R, COST=COST, alive=alive, g_T=g_prev,
                     n_probes=alive.sum(1), RAW=RAW, PHIT=PHIT, TAUR=TAUR)
 
@@ -176,6 +180,23 @@ class TrainerV2:
                              drop_nc=self.cfg.method == "no_nc_input")
         ctx, sh = rel_ctx(PHIT[:, :upto], TAUR[:, :upto], self.cfg.tau)
         return Fr, M, ctx, sh
+
+    def _success_reward(self, rng, s0s, RAW, alive):
+        """Terminal 1[success] at the last live step (v1 rl_success: PF N = 1000, 3 MH steps, estimate refine 10)."""
+        B, T = alive.shape
+        R = np.zeros((B, T))
+        n_pf, mh = self.cfg.extra.get("train_pf_n", 1000), self.cfg.extra.get("train_pf_mh", 3)
+        for b in range(B):
+            T_b = int(alive[b].sum())
+            if T_b == 0:
+                continue
+            pf = ParticleFilter(self.lib, self.om, self.prior, n_pf, rng, mh_steps=mh)
+            for t in range(T_b):
+                phi, psi, c, px, py, n = RAW[b, t]
+                pf.update(phi, psi, (bool(c), px, py, n))
+            s0 = tuple(v[b] for v in s0s)
+            R[b, T_b - 1] = float(success(self.lib, pf.estimate(refine_iters=10), s0)["success"])
+        return R
 
     def update(self, ro):
         cfg = self.cfg
@@ -224,7 +245,7 @@ class TrainerV2:
         tot, n = 0.0, 0
         while n < self.cfg.val_episodes:
             b = min(128, self.cfg.val_episodes - n)
-            ro = self.rollout(rng, B=b, greedy=greedy)
+            ro = self.rollout(rng, B=b, greedy=greedy, terminal_reward=False)
             tot += float(ro["g_T"].sum()); n += b
         return tot / n
 
