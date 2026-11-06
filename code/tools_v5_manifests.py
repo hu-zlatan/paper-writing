@@ -4,7 +4,7 @@ shards of 40; every distill = fixed 200 epochs, best held-out R-bar checkpoint, 
 training data = all label shards + every DAgger shard of earlier rounds (the v4 pattern, results/v4/d4/*_r1.json).
 
 usage: python tools_v5_manifests.py <step> <cell> [<cell> ...]
-  step: r0 | distill1 | dag2 | distill2      cell: S2 | S4 | S8 | S12 | A16-2
+  step: r0 | dag1 | distill1 | dag2 | distill2      cell: S2 | S4 | S8 | S12 | A16-2
 Checks that every input file exists (refuses to write a manifest that would fail on the runner)."""
 import json
 import os
@@ -71,13 +71,15 @@ def jobs_for(step, c):
             out.append({"id": f"v5_d5_{c}_s{sd}_r{r}", "cmd": f"python main.py distill3 --set {s} --kappa {k} --tau {tau} --hp 0 "
                         f"--seed {sd} --round {r} --shards {' '.join(shards)} --val-shards {' '.join(held)}{init} "
                         f"--fixed-epochs 200 --keep best --budget-minutes 330 --out ../results/v5/d5/{s}_k{k}_s{sd}_r{r}"})
-        elif step == "dag2":
-            w = f"../results/v5/d5/{s}_k{k}_s{sd}_r1.npz"
+        elif step in ("dag1", "dag2"):
+            r = int(step[-1])
+            beta = "0.5" if r == 1 else "0"
+            w = f"../results/v5/d5/{s}_k{k}_s{sd}_r{r - 1}.npz"
             check([w])
             for st in range(0, 800, 40):
-                out.append({"id": f"v5_dag_{c}_s{sd}_r2_{st:03d}", "cmd": f"python main.py dagger3 --set {s} --kappa {k} --tau {tau} "
-                            f"--weights {w} --seed {sd} --round 2 --beta 0 --start {st} --count 40 --budget-minutes 25 "
-                            f"--out ../results/v5/d5/{s}_k{k}_s{sd}_r2_{st:03d}"})
+                out.append({"id": f"v5_dag_{c}_s{sd}_r{r}_{st:03d}", "cmd": f"python main.py dagger3 --set {s} --kappa {k} --tau {tau} "
+                            f"--weights {w} --seed {sd} --round {r} --beta {beta} --start {st} --count 40 --budget-minutes 25 "
+                            f"--out ../results/v5/d5/{s}_k{k}_s{sd}_r{r}_{st:03d}"})
     return out
 
 

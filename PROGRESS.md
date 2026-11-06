@@ -8,8 +8,8 @@
 **Target venue:** RSS 2027 — Stage 1 extended abstract 2026-12-04 23:59 AoE; Stage 2 full paper (invited) 2027-04-16 23:59 AoE (verified 2026-10-28 at https://roboticsconference.org/information/cfp/)
 **Topic:** Amortized, non-myopic active tactile localization (TouchBED)
 **Initialised:** 2026-10-28T07:56:44Z
-**Current version:** v4
-**Latest stage:** Stage 21 KNOWLEDGE_ARCHIVE [v4] done; stage 20 v4 FAILED (5.0/10), refine cap used, owner decision pending (OWNER_TODO); see the end of this file
+**Current version:** v5
+**Latest stage:** Stage 13 ITERATIVE_REFINE [v5] in progress (main-run execution on Actions); see run 31 at the end of this file
 
 ---
 
@@ -1316,3 +1316,27 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
     shard that hit its time budget → follow-up manifest (`code/tools_resume_manifest.py`). (4) Baselines landed → H\*
     per cell (write `analysis_base_v5.py`). (5) Students r2 → val3 eval (students, sub 8, 20-episode shards) →
     `analysis_d5_v5.py`. test5 stays untouched until the freeze commit.
+
+- **Run 31 (2026-11-06, from ≈ 19:30 UTC, scheduled) — stage 13 v5 continued.** No open issues; AUTOPILOT §1 unchanged.
+  All run-30 dispatches had finished (last at 18:56 UTC).
+  - **Audit of landed outputs:** S4/S8 labels 120/120 complete; DAgger r1 S2/S12 200/200 complete; RL cfg 6 × 5 seeds
+    in all 5 cells reached 2 × 10⁵ episodes; 9 of 10 `rl_success` runs were stopped by the time guard at 111k–185k
+    episodes (no resume in the trainer → recorded in addendum v5.1c before any evaluation; the saved weights are the
+    models of record, episode counts reported with every number). G\* val3 new cells 1,370 / 1,500 episodes; baselines
+    on pilot3 2,037 / 3,000 episodes (per-episode wall time up to ≈ 24 min for B-cov at sub 8).
+  - **Incident:** Actions run 42233537062 failed in all 60 A16-2 label jobs (`episode_arrays` belief buffer fixed at 48
+    wide; A16 has K = 16 → 96). Fixed in `touchbed/distill.py` (width follows the labels; S outputs unchanged), test
+    added (suite 65 passed), sandbox check: A16 label3 2 episodes + 3-epoch distill3 OK. Re-dispatched with identical
+    commands (`experiments/v5_a16_label_rerun.json`).
+  - **Dispatched:** r1 students S2/S12 (`v5_distill1_S2_S12`, 10), round-0 students S4/S8 (`v5_r0_S4_S8`, 10), A16
+    labels (60), baseline follow-ups (`v5_base_pilot_f1`, 246 shards ≈ 15 min each), G\* val3 follow-ups
+    (`v5_val_gstar_new_f1`, 42 shards).
+  - **Code:** `code/analysis_base_v5.py` (H\* per cell by the v5 Baselines rule, v3 tie-break; not run to a result
+    yet — inputs incomplete); `tools_v5_manifests.py` gains `dag1` (reproduces the dispatched S2/S12 r1 manifest
+    exactly, 200/200 jobs).
+  - **Where to resume (run 32):** (1) r1 students S2/S12 landed → `python tools_v5_manifests.py dag2 S2 S12` → dispatch
+    → later `distill2 S2 S12`. (2) r0 S4/S8 landed → `dag1 S4 S8` → `distill1` → `dag2` → `distill2`. (3) A16 labels
+    landed (check all `complete`) → `r0 A16-2` → same chain. (4) Baseline follow-ups landed → `analysis_base_v5.py`
+    (check `complete` in every cell; another follow-up via `tools_resume_manifest.py` if not) → commit
+    `results/v5/12_base_hstar.json`. (5) G\* val3 complete → students r2 val3 eval → `analysis_d5_v5.py`. test5 stays
+    untouched until the freeze commit.
