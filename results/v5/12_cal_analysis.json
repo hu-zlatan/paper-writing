@@ -27,11 +27,24 @@
    "mean_travel_rad": 0.3273260829932977,
    "tau": 4.8,
    "complete": true
+  },
+  "A16_k2": {
+   "n_star": 3,
+   "n_episodes": 200,
+   "mean_travel_time": 0.35141201826181884,
+   "sd_travel_time": 0.2747693499639871,
+   "mean_travel_rad": 0.551996707477246,
+   "tau": 3.4,
+   "complete": true
   }
  },
  "keep": {
   "A16": {
-   "note": "n* = 3: needs 200 cal3 episodes at tau = 3 before the keep check"
+   "gstar_success_sub8_at_nstar": 0.8,
+   "n_episodes": 200,
+   "complete": true,
+   "keep": true,
+   "conditions": "kappa 0, tau = n* = 3, cal3 0-199, sub 8 (amendment v5.1)"
   }
  }
 }

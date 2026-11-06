@@ -11,12 +11,14 @@ produce. Source files: `results/v5/12_cal_analysis.json` (`code/analysis_cal_v5.
 | S4 | S | 4 | 4 | 4.8 | Cal′ rule: 4 + mean G\* travel time 0.797 (200 cal3) |
 | S8 | S | 8 | 4 | 4.8 | Cal′ rule: 4 + 0.834 (200 cal3) |
 | S12 | S | 12 | 4 | 4.9 | v3 Cal′ (unchanged) |
-| A16-2 | A16 | 2 | 3 | pending | n\* rule: G\* sub-8 success at κ 0, τ 4 = 0.975 > 0.88 → n\* = 3 |
+| A16-2 | A16 | 2 | 3 | 3.4 | n\* rule: G\* sub-8 success at κ 0, τ 4 = 0.975 > 0.88 → n\* = 3; τ = 3 + 0.351 (200 cal3) |
 
 **A16 keep check (reading fixed here, before the run):** "G\* sub-8 success at that n\*" is read with the same
 conditions as the n\* rule (κ 0, τ = n\* = 3, the same 200 cal3 episodes, sub 8). Keep iff in [0.30, 0.90]; if not,
 A16-2 is dropped and reported, no substitute. The τ calibration for A16 κ 2 (n\* 3) runs in parallel and is discarded
 if the cell is dropped. Manifest `experiments/v5_p0_a16.json`.
+**Result (run 30):** G\* sub-8 success at κ 0, τ 3 = 0.800 (200/200 episodes) ∈ [0.30, 0.90] → **A16-2 kept**,
+τ = 3.4. Labels + RL: `experiments/v5_a16_label_rl.json`.
 
 ## RL configuration (E3 i)
 v3 D9 rule on the 8 sweep runs (seed 719, 10⁵ episodes, S2): highest final trainer-validation ball-sPCE is cfg 6

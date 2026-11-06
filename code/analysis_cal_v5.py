@@ -34,13 +34,20 @@ if ns:
         out["keep"]["A16"] = {"gstar_success_sub8_at_nstar": p, "keep": bool(0.30 <= p <= 0.90),
                               "note": "n* = 4 equals the tau = 4, kappa = 0 run, so the keep check uses the same episodes"}
     else:
-        out["keep"]["A16"] = {"note": f"n* = {n_star}: needs 200 cal3 episodes at tau = {n_star} before the keep check"}
-for k in (4, 8):
-    cal = rows(f"tau_S_k{k}_sh*.jsonl")
+        kp = rows(f"keep_A16_n{n_star}_sh*.jsonl")
+        if kp:
+            q = float(np.mean([r["success"] for r in kp]))
+            out["keep"]["A16"] = {"gstar_success_sub8_at_nstar": q, "n_episodes": len(kp), "complete": len(kp) == 200,
+                                  "keep": bool(0.30 <= q <= 0.90) if len(kp) == 200 else None,
+                                  "conditions": f"kappa 0, tau = n* = {n_star}, cal3 0-199, sub 8 (amendment v5.1)"}
+        else:
+            out["keep"]["A16"] = {"note": f"n* = {n_star}: needs 200 cal3 episodes at tau = {n_star} before the keep check"}
+for setname, k in (("S", 4), ("S", 8), ("A16", 2)):
+    cal = rows(f"tau_{setname}_k{k}_sh*.jsonl")
     if cal:
         v = np.array([r["travel_time"] for r in cal])
         n = cal[0]["n_star"]
-        out["tau"][f"S_k{k}"] = {"n_star": n, "n_episodes": len(v), "mean_travel_time": float(v.mean()),
+        out["tau"][f"{setname}_k{k}"] = {"n_star": n, "n_episodes": len(v), "mean_travel_time": float(v.mean()),
                                  "sd_travel_time": float(v.std(ddof=1)), "mean_travel_rad": float(np.mean([r["travel_rad"] for r in cal])),
                                  "tau": round(n + float(v.mean()), 1), "complete": len(v) == 200}
 print(json.dumps(out, indent=1))
