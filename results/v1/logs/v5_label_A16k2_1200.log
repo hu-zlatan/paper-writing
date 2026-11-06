@@ -1,15 +1,1 @@
-Traceback (most recent call last):
-  File "/home/runner/work/paper-writing/paper-writing/code/main.py", line 503, in <module>
-    main()
-  File "/home/runner/work/paper-writing/paper-writing/code/main.py", line 498, in main
-    return v3cmds[a.cmd](a)
-           ^^^^^^^^^^^^^^^^
-  File "/home/runner/work/paper-writing/paper-writing/code/touchbed/cli3.py", line 205, in cmd_label3
-    _label_loop(a, "label3", list(range(a.start, a.start + a.count)), lambda: None, 0.0, ("r0",))
-  File "/home/runner/work/paper-writing/paper-writing/code/touchbed/cli3.py", line 191, in _label_loop
-    packed.append(episode_arrays(r["history"], r["labels"], T))
-                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/paper-writing/paper-writing/code/touchbed/distill.py", line 97, in episode_arrays
-    BF[t] = lab["belief"]
-    ~~^^^
-ValueError: could not broadcast input array from shape (96,) into shape (48,)
+LABEL3_DONE status=complete episodes=50 wall_s=456
