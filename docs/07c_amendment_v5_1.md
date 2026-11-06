@@ -48,3 +48,10 @@ test5 500 episodes per cell, val3 500, S8 kept, E7 decided after the pilot timin
   RL run itself; inside the 330-min job budget (the time guard stops and saves if not).
 - Runs: S2 and S12, seeds 711–715 (`experiments/v5_e3_rlsucc.json`).
 - Pilot TIME_ESTIMATE (sandbox, sub-4 grid, design info only; `results/v5/pilot/`): S4 label 9.8 s / episode, S8 5.6 s.
+
+## Addendum v5.1b — D5 read-out details (run 30, before any v5 val3 job)
+- G\* val3 records are re-used where they already exist with the same split, episodes 0–499, (set, κ, τ), sub 8 and
+  G\* code path: S2 from `results/v4/d4_val/` (v4 D4), S12 from `results/v3/d3_val/` (v3 D3). The v5 code changes
+  (test5 salt, DAgger index range, `--keep best`, sub > 8 batching) do not touch G\* at sub 8. New cells (S4, S8,
+  A16-2) run G\* on val3 0–499 in `results/v5/d5_val/`.
+- Script: `code/analysis_d5_v5.py` → `results/v5/12_d5_analysis.json`.
