@@ -1261,3 +1261,21 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
 - **Next stage:** 13 ITERATIVE_REFINE (code: test5 salt, best-checkpoint distillation, `--sub 16`) → P0 pilot →
   amendment v5.1 → E1–E7 → 14 → 15 → 16–20.
 - **Resuming under version:** v5
+
+## Stage 13 · ITERATIVE_REFINE · v5 (started 2026-11-06 ≈ 08:30 UTC, in the owner's chat session)
+- **Plan:** `plans/stage_13_iterative_refine_v5.md`.
+- **Code (aeb3165):** split `test5` (salt 107; tests show it is disjoint from test3/val3/pilot3/cal3 and paired across
+  κ); DAgger index range for seeds 701–799 (≥ 2,000,000, disjoint from v3/v4); `distill3 --keep best` (keeps the
+  lowest held-out-R̄ checkpoint, also saves `<out>_last.npz`; default `last` so v3/v4 commands reproduce); grid
+  read-out batch scaled for sub > 8 (sub 16 was OOM-killed in the sandbox; sub ≤ 8 paths unchanged). Full test suite 63
+  passed + 3 new v5 tests.
+- **Amendment v5.0 edits before any v5 job:** A16 n\* by the unchanged v3 Cal′ rule (not an ad-hoc scan); RL sweep
+  selection by the v3 D9 rule (trainer-validation ball-sPCE), sweep cfg 0 = the v3/v4 config.
+- **Timing (sandbox, report-only):** G\* on A16 κ 0 τ 4, sub 8: 23 s per cal3 episode; `regrid3 --sub 16`: 109 s per
+  episode (S2 test3 ep 0) → E5 ≈ 25 CPU-h (estimate was 15).
+- **Dispatched on Actions:** `v5_p0_cal` (26 jobs: Cal′ τ for S κ 4 / κ 8, A16 n\* scan), `v5_rl_sweep_S2` (8 configs,
+  seed 719, 10⁵ episodes), `v5_d5_r0_S2_S12` (10 jobs: round-0 students, seeds 701–705, re-using v4 S2 / v3 S12 labels).
+- **Where to resume:** when P0 lands → `analysis_cal_v3.py`-style analysis for S4, S8, A16 (write
+  `results/v5/12_cal_analysis.json`); if A16 n\* ≠ 4, run 200 cal3 at τ = n\* to check the [0.30, 0.90] keep rule; then
+  amendment v5.1 (τ per cell, sizes) → labels for S4, S8, A16-2 → DAgger r1/r2 (copy `v4_dag_S2_r1/r2.json`, seeds
+  701–705, `--keep best` in the distill steps) → RL sweep selection → RL 5 seeds × 5 cells + rl_success S2/S12 → val3 D5.
