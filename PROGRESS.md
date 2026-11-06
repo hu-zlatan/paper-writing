@@ -1233,3 +1233,11 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
   CFP page, so the deadline is neither re-confirmed nor contradicted (last read run 14).
 - **No push notification** (nothing new, per run 14). Next reminder stays at 2026-11-20.
 - **Where to resume (run 29):** unchanged from run 17's entry: read the owner's answer; none → check and log only.
+
+- **Run 29 (2026-11-06, from ≈ 07:50 UTC).** Check-and-log only. No open issues and none updated since 11-01 (GitHub MCP);
+  AUTOPILOT §1 has no new owner directive; `max_refine_cycles` still 3 → the stage-20 escalation is still unanswered. No stage
+  advanced; no draft, claim or number changed. `add_repo` not available as a tool this run; checkout moved onto main, level with
+  origin/main (461a5c1). `tools_number_audit.py`: `draft_v4_condensed.md` 0 unmatched, `draft_v4.md` 7 (same as runs 14,
+  18–28). CFP page not re-read (last read run 14).
+- **No push notification** (nothing new, per run 14). Next reminder stays at 2026-11-20.
+- **Where to resume (run 30):** unchanged from run 17's entry: read the owner's answer; none → check and log only.
