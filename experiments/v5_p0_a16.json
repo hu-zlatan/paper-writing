@@ -1,0 +1,77 @@
+{
+ "purpose": "v5 P0 (amendment v5.1): A16 n* = 3 by the v3 Cal' rule (sub-8 success 0.975 at tau 4) -> keep check: G* sub 8 on the 200 cal3 episodes at kappa 0, tau = n* = 3 (keep iff in [0.30, 0.90]); tau calibration for A16 kappa 2 with n* = 3 (run in parallel; discarded if the cell is dropped)",
+ "jobs": [
+  {
+   "id": "v5_a16_keep_sh0",
+   "cmd": "python main.py eval3 --set A16 --method gstar --kappa 0 --tau 3 --split cal3 --start 0 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/cal/keep_A16_n3_sh0"
+  },
+  {
+   "id": "v5_a16_keep_sh1",
+   "cmd": "python main.py eval3 --set A16 --method gstar --kappa 0 --tau 3 --split cal3 --start 20 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/cal/keep_A16_n3_sh1"
+  },
+  {
+   "id": "v5_a16_keep_sh2",
+   "cmd": "python main.py eval3 --set A16 --method gstar --kappa 0 --tau 3 --split cal3 --start 40 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/cal/keep_A16_n3_sh2"
+  },
+  {
+   "id": "v5_a16_keep_sh3",
+   "cmd": "python main.py eval3 --set A16 --method gstar --kappa 0 --tau 3 --split cal3 --start 60 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/cal/keep_A16_n3_sh3"
+  },
+  {
+   "id": "v5_a16_keep_sh4",
+   "cmd": "python main.py eval3 --set A16 --method gstar --kappa 0 --tau 3 --split cal3 --start 80 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/cal/keep_A16_n3_sh4"
+  },
+  {
+   "id": "v5_a16_keep_sh5",
+   "cmd": "python main.py eval3 --set A16 --method gstar --kappa 0 --tau 3 --split cal3 --start 100 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/cal/keep_A16_n3_sh5"
+  },
+  {
+   "id": "v5_a16_keep_sh6",
+   "cmd": "python main.py eval3 --set A16 --method gstar --kappa 0 --tau 3 --split cal3 --start 120 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/cal/keep_A16_n3_sh6"
+  },
+  {
+   "id": "v5_a16_keep_sh7",
+   "cmd": "python main.py eval3 --set A16 --method gstar --kappa 0 --tau 3 --split cal3 --start 140 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/cal/keep_A16_n3_sh7"
+  },
+  {
+   "id": "v5_a16_keep_sh8",
+   "cmd": "python main.py eval3 --set A16 --method gstar --kappa 0 --tau 3 --split cal3 --start 160 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/cal/keep_A16_n3_sh8"
+  },
+  {
+   "id": "v5_a16_keep_sh9",
+   "cmd": "python main.py eval3 --set A16 --method gstar --kappa 0 --tau 3 --split cal3 --start 180 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/cal/keep_A16_n3_sh9"
+  },
+  {
+   "id": "v5_cal_tau_A16_k2_sh0",
+   "cmd": "python main.py calib3 --set A16 --kappa 2 --n-star 3 --start 0 --count 25 --budget-minutes 25 --out ../results/v5/cal/tau_A16_k2_sh0"
+  },
+  {
+   "id": "v5_cal_tau_A16_k2_sh1",
+   "cmd": "python main.py calib3 --set A16 --kappa 2 --n-star 3 --start 25 --count 25 --budget-minutes 25 --out ../results/v5/cal/tau_A16_k2_sh1"
+  },
+  {
+   "id": "v5_cal_tau_A16_k2_sh2",
+   "cmd": "python main.py calib3 --set A16 --kappa 2 --n-star 3 --start 50 --count 25 --budget-minutes 25 --out ../results/v5/cal/tau_A16_k2_sh2"
+  },
+  {
+   "id": "v5_cal_tau_A16_k2_sh3",
+   "cmd": "python main.py calib3 --set A16 --kappa 2 --n-star 3 --start 75 --count 25 --budget-minutes 25 --out ../results/v5/cal/tau_A16_k2_sh3"
+  },
+  {
+   "id": "v5_cal_tau_A16_k2_sh4",
+   "cmd": "python main.py calib3 --set A16 --kappa 2 --n-star 3 --start 100 --count 25 --budget-minutes 25 --out ../results/v5/cal/tau_A16_k2_sh4"
+  },
+  {
+   "id": "v5_cal_tau_A16_k2_sh5",
+   "cmd": "python main.py calib3 --set A16 --kappa 2 --n-star 3 --start 125 --count 25 --budget-minutes 25 --out ../results/v5/cal/tau_A16_k2_sh5"
+  },
+  {
+   "id": "v5_cal_tau_A16_k2_sh6",
+   "cmd": "python main.py calib3 --set A16 --kappa 2 --n-star 3 --start 150 --count 25 --budget-minutes 25 --out ../results/v5/cal/tau_A16_k2_sh6"
+  },
+  {
+   "id": "v5_cal_tau_A16_k2_sh7",
+   "cmd": "python main.py calib3 --set A16 --kappa 2 --n-star 3 --start 175 --count 25 --budget-minutes 25 --out ../results/v5/cal/tau_A16_k2_sh7"
+  }
+ ]
+}
