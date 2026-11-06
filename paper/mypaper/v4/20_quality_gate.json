@@ -1,0 +1,40 @@
+{
+  "score_1_to_10": 5.0,
+  "verdict": "Below threshold (5.0 < 7.5): not ready for a top-conference submission. The manuscript is an unusually honest, carefully hedged, pre-registered characterisation study, but its contributions are narrow (one cell per regime, planar simulation, three seeds, mostly null or exploratory learning results), and the draft still contains unfinished content (a [PENDING] random row and a placeholder Figure 1). Its main positive finding (small one-step headroom) is expected from theory and is bounded only over 32 screened actions with a reduced completion. The most transferable observation (the g_T versus grid-posterior ordering inversion) rests on point estimates in one cell, with no interval.",
+  "strengths": [
+    "Rigorous pre-registration discipline: frozen hypotheses, gates, outcome map and an amendment before S2. Failed gates (D3 twice, D4) are reported plainly, and exploratory rows are clearly separated from registered ones.",
+    "Validated headroom estimator: notch and travel-notch constructions with known exact gaps, a zero-gap false-positive bank and an on-belief bias check, plus an explicit statement that G is one-step-deviation headroom, not the gap to the optimal policy.",
+    "Controlled learner comparison: the same belief-free DeepSets head, action set and feasibility mask for DAgger distillation and PPO, so the training signal is the isolated variable.",
+    "The g_T (sPCE-type) versus posterior ordering disagreement is a potentially useful methodological warning for amortized experimental-design work that reports contrastive bounds as policy quality.",
+    "Careful behavioural diagnostics: the travel decomposition separates the grid snap from between-probe travel, and the probe counts, zero-move fractions and per-seed travel correlations show what each policy actually does in each regime.",
+    "Honest cost analysis: the latency decomposition explains why candidate pruning cannot reach the 10x target, and reduced-size planners are compared against the students, which is the fair alternative to amortization.",
+    "The limitations section is thorough, and nearly every quantitative claim carries a paired crossed-bootstrap ci95 and a statement of its evidential status."
+  ],
+  "weaknesses": [
+    "Unfinished manuscript: the S2 random test row is still [PENDING:...] in Table 2, Table 5 and Section 7, and Figure 1 is an explicit placeholder. Either alone blocks submission.",
+    "Thin empirical scope: one cell per regime, one planar shape library (K = 8), simulated Gaussian sensing with no contact dynamics, no held-out shapes, no 3D objects and no hardware. Every regime-dependent claim is an untested two-cell comparison.",
+    "Low statistical power: three seeds per learner make H2 and H2-S2 sensitive only to advantages of about 0.5 nats. No equivalence test was run, there is no multiplicity correction, and the test split was reused by all S2 rows, E5, B-fan and the long student.",
+    "The headline result H3 (Hold) is close to what adaptive-submodularity arguments predict, and it covers only 32 mostly random screened first actions with a reduced greedy completion. The upward selection bias of V_LA was not measured, and there is no full 512-action screen or structured travel-then-fan family. Its novelty and informativeness are limited.",
+    "The learning results are mostly negative or unresolved: no learner reaches G*, H2 is not detected in either cell, and the belief-input control is under-fit and isolates nothing. As a result the paper yields few actionable conclusions.",
+    "The RL comparator is weak and untuned for S2: it uses a single configuration selected at the edge of the learning-rate grid, and all six PPO policies collapse to exactly three probes. This undermines H2 and H2-S2 as a comparison of distillation against RL in general.",
+    "The g_T/posterior inversion, the most transferable claim, has no interval for g_T(G*) - g_T(learner) in either cell. It is marginal in S12, near-cap compression was not measured on test, and it is confounded with RL's fixed three-probe behaviour.",
+    "The evaluator is not shown to have converged: gate E' failed, no sub-16 check was run, and the 7.5 % success flip rate between subdivisions is of the same order as most success contrasts, including the S2 student versus B-fan +8.1 pp.",
+    "The S2 validation/test discrepancy is unexplained (about 2 combined SE, wider for every seed). The S2 training record shows over-fitting under the registered last-checkpoint recipe, which weakens the S2 learnability conclusion as a statement about distillation rather than about this recipe.",
+    "Baselines in S2 are incomplete: only B-fan (the S12 H*) was run. The S2 separation is therefore from a stay-and-fan heuristic that is mismatched to a travelling regime, not from the best available heuristic.",
+    "S2 Cal' verification was done after the experiments, and the E5 latencies are logged medians on free runners rather than Lat' measurements.",
+    "Presentation: the text is dense with qualifiers, derived figures and parenthetical caveats, which obscures a clear take-home message. Several numbers are repeated across the abstract, introduction, results and conclusion with slightly different splits."
+  ],
+  "required_actions": [
+    "Complete the S2 random test3 row and remove every [PENDING] marker. Produce Figure 1, or remove the reference to it.",
+    "Add more cells per regime (several kappa values and at least one more shape library) and more learner seeds (at least 5 to 10), so that regime-dependent claims can be tested across cells rather than stated anecdotally.",
+    "Compute bootstrap intervals for g_T(G*) - g_T(learner) in both cells, measure near-cap compression of g_T on test, and run a probe-count-aware or S2-tuned RL variant so that the g_T/posterior inversion can be separated from RL's three-probe collapse.",
+    "Strengthen H3: run a full 512-action first-step screen and a structured travel-then-fan candidate family, measure the selection bias of V_LA (for example with an independent re-estimate of the selected action), and ideally add a two-step look-ahead estimate.",
+    "Validate the evaluator at a finer grid (sub-16) on set S, or report success contrasts with the evaluator's resolution folded into the uncertainty.",
+    "Use a fresh, untouched test split for the S2 rows and the student versus B-fan claims, or confine those claims explicitly to exploratory status in the abstract.",
+    "Investigate the S2 validation/test gap with more episodes and seeds, and test early stopping on held-out regret as a pre-declared sensitivity analysis.",
+    "Run B-spread and B-cov (or select an S2 H* on S2 pilot data) so that the travelling-regime comparison is against the best available heuristic.",
+    "Fit a working belief-input or attention-based head so that the representation question can be answered, and measure regret on student-visited states to test the covariate-shift explanation.",
+    "Time the reduced planners and the students under the Lat' protocol and plot a latency-accuracy frontier.",
+    "Tighten the writing: state one clear take-home message per contribution, move derived and post-hoc sensitivity figures to an appendix, and remove repeated numbers across sections."
+  ]
+}

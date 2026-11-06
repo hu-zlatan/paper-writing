@@ -91,7 +91,7 @@ numpy:
 
 # ─── Loop / decision behaviour ────────────────────────────────────────────────
 loops:
-  max_refine_cycles: 3        # stage 13 ↔ 14 ↔ 15
+  max_refine_cycles: 4        # stage 13 ↔ 14 ↔ 15 (raised 3 → 4 on the owner's instruction, 2026-11-06, for v5)
   max_revision_cycles: 3      # stage 19 ↔ 20
   max_external_review_cycles: 3  # stage 24 ↔ 25
   # When any of the above hits its cap without converging, escalate to the user

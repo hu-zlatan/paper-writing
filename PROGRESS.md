@@ -1241,3 +1241,23 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
   18–28). CFP page not re-read (last read run 14).
 - **No push notification** (nothing new, per run 14). Next reminder stays at 2026-11-20.
 - **Where to resume (run 30):** unchanged from run 17's entry: read the owner's answer; none → check and log only.
+
+## OWNER DECISION — 2026-11-06 (in chat, after run 29)
+- The owner read the run-29 summary and the stage-20 v4 weaknesses and instructed: improve the evidence ("那你提升这里啊")
+  → option (c). Also accepted the RSS LLM-policy reading (2027 CFP permits LLM use; the conflicting page is a stale 2025
+  page, verified 2026-11-06, see `AI_USAGE.md`). Recorded in AUTOPILOT §1; `RESTRICTS.yaml` `max_refine_cycles` 3 → 4.
+
+## LOOP MARKER — REFINE from stage 20 → stage 13     [version v4 → v5]
+
+- **Reason:** stage 20 v4 5.0 / 10 (`paper/mypaper/v4/20_quality_gate.json`); evidence-level actions (one cell per
+  regime, 3 seeds, untuned S2 RL, re-used test split, evaluator unchecked below sub 8, S2 baselines = B-fan only).
+  Refine cycle 4 of 4 (cap raised by the owner).
+- **Snapshot taken:** `results/v4/` (unchanged; v5 writes `results/v5/`), `paper/mypaper/v4/` (draft_v4_final.md,
+  draft_v4_condensed.md, 18_peer_review.md, 20_quality_gate.json, earlier stage snapshots).
+- **Design:** `docs/07c_amendment_v5_0.md` (written before any v5 run): cells S2/S4/S8/S12 + A16-2, one student recipe
+  (fixed 200 epochs, best held-out-R̄ checkpoint), 5 student seeds (701–705), RL tuned on S2 then 5 seeds (711–715) +
+  `rl_success` control, fresh split test5 evaluated once after a recorded freeze, 4 heuristic baselines, sub-16 check,
+  Lat′ timing, optional H3 full screen. Rules D5, H5a, H5b, H2-v5; Holm over cells. Estimate ≈ 800–860 CPU-h.
+- **Next stage:** 13 ITERATIVE_REFINE (code: test5 salt, best-checkpoint distillation, `--sub 16`) → P0 pilot →
+  amendment v5.1 → E1–E7 → 14 → 15 → 16–20.
+- **Resuming under version:** v5

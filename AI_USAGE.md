@@ -17,6 +17,12 @@ prohibited unless it is part of the paper's experimental analysis" (the page tex
 points to the "RSS 2025 website"). The RSS 2027 CFP (above) permits LLM use. The owner must confirm which rule applies to
 RSS 2027 before any submission; if the prohibition applies, this manuscript cannot be submitted to RSS as written.
 
+**Resolved (2026-11-06):** re-fetched both pages. The undated author-information page's LLM section is word-for-word the
+same as the archived RSS 2025 page (https://roboticsconference.org/2025/information/authorinfo/), and its body still says
+"RSS 2025" with the 2025 deadlines (Jan 17/24). It is a stale 2025 page; the RSS 2027 CFP (LLM use permitted, disclosure
+encouraged, hallucinated references desk-rejected) governs. The owner accepted this reading in chat. Optional: an email
+to the RSS program chairs would remove all doubt.
+
 Recommendation for the owner: disclose in the submission that the research and manuscript were produced by an autonomous AI pipeline under the owner's direction, and check every reference before submitting.
 
 ## Scope of AI involvement
