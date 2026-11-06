@@ -1,0 +1,245 @@
+{
+ "purpose": "v5 'Baselines' rule: B-fan / B-spread / B-cov on pilot3 0-199, sub 8, every cell; H* per cell = best (not test5)",
+ "jobs": [
+  {
+   "id": "v5_base_S_k2_b_fan_000",
+   "cmd": "python main.py eval3 --set S --method b_fan --kappa 2 --tau 4.7 --n-star 4 --split pilot3 --start 0 --count 50 --sub 8 --budget-minutes 25 --out ../results/v5/base_pilot/S_k2_b_fan_000"
+  },
+  {
+   "id": "v5_base_S_k2_b_fan_050",
+   "cmd": "python main.py eval3 --set S --method b_fan --kappa 2 --tau 4.7 --n-star 4 --split pilot3 --start 50 --count 50 --sub 8 --budget-minutes 25 --out ../results/v5/base_pilot/S_k2_b_fan_050"
+  },
+  {
+   "id": "v5_base_S_k2_b_fan_100",
+   "cmd": "python main.py eval3 --set S --method b_fan --kappa 2 --tau 4.7 --n-star 4 --split pilot3 --start 100 --count 50 --sub 8 --budget-minutes 25 --out ../results/v5/base_pilot/S_k2_b_fan_100"
+  },
+  {
+   "id": "v5_base_S_k2_b_fan_150",
+   "cmd": "python main.py eval3 --set S --method b_fan --kappa 2 --tau 4.7 --n-star 4 --split pilot3 --start 150 --count 50 --sub 8 --budget-minutes 25 --out ../results/v5/base_pilot/S_k2_b_fan_150"
+  },
+  {
+   "id": "v5_base_S_k2_b_spread_000",
+   "cmd": "python main.py eval3 --set S --method b_spread --kappa 2 --tau 4.7 --n-star 4 --split pilot3 --start 0 --count 50 --sub 8 --budget-minutes 25 --out ../results/v5/base_pilot/S_k2_b_spread_000"
+  },
+  {
+   "id": "v5_base_S_k2_b_spread_050",
+   "cmd": "python main.py eval3 --set S --method b_spread --kappa 2 --tau 4.7 --n-star 4 --split pilot3 --start 50 --count 50 --sub 8 --budget-minutes 25 --out ../results/v5/base_pilot/S_k2_b_spread_050"
+  },
+  {
+   "id": "v5_base_S_k2_b_spread_100",
+   "cmd": "python main.py eval3 --set S --method b_spread --kappa 2 --tau 4.7 --n-star 4 --split pilot3 --start 100 --count 50 --sub 8 --budget-minutes 25 --out ../results/v5/base_pilot/S_k2_b_spread_100"
+  },
+  {
+   "id": "v5_base_S_k2_b_spread_150",
+   "cmd": "python main.py eval3 --set S --method b_spread --kappa 2 --tau 4.7 --n-star 4 --split pilot3 --start 150 --count 50 --sub 8 --budget-minutes 25 --out ../results/v5/base_pilot/S_k2_b_spread_150"
+  },
+  {
+   "id": "v5_base_S_k2_b_cov_000",
+   "cmd": "python main.py eval3 --set S --method b_cov --kappa 2 --tau 4.7 --n-star 4 --split pilot3 --start 0 --count 50 --sub 8 --budget-minutes 25 --out ../results/v5/base_pilot/S_k2_b_cov_000"
+  },
+  {
+   "id": "v5_base_S_k2_b_cov_050",
+   "cmd": "python main.py eval3 --set S --method b_cov --kappa 2 --tau 4.7 --n-star 4 --split pilot3 --start 50 --count 50 --sub 8 --budget-minutes 25 --out ../results/v5/base_pilot/S_k2_b_cov_050"
+  },
+  {
+   "id": "v5_base_S_k2_b_cov_100",
+   "cmd": "python main.py eval3 --set S --method b_cov --kappa 2 --tau 4.7 --n-star 4 --split pilot3 --start 100 --count 50 --sub 8 --budget-minutes 25 --out ../results/v5/base_pilot/S_k2_b_cov_100"
+  },
+  {
+   "id": "v5_base_S_k2_b_cov_150",
+   "cmd": "python main.py eval3 --set S --method b_cov --kappa 2 --tau 4.7 --n-star 4 --split pilot3 --start 150 --count 50 --sub 8 --budget-minutes 25 --out ../results/v5/base_pilot/S_k2_b_cov_150"
+  },
+  {
+   "id": "v5_base_S_k4_b_fan_000",
+   "cmd": "python main.py eval3 --set S --method b_fan --kappa 4 --tau 4.8 --n-star 4 --split pilot3 --start 0 --count 50 --sub 8 --budget-minutes 25 --out ../results/v5/base_pilot/S_k4_b_fan_000"
+  },
+  {
+   "id": "v5_base_S_k4_b_fan_050",
+   "cmd": "python main.py eval3 --set S --method b_fan --kappa 4 --tau 4.8 --n-star 4 --split pilot3 --start 50 --count 50 --sub 8 --budget-minutes 25 --out ../results/v5/base_pilot/S_k4_b_fan_050"
+  },
+  {
+   "id": "v5_base_S_k4_b_fan_100",
+   "cmd": "python main.py eval3 --set S --method b_fan --kappa 4 --tau 4.8 --n-star 4 --split pilot3 --start 100 --count 50 --sub 8 --budget-minutes 25 --out ../results/v5/base_pilot/S_k4_b_fan_100"
+  },
+  {
+   "id": "v5_base_S_k4_b_fan_150",
+   "cmd": "python main.py eval3 --set S --method b_fan --kappa 4 --tau 4.8 --n-star 4 --split pilot3 --start 150 --count 50 --sub 8 --budget-minutes 25 --out ../results/v5/base_pilot/S_k4_b_fan_150"
+  },
+  {
+   "id": "v5_base_S_k4_b_spread_000",
+   "cmd": "python main.py eval3 --set S --method b_spread --kappa 4 --tau 4.8 --n-star 4 --split pilot3 --start 0 --count 50 --sub 8 --budget-minutes 25 --out ../results/v5/base_pilot/S_k4_b_spread_000"
+  },
+  {
+   "id": "v5_base_S_k4_b_spread_050",
+   "cmd": "python main.py eval3 --set S --method b_spread --kappa 4 --tau 4.8 --n-star 4 --split pilot3 --start 50 --count 50 --sub 8 --budget-minutes 25 --out ../results/v5/base_pilot/S_k4_b_spread_050"
+  },
+  {
+   "id": "v5_base_S_k4_b_spread_100",
+   "cmd": "python main.py eval3 --set S --method b_spread --kappa 4 --tau 4.8 --n-star 4 --split pilot3 --start 100 --count 50 --sub 8 --budget-minutes 25 --out ../results/v5/base_pilot/S_k4_b_spread_100"
+  },
+  {
+   "id": "v5_base_S_k4_b_spread_150",
+   "cmd": "python main.py eval3 --set S --method b_spread --kappa 4 --tau 4.8 --n-star 4 --split pilot3 --start 150 --count 50 --sub 8 --budget-minutes 25 --out ../results/v5/base_pilot/S_k4_b_spread_150"
+  },
+  {
+   "id": "v5_base_S_k4_b_cov_000",
+   "cmd": "python main.py eval3 --set S --method b_cov --kappa 4 --tau 4.8 --n-star 4 --split pilot3 --start 0 --count 50 --sub 8 --budget-minutes 25 --out ../results/v5/base_pilot/S_k4_b_cov_000"
+  },
+  {
+   "id": "v5_base_S_k4_b_cov_050",
+   "cmd": "python main.py eval3 --set S --method b_cov --kappa 4 --tau 4.8 --n-star 4 --split pilot3 --start 50 --count 50 --sub 8 --budget-minutes 25 --out ../results/v5/base_pilot/S_k4_b_cov_050"
+  },
+  {
+   "id": "v5_base_S_k4_b_cov_100",
+   "cmd": "python main.py eval3 --set S --method b_cov --kappa 4 --tau 4.8 --n-star 4 --split pilot3 --start 100 --count 50 --sub 8 --budget-minutes 25 --out ../results/v5/base_pilot/S_k4_b_cov_100"
+  },
+  {
+   "id": "v5_base_S_k4_b_cov_150",
+   "cmd": "python main.py eval3 --set S --method b_cov --kappa 4 --tau 4.8 --n-star 4 --split pilot3 --start 150 --count 50 --sub 8 --budget-minutes 25 --out ../results/v5/base_pilot/S_k4_b_cov_150"
+  },
+  {
+   "id": "v5_base_S_k8_b_fan_000",
+   "cmd": "python main.py eval3 --set S --method b_fan --kappa 8 --tau 4.8 --n-star 4 --split pilot3 --start 0 --count 50 --sub 8 --budget-minutes 25 --out ../results/v5/base_pilot/S_k8_b_fan_000"
+  },
+  {
+   "id": "v5_base_S_k8_b_fan_050",
+   "cmd": "python main.py eval3 --set S --method b_fan --kappa 8 --tau 4.8 --n-star 4 --split pilot3 --start 50 --count 50 --sub 8 --budget-minutes 25 --out ../results/v5/base_pilot/S_k8_b_fan_050"
+  },
+  {
+   "id": "v5_base_S_k8_b_fan_100",
+   "cmd": "python main.py eval3 --set S --method b_fan --kappa 8 --tau 4.8 --n-star 4 --split pilot3 --start 100 --count 50 --sub 8 --budget-minutes 25 --out ../results/v5/base_pilot/S_k8_b_fan_100"
+  },
+  {
+   "id": "v5_base_S_k8_b_fan_150",
+   "cmd": "python main.py eval3 --set S --method b_fan --kappa 8 --tau 4.8 --n-star 4 --split pilot3 --start 150 --count 50 --sub 8 --budget-minutes 25 --out ../results/v5/base_pilot/S_k8_b_fan_150"
+  },
+  {
+   "id": "v5_base_S_k8_b_spread_000",
+   "cmd": "python main.py eval3 --set S --method b_spread --kappa 8 --tau 4.8 --n-star 4 --split pilot3 --start 0 --count 50 --sub 8 --budget-minutes 25 --out ../results/v5/base_pilot/S_k8_b_spread_000"
+  },
+  {
+   "id": "v5_base_S_k8_b_spread_050",
+   "cmd": "python main.py eval3 --set S --method b_spread --kappa 8 --tau 4.8 --n-star 4 --split pilot3 --start 50 --count 50 --sub 8 --budget-minutes 25 --out ../results/v5/base_pilot/S_k8_b_spread_050"
+  },
+  {
+   "id": "v5_base_S_k8_b_spread_100",
+   "cmd": "python main.py eval3 --set S --method b_spread --kappa 8 --tau 4.8 --n-star 4 --split pilot3 --start 100 --count 50 --sub 8 --budget-minutes 25 --out ../results/v5/base_pilot/S_k8_b_spread_100"
+  },
+  {
+   "id": "v5_base_S_k8_b_spread_150",
+   "cmd": "python main.py eval3 --set S --method b_spread --kappa 8 --tau 4.8 --n-star 4 --split pilot3 --start 150 --count 50 --sub 8 --budget-minutes 25 --out ../results/v5/base_pilot/S_k8_b_spread_150"
+  },
+  {
+   "id": "v5_base_S_k8_b_cov_000",
+   "cmd": "python main.py eval3 --set S --method b_cov --kappa 8 --tau 4.8 --n-star 4 --split pilot3 --start 0 --count 50 --sub 8 --budget-minutes 25 --out ../results/v5/base_pilot/S_k8_b_cov_000"
+  },
+  {
+   "id": "v5_base_S_k8_b_cov_050",
+   "cmd": "python main.py eval3 --set S --method b_cov --kappa 8 --tau 4.8 --n-star 4 --split pilot3 --start 50 --count 50 --sub 8 --budget-minutes 25 --out ../results/v5/base_pilot/S_k8_b_cov_050"
+  },
+  {
+   "id": "v5_base_S_k8_b_cov_100",
+   "cmd": "python main.py eval3 --set S --method b_cov --kappa 8 --tau 4.8 --n-star 4 --split pilot3 --start 100 --count 50 --sub 8 --budget-minutes 25 --out ../results/v5/base_pilot/S_k8_b_cov_100"
+  },
+  {
+   "id": "v5_base_S_k8_b_cov_150",
+   "cmd": "python main.py eval3 --set S --method b_cov --kappa 8 --tau 4.8 --n-star 4 --split pilot3 --start 150 --count 50 --sub 8 --budget-minutes 25 --out ../results/v5/base_pilot/S_k8_b_cov_150"
+  },
+  {
+   "id": "v5_base_S_k12_b_fan_000",
+   "cmd": "python main.py eval3 --set S --method b_fan --kappa 12 --tau 4.9 --n-star 4 --split pilot3 --start 0 --count 50 --sub 8 --budget-minutes 25 --out ../results/v5/base_pilot/S_k12_b_fan_000"
+  },
+  {
+   "id": "v5_base_S_k12_b_fan_050",
+   "cmd": "python main.py eval3 --set S --method b_fan --kappa 12 --tau 4.9 --n-star 4 --split pilot3 --start 50 --count 50 --sub 8 --budget-minutes 25 --out ../results/v5/base_pilot/S_k12_b_fan_050"
+  },
+  {
+   "id": "v5_base_S_k12_b_fan_100",
+   "cmd": "python main.py eval3 --set S --method b_fan --kappa 12 --tau 4.9 --n-star 4 --split pilot3 --start 100 --count 50 --sub 8 --budget-minutes 25 --out ../results/v5/base_pilot/S_k12_b_fan_100"
+  },
+  {
+   "id": "v5_base_S_k12_b_fan_150",
+   "cmd": "python main.py eval3 --set S --method b_fan --kappa 12 --tau 4.9 --n-star 4 --split pilot3 --start 150 --count 50 --sub 8 --budget-minutes 25 --out ../results/v5/base_pilot/S_k12_b_fan_150"
+  },
+  {
+   "id": "v5_base_S_k12_b_spread_000",
+   "cmd": "python main.py eval3 --set S --method b_spread --kappa 12 --tau 4.9 --n-star 4 --split pilot3 --start 0 --count 50 --sub 8 --budget-minutes 25 --out ../results/v5/base_pilot/S_k12_b_spread_000"
+  },
+  {
+   "id": "v5_base_S_k12_b_spread_050",
+   "cmd": "python main.py eval3 --set S --method b_spread --kappa 12 --tau 4.9 --n-star 4 --split pilot3 --start 50 --count 50 --sub 8 --budget-minutes 25 --out ../results/v5/base_pilot/S_k12_b_spread_050"
+  },
+  {
+   "id": "v5_base_S_k12_b_spread_100",
+   "cmd": "python main.py eval3 --set S --method b_spread --kappa 12 --tau 4.9 --n-star 4 --split pilot3 --start 100 --count 50 --sub 8 --budget-minutes 25 --out ../results/v5/base_pilot/S_k12_b_spread_100"
+  },
+  {
+   "id": "v5_base_S_k12_b_spread_150",
+   "cmd": "python main.py eval3 --set S --method b_spread --kappa 12 --tau 4.9 --n-star 4 --split pilot3 --start 150 --count 50 --sub 8 --budget-minutes 25 --out ../results/v5/base_pilot/S_k12_b_spread_150"
+  },
+  {
+   "id": "v5_base_S_k12_b_cov_000",
+   "cmd": "python main.py eval3 --set S --method b_cov --kappa 12 --tau 4.9 --n-star 4 --split pilot3 --start 0 --count 50 --sub 8 --budget-minutes 25 --out ../results/v5/base_pilot/S_k12_b_cov_000"
+  },
+  {
+   "id": "v5_base_S_k12_b_cov_050",
+   "cmd": "python main.py eval3 --set S --method b_cov --kappa 12 --tau 4.9 --n-star 4 --split pilot3 --start 50 --count 50 --sub 8 --budget-minutes 25 --out ../results/v5/base_pilot/S_k12_b_cov_050"
+  },
+  {
+   "id": "v5_base_S_k12_b_cov_100",
+   "cmd": "python main.py eval3 --set S --method b_cov --kappa 12 --tau 4.9 --n-star 4 --split pilot3 --start 100 --count 50 --sub 8 --budget-minutes 25 --out ../results/v5/base_pilot/S_k12_b_cov_100"
+  },
+  {
+   "id": "v5_base_S_k12_b_cov_150",
+   "cmd": "python main.py eval3 --set S --method b_cov --kappa 12 --tau 4.9 --n-star 4 --split pilot3 --start 150 --count 50 --sub 8 --budget-minutes 25 --out ../results/v5/base_pilot/S_k12_b_cov_150"
+  },
+  {
+   "id": "v5_base_A16_k2_b_fan_000",
+   "cmd": "python main.py eval3 --set A16 --method b_fan --kappa 2 --tau 3.4 --n-star 3 --split pilot3 --start 0 --count 50 --sub 8 --budget-minutes 25 --out ../results/v5/base_pilot/A16_k2_b_fan_000"
+  },
+  {
+   "id": "v5_base_A16_k2_b_fan_050",
+   "cmd": "python main.py eval3 --set A16 --method b_fan --kappa 2 --tau 3.4 --n-star 3 --split pilot3 --start 50 --count 50 --sub 8 --budget-minutes 25 --out ../results/v5/base_pilot/A16_k2_b_fan_050"
+  },
+  {
+   "id": "v5_base_A16_k2_b_fan_100",
+   "cmd": "python main.py eval3 --set A16 --method b_fan --kappa 2 --tau 3.4 --n-star 3 --split pilot3 --start 100 --count 50 --sub 8 --budget-minutes 25 --out ../results/v5/base_pilot/A16_k2_b_fan_100"
+  },
+  {
+   "id": "v5_base_A16_k2_b_fan_150",
+   "cmd": "python main.py eval3 --set A16 --method b_fan --kappa 2 --tau 3.4 --n-star 3 --split pilot3 --start 150 --count 50 --sub 8 --budget-minutes 25 --out ../results/v5/base_pilot/A16_k2_b_fan_150"
+  },
+  {
+   "id": "v5_base_A16_k2_b_spread_000",
+   "cmd": "python main.py eval3 --set A16 --method b_spread --kappa 2 --tau 3.4 --n-star 3 --split pilot3 --start 0 --count 50 --sub 8 --budget-minutes 25 --out ../results/v5/base_pilot/A16_k2_b_spread_000"
+  },
+  {
+   "id": "v5_base_A16_k2_b_spread_050",
+   "cmd": "python main.py eval3 --set A16 --method b_spread --kappa 2 --tau 3.4 --n-star 3 --split pilot3 --start 50 --count 50 --sub 8 --budget-minutes 25 --out ../results/v5/base_pilot/A16_k2_b_spread_050"
+  },
+  {
+   "id": "v5_base_A16_k2_b_spread_100",
+   "cmd": "python main.py eval3 --set A16 --method b_spread --kappa 2 --tau 3.4 --n-star 3 --split pilot3 --start 100 --count 50 --sub 8 --budget-minutes 25 --out ../results/v5/base_pilot/A16_k2_b_spread_100"
+  },
+  {
+   "id": "v5_base_A16_k2_b_spread_150",
+   "cmd": "python main.py eval3 --set A16 --method b_spread --kappa 2 --tau 3.4 --n-star 3 --split pilot3 --start 150 --count 50 --sub 8 --budget-minutes 25 --out ../results/v5/base_pilot/A16_k2_b_spread_150"
+  },
+  {
+   "id": "v5_base_A16_k2_b_cov_000",
+   "cmd": "python main.py eval3 --set A16 --method b_cov --kappa 2 --tau 3.4 --n-star 3 --split pilot3 --start 0 --count 50 --sub 8 --budget-minutes 25 --out ../results/v5/base_pilot/A16_k2_b_cov_000"
+  },
+  {
+   "id": "v5_base_A16_k2_b_cov_050",
+   "cmd": "python main.py eval3 --set A16 --method b_cov --kappa 2 --tau 3.4 --n-star 3 --split pilot3 --start 50 --count 50 --sub 8 --budget-minutes 25 --out ../results/v5/base_pilot/A16_k2_b_cov_050"
+  },
+  {
+   "id": "v5_base_A16_k2_b_cov_100",
+   "cmd": "python main.py eval3 --set A16 --method b_cov --kappa 2 --tau 3.4 --n-star 3 --split pilot3 --start 100 --count 50 --sub 8 --budget-minutes 25 --out ../results/v5/base_pilot/A16_k2_b_cov_100"
+  },
+  {
+   "id": "v5_base_A16_k2_b_cov_150",
+   "cmd": "python main.py eval3 --set A16 --method b_cov --kappa 2 --tau 3.4 --n-star 3 --split pilot3 --start 150 --count 50 --sub 8 --budget-minutes 25 --out ../results/v5/base_pilot/A16_k2_b_cov_150"
+  }
+ ]
+}
