@@ -89,7 +89,9 @@ def episode_arrays(history, labels, T):
     """Pack one labelled episode: RAW (T, 6), PHIT, TAUR (T), valid (T), S (T, A) float32, MASK (T, A), AT (T)."""
     RAW = np.zeros((T, 6)); PHIT = np.zeros(T); TAUR = np.zeros(T); valid = np.zeros(T, dtype=bool)
     S = np.zeros((T, A), dtype=np.float32); MASK = np.zeros((T, A), dtype=bool); AT = np.zeros(T, dtype=np.int16)
-    BF = np.zeros((T, BELIEF_DIM), dtype=np.float32)
+    # belief width = 6 per identity (48 for the K = 8 S library, 96 for the K = 16 A16 library; v5 run 31 fix)
+    bdim = next((len(lab["belief"]) for lab in labels[:T] if "belief" in lab), BELIEF_DIM)
+    BF = np.zeros((T, bdim), dtype=np.float32)
     for t, lab in enumerate(labels[:T]):
         PHIT[t], TAUR[t], valid[t] = lab["phi_t"], lab["tau_rem"], True
         S[t], MASK[t], AT[t] = lab["s"], lab["mask"], lab["a_teacher"]

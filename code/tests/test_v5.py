@@ -45,3 +45,14 @@ def test_best_checkpoint_tracks_lowest_val_regret():
     assert len(log) == 15 and best["R_bar"] == min(vals) and best["epoch"] == int(np.argmin(vals))
     st.set_state(best["state"])
     assert abs(mean_regret(st, D, np.arange(2, 4))["R_bar"] - best["R_bar"]) < 1e-12
+
+
+def test_episode_arrays_belief_width_follows_library():
+    """v5 run 31: A16 (K = 16) labels carry 96-wide belief features; S (K = 8) stays 48 wide."""
+    import numpy as np
+    from touchbed.distill import episode_arrays, A
+    for width in (48, 96):
+        lab = {"phi_t": 0.0, "tau_rem": 1.0, "s": np.zeros(A), "mask": np.ones(A, bool), "a_teacher": 0,
+               "belief": np.ones(width, np.float32)}
+        out = episode_arrays([(0.0, 0.0, (0, 0, 0, 0))], [lab], 3)
+        assert out["BF"].shape == (3, width) and out["BF"][0].sum() == width

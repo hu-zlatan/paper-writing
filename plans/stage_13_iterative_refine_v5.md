@@ -19,3 +19,12 @@ No v3/v4 output changed; test5 not touched before the freeze; all numbers from c
 Steps 1–3 done (chat session). Step 4: P0 analysed (`results/v5/12_cal_analysis.json`), amendment v5.1 written
 (+ addenda a: rl_success; b: G* val3 re-use). Main runs E1/E2/E3 dispatched; stage 13 continues as the execution
 stage of the v5 rows until test5 is frozen and evaluated, then stage 14.
+
+## Plan (run 31)
+1. Audit run-30 dispatches: every label / DAgger shard `complete`; Actions run 42233537062 failed in all 60 A16 label
+   jobs (`episode_arrays` belief buffer fixed at 48; A16 has K = 16 → 96). A16 RL jobs in that run succeeded.
+2. Fix: belief buffer width follows the labels (48 for S → S outputs unchanged); regression test; sandbox check
+   (A16 label3 2 episodes + 3-epoch distill3). Re-dispatch the 60 A16 label jobs with identical commands.
+3. Dispatch `distill1 S2 S12` (r1 students) and `r0 S4 S8` (round-0 students) from `tools_v5_manifests.py`.
+4. Baselines on pilot3 landed → write `code/analysis_base_v5.py` (H\* per cell by the amendment rule) if the rule is
+   fully specified in the amendment; otherwise log and defer.
