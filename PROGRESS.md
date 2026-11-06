@@ -1279,3 +1279,31 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
   `results/v5/12_cal_analysis.json`); if A16 n\* ≠ 4, run 200 cal3 at τ = n\* to check the [0.30, 0.90] keep rule; then
   amendment v5.1 (τ per cell, sizes) → labels for S4, S8, A16-2 → DAgger r1/r2 (copy `v4_dag_S2_r1/r2.json`, seeds
   701–705, `--keep best` in the distill steps) → RL sweep selection → RL 5 seeds × 5 cells + rl_success S2/S12 → val3 D5.
+
+- **Run 30 (2026-11-06, from ≈ 13:51 UTC, scheduled) — stage 13 v5 continued.** No open issues; AUTOPILOT §1 unchanged
+  since the owner's (c) directive. All three P0 dispatches of the chat session had landed (cal 26/26 jobs, RL sweep 8/8,
+  round-0 students 10/10).
+  - **P0 read-out** (`code/analysis_cal_v5.py` → `results/v5/12_cal_analysis.json`): S4 τ = 4.8 (mean G\* travel time
+    0.797), S8 τ = 4.8 (0.834); A16 G\* sub-8 success at κ 0, τ 4 = 0.975 > 0.88 → **n\*(A16) = 3** by the v3 rule; the
+    keep check ([0.30, 0.90] at κ 0, τ = 3, reading fixed in amendment v5.1 before the run) and the A16 κ 2 τ
+    calibration are running (`experiments/v5_p0_a16.json`).
+  - **RL sweep** (`code/analysis_rl_sweep_v5.py` → `results/v5/12_rl_sweep_selection.json`): v3 D9 rule → **cfg 6**
+    (final val ball-sPCE 6.300 vs 6.241 for the v3/v4 cfg 0; outside the 0.02 tie band).
+  - **Incident:** the round-0 students and the sweep had committed JSON but no `.npz` (`*.npz` ignored outside v2–v4,
+    same slip as v4 run 8). Fixed `.gitignore`; round 0 re-run with identical commands. Determinism check against the
+    first JSONs (`results/v5/prev_r0_json/`): same best epoch in 10/10, identical held-out R̄ in 9/10; S2 seed 705
+    differs by 0.0012 (0.2793 → 0.2805; likely a different runner CPU / BLAS path). The re-run weights are the models
+    of record.
+  - **Amendment v5.1** (`docs/07c_amendment_v5_1.md`): cells, τ, n\*, RL cfg 6, no size reduction (estimate still
+    < 1,000 CPU-h). **Addendum v5.1a:** `rl_success` added to the relative-frame trainer (v1 definition: terminal
+    1[success] of a 1,000-particle PF; validation PF-free on the spce_total stream); test added, full suite 64 passed;
+    smoke run 512 episodes in 27 s.
+  - Pilot TIME_ESTIMATE S4 / S8 in the sandbox (`results/v5/pilot/`).
+  - **Dispatched:** round-0 re-run (done), A16 keep + τ (18 jobs), RL cfg 6 × seeds 711–715 × S2/S12/S4/S8 (20),
+    labels S4/S8 0–2,999 (120), rl_success S2/S12 × 5 seeds (10), DAgger r1 S2/S12 × 5 seeds × 800 episodes (200).
+  - **Where to resume (run 31):** (1) A16 keep result → if kept: τ from `tau_A16_k2_*` (extend `analysis_cal_v5.py`),
+    then A16-2 labels + RL; if dropped: record it in amendment v5.1 and in PROGRESS. (2) When DAgger r1 lands: r1
+    distill per seed (r0 label shards + r1 shards, `--init` r0 best, `--fixed-epochs 200 --keep best`; v4 pattern in
+    `results/v4/d4/S_k2_s601_r1.json`), then DAgger r2 (β 0) and r2 distill. (3) When S4/S8 labels land: round-0
+    students (copy `experiments/v5_d5_r0_S2_S12.json`; held-out = shards 1200–1450). (4) RL / rl_success: nothing until
+    they land.
