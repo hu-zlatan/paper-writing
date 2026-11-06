@@ -1,0 +1,36 @@
+{
+ "jobs": [
+  {
+   "id": "v5_rl_sweep_S_k2_cfg0",
+   "cmd": "python main.py train3rl --set S --method spce_total --frame rel --kappa 2 --tau 4.7 --lr 0.001090170443025114 --ent-coef 0.00013313139952275948 --batch 128 --critic-lr 0.0014321061677694642 --seed 719 --max-episodes 100000 --no-plateau-stop --budget-minutes 330 --out ../results/v5/rl/sweep_S_k2_cfg0_sd719"
+  },
+  {
+   "id": "v5_rl_sweep_S_k2_cfg1",
+   "cmd": "python main.py train3rl --set S --method spce_total --frame rel --kappa 2 --tau 4.7 --lr 0.001265367632804912 --ent-coef 0.000622913297447414 --batch 128 --critic-lr 0.0005038815361709748 --seed 719 --max-episodes 100000 --no-plateau-stop --budget-minutes 330 --out ../results/v5/rl/sweep_S_k2_cfg1_sd719"
+  },
+  {
+   "id": "v5_rl_sweep_S_k2_cfg2",
+   "cmd": "python main.py train3rl --set S --method spce_total --frame rel --kappa 2 --tau 4.7 --lr 0.0005988079252702773 --ent-coef 0.0005586076652115126 --batch 256 --critic-lr 0.0003036592809354672 --seed 719 --max-episodes 100000 --no-plateau-stop --budget-minutes 330 --out ../results/v5/rl/sweep_S_k2_cfg2_sd719"
+  },
+  {
+   "id": "v5_rl_sweep_S_k2_cfg3",
+   "cmd": "python main.py train3rl --set S --method spce_total --frame rel --kappa 2 --tau 4.7 --lr 0.0019876946697329504 --ent-coef 0.0003927704963152219 --batch 64 --critic-lr 0.0006027728484450538 --seed 719 --max-episodes 100000 --no-plateau-stop --budget-minutes 330 --out ../results/v5/rl/sweep_S_k2_cfg3_sd719"
+  },
+  {
+   "id": "v5_rl_sweep_S_k2_cfg4",
+   "cmd": "python main.py train3rl --set S --method spce_total --frame rel --kappa 2 --tau 4.7 --lr 0.0005695696858342624 --ent-coef 3.2339937429435025e-05 --batch 128 --critic-lr 0.0008359832205964869 --seed 719 --max-episodes 100000 --no-plateau-stop --budget-minutes 330 --out ../results/v5/rl/sweep_S_k2_cfg4_sd719"
+  },
+  {
+   "id": "v5_rl_sweep_S_k2_cfg5",
+   "cmd": "python main.py train3rl --set S --method spce_total --frame rel --kappa 2 --tau 4.7 --lr 0.0009586708313691852 --ent-coef 0.00012793657032881831 --batch 128 --critic-lr 0.0018611577022005236 --seed 719 --max-episodes 100000 --no-plateau-stop --budget-minutes 330 --out ../results/v5/rl/sweep_S_k2_cfg5_sd719"
+  },
+  {
+   "id": "v5_rl_sweep_S_k2_cfg6",
+   "cmd": "python main.py train3rl --set S --method spce_total --frame rel --kappa 2 --tau 4.7 --lr 0.0012568992994131244 --ent-coef 0.0009504303482968091 --batch 256 --critic-lr 0.0004925268976336745 --seed 719 --max-episodes 100000 --no-plateau-stop --budget-minutes 330 --out ../results/v5/rl/sweep_S_k2_cfg6_sd719"
+  },
+  {
+   "id": "v5_rl_sweep_S_k2_cfg7",
+   "cmd": "python main.py train3rl --set S --method spce_total --frame rel --kappa 2 --tau 4.7 --lr 0.00043384369329682316 --ent-coef 0.00016791102337389616 --batch 64 --critic-lr 0.00032568783220295755 --seed 719 --max-episodes 100000 --no-plateau-stop --budget-minutes 330 --out ../results/v5/rl/sweep_S_k2_cfg7_sd719"
+  }
+ ]
+}

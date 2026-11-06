@@ -34,8 +34,10 @@ labeller config).
 R̄** (pre-declared response to the S2 over-fitting finding; the last-checkpoint variant is logged for every seed as a
 sensitivity row). **5 seeds per cell** (701–705).
 
-**E3 RL — tuned, then fixed.** (i) Sweep on S2 only: 8 configurations (log-uniform lr ∈ [3e-4, 3e-3], ent ∈ [1e-5,
-1e-3], batch ∈ {64, 128, 256}; sampler seed 7) × 1 seed × 10⁵ episodes, selected by g_T on pilot3 0–199 (the v3 rule).
+**E3 RL — tuned, then fixed.** (i) Sweep on S2 only: 8 configurations = the v3/v4 config (cfg 0) + 7 drawn log-uniform (lr, critic lr ∈ [3e-4,
+3e-3], ent ∈ [1e-5, 1e-3]) with batch ∈ {64, 128, 256} (numpy rng seed 7), × 1 seed (719) × 10⁵ episodes, selected by
+the v3 D9 rule (highest final trainer-validation ball-sPCE; ties within 0.02 nats → lower index). *(Edited 2026-11-06
+before any v5 job: the first draft named g_T on pilot3, which is not the rule v3 used.)*
 (ii) Selected config, `spce_total`, 5 seeds per cell (711–715), 2 × 10⁵ episodes. (iii) Probe-count control:
 `rl_success` (terminal-success reward, same config) 5 seeds in S2 and S12 only, so the g_T/posterior inversion can be
 separated from the three-probe collapse.
