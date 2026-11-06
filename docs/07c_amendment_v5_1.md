@@ -57,3 +57,15 @@ test5 500 episodes per cell, val3 500, S8 kept, E7 decided after the pilot timin
   (test5 salt, DAgger index range, `--keep best`, sub > 8 batching) do not touch G\* at sub 8. New cells (S4, S8,
   A16-2) run G\* on val3 0–499 in `results/v5/d5_val/`.
 - Script: `code/analysis_d5_v5.py` → `results/v5/12_d5_analysis.json`.
+
+## Addendum v5.1c — run 31 execution notes (before any v5 evaluation of `rl_success`, A16-2 students or test5)
+- **`rl_success` budget truncation.** 9 of the 10 runs hit the trainer's time guard (80 % of 330 min) before
+  2 × 10⁵ episodes: S2 seeds 711/712/713/715 stopped at 123k / 125k / 182k / 125k episodes (714 reached 200k); S12
+  seeds 711–715 at 185k / 113k / 111k / 162k / 166k. The PF reward cost more on the runners than the sandbox estimate.
+  The trainer has no resume, so the time-guard-saved weights are the models of record; the episode count of each is
+  reported next to every `rl_success` number, and the arm stays a control (it is not a hypothesis test). The
+  trainer's plateau detector (logged only, `--no-plateau-stop`) had fired at 102k–113k episodes in 7 of the 10 runs.
+- **A16-2 labels.** All 60 label jobs of the run-30 dispatch failed in the packing step (belief buffer fixed at 48
+  wide; K = 16 needs 96). Fixed (width follows the labels; S outputs unchanged) and re-run with identical commands.
+- **Shard follow-ups.** Baseline (pilot3) and G\* val3 shards that the 25-min time guard stopped are completed by
+  follow-up manifests that start at the recorded `next_index`, with smaller shards; commands otherwise identical.

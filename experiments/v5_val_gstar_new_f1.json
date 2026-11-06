@@ -1,0 +1,173 @@
+{
+ "purpose": "v5 G* val3 follow-up (S4, S8, A16-2): shards of experiments/v5_val_gstar_new.json that early-stopped or are incomplete; identical commands from next_index (tools_resume_manifest.py); re-sharded to 4 episodes per job",
+ "jobs": [
+  {
+   "id": "v5_val_S_k4_gstar_f419",
+   "cmd": "python main.py eval3 --set S --method gstar --kappa 4 --tau 4.8 --n-star 4 --split val3 --start 419 --count 1 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k4_gstar_f419"
+  },
+  {
+   "id": "v5_val_S_k4_gstar_f479",
+   "cmd": "python main.py eval3 --set S --method gstar --kappa 4 --tau 4.8 --n-star 4 --split val3 --start 479 --count 1 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k4_gstar_f479"
+  },
+  {
+   "id": "v5_val_S_k8_gstar_f032",
+   "cmd": "python main.py eval3 --set S --method gstar --kappa 8 --tau 4.8 --n-star 4 --split val3 --start 32 --count 4 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_gstar_f032"
+  },
+  {
+   "id": "v5_val_S_k8_gstar_f036",
+   "cmd": "python main.py eval3 --set S --method gstar --kappa 8 --tau 4.8 --n-star 4 --split val3 --start 36 --count 4 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_gstar_f036"
+  },
+  {
+   "id": "v5_val_S_k8_gstar_f095",
+   "cmd": "python main.py eval3 --set S --method gstar --kappa 8 --tau 4.8 --n-star 4 --split val3 --start 95 --count 4 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_gstar_f095"
+  },
+  {
+   "id": "v5_val_S_k8_gstar_f099",
+   "cmd": "python main.py eval3 --set S --method gstar --kappa 8 --tau 4.8 --n-star 4 --split val3 --start 99 --count 1 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_gstar_f099"
+  },
+  {
+   "id": "v5_val_S_k8_gstar_f219",
+   "cmd": "python main.py eval3 --set S --method gstar --kappa 8 --tau 4.8 --n-star 4 --split val3 --start 219 --count 1 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_gstar_f219"
+  },
+  {
+   "id": "v5_val_S_k8_gstar_f276",
+   "cmd": "python main.py eval3 --set S --method gstar --kappa 8 --tau 4.8 --n-star 4 --split val3 --start 276 --count 4 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_gstar_f276"
+  },
+  {
+   "id": "v5_val_S_k8_gstar_f313",
+   "cmd": "python main.py eval3 --set S --method gstar --kappa 8 --tau 4.8 --n-star 4 --split val3 --start 313 --count 4 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_gstar_f313"
+  },
+  {
+   "id": "v5_val_S_k8_gstar_f317",
+   "cmd": "python main.py eval3 --set S --method gstar --kappa 8 --tau 4.8 --n-star 4 --split val3 --start 317 --count 3 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_gstar_f317"
+  },
+  {
+   "id": "v5_val_S_k8_gstar_f418",
+   "cmd": "python main.py eval3 --set S --method gstar --kappa 8 --tau 4.8 --n-star 4 --split val3 --start 418 --count 2 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_gstar_f418"
+  },
+  {
+   "id": "v5_val_S_k8_gstar_f459",
+   "cmd": "python main.py eval3 --set S --method gstar --kappa 8 --tau 4.8 --n-star 4 --split val3 --start 459 --count 1 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_gstar_f459"
+  },
+  {
+   "id": "v5_val_A16_k2_gstar_f012",
+   "cmd": "python main.py eval3 --set A16 --method gstar --kappa 2 --tau 3.4 --n-star 3 --split val3 --start 12 --count 4 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/A16_k2_gstar_f012"
+  },
+  {
+   "id": "v5_val_A16_k2_gstar_f016",
+   "cmd": "python main.py eval3 --set A16 --method gstar --kappa 2 --tau 3.4 --n-star 3 --split val3 --start 16 --count 4 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/A16_k2_gstar_f016"
+  },
+  {
+   "id": "v5_val_A16_k2_gstar_f053",
+   "cmd": "python main.py eval3 --set A16 --method gstar --kappa 2 --tau 3.4 --n-star 3 --split val3 --start 53 --count 4 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/A16_k2_gstar_f053"
+  },
+  {
+   "id": "v5_val_A16_k2_gstar_f057",
+   "cmd": "python main.py eval3 --set A16 --method gstar --kappa 2 --tau 3.4 --n-star 3 --split val3 --start 57 --count 3 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/A16_k2_gstar_f057"
+  },
+  {
+   "id": "v5_val_A16_k2_gstar_f076",
+   "cmd": "python main.py eval3 --set A16 --method gstar --kappa 2 --tau 3.4 --n-star 3 --split val3 --start 76 --count 4 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/A16_k2_gstar_f076"
+  },
+  {
+   "id": "v5_val_A16_k2_gstar_f119",
+   "cmd": "python main.py eval3 --set A16 --method gstar --kappa 2 --tau 3.4 --n-star 3 --split val3 --start 119 --count 1 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/A16_k2_gstar_f119"
+  },
+  {
+   "id": "v5_val_A16_k2_gstar_f155",
+   "cmd": "python main.py eval3 --set A16 --method gstar --kappa 2 --tau 3.4 --n-star 3 --split val3 --start 155 --count 4 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/A16_k2_gstar_f155"
+  },
+  {
+   "id": "v5_val_A16_k2_gstar_f159",
+   "cmd": "python main.py eval3 --set A16 --method gstar --kappa 2 --tau 3.4 --n-star 3 --split val3 --start 159 --count 1 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/A16_k2_gstar_f159"
+  },
+  {
+   "id": "v5_val_A16_k2_gstar_f172",
+   "cmd": "python main.py eval3 --set A16 --method gstar --kappa 2 --tau 3.4 --n-star 3 --split val3 --start 172 --count 4 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/A16_k2_gstar_f172"
+  },
+  {
+   "id": "v5_val_A16_k2_gstar_f176",
+   "cmd": "python main.py eval3 --set A16 --method gstar --kappa 2 --tau 3.4 --n-star 3 --split val3 --start 176 --count 4 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/A16_k2_gstar_f176"
+  },
+  {
+   "id": "v5_val_A16_k2_gstar_f215",
+   "cmd": "python main.py eval3 --set A16 --method gstar --kappa 2 --tau 3.4 --n-star 3 --split val3 --start 215 --count 4 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/A16_k2_gstar_f215"
+  },
+  {
+   "id": "v5_val_A16_k2_gstar_f219",
+   "cmd": "python main.py eval3 --set A16 --method gstar --kappa 2 --tau 3.4 --n-star 3 --split val3 --start 219 --count 1 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/A16_k2_gstar_f219"
+  },
+  {
+   "id": "v5_val_A16_k2_gstar_f232",
+   "cmd": "python main.py eval3 --set A16 --method gstar --kappa 2 --tau 3.4 --n-star 3 --split val3 --start 232 --count 4 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/A16_k2_gstar_f232"
+  },
+  {
+   "id": "v5_val_A16_k2_gstar_f236",
+   "cmd": "python main.py eval3 --set A16 --method gstar --kappa 2 --tau 3.4 --n-star 3 --split val3 --start 236 --count 4 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/A16_k2_gstar_f236"
+  },
+  {
+   "id": "v5_val_A16_k2_gstar_f273",
+   "cmd": "python main.py eval3 --set A16 --method gstar --kappa 2 --tau 3.4 --n-star 3 --split val3 --start 273 --count 4 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/A16_k2_gstar_f273"
+  },
+  {
+   "id": "v5_val_A16_k2_gstar_f277",
+   "cmd": "python main.py eval3 --set A16 --method gstar --kappa 2 --tau 3.4 --n-star 3 --split val3 --start 277 --count 3 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/A16_k2_gstar_f277"
+  },
+  {
+   "id": "v5_val_A16_k2_gstar_f354",
+   "cmd": "python main.py eval3 --set A16 --method gstar --kappa 2 --tau 3.4 --n-star 3 --split val3 --start 354 --count 4 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/A16_k2_gstar_f354"
+  },
+  {
+   "id": "v5_val_A16_k2_gstar_f358",
+   "cmd": "python main.py eval3 --set A16 --method gstar --kappa 2 --tau 3.4 --n-star 3 --split val3 --start 358 --count 2 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/A16_k2_gstar_f358"
+  },
+  {
+   "id": "v5_val_A16_k2_gstar_f373",
+   "cmd": "python main.py eval3 --set A16 --method gstar --kappa 2 --tau 3.4 --n-star 3 --split val3 --start 373 --count 4 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/A16_k2_gstar_f373"
+  },
+  {
+   "id": "v5_val_A16_k2_gstar_f377",
+   "cmd": "python main.py eval3 --set A16 --method gstar --kappa 2 --tau 3.4 --n-star 3 --split val3 --start 377 --count 3 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/A16_k2_gstar_f377"
+  },
+  {
+   "id": "v5_val_A16_k2_gstar_f390",
+   "cmd": "python main.py eval3 --set A16 --method gstar --kappa 2 --tau 3.4 --n-star 3 --split val3 --start 390 --count 4 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/A16_k2_gstar_f390"
+  },
+  {
+   "id": "v5_val_A16_k2_gstar_f394",
+   "cmd": "python main.py eval3 --set A16 --method gstar --kappa 2 --tau 3.4 --n-star 3 --split val3 --start 394 --count 4 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/A16_k2_gstar_f394"
+  },
+  {
+   "id": "v5_val_A16_k2_gstar_f398",
+   "cmd": "python main.py eval3 --set A16 --method gstar --kappa 2 --tau 3.4 --n-star 3 --split val3 --start 398 --count 2 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/A16_k2_gstar_f398"
+  },
+  {
+   "id": "v5_val_A16_k2_gstar_f410",
+   "cmd": "python main.py eval3 --set A16 --method gstar --kappa 2 --tau 3.4 --n-star 3 --split val3 --start 410 --count 4 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/A16_k2_gstar_f410"
+  },
+  {
+   "id": "v5_val_A16_k2_gstar_f414",
+   "cmd": "python main.py eval3 --set A16 --method gstar --kappa 2 --tau 3.4 --n-star 3 --split val3 --start 414 --count 4 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/A16_k2_gstar_f414"
+  },
+  {
+   "id": "v5_val_A16_k2_gstar_f418",
+   "cmd": "python main.py eval3 --set A16 --method gstar --kappa 2 --tau 3.4 --n-star 3 --split val3 --start 418 --count 2 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/A16_k2_gstar_f418"
+  },
+  {
+   "id": "v5_val_A16_k2_gstar_f438",
+   "cmd": "python main.py eval3 --set A16 --method gstar --kappa 2 --tau 3.4 --n-star 3 --split val3 --start 438 --count 2 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/A16_k2_gstar_f438"
+  },
+  {
+   "id": "v5_val_A16_k2_gstar_f488",
+   "cmd": "python main.py eval3 --set A16 --method gstar --kappa 2 --tau 3.4 --n-star 3 --split val3 --start 488 --count 4 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/A16_k2_gstar_f488"
+  },
+  {
+   "id": "v5_val_A16_k2_gstar_f492",
+   "cmd": "python main.py eval3 --set A16 --method gstar --kappa 2 --tau 3.4 --n-star 3 --split val3 --start 492 --count 4 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/A16_k2_gstar_f492"
+  },
+  {
+   "id": "v5_val_A16_k2_gstar_f496",
+   "cmd": "python main.py eval3 --set A16 --method gstar --kappa 2 --tau 3.4 --n-star 3 --split val3 --start 496 --count 4 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/A16_k2_gstar_f496"
+  }
+ ]
+}
