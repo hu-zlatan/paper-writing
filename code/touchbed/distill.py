@@ -189,9 +189,11 @@ def mean_regret(student, D, idx=None, chunk=256):
             "tie_fraction": n_tie / max(n - n_ex, 1)}
 
 
-def train_round(student, opt, D, train_idx, val_D, val_idx, cfg: DistillConfig, rng, log, t0=None):
+def train_round(student, opt, D, train_idx, val_D, val_idx, cfg: DistillConfig, rng, log, t0=None, best_out=None):
     """Epochs over the aggregated data until validation R̄ improves by < stop_tol over stop_patience evaluations
-    (cap max_epochs). Returns the stop status. Last checkpoint is kept (no success-based selection)."""
+    (cap max_epochs). Returns the stop status. Last checkpoint is kept (no success-based selection).
+    best_out (amendment v5.0 E2): if a dict is given, it receives the parameters and epoch with the lowest held-out R̄
+    seen so far ("state", "epoch", "R_bar"); the caller decides which checkpoint to keep."""
     import time
     t0 = t0 or time.time()
     T = D["valid"].shape[1]
@@ -210,6 +212,8 @@ def train_round(student, opt, D, train_idx, val_D, val_idx, cfg: DistillConfig, 
         vr = mean_regret(student, val_D, val_idx)
         log.append({"epoch": epoch, "train_loss": float(np.mean(losses)), **{f"val_{k}": v for k, v in vr.items()},
                     "wall_s": time.time() - t0})
+        if best_out is not None and vr["R_bar"] < best_out.get("R_bar", math.inf):
+            best_out.update(state=student.get_state(), epoch=epoch, R_bar=vr["R_bar"])
         if vr["R_bar"] < best - cfg.stop_tol:
             best, since = vr["R_bar"], 0
         else:

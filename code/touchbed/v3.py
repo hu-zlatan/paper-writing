@@ -14,7 +14,8 @@ from .pf import Prior
 from .shapes import get_set
 from .travel import A, N_PHI, N_PSI
 
-V3_SALTS = {"cal3": 61, "pilot3": 67, "val3": 71, "test3": 79, "label3": 83, "dagger3": 89, "g2v3": 97, "bank3": 101}
+V3_SALTS = {"cal3": 61, "pilot3": 67, "val3": 71, "test3": 79, "label3": 83, "dagger3": 89, "g2v3": 97, "bank3": 101,
+             "test5": 107}  # test5: fresh v5 test split (amendment v5.0 E4), untouched before the freeze
 TRAIN_SPLITS = ("label3", "dagger3")
 for _k, _v in V3_SALTS.items():           # register without touching the v1/v2 entries
     assert SPLIT_SALT.get(_k, _v) == _v
@@ -39,6 +40,8 @@ def dagger_index(round_: int, seed: int, j: int) -> int:
         return 100_000 * round_ + 1_000 * (seed - 500) + j
     if 601 <= seed <= 699:
         return 1_000_000 + 100_000 * round_ + 1_000 * (seed - 600) + j
+    if 701 <= seed <= 799:                 # v5 students (amendment v5.0 E2), disjoint from v3/v4 ranges
+        return 2_000_000 + 100_000 * round_ + 1_000 * (seed - 700) + j
     raise ValueError((round_, seed, j))
 
 

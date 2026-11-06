@@ -15,9 +15,11 @@ heads, 3D objects, hardware, new planners.
 
 **P0 · pilot and calibration (sandbox + Actions, report-only).**
 - τ for each new cell by the v3 Cal′ rule (`calib3`, n\* = 4 unless stated, 200 cal3 episodes).
-- Second library: A16 (set A, K = 16) at κ = 2. Its n\* is the smallest n with G\* sub-8 success in [0.40, 0.85] on
-  200 cal3 episodes (A with K = 8 is at ceiling, 0.985). If no n ≤ 6 qualifies, the library cell is dropped and that is
-  reported (no substitute library is chosen after seeing results).
+- Second library: A16 (set A, K = 16) at κ = 2, n\* by the unchanged v3 Cal′ rule (G\* at κ 0, τ 4 on the 200 cal3
+  episodes, sub 8: success > 0.88 → 3, < 0.20 → 5, else 4; A with K = 8 is at ceiling, 0.985). The cell is kept only if
+  G\* sub-8 success at that n\* is in [0.30, 0.90]; otherwise it is dropped and reported (no substitute library is chosen
+  after seeing results). *(Edited 2026-11-06 before any v5 job: first draft used an ad-hoc n-scan; replaced by the
+  existing rule.)*
 - `pilot3` TIME_ESTIMATE per cell; G\* travel per episode on 20 pilot3 episodes (design info, not a paper number).
 
 **Cells.** S2 (κ 2, τ 4.7), S4 (κ 4), S8 (κ 8), S12 (κ 12, τ 4.9), A16-2 (κ 2). Five cells spanning the travel range;

@@ -236,10 +236,20 @@ def cmd_distill3(a):
     opt = Adam(st.net.params(), lr=cfg.lr)
     log = []
     t0 = time.time()
-    status = train_round(st, opt, D, np.arange(len(D["valid"])), V, np.arange(len(V["valid"])), cfg, rng, log, t0)
+    keep_best = getattr(a, "keep", "last") == "best"
+    best = {} if keep_best else None
+    status = train_round(st, opt, D, np.arange(len(D["valid"])), V, np.arange(len(V["valid"])), cfg, rng, log, t0,
+                         best_out=best)
+    last_val = mean_regret(st, V)
+    if keep_best:                                # v5 recipe: also save the last checkpoint as a sensitivity row
+        save_student(a.out + "_last.npz", st, {"config": vars(a), "checkpoint": "last", "final_val": last_val})
+        if "state" in best:
+            st.set_state(best["state"])
     final = mean_regret(st, V)
     meta = {"config": vars(a), "distill_config": cfg.__dict__, "hidden": a.hidden, "tau": a.tau, "env": _env(),
-            "shards": paths, "val_shards": vpaths, "status": status, "final_val": final, "n_train_episodes":
+            "shards": paths, "val_shards": vpaths, "status": status, "final_val": final, "last_val": last_val,
+            "checkpoint": "best" if keep_best else "last",
+            "best_epoch": (best or {}).get("epoch"), "n_train_episodes":
             int(len(D["valid"])), "n_train_decisions": int(D["valid"].sum())}
     save_student(a.out + ".npz", st, meta)
     with _open(a.out, ".json") as f:
@@ -440,6 +450,7 @@ def register(sub):
     ds.add_argument("--shards", nargs="+", required=True); ds.add_argument("--val-shards", nargs="+", required=True)
     ds.add_argument("--init", default=None); ds.add_argument("--budget-minutes", type=float, default=330.0)
     ds.add_argument("--fixed-epochs", type=int, default=None)  # train exactly N epochs (no stopping rule); default off
+    ds.add_argument("--keep", default="last", choices=["last", "best"])  # v5: best held-out R-bar checkpoint
     ds.add_argument("--out", required=True)
     la = sub.add_parser("latency3"); common(la)
     la.add_argument("--weights", required=True); la.add_argument("--warmup", type=int, default=20)

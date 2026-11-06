@@ -1,0 +1,108 @@
+{
+ "jobs": [
+  {
+   "id": "v5_cal_tau_S_k4_sh0",
+   "cmd": "python main.py calib3 --set S --kappa 4 --n-star 4 --start 0 --count 25 --budget-minutes 25 --out ../results/v5/cal/tau_S_k4_sh0"
+  },
+  {
+   "id": "v5_cal_tau_S_k4_sh1",
+   "cmd": "python main.py calib3 --set S --kappa 4 --n-star 4 --start 25 --count 25 --budget-minutes 25 --out ../results/v5/cal/tau_S_k4_sh1"
+  },
+  {
+   "id": "v5_cal_tau_S_k4_sh2",
+   "cmd": "python main.py calib3 --set S --kappa 4 --n-star 4 --start 50 --count 25 --budget-minutes 25 --out ../results/v5/cal/tau_S_k4_sh2"
+  },
+  {
+   "id": "v5_cal_tau_S_k4_sh3",
+   "cmd": "python main.py calib3 --set S --kappa 4 --n-star 4 --start 75 --count 25 --budget-minutes 25 --out ../results/v5/cal/tau_S_k4_sh3"
+  },
+  {
+   "id": "v5_cal_tau_S_k4_sh4",
+   "cmd": "python main.py calib3 --set S --kappa 4 --n-star 4 --start 100 --count 25 --budget-minutes 25 --out ../results/v5/cal/tau_S_k4_sh4"
+  },
+  {
+   "id": "v5_cal_tau_S_k4_sh5",
+   "cmd": "python main.py calib3 --set S --kappa 4 --n-star 4 --start 125 --count 25 --budget-minutes 25 --out ../results/v5/cal/tau_S_k4_sh5"
+  },
+  {
+   "id": "v5_cal_tau_S_k4_sh6",
+   "cmd": "python main.py calib3 --set S --kappa 4 --n-star 4 --start 150 --count 25 --budget-minutes 25 --out ../results/v5/cal/tau_S_k4_sh6"
+  },
+  {
+   "id": "v5_cal_tau_S_k4_sh7",
+   "cmd": "python main.py calib3 --set S --kappa 4 --n-star 4 --start 175 --count 25 --budget-minutes 25 --out ../results/v5/cal/tau_S_k4_sh7"
+  },
+  {
+   "id": "v5_cal_tau_S_k8_sh0",
+   "cmd": "python main.py calib3 --set S --kappa 8 --n-star 4 --start 0 --count 25 --budget-minutes 25 --out ../results/v5/cal/tau_S_k8_sh0"
+  },
+  {
+   "id": "v5_cal_tau_S_k8_sh1",
+   "cmd": "python main.py calib3 --set S --kappa 8 --n-star 4 --start 25 --count 25 --budget-minutes 25 --out ../results/v5/cal/tau_S_k8_sh1"
+  },
+  {
+   "id": "v5_cal_tau_S_k8_sh2",
+   "cmd": "python main.py calib3 --set S --kappa 8 --n-star 4 --start 50 --count 25 --budget-minutes 25 --out ../results/v5/cal/tau_S_k8_sh2"
+  },
+  {
+   "id": "v5_cal_tau_S_k8_sh3",
+   "cmd": "python main.py calib3 --set S --kappa 8 --n-star 4 --start 75 --count 25 --budget-minutes 25 --out ../results/v5/cal/tau_S_k8_sh3"
+  },
+  {
+   "id": "v5_cal_tau_S_k8_sh4",
+   "cmd": "python main.py calib3 --set S --kappa 8 --n-star 4 --start 100 --count 25 --budget-minutes 25 --out ../results/v5/cal/tau_S_k8_sh4"
+  },
+  {
+   "id": "v5_cal_tau_S_k8_sh5",
+   "cmd": "python main.py calib3 --set S --kappa 8 --n-star 4 --start 125 --count 25 --budget-minutes 25 --out ../results/v5/cal/tau_S_k8_sh5"
+  },
+  {
+   "id": "v5_cal_tau_S_k8_sh6",
+   "cmd": "python main.py calib3 --set S --kappa 8 --n-star 4 --start 150 --count 25 --budget-minutes 25 --out ../results/v5/cal/tau_S_k8_sh6"
+  },
+  {
+   "id": "v5_cal_tau_S_k8_sh7",
+   "cmd": "python main.py calib3 --set S --kappa 8 --n-star 4 --start 175 --count 25 --budget-minutes 25 --out ../results/v5/cal/tau_S_k8_sh7"
+  },
+  {
+   "id": "v5_cal_nstar_A16_sh0",
+   "cmd": "python main.py eval3 --set A16 --method gstar --kappa 0 --tau 4 --split cal3 --start 0 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/cal/nstar_A16_sh0"
+  },
+  {
+   "id": "v5_cal_nstar_A16_sh1",
+   "cmd": "python main.py eval3 --set A16 --method gstar --kappa 0 --tau 4 --split cal3 --start 20 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/cal/nstar_A16_sh1"
+  },
+  {
+   "id": "v5_cal_nstar_A16_sh2",
+   "cmd": "python main.py eval3 --set A16 --method gstar --kappa 0 --tau 4 --split cal3 --start 40 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/cal/nstar_A16_sh2"
+  },
+  {
+   "id": "v5_cal_nstar_A16_sh3",
+   "cmd": "python main.py eval3 --set A16 --method gstar --kappa 0 --tau 4 --split cal3 --start 60 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/cal/nstar_A16_sh3"
+  },
+  {
+   "id": "v5_cal_nstar_A16_sh4",
+   "cmd": "python main.py eval3 --set A16 --method gstar --kappa 0 --tau 4 --split cal3 --start 80 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/cal/nstar_A16_sh4"
+  },
+  {
+   "id": "v5_cal_nstar_A16_sh5",
+   "cmd": "python main.py eval3 --set A16 --method gstar --kappa 0 --tau 4 --split cal3 --start 100 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/cal/nstar_A16_sh5"
+  },
+  {
+   "id": "v5_cal_nstar_A16_sh6",
+   "cmd": "python main.py eval3 --set A16 --method gstar --kappa 0 --tau 4 --split cal3 --start 120 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/cal/nstar_A16_sh6"
+  },
+  {
+   "id": "v5_cal_nstar_A16_sh7",
+   "cmd": "python main.py eval3 --set A16 --method gstar --kappa 0 --tau 4 --split cal3 --start 140 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/cal/nstar_A16_sh7"
+  },
+  {
+   "id": "v5_cal_nstar_A16_sh8",
+   "cmd": "python main.py eval3 --set A16 --method gstar --kappa 0 --tau 4 --split cal3 --start 160 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/cal/nstar_A16_sh8"
+  },
+  {
+   "id": "v5_cal_nstar_A16_sh9",
+   "cmd": "python main.py eval3 --set A16 --method gstar --kappa 0 --tau 4 --split cal3 --start 180 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/cal/nstar_A16_sh9"
+  }
+ ]
+}

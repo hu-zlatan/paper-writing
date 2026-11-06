@@ -113,6 +113,8 @@ class AdaptiveGridPosterior(GridPosterior):
                  prune: float = 25.0, batch: int = 4000):
         super().__init__(lib, prior, om, history, h_xy=h_xy, h_th_deg=h_th_deg)
         self.sub, self.s0 = sub, s0
+        if sub > 8:   # v5 E5 (sub 16): keep the per-batch point count of sub 8; sub <= 8 paths are unchanged
+            batch = max(1, batch * 512 // sub ** 3)
         h_th = math.radians(h_th_deg)
         K = prior.K
         LPc = self.LP
