@@ -101,3 +101,23 @@ test5 500 episodes per cell, val3 500, S8 kept, E7 decided after the pilot timin
   with n = 300 per cell and the reason for the size.
 - Compute is free (public-repo GitHub-hosted runners); the reduction also shortens wall time (≈ 1,750 → ≈ 1,050 test5
   jobs, ≈ 13 h at 20 concurrent) toward the stage-20 date of 2026-12-01.
+
+## Addendum v5.1f — E6 latency on runners, g_T for H2-v5, test5 read-out script (run 35, before any test5 number is read)
+- **E6 machine.** Amendment v5.0 put E6 in the sandbox ("same machine, one session"). Measured in run 35: on the
+  sandbox one full-G\* decision (2,000 / 512 / 64) takes ≈ 3.7 s, and the Lat′ driver is itself a full G\*, so 25
+  students × 520 decisions do not fit one session (≈ 27 h). E6 therefore runs on GitHub-hosted runners
+  (`experiments/v5_e6_lat.json`), keeping "same machine" where a comparison is made: per cell, **one job times student
+  701, full G\* and the two reduced G\* configs of v4 E5 (g125_512_16, g500_512_4) interleaved on the same pilot3
+  decision states** (the latency–accuracy frontier is read within that job); a second job per cell times students
+  702–705 (student timers only; seed spread of student latency). Cross-cell latency is reported per runner, not
+  compared as if on one machine. Protocol otherwise the v3 Lat′ one (500 decisions after 20 warm-up, pilot3, single
+  thread). New opt-in CLI flags `latency3 --configs … --no-pruned` (defaults leave the v3 protocol unchanged; test in
+  `tests/test_v5.py`). The accuracy side of the frontier is test5 success / BI (G\*, students) and, for the reduced
+  configs, the v4 E5 rows only where they exist (S12); no new reduced-G\* accuracy runs are added in v5.
+- **g_T (H2-v5).** `gt3` (J 16, L 4095, no grid, histories rebuilt from the recorded actions) costs ≈ 0.08 s per
+  episode in the sandbox, so it is run in the sandbox on every test5 record of G\*, students, RL and rl_success after
+  a cell's test5 is complete, outputs `results/v5/test5_gt/`.
+- **Read-out script** `code/analysis_test5_v5.py` (synthetic test `tests/test_v5_test5_analysis.py`) implements the
+  frozen H5a / H5b / H2-v5 / baseline / Holm rules; it fixes the two details the amendment left open: H5b weights =
+  1 / bootstrap variance of each cell's Δ_succ (held fixed across replicates), and travel in radians (also reported per
+  100°). A cell is analysed only when every method has all 300 test5 episodes.

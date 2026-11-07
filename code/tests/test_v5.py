@@ -66,3 +66,16 @@ def test_g2v3_indep_reestimate_off_by_default():
     assert inspect.signature(g2_gap).parameters["indep_M"].default == 0
     src = inspect.getsource(cli3)
     assert '"--indep-M", type=int, default=0' in src
+
+
+def test_latency3_cli_opt_ins_default_to_v3_protocol():
+    """E6 opt-ins (--configs, --no-pruned): defaults leave the v3 Lat' protocol unchanged."""
+    import argparse
+    from touchbed import cli3
+    p = argparse.ArgumentParser(); sub = p.add_subparsers(dest="cmd"); cli3.register(sub)
+    base = ["latency3", "--weights", "w.npz", "--out", "o"]
+    a = p.parse_args(base)
+    assert a.configs is None and a.no_pruned is False
+    a = p.parse_args(base + ["--configs", "g2000_512_64", "g125_512_16", "--no-pruned"])
+    assert a.configs == ["g2000_512_64", "g125_512_16"] and a.no_pruned is True
+    assert p.parse_args(base + ["--configs"]).configs == []

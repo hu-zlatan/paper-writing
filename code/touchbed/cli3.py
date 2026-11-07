@@ -264,7 +264,8 @@ def cmd_latency3(a):
         require_v3_actions()
     st, _ = load_student(a.weights)
     recs, finals = run_latency3(a.set, a.kappa, a.tau, st, list(range(a.start, a.start + a.count)), split=a.split,
-                                warmup=a.warmup, max_decisions=a.decisions + a.warmup)
+                                warmup=a.warmup, max_decisions=a.decisions + a.warmup, configs=a.configs,
+                                pruned=not a.no_pruned)
     with _open(a.out, ".jsonl") as f:
         f.write(json.dumps({"header": True, "args": vars(a), "env": _env()}) + "\n")
         for r in recs:
@@ -455,6 +456,8 @@ def register(sub):
     la = sub.add_parser("latency3"); common(la)
     la.add_argument("--weights", required=True); la.add_argument("--warmup", type=int, default=20)
     la.add_argument("--decisions", type=int, default=500)
+    # v5 E6 opt-ins (defaults = the v3 Lat' protocol unchanged): subset of greedy configs; skip pruned16/random16
+    la.add_argument("--configs", nargs="*", default=None); la.add_argument("--no-pruned", action="store_true")
     g = sub.add_parser("g1c")
     g.add_argument("--kappa", type=float, default=12.0); g.add_argument("--start", type=int, default=0)
     g.add_argument("--count", type=int, default=1); g.add_argument("--C1", type=int, default=32)

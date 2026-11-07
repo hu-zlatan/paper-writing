@@ -1,0 +1,45 @@
+{
+ "purpose": "v5 E6 latency (addendum v5.1f): Lat' protocol on pilot3 (500 decisions after 20 warm-up, full-G* driven states). Per cell: job 1 = student 701 + full G* (g2000_512_64) + the two reduced G* configs (g125_512_16, g500_512_4) timed on the same decision states on one runner; job 2 = students 702-705, student timers only, one runner",
+ "jobs": [
+  {
+   "id": "v5_e6_lat_S2_s701_gstar",
+   "cmd": "python main.py latency3 --set S --kappa 2 --tau 4.7 --split pilot3 --start 0 --count 300 --weights ../results/v5/d5/S_k2_s701_r2.npz --warmup 20 --decisions 500 --configs g2000_512_64 g125_512_16 g500_512_4 --no-pruned --out ../results/v5/lat/S_k2_s701_gstar"
+  },
+  {
+   "id": "v5_e6_lat_S2_s702_705",
+   "cmd": "python main.py latency3 --set S --kappa 2 --tau 4.7 --split pilot3 --start 0 --count 300 --weights ../results/v5/d5/S_k2_s702_r2.npz --warmup 20 --decisions 500 --configs --no-pruned --out ../results/v5/lat/S_k2_s702 && python main.py latency3 --set S --kappa 2 --tau 4.7 --split pilot3 --start 0 --count 300 --weights ../results/v5/d5/S_k2_s703_r2.npz --warmup 20 --decisions 500 --configs --no-pruned --out ../results/v5/lat/S_k2_s703 && python main.py latency3 --set S --kappa 2 --tau 4.7 --split pilot3 --start 0 --count 300 --weights ../results/v5/d5/S_k2_s704_r2.npz --warmup 20 --decisions 500 --configs --no-pruned --out ../results/v5/lat/S_k2_s704 && python main.py latency3 --set S --kappa 2 --tau 4.7 --split pilot3 --start 0 --count 300 --weights ../results/v5/d5/S_k2_s705_r2.npz --warmup 20 --decisions 500 --configs --no-pruned --out ../results/v5/lat/S_k2_s705"
+  },
+  {
+   "id": "v5_e6_lat_S4_s701_gstar",
+   "cmd": "python main.py latency3 --set S --kappa 4 --tau 4.8 --split pilot3 --start 0 --count 300 --weights ../results/v5/d5/S_k4_s701_r2.npz --warmup 20 --decisions 500 --configs g2000_512_64 g125_512_16 g500_512_4 --no-pruned --out ../results/v5/lat/S_k4_s701_gstar"
+  },
+  {
+   "id": "v5_e6_lat_S4_s702_705",
+   "cmd": "python main.py latency3 --set S --kappa 4 --tau 4.8 --split pilot3 --start 0 --count 300 --weights ../results/v5/d5/S_k4_s702_r2.npz --warmup 20 --decisions 500 --configs --no-pruned --out ../results/v5/lat/S_k4_s702 && python main.py latency3 --set S --kappa 4 --tau 4.8 --split pilot3 --start 0 --count 300 --weights ../results/v5/d5/S_k4_s703_r2.npz --warmup 20 --decisions 500 --configs --no-pruned --out ../results/v5/lat/S_k4_s703 && python main.py latency3 --set S --kappa 4 --tau 4.8 --split pilot3 --start 0 --count 300 --weights ../results/v5/d5/S_k4_s704_r2.npz --warmup 20 --decisions 500 --configs --no-pruned --out ../results/v5/lat/S_k4_s704 && python main.py latency3 --set S --kappa 4 --tau 4.8 --split pilot3 --start 0 --count 300 --weights ../results/v5/d5/S_k4_s705_r2.npz --warmup 20 --decisions 500 --configs --no-pruned --out ../results/v5/lat/S_k4_s705"
+  },
+  {
+   "id": "v5_e6_lat_S8_s701_gstar",
+   "cmd": "python main.py latency3 --set S --kappa 8 --tau 4.8 --split pilot3 --start 0 --count 300 --weights ../results/v5/d5/S_k8_s701_r2.npz --warmup 20 --decisions 500 --configs g2000_512_64 g125_512_16 g500_512_4 --no-pruned --out ../results/v5/lat/S_k8_s701_gstar"
+  },
+  {
+   "id": "v5_e6_lat_S8_s702_705",
+   "cmd": "python main.py latency3 --set S --kappa 8 --tau 4.8 --split pilot3 --start 0 --count 300 --weights ../results/v5/d5/S_k8_s702_r2.npz --warmup 20 --decisions 500 --configs --no-pruned --out ../results/v5/lat/S_k8_s702 && python main.py latency3 --set S --kappa 8 --tau 4.8 --split pilot3 --start 0 --count 300 --weights ../results/v5/d5/S_k8_s703_r2.npz --warmup 20 --decisions 500 --configs --no-pruned --out ../results/v5/lat/S_k8_s703 && python main.py latency3 --set S --kappa 8 --tau 4.8 --split pilot3 --start 0 --count 300 --weights ../results/v5/d5/S_k8_s704_r2.npz --warmup 20 --decisions 500 --configs --no-pruned --out ../results/v5/lat/S_k8_s704 && python main.py latency3 --set S --kappa 8 --tau 4.8 --split pilot3 --start 0 --count 300 --weights ../results/v5/d5/S_k8_s705_r2.npz --warmup 20 --decisions 500 --configs --no-pruned --out ../results/v5/lat/S_k8_s705"
+  },
+  {
+   "id": "v5_e6_lat_S12_s701_gstar",
+   "cmd": "python main.py latency3 --set S --kappa 12 --tau 4.9 --split pilot3 --start 0 --count 300 --weights ../results/v5/d5/S_k12_s701_r2.npz --warmup 20 --decisions 500 --configs g2000_512_64 g125_512_16 g500_512_4 --no-pruned --out ../results/v5/lat/S_k12_s701_gstar"
+  },
+  {
+   "id": "v5_e6_lat_S12_s702_705",
+   "cmd": "python main.py latency3 --set S --kappa 12 --tau 4.9 --split pilot3 --start 0 --count 300 --weights ../results/v5/d5/S_k12_s702_r2.npz --warmup 20 --decisions 500 --configs --no-pruned --out ../results/v5/lat/S_k12_s702 && python main.py latency3 --set S --kappa 12 --tau 4.9 --split pilot3 --start 0 --count 300 --weights ../results/v5/d5/S_k12_s703_r2.npz --warmup 20 --decisions 500 --configs --no-pruned --out ../results/v5/lat/S_k12_s703 && python main.py latency3 --set S --kappa 12 --tau 4.9 --split pilot3 --start 0 --count 300 --weights ../results/v5/d5/S_k12_s704_r2.npz --warmup 20 --decisions 500 --configs --no-pruned --out ../results/v5/lat/S_k12_s704 && python main.py latency3 --set S --kappa 12 --tau 4.9 --split pilot3 --start 0 --count 300 --weights ../results/v5/d5/S_k12_s705_r2.npz --warmup 20 --decisions 500 --configs --no-pruned --out ../results/v5/lat/S_k12_s705"
+  },
+  {
+   "id": "v5_e6_lat_A162_s701_gstar",
+   "cmd": "python main.py latency3 --set A16 --kappa 2 --tau 3.4 --split pilot3 --start 0 --count 300 --weights ../results/v5/d5/A16_k2_s701_r2.npz --warmup 20 --decisions 500 --configs g2000_512_64 g125_512_16 g500_512_4 --no-pruned --out ../results/v5/lat/A16_k2_s701_gstar"
+  },
+  {
+   "id": "v5_e6_lat_A162_s702_705",
+   "cmd": "python main.py latency3 --set A16 --kappa 2 --tau 3.4 --split pilot3 --start 0 --count 300 --weights ../results/v5/d5/A16_k2_s702_r2.npz --warmup 20 --decisions 500 --configs --no-pruned --out ../results/v5/lat/A16_k2_s702 && python main.py latency3 --set A16 --kappa 2 --tau 3.4 --split pilot3 --start 0 --count 300 --weights ../results/v5/d5/A16_k2_s703_r2.npz --warmup 20 --decisions 500 --configs --no-pruned --out ../results/v5/lat/A16_k2_s703 && python main.py latency3 --set A16 --kappa 2 --tau 3.4 --split pilot3 --start 0 --count 300 --weights ../results/v5/d5/A16_k2_s704_r2.npz --warmup 20 --decisions 500 --configs --no-pruned --out ../results/v5/lat/A16_k2_s704 && python main.py latency3 --set A16 --kappa 2 --tau 3.4 --split pilot3 --start 0 --count 300 --weights ../results/v5/d5/A16_k2_s705_r2.npz --warmup 20 --decisions 500 --configs --no-pruned --out ../results/v5/lat/A16_k2_s705"
+  }
+ ]
+}
