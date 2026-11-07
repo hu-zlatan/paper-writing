@@ -1405,3 +1405,12 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
     committed in this commit, before any test5 job. test5 manifests (`tools_v5_test5.py manifest`, test5 0–299):
     `v5_test5_S2_p0/p1` (320 jobs), `v5_test5_S12_p0/p1` (349 jobs). Dispatched right after this push.
   - `v5_distill2_S4_S8_A162` (15 round-2 students) dispatched at 16:01 UTC; DAgger r2 S4/S8/A16-2 300/300 complete.
+  - **Dispatched (≈ 17:00 UTC):** `v5_test5_S2_p0`, `_p1`, `v5_test5_S12_p0`, `_p1` (669 jobs ≈ 15 min each; expect
+    ≈ 8–9 h wall with the 20-runner cap, sharing it with distill2).
+  - **Where to resume (run 35):** (1) distill2 S4/S8/A16-2 landed (15 × `.npz`, `max_epochs`) → `tools_v5_manifests.py
+    val S4` / `val S8` / `val A16-2` → dispatch → follow-ups via `tools_resume_manifest.py` → `analysis_d5_v5.py` →
+    then `tools_v5_test5.py freeze <cell>`, commit + log, then `manifest <cell>` → dispatch. (2) test5 S2/S12 landed →
+    follow-up manifests for time-guarded shards (`tools_resume_manifest.py` per p0/p1 manifest). (3) When S2/S12 test5
+    is complete: E5 (sub 16 re-read of G\* and student 701, test5 0–199) and the test5 read-out script (H5a/H5b/H2-v5,
+    student − H\*, Holm) — write it before reading any test5 number. (4) E6 latency in the sandbox once all 25 round-2
+    students exist (one session).
