@@ -13,4 +13,8 @@ Red lines: no test5 number read or printed this run before the script is committ
 open details and moves E6's machine, stated with the reason).
 
 ## Outputs
-(filled at the end of the run)
+- Dispatched: `v5_val_S4/S8/A162` (375 jobs), `v5_e6_lat` (10 jobs).
+- Code: `latency3 --configs/--no-pruned`, `analysis_test5_v5.py` (+ synthetic test), `analysis_e5_v5.py`,
+  `analysis_e6_v5.py`, `tools_v5_e5.py`, `tools_v5_gt.py`; addendum v5.1f.
+- g_T for the 316 test5 files committed so far (`results/v5/test5_gt/`, not read).
+- No test5 outcome was read in this run.
