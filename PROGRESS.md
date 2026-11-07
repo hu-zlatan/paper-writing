@@ -9,7 +9,7 @@
 **Topic:** Amortized, non-myopic active tactile localization (TouchBED)
 **Initialised:** 2026-10-28T07:56:44Z
 **Current version:** v5
-**Latest stage:** Stage 13 ITERATIVE_REFINE [v5] in progress (main-run execution on Actions); see run 31 at the end of this file
+**Latest stage:** Stage 13 ITERATIVE_REFINE [v5] in progress (main-run execution on Actions); see run 35 at the end of this file
 
 ---
 
@@ -1414,3 +1414,27 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
     is complete: E5 (sub 16 re-read of G\* and student 701, test5 0–199) and the test5 read-out script (H5a/H5b/H2-v5,
     student − H\*, Holm) — write it before reading any test5 number. (4) E6 latency in the sandbox once all 25 round-2
     students exist (one session).
+
+- **Run 35 (2026-11-07, from ≈ 19:50 UTC, scheduled) — stage 13 v5 continued.** No open issues; AUTOPILOT §1 unchanged.
+  `add_repo` not available as a tool; the existing checkout was reset onto origin/main (the local branch held a stale
+  copy of old run-26 commits; nothing of it was pushed). Plan: `plans/stage_13_v5_run35_e6_readout.md`.
+  - **Inputs checked:** round-2 students S4 / S8 / A16-2 15/15 `max_epochs` with `.npz` (A16-2 seed 701 kept its
+    round-1 init, best epoch 0 — the recipe's best-checkpoint rule, logged). test5 S2/S12 still running (runs 157/159;
+    counts only: S2 4,253 / 6,000, S12 3,886 / 6,000 method-episodes at 20:00 UTC).
+  - **Dispatched:** `v5_val_S4`, `v5_val_S8`, `v5_val_A162` (125 each: D5 read-out, val3 0–499, sub 8). Freeze of these
+    cells waits for D5 (amendment v5.0 order).
+  - **Addendum v5.1f** (before any test5 number is read): E6 moves from the sandbox to runners (sandbox full-G\* decision
+    ≈ 3.7 s; 25 students × 520 decisions ≈ 27 h ≫ one session) with "same machine" kept per cell job; new opt-in
+    `latency3 --configs … --no-pruned` (defaults unchanged, test added); `experiments/v5_e6_lat.json` (10 jobs)
+    dispatched. g_T for H2-v5 is cheap (≈ 0.08 s / episode) → sandbox (`code/tools_v5_gt.py` → `results/v5/test5_gt/`).
+  - **Read-out code written before any test5 number:** `code/analysis_test5_v5.py` (H5a / H5b / H2-v5 / H\* / Holm;
+    H5b weights = 1 / bootstrap variance per cell; synthetic test `tests/test_v5_test5_analysis.py`, 2 passed),
+    `code/analysis_e5_v5.py` (sub-16 flip rate), `code/analysis_e6_v5.py` (latency medians, ratio, L_final),
+    `code/tools_v5_e5.py` (E5 manifest; refuses until G\* and student 701 have test5 0–199 — S12 G\* still lacks 3).
+    Sandbox timing for E5: sub-16 re-read ≈ 45–70 s per episode (val3 record).
+  - **Where to resume (run 36):** (1) D5 val3 S4/S8/A16-2 landed → follow-ups via `tools_resume_manifest.py` →
+    `analysis_d5_v5.py` → `tools_v5_test5.py freeze <cell>`, commit + log **before** `manifest <cell>` → dispatch.
+    (2) test5 S2/S12: follow-up manifests for time-guarded shards; `python tools_v5_e5.py` once 0–199 exist → dispatch.
+    (3) `python tools_v5_gt.py` in the sandbox for new test5 files (commit `results/v5/test5_gt/`, never the
+    dot-prefixed temp files). (4) E6 landed → `analysis_e6_v5.py`. (5) All cells complete → `analysis_test5_v5.py` →
+    stage 14. `analysis_test5_v5.py --check` prints counts only.
