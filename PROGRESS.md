@@ -1363,3 +1363,26 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
     landed → `analysis_base_v5.py` → if every cell `complete`, commit `results/v5/12_base_hstar.json`. (5) E7 landed →
     `analysis_e7_v5.py` → commit `results/v5/12_e7_analysis.json`. (6) Any shard stopped by its time guard →
     `tools_resume_manifest.py`. test5 stays untouched until the freeze commit.
+
+- **Run 33 (2026-11-07, from ≈ 07:50 UTC, scheduled) — stage 13 v5 continued.** No open issues; AUTOPILOT §1 unchanged.
+  All run-32 dispatches had finished without failures (last at 03:23 UTC).
+  - **Inputs checked:** DAgger r2 S2/S12 and r1 S4/S8/A16-2: 100/100 shards `complete` with `.npz` in every cell.
+  - **Dispatched:** `v5_distill2_S2_S12` (10, round-2 students → then D5 val3), `v5_distill1_S4_S8_A162` (15),
+    `v5_e7_h3_f1` (11: the S2 C1-512 beliefs the 60-min time guard stopped; one belief per job, 90-min budget).
+  - **H\* per cell (pilot3 0–199, sub 8; `results/v5/12_base_hstar.json`, every cell complete):** S2 B-cov 0.445,
+    S4 B-fan 0.43, S8 B-cov 0.405, S12 B-fan 0.41, A16-2 B-fan 0.33 (B-spread ≤ 0.075 everywhere). These pick the
+    comparator only; the paper's baseline numbers come from test5.
+  - **E7 interim (`results/v5/12_e7_analysis.json`, report-only):** S12 complete (C1 512: independent look-ahead gap
+    0.042 nats, ci95 [0.025, 0.062]; selection bias −0.002 [−0.016, 0.012]); S2 C1 512 has 21/32 beliefs — the
+    follow-up completes it, numbers not final.
+  - **E4 tooling:** `code/tools_v5_test5.py` (freeze record with sha256 of every student/RL weight; test5 manifests
+    refuse to build unless the cell is frozen and hashes match). RL eval3 path smoke-tested on pilot3 ep 0 (41 s).
+  - **Addendum v5.1e (before any test5 job, before any round-2 student exists):** recorded v5 CPU so far ≈ 266 CPU-h;
+    test5 sized at ≈ 690 CPU-h for 500 episodes → projected total ≈ 1,250 > 1,000 → frozen reduction order step (2):
+    **test5 500 → 300 episodes per cell**; projected ≈ 975 CPU-h; steps (3)/(4) not applied.
+  - **Where to resume (run 34):** (1) distill2 S2/S12 landed (10 × `.npz`, `max_epochs`) → `tools_v5_manifests.py val
+    S2` and `val S12` → dispatch → `analysis_d5_v5.py` when complete. (2) distill1 S4/S8/A16-2 landed → `dag2 S4 S8
+    A16-2` (300 jobs > 256: split per cell or two manifests) → `distill2` → `val`. (3) E7 f1 landed → re-run
+    `analysis_e7_v5.py`, commit. (4) A cell's students r2 + RL all present → `tools_v5_test5.py freeze <cell>`, commit
+    the freeze and log it here **before** `manifest <cell>` and dispatch (test5 0–299). E5 (sub 16 re-read of test5
+    0–199, G\* and student 701, S2/S12) and E6 latency (sandbox) follow. test5 untouched so far.

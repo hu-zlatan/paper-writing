@@ -84,3 +84,20 @@ test5 500 episodes per cell, val3 500, S8 kept, E7 decided after the pilot timin
   ratio-of-means relative gap, each with a belief bootstrap ci95; C1 32 vs 512 paired on the same beliefs.
 - Report-only (H3 was a characterisation in v3/v4 and stays one); no decision rule depends on it.
 - Manifest: `experiments/v5_e7_h3.json` (16 jobs × 8 beliefs).
+
+## Addendum v5.1e — test5 size by the frozen reduction order (run 33, before any test5 job; no round-2 student exists yet)
+- **Re-projection.** Recorded v5 CPU time so far ≈ 266 CPU-h (sum of `wall_s` in `results/v5/`; excludes E7 and the
+  re-used v3/v4 S2/S12 labels). test5 sized for real for the first time (`code/tools_v5_test5.py`: every method of E4,
+  mean per-episode wall time per (cell, method) from pilot3/val3, sub 8): ≈ 690 CPU-h at 500 episodes per cell
+  (2,918 jobs; B-spread / B-cov at sub 8 and the A16 cell dominate; the amendment v5.0 guess was 75 CPU-h per cell).
+  Remaining non-test5 work (distill r1/r2, DAgger r2 for S4/S8/A16-2, D5 val3 read-out, E5) ≈ 300 CPU-h →
+  **projected total ≈ 1,250 CPU-h > 1,000.**
+- **Decision (mechanical, by the order frozen in amendment v5.0 "Reduction order"):** step (1) "E7 skipped" is no longer
+  available (E7 has run, ≈ 1 CPU-h), so step (2) applies: **test5 500 → 300 episodes per cell (indices 0–299)**,
+  every method, all 5 cells. Projected total ≈ 975 CPU-h ≤ 1,000, so steps (3) drop S8 and (4) val3 500 → 300 are not
+  applied. E5 (sub 16 on test5 0–199) is unchanged and lies inside 0–299.
+- **Blindness.** Decided before any test5 episode of any method and before any round-2 student or D5 read-out exists
+  (round-2 distillation is still running); it depends only on wall-time records. Every number on test5 is reported
+  with n = 300 per cell and the reason for the size.
+- Compute is free (public-repo GitHub-hosted runners); the reduction also shortens wall time (≈ 1,750 → ≈ 1,050 test5
+  jobs, ≈ 13 h at 20 concurrent) toward the stage-20 date of 2026-12-01.

@@ -39,3 +39,12 @@ stage of the v5 rows until test5 is frozen and evaluated, then stage 14.
    an opt-in independent re-estimate (default off, so v3/v4 commands are unchanged), write addendum v5.1d before any
    E7 job, dispatch, pre-write `analysis_e7_v5.py`.
 5. Pre-write the D5 val3 student manifest step. test5 untouched.
+
+### Run 33 plan (2026-11-07, scheduled)
+1. Verify run-32 dispatches (DAgger r2 S2/S12, r1 S4/S8, r1 A16-2, baseline f2, E7) are complete; dispatch distill2
+   S2/S12 and distill1 S4/S8/A16-2.
+2. Read out H\* per cell (`analysis_base_v5.py`) and E7 (`analysis_e7_v5.py`); follow-up for E7 shards stopped by the
+   time guard (one belief per job).
+3. Pre-write the E4 freeze + test5 manifest tool (`tools_v5_test5.py`), size test5 from recorded wall times, and if the
+   projection crosses the 1,000 CPU-h trigger apply the frozen reduction order in an addendum before any test5 job.
+   test5 untouched.
