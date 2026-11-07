@@ -1359,7 +1359,7 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
     20-episode shards, ≤ 125 jobs per cell).
   - **Where to resume (run 33):** (1) DAgger r2 S2/S12 landed (all 200 shards with `.npz`) → `distill2 S2 S12` →
     then `val S2`, `val S12` → `analysis_d5_v5.py`. (2) DAgger r1 S4/S8 landed → `distill1 S4 S8` → `dag2` → `distill2`
-    → `val`. (3) A16-2 r0 landed → `dag1 A16-2` (if not already dispatched this run) → same chain. (4) Baseline f2
+    → `val`. (3) A16-2 r0 landed this run (5/5 `max_epochs`, held-out R̄ 0.113–0.118) and `dag1 A16-2` (`v5_dag1_A162`, 100 jobs) is dispatched → when it lands, `distill1 A16-2` → same chain. (4) Baseline f2
     landed → `analysis_base_v5.py` → if every cell `complete`, commit `results/v5/12_base_hstar.json`. (5) E7 landed →
     `analysis_e7_v5.py` → commit `results/v5/12_e7_analysis.json`. (6) Any shard stopped by its time guard →
     `tools_resume_manifest.py`. test5 stays untouched until the freeze commit.
