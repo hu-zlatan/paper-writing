@@ -1,0 +1,21 @@
+{
+ "purpose": "v5 D5 val3 S2 follow-up: shards stopped by the 25-min time guard",
+ "jobs": [
+  {
+   "id": "v5_val_S2_s701_140_r155",
+   "cmd": "python main.py eval3 --set S --kappa 2 --tau 4.7 --n-star 4 --method student --weights ../results/v5/d5/S_k2_s701_r2.npz --split val3 --start 155 --count 5 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k2_student_s701_r2_140_r155"
+  },
+  {
+   "id": "v5_val_S2_s701_320_r337",
+   "cmd": "python main.py eval3 --set S --kappa 2 --tau 4.7 --n-star 4 --method student --weights ../results/v5/d5/S_k2_s701_r2.npz --split val3 --start 337 --count 3 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k2_student_s701_r2_320_r337"
+  },
+  {
+   "id": "v5_val_S2_s702_320_r337",
+   "cmd": "python main.py eval3 --set S --kappa 2 --tau 4.7 --n-star 4 --method student --weights ../results/v5/d5/S_k2_s702_r2.npz --split val3 --start 337 --count 3 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k2_student_s702_r2_320_r337"
+  },
+  {
+   "id": "v5_val_S2_s705_080_r96",
+   "cmd": "python main.py eval3 --set S --kappa 2 --tau 4.7 --n-star 4 --method student --weights ../results/v5/d5/S_k2_s705_r2.npz --split val3 --start 96 --count 4 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k2_student_s705_r2_080_r96"
+  }
+ ]
+}
