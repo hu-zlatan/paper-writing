@@ -304,7 +304,7 @@ def cmd_g2v3(a):
             if time.time() - t0 > 0.8 * a.budget_minutes * 60:
                 f.write(json.dumps({"EARLY_STOP_AT_80_PCT_BUDGET": True, "next_index": i}) + "\n")
                 break
-            r = g2_gap(a.set, a.kappa, a.tau, a.n_star, i, C1=a.C1, M_outer=a.M_outer, split="g2v3")
+            r = g2_gap(a.set, a.kappa, a.tau, a.n_star, i, C1=a.C1, M_outer=a.M_outer, split="g2v3", indep_M=a.indep_M)
             f.write(json.dumps(r) + "\n"); f.flush()
     print(f"G2V3_DONE wall_s={time.time() - t0:.0f}")
 
@@ -462,6 +462,7 @@ def register(sub):
     g2 = sub.add_parser("g2v3"); common(g2, split=False)
     g2.add_argument("--n-star", type=int, default=4); g2.add_argument("--C1", type=int, default=32)
     g2.add_argument("--M-outer", type=int, default=64)
+    g2.add_argument("--indep-M", type=int, default=0, help="v5 E7: independent re-estimate samples (0 = off, v3/v4 behaviour)")
     bz = sub.add_parser("bias3"); common(bz, split=False)
     bz.add_argument("--n-star", type=int, default=4); bz.add_argument("--n-roll", type=int, default=256)
     rg = sub.add_parser("regrid3")

@@ -45,7 +45,7 @@ def g2_belief(setname, kappa, tau, n_star, i, n_dec=2000, M=64, split="g2"):
     return lib, om, pf, ts, u
 
 
-def g2_gap(setname, kappa, tau, n_star, i, n_la=500, C1=32, M_outer=64, split="g2"):
+def g2_gap(setname, kappa, tau, n_star, i, n_la=500, C1=32, M_outer=64, split="g2", indep_M=0):
     lib, om, pf, ts, u = g2_belief(setname, kappa, tau, n_star, i, split=split)
     if ts.done() or not ts.feasible().any():
         # budget exhausted before the drawn step: no decision is left, V_LA = V_G* = 0 (contributes nothing to either
@@ -60,4 +60,13 @@ def g2_gap(setname, kappa, tau, n_star, i, n_la=500, C1=32, M_outer=64, split="g
     r = lookahead_gap(prob, np.zeros(n_la), ts, seed=int(rng.integers(1 << 30)), C1=C1, M_outer=M_outer, greedy_M=0)
     r.update({"set": setname, "kappa": kappa, "tau": tau, "n_star": n_star, "index": i, "steps_before": u,
               "tau_rem": ts.tau_rem, "split": split})
+    if indep_M > 0:
+        # v5 E7: independent re-estimate (own stream, fresh CRN draws) of the selected look-ahead action and of the
+        # greedy action, so the selection bias of v_la = max over re-estimated values can be measured. Off by default.
+        from .lookahead import value_estimates
+        acts = [r["a_la"]] + ([r["a_greedy"]] if r["a_greedy"] != r["a_la"] else [])
+        sd = int(stream(*_k(split, "g2_indep", setname, kappa, i)).integers(1 << 30))
+        v = value_estimates(prob, np.zeros(n_la), ts, acts, indep_M, sd, 0).mean(1)
+        v_la_i, v_g_i = float(v[0]), float(v[-1])
+        r["indep"] = {"M": indep_M, "actions": acts, "v_la": v_la_i, "v_greedy": v_g_i, "gap_abs": v_la_i - v_g_i}
     return r

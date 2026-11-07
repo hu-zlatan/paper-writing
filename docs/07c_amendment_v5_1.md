@@ -69,3 +69,18 @@ test5 500 episodes per cell, val3 500, S8 kept, E7 decided after the pilot timin
   wide; K = 16 needs 96). Fixed (width follows the labels; S outputs unchanged) and re-run with identical commands.
 - **Shard follow-ups.** Baseline (pilot3) and G\* val3 shards that the 25-min time guard stopped are completed by
   follow-up manifests that start at the recorded `next_index`, with smaller shards; commands otherwise identical.
+
+## Addendum v5.1d — E7 decided (run 32, before any E7 job)
+- **Timing (sandbox, one process, design info only):** `g2v3` on S κ 2, τ 4.7, belief 0: C1 = 32 → 15 s; C1 = 512
+  (all feasible first actions; 168 feasible at this belief) → 20 s; C1 = 512 + independent re-estimate → 33 s for
+  beliefs 0–1. E7 therefore costs ≈ 1 CPU-h, far below the 60 CPU-h cap → **full screen (C1 = 512)**.
+- **Rows:** g2v3 beliefs 0–31 (split `g2v3`, n\* 4, decision PF and estimator unchanged) in S2 (κ 2, τ 4.7) and S12
+  (κ 12, τ 4.9); on the same beliefs both C1 = 32 (the v3/v4 estimator, for a paired comparison) and C1 = 512.
+- **Independent re-estimate** (new opt-in flag `--indep-M`, default 0 so every earlier command is unchanged; test in
+  `tests/test_v5.py`): after selection, the selected look-ahead action and the greedy action are re-valued on a fresh
+  stream (`g2_indep` key) with M = 256 (= reest × M_outer, the size of the selection re-estimate). The sandbox check
+  showed the absolute values shift by seed (common to both actions under CRN), so the read-out is on **gaps**:
+  selection bias = mean(gap_abs) − mean(indep.gap_abs); headroom reported as mean indep.gap_abs and as the
+  ratio-of-means relative gap, each with a belief bootstrap ci95; C1 32 vs 512 paired on the same beliefs.
+- Report-only (H3 was a characterisation in v3/v4 and stays one); no decision rule depends on it.
+- Manifest: `experiments/v5_e7_h3.json` (16 jobs × 8 beliefs).

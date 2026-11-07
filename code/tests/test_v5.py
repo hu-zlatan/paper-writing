@@ -56,3 +56,13 @@ def test_episode_arrays_belief_width_follows_library():
                "belief": np.ones(width, np.float32)}
         out = episode_arrays([(0.0, 0.0, (0, 0, 0, 0))], [lab], 3)
         assert out["BF"].shape == (3, width) and out["BF"][0].sum() == width
+
+
+def test_g2v3_indep_reestimate_off_by_default():
+    """v5 E7: the independent re-estimate is opt-in; v3/v4 g2v3 commands keep their behaviour (no extra draws)."""
+    import inspect
+    from touchbed.g2 import g2_gap
+    from touchbed import cli3
+    assert inspect.signature(g2_gap).parameters["indep_M"].default == 0
+    src = inspect.getsource(cli3)
+    assert '"--indep-M", type=int, default=0' in src
