@@ -1396,3 +1396,12 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
   - **Dispatched:** `v5_val_S2`, `v5_val_S12` (125 + 125: D5 read-out on val3 0–499), `v5_dag2_S4_S8` (200),
     `v5_dag2_A162` (100).
   - **Order kept from amendment v5.0 l. 87:** D5 on val3 → freeze → test5. The S2/S12 freeze waits for the D5 read-out.
+  - **D5 read-out S2 / S12** (`results/v5/12_d5_analysis.json`; val3 0–499 complete after follow-ups `v5_val_S2_f1` /
+    `v5_val_S12_f1` for 22 time-guarded shards): **D5 fails in both cells.** S2: Δ_succ(student − G\*) = −3.28 pp (SE
+    2.19, threshold −1.45), Δ_BI = −0.068 nats (passes ii), seeds within δ 3/5 (fails iii). S12: Δ_succ = −3.24 pp (SE
+    1.96, threshold −1.72), Δ_BI = −0.063 (passes ii), seeds 3/5. Per amendment v5.0, D5 has no remedy step: it is
+    reported as H5a ("within δ on validation in m of 5 cells") with the test5 contrasts. No student is retrained.
+  - **FREEZE S2, S12** (`results/v5/13_freeze.json`, sha256 of 5 students r2 + 5 RL cfg 6 + 5 rl_success per cell),
+    committed in this commit, before any test5 job. test5 manifests (`tools_v5_test5.py manifest`, test5 0–299):
+    `v5_test5_S2_p0/p1` (320 jobs), `v5_test5_S12_p0/p1` (349 jobs). Dispatched right after this push.
+  - `v5_distill2_S4_S8_A162` (15 round-2 students) dispatched at 16:01 UTC; DAgger r2 S4/S8/A16-2 300/300 complete.

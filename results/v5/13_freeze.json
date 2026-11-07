@@ -1,0 +1,43 @@
+{
+ "rule": "amendment v5.0 E4: no test5 job for a cell before its weights are recorded here",
+ "cells": {
+  "S2": {
+   "sha256": {
+    "results/v5/d5/S_k2_s701_r2.npz": "d2a49c73bdf8ed34ac3528081f8cf5cb086159cb0344c0ae7c13aa9065e7d012",
+    "results/v5/d5/S_k2_s702_r2.npz": "d74d341841d616dbeb80b7262ce84155f78e24be4b6c1f137f88fba19d84e6d0",
+    "results/v5/d5/S_k2_s703_r2.npz": "8659e0bb184b9c0e6d0ed78c27d30342608a703ad4305a8f648dbf4fc78e71b0",
+    "results/v5/d5/S_k2_s704_r2.npz": "b985f4921496938d94a3de18971852f6f9d69ff917db27002ce750726f6842b9",
+    "results/v5/d5/S_k2_s705_r2.npz": "becdd1e938f9c6884e1583d833852ea477b8a8b4d563297edea57252c9052941",
+    "results/v5/rl/S_k2_rel_cfg6_sd711.npz": "16b23665ec7b9cd71d668855191646721ffb13d0fd2dc59e08bfdead30577c1c",
+    "results/v5/rl/S_k2_rel_cfg6_sd712.npz": "80ef506167c0f9d6fc7db35ef038f32283a32bc328b20e04c3a3af576fa319e4",
+    "results/v5/rl/S_k2_rel_cfg6_sd713.npz": "15c17a5130789266df651430d99ca1846e96400155d9c4ffb92c8311e062f283",
+    "results/v5/rl/S_k2_rel_cfg6_sd714.npz": "1234638f8b943b4e187a55d19cc4682811c300028cfabb7df6d279b3ec1a8cda",
+    "results/v5/rl/S_k2_rel_cfg6_sd715.npz": "5354b71d4dc4b1f0394ea136cbb71cf1dba7392d30297414ae67dcc8bf72e0cd",
+    "results/v5/rl/S_k2_rlsucc_cfg6_sd711.npz": "4eef2a389d029efe394e078e4530e4d9f82232969b426d2c7bf3ce904ece51f8",
+    "results/v5/rl/S_k2_rlsucc_cfg6_sd712.npz": "d44197064d35b8344371adfed121945ab4c5a602d1d0b714f6b40adee1a6cc47",
+    "results/v5/rl/S_k2_rlsucc_cfg6_sd713.npz": "1f78d1225304da872e228f6081c90fe423cce15c46a153bf2f73c13d8bfa6ac6",
+    "results/v5/rl/S_k2_rlsucc_cfg6_sd714.npz": "76d463b599edb00ee4eed84e204ff572c6126e57a94b20ee87fcf86cfdde3988",
+    "results/v5/rl/S_k2_rlsucc_cfg6_sd715.npz": "7136cdcfe07ab0a1a07a0199bca8656b6c4bd597df4fc772b2762d394526b210"
+   }
+  },
+  "S12": {
+   "sha256": {
+    "results/v5/d5/S_k12_s701_r2.npz": "51ec387987973d114d833651bdc1cc0f0a0071f35891340028e707781d44d048",
+    "results/v5/d5/S_k12_s702_r2.npz": "184e944bcda5c79438986004448977dc07e6d8ab8551530ca05c5931fa962848",
+    "results/v5/d5/S_k12_s703_r2.npz": "e69544078f9fd6b47c67b90990f077dbf39514f98b28d2a7789f49b0ec712c48",
+    "results/v5/d5/S_k12_s704_r2.npz": "e431a435fd96eb03d7d14f0b33b0b9a294edb1a60bf5a7efde48ec340b18ce9b",
+    "results/v5/d5/S_k12_s705_r2.npz": "d289acddd91d800fa673731067d50fd79fc232f7d12a18f80fdf39b3db53a0d0",
+    "results/v5/rl/S_k12_rel_cfg6_sd711.npz": "7e7e806a5f935816e4f13a67c7300d7ff4bcf1988b2007afb99da1a390c0d9f4",
+    "results/v5/rl/S_k12_rel_cfg6_sd712.npz": "017a160244f7e23f90a8908d2b4d479a289265c8b2f6576b8ddacaffab2cdb64",
+    "results/v5/rl/S_k12_rel_cfg6_sd713.npz": "eae5e316bcbeb73fde2ae7be972c9b3ddd36e4f45763ed1ad8952553404ca4e4",
+    "results/v5/rl/S_k12_rel_cfg6_sd714.npz": "811a1d938a1e5612786b94f5624fc916797b3b58e007308354a5a08da2384ae3",
+    "results/v5/rl/S_k12_rel_cfg6_sd715.npz": "c432c8a2009ef62cc020ecf1636547de8794f7d0e124aa15bfeb4b6aa5988334",
+    "results/v5/rl/S_k12_rlsucc_cfg6_sd711.npz": "13cc887ef61b813580ffca6ebdd73b493242e17427a0418fed4c6f823ad837f5",
+    "results/v5/rl/S_k12_rlsucc_cfg6_sd712.npz": "58ef61886f0275cbc3f2128e8bc12fc1e8ab528da7c7524299ad66274888b40f",
+    "results/v5/rl/S_k12_rlsucc_cfg6_sd713.npz": "a0081bce317127a809ebc277c83c6a452b79a8773a7f2042738303dfac9ae780",
+    "results/v5/rl/S_k12_rlsucc_cfg6_sd714.npz": "933e5cb405cfe2f3faa7de2b54e61938e16600ecbc8e1fd34ccdbf5b49615e06",
+    "results/v5/rl/S_k12_rlsucc_cfg6_sd715.npz": "f86b8b0b4abf46e2e3978179c31aa53ada3cba5c5a45a9cc3c42f4f6ef9f58d7"
+   }
+  }
+ }
+}

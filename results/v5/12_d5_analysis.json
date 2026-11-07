@@ -1,0 +1,122 @@
+{
+ "S2": {
+  "cell": "S2",
+  "n_episodes": 500,
+  "complete": true,
+  "delta": 0.04,
+  "gstar_source": "v4/d4_val/S_k2_gstar_*.jsonl",
+  "succ": {
+   "delta_hat": -0.03279999999999999,
+   "se": 0.021889487848952265,
+   "threshold": -0.014538352290227253,
+   "passes": false,
+   "student_mean": 0.4812,
+   "gstar_mean": 0.514,
+   "per_seed": {
+    "701": -0.044,
+    "702": -0.028,
+    "703": -0.014,
+    "704": -0.04,
+    "705": -0.038
+   }
+  },
+  "bi": {
+   "delta_hat": -0.06820311567557115,
+   "se": 0.035178689524603436,
+   "threshold": -0.15,
+   "passes": true,
+   "student_mean": 6.5992305923460215,
+   "gstar_mean": 6.6674337080215915,
+   "per_seed": {
+    "701": -0.09660690216961854,
+    "702": -0.075766967092135,
+    "703": -0.06047320093360096,
+    "704": -0.05232347605368945,
+    "705": -0.05584503212881191
+   }
+  },
+  "seeds_ok": {
+   "701": false,
+   "702": true,
+   "703": true,
+   "704": false,
+   "705": true
+  },
+  "passes": false,
+  "gstar_mean_travel_rad": 0.8252424997761877
+ },
+ "S4": {
+  "cell": "S4",
+  "n_episodes": 0,
+  "complete": false,
+  "delta": 0.04,
+  "gstar_source": "v5/d5_val"
+ },
+ "S8": {
+  "cell": "S8",
+  "n_episodes": 0,
+  "complete": false,
+  "delta": 0.04,
+  "gstar_source": "v5/d5_val"
+ },
+ "S12": {
+  "cell": "S12",
+  "n_episodes": 500,
+  "complete": true,
+  "delta": 0.04,
+  "gstar_source": "v3/d3_val/S_k12_gstar_*.jsonl",
+  "succ": {
+   "delta_hat": -0.0324,
+   "se": 0.019582975029466293,
+   "threshold": -0.017221266447610677,
+   "passes": false,
+   "student_mean": 0.4136,
+   "gstar_mean": 0.446,
+   "per_seed": {
+    "701": -0.01,
+    "702": -0.024,
+    "703": -0.046,
+    "704": -0.024,
+    "705": -0.058
+   }
+  },
+  "bi": {
+   "delta_hat": -0.06347759156954644,
+   "se": 0.02998660714210269,
+   "threshold": -0.15,
+   "passes": true,
+   "student_mean": 6.317336385913268,
+   "gstar_mean": 6.3808139774828145,
+   "per_seed": {
+    "701": -0.06585720936012192,
+    "702": -0.03507211317665099,
+    "703": -0.03175527069453238,
+    "704": -0.07524492303459449,
+    "705": -0.1094584415818323
+   }
+  },
+  "seeds_ok": {
+   "701": true,
+   "702": true,
+   "703": false,
+   "704": true,
+   "705": false
+  },
+  "passes": false,
+  "gstar_mean_travel_rad": 0.1069752127906285
+ },
+ "A16-2": {
+  "cell": "A16-2",
+  "n_episodes": 0,
+  "complete": false,
+  "delta": 0.04,
+  "gstar_source": "v5/d5_val"
+ },
+ "H5a_validation": {
+  "cells_complete": [
+   "S2",
+   "S12"
+  ],
+  "cells_pass": []
+ }
+}
