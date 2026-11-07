@@ -1,0 +1,49 @@
+{
+ "purpose": "v5 E7 follow-up (run 33): the 11 S2 C1-512 beliefs stopped by the 60-min time guard, one belief per job, 90-min budget; identical commands otherwise (amendment v5.1d)",
+ "jobs": [
+  {
+   "id": "v5_e7_S2_c512_f1_006",
+   "cmd": "python main.py g2v3 --set S --kappa 2 --tau 4.7 --n-star 4 --start 6 --count 1 --C1 512 --indep-M 256 --budget-minutes 90 --out ../results/v5/e7/S_k2_c512_f1_006"
+  },
+  {
+   "id": "v5_e7_S2_c512_f1_007",
+   "cmd": "python main.py g2v3 --set S --kappa 2 --tau 4.7 --n-star 4 --start 7 --count 1 --C1 512 --indep-M 256 --budget-minutes 90 --out ../results/v5/e7/S_k2_c512_f1_007"
+  },
+  {
+   "id": "v5_e7_S2_c512_f1_011",
+   "cmd": "python main.py g2v3 --set S --kappa 2 --tau 4.7 --n-star 4 --start 11 --count 1 --C1 512 --indep-M 256 --budget-minutes 90 --out ../results/v5/e7/S_k2_c512_f1_011"
+  },
+  {
+   "id": "v5_e7_S2_c512_f1_012",
+   "cmd": "python main.py g2v3 --set S --kappa 2 --tau 4.7 --n-star 4 --start 12 --count 1 --C1 512 --indep-M 256 --budget-minutes 90 --out ../results/v5/e7/S_k2_c512_f1_012"
+  },
+  {
+   "id": "v5_e7_S2_c512_f1_013",
+   "cmd": "python main.py g2v3 --set S --kappa 2 --tau 4.7 --n-star 4 --start 13 --count 1 --C1 512 --indep-M 256 --budget-minutes 90 --out ../results/v5/e7/S_k2_c512_f1_013"
+  },
+  {
+   "id": "v5_e7_S2_c512_f1_014",
+   "cmd": "python main.py g2v3 --set S --kappa 2 --tau 4.7 --n-star 4 --start 14 --count 1 --C1 512 --indep-M 256 --budget-minutes 90 --out ../results/v5/e7/S_k2_c512_f1_014"
+  },
+  {
+   "id": "v5_e7_S2_c512_f1_015",
+   "cmd": "python main.py g2v3 --set S --kappa 2 --tau 4.7 --n-star 4 --start 15 --count 1 --C1 512 --indep-M 256 --budget-minutes 90 --out ../results/v5/e7/S_k2_c512_f1_015"
+  },
+  {
+   "id": "v5_e7_S2_c512_f1_020",
+   "cmd": "python main.py g2v3 --set S --kappa 2 --tau 4.7 --n-star 4 --start 20 --count 1 --C1 512 --indep-M 256 --budget-minutes 90 --out ../results/v5/e7/S_k2_c512_f1_020"
+  },
+  {
+   "id": "v5_e7_S2_c512_f1_021",
+   "cmd": "python main.py g2v3 --set S --kappa 2 --tau 4.7 --n-star 4 --start 21 --count 1 --C1 512 --indep-M 256 --budget-minutes 90 --out ../results/v5/e7/S_k2_c512_f1_021"
+  },
+  {
+   "id": "v5_e7_S2_c512_f1_022",
+   "cmd": "python main.py g2v3 --set S --kappa 2 --tau 4.7 --n-star 4 --start 22 --count 1 --C1 512 --indep-M 256 --budget-minutes 90 --out ../results/v5/e7/S_k2_c512_f1_022"
+  },
+  {
+   "id": "v5_e7_S2_c512_f1_023",
+   "cmd": "python main.py g2v3 --set S --kappa 2 --tau 4.7 --n-star 4 --start 23 --count 1 --C1 512 --indep-M 256 --budget-minutes 90 --out ../results/v5/e7/S_k2_c512_f1_023"
+  }
+ ]
+}
