@@ -1,0 +1,14 @@
+{"header": true, "args": {"cmd": "gt3", "src": ["/home/claude/paper-writing/code/../results/v5/test5/S_k12_rlsucc_s713_200.jsonl"], "J": 16, "L": 4095, "out": "/home/claude/paper-writing/code/../results/v5/test5_gt/.S_k12_rlsucc_s713_200"}, "env": {"TOUCHBED_NPHI": "64", "action_set": "64x8", "A": 512, "numpy": "2.5.3", "python": "3.13.18", "threads": {"OMP_NUM_THREADS": "1", "OPENBLAS_NUM_THREADS": "1", "MKL_NUM_THREADS": "1"}}}
+{"episode": 200, "set": "S", "split": "test5", "kappa": 12.0, "tau": 4.9, "method": "rl", "g_T": 4.739269793349658, "n_probes": 4, "J": 16, "L": 4095}
+{"episode": 201, "set": "S", "split": "test5", "kappa": 12.0, "tau": 4.9, "method": "rl", "g_T": 5.489483289632698, "n_probes": 3, "J": 16, "L": 4095}
+{"episode": 202, "set": "S", "split": "test5", "kappa": 12.0, "tau": 4.9, "method": "rl", "g_T": -4.319055824133438, "n_probes": 3, "J": 16, "L": 4095}
+{"episode": 203, "set": "S", "split": "test5", "kappa": 12.0, "tau": 4.9, "method": "rl", "g_T": 5.011133068777274, "n_probes": 3, "J": 16, "L": 4095}
+{"episode": 204, "set": "S", "split": "test5", "kappa": 12.0, "tau": 4.9, "method": "rl", "g_T": 8.317739236509558, "n_probes": 4, "J": 16, "L": 4095}
+{"episode": 205, "set": "S", "split": "test5", "kappa": 12.0, "tau": 4.9, "method": "rl", "g_T": 6.478626210162032, "n_probes": 4, "J": 16, "L": 4095}
+{"episode": 206, "set": "S", "split": "test5", "kappa": 12.0, "tau": 4.9, "method": "rl", "g_T": 7.9834694648759275, "n_probes": 4, "J": 16, "L": 4095}
+{"episode": 207, "set": "S", "split": "test5", "kappa": 12.0, "tau": 4.9, "method": "rl", "g_T": 1.3591090933828855, "n_probes": 4, "J": 16, "L": 4095}
+{"episode": 208, "set": "S", "split": "test5", "kappa": 12.0, "tau": 4.9, "method": "rl", "g_T": -2.389259993267517, "n_probes": 4, "J": 16, "L": 4095}
+{"episode": 209, "set": "S", "split": "test5", "kappa": 12.0, "tau": 4.9, "method": "rl", "g_T": 2.642428794433645, "n_probes": 4, "J": 16, "L": 4095}
+{"episode": 210, "set": "S", "split": "test5", "kappa": 12.0, "tau": 4.9, "method": "rl", "g_T": 3.5927097701312434, "n_probes": 4, "J": 16, "L": 4095}
+{"episode": 211, "set": "S", "split": "test5", "kappa": 12.0, "tau": 4.9, "method": "rl", "g_T": 0.10764365649769303, "n_probes": 4, "J": 16, "L": 4095}
+{"episode": 212, "set": "S", "split": "test5", "kappa": 12.0, "tau": 4.9, "method": "rl", "g_T": 7.316846335688375, "n_probes": 3, "J": 16, "L": 4095}
