@@ -1,0 +1,405 @@
+{
+ "purpose": "v5 E2 dag1 for A16-2 (code/tools_v5_manifests.py; amendment v5.0/v5.1)",
+ "jobs": [
+  {
+   "id": "v5_dag_A16-2_s701_r1_000",
+   "cmd": "python main.py dagger3 --set A16 --kappa 2 --tau 3.4 --weights ../results/v5/d5/A16_k2_s701_r0.npz --seed 701 --round 1 --beta 0.5 --start 0 --count 40 --budget-minutes 25 --out ../results/v5/d5/A16_k2_s701_r1_000"
+  },
+  {
+   "id": "v5_dag_A16-2_s701_r1_040",
+   "cmd": "python main.py dagger3 --set A16 --kappa 2 --tau 3.4 --weights ../results/v5/d5/A16_k2_s701_r0.npz --seed 701 --round 1 --beta 0.5 --start 40 --count 40 --budget-minutes 25 --out ../results/v5/d5/A16_k2_s701_r1_040"
+  },
+  {
+   "id": "v5_dag_A16-2_s701_r1_080",
+   "cmd": "python main.py dagger3 --set A16 --kappa 2 --tau 3.4 --weights ../results/v5/d5/A16_k2_s701_r0.npz --seed 701 --round 1 --beta 0.5 --start 80 --count 40 --budget-minutes 25 --out ../results/v5/d5/A16_k2_s701_r1_080"
+  },
+  {
+   "id": "v5_dag_A16-2_s701_r1_120",
+   "cmd": "python main.py dagger3 --set A16 --kappa 2 --tau 3.4 --weights ../results/v5/d5/A16_k2_s701_r0.npz --seed 701 --round 1 --beta 0.5 --start 120 --count 40 --budget-minutes 25 --out ../results/v5/d5/A16_k2_s701_r1_120"
+  },
+  {
+   "id": "v5_dag_A16-2_s701_r1_160",
+   "cmd": "python main.py dagger3 --set A16 --kappa 2 --tau 3.4 --weights ../results/v5/d5/A16_k2_s701_r0.npz --seed 701 --round 1 --beta 0.5 --start 160 --count 40 --budget-minutes 25 --out ../results/v5/d5/A16_k2_s701_r1_160"
+  },
+  {
+   "id": "v5_dag_A16-2_s701_r1_200",
+   "cmd": "python main.py dagger3 --set A16 --kappa 2 --tau 3.4 --weights ../results/v5/d5/A16_k2_s701_r0.npz --seed 701 --round 1 --beta 0.5 --start 200 --count 40 --budget-minutes 25 --out ../results/v5/d5/A16_k2_s701_r1_200"
+  },
+  {
+   "id": "v5_dag_A16-2_s701_r1_240",
+   "cmd": "python main.py dagger3 --set A16 --kappa 2 --tau 3.4 --weights ../results/v5/d5/A16_k2_s701_r0.npz --seed 701 --round 1 --beta 0.5 --start 240 --count 40 --budget-minutes 25 --out ../results/v5/d5/A16_k2_s701_r1_240"
+  },
+  {
+   "id": "v5_dag_A16-2_s701_r1_280",
+   "cmd": "python main.py dagger3 --set A16 --kappa 2 --tau 3.4 --weights ../results/v5/d5/A16_k2_s701_r0.npz --seed 701 --round 1 --beta 0.5 --start 280 --count 40 --budget-minutes 25 --out ../results/v5/d5/A16_k2_s701_r1_280"
+  },
+  {
+   "id": "v5_dag_A16-2_s701_r1_320",
+   "cmd": "python main.py dagger3 --set A16 --kappa 2 --tau 3.4 --weights ../results/v5/d5/A16_k2_s701_r0.npz --seed 701 --round 1 --beta 0.5 --start 320 --count 40 --budget-minutes 25 --out ../results/v5/d5/A16_k2_s701_r1_320"
+  },
+  {
+   "id": "v5_dag_A16-2_s701_r1_360",
+   "cmd": "python main.py dagger3 --set A16 --kappa 2 --tau 3.4 --weights ../results/v5/d5/A16_k2_s701_r0.npz --seed 701 --round 1 --beta 0.5 --start 360 --count 40 --budget-minutes 25 --out ../results/v5/d5/A16_k2_s701_r1_360"
+  },
+  {
+   "id": "v5_dag_A16-2_s701_r1_400",
+   "cmd": "python main.py dagger3 --set A16 --kappa 2 --tau 3.4 --weights ../results/v5/d5/A16_k2_s701_r0.npz --seed 701 --round 1 --beta 0.5 --start 400 --count 40 --budget-minutes 25 --out ../results/v5/d5/A16_k2_s701_r1_400"
+  },
+  {
+   "id": "v5_dag_A16-2_s701_r1_440",
+   "cmd": "python main.py dagger3 --set A16 --kappa 2 --tau 3.4 --weights ../results/v5/d5/A16_k2_s701_r0.npz --seed 701 --round 1 --beta 0.5 --start 440 --count 40 --budget-minutes 25 --out ../results/v5/d5/A16_k2_s701_r1_440"
+  },
+  {
+   "id": "v5_dag_A16-2_s701_r1_480",
+   "cmd": "python main.py dagger3 --set A16 --kappa 2 --tau 3.4 --weights ../results/v5/d5/A16_k2_s701_r0.npz --seed 701 --round 1 --beta 0.5 --start 480 --count 40 --budget-minutes 25 --out ../results/v5/d5/A16_k2_s701_r1_480"
+  },
+  {
+   "id": "v5_dag_A16-2_s701_r1_520",
+   "cmd": "python main.py dagger3 --set A16 --kappa 2 --tau 3.4 --weights ../results/v5/d5/A16_k2_s701_r0.npz --seed 701 --round 1 --beta 0.5 --start 520 --count 40 --budget-minutes 25 --out ../results/v5/d5/A16_k2_s701_r1_520"
+  },
+  {
+   "id": "v5_dag_A16-2_s701_r1_560",
+   "cmd": "python main.py dagger3 --set A16 --kappa 2 --tau 3.4 --weights ../results/v5/d5/A16_k2_s701_r0.npz --seed 701 --round 1 --beta 0.5 --start 560 --count 40 --budget-minutes 25 --out ../results/v5/d5/A16_k2_s701_r1_560"
+  },
+  {
+   "id": "v5_dag_A16-2_s701_r1_600",
+   "cmd": "python main.py dagger3 --set A16 --kappa 2 --tau 3.4 --weights ../results/v5/d5/A16_k2_s701_r0.npz --seed 701 --round 1 --beta 0.5 --start 600 --count 40 --budget-minutes 25 --out ../results/v5/d5/A16_k2_s701_r1_600"
+  },
+  {
+   "id": "v5_dag_A16-2_s701_r1_640",
+   "cmd": "python main.py dagger3 --set A16 --kappa 2 --tau 3.4 --weights ../results/v5/d5/A16_k2_s701_r0.npz --seed 701 --round 1 --beta 0.5 --start 640 --count 40 --budget-minutes 25 --out ../results/v5/d5/A16_k2_s701_r1_640"
+  },
+  {
+   "id": "v5_dag_A16-2_s701_r1_680",
+   "cmd": "python main.py dagger3 --set A16 --kappa 2 --tau 3.4 --weights ../results/v5/d5/A16_k2_s701_r0.npz --seed 701 --round 1 --beta 0.5 --start 680 --count 40 --budget-minutes 25 --out ../results/v5/d5/A16_k2_s701_r1_680"
+  },
+  {
+   "id": "v5_dag_A16-2_s701_r1_720",
+   "cmd": "python main.py dagger3 --set A16 --kappa 2 --tau 3.4 --weights ../results/v5/d5/A16_k2_s701_r0.npz --seed 701 --round 1 --beta 0.5 --start 720 --count 40 --budget-minutes 25 --out ../results/v5/d5/A16_k2_s701_r1_720"
+  },
+  {
+   "id": "v5_dag_A16-2_s701_r1_760",
+   "cmd": "python main.py dagger3 --set A16 --kappa 2 --tau 3.4 --weights ../results/v5/d5/A16_k2_s701_r0.npz --seed 701 --round 1 --beta 0.5 --start 760 --count 40 --budget-minutes 25 --out ../results/v5/d5/A16_k2_s701_r1_760"
+  },
+  {
+   "id": "v5_dag_A16-2_s702_r1_000",
+   "cmd": "python main.py dagger3 --set A16 --kappa 2 --tau 3.4 --weights ../results/v5/d5/A16_k2_s702_r0.npz --seed 702 --round 1 --beta 0.5 --start 0 --count 40 --budget-minutes 25 --out ../results/v5/d5/A16_k2_s702_r1_000"
+  },
+  {
+   "id": "v5_dag_A16-2_s702_r1_040",
+   "cmd": "python main.py dagger3 --set A16 --kappa 2 --tau 3.4 --weights ../results/v5/d5/A16_k2_s702_r0.npz --seed 702 --round 1 --beta 0.5 --start 40 --count 40 --budget-minutes 25 --out ../results/v5/d5/A16_k2_s702_r1_040"
+  },
+  {
+   "id": "v5_dag_A16-2_s702_r1_080",
+   "cmd": "python main.py dagger3 --set A16 --kappa 2 --tau 3.4 --weights ../results/v5/d5/A16_k2_s702_r0.npz --seed 702 --round 1 --beta 0.5 --start 80 --count 40 --budget-minutes 25 --out ../results/v5/d5/A16_k2_s702_r1_080"
+  },
+  {
+   "id": "v5_dag_A16-2_s702_r1_120",
+   "cmd": "python main.py dagger3 --set A16 --kappa 2 --tau 3.4 --weights ../results/v5/d5/A16_k2_s702_r0.npz --seed 702 --round 1 --beta 0.5 --start 120 --count 40 --budget-minutes 25 --out ../results/v5/d5/A16_k2_s702_r1_120"
+  },
+  {
+   "id": "v5_dag_A16-2_s702_r1_160",
+   "cmd": "python main.py dagger3 --set A16 --kappa 2 --tau 3.4 --weights ../results/v5/d5/A16_k2_s702_r0.npz --seed 702 --round 1 --beta 0.5 --start 160 --count 40 --budget-minutes 25 --out ../results/v5/d5/A16_k2_s702_r1_160"
+  },
+  {
+   "id": "v5_dag_A16-2_s702_r1_200",
+   "cmd": "python main.py dagger3 --set A16 --kappa 2 --tau 3.4 --weights ../results/v5/d5/A16_k2_s702_r0.npz --seed 702 --round 1 --beta 0.5 --start 200 --count 40 --budget-minutes 25 --out ../results/v5/d5/A16_k2_s702_r1_200"
+  },
+  {
+   "id": "v5_dag_A16-2_s702_r1_240",
+   "cmd": "python main.py dagger3 --set A16 --kappa 2 --tau 3.4 --weights ../results/v5/d5/A16_k2_s702_r0.npz --seed 702 --round 1 --beta 0.5 --start 240 --count 40 --budget-minutes 25 --out ../results/v5/d5/A16_k2_s702_r1_240"
+  },
+  {
+   "id": "v5_dag_A16-2_s702_r1_280",
+   "cmd": "python main.py dagger3 --set A16 --kappa 2 --tau 3.4 --weights ../results/v5/d5/A16_k2_s702_r0.npz --seed 702 --round 1 --beta 0.5 --start 280 --count 40 --budget-minutes 25 --out ../results/v5/d5/A16_k2_s702_r1_280"
+  },
+  {
+   "id": "v5_dag_A16-2_s702_r1_320",
+   "cmd": "python main.py dagger3 --set A16 --kappa 2 --tau 3.4 --weights ../results/v5/d5/A16_k2_s702_r0.npz --seed 702 --round 1 --beta 0.5 --start 320 --count 40 --budget-minutes 25 --out ../results/v5/d5/A16_k2_s702_r1_320"
+  },
+  {
+   "id": "v5_dag_A16-2_s702_r1_360",
+   "cmd": "python main.py dagger3 --set A16 --kappa 2 --tau 3.4 --weights ../results/v5/d5/A16_k2_s702_r0.npz --seed 702 --round 1 --beta 0.5 --start 360 --count 40 --budget-minutes 25 --out ../results/v5/d5/A16_k2_s702_r1_360"
+  },
+  {
+   "id": "v5_dag_A16-2_s702_r1_400",
+   "cmd": "python main.py dagger3 --set A16 --kappa 2 --tau 3.4 --weights ../results/v5/d5/A16_k2_s702_r0.npz --seed 702 --round 1 --beta 0.5 --start 400 --count 40 --budget-minutes 25 --out ../results/v5/d5/A16_k2_s702_r1_400"
+  },
+  {
+   "id": "v5_dag_A16-2_s702_r1_440",
+   "cmd": "python main.py dagger3 --set A16 --kappa 2 --tau 3.4 --weights ../results/v5/d5/A16_k2_s702_r0.npz --seed 702 --round 1 --beta 0.5 --start 440 --count 40 --budget-minutes 25 --out ../results/v5/d5/A16_k2_s702_r1_440"
+  },
+  {
+   "id": "v5_dag_A16-2_s702_r1_480",
+   "cmd": "python main.py dagger3 --set A16 --kappa 2 --tau 3.4 --weights ../results/v5/d5/A16_k2_s702_r0.npz --seed 702 --round 1 --beta 0.5 --start 480 --count 40 --budget-minutes 25 --out ../results/v5/d5/A16_k2_s702_r1_480"
+  },
+  {
+   "id": "v5_dag_A16-2_s702_r1_520",
+   "cmd": "python main.py dagger3 --set A16 --kappa 2 --tau 3.4 --weights ../results/v5/d5/A16_k2_s702_r0.npz --seed 702 --round 1 --beta 0.5 --start 520 --count 40 --budget-minutes 25 --out ../results/v5/d5/A16_k2_s702_r1_520"
+  },
+  {
+   "id": "v5_dag_A16-2_s702_r1_560",
+   "cmd": "python main.py dagger3 --set A16 --kappa 2 --tau 3.4 --weights ../results/v5/d5/A16_k2_s702_r0.npz --seed 702 --round 1 --beta 0.5 --start 560 --count 40 --budget-minutes 25 --out ../results/v5/d5/A16_k2_s702_r1_560"
+  },
+  {
+   "id": "v5_dag_A16-2_s702_r1_600",
+   "cmd": "python main.py dagger3 --set A16 --kappa 2 --tau 3.4 --weights ../results/v5/d5/A16_k2_s702_r0.npz --seed 702 --round 1 --beta 0.5 --start 600 --count 40 --budget-minutes 25 --out ../results/v5/d5/A16_k2_s702_r1_600"
+  },
+  {
+   "id": "v5_dag_A16-2_s702_r1_640",
+   "cmd": "python main.py dagger3 --set A16 --kappa 2 --tau 3.4 --weights ../results/v5/d5/A16_k2_s702_r0.npz --seed 702 --round 1 --beta 0.5 --start 640 --count 40 --budget-minutes 25 --out ../results/v5/d5/A16_k2_s702_r1_640"
+  },
+  {
+   "id": "v5_dag_A16-2_s702_r1_680",
+   "cmd": "python main.py dagger3 --set A16 --kappa 2 --tau 3.4 --weights ../results/v5/d5/A16_k2_s702_r0.npz --seed 702 --round 1 --beta 0.5 --start 680 --count 40 --budget-minutes 25 --out ../results/v5/d5/A16_k2_s702_r1_680"
+  },
+  {
+   "id": "v5_dag_A16-2_s702_r1_720",
+   "cmd": "python main.py dagger3 --set A16 --kappa 2 --tau 3.4 --weights ../results/v5/d5/A16_k2_s702_r0.npz --seed 702 --round 1 --beta 0.5 --start 720 --count 40 --budget-minutes 25 --out ../results/v5/d5/A16_k2_s702_r1_720"
+  },
+  {
+   "id": "v5_dag_A16-2_s702_r1_760",
+   "cmd": "python main.py dagger3 --set A16 --kappa 2 --tau 3.4 --weights ../results/v5/d5/A16_k2_s702_r0.npz --seed 702 --round 1 --beta 0.5 --start 760 --count 40 --budget-minutes 25 --out ../results/v5/d5/A16_k2_s702_r1_760"
+  },
+  {
+   "id": "v5_dag_A16-2_s703_r1_000",
+   "cmd": "python main.py dagger3 --set A16 --kappa 2 --tau 3.4 --weights ../results/v5/d5/A16_k2_s703_r0.npz --seed 703 --round 1 --beta 0.5 --start 0 --count 40 --budget-minutes 25 --out ../results/v5/d5/A16_k2_s703_r1_000"
+  },
+  {
+   "id": "v5_dag_A16-2_s703_r1_040",
+   "cmd": "python main.py dagger3 --set A16 --kappa 2 --tau 3.4 --weights ../results/v5/d5/A16_k2_s703_r0.npz --seed 703 --round 1 --beta 0.5 --start 40 --count 40 --budget-minutes 25 --out ../results/v5/d5/A16_k2_s703_r1_040"
+  },
+  {
+   "id": "v5_dag_A16-2_s703_r1_080",
+   "cmd": "python main.py dagger3 --set A16 --kappa 2 --tau 3.4 --weights ../results/v5/d5/A16_k2_s703_r0.npz --seed 703 --round 1 --beta 0.5 --start 80 --count 40 --budget-minutes 25 --out ../results/v5/d5/A16_k2_s703_r1_080"
+  },
+  {
+   "id": "v5_dag_A16-2_s703_r1_120",
+   "cmd": "python main.py dagger3 --set A16 --kappa 2 --tau 3.4 --weights ../results/v5/d5/A16_k2_s703_r0.npz --seed 703 --round 1 --beta 0.5 --start 120 --count 40 --budget-minutes 25 --out ../results/v5/d5/A16_k2_s703_r1_120"
+  },
+  {
+   "id": "v5_dag_A16-2_s703_r1_160",
+   "cmd": "python main.py dagger3 --set A16 --kappa 2 --tau 3.4 --weights ../results/v5/d5/A16_k2_s703_r0.npz --seed 703 --round 1 --beta 0.5 --start 160 --count 40 --budget-minutes 25 --out ../results/v5/d5/A16_k2_s703_r1_160"
+  },
+  {
+   "id": "v5_dag_A16-2_s703_r1_200",
+   "cmd": "python main.py dagger3 --set A16 --kappa 2 --tau 3.4 --weights ../results/v5/d5/A16_k2_s703_r0.npz --seed 703 --round 1 --beta 0.5 --start 200 --count 40 --budget-minutes 25 --out ../results/v5/d5/A16_k2_s703_r1_200"
+  },
+  {
+   "id": "v5_dag_A16-2_s703_r1_240",
+   "cmd": "python main.py dagger3 --set A16 --kappa 2 --tau 3.4 --weights ../results/v5/d5/A16_k2_s703_r0.npz --seed 703 --round 1 --beta 0.5 --start 240 --count 40 --budget-minutes 25 --out ../results/v5/d5/A16_k2_s703_r1_240"
+  },
+  {
+   "id": "v5_dag_A16-2_s703_r1_280",
+   "cmd": "python main.py dagger3 --set A16 --kappa 2 --tau 3.4 --weights ../results/v5/d5/A16_k2_s703_r0.npz --seed 703 --round 1 --beta 0.5 --start 280 --count 40 --budget-minutes 25 --out ../results/v5/d5/A16_k2_s703_r1_280"
+  },
+  {
+   "id": "v5_dag_A16-2_s703_r1_320",
+   "cmd": "python main.py dagger3 --set A16 --kappa 2 --tau 3.4 --weights ../results/v5/d5/A16_k2_s703_r0.npz --seed 703 --round 1 --beta 0.5 --start 320 --count 40 --budget-minutes 25 --out ../results/v5/d5/A16_k2_s703_r1_320"
+  },
+  {
+   "id": "v5_dag_A16-2_s703_r1_360",
+   "cmd": "python main.py dagger3 --set A16 --kappa 2 --tau 3.4 --weights ../results/v5/d5/A16_k2_s703_r0.npz --seed 703 --round 1 --beta 0.5 --start 360 --count 40 --budget-minutes 25 --out ../results/v5/d5/A16_k2_s703_r1_360"
+  },
+  {
+   "id": "v5_dag_A16-2_s703_r1_400",
+   "cmd": "python main.py dagger3 --set A16 --kappa 2 --tau 3.4 --weights ../results/v5/d5/A16_k2_s703_r0.npz --seed 703 --round 1 --beta 0.5 --start 400 --count 40 --budget-minutes 25 --out ../results/v5/d5/A16_k2_s703_r1_400"
+  },
+  {
+   "id": "v5_dag_A16-2_s703_r1_440",
+   "cmd": "python main.py dagger3 --set A16 --kappa 2 --tau 3.4 --weights ../results/v5/d5/A16_k2_s703_r0.npz --seed 703 --round 1 --beta 0.5 --start 440 --count 40 --budget-minutes 25 --out ../results/v5/d5/A16_k2_s703_r1_440"
+  },
+  {
+   "id": "v5_dag_A16-2_s703_r1_480",
+   "cmd": "python main.py dagger3 --set A16 --kappa 2 --tau 3.4 --weights ../results/v5/d5/A16_k2_s703_r0.npz --seed 703 --round 1 --beta 0.5 --start 480 --count 40 --budget-minutes 25 --out ../results/v5/d5/A16_k2_s703_r1_480"
+  },
+  {
+   "id": "v5_dag_A16-2_s703_r1_520",
+   "cmd": "python main.py dagger3 --set A16 --kappa 2 --tau 3.4 --weights ../results/v5/d5/A16_k2_s703_r0.npz --seed 703 --round 1 --beta 0.5 --start 520 --count 40 --budget-minutes 25 --out ../results/v5/d5/A16_k2_s703_r1_520"
+  },
+  {
+   "id": "v5_dag_A16-2_s703_r1_560",
+   "cmd": "python main.py dagger3 --set A16 --kappa 2 --tau 3.4 --weights ../results/v5/d5/A16_k2_s703_r0.npz --seed 703 --round 1 --beta 0.5 --start 560 --count 40 --budget-minutes 25 --out ../results/v5/d5/A16_k2_s703_r1_560"
+  },
+  {
+   "id": "v5_dag_A16-2_s703_r1_600",
+   "cmd": "python main.py dagger3 --set A16 --kappa 2 --tau 3.4 --weights ../results/v5/d5/A16_k2_s703_r0.npz --seed 703 --round 1 --beta 0.5 --start 600 --count 40 --budget-minutes 25 --out ../results/v5/d5/A16_k2_s703_r1_600"
+  },
+  {
+   "id": "v5_dag_A16-2_s703_r1_640",
+   "cmd": "python main.py dagger3 --set A16 --kappa 2 --tau 3.4 --weights ../results/v5/d5/A16_k2_s703_r0.npz --seed 703 --round 1 --beta 0.5 --start 640 --count 40 --budget-minutes 25 --out ../results/v5/d5/A16_k2_s703_r1_640"
+  },
+  {
+   "id": "v5_dag_A16-2_s703_r1_680",
+   "cmd": "python main.py dagger3 --set A16 --kappa 2 --tau 3.4 --weights ../results/v5/d5/A16_k2_s703_r0.npz --seed 703 --round 1 --beta 0.5 --start 680 --count 40 --budget-minutes 25 --out ../results/v5/d5/A16_k2_s703_r1_680"
+  },
+  {
+   "id": "v5_dag_A16-2_s703_r1_720",
+   "cmd": "python main.py dagger3 --set A16 --kappa 2 --tau 3.4 --weights ../results/v5/d5/A16_k2_s703_r0.npz --seed 703 --round 1 --beta 0.5 --start 720 --count 40 --budget-minutes 25 --out ../results/v5/d5/A16_k2_s703_r1_720"
+  },
+  {
+   "id": "v5_dag_A16-2_s703_r1_760",
+   "cmd": "python main.py dagger3 --set A16 --kappa 2 --tau 3.4 --weights ../results/v5/d5/A16_k2_s703_r0.npz --seed 703 --round 1 --beta 0.5 --start 760 --count 40 --budget-minutes 25 --out ../results/v5/d5/A16_k2_s703_r1_760"
+  },
+  {
+   "id": "v5_dag_A16-2_s704_r1_000",
+   "cmd": "python main.py dagger3 --set A16 --kappa 2 --tau 3.4 --weights ../results/v5/d5/A16_k2_s704_r0.npz --seed 704 --round 1 --beta 0.5 --start 0 --count 40 --budget-minutes 25 --out ../results/v5/d5/A16_k2_s704_r1_000"
+  },
+  {
+   "id": "v5_dag_A16-2_s704_r1_040",
+   "cmd": "python main.py dagger3 --set A16 --kappa 2 --tau 3.4 --weights ../results/v5/d5/A16_k2_s704_r0.npz --seed 704 --round 1 --beta 0.5 --start 40 --count 40 --budget-minutes 25 --out ../results/v5/d5/A16_k2_s704_r1_040"
+  },
+  {
+   "id": "v5_dag_A16-2_s704_r1_080",
+   "cmd": "python main.py dagger3 --set A16 --kappa 2 --tau 3.4 --weights ../results/v5/d5/A16_k2_s704_r0.npz --seed 704 --round 1 --beta 0.5 --start 80 --count 40 --budget-minutes 25 --out ../results/v5/d5/A16_k2_s704_r1_080"
+  },
+  {
+   "id": "v5_dag_A16-2_s704_r1_120",
+   "cmd": "python main.py dagger3 --set A16 --kappa 2 --tau 3.4 --weights ../results/v5/d5/A16_k2_s704_r0.npz --seed 704 --round 1 --beta 0.5 --start 120 --count 40 --budget-minutes 25 --out ../results/v5/d5/A16_k2_s704_r1_120"
+  },
+  {
+   "id": "v5_dag_A16-2_s704_r1_160",
+   "cmd": "python main.py dagger3 --set A16 --kappa 2 --tau 3.4 --weights ../results/v5/d5/A16_k2_s704_r0.npz --seed 704 --round 1 --beta 0.5 --start 160 --count 40 --budget-minutes 25 --out ../results/v5/d5/A16_k2_s704_r1_160"
+  },
+  {
+   "id": "v5_dag_A16-2_s704_r1_200",
+   "cmd": "python main.py dagger3 --set A16 --kappa 2 --tau 3.4 --weights ../results/v5/d5/A16_k2_s704_r0.npz --seed 704 --round 1 --beta 0.5 --start 200 --count 40 --budget-minutes 25 --out ../results/v5/d5/A16_k2_s704_r1_200"
+  },
+  {
+   "id": "v5_dag_A16-2_s704_r1_240",
+   "cmd": "python main.py dagger3 --set A16 --kappa 2 --tau 3.4 --weights ../results/v5/d5/A16_k2_s704_r0.npz --seed 704 --round 1 --beta 0.5 --start 240 --count 40 --budget-minutes 25 --out ../results/v5/d5/A16_k2_s704_r1_240"
+  },
+  {
+   "id": "v5_dag_A16-2_s704_r1_280",
+   "cmd": "python main.py dagger3 --set A16 --kappa 2 --tau 3.4 --weights ../results/v5/d5/A16_k2_s704_r0.npz --seed 704 --round 1 --beta 0.5 --start 280 --count 40 --budget-minutes 25 --out ../results/v5/d5/A16_k2_s704_r1_280"
+  },
+  {
+   "id": "v5_dag_A16-2_s704_r1_320",
+   "cmd": "python main.py dagger3 --set A16 --kappa 2 --tau 3.4 --weights ../results/v5/d5/A16_k2_s704_r0.npz --seed 704 --round 1 --beta 0.5 --start 320 --count 40 --budget-minutes 25 --out ../results/v5/d5/A16_k2_s704_r1_320"
+  },
+  {
+   "id": "v5_dag_A16-2_s704_r1_360",
+   "cmd": "python main.py dagger3 --set A16 --kappa 2 --tau 3.4 --weights ../results/v5/d5/A16_k2_s704_r0.npz --seed 704 --round 1 --beta 0.5 --start 360 --count 40 --budget-minutes 25 --out ../results/v5/d5/A16_k2_s704_r1_360"
+  },
+  {
+   "id": "v5_dag_A16-2_s704_r1_400",
+   "cmd": "python main.py dagger3 --set A16 --kappa 2 --tau 3.4 --weights ../results/v5/d5/A16_k2_s704_r0.npz --seed 704 --round 1 --beta 0.5 --start 400 --count 40 --budget-minutes 25 --out ../results/v5/d5/A16_k2_s704_r1_400"
+  },
+  {
+   "id": "v5_dag_A16-2_s704_r1_440",
+   "cmd": "python main.py dagger3 --set A16 --kappa 2 --tau 3.4 --weights ../results/v5/d5/A16_k2_s704_r0.npz --seed 704 --round 1 --beta 0.5 --start 440 --count 40 --budget-minutes 25 --out ../results/v5/d5/A16_k2_s704_r1_440"
+  },
+  {
+   "id": "v5_dag_A16-2_s704_r1_480",
+   "cmd": "python main.py dagger3 --set A16 --kappa 2 --tau 3.4 --weights ../results/v5/d5/A16_k2_s704_r0.npz --seed 704 --round 1 --beta 0.5 --start 480 --count 40 --budget-minutes 25 --out ../results/v5/d5/A16_k2_s704_r1_480"
+  },
+  {
+   "id": "v5_dag_A16-2_s704_r1_520",
+   "cmd": "python main.py dagger3 --set A16 --kappa 2 --tau 3.4 --weights ../results/v5/d5/A16_k2_s704_r0.npz --seed 704 --round 1 --beta 0.5 --start 520 --count 40 --budget-minutes 25 --out ../results/v5/d5/A16_k2_s704_r1_520"
+  },
+  {
+   "id": "v5_dag_A16-2_s704_r1_560",
+   "cmd": "python main.py dagger3 --set A16 --kappa 2 --tau 3.4 --weights ../results/v5/d5/A16_k2_s704_r0.npz --seed 704 --round 1 --beta 0.5 --start 560 --count 40 --budget-minutes 25 --out ../results/v5/d5/A16_k2_s704_r1_560"
+  },
+  {
+   "id": "v5_dag_A16-2_s704_r1_600",
+   "cmd": "python main.py dagger3 --set A16 --kappa 2 --tau 3.4 --weights ../results/v5/d5/A16_k2_s704_r0.npz --seed 704 --round 1 --beta 0.5 --start 600 --count 40 --budget-minutes 25 --out ../results/v5/d5/A16_k2_s704_r1_600"
+  },
+  {
+   "id": "v5_dag_A16-2_s704_r1_640",
+   "cmd": "python main.py dagger3 --set A16 --kappa 2 --tau 3.4 --weights ../results/v5/d5/A16_k2_s704_r0.npz --seed 704 --round 1 --beta 0.5 --start 640 --count 40 --budget-minutes 25 --out ../results/v5/d5/A16_k2_s704_r1_640"
+  },
+  {
+   "id": "v5_dag_A16-2_s704_r1_680",
+   "cmd": "python main.py dagger3 --set A16 --kappa 2 --tau 3.4 --weights ../results/v5/d5/A16_k2_s704_r0.npz --seed 704 --round 1 --beta 0.5 --start 680 --count 40 --budget-minutes 25 --out ../results/v5/d5/A16_k2_s704_r1_680"
+  },
+  {
+   "id": "v5_dag_A16-2_s704_r1_720",
+   "cmd": "python main.py dagger3 --set A16 --kappa 2 --tau 3.4 --weights ../results/v5/d5/A16_k2_s704_r0.npz --seed 704 --round 1 --beta 0.5 --start 720 --count 40 --budget-minutes 25 --out ../results/v5/d5/A16_k2_s704_r1_720"
+  },
+  {
+   "id": "v5_dag_A16-2_s704_r1_760",
+   "cmd": "python main.py dagger3 --set A16 --kappa 2 --tau 3.4 --weights ../results/v5/d5/A16_k2_s704_r0.npz --seed 704 --round 1 --beta 0.5 --start 760 --count 40 --budget-minutes 25 --out ../results/v5/d5/A16_k2_s704_r1_760"
+  },
+  {
+   "id": "v5_dag_A16-2_s705_r1_000",
+   "cmd": "python main.py dagger3 --set A16 --kappa 2 --tau 3.4 --weights ../results/v5/d5/A16_k2_s705_r0.npz --seed 705 --round 1 --beta 0.5 --start 0 --count 40 --budget-minutes 25 --out ../results/v5/d5/A16_k2_s705_r1_000"
+  },
+  {
+   "id": "v5_dag_A16-2_s705_r1_040",
+   "cmd": "python main.py dagger3 --set A16 --kappa 2 --tau 3.4 --weights ../results/v5/d5/A16_k2_s705_r0.npz --seed 705 --round 1 --beta 0.5 --start 40 --count 40 --budget-minutes 25 --out ../results/v5/d5/A16_k2_s705_r1_040"
+  },
+  {
+   "id": "v5_dag_A16-2_s705_r1_080",
+   "cmd": "python main.py dagger3 --set A16 --kappa 2 --tau 3.4 --weights ../results/v5/d5/A16_k2_s705_r0.npz --seed 705 --round 1 --beta 0.5 --start 80 --count 40 --budget-minutes 25 --out ../results/v5/d5/A16_k2_s705_r1_080"
+  },
+  {
+   "id": "v5_dag_A16-2_s705_r1_120",
+   "cmd": "python main.py dagger3 --set A16 --kappa 2 --tau 3.4 --weights ../results/v5/d5/A16_k2_s705_r0.npz --seed 705 --round 1 --beta 0.5 --start 120 --count 40 --budget-minutes 25 --out ../results/v5/d5/A16_k2_s705_r1_120"
+  },
+  {
+   "id": "v5_dag_A16-2_s705_r1_160",
+   "cmd": "python main.py dagger3 --set A16 --kappa 2 --tau 3.4 --weights ../results/v5/d5/A16_k2_s705_r0.npz --seed 705 --round 1 --beta 0.5 --start 160 --count 40 --budget-minutes 25 --out ../results/v5/d5/A16_k2_s705_r1_160"
+  },
+  {
+   "id": "v5_dag_A16-2_s705_r1_200",
+   "cmd": "python main.py dagger3 --set A16 --kappa 2 --tau 3.4 --weights ../results/v5/d5/A16_k2_s705_r0.npz --seed 705 --round 1 --beta 0.5 --start 200 --count 40 --budget-minutes 25 --out ../results/v5/d5/A16_k2_s705_r1_200"
+  },
+  {
+   "id": "v5_dag_A16-2_s705_r1_240",
+   "cmd": "python main.py dagger3 --set A16 --kappa 2 --tau 3.4 --weights ../results/v5/d5/A16_k2_s705_r0.npz --seed 705 --round 1 --beta 0.5 --start 240 --count 40 --budget-minutes 25 --out ../results/v5/d5/A16_k2_s705_r1_240"
+  },
+  {
+   "id": "v5_dag_A16-2_s705_r1_280",
+   "cmd": "python main.py dagger3 --set A16 --kappa 2 --tau 3.4 --weights ../results/v5/d5/A16_k2_s705_r0.npz --seed 705 --round 1 --beta 0.5 --start 280 --count 40 --budget-minutes 25 --out ../results/v5/d5/A16_k2_s705_r1_280"
+  },
+  {
+   "id": "v5_dag_A16-2_s705_r1_320",
+   "cmd": "python main.py dagger3 --set A16 --kappa 2 --tau 3.4 --weights ../results/v5/d5/A16_k2_s705_r0.npz --seed 705 --round 1 --beta 0.5 --start 320 --count 40 --budget-minutes 25 --out ../results/v5/d5/A16_k2_s705_r1_320"
+  },
+  {
+   "id": "v5_dag_A16-2_s705_r1_360",
+   "cmd": "python main.py dagger3 --set A16 --kappa 2 --tau 3.4 --weights ../results/v5/d5/A16_k2_s705_r0.npz --seed 705 --round 1 --beta 0.5 --start 360 --count 40 --budget-minutes 25 --out ../results/v5/d5/A16_k2_s705_r1_360"
+  },
+  {
+   "id": "v5_dag_A16-2_s705_r1_400",
+   "cmd": "python main.py dagger3 --set A16 --kappa 2 --tau 3.4 --weights ../results/v5/d5/A16_k2_s705_r0.npz --seed 705 --round 1 --beta 0.5 --start 400 --count 40 --budget-minutes 25 --out ../results/v5/d5/A16_k2_s705_r1_400"
+  },
+  {
+   "id": "v5_dag_A16-2_s705_r1_440",
+   "cmd": "python main.py dagger3 --set A16 --kappa 2 --tau 3.4 --weights ../results/v5/d5/A16_k2_s705_r0.npz --seed 705 --round 1 --beta 0.5 --start 440 --count 40 --budget-minutes 25 --out ../results/v5/d5/A16_k2_s705_r1_440"
+  },
+  {
+   "id": "v5_dag_A16-2_s705_r1_480",
+   "cmd": "python main.py dagger3 --set A16 --kappa 2 --tau 3.4 --weights ../results/v5/d5/A16_k2_s705_r0.npz --seed 705 --round 1 --beta 0.5 --start 480 --count 40 --budget-minutes 25 --out ../results/v5/d5/A16_k2_s705_r1_480"
+  },
+  {
+   "id": "v5_dag_A16-2_s705_r1_520",
+   "cmd": "python main.py dagger3 --set A16 --kappa 2 --tau 3.4 --weights ../results/v5/d5/A16_k2_s705_r0.npz --seed 705 --round 1 --beta 0.5 --start 520 --count 40 --budget-minutes 25 --out ../results/v5/d5/A16_k2_s705_r1_520"
+  },
+  {
+   "id": "v5_dag_A16-2_s705_r1_560",
+   "cmd": "python main.py dagger3 --set A16 --kappa 2 --tau 3.4 --weights ../results/v5/d5/A16_k2_s705_r0.npz --seed 705 --round 1 --beta 0.5 --start 560 --count 40 --budget-minutes 25 --out ../results/v5/d5/A16_k2_s705_r1_560"
+  },
+  {
+   "id": "v5_dag_A16-2_s705_r1_600",
+   "cmd": "python main.py dagger3 --set A16 --kappa 2 --tau 3.4 --weights ../results/v5/d5/A16_k2_s705_r0.npz --seed 705 --round 1 --beta 0.5 --start 600 --count 40 --budget-minutes 25 --out ../results/v5/d5/A16_k2_s705_r1_600"
+  },
+  {
+   "id": "v5_dag_A16-2_s705_r1_640",
+   "cmd": "python main.py dagger3 --set A16 --kappa 2 --tau 3.4 --weights ../results/v5/d5/A16_k2_s705_r0.npz --seed 705 --round 1 --beta 0.5 --start 640 --count 40 --budget-minutes 25 --out ../results/v5/d5/A16_k2_s705_r1_640"
+  },
+  {
+   "id": "v5_dag_A16-2_s705_r1_680",
+   "cmd": "python main.py dagger3 --set A16 --kappa 2 --tau 3.4 --weights ../results/v5/d5/A16_k2_s705_r0.npz --seed 705 --round 1 --beta 0.5 --start 680 --count 40 --budget-minutes 25 --out ../results/v5/d5/A16_k2_s705_r1_680"
+  },
+  {
+   "id": "v5_dag_A16-2_s705_r1_720",
+   "cmd": "python main.py dagger3 --set A16 --kappa 2 --tau 3.4 --weights ../results/v5/d5/A16_k2_s705_r0.npz --seed 705 --round 1 --beta 0.5 --start 720 --count 40 --budget-minutes 25 --out ../results/v5/d5/A16_k2_s705_r1_720"
+  },
+  {
+   "id": "v5_dag_A16-2_s705_r1_760",
+   "cmd": "python main.py dagger3 --set A16 --kappa 2 --tau 3.4 --weights ../results/v5/d5/A16_k2_s705_r0.npz --seed 705 --round 1 --beta 0.5 --start 760 --count 40 --budget-minutes 25 --out ../results/v5/d5/A16_k2_s705_r1_760"
+  }
+ ]
+}
