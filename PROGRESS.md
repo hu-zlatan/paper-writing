@@ -1340,3 +1340,26 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
     (check `complete` in every cell; another follow-up via `tools_resume_manifest.py` if not) → commit
     `results/v5/12_base_hstar.json`. (5) G\* val3 complete → students r2 val3 eval → `analysis_d5_v5.py`. test5 stays
     untouched until the freeze commit.
+
+- **Run 32 (2026-11-07, from ≈ 01:50 UTC, scheduled) — stage 13 v5 continued.** No open issues; AUTOPILOT §1 unchanged.
+  All run-31 dispatches had finished without failures (last at 22:30 UTC). `add_repo` not available as a tool; the
+  existing checkout was moved onto origin/main (the fetch's "forced update" is the same stale-ref artefact as before).
+  - **Inputs checked:** r1 students S2/S12 and r0 students S4/S8 all `max_epochs` with `.npz`; A16-2 labels 60/60
+    `complete`; G\* val3 S4 / S8 / A16-2 500/500 episodes each (follow-up 1 closed the gap).
+  - **Dispatched:** DAgger r2 S2/S12 (`v5_dag2_S2_S12`, 200), DAgger r1 S4/S8 (`v5_dag1_S4_S8`, 200), round-0
+    students A16-2 (`v5_r0_A162`, 5), baseline pilot3 follow-up 2 (`v5_base_pilot_f2`, 14 jobs for the 21 missing
+    episodes: S2 1, S8 6, S12 2, A16-2 12; H\* not read out yet — S4 is complete, the other cells are not).
+  - **E7 decided (addendum v5.1d, before any E7 job):** sandbox timing `g2v3` C1 32 → 15 s, C1 512 → 20 s per belief,
+    so the full 512-action screen costs ≈ 1 CPU-h ≪ 60 → full screen, g2v3 beliefs 0–31, S2 and S12, C1 32 and 512
+    paired. New opt-in `--indep-M` (default 0; v3/v4 commands unchanged, checked on belief 0) re-values the selected
+    and greedy actions on a fresh stream (M 256) to measure the selection bias of V_LA; the sandbox check showed the
+    absolute values move with the seed (common to both actions), so the read-out is on gaps. Test added (test_v5 5
+    passed). Dispatched `v5_e7_h3` (16 jobs); `code/analysis_e7_v5.py` pre-written.
+  - **Code:** `tools_v5_manifests.py val <cell>` writes the D5 read-out manifest (round-2 students, val3 0–499, sub 8,
+    20-episode shards, ≤ 125 jobs per cell).
+  - **Where to resume (run 33):** (1) DAgger r2 S2/S12 landed (all 200 shards with `.npz`) → `distill2 S2 S12` →
+    then `val S2`, `val S12` → `analysis_d5_v5.py`. (2) DAgger r1 S4/S8 landed → `distill1 S4 S8` → `dag2` → `distill2`
+    → `val`. (3) A16-2 r0 landed → `dag1 A16-2` (if not already dispatched this run) → same chain. (4) Baseline f2
+    landed → `analysis_base_v5.py` → if every cell `complete`, commit `results/v5/12_base_hstar.json`. (5) E7 landed →
+    `analysis_e7_v5.py` → commit `results/v5/12_e7_analysis.json`. (6) Any shard stopped by its time guard →
+    `tools_resume_manifest.py`. test5 stays untouched until the freeze commit.

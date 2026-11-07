@@ -28,3 +28,14 @@ stage of the v5 rows until test5 is frozen and evaluated, then stage 14.
 3. Dispatch `distill1 S2 S12` (r1 students) and `r0 S4 S8` (round-0 students) from `tools_v5_manifests.py`.
 4. Baselines on pilot3 landed → write `code/analysis_base_v5.py` (H\* per cell by the amendment rule) if the rule is
    fully specified in the amendment; otherwise log and defer.
+
+## Plan (run 32)
+1. All run-31 dispatches finished (no failures). Check inputs complete, then dispatch from `tools_v5_manifests.py`:
+   `dag2 S2 S12`, `dag1 S4 S8`, `r0 A16-2`; when A16 r0 lands, `dag1 A16-2`.
+2. Baselines: `analysis_base_v5.py` shows 21 pilot3 episodes still missing (S2 1, S8 6, S12 2, A16-2 12) →
+   follow-up 2 via `tools_resume_manifest.py` (budget 90 min so single long episodes finish).
+3. G\* val3 new cells: verify 500/500 in S4, S8, A16-2.
+4. E7: was "decided after the pilot timing" (v5.1). Time `g2v3` at C1 32 / 512 in the sandbox; if ≤ 60 CPU-h, add
+   an opt-in independent re-estimate (default off, so v3/v4 commands are unchanged), write addendum v5.1d before any
+   E7 job, dispatch, pre-write `analysis_e7_v5.py`.
+5. Pre-write the D5 val3 student manifest step. test5 untouched.
