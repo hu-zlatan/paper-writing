@@ -4,7 +4,9 @@ shards of 40; every distill = fixed 200 epochs, best held-out R-bar checkpoint, 
 training data = all label shards + every DAgger shard of earlier rounds (the v4 pattern, results/v4/d4/*_r1.json).
 
 usage: python tools_v5_manifests.py <step> <cell> [<cell> ...]
-  step: r0 | dag1 | distill1 | dag2 | distill2      cell: S2 | S4 | S8 | S12 | A16-2
+  step: r0 | dag1 | distill1 | dag2 | distill2 | val      cell: S2 | S4 | S8 | S12 | A16-2
+  val = D5 read-out: round-2 best-checkpoint students on val3 0-499, sub 8, shards of 20 (one manifest per cell keeps
+  each run under the 256-job matrix limit).
 Checks that every input file exists (refuses to write a manifest that would fail on the runner)."""
 import json
 import os
@@ -71,6 +73,14 @@ def jobs_for(step, c):
             out.append({"id": f"v5_d5_{c}_s{sd}_r{r}", "cmd": f"python main.py distill3 --set {s} --kappa {k} --tau {tau} --hp 0 "
                         f"--seed {sd} --round {r} --shards {' '.join(shards)} --val-shards {' '.join(held)}{init} "
                         f"--fixed-epochs 200 --keep best --budget-minutes 330 --out ../results/v5/d5/{s}_k{k}_s{sd}_r{r}"})
+        elif step == "val":
+            w = f"../results/v5/d5/{s}_k{k}_s{sd}_r2.npz"
+            check([w])
+            n_star = 3 if s == "A16" else 4
+            for st in range(0, 500, 20):
+                out.append({"id": f"v5_val_{c}_s{sd}_{st:03d}", "cmd": f"python main.py eval3 --set {s} --kappa {k} --tau {tau} "
+                            f"--n-star {n_star} --method student --weights {w} --split val3 --start {st} --count 20 --sub 8 "
+                            f"--budget-minutes 25 --out ../results/v5/d5_val/{s}_k{k}_student_s{sd}_r2_{st:03d}"})
         elif step in ("dag1", "dag2"):
             r = int(step[-1])
             beta = "0.5" if r == 1 else "0"
