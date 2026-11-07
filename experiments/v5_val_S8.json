@@ -1,0 +1,505 @@
+{
+ "purpose": "v5 E2 val for S8 (code/tools_v5_manifests.py; amendment v5.0/v5.1)",
+ "jobs": [
+  {
+   "id": "v5_val_S8_s701_000",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s701_r2.npz --split val3 --start 0 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s701_r2_000"
+  },
+  {
+   "id": "v5_val_S8_s701_020",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s701_r2.npz --split val3 --start 20 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s701_r2_020"
+  },
+  {
+   "id": "v5_val_S8_s701_040",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s701_r2.npz --split val3 --start 40 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s701_r2_040"
+  },
+  {
+   "id": "v5_val_S8_s701_060",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s701_r2.npz --split val3 --start 60 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s701_r2_060"
+  },
+  {
+   "id": "v5_val_S8_s701_080",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s701_r2.npz --split val3 --start 80 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s701_r2_080"
+  },
+  {
+   "id": "v5_val_S8_s701_100",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s701_r2.npz --split val3 --start 100 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s701_r2_100"
+  },
+  {
+   "id": "v5_val_S8_s701_120",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s701_r2.npz --split val3 --start 120 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s701_r2_120"
+  },
+  {
+   "id": "v5_val_S8_s701_140",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s701_r2.npz --split val3 --start 140 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s701_r2_140"
+  },
+  {
+   "id": "v5_val_S8_s701_160",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s701_r2.npz --split val3 --start 160 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s701_r2_160"
+  },
+  {
+   "id": "v5_val_S8_s701_180",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s701_r2.npz --split val3 --start 180 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s701_r2_180"
+  },
+  {
+   "id": "v5_val_S8_s701_200",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s701_r2.npz --split val3 --start 200 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s701_r2_200"
+  },
+  {
+   "id": "v5_val_S8_s701_220",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s701_r2.npz --split val3 --start 220 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s701_r2_220"
+  },
+  {
+   "id": "v5_val_S8_s701_240",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s701_r2.npz --split val3 --start 240 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s701_r2_240"
+  },
+  {
+   "id": "v5_val_S8_s701_260",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s701_r2.npz --split val3 --start 260 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s701_r2_260"
+  },
+  {
+   "id": "v5_val_S8_s701_280",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s701_r2.npz --split val3 --start 280 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s701_r2_280"
+  },
+  {
+   "id": "v5_val_S8_s701_300",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s701_r2.npz --split val3 --start 300 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s701_r2_300"
+  },
+  {
+   "id": "v5_val_S8_s701_320",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s701_r2.npz --split val3 --start 320 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s701_r2_320"
+  },
+  {
+   "id": "v5_val_S8_s701_340",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s701_r2.npz --split val3 --start 340 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s701_r2_340"
+  },
+  {
+   "id": "v5_val_S8_s701_360",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s701_r2.npz --split val3 --start 360 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s701_r2_360"
+  },
+  {
+   "id": "v5_val_S8_s701_380",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s701_r2.npz --split val3 --start 380 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s701_r2_380"
+  },
+  {
+   "id": "v5_val_S8_s701_400",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s701_r2.npz --split val3 --start 400 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s701_r2_400"
+  },
+  {
+   "id": "v5_val_S8_s701_420",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s701_r2.npz --split val3 --start 420 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s701_r2_420"
+  },
+  {
+   "id": "v5_val_S8_s701_440",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s701_r2.npz --split val3 --start 440 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s701_r2_440"
+  },
+  {
+   "id": "v5_val_S8_s701_460",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s701_r2.npz --split val3 --start 460 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s701_r2_460"
+  },
+  {
+   "id": "v5_val_S8_s701_480",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s701_r2.npz --split val3 --start 480 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s701_r2_480"
+  },
+  {
+   "id": "v5_val_S8_s702_000",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s702_r2.npz --split val3 --start 0 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s702_r2_000"
+  },
+  {
+   "id": "v5_val_S8_s702_020",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s702_r2.npz --split val3 --start 20 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s702_r2_020"
+  },
+  {
+   "id": "v5_val_S8_s702_040",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s702_r2.npz --split val3 --start 40 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s702_r2_040"
+  },
+  {
+   "id": "v5_val_S8_s702_060",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s702_r2.npz --split val3 --start 60 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s702_r2_060"
+  },
+  {
+   "id": "v5_val_S8_s702_080",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s702_r2.npz --split val3 --start 80 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s702_r2_080"
+  },
+  {
+   "id": "v5_val_S8_s702_100",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s702_r2.npz --split val3 --start 100 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s702_r2_100"
+  },
+  {
+   "id": "v5_val_S8_s702_120",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s702_r2.npz --split val3 --start 120 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s702_r2_120"
+  },
+  {
+   "id": "v5_val_S8_s702_140",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s702_r2.npz --split val3 --start 140 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s702_r2_140"
+  },
+  {
+   "id": "v5_val_S8_s702_160",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s702_r2.npz --split val3 --start 160 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s702_r2_160"
+  },
+  {
+   "id": "v5_val_S8_s702_180",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s702_r2.npz --split val3 --start 180 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s702_r2_180"
+  },
+  {
+   "id": "v5_val_S8_s702_200",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s702_r2.npz --split val3 --start 200 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s702_r2_200"
+  },
+  {
+   "id": "v5_val_S8_s702_220",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s702_r2.npz --split val3 --start 220 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s702_r2_220"
+  },
+  {
+   "id": "v5_val_S8_s702_240",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s702_r2.npz --split val3 --start 240 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s702_r2_240"
+  },
+  {
+   "id": "v5_val_S8_s702_260",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s702_r2.npz --split val3 --start 260 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s702_r2_260"
+  },
+  {
+   "id": "v5_val_S8_s702_280",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s702_r2.npz --split val3 --start 280 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s702_r2_280"
+  },
+  {
+   "id": "v5_val_S8_s702_300",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s702_r2.npz --split val3 --start 300 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s702_r2_300"
+  },
+  {
+   "id": "v5_val_S8_s702_320",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s702_r2.npz --split val3 --start 320 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s702_r2_320"
+  },
+  {
+   "id": "v5_val_S8_s702_340",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s702_r2.npz --split val3 --start 340 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s702_r2_340"
+  },
+  {
+   "id": "v5_val_S8_s702_360",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s702_r2.npz --split val3 --start 360 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s702_r2_360"
+  },
+  {
+   "id": "v5_val_S8_s702_380",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s702_r2.npz --split val3 --start 380 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s702_r2_380"
+  },
+  {
+   "id": "v5_val_S8_s702_400",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s702_r2.npz --split val3 --start 400 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s702_r2_400"
+  },
+  {
+   "id": "v5_val_S8_s702_420",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s702_r2.npz --split val3 --start 420 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s702_r2_420"
+  },
+  {
+   "id": "v5_val_S8_s702_440",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s702_r2.npz --split val3 --start 440 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s702_r2_440"
+  },
+  {
+   "id": "v5_val_S8_s702_460",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s702_r2.npz --split val3 --start 460 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s702_r2_460"
+  },
+  {
+   "id": "v5_val_S8_s702_480",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s702_r2.npz --split val3 --start 480 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s702_r2_480"
+  },
+  {
+   "id": "v5_val_S8_s703_000",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s703_r2.npz --split val3 --start 0 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s703_r2_000"
+  },
+  {
+   "id": "v5_val_S8_s703_020",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s703_r2.npz --split val3 --start 20 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s703_r2_020"
+  },
+  {
+   "id": "v5_val_S8_s703_040",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s703_r2.npz --split val3 --start 40 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s703_r2_040"
+  },
+  {
+   "id": "v5_val_S8_s703_060",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s703_r2.npz --split val3 --start 60 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s703_r2_060"
+  },
+  {
+   "id": "v5_val_S8_s703_080",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s703_r2.npz --split val3 --start 80 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s703_r2_080"
+  },
+  {
+   "id": "v5_val_S8_s703_100",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s703_r2.npz --split val3 --start 100 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s703_r2_100"
+  },
+  {
+   "id": "v5_val_S8_s703_120",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s703_r2.npz --split val3 --start 120 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s703_r2_120"
+  },
+  {
+   "id": "v5_val_S8_s703_140",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s703_r2.npz --split val3 --start 140 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s703_r2_140"
+  },
+  {
+   "id": "v5_val_S8_s703_160",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s703_r2.npz --split val3 --start 160 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s703_r2_160"
+  },
+  {
+   "id": "v5_val_S8_s703_180",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s703_r2.npz --split val3 --start 180 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s703_r2_180"
+  },
+  {
+   "id": "v5_val_S8_s703_200",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s703_r2.npz --split val3 --start 200 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s703_r2_200"
+  },
+  {
+   "id": "v5_val_S8_s703_220",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s703_r2.npz --split val3 --start 220 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s703_r2_220"
+  },
+  {
+   "id": "v5_val_S8_s703_240",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s703_r2.npz --split val3 --start 240 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s703_r2_240"
+  },
+  {
+   "id": "v5_val_S8_s703_260",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s703_r2.npz --split val3 --start 260 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s703_r2_260"
+  },
+  {
+   "id": "v5_val_S8_s703_280",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s703_r2.npz --split val3 --start 280 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s703_r2_280"
+  },
+  {
+   "id": "v5_val_S8_s703_300",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s703_r2.npz --split val3 --start 300 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s703_r2_300"
+  },
+  {
+   "id": "v5_val_S8_s703_320",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s703_r2.npz --split val3 --start 320 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s703_r2_320"
+  },
+  {
+   "id": "v5_val_S8_s703_340",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s703_r2.npz --split val3 --start 340 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s703_r2_340"
+  },
+  {
+   "id": "v5_val_S8_s703_360",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s703_r2.npz --split val3 --start 360 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s703_r2_360"
+  },
+  {
+   "id": "v5_val_S8_s703_380",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s703_r2.npz --split val3 --start 380 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s703_r2_380"
+  },
+  {
+   "id": "v5_val_S8_s703_400",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s703_r2.npz --split val3 --start 400 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s703_r2_400"
+  },
+  {
+   "id": "v5_val_S8_s703_420",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s703_r2.npz --split val3 --start 420 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s703_r2_420"
+  },
+  {
+   "id": "v5_val_S8_s703_440",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s703_r2.npz --split val3 --start 440 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s703_r2_440"
+  },
+  {
+   "id": "v5_val_S8_s703_460",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s703_r2.npz --split val3 --start 460 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s703_r2_460"
+  },
+  {
+   "id": "v5_val_S8_s703_480",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s703_r2.npz --split val3 --start 480 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s703_r2_480"
+  },
+  {
+   "id": "v5_val_S8_s704_000",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s704_r2.npz --split val3 --start 0 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s704_r2_000"
+  },
+  {
+   "id": "v5_val_S8_s704_020",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s704_r2.npz --split val3 --start 20 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s704_r2_020"
+  },
+  {
+   "id": "v5_val_S8_s704_040",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s704_r2.npz --split val3 --start 40 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s704_r2_040"
+  },
+  {
+   "id": "v5_val_S8_s704_060",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s704_r2.npz --split val3 --start 60 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s704_r2_060"
+  },
+  {
+   "id": "v5_val_S8_s704_080",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s704_r2.npz --split val3 --start 80 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s704_r2_080"
+  },
+  {
+   "id": "v5_val_S8_s704_100",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s704_r2.npz --split val3 --start 100 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s704_r2_100"
+  },
+  {
+   "id": "v5_val_S8_s704_120",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s704_r2.npz --split val3 --start 120 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s704_r2_120"
+  },
+  {
+   "id": "v5_val_S8_s704_140",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s704_r2.npz --split val3 --start 140 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s704_r2_140"
+  },
+  {
+   "id": "v5_val_S8_s704_160",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s704_r2.npz --split val3 --start 160 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s704_r2_160"
+  },
+  {
+   "id": "v5_val_S8_s704_180",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s704_r2.npz --split val3 --start 180 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s704_r2_180"
+  },
+  {
+   "id": "v5_val_S8_s704_200",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s704_r2.npz --split val3 --start 200 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s704_r2_200"
+  },
+  {
+   "id": "v5_val_S8_s704_220",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s704_r2.npz --split val3 --start 220 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s704_r2_220"
+  },
+  {
+   "id": "v5_val_S8_s704_240",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s704_r2.npz --split val3 --start 240 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s704_r2_240"
+  },
+  {
+   "id": "v5_val_S8_s704_260",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s704_r2.npz --split val3 --start 260 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s704_r2_260"
+  },
+  {
+   "id": "v5_val_S8_s704_280",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s704_r2.npz --split val3 --start 280 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s704_r2_280"
+  },
+  {
+   "id": "v5_val_S8_s704_300",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s704_r2.npz --split val3 --start 300 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s704_r2_300"
+  },
+  {
+   "id": "v5_val_S8_s704_320",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s704_r2.npz --split val3 --start 320 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s704_r2_320"
+  },
+  {
+   "id": "v5_val_S8_s704_340",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s704_r2.npz --split val3 --start 340 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s704_r2_340"
+  },
+  {
+   "id": "v5_val_S8_s704_360",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s704_r2.npz --split val3 --start 360 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s704_r2_360"
+  },
+  {
+   "id": "v5_val_S8_s704_380",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s704_r2.npz --split val3 --start 380 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s704_r2_380"
+  },
+  {
+   "id": "v5_val_S8_s704_400",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s704_r2.npz --split val3 --start 400 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s704_r2_400"
+  },
+  {
+   "id": "v5_val_S8_s704_420",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s704_r2.npz --split val3 --start 420 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s704_r2_420"
+  },
+  {
+   "id": "v5_val_S8_s704_440",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s704_r2.npz --split val3 --start 440 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s704_r2_440"
+  },
+  {
+   "id": "v5_val_S8_s704_460",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s704_r2.npz --split val3 --start 460 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s704_r2_460"
+  },
+  {
+   "id": "v5_val_S8_s704_480",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s704_r2.npz --split val3 --start 480 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s704_r2_480"
+  },
+  {
+   "id": "v5_val_S8_s705_000",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s705_r2.npz --split val3 --start 0 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s705_r2_000"
+  },
+  {
+   "id": "v5_val_S8_s705_020",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s705_r2.npz --split val3 --start 20 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s705_r2_020"
+  },
+  {
+   "id": "v5_val_S8_s705_040",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s705_r2.npz --split val3 --start 40 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s705_r2_040"
+  },
+  {
+   "id": "v5_val_S8_s705_060",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s705_r2.npz --split val3 --start 60 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s705_r2_060"
+  },
+  {
+   "id": "v5_val_S8_s705_080",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s705_r2.npz --split val3 --start 80 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s705_r2_080"
+  },
+  {
+   "id": "v5_val_S8_s705_100",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s705_r2.npz --split val3 --start 100 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s705_r2_100"
+  },
+  {
+   "id": "v5_val_S8_s705_120",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s705_r2.npz --split val3 --start 120 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s705_r2_120"
+  },
+  {
+   "id": "v5_val_S8_s705_140",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s705_r2.npz --split val3 --start 140 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s705_r2_140"
+  },
+  {
+   "id": "v5_val_S8_s705_160",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s705_r2.npz --split val3 --start 160 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s705_r2_160"
+  },
+  {
+   "id": "v5_val_S8_s705_180",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s705_r2.npz --split val3 --start 180 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s705_r2_180"
+  },
+  {
+   "id": "v5_val_S8_s705_200",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s705_r2.npz --split val3 --start 200 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s705_r2_200"
+  },
+  {
+   "id": "v5_val_S8_s705_220",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s705_r2.npz --split val3 --start 220 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s705_r2_220"
+  },
+  {
+   "id": "v5_val_S8_s705_240",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s705_r2.npz --split val3 --start 240 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s705_r2_240"
+  },
+  {
+   "id": "v5_val_S8_s705_260",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s705_r2.npz --split val3 --start 260 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s705_r2_260"
+  },
+  {
+   "id": "v5_val_S8_s705_280",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s705_r2.npz --split val3 --start 280 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s705_r2_280"
+  },
+  {
+   "id": "v5_val_S8_s705_300",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s705_r2.npz --split val3 --start 300 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s705_r2_300"
+  },
+  {
+   "id": "v5_val_S8_s705_320",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s705_r2.npz --split val3 --start 320 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s705_r2_320"
+  },
+  {
+   "id": "v5_val_S8_s705_340",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s705_r2.npz --split val3 --start 340 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s705_r2_340"
+  },
+  {
+   "id": "v5_val_S8_s705_360",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s705_r2.npz --split val3 --start 360 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s705_r2_360"
+  },
+  {
+   "id": "v5_val_S8_s705_380",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s705_r2.npz --split val3 --start 380 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s705_r2_380"
+  },
+  {
+   "id": "v5_val_S8_s705_400",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s705_r2.npz --split val3 --start 400 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s705_r2_400"
+  },
+  {
+   "id": "v5_val_S8_s705_420",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s705_r2.npz --split val3 --start 420 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s705_r2_420"
+  },
+  {
+   "id": "v5_val_S8_s705_440",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s705_r2.npz --split val3 --start 440 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s705_r2_440"
+  },
+  {
+   "id": "v5_val_S8_s705_460",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s705_r2.npz --split val3 --start 460 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s705_r2_460"
+  },
+  {
+   "id": "v5_val_S8_s705_480",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s705_r2.npz --split val3 --start 480 --count 20 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/S_k8_student_s705_r2_480"
+  }
+ ]
+}
