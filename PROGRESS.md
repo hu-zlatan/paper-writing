@@ -1386,3 +1386,13 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
     `analysis_e7_v5.py`, commit. (4) A cell's students r2 + RL all present → `tools_v5_test5.py freeze <cell>`, commit
     the freeze and log it here **before** `manifest <cell>` and dispatch (test5 0–299). E5 (sub 16 re-read of test5
     0–199, G\* and student 701, S2/S12) and E6 latency (sandbox) follow. test5 untouched so far.
+
+- **Run 34 (2026-11-07, from ≈ 13:50 UTC, scheduled) — stage 13 v5 continued.** No open issues; AUTOPILOT §1 unchanged.
+  All run-33 dispatches had finished without failures (last at 09:18 UTC).
+  - **Inputs checked:** round-2 students S2/S12 and round-1 students S4/S8/A16-2: 25/25 `max_epochs` with `.npz`.
+  - **E7 complete** (`results/v5/12_e7_analysis.json`, report-only, 32/32 beliefs in every cell × C1): independent
+    look-ahead gap at C1 512 — S2 0.066 nats, S12 0.042 nats; paired gap 512 − 32: S2 0.048, S12 0.018. Selection bias of
+    V_LA at C1 512: S2 0.022, S12 −0.002 nats. CIs in the JSON.
+  - **Dispatched:** `v5_val_S2`, `v5_val_S12` (125 + 125: D5 read-out on val3 0–499), `v5_dag2_S4_S8` (200),
+    `v5_dag2_A162` (100).
+  - **Order kept from amendment v5.0 l. 87:** D5 on val3 → freeze → test5. The S2/S12 freeze waits for the D5 read-out.
