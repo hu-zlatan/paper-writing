@@ -52,3 +52,26 @@ Design deviations recorded so far:
   UT9 (3 mm normal → 0, 3 mm tangential → slip), feature shapes. 12 passed in total.
 - Not yet: UT3 (needs calibration + test labels, runs at analysis time), UT5 (bracket replays, analysis time),
   UT6 (runner job dispatched), UT8 (pilot).
+
+## Increment 4a (run 38) — pilot read-out, before any main-pool data
+Pilot pool only (salt 3003; main pools untouched). Sandbox, 2026-11-08 ≈ 14:15–14:55 UTC.
+- Labels: 4 families × 25 objects × 4 disturbances = 400 instances, paired S1 / S3 (400 each), F5 100
+  (`results/pilot/labels/`); monotonicity grids 35 points on 140 instances incl. F5 (`results/pilot/mono/`).
+- Read-out `code/pilot_analysis.py` → `results/pilot/pilot_analysis.json`:
+  - H1-M pilot look: **0 / 140 non-monotone**. UT8: **0 unavoidable** in every pool; max F\*_hi 19.9 N (ID),
+    33.3 N (S1), 26.5 N (S3), 22.5 N (F5) vs F_max 100 N; 0 preload slips; no bracket stuck at F_min.
+  - Cross-fitted (5-fold by object, 5-config search — pilot scale, 320 train rows per fold) conformal RE at α 0.10:
+    base 1.02, P 1.02, S 0.97, full (CertGrip) 0.94, CSF-1 0.76, oracle 0.39; Mondrian-CSF 2.98 (12 cal objects
+    per cell → q̂ near the maximum score; a pilot-size artefact). Label slip ≈ 0.094–0.099 everywhere (as theory says).
+  - **Key finding:** the residual of every non-oracle predictor still correlates ≈ −0.79 with log μ (oracle −0.40):
+    the static and squeeze touch features carry almost no friction information. A rigidly held object does not
+    micro-slip during a 1.5 F0 squeeze, so the squeeze cannot reveal μ. As designed, H2 would most likely come out
+    negative for a reason fixed by the protocol, not by the method.
+  - η pilot: 0.1 × IQR(scores) = 0.060.
+- **Decision (pre-freeze; logged, not hidden):** before freezing, add an **incipient-slip ramp-down probe** (grip
+  force lowered from F0 until the first tangential micro-displacement, e.g. 0.3 mm, or a floor, then back to F0 —
+  the ramp-down route already budgeted as E5b and the human grip-force strategy) as a protocol step before the force
+  ramp, and test in a re-pilot whether it carries μ information. The 1.5 F0 squeeze stays as the PM3 ablation.
+  Write the change as `docs/08a_pilot_amendment.md` first (stage-9 design amendment, with the pilot numbers above as
+  the reason), then implement it in `sim.py` behind a protocol flag so the current protocol stays reproducible.
+  If the ramp-down probe also carries no μ information, keep the original design and report H2 honestly.
