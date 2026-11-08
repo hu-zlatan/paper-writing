@@ -33,3 +33,18 @@ Run order when both papers are active: AUTOPILOT §7.
   CPU is enough for the planned scale (estimate < 100 CPU-h, to be replaced by a pilot TIME_ESTIMATE).
 - **Summary:** paper 2 initialised; no experiment run, no result exists.
 - **Next stage:** 2 PROBLEM_DECOMPOSE (then 3 → 4 literature with verifiable IDs).
+
+## Stage 2. PROBLEM_DECOMPOSE     [v1]
+
+- **Started / Finished:** 2026-11-08T08:10Z / 08:25Z (scheduled run 37, after paper 1's time-critical work)
+- **Inputs used:** `docs/00_topic_init.md`, `RESTRICTS.yaml` topic; template `stage_prompts/problem_decompose.md` verbatim.
+- **Plan:** `plans/stage_02_problem_decompose.md`.
+- **Outputs produced:** `docs/01_problem_tree.md` — 6 sub-questions: SQ1 is F\* (minimal no-slip force) a monotone,
+  measurable label in MuJoCo; SQ2 split-conformal slip-rate validity (exchangeable); SQ3 force efficiency vs a safety
+  factor calibrated on the same calibration set (primary comparator) and conformalized point / quantile / σ predictors;
+  SQ4 tactile / probe-squeeze ablation; SQ5 online adaptive conformal with binary slip feedback under 3 shifts; SQ6
+  group-conditional coverage. Priority SQ1 > SQ2 > SQ3 > SQ5 > SQ4 > SQ6. 8 risks, each with a mitigation (non-monotone
+  slip → conformal risk control; label cost → pilot TIME_ESTIMATE; calibrated safety factor may match → reported either
+  way; sim-only; novelty; time; split leakage).
+- **Hard constraints:** no results exist or are claimed; no new citations introduced beyond stage-1 docs.
+- **Decision:** PROCEED → stage 3 SEARCH_STRATEGY (re-verify the RSS 2027 CFP first).
