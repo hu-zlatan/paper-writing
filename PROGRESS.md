@@ -1469,3 +1469,13 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
     −0.063 nats (passes ii), seeds within δ 0/5. **H5a on validation: 0 of 5 cells within δ.** No remedy step, no
     retraining (amendment v5.0).
   - **FREEZE A16-2** (`results/v5/13_freeze.json`, 5 students r2 + 5 RL cfg 6), committed before its test5 manifest.
+  - **test5 A16-2 dispatched** (≈ 03:05 UTC): `v5_test5_A162_p0/p1` (485 jobs). All 5 cells are now frozen and on test5.
+    Queue ≈ 1,200 jobs (S2/S12 f1 141, S4 267, S8 300, A16-2 485, E6 d1000 4) at the 20-runner cap → expect ≈ 15 h
+    wall plus follow-ups. No test5 outcome has been read.
+  - **Where to resume (run 37):** (1) test5 runs landed → follow-up manifests per cell via `tools_resume_manifest.py`
+    (for S2/S12 run it on `v5_test5_S2_S12_f1.json`; for S4/S8/A16-2 on their p0/p1 manifests); combine per wave.
+    (2) `python tools_v5_gt.py --workers 4` for new test5 files (needs `pip install -r code/requirements.txt` in a fresh
+    sandbox). (3) `python tools_v5_e5.py` once S12 G\* has test5 0–199 → commit + dispatch E5. (4) E6 d1000 landed →
+    `analysis_e6_v5.py`, commit. (5) A cell with every method at 300 test5 episodes → `analysis_test5_v5.py --check`,
+    then the read-out once all cells are complete → stage 14. If an eval run is queued behind long test5 waves and has
+    only a few episodes, running the identical command in the sandbox is fine (log it).
