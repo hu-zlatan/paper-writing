@@ -136,7 +136,7 @@ Run order when both papers are active: AUTOPILOT §7.
 
 ## Stage 8.5. THEORETICAL_BOUNDS     [v1]
 
-- **Finished:** 2026-11-08T08:50Z (run 37). Plan: `plans/stage_08_5_theoretical_bounds.md`.
+- **Finished:** 2026-11-08T08:40Z (run 37). Plan: `plans/stage_08_5_theoretical_bounds.md`.
 - **Outputs produced:** `docs/07b_theoretical_bounds.md` — standard results restated with premises (no new theory):
   G1 offline coverage ≤ α of the label rule, physical slip ≤ α only under monotonicity; caveat that several instances
   per object break plain instance-level exchangeability (stage 9 must pick a clustered calibration rule); G2 online
@@ -144,3 +144,23 @@ Run order when both papers are active: AUTOPILOT §7.
   on the cap-rarity design condition. Complexity: ≈ 10 replays per label dominate; decision one tree-ensemble call.
 - **Decision:** PROCEED → stage 9 EXPERIMENT_DESIGN [gate] — next run; the pilot items of `07_hypotheses.md` §8 are
   needed for the freeze.
+
+## Stage 9. EXPERIMENT_DESIGN [GATE]     [v1]
+
+- **Finished:** 2026-11-08T08:42Z (run 37). Plan: `plans/stage_09_experiment_design.md`.
+- **Outputs produced:** `docs/08_experiment_plan.yaml` (objectives C1/C2 + secondary/exploratory; datasets: MuJoCo
+  parallel-jaw, 4 families × 500 objects × 4 disturbances = 8,000 labelled instances, 4 shift pools; baselines CSF-1,
+  Mondrian-CSF (privileged family ID), CertGrip-P, COMP = better of the two frozen on a selection split, RAW-Q/Qv/G,
+  oracle ceiling, oracle recalibration; 10 proposed components each with an ablation; metric formulas; risks; budget).
+- **GATE — auto-approved (AUTOPILOT §1).** Evidence: all 8 required keys; every proposed component (PM1–PM10) has a
+  matching ablation (checked by script; 4 added at this stage, none needs extra simulation); every baseline has a tuning
+  protocol (equal 30-config search for every learned input set); primary comparator is the stronger of two non-tactile
+  conformal methods, one with privileged family ID; failure conditions are pre-stated as negative results. Reason: the
+  design answers every skeptic point (07_hypotheses §9) and stays within ≈ 90 CPU-h on free runners.
+  **Condition:** the approval covers the design only. Pilot-dependent constants (replay cost c, determinism, δ_t,
+  F_max, η, power re-projection) are frozen in `docs/08b_preregistration.md` after the stage-10/12 pilot and before any
+  non-pilot data.
+- **Compute note:** ≈ 90 CPU-h (assumption c = 1 CPU-s per replay) exceeds `RESTRICTS.yaml` `budget_total_hours: 12`
+  under a CPU-hour reading; as for paper 1, it is read as wall-clock on parallel free runners (≈ 5–6 h at 20 runners),
+  recorded here and in OWNER_TODO; the downscale order applies if the pilot measures a higher c.
+- **Decision:** PROCEED → stage 10 CODE_GENERATION (`papers/p2/code/`, with the pilot), next run.
