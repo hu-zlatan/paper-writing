@@ -1,0 +1,13 @@
+{
+ "purpose": "p2 stage 10 increment 2: replay cost c and UT6 bit-identity on the runner image (two identical jobs; compare digests with each other and with results/pilot/timing_sandbox.json)",
+ "jobs": [
+  {
+   "id": "p2_timing_runner_a",
+   "cmd": "python main.py timing --start 0 --count 5 --out ../results/pilot/timing_runner_a"
+  },
+  {
+   "id": "p2_timing_runner_b",
+   "cmd": "python main.py timing --start 0 --count 5 --out ../results/pilot/timing_runner_b"
+  }
+ ]
+}
