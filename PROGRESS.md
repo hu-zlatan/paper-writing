@@ -1529,9 +1529,15 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
     guard only — same precedent as run 36); method, frozen weights and episode indices unchanged.
   - **Dispatched (≈ 20:00 UTC):** `v5_test5_f4a` / `v5_test5_f4b` (166 + 166 jobs) and `v5_e5_sub16_f2` (25 jobs /
     45 episodes). Expected ≈ 9–10 h wall at the 20-runner cap.
-  - **g_T** for new test5 files running in the sandbox (`tools_v5_gt.py --workers 2`); outputs committed at the end.
+  - **g_T:** 121 + 49 more test5 files → `results/v5/test5_gt/` (sandbox; stopped at the end of the run, temps removed;
+    the tool resumes on the rest). Not read.
   - No test5 or E5 outcome read (counts only).
   - **Where to resume (run 40):** (1) f4a / f4b / e5_f2 landed → `tools_resume_manifest.py` on f4a / f4b (random
     leftovers → `tools_split_manifest.py` again) and `tools_resume_e5.py` on `v5_e5_sub16_f2.json` → dispatch;
     (2) `python code/tools_v5_gt.py --workers 2`; (3) E5 complete → `analysis_e5_v5.py`; (4) all cells at 300 →
     `analysis_test5_v5.py --check`, then the read-out → stage 14.
+  - **Paper 2 this run** (details in `papers/p2/PROGRESS.md`): stage 10 done (amendment 08a implemented, re-pilot,
+    pre-registration `papers/p2/docs/08b_preregistration.md` FROZEN), stage 11 done, stage 12 started — 18,600
+    main-pool labels; **the pre-registered H1-M design gate failed (8 / 800 non-monotone, limit 7)** → pre-registered
+    switch to the conformal-risk-control route (addendum 08c, written before any cal / test statistic); offline fits
+    dispatched (`experiments/p2_fit_a010.json`, Actions run 185).
