@@ -36,7 +36,7 @@ Run order when both papers are active: AUTOPILOT §7.
 
 ## Stage 2. PROBLEM_DECOMPOSE     [v1]
 
-- **Started / Finished:** 2026-11-08T08:10Z / 08:25Z (scheduled run 37, after paper 1's time-critical work)
+- **Started / Finished:** 2026-11-08T07:55Z / 08:02Z (scheduled run 37, after paper 1's time-critical work)
 - **Inputs used:** `docs/00_topic_init.md`, `RESTRICTS.yaml` topic; template `stage_prompts/problem_decompose.md` verbatim.
 - **Plan:** `plans/stage_02_problem_decompose.md`.
 - **Outputs produced:** `docs/01_problem_tree.md` — 6 sub-questions: SQ1 is F\* (minimal no-slip force) a monotone,
@@ -51,7 +51,7 @@ Run order when both papers are active: AUTOPILOT §7.
 
 ## Stage 3. SEARCH_STRATEGY     [v1]
 
-- **Finished:** 2026-11-08T08:45Z (run 37). Plan: `plans/stage_03_search_strategy.md`.
+- **Finished:** 2026-11-08T08:05Z (run 37). Plan: `plans/stage_03_search_strategy.md`.
 - **Outputs produced:** `docs/02_search_plan.yaml` (5 strategies: grip force & slip; guarantees in grasping; conformal
   methods; conformal in robotics; tactile simulation & benchmarks — 22 queries + 4 seminal), `docs/02_sources.json`
   (OpenAlex, Semantic Scholar, arXiv API, stage-1 seed IDs). Root `.github/workflows/literature.yml`: optional
@@ -73,7 +73,7 @@ Run order when both papers are active: AUTOPILOT §7.
 
 ## Stage 5. LITERATURE_SCREEN [GATE]     [v1]
 
-- **Finished:** 2026-11-08T09:00Z (run 37). Plan: `plans/stage_05_literature_screen.md`.
+- **Finished:** 2026-11-08T08:17Z (run 37). Plan: `plans/stage_05_literature_screen.md`.
 - **Outputs produced:** `docs/04_prefiltered.tsv` (824 after year / ID / abstract filter), `docs/04_screen_decisions.json`,
   `docs/04_shortlist.jsonl` — **52 papers**: grip force & slip 17, guarantees / risk in grasping 5, conformal methods 13,
   conformal in robotics / control 11, tactile simulation & benchmarks 5 (+ the 9 stage-1 seeds, all kept). Code:
@@ -90,7 +90,7 @@ Run order when both papers are active: AUTOPILOT §7.
 
 ## Stage 6. KNOWLEDGE_EXTRACT     [v1]
 
-- **Finished:** 2026-11-08T09:20Z (run 37). Plan: `plans/stage_06_knowledge_extract.md`.
+- **Finished:** 2026-11-08T08:19Z (run 37). Plan: `plans/stage_06_knowledge_extract.md`.
 - **Outputs produced:** `docs/05_knowledge_cards.json` (52 cards, abstracts only), `code/literature/build_cards_v1.py`.
   Extraction by a fresh Sonnet subagent with the stage template; the session checked keys (52/52, none extra) and that
   every number in findings / data / metrics occurs in the source abstract (0 violations).
@@ -102,10 +102,34 @@ Run order when both papers are active: AUTOPILOT §7.
 
 ## Stage 7. SYNTHESIS     [v1]
 
-- **Finished:** 2026-11-08T09:45Z (run 37). Plan: `plans/stage_07_synthesis.md`.
+- **Finished:** 2026-11-08T08:21Z (run 37). Plan: `plans/stage_07_synthesis.md`.
 - **Outputs produced:** `docs/06_synthesis.md` — 7 clusters (reactive slip control; force selection by estimation;
   guarantees / risk in grasping; offline conformal / risk control; online conformal under shift and partial feedback;
   conformal in robotics; tactile simulation & human grip), 6 falsifiable gaps, ranked opportunities. Key observation:
   with a monotone slip threshold the ACI miscoverage indicator equals the observed slip event, so online calibration
   needs no F\* label at deployment. Targeted WebSearch (2 queries) found no conformal grip-force / slip-rate work.
 - **Decision:** PROCEED → stage 8 HYPOTHESIS_GEN (fresh-context proposer / skeptic / methodologist subagents).
+
+- **Timestamp correction (run 37):** the stage 2, 3, 5, 6 and 7 entries above first carried estimated finish times
+  (08:25–09:45Z) that were wrong; they now show the commit times from `git log`.
+
+## Stage 8. HYPOTHESIS_GEN     [v1]
+
+- **Finished:** 2026-11-08T08:40Z (run 37). Plan: `plans/stage_08_hypothesis_gen.md`.
+- **Method:** three-pass debate, each pass a fresh Opus subagent with only the input files (AUTOPILOT §3).
+- **Outputs produced:** `docs/07a_proposer.md`, `docs/07b_skeptic.md`, `docs/07_hypotheses.md` (canonical).
+- **Core hypotheses (pre-registration targets, nothing run yet):**
+  - **H1 validity** — gate: slip non-monotone in force in ≤ 7 of 800 pilot instances (upper limit ≤ 2 %), else the
+    non-monotone risk-control fallback; then a physical replay audit at the chosen forces: (real − label-predicted)
+    slip-rate gap upper limit ≤ 0.02 at α = 0.10.
+  - **H2 efficiency (primary endpoint)** — D = 1 − RE(CertGrip) / RE(COMP) at α = 0.10, COMP = the better (on a
+    held-out selection split, frozen before test) of a Mondrian safety factor (per family × disturbance, true family
+    given) and a no-touch learned conformal predictor; confirmed if D ≥ 0.10 with lower limit > 0, robust to the label
+    bracket end; negative result if the CI lies within ±0.10.
+  - **H3 online** — quantile tracking q ← q + η(slip − α) from binary slip feedback; excess ratio vs an oracle
+    recalibrated on 500 labelled shifted grasps upper limit < 1.10 and slip-rate gap ≤ 0.02 under S1 friction ×0.6,
+    S2 new family, S3 disturbance ×1.5. Each core test at one-sided 0.0167.
+- **Limitation recorded:** offline calibration needs F\* labels, available only in simulation; the online tracker is the
+  deployable route on hardware.
+- **Decision:** PROCEED → stage 8.5 THEORETICAL_BOUNDS, then stage 9 (pilot items in `07_hypotheses.md` §8 settle
+  before the pre-registration freeze).
