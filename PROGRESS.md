@@ -1502,3 +1502,19 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
     in the background, commit outputs (never dot-prefixed temps); (3) E5 landed → `analysis_e5_v5.py`, commit;
     (4) all cells complete → `analysis_test5_v5.py --check`, then the read-out → stage 14. Then paper 2 stage 10
     increment 2 (`papers/p2/plans/stage_10_code_generation.md`).
+
+- **Run 38 (2026-11-08, from ≈ 13:50 UTC, scheduled) — stage 13 v5 continued, then paper 2.** No open issues;
+  AUTOPILOT §1 unchanged. `add_repo` not available as a tool; the existing checkout was reset onto origin/main and
+  unshallowed. Plan: `plans/stage_13_v5_run38_followups.md`.
+  - **Finished since run 37 (all `success`):** test5 S4_p0 (168), S8_p0 (170), A16-2 p0/p1 (173/174), f2 (175), E5 (176).
+  - **Dispatched:** `v5_test5_f3a` (126: S4 52, S8 45, f2 29) and `v5_test5_f3b` (187: A16-2) — time-guarded /
+    missing shards only, frozen weights unchanged; `v5_e5_sub16_f1` (111 jobs / 444 episodes: E5 regrid3 shards stop
+    at ≈ 7 of 15 episodes, so the new `code/tools_resume_e5.py` re-runs each shard's `remaining` episodes, 5 per job).
+  - **g_T:** 94 more test5 files → `results/v5/test5_gt/` (worker pool stalled late in the run; stopped, temps removed;
+    the tool resumes on the rest). Not read.
+  - A partial `results/v5/14_e5_analysis.json` written by a completeness check was deleted unread (E5 incomplete:
+    S2 G\* 127 / student 95, S12 68 / 66 of 200). No test5 outcome read.
+  - **Where to resume (run 39):** (1) f3a / f3b / e5_f1 landed → `tools_resume_manifest.py` on f3a / f3b (and
+    `tools_resume_e5.py` on `v5_e5_sub16_f1.json` if any shard stopped) → dispatch; (2) `python code/tools_v5_gt.py
+    --workers 2` for new test5 files; (3) E5 complete → `analysis_e5_v5.py`, commit; (4) all cells at 300 →
+    `analysis_test5_v5.py --check`, then the read-out → stage 14. Paper 2: the probe design decision, then the freeze.

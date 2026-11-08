@@ -178,3 +178,17 @@ Run order when both papers are active: AUTOPILOT §7.
 - **Design deviation (logged in the plan):** D1/D2 hand motion applied as the exact inertial pseudo-force in the hand
   frame; no table phase.
 - **Next:** increment 2 (features + `main.py label` with time_guard + runner timing / determinism via Actions).
+- **Run 38 (2026-11-08, ≈ 14:00–15:20 UTC): increments 2, 3, 4a, 4b** (details in `plans/stage_10_code_generation.md`).
+  - Code: `certgrip/data.py` (pools / object splits / paired shifts), `features.py`, `conformal.py` (q̂, Mondrian, OQT
+    with anti-windup + UT4 books), `baselines.py` (CSF), `featsets.py` (fairness-table sets), `models.py` (HGB quantile,
+    equal 30-config grouped-CV search, RAW-G), `main.py label / mono / timing`; tests UT1, UT2, UT4, UT7, UT9 + shapes:
+    12 passed. Runner UT6 / timing job `experiments/p2_timing.json` dispatched (queued behind paper-1 follow-ups).
+  - Replay cost in the sandbox ≈ 0.008 s (not 1 s): the whole simulation budget is ≈ 0.5 CPU-h; no downscale needed.
+  - **Pilot (pilot pool only):** 0 / 140 non-monotone; 0 unavoidable in ID / S1 / S3 / F5 (max F\*_hi 33 N ≪ 100 N);
+    0 preload slips. Cross-fitted conformal RE at α 0.10 (pilot scale): P 1.02, S 0.97, full 0.94, CSF-1 0.76,
+    oracle 0.39; every non-oracle residual correlates ≈ −0.79 with log μ → **the squeeze probe gives touch almost no
+    friction information.** Candidate fix tested behind a flag (default protocol unchanged): an incipient-slip
+    ramp-down probe; its onset force recovers μ with corr 0.999 in simulation (a perfect detector, so too optimistic).
+  - **Open design decision before the freeze (next run):** keep the squeeze design, or amend (ramp-down probe with a
+    robot-observable detector and onset-noise sensitivity, re-stated H2/H4/H3-L/D-μ), after a fresh-context skeptic
+    review. Then freeze `docs/08b_preregistration.md` and start the main labels (stage 12).
