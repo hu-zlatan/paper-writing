@@ -210,3 +210,26 @@ Run order when both papers are active: AUTOPILOT §7.
     H3). Pilot power rules applied: 50 train objects per family moved to test (H2b SE 0.037 > 0.035); H3 oracle share
     175 objects (S2 pool 550 objects) and H3 pre-registered with reduced power (projected half-width ≈ 0.12).
   - Next: stage 11 RESOURCE_PLANNING (`docs/09_schedule.json`), then stage 12 main-pool labels on Actions.
+
+## Stage 11. RESOURCE_PLANNING     [v1]
+- **Finished:** 2026-11-08 (run 39). Plan `plans/stage_11_resource_planning.md`; output `docs/09_schedule.json`.
+- 1-condition pilot: TIME_ESTIMATE 0.124 s per label instance (sandbox); whole plan ≈ 350 CPU-min, CPU only; the
+  label set runs in the sandbox because paper 1 holds the Actions queue for ≈ 10 h. **Decision:** PROCEED → 12.
+
+## Stage 12. EXPERIMENT_RUN     [v1] — in progress
+- **Run 39, increment 1 (labels):** 18,600 main-pool labels under protocol `"rd"` (`code/run_labels_v1.sh`,
+  `results/v1/labels/`): id 8,000 (train 2,400 / select 800 / cal 2,000 / test 2,800), S1 / S1m / S3 2,800 each on the
+  id test objects, s2 2,200 (oracle 700 / stream 1,500). UT8: unavoidable 2 / 8,000 (id), 6 / 2,800 (S1, 0.21 %),
+  1 (S1m), 1 (S3), 2 / 2,200 (S2) — all ≤ 1 %. Preload slips 0. No predictor fitted, no cal / test statistic read.
+- **Run 39, increment 2 — H1-M design gate (`code/run_h1m_v1.sh`, `analysis_h1m.py` → `results/v1/h1m_analysis.json`):
+  FAILS.** 8 / 800 id instances non-monotone (pre-registered pass: ≤ 7; Clopper–Pearson 98.75 % upper limit 2.11 % >
+  2 %). By family F1 3, F2 2, F3 2, F4 1; by disturbance D2 (shake) 7, D1 1. Every violation is a single slip outcome
+  at most 0.9 % above F\*_hi (just above the first no-slip force); shift pools (descriptive): S1 0 / 100, S3 1 / 100,
+  S2 1 / 100. The pilot had 0 / 140, which only bounded the rate at ≈ 2 %.
+  **Pre-registered consequence (07_hypotheses H1-M failure condition, unchanged by 08a/08b):** reported as a negative
+  finding ("slip is not monotone in force in this simulator at rate ≈ 1 %, as narrow flickers just above F\*, mostly
+  under shaking"), and the primary validity route switches to conformal risk control on the binary loss
+  1{slip(F)} (non-monotone form, 20-point λ-grid per calibration instance). No family exceeds the 5 % flag.
+- **Next (run 40):** implement the CRC route (λ-grid replays on the cal and test instances, ≈ 2,000 × 20 + audits) and
+  write the analysis code (`docs/08c_analysis_plan.md`: COMP selection, seeds, bootstrap) before fitting / reading
+  any cal or test result; then `main.py fit` per arm × seed.
