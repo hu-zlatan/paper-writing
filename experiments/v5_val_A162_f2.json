@@ -1,0 +1,13 @@
+{
+ "purpose": "v5 D5 val3 A16-2 follow-up 2: shards of f1 stopped by the 25-min time guard (tools_resume_manifest.py)",
+ "jobs": [
+  {
+   "id": "v5_val_A16-2_s705_220_r229_r238",
+   "cmd": "python main.py eval3 --set A16 --kappa 2 --tau 3.4 --n-star 3 --method student --weights ../results/v5/d5/A16_k2_s705_r2.npz --split val3 --start 238 --count 2 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/A16_k2_student_s705_r2_220_r229_r238"
+  },
+  {
+   "id": "v5_val_A16-2_s705_260_r270_r278",
+   "cmd": "python main.py eval3 --set A16 --kappa 2 --tau 3.4 --n-star 3 --method student --weights ../results/v5/d5/A16_k2_s705_r2.npz --split val3 --start 278 --count 2 --sub 8 --budget-minutes 25 --out ../results/v5/d5_val/A16_k2_student_s705_r2_260_r270_r278"
+  }
+ ]
+}
