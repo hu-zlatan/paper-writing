@@ -133,3 +133,14 @@ Run order when both papers are active: AUTOPILOT §7.
   deployable route on hardware.
 - **Decision:** PROCEED → stage 8.5 THEORETICAL_BOUNDS, then stage 9 (pilot items in `07_hypotheses.md` §8 settle
   before the pre-registration freeze).
+
+## Stage 8.5. THEORETICAL_BOUNDS     [v1]
+
+- **Finished:** 2026-11-08T08:50Z (run 37). Plan: `plans/stage_08_5_theoretical_bounds.md`.
+- **Outputs produced:** `docs/07b_theoretical_bounds.md` — standard results restated with premises (no new theory):
+  G1 offline coverage ≤ α of the label rule, physical slip ≤ α only under monotonicity; caveat that several instances
+  per object break plain instance-level exchangeability (stage 9 must pick a clustered calibration rule); G2 online
+  identity Σ(slip − α) = Δq/η and long-run bound on uncapped steps, any sequence, informal boundedness argument relying
+  on the cap-rarity design condition. Complexity: ≈ 10 replays per label dominate; decision one tree-ensemble call.
+- **Decision:** PROCEED → stage 9 EXPERIMENT_DESIGN [gate] — next run; the pilot items of `07_hypotheses.md` §8 are
+  needed for the freeze.
