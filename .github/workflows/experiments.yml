@@ -7,6 +7,10 @@ on:
       manifest:
         description: "path to manifest JSON {jobs:[{id, cmd}]}"
         required: true
+      workdir:
+        description: "code directory the commands run in (paper 1: code; paper 2: papers/p2/code)"
+        required: false
+        default: "code"
 permissions:
   contents: write
 jobs:
@@ -40,9 +44,9 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - run: pip install -r code/requirements.txt
+      - run: pip install -r ${{ github.event.inputs.workdir || 'code' }}/requirements.txt
       - name: Run
-        working-directory: code
+        working-directory: ${{ github.event.inputs.workdir || 'code' }}
         env:
           OMP_NUM_THREADS: "1"
           OPENBLAS_NUM_THREADS: "1"
@@ -56,7 +60,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add results/
+          git add results/ $(ls -d papers/*/results 2>/dev/null)
           git commit -m "results: ${{ matrix.id }} (Actions run ${{ github.run_id }})" || exit 0
           for i in 1 2 3 4 5 6 7 8; do git pull --rebase origin main && git push origin HEAD:main && exit 0; sleep $((RANDOM % 20 + 5)); done
           exit 1
