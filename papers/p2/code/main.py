@@ -199,7 +199,8 @@ def cmd_fit(a):
     res = header(a, "fit")
     res.update({"fset": a.fset, "sigma": a.sigma, "no_mass": a.no_mass, "alpha": a.alpha, "seed": a.seed,
                 "configs": a.configs, "n_train_rows": len(tr), "best": info["best"], "cv_pinball": info["cv_pinball"],
-                "keys": [list(key(r)) for r in rows], "log_pred": [round(float(p), 7) for p in pred],
+                "n_rows": len(rows), "keys_sha256": hashlib.sha256(json.dumps([list(key(r)) for r in rows]).encode()).hexdigest(),
+                "log_pred": [round(float(p), 6) for p in pred],
                 "seconds": time.time() - t0})
     with open(a.out + ".json", "w") as f:
         json.dump(res, f)

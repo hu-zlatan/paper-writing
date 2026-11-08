@@ -1,0 +1,245 @@
+{
+ "purpose": "p2 stage 12: offline predictors at alpha 0.10 (tau 0.90), every arm x 5 seeds, equal 30-config grouped-CV search on id train objects only; predictions for every labelled row. No cal/test label enters the fit.",
+ "jobs": [
+  {
+   "id": "p2_fit_P_seed0",
+   "cmd": "python main.py fit --fset P --sigma 0.2 --alpha 0.10 --seed 0 --configs 30 --out ../results/v1/preds/a010_P_seed0"
+  },
+  {
+   "id": "p2_fit_P_seed1",
+   "cmd": "python main.py fit --fset P --sigma 0.2 --alpha 0.10 --seed 1 --configs 30 --out ../results/v1/preds/a010_P_seed1"
+  },
+  {
+   "id": "p2_fit_P_seed2",
+   "cmd": "python main.py fit --fset P --sigma 0.2 --alpha 0.10 --seed 2 --configs 30 --out ../results/v1/preds/a010_P_seed2"
+  },
+  {
+   "id": "p2_fit_P_seed3",
+   "cmd": "python main.py fit --fset P --sigma 0.2 --alpha 0.10 --seed 3 --configs 30 --out ../results/v1/preds/a010_P_seed3"
+  },
+  {
+   "id": "p2_fit_P_seed4",
+   "cmd": "python main.py fit --fset P --sigma 0.2 --alpha 0.10 --seed 4 --configs 30 --out ../results/v1/preds/a010_P_seed4"
+  },
+  {
+   "id": "p2_fit_S_seed0",
+   "cmd": "python main.py fit --fset S --sigma 0.2 --alpha 0.10 --seed 0 --configs 30 --out ../results/v1/preds/a010_S_seed0"
+  },
+  {
+   "id": "p2_fit_S_seed1",
+   "cmd": "python main.py fit --fset S --sigma 0.2 --alpha 0.10 --seed 1 --configs 30 --out ../results/v1/preds/a010_S_seed1"
+  },
+  {
+   "id": "p2_fit_S_seed2",
+   "cmd": "python main.py fit --fset S --sigma 0.2 --alpha 0.10 --seed 2 --configs 30 --out ../results/v1/preds/a010_S_seed2"
+  },
+  {
+   "id": "p2_fit_S_seed3",
+   "cmd": "python main.py fit --fset S --sigma 0.2 --alpha 0.10 --seed 3 --configs 30 --out ../results/v1/preds/a010_S_seed3"
+  },
+  {
+   "id": "p2_fit_S_seed4",
+   "cmd": "python main.py fit --fset S --sigma 0.2 --alpha 0.10 --seed 4 --configs 30 --out ../results/v1/preds/a010_S_seed4"
+  },
+  {
+   "id": "p2_fit_full_seed0",
+   "cmd": "python main.py fit --fset full --sigma 0.2 --alpha 0.10 --seed 0 --configs 30 --out ../results/v1/preds/a010_full_seed0"
+  },
+  {
+   "id": "p2_fit_full_seed1",
+   "cmd": "python main.py fit --fset full --sigma 0.2 --alpha 0.10 --seed 1 --configs 30 --out ../results/v1/preds/a010_full_seed1"
+  },
+  {
+   "id": "p2_fit_full_seed2",
+   "cmd": "python main.py fit --fset full --sigma 0.2 --alpha 0.10 --seed 2 --configs 30 --out ../results/v1/preds/a010_full_seed2"
+  },
+  {
+   "id": "p2_fit_full_seed3",
+   "cmd": "python main.py fit --fset full --sigma 0.2 --alpha 0.10 --seed 3 --configs 30 --out ../results/v1/preds/a010_full_seed3"
+  },
+  {
+   "id": "p2_fit_full_seed4",
+   "cmd": "python main.py fit --fset full --sigma 0.2 --alpha 0.10 --seed 4 --configs 30 --out ../results/v1/preds/a010_full_seed4"
+  },
+  {
+   "id": "p2_fit_oracle_seed0",
+   "cmd": "python main.py fit --fset oracle --sigma 0.2 --alpha 0.10 --seed 0 --configs 30 --out ../results/v1/preds/a010_oracle_seed0"
+  },
+  {
+   "id": "p2_fit_oracle_seed1",
+   "cmd": "python main.py fit --fset oracle --sigma 0.2 --alpha 0.10 --seed 1 --configs 30 --out ../results/v1/preds/a010_oracle_seed1"
+  },
+  {
+   "id": "p2_fit_oracle_seed2",
+   "cmd": "python main.py fit --fset oracle --sigma 0.2 --alpha 0.10 --seed 2 --configs 30 --out ../results/v1/preds/a010_oracle_seed2"
+  },
+  {
+   "id": "p2_fit_oracle_seed3",
+   "cmd": "python main.py fit --fset oracle --sigma 0.2 --alpha 0.10 --seed 3 --configs 30 --out ../results/v1/preds/a010_oracle_seed3"
+  },
+  {
+   "id": "p2_fit_oracle_seed4",
+   "cmd": "python main.py fit --fset oracle --sigma 0.2 --alpha 0.10 --seed 4 --configs 30 --out ../results/v1/preds/a010_oracle_seed4"
+  },
+  {
+   "id": "p2_fit_full_rd_s0.0_seed0",
+   "cmd": "python main.py fit --fset full_rd --sigma 0.0 --alpha 0.10 --seed 0 --configs 30 --out ../results/v1/preds/a010_full_rd_s0.0_seed0"
+  },
+  {
+   "id": "p2_fit_full_rd_s0.0_seed1",
+   "cmd": "python main.py fit --fset full_rd --sigma 0.0 --alpha 0.10 --seed 1 --configs 30 --out ../results/v1/preds/a010_full_rd_s0.0_seed1"
+  },
+  {
+   "id": "p2_fit_full_rd_s0.0_seed2",
+   "cmd": "python main.py fit --fset full_rd --sigma 0.0 --alpha 0.10 --seed 2 --configs 30 --out ../results/v1/preds/a010_full_rd_s0.0_seed2"
+  },
+  {
+   "id": "p2_fit_full_rd_s0.0_seed3",
+   "cmd": "python main.py fit --fset full_rd --sigma 0.0 --alpha 0.10 --seed 3 --configs 30 --out ../results/v1/preds/a010_full_rd_s0.0_seed3"
+  },
+  {
+   "id": "p2_fit_full_rd_s0.0_seed4",
+   "cmd": "python main.py fit --fset full_rd --sigma 0.0 --alpha 0.10 --seed 4 --configs 30 --out ../results/v1/preds/a010_full_rd_s0.0_seed4"
+  },
+  {
+   "id": "p2_fit_full_rd_s0.1_seed0",
+   "cmd": "python main.py fit --fset full_rd --sigma 0.1 --alpha 0.10 --seed 0 --configs 30 --out ../results/v1/preds/a010_full_rd_s0.1_seed0"
+  },
+  {
+   "id": "p2_fit_full_rd_s0.1_seed1",
+   "cmd": "python main.py fit --fset full_rd --sigma 0.1 --alpha 0.10 --seed 1 --configs 30 --out ../results/v1/preds/a010_full_rd_s0.1_seed1"
+  },
+  {
+   "id": "p2_fit_full_rd_s0.1_seed2",
+   "cmd": "python main.py fit --fset full_rd --sigma 0.1 --alpha 0.10 --seed 2 --configs 30 --out ../results/v1/preds/a010_full_rd_s0.1_seed2"
+  },
+  {
+   "id": "p2_fit_full_rd_s0.1_seed3",
+   "cmd": "python main.py fit --fset full_rd --sigma 0.1 --alpha 0.10 --seed 3 --configs 30 --out ../results/v1/preds/a010_full_rd_s0.1_seed3"
+  },
+  {
+   "id": "p2_fit_full_rd_s0.1_seed4",
+   "cmd": "python main.py fit --fset full_rd --sigma 0.1 --alpha 0.10 --seed 4 --configs 30 --out ../results/v1/preds/a010_full_rd_s0.1_seed4"
+  },
+  {
+   "id": "p2_fit_full_rd_s0.2_seed0",
+   "cmd": "python main.py fit --fset full_rd --sigma 0.2 --alpha 0.10 --seed 0 --configs 30 --out ../results/v1/preds/a010_full_rd_s0.2_seed0"
+  },
+  {
+   "id": "p2_fit_full_rd_s0.2_seed1",
+   "cmd": "python main.py fit --fset full_rd --sigma 0.2 --alpha 0.10 --seed 1 --configs 30 --out ../results/v1/preds/a010_full_rd_s0.2_seed1"
+  },
+  {
+   "id": "p2_fit_full_rd_s0.2_seed2",
+   "cmd": "python main.py fit --fset full_rd --sigma 0.2 --alpha 0.10 --seed 2 --configs 30 --out ../results/v1/preds/a010_full_rd_s0.2_seed2"
+  },
+  {
+   "id": "p2_fit_full_rd_s0.2_seed3",
+   "cmd": "python main.py fit --fset full_rd --sigma 0.2 --alpha 0.10 --seed 3 --configs 30 --out ../results/v1/preds/a010_full_rd_s0.2_seed3"
+  },
+  {
+   "id": "p2_fit_full_rd_s0.2_seed4",
+   "cmd": "python main.py fit --fset full_rd --sigma 0.2 --alpha 0.10 --seed 4 --configs 30 --out ../results/v1/preds/a010_full_rd_s0.2_seed4"
+  },
+  {
+   "id": "p2_fit_full_rd_s0.4_seed0",
+   "cmd": "python main.py fit --fset full_rd --sigma 0.4 --alpha 0.10 --seed 0 --configs 30 --out ../results/v1/preds/a010_full_rd_s0.4_seed0"
+  },
+  {
+   "id": "p2_fit_full_rd_s0.4_seed1",
+   "cmd": "python main.py fit --fset full_rd --sigma 0.4 --alpha 0.10 --seed 1 --configs 30 --out ../results/v1/preds/a010_full_rd_s0.4_seed1"
+  },
+  {
+   "id": "p2_fit_full_rd_s0.4_seed2",
+   "cmd": "python main.py fit --fset full_rd --sigma 0.4 --alpha 0.10 --seed 2 --configs 30 --out ../results/v1/preds/a010_full_rd_s0.4_seed2"
+  },
+  {
+   "id": "p2_fit_full_rd_s0.4_seed3",
+   "cmd": "python main.py fit --fset full_rd --sigma 0.4 --alpha 0.10 --seed 3 --configs 30 --out ../results/v1/preds/a010_full_rd_s0.4_seed3"
+  },
+  {
+   "id": "p2_fit_full_rd_s0.4_seed4",
+   "cmd": "python main.py fit --fset full_rd --sigma 0.4 --alpha 0.10 --seed 4 --configs 30 --out ../results/v1/preds/a010_full_rd_s0.4_seed4"
+  },
+  {
+   "id": "p2_fit_P_onset_s0.0_seed0",
+   "cmd": "python main.py fit --fset P_onset --sigma 0.0 --alpha 0.10 --seed 0 --configs 30 --out ../results/v1/preds/a010_P_onset_s0.0_seed0"
+  },
+  {
+   "id": "p2_fit_P_onset_s0.0_seed1",
+   "cmd": "python main.py fit --fset P_onset --sigma 0.0 --alpha 0.10 --seed 1 --configs 30 --out ../results/v1/preds/a010_P_onset_s0.0_seed1"
+  },
+  {
+   "id": "p2_fit_P_onset_s0.0_seed2",
+   "cmd": "python main.py fit --fset P_onset --sigma 0.0 --alpha 0.10 --seed 2 --configs 30 --out ../results/v1/preds/a010_P_onset_s0.0_seed2"
+  },
+  {
+   "id": "p2_fit_P_onset_s0.0_seed3",
+   "cmd": "python main.py fit --fset P_onset --sigma 0.0 --alpha 0.10 --seed 3 --configs 30 --out ../results/v1/preds/a010_P_onset_s0.0_seed3"
+  },
+  {
+   "id": "p2_fit_P_onset_s0.0_seed4",
+   "cmd": "python main.py fit --fset P_onset --sigma 0.0 --alpha 0.10 --seed 4 --configs 30 --out ../results/v1/preds/a010_P_onset_s0.0_seed4"
+  },
+  {
+   "id": "p2_fit_P_onset_s0.1_seed0",
+   "cmd": "python main.py fit --fset P_onset --sigma 0.1 --alpha 0.10 --seed 0 --configs 30 --out ../results/v1/preds/a010_P_onset_s0.1_seed0"
+  },
+  {
+   "id": "p2_fit_P_onset_s0.1_seed1",
+   "cmd": "python main.py fit --fset P_onset --sigma 0.1 --alpha 0.10 --seed 1 --configs 30 --out ../results/v1/preds/a010_P_onset_s0.1_seed1"
+  },
+  {
+   "id": "p2_fit_P_onset_s0.1_seed2",
+   "cmd": "python main.py fit --fset P_onset --sigma 0.1 --alpha 0.10 --seed 2 --configs 30 --out ../results/v1/preds/a010_P_onset_s0.1_seed2"
+  },
+  {
+   "id": "p2_fit_P_onset_s0.1_seed3",
+   "cmd": "python main.py fit --fset P_onset --sigma 0.1 --alpha 0.10 --seed 3 --configs 30 --out ../results/v1/preds/a010_P_onset_s0.1_seed3"
+  },
+  {
+   "id": "p2_fit_P_onset_s0.1_seed4",
+   "cmd": "python main.py fit --fset P_onset --sigma 0.1 --alpha 0.10 --seed 4 --configs 30 --out ../results/v1/preds/a010_P_onset_s0.1_seed4"
+  },
+  {
+   "id": "p2_fit_P_onset_s0.2_seed0",
+   "cmd": "python main.py fit --fset P_onset --sigma 0.2 --alpha 0.10 --seed 0 --configs 30 --out ../results/v1/preds/a010_P_onset_s0.2_seed0"
+  },
+  {
+   "id": "p2_fit_P_onset_s0.2_seed1",
+   "cmd": "python main.py fit --fset P_onset --sigma 0.2 --alpha 0.10 --seed 1 --configs 30 --out ../results/v1/preds/a010_P_onset_s0.2_seed1"
+  },
+  {
+   "id": "p2_fit_P_onset_s0.2_seed2",
+   "cmd": "python main.py fit --fset P_onset --sigma 0.2 --alpha 0.10 --seed 2 --configs 30 --out ../results/v1/preds/a010_P_onset_s0.2_seed2"
+  },
+  {
+   "id": "p2_fit_P_onset_s0.2_seed3",
+   "cmd": "python main.py fit --fset P_onset --sigma 0.2 --alpha 0.10 --seed 3 --configs 30 --out ../results/v1/preds/a010_P_onset_s0.2_seed3"
+  },
+  {
+   "id": "p2_fit_P_onset_s0.2_seed4",
+   "cmd": "python main.py fit --fset P_onset --sigma 0.2 --alpha 0.10 --seed 4 --configs 30 --out ../results/v1/preds/a010_P_onset_s0.2_seed4"
+  },
+  {
+   "id": "p2_fit_P_onset_s0.4_seed0",
+   "cmd": "python main.py fit --fset P_onset --sigma 0.4 --alpha 0.10 --seed 0 --configs 30 --out ../results/v1/preds/a010_P_onset_s0.4_seed0"
+  },
+  {
+   "id": "p2_fit_P_onset_s0.4_seed1",
+   "cmd": "python main.py fit --fset P_onset --sigma 0.4 --alpha 0.10 --seed 1 --configs 30 --out ../results/v1/preds/a010_P_onset_s0.4_seed1"
+  },
+  {
+   "id": "p2_fit_P_onset_s0.4_seed2",
+   "cmd": "python main.py fit --fset P_onset --sigma 0.4 --alpha 0.10 --seed 2 --configs 30 --out ../results/v1/preds/a010_P_onset_s0.4_seed2"
+  },
+  {
+   "id": "p2_fit_P_onset_s0.4_seed3",
+   "cmd": "python main.py fit --fset P_onset --sigma 0.4 --alpha 0.10 --seed 3 --configs 30 --out ../results/v1/preds/a010_P_onset_s0.4_seed3"
+  },
+  {
+   "id": "p2_fit_P_onset_s0.4_seed4",
+   "cmd": "python main.py fit --fset P_onset --sigma 0.4 --alpha 0.10 --seed 4 --configs 30 --out ../results/v1/preds/a010_P_onset_s0.4_seed4"
+  }
+ ]
+}
