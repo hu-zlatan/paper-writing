@@ -25,6 +25,7 @@ G = 9.81
 DT = 0.002
 T_PRELOAD, T_PROBE, T_RAMP, T_SETTLE, T_DIST = 0.4, 0.3, 0.1, 0.1, 0.6
 PAD_HALF = (0.004, 0.02, 0.03)  # pad box half-sizes (x thickness, y width, z height) [m]
+T_RD, RD_FLOOR, RD_DISP, RD_ROT = 0.4, 0.02, 0.0003, math.radians(1.0)  # ramp-down probe (pilot candidate)
 GRID = 8                        # touch_grid resolution per pad (GRID x GRID)
 
 
@@ -125,8 +126,9 @@ def preload_force(m_max: float = 1.0, mu_min: float = 0.3) -> float:
 class Sim:
     """Compiled model for one instance; `run(F)` replays the protocol from the same initial state."""
 
-    def __init__(self, inst: Instance, F0: float, delta_t: float = 0.002, rot_t_deg: float = 3.0):
-        self.inst, self.F0 = inst, F0
+    def __init__(self, inst: Instance, F0: float, delta_t: float = 0.002, rot_t_deg: float = 3.0,
+                 rampdown: bool = False):
+        self.inst, self.F0, self.rampdown = inst, F0, rampdown
         self.delta_t, self.rot_t = delta_t, math.radians(rot_t_deg)
         self.m = mujoco.MjModel.from_xml_string(build_xml(inst))
         self.d = mujoco.MjData(self.m)
@@ -188,6 +190,32 @@ class Sim:
         elif inst.dist == "D4":    # payload: extra downward load, ramped over 0.1 s
             self.d.xfrc_applied[self.obj, 2] = -inst.amp * inst.mass * G * min(1.0, t / 0.1)
 
+    def _rampdown_probe(self, p_ref, a_ref, record):
+        """Lower the grip force log-linearly from F0 to RD_FLOOR*F0 over T_RD; stop at the first tangential
+        micro-displacement > RD_DISP or rotation > RD_ROT (incipient slip), then return to F0 over 0.1 s and hold
+        0.1 s. Returns the onset force and the touch frame at onset (only the robot-observable quantities are used
+        as features: commanded force at onset and pad readings; the displacement test stands in for a tactile
+        incipient-slip detector)."""
+        n = int(T_RD / DT)
+        onset, F, touch = None, self.F0 * RD_FLOOR, None
+        for k in range(n):
+            F = self.F0 * math.exp(math.log(RD_FLOOR) * (k + 1) / n)
+            self._set_force(F)
+            self._step()
+            p, a = self._rel_pose()
+            if tangential_disp(p - p_ref) > RD_DISP or abs(a - a_ref) > RD_ROT:
+                onset = F
+                break
+        if record:
+            touch = self._touch()
+        F_end = F
+        n_up = int(0.1 / DT)
+        for k in range(n_up):
+            self._set_force(F_end + (self.F0 - F_end) * (k + 1) / n_up)
+            self._step()
+        self._step(int(0.1 / DT))
+        return {"onset_force": onset, "found": onset is not None, "end_force": F_end, "touch_onset": touch}
+
     # ------------------------------------------------------------------ protocol
     def run(self, F: float, record: bool = False):
         """Replay the instance at grip force F. Returns dict(slip, reason, features?)."""
@@ -218,6 +246,11 @@ class Sim:
             feats["aperture_probe"] = float(d.qpos[m.joint("jR").qposadr[0]] - d.qpos[m.joint("jL").qposadr[0]])
         p1, a1 = self._rel_pose()
         pre_slip = bool(tangential_disp(p1 - p0) > self.delta_t)
+        if self.rampdown:   # 2b. incipient-slip ramp-down probe (pilot amendment candidate; off by default)
+            rd = self._rampdown_probe(p1, a1, record)
+            if record:
+                feats["rampdown"] = rd
+            p1, a1 = self._rel_pose()   # slip in steps 3-4 is measured from the pose after the probe
         # 3. ramp to F and settle
         n_r = int(T_RAMP / DT)
         Fs = self.F0

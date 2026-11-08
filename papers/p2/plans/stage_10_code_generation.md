@@ -75,3 +75,19 @@ Pilot pool only (salt 3003; main pools untouched). Sandbox, 2026-11-08 ≈ 14:15
   Write the change as `docs/08a_pilot_amendment.md` first (stage-9 design amendment, with the pilot numbers above as
   the reason), then implement it in `sim.py` behind a protocol flag so the current protocol stays reproducible.
   If the ramp-down probe also carries no μ information, keep the original design and report H2 honestly.
+
+## Increment 4b (run 38) — ramp-down probe re-pilot (candidate only, default protocol unchanged)
+- `sim.py`: `Sim(..., rampdown=False)`; when on, after the squeeze the force falls log-linearly from F0 to
+  RD_FLOOR·F0 over 0.4 s, stops at the first tangential displacement > 0.3 mm or rotation > 1°, returns to F0
+  (0.1 s) and holds 0.1 s; slip in steps 3–4 is then measured from the post-probe pose. Default off: the timing digest
+  is unchanged (70368455…).
+- `pilot_rampdown.py` (D4 instances, 5 families × 25 pilot objects): log(m g / 2 F_onset) vs log μ —
+  floor 0.02 F0: corr 0.9995, 27 / 125 onsets not found (light, high-μ objects); floor 0.005 F0: corr 0.999,
+  0 / 125 not found, constant offset 0.33 (detection lag), residual SD 0.015 (`results/pilot/pilot_rampdown_floor*.json`).
+- **Reading:** in simulation the probe measures μ almost exactly, because the "detector" is the true displacement.
+  Adopting it as-is would make the touch gain an artefact of a perfect friction sensor. The amendment (next run) must
+  therefore (i) model the robot-observable detector (onset from pad shear/normal ratio or centroid shift, not the true
+  displacement) and/or add onset-force noise as a pre-registered sensitivity axis, (ii) re-state H2/H4 and the H3-L /
+  D-μ premises (D-μ R² ≤ 0.05 no longer holds for that arm; S1 then becomes partly visible to the predictor), and
+  (iii) get a fresh-context skeptic review (stage-8 style) before the freeze. Alternative kept open: no probe change,
+  report H2 as designed (pilot D ≈ 0.08 vs the 0.10 target, underpowered pilot).
