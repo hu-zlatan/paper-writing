@@ -112,6 +112,11 @@ def build_xml(inst: Instance, delta_pad: float = 0.0) -> str:
 </mujoco>"""
 
 
+def tangential_disp(dp) -> float:
+    """Displacement projected onto the pad plane (y, z); the normal (x, jaw-axis) component is excluded (UT9)."""
+    return float(np.linalg.norm(np.asarray(dp)[1:]))
+
+
 def preload_force(m_max: float = 1.0, mu_min: float = 0.3) -> float:
     """Constant preload F0 = 2 m_max g / (2 mu_min) (07_hypotheses §1.1) — identical for every instance."""
     return 2 * m_max * G / (2 * mu_min)
@@ -212,7 +217,7 @@ class Sim:
             feats["touch_probe"] = np.array(probe)
             feats["aperture_probe"] = float(d.qpos[m.joint("jR").qposadr[0]] - d.qpos[m.joint("jL").qposadr[0]])
         p1, a1 = self._rel_pose()
-        pre_slip = bool(np.linalg.norm((p1 - p0)[1:]) > self.delta_t)
+        pre_slip = bool(tangential_disp(p1 - p0) > self.delta_t)
         # 3. ramp to F and settle
         n_r = int(T_RAMP / DT)
         Fs = self.F0
@@ -230,7 +235,7 @@ class Sim:
             self._step()
             if k % 5 == 4:
                 p, a = self._rel_pose()
-                if np.linalg.norm((p - ref_p)[1:]) > self.delta_t:
+                if tangential_disp(p - ref_p) > self.delta_t:
                     slip, reason = True, "translation"
                     break
                 if abs(a - ref_a) > self.rot_t:
@@ -240,7 +245,7 @@ class Sim:
                     slip, reason = True, "contact_lost"
                     break
         if not slip:  # also catch slip during ramp/settle
-            if np.linalg.norm((pr - ref_p)[1:]) > self.delta_t:
+            if tangential_disp(pr - ref_p) > self.delta_t:
                 slip, reason = True, "translation_settle"
         self.d.xfrc_applied[self.obj] = 0.0
         out = {"slip": slip, "reason": reason, "preload_slip": pre_slip}

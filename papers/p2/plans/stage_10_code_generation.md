@@ -38,3 +38,17 @@ Design deviations recorded so far:
 - **Consequence for the budget:** at ≈ 0.008 s per replay the full simulation budget (≈ 230 k replays) is ≈ 0.5 CPU-h,
   not 64.5; no downscale step is needed.
 - Next: increment 3 (predictors, conformal, OQT, baselines, UT2–UT9), then increment 4 (pilot + freeze).
+
+## Increment 3 (run 38) — done
+- `certgrip/conformal.py` (q̂ order statistic, Mondrian calibrate, capped decision, OQT with anti-windup, decaying
+  variant, UT4 identity/bound bookkeeping); `certgrip/baselines.py` (CSF nominal force; D2 a_cmd = A(2πf)²);
+  `certgrip/featsets.py` (base / P / S / full / oracle per the fairness table; no μ, external amplitude, CoM or
+  family ID outside the oracle); `certgrip/models.py` (HGB quantile on log F\*_hi, the same 30-config search with
+  4-fold object-grouped CV for every input set; RAW-G Gaussian model).
+- `sim.py`: slip displacement factored into `tangential_disp` (behaviour-preserving: timing digest unchanged,
+  70368455…); `requirements.txt` + scikit-learn 1.9.1.
+- `tests/test_conformal.py`: UT2 (exact leave-one-out indexing), UT4 (identity < 1e-8, bound < α), UT7 (compiled
+  timestep / cone / integrator / impratio / condim / solref / solimp identical over F1–F5 × D1–D4 × {none, S1, S3}),
+  UT9 (3 mm normal → 0, 3 mm tangential → slip), feature shapes. 12 passed in total.
+- Not yet: UT3 (needs calibration + test labels, runs at analysis time), UT5 (bracket replays, analysis time),
+  UT6 (runner job dispatched), UT8 (pilot).
