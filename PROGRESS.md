@@ -1461,3 +1461,11 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
     A16-2 val3 still incomplete (422 / 500; 11 follow-up shards running).
   - **FREEZE S4, S8** (`results/v5/13_freeze.json`, sha256 of 5 students r2 + 5 RL cfg 6 per cell), committed in
     df338d3 before any test5 job of these cells.
+  - **test5 S4 / S8 dispatched** (02:17 UTC): `v5_test5_S4_p0/p1` (267 jobs), `v5_test5_S8_p0/p1` (300 jobs).
+  - **A16-2 val3 follow-up 2** (`experiments/v5_val_A162_f2.json`, 2 shards / 4 episodes of seed 705): the Actions run
+    was queued behind ≈ 700 test5 jobs, so it was cancelled before starting and the two identical commands were run in
+    the sandbox (only `--budget-minutes` 25 → 50, a time guard that does not touch results; 186 s / 152 s, no early stop).
+  - **D5 read-out A16-2** (val3 0–499 complete): **fails** — Δ_succ = −5.96 pp (SE 2.38, threshold −1.23), Δ_BI =
+    −0.063 nats (passes ii), seeds within δ 0/5. **H5a on validation: 0 of 5 cells within δ.** No remedy step, no
+    retraining (amendment v5.0).
+  - **FREEZE A16-2** (`results/v5/13_freeze.json`, 5 students r2 + 5 RL cfg 6), committed before its test5 manifest.
