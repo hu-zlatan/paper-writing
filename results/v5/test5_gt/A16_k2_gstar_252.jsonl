@@ -1,0 +1,12 @@
+{"header": true, "args": {"cmd": "gt3", "src": ["/home/claude/paper-writing/code/../results/v5/test5/A16_k2_gstar_252.jsonl"], "J": 16, "L": 4095, "out": "/home/claude/paper-writing/code/../results/v5/test5_gt/.A16_k2_gstar_252"}, "env": {"TOUCHBED_NPHI": "64", "action_set": "64x8", "A": 512, "numpy": "2.5.3", "python": "3.13.18", "threads": {"OMP_NUM_THREADS": "1", "OPENBLAS_NUM_THREADS": "1", "MKL_NUM_THREADS": "1"}}}
+{"episode": 252, "set": "A16", "split": "test5", "kappa": 2.0, "tau": 3.4, "method": "gstar", "g_T": 4.783665506154902, "n_probes": 3, "J": 16, "L": 4095}
+{"episode": 253, "set": "A16", "split": "test5", "kappa": 2.0, "tau": 3.4, "method": "gstar", "g_T": 8.317765320197745, "n_probes": 3, "J": 16, "L": 4095}
+{"episode": 254, "set": "A16", "split": "test5", "kappa": 2.0, "tau": 3.4, "method": "gstar", "g_T": 8.316989403588675, "n_probes": 3, "J": 16, "L": 4095}
+{"episode": 255, "set": "A16", "split": "test5", "kappa": 2.0, "tau": 3.4, "method": "gstar", "g_T": 8.200425757328023, "n_probes": 3, "J": 16, "L": 4095}
+{"episode": 256, "set": "A16", "split": "test5", "kappa": 2.0, "tau": 3.4, "method": "gstar", "g_T": 6.902189011877811, "n_probes": 3, "J": 16, "L": 4095}
+{"episode": 257, "set": "A16", "split": "test5", "kappa": 2.0, "tau": 3.4, "method": "gstar", "g_T": 8.316023878762273, "n_probes": 3, "J": 16, "L": 4095}
+{"episode": 258, "set": "A16", "split": "test5", "kappa": 2.0, "tau": 3.4, "method": "gstar", "g_T": -5.790380685882951, "n_probes": 3, "J": 16, "L": 4095}
+{"episode": 259, "set": "A16", "split": "test5", "kappa": 2.0, "tau": 3.4, "method": "gstar", "g_T": 5.530100447133581, "n_probes": 3, "J": 16, "L": 4095}
+{"episode": 260, "set": "A16", "split": "test5", "kappa": 2.0, "tau": 3.4, "method": "gstar", "g_T": 8.31335672721637, "n_probes": 3, "J": 16, "L": 4095}
+{"episode": 261, "set": "A16", "split": "test5", "kappa": 2.0, "tau": 3.4, "method": "gstar", "g_T": 8.316756306647735, "n_probes": 3, "J": 16, "L": 4095}
+{"episode": 262, "set": "A16", "split": "test5", "kappa": 2.0, "tau": 3.4, "method": "gstar", "g_T": 5.882709898563695, "n_probes": 3, "J": 16, "L": 4095}

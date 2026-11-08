@@ -1,0 +1,13 @@
+{"header": true, "args": {"cmd": "gt3", "src": ["/home/claude/paper-writing/code/../results/v5/test5/A16_k2_gstar_096.jsonl"], "J": 16, "L": 4095, "out": "/home/claude/paper-writing/code/../results/v5/test5_gt/.A16_k2_gstar_096"}, "env": {"TOUCHBED_NPHI": "64", "action_set": "64x8", "A": 512, "numpy": "2.5.3", "python": "3.13.18", "threads": {"OMP_NUM_THREADS": "1", "OPENBLAS_NUM_THREADS": "1", "MKL_NUM_THREADS": "1"}}}
+{"episode": 96, "set": "A16", "split": "test5", "kappa": 2.0, "tau": 3.4, "method": "gstar", "g_T": 8.312094385868377, "n_probes": 3, "J": 16, "L": 4095}
+{"episode": 97, "set": "A16", "split": "test5", "kappa": 2.0, "tau": 3.4, "method": "gstar", "g_T": 8.15612922979611, "n_probes": 3, "J": 16, "L": 4095}
+{"episode": 98, "set": "A16", "split": "test5", "kappa": 2.0, "tau": 3.4, "method": "gstar", "g_T": 8.317716333792086, "n_probes": 3, "J": 16, "L": 4095}
+{"episode": 99, "set": "A16", "split": "test5", "kappa": 2.0, "tau": 3.4, "method": "gstar", "g_T": 8.310625395792012, "n_probes": 3, "J": 16, "L": 4095}
+{"episode": 100, "set": "A16", "split": "test5", "kappa": 2.0, "tau": 3.4, "method": "gstar", "g_T": 6.531717578585991, "n_probes": 3, "J": 16, "L": 4095}
+{"episode": 101, "set": "A16", "split": "test5", "kappa": 2.0, "tau": 3.4, "method": "gstar", "g_T": 7.572242803720904, "n_probes": 3, "J": 16, "L": 4095}
+{"episode": 102, "set": "A16", "split": "test5", "kappa": 2.0, "tau": 3.4, "method": "gstar", "g_T": 7.013659917076101, "n_probes": 3, "J": 16, "L": 4095}
+{"episode": 103, "set": "A16", "split": "test5", "kappa": 2.0, "tau": 3.4, "method": "gstar", "g_T": 8.31774925254963, "n_probes": 3, "J": 16, "L": 4095}
+{"episode": 104, "set": "A16", "split": "test5", "kappa": 2.0, "tau": 3.4, "method": "gstar", "g_T": 8.317766159663645, "n_probes": 3, "J": 16, "L": 4095}
+{"episode": 105, "set": "A16", "split": "test5", "kappa": 2.0, "tau": 3.4, "method": "gstar", "g_T": 7.576568661143767, "n_probes": 3, "J": 16, "L": 4095}
+{"episode": 106, "set": "A16", "split": "test5", "kappa": 2.0, "tau": 3.4, "method": "gstar", "g_T": 8.317766160894173, "n_probes": 3, "J": 16, "L": 4095}
+{"episode": 107, "set": "A16", "split": "test5", "kappa": 2.0, "tau": 3.4, "method": "gstar", "g_T": 5.7090046250973, "n_probes": 3, "J": 16, "L": 4095}
