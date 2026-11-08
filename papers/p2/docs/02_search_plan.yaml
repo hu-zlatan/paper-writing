@@ -1,0 +1,49 @@
+# p2 Stage 3 · SEARCH_STRATEGY (v1) — produced with pipeline/references/stage_prompts/search_strategy.md (verbatim)
+# topic: CertGrip — distribution-free slip-rate control for minimal-force tactile grip regulation
+topic: "Conformal / distribution-free risk control of slip rate for minimal-force tactile grip regulation"
+year_cutoff: 2018          # seminal pre-2018 work (friction cones, grip-force control, conformal prediction) via 'seminal'
+per_query_limit: 25
+search_strategies:
+  - name: core_grip_force_and_slip
+    goal: Direct prior work on choosing / regulating grip force and detecting or preventing slip with touch (SQ1, SQ3, SQ4).
+    queries:
+      - tactile grip force control
+      - slip detection tactile sensor
+      - slip prevention grasp force
+      - minimal grasp force estimation
+      - incipient slip tactile learning
+  - name: safety_guarantees_in_grasping
+    goal: Robust / risk-aware / certified grasping and force-closure margins, the closest guarantee-type alternatives (SQ3).
+    queries:
+      - risk aware grasp synthesis
+      - robust grasping friction uncertainty
+      - control barrier function grasping
+      - probabilistic grasp success guarantee
+  - name: conformal_prediction_methods
+    goal: Methodological foundations — split / quantile conformal, risk control, adaptive conformal under shift (SQ2, SQ5, SQ6).
+    queries:
+      - conformal quantile regression
+      - conformal risk control
+      - adaptive conformal inference distribution shift
+      - online conformal prediction feedback
+      - group conditional conformal coverage
+  - name: conformal_in_robotics
+    goal: Applications of conformal prediction / distribution-free UQ to robot learning, planning and control (positioning, R6).
+    queries:
+      - conformal prediction robotics
+      - conformal prediction motion planning
+      - conformal prediction robot safety
+      - uncertainty calibration robot manipulation
+  - name: tactile_simulation_and_benchmarks
+    goal: Tactile simulators, MuJoCo contact modelling, tactile manipulation benchmarks (environment and sim-only threats, R1, R5).
+    queries:
+      - tactile sensor simulation MuJoCo
+      - simulated tactile manipulation benchmark
+      - soft contact model friction simulation
+      - tactile learning grasping simulation
+seminal:
+  queries:
+    - grasp force optimization friction cone
+    - human grip force slip reflex
+    - distribution-free predictive inference regression
+    - algorithmic learning random world

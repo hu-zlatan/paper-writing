@@ -48,3 +48,14 @@ Run order when both papers are active: AUTOPILOT §7.
   way; sim-only; novelty; time; split leakage).
 - **Hard constraints:** no results exist or are claimed; no new citations introduced beyond stage-1 docs.
 - **Decision:** PROCEED → stage 3 SEARCH_STRATEGY (re-verify the RSS 2027 CFP first).
+
+## Stage 3. SEARCH_STRATEGY     [v1]
+
+- **Finished:** 2026-11-08T08:45Z (run 37). Plan: `plans/stage_03_search_strategy.md`.
+- **Outputs produced:** `docs/02_search_plan.yaml` (5 strategies: grip force & slip; guarantees in grasping; conformal
+  methods; conformal in robotics; tactile simulation & benchmarks — 22 queries + 4 seminal), `docs/02_sources.json`
+  (OpenAlex, Semantic Scholar, arXiv API, stage-1 seed IDs). Root `.github/workflows/literature.yml`: optional
+  `docs_dir` input (default `docs`; paper 1 behaviour unchanged).
+- **RSS CFP re-check:** not possible this run (page fetch timed out on permission; no content). Last verified
+  2026-11-06. Retry before stage 5.
+- **Decision:** PROCEED → stage 4 LITERATURE_COLLECT (dispatch `literature.yml` with `docs_dir: papers/p2/docs`).

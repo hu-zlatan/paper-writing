@@ -3,6 +3,11 @@ name: literature-collect
 # and commits docs/03_candidates.jsonl + docs/03_collect_log.json back to main.
 on:
   workflow_dispatch:
+    inputs:
+      docs_dir:
+        description: "docs directory holding 02_search_plan.yaml (paper 1: docs; paper 2: papers/p2/docs)"
+        required: false
+        default: "docs"
   push:
     branches: [main]
     paths:
@@ -22,12 +27,16 @@ jobs:
         with:
           python-version: "3.12"
       - run: pip install pyyaml
-      - run: python code/literature/collect.py
+      - name: Collect
+        env:
+          D: ${{ github.event.inputs.docs_dir || 'docs' }}
+        run: python code/literature/collect.py --plan "$D/02_search_plan.yaml" --out "$D/03_candidates.jsonl" --log "$D/03_collect_log.json"
       - name: Commit results
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add docs/03_candidates.jsonl docs/03_collect_log.json
-          git commit -m "stage 4 LITERATURE_COLLECT: candidates from OpenAlex/arXiv/Semantic Scholar (Actions run ${{ github.run_id }})" || exit 0
+          D="${{ github.event.inputs.docs_dir || 'docs' }}"
+          git add "$D/03_candidates.jsonl" "$D/03_collect_log.json"
+          git commit -m "stage 4 LITERATURE_COLLECT ($D): candidates from OpenAlex/arXiv/Semantic Scholar (Actions run ${{ github.run_id }})" || exit 0
           for i in 1 2 3; do git pull --rebase origin main && git push origin HEAD:main && exit 0; sleep 5; done
           exit 1

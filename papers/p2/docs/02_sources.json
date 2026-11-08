@@ -1,0 +1,6 @@
+[
+  {"id": "openalex", "name": "OpenAlex works API", "type": "bibliographic_api", "url": "https://api.openalex.org/works", "status": "planned (queried from GitHub Actions with code/literature/collect.py; sandbox shell has no route)", "query": "search=<query>&per_page=25&filter=publication_year:>2017", "verified_at": "2026-11-08"},
+  {"id": "semanticscholar", "name": "Semantic Scholar Graph API", "type": "bibliographic_api", "url": "https://api.semanticscholar.org/graph/v1/paper/search", "status": "planned (unauthenticated, rate-limited; cross-checks)", "query": "query=<query>&limit=25&fields=title,abstract,year,authors,externalIds,citationCount,venue", "verified_at": "2026-11-08"},
+  {"id": "arxiv", "name": "arXiv API", "type": "preprint_api", "url": "https://export.arxiv.org/api/query", "status": "planned (fallback; HTTP 429 seen in paper 1's run)", "query": "search_query=all:<query>&max_results=25", "verified_at": "2026-11-08"},
+  {"id": "arxiv_abs_pages", "name": "arXiv abstract pages opened in stage 1", "type": "seed_list", "url": "https://arxiv.org/abs/<id>", "status": "seed: 2607.25049, 2411.07833, 2605.23568, 2608.09166, 2505.18472, 2601.10268, 1905.03222, 2208.02814, 2106.00170 (stage-4 metadata must still be verified through an API)", "query": "n/a", "verified_at": "2026-11-08"}
+]
