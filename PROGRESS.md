@@ -9,7 +9,7 @@
 **Topic:** Amortized, non-myopic active tactile localization (TouchBED)
 **Initialised:** 2026-10-28T07:56:44Z
 **Current version:** v5
-**Latest stage:** Stage 13 ITERATIVE_REFINE [v5] in progress (main-run execution on Actions); see run 37 at the end of this file
+**Latest stage:** Stage 13 ITERATIVE_REFINE [v5] in progress (main-run execution on Actions); see run 39 at the end of this file
 
 ---
 
@@ -1518,3 +1518,20 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
     `tools_resume_e5.py` on `v5_e5_sub16_f1.json` if any shard stopped) → dispatch; (2) `python code/tools_v5_gt.py
     --workers 2` for new test5 files; (3) E5 complete → `analysis_e5_v5.py`, commit; (4) all cells at 300 →
     `analysis_test5_v5.py --check`, then the read-out → stage 14. Paper 2: the probe design decision, then the freeze.
+
+- **Run 39 (2026-11-08, from ≈ 19:50 UTC, scheduled) — stage 13 v5 continued, then paper 2.** No open issues;
+  AUTOPILOT §1 unchanged. `add_repo` not available as a tool; the existing checkout was reset onto origin/main.
+  Plan: `plans/stage_13_v5_run39_followups.md`.
+  - **Finished since run 38 (all `success`):** f3a (177), e5_f1 (178), f3b (179); p2 timing (180).
+  - **Remaining test5 work:** 93 time-guarded shards, almost all the random baseline (≈ 900 episodes over 5 cells;
+    ≈ 700 s / episode under sub 8, so a 25-min job finished only ≈ 2 episodes) plus 13 RL A16-2 episodes.
+    New `code/tools_split_manifest.py` splits each random shard into 3-episode jobs with `--budget-minutes 60` (a time
+    guard only — same precedent as run 36); method, frozen weights and episode indices unchanged.
+  - **Dispatched (≈ 20:00 UTC):** `v5_test5_f4a` / `v5_test5_f4b` (166 + 166 jobs) and `v5_e5_sub16_f2` (25 jobs /
+    45 episodes). Expected ≈ 9–10 h wall at the 20-runner cap.
+  - **g_T** for new test5 files running in the sandbox (`tools_v5_gt.py --workers 2`); outputs committed at the end.
+  - No test5 or E5 outcome read (counts only).
+  - **Where to resume (run 40):** (1) f4a / f4b / e5_f2 landed → `tools_resume_manifest.py` on f4a / f4b (random
+    leftovers → `tools_split_manifest.py` again) and `tools_resume_e5.py` on `v5_e5_sub16_f2.json` → dispatch;
+    (2) `python code/tools_v5_gt.py --workers 2`; (3) E5 complete → `analysis_e5_v5.py`; (4) all cells at 300 →
+    `analysis_test5_v5.py --check`, then the read-out → stage 14.
