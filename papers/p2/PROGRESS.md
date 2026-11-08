@@ -59,3 +59,14 @@ Run order when both papers are active: AUTOPILOT §7.
 - **RSS CFP re-check:** not possible this run (page fetch timed out on permission; no content). Last verified
   2026-11-06. Retry before stage 5.
 - **Decision:** PROCEED → stage 4 LITERATURE_COLLECT (dispatch `literature.yml` with `docs_dir: papers/p2/docs`).
+
+## Stage 4. LITERATURE_COLLECT     [v1]
+
+- **Finished:** 2026-11-08T08:09Z (Actions run 42461442407, `literature.yml` with `docs_dir: papers/p2/docs`).
+  Plan: `plans/stage_04_literature_collect.md`.
+- **Outputs produced:** `docs/03_candidates.jsonl` — 872 unique candidates (1,115 raw) from OpenAlex (26/26 queries
+  ok) and arXiv (26/26 ok); Semantic Scholar failed on 25/26 queries (rate limit, logged in `docs/03_collect_log.json`).
+  Every record has a DOI / arXiv ID / OpenAlex ID; 60 lack an abstract. All 9 stage-1 seed arXiv IDs are present.
+- **Environment note (for stage 10):** pip `mujoco` 4.0.0 installs in the sandbox and loads the
+  `mujoco.sensor.touch_grid` plugin (smoke test only; no experiment).
+- **Decision:** PROCEED → stage 5 LITERATURE_SCREEN [gate, auto-approve with logged reasons].
