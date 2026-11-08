@@ -164,3 +164,17 @@ Run order when both papers are active: AUTOPILOT §7.
   under a CPU-hour reading; as for paper 1, it is read as wall-clock on parallel free runners (≈ 5–6 h at 20 runners),
   recorded here and in OWNER_TODO; the downscale order applies if the pilot measures a higher c.
 - **Decision:** PROCEED → stage 10 CODE_GENERATION (`papers/p2/code/`, with the pilot), next run.
+
+## Stage 10. CODE_GENERATION     [v1] — increment 1 of 4 (in progress)
+
+- **Time:** 2026-11-08T08:45Z (run 37). Plan: `plans/stage_10_code_generation.md`.
+- **Outputs produced:** `code/certgrip/sim.py`, `code/pilot_smoke.py`, `code/requirements.txt` (mujoco 4.0.0),
+  `results/pilot/pilot_smoke.json` (pilot smoke, not a paper result).
+- **Pilot smoke (sandbox, 16 instances × 25-point force grid, seed 1):** median replay 0.008 s (p95 0.013 s) —
+  ≈ 100× cheaper than the 1 CPU-s assumption, so the downscale order is not needed (runner-image timing still to do);
+  0 / 16 instances non-monotone; replays bit-identical (same sandbox); `touch_grid` gives normal + 2 tangential
+  channels (07_hypotheses §8 item 4: tangential available; preload normal sum = F0 per pad as expected).
+- **Fixed before the look:** slip metric 2 mm tangential / 3° / contact loss (07_hypotheses assumption, unchanged).
+- **Design deviation (logged in the plan):** D1/D2 hand motion applied as the exact inertial pseudo-force in the hand
+  frame; no table phase.
+- **Next:** increment 2 (features + `main.py label` with time_guard + runner timing / determinism via Actions).
