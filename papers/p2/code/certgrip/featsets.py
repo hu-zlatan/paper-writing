@@ -6,6 +6,10 @@ P  = base + proprio (aperture at contact; the measured preload force equals the 
 S  = P + static touch at the preload (both pads' 7 statistics) + preload-slip flag.
 full (CertGrip) = S + probe-squeeze features (per pad: normal / tangential sums and centroid at each probe frame
      minus the preload frame, and the aperture change during the probe).
+Amendment 08a (protocol "rd" labels only): onset features = [log F_onset + sigma * eps, found flag], where F_onset is
+the commanded force at the touch-detected incipient slip (censored at the floor) and eps the instance's stored N(0,1)
+draw; sigma in {0, 0.1, 0.2, 0.4}, primary 0.2.
+full_rd (CertGrip-full under 08a) = full + onset;  P_onset (onset-only, H4e) = P + onset;  S_onset = S + onset.
 No feature uses the external D3/D4 amplitude, mu, CoM offset or family ID (privileged; oracle ceiling only).
 """
 from __future__ import annotations
@@ -23,7 +27,21 @@ def _nan0(v):
     return [0.0 if (x is None or (isinstance(x, float) and math.isnan(x))) else float(x) for x in v]
 
 
-def row_features(r: dict, fset: str, no_mass: bool = False) -> list:
+SIGMA_PRIMARY = 0.2
+
+
+def onset_log_force(r: dict, sigma: float) -> float:
+    o = r["rec"]["onset"]
+    return math.log(o["F_onset"]) + sigma * o["eps"]
+
+
+def onset_feats(r: dict, sigma: float) -> list:
+    return [onset_log_force(r, sigma), float(r["rec"]["onset"]["found"])]
+
+
+def row_features(r: dict, fset: str, no_mass: bool = False, sigma: float = SIGMA_PRIMARY) -> list:
+    if fset in ("full_rd", "P_onset", "S_onset"):
+        return row_features(r, {"full_rd": "full", "P_onset": "P", "S_onset": "S"}[fset], no_mass) + onset_feats(r, sigma)
     i = r["inst"]
     x = [float(r["dist"] == d) for d in DISTS] + [commanded_acc(r["dist"], i["amp"], i["freq"])]
     if not no_mass:
@@ -55,7 +73,7 @@ def privileged(r: dict) -> list:
             + [math.log(i["mu"]), math.log(i["mass"]), i["amp"], i["freq"], i["com"], i["grasp_dz"]] + size)
 
 
-def matrix(rows, fset: str, no_mass: bool = False) -> np.ndarray:
+def matrix(rows, fset: str, no_mass: bool = False, sigma: float = SIGMA_PRIMARY) -> np.ndarray:
     if fset == "oracle":
         return np.array([privileged(r) for r in rows])
-    return np.array([row_features(r, fset, no_mass) for r in rows])
+    return np.array([row_features(r, fset, no_mass, sigma) for r in rows])

@@ -17,6 +17,7 @@ from __future__ import annotations
 
 import dataclasses
 import math
+import zlib
 
 import mujoco
 import numpy as np
@@ -27,6 +28,10 @@ T_PRELOAD, T_PROBE, T_RAMP, T_SETTLE, T_DIST = 0.4, 0.3, 0.1, 0.1, 0.6
 PAD_HALF = (0.004, 0.02, 0.03)  # pad box half-sizes (x thickness, y width, z height) [m]
 T_RD, RD_FLOOR, RD_DISP, RD_ROT = 0.4, 0.02, 0.0003, math.radians(1.0)  # ramp-down probe (pilot candidate)
 GRID = 8                        # touch_grid resolution per pad (GRID x GRID)
+# Amendment 08a protocol "rd": ramp-down probe with a touch-only incipient-slip detector (fixed before the re-pilot).
+RD2 = {"T": 0.5, "floor": 0.005, "frame_steps": 1, "w": 10, "k": 10, "consec": 4, "slope_frac": 0.5,
+       "r_arm": 0.1, "n_min": 1e-3, "t_up": 0.02}
+TAXEL_NOISE = {"mult": 0.05, "add": 0.002, "gain": 0.10}   # per-taxel multiplicative / additive [N], per-instance gain
 
 
 @dataclasses.dataclass
@@ -40,6 +45,11 @@ class Instance:
     dist: str            # D1..D4
     amp: float           # D1 m/s^2, D2 m (amplitude), D3 multiple of m g, D4 multiple of m
     freq: float = 0.0    # D2 Hz
+
+
+def instance_seed(inst: Instance, tag: str) -> int:
+    """Deterministic per-instance seed (independent of the grip force and of Python's hash randomisation)."""
+    return zlib.crc32((tag + repr(dataclasses.astuple(inst))).encode())
 
 
 def half_width(inst: Instance) -> float:
@@ -127,8 +137,11 @@ class Sim:
     """Compiled model for one instance; `run(F)` replays the protocol from the same initial state."""
 
     def __init__(self, inst: Instance, F0: float, delta_t: float = 0.002, rot_t_deg: float = 3.0,
-                 rampdown: bool = False):
-        self.inst, self.F0, self.rampdown = inst, F0, rampdown
+                 rampdown: bool = False, protocol: str = "squeeze"):
+        """protocol "squeeze" = original design (stage 9); "rd" = amendment 08a (squeeze, then ramp-down probe with
+        the touch-only detector; slip measured from the pose before the probe, so probe slip counts)."""
+        assert protocol in ("squeeze", "rd")
+        self.inst, self.F0, self.rampdown, self.protocol = inst, F0, rampdown, protocol
         self.delta_t, self.rot_t = delta_t, math.radians(rot_t_deg)
         self.m = mujoco.MjModel.from_xml_string(build_xml(inst))
         self.d = mujoco.MjData(self.m)
@@ -216,6 +229,58 @@ class Sim:
         self._step(int(0.1 / DT))
         return {"onset_force": onset, "found": onset is not None, "end_force": F_end, "touch_onset": touch}
 
+    def _noisy_ratio(self, rng, gain):
+        """Shear/normal ratio from noisy taxels: per-taxel multiplicative + additive noise, per-instance channel gain."""
+        a = self._touch().reshape(2, 3, GRID, GRID)
+        nz = TAXEL_NOISE
+        a = a * gain[None, :, None, None] * np.exp(nz["mult"] * rng.standard_normal(a.shape)) \
+            + nz["add"] * rng.standard_normal(a.shape)
+        N = float(np.clip(a[:, 0], 0, None).sum())
+        T = float(sum(math.hypot(a[p, 1].sum(), a[p, 2].sum()) for p in range(2)))
+        return N, T
+
+    def _rd_touch_probe(self, record):
+        """Amendment 08a ramp-down probe. Force falls log-linearly from F0 to floor*F0 over T; every frame_steps
+        (100 Hz) the noisy shear/normal ratio r is read. While the pads stick, log r rises at the commanded rate
+        s = log(1/floor) per T; at incipient slip r saturates (Coulomb). Onset = first frame k-frame rise of log r is
+        below slope_frac * k * s on `consec` consecutive frames while the smoothed ratio exceeds r_arm (below the
+        lowest friction coefficient of any pool, 0.3 x 0.6), or whose normal reading falls below n_min (contact lost). The force then
+        returns to F0 over t_up and holds 0.1 s. Not found -> censored at the floor. Only touch readings and the
+        commanded force are used; the true displacement is logged as a diagnostic, never as a feature."""
+        rng = np.random.default_rng(instance_seed(self.inst, "taxel"))
+        gain = np.exp(TAXEL_NOISE["gain"] * rng.standard_normal(3))
+        gain[2] = gain[1]                                   # both shear channels share one gain
+        c = RD2
+        n = int(c["T"] / DT)
+        s_frame = math.log(1 / c["floor"]) * c["frame_steps"] / n
+        p_ref, _ = self._rel_pose()
+        raw, hist, onset, F, run = [], [], None, self.F0, 0
+        for k in range(n):
+            F = self.F0 * math.exp(math.log(c["floor"]) * (k + 1) / n)
+            self._set_force(F)
+            self._step()
+            if (k + 1) % c["frame_steps"]:
+                continue
+            N, T = self._noisy_ratio(rng, gain)
+            lost = N < c["n_min"]
+            raw.append(math.log(max(T, 1e-9) / max(N, 1e-9)))
+            hist.append(sum(raw[-c["w"]:]) / len(raw[-c["w"]:]))       # moving average over w frames
+            flat = len(raw) >= c["w"] + c["k"] and hist[-1] > math.log(c["r_arm"]) and hist[-1] - hist[-1 - c["k"]] < c["slope_frac"] * c["k"] * s_frame
+            run = run + 1 if flat else 0
+            if lost or run >= c["consec"]:
+                onset = F
+                break
+        p, _ = self._rel_pose()
+        F_end = F
+        n_up = int(c["t_up"] / DT)
+        for k in range(n_up):
+            self._set_force(F_end + (self.F0 - F_end) * (k + 1) / n_up)
+            self._step()
+        self._step(int(0.1 / DT))
+        eps = float(np.random.default_rng(instance_seed(self.inst, "onset_eps")).standard_normal())
+        return {"found": onset is not None, "F_onset": onset if onset is not None else self.F0 * c["floor"], "eps": eps,
+                "frames": len(hist), "disp_at_onset_mm": 1000 * tangential_disp(p - p_ref)}
+
     # ------------------------------------------------------------------ protocol
     def run(self, F: float, record: bool = False):
         """Replay the instance at grip force F. Returns dict(slip, reason, features?)."""
@@ -246,7 +311,11 @@ class Sim:
             feats["aperture_probe"] = float(d.qpos[m.joint("jR").qposadr[0]] - d.qpos[m.joint("jL").qposadr[0]])
         p1, a1 = self._rel_pose()
         pre_slip = bool(tangential_disp(p1 - p0) > self.delta_t)
-        if self.rampdown:   # 2b. incipient-slip ramp-down probe (pilot amendment candidate; off by default)
+        if self.protocol == "rd":   # 2b'. amendment 08a probe; the slip reference stays at the pre-probe pose
+            rdt = self._rd_touch_probe(record)
+            if record:
+                feats["onset"] = rdt
+        elif self.rampdown:   # 2b. incipient-slip ramp-down probe (pilot amendment candidate; off by default)
             rd = self._rampdown_probe(p1, a1, record)
             if record:
                 feats["rampdown"] = rd

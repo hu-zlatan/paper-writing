@@ -51,3 +51,23 @@ friction information, we added a ramp-down incipient-slip probe before freezing.
 recovered μ almost exactly in simulation, we model a tactile detector with pre-registered noise levels, keep the
 squeeze-only design as a pre-registered arm, and test whether learned touch improves on a physics plug-in using the
 same friction estimate. No main-pool data existed when the change was made.
+
+## Implementation record (run 39, 2026-11-08 ≈ 20:10–20:50 UTC) — before the re-pilot, before any main-pool data
+`code/certgrip/sim.py` protocol `"rd"` (`Sim(..., protocol="rd")`, `main.py ... --protocol rd`; the old protocol stays
+the default, timing digest 70368455… unchanged). Detector constants `RD2` / `TAXEL_NOISE` were set on the **first
+pilot objects 0–24 only** (already used in run 38) and are frozen from here; the re-pilot uses objects 25–124.
+- **Probe:** after the squeeze, force F0 → 0.005 F0 log-linearly over 0.5 s; on detection, back to F0 in 0.02 s, hold
+  0.1 s. Slip reference = pose **before** the probe (probe slip counts, item 2).
+- **Detector (touch only):** 500 Hz frames; noisy shear/normal ratio r = Σ_pads |shear sum| / Σ normal from noisy
+  taxels (per-taxel multiplicative lognormal 0.05, additive 0.002 N, per-instance channel gain lognormal 0.10, seeded
+  per instance); log r smoothed over 10 frames; onset = 4 consecutive frames whose 10-frame rise is < ½ of the stick
+  rise, armed only when smoothed r > 0.1 (below the lowest μ of any pool), or normal reading < 1 mN. Not found →
+  censored at the floor. Feature = [log F_onset + σ·ε, found], ε ~ N(0,1) per instance (stored), σ ∈ {0, 0.1, 0.2, 0.4},
+  primary 0.2. CSF-μ̂: μ̂ = m g / (2 F_onset_noisy) clipped to [0.1, 3].
+- **Why these constants (tuning log, objects 0–24, D4 + D1, F = 60 N):** a 100 Hz / 3-frame rule had 3 false early
+  triggers on light objects; a 2-consecutive 5-frame rule had a long lag and the probe made 156 / 250 instances slip;
+  a 1 s / 20-frame rule had no false triggers but 91 / 250 probe slips. Final rule: 250 / 250 found, 1 early
+  trigger, 1 / 250 probe slip at 60 N, onset displacement median 0.27 mm (p99 1.4 mm), log(m g / 2F_onset) vs log μ
+  corr 0.95, offset 0.25 (detection lag), SD 0.10 at σ = 0. So even σ = 0 is not a perfect friction sensor.
+- Tests: `code/tests/test_rd_probe.py` (determinism / force independence of the probe, onset vs Coulomb force,
+  no drop at F_max + monotone bracket, old protocol unchanged, CSF-μ̂, feature sets with σ) — 18 / 18 pass.

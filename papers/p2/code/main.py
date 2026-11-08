@@ -25,7 +25,7 @@ import numpy as np
 
 from certgrip.data import DISTS, N_OBJ, make_instance, split_of
 from certgrip.features import record
-from certgrip.sim import Sim, preload_force
+from certgrip.sim import RD2, TAXEL_NOISE, Sim, preload_force
 
 SLIP = {"delta_t": 0.002, "rot_t_deg": 3.0}   # fixed before any monotonicity data (run 37; 07_hypotheses §1.1)
 
@@ -33,7 +33,9 @@ SLIP = {"delta_t": 0.002, "rot_t_deg": 3.0}   # fixed before any monotonicity da
 def header(a, cmd):
     return {"header": True, "cmd": cmd, "argv": sys.argv[1:], "mujoco": mujoco.__version__,
             "numpy": np.__version__, "python": platform.python_version(), "machine": platform.machine(),
-            "processor": platform.processor(), "F0": preload_force(), "slip_metric": SLIP}
+            "processor": platform.processor(), "F0": preload_force(), "slip_metric": SLIP,
+            "protocol": getattr(a, "protocol", "squeeze"), "rd_detector": RD2 if getattr(a, "protocol", "") == "rd" else None,
+            "taxel_noise": TAXEL_NOISE if getattr(a, "protocol", "") == "rd" else None}
 
 
 def items(a):
@@ -83,7 +85,7 @@ def run_loop(a, cmd, body):
                 print("EARLY_STOP_AT_80_PCT_BUDGET", flush=True)
                 break
             inst = make_instance(a.pool, a.family, obj, d, a.shift)
-            sim = Sim(inst, preload_force(), delta_t=SLIP["delta_t"], rot_t_deg=SLIP["rot_t_deg"])
+            sim = Sim(inst, preload_force(), delta_t=SLIP["delta_t"], rot_t_deg=SLIP["rot_t_deg"], protocol=a.protocol)
             r = inst_row(a, obj, d, inst)
             r.update(body(sim))
             rows.append(r)
@@ -127,7 +129,8 @@ def cmd_timing(a):
         for obj in range(a.start, a.start + a.count):
             for d in DISTS:
                 inst = make_instance("pilot", fam, obj, d)
-                sim = Sim(inst, preload_force(), delta_t=SLIP["delta_t"], rot_t_deg=SLIP["rot_t_deg"])
+                sim = Sim(inst, preload_force(), delta_t=SLIP["delta_t"], rot_t_deg=SLIP["rot_t_deg"],
+                          protocol=a.protocol)
                 hs = []
                 for F in (3.0, 15.0, 60.0):
                     for _ in range(2):
@@ -167,6 +170,8 @@ def main(argv=None):
         p.add_argument("--f-min-grid", type=float, default=0.3)
         p.add_argument("--grid", type=int, default=35)
         p.add_argument("--budget-minutes", type=float, default=25.0)
+        p.add_argument("--protocol", default="squeeze", choices=["squeeze", "rd"],
+                       help="squeeze = stage-9 design; rd = amendment 08a ramp-down probe (the frozen study uses rd)")
         p.add_argument("--out", required=True)
     a = ap.parse_args(argv)
     {"label": cmd_label, "mono": cmd_mono, "timing": cmd_timing}[a.cmd](a)

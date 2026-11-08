@@ -22,3 +22,16 @@ def commanded_acc(dist: str, amp: float, freq: float) -> float:
 
 def f_nom(mass: float, dist: str, amp: float, freq: float) -> float:
     return mass * (G + commanded_acc(dist, amp, freq)) / (2 * MU_BAR)
+
+
+MU_HAT_CLIP = (0.1, 3.0)   # amendment 08a: keeps a censored (not found) onset from giving an unbounded estimate
+
+
+def mu_hat(mass: float, F_onset_noisy: float) -> float:
+    """Friction estimate from the noisy ramp-down onset force (static load m g shared by two pads)."""
+    return min(max(mass * G / (2 * F_onset_noisy), MU_HAT_CLIP[0]), MU_HAT_CLIP[1])
+
+
+def f_nom_muhat(mass: float, dist: str, amp: float, freq: float, F_onset_noisy: float) -> float:
+    """CSF-mu-hat (amendment 08a): the CSF-1 formula with mu_bar replaced by the same noisy onset estimate."""
+    return mass * (G + commanded_acc(dist, amp, freq)) / (2 * mu_hat(mass, F_onset_noisy))

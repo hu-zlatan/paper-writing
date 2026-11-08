@@ -32,10 +32,15 @@ def pad_stats(frame: np.ndarray) -> list:
 
 def record(feats: dict) -> dict:
     probe = feats["touch_probe"]
-    return {
+    out = {
         "aperture": round(feats["aperture"], 7),
         "aperture_probe": round(feats["aperture_probe"], 7),
         "touch_preload": pad_stats(feats["touch_preload"]),
         "touch_probe": [pad_stats(probe[k]) for k in PROBE_KEEP if k < len(probe)],
         "probe_frames": [k for k in PROBE_KEEP if k < len(probe)],
     }
+    if "onset" in feats:   # amendment 08a ramp-down probe (protocol "rd"); eps = the instance's onset-noise draw
+        o = feats["onset"]
+        out["onset"] = {"found": bool(o["found"]), "F_onset": round(float(o["F_onset"]), 7), "frames": int(o["frames"]),
+                        "eps": round(float(o["eps"]), 7), "disp_at_onset_mm": round(float(o["disp_at_onset_mm"]), 5)}
+    return out
