@@ -1,0 +1,475 @@
+{
+ "generated": "2026-11-08T08:06:46Z",
+ "queries": [
+  {
+   "strategy": "core_grip_force_and_slip",
+   "query": "tactile grip force control",
+   "source": "openalex",
+   "hits": 25
+  },
+  {
+   "strategy": "core_grip_force_and_slip",
+   "query": "tactile grip force control",
+   "source": "arxiv",
+   "hits": 25
+  },
+  {
+   "strategy": "core_grip_force_and_slip",
+   "query": "tactile grip force control",
+   "source": "semanticscholar",
+   "hits": 25
+  },
+  {
+   "strategy": "core_grip_force_and_slip",
+   "query": "slip detection tactile sensor",
+   "source": "openalex",
+   "hits": 25
+  },
+  {
+   "strategy": "core_grip_force_and_slip",
+   "query": "slip detection tactile sensor",
+   "source": "arxiv",
+   "hits": 25
+  },
+  {
+   "strategy": "core_grip_force_and_slip",
+   "query": "slip detection tactile sensor",
+   "source": "semanticscholar",
+   "error": "https://api.semanticscholar.org/graph/v1/paper/search?query=slip%20detection%20tactile%20sensor&limit=25&fields=title,abstract,year,authors,externalIds,citationCount,venue,url failed: HTTP 429"
+  },
+  {
+   "strategy": "core_grip_force_and_slip",
+   "query": "slip prevention grasp force",
+   "source": "openalex",
+   "hits": 25
+  },
+  {
+   "strategy": "core_grip_force_and_slip",
+   "query": "slip prevention grasp force",
+   "source": "arxiv",
+   "hits": 15
+  },
+  {
+   "strategy": "core_grip_force_and_slip",
+   "query": "slip prevention grasp force",
+   "source": "semanticscholar",
+   "error": "https://api.semanticscholar.org/graph/v1/paper/search?query=slip%20prevention%20grasp%20force&limit=25&fields=title,abstract,year,authors,externalIds,citationCount,venue,url failed: HTTP 429"
+  },
+  {
+   "strategy": "core_grip_force_and_slip",
+   "query": "minimal grasp force estimation",
+   "source": "openalex",
+   "hits": 25
+  },
+  {
+   "strategy": "core_grip_force_and_slip",
+   "query": "minimal grasp force estimation",
+   "source": "arxiv",
+   "hits": 16
+  },
+  {
+   "strategy": "core_grip_force_and_slip",
+   "query": "minimal grasp force estimation",
+   "source": "semanticscholar",
+   "error": "https://api.semanticscholar.org/graph/v1/paper/search?query=minimal%20grasp%20force%20estimation&limit=25&fields=title,abstract,year,authors,externalIds,citationCount,venue,url failed: HTTP 429"
+  },
+  {
+   "strategy": "core_grip_force_and_slip",
+   "query": "incipient slip tactile learning",
+   "source": "openalex",
+   "hits": 25
+  },
+  {
+   "strategy": "core_grip_force_and_slip",
+   "query": "incipient slip tactile learning",
+   "source": "arxiv",
+   "hits": 3
+  },
+  {
+   "strategy": "core_grip_force_and_slip",
+   "query": "incipient slip tactile learning",
+   "source": "semanticscholar",
+   "error": "skipped (source failing repeatedly or time budget exhausted)"
+  },
+  {
+   "strategy": "safety_guarantees_in_grasping",
+   "query": "risk aware grasp synthesis",
+   "source": "openalex",
+   "hits": 25
+  },
+  {
+   "strategy": "safety_guarantees_in_grasping",
+   "query": "risk aware grasp synthesis",
+   "source": "arxiv",
+   "hits": 1
+  },
+  {
+   "strategy": "safety_guarantees_in_grasping",
+   "query": "risk aware grasp synthesis",
+   "source": "semanticscholar",
+   "error": "skipped (source failing repeatedly or time budget exhausted)"
+  },
+  {
+   "strategy": "safety_guarantees_in_grasping",
+   "query": "robust grasping friction uncertainty",
+   "source": "openalex",
+   "hits": 25
+  },
+  {
+   "strategy": "safety_guarantees_in_grasping",
+   "query": "robust grasping friction uncertainty",
+   "source": "arxiv",
+   "hits": 7
+  },
+  {
+   "strategy": "safety_guarantees_in_grasping",
+   "query": "robust grasping friction uncertainty",
+   "source": "semanticscholar",
+   "error": "skipped (source failing repeatedly or time budget exhausted)"
+  },
+  {
+   "strategy": "safety_guarantees_in_grasping",
+   "query": "control barrier function grasping",
+   "source": "openalex",
+   "hits": 25
+  },
+  {
+   "strategy": "safety_guarantees_in_grasping",
+   "query": "control barrier function grasping",
+   "source": "arxiv",
+   "hits": 10
+  },
+  {
+   "strategy": "safety_guarantees_in_grasping",
+   "query": "control barrier function grasping",
+   "source": "semanticscholar",
+   "error": "skipped (source failing repeatedly or time budget exhausted)"
+  },
+  {
+   "strategy": "safety_guarantees_in_grasping",
+   "query": "probabilistic grasp success guarantee",
+   "source": "openalex",
+   "hits": 25
+  },
+  {
+   "strategy": "safety_guarantees_in_grasping",
+   "query": "probabilistic grasp success guarantee",
+   "source": "arxiv",
+   "hits": 3
+  },
+  {
+   "strategy": "safety_guarantees_in_grasping",
+   "query": "probabilistic grasp success guarantee",
+   "source": "semanticscholar",
+   "error": "skipped (source failing repeatedly or time budget exhausted)"
+  },
+  {
+   "strategy": "conformal_prediction_methods",
+   "query": "conformal quantile regression",
+   "source": "openalex",
+   "hits": 25
+  },
+  {
+   "strategy": "conformal_prediction_methods",
+   "query": "conformal quantile regression",
+   "source": "arxiv",
+   "hits": 25
+  },
+  {
+   "strategy": "conformal_prediction_methods",
+   "query": "conformal quantile regression",
+   "source": "semanticscholar",
+   "error": "skipped (source failing repeatedly or time budget exhausted)"
+  },
+  {
+   "strategy": "conformal_prediction_methods",
+   "query": "conformal risk control",
+   "source": "openalex",
+   "hits": 25
+  },
+  {
+   "strategy": "conformal_prediction_methods",
+   "query": "conformal risk control",
+   "source": "arxiv",
+   "hits": 25
+  },
+  {
+   "strategy": "conformal_prediction_methods",
+   "query": "conformal risk control",
+   "source": "semanticscholar",
+   "error": "skipped (source failing repeatedly or time budget exhausted)"
+  },
+  {
+   "strategy": "conformal_prediction_methods",
+   "query": "adaptive conformal inference distribution shift",
+   "source": "openalex",
+   "hits": 25
+  },
+  {
+   "strategy": "conformal_prediction_methods",
+   "query": "adaptive conformal inference distribution shift",
+   "source": "arxiv",
+   "hits": 25
+  },
+  {
+   "strategy": "conformal_prediction_methods",
+   "query": "adaptive conformal inference distribution shift",
+   "source": "semanticscholar",
+   "error": "skipped (source failing repeatedly or time budget exhausted)"
+  },
+  {
+   "strategy": "conformal_prediction_methods",
+   "query": "online conformal prediction feedback",
+   "source": "openalex",
+   "hits": 25
+  },
+  {
+   "strategy": "conformal_prediction_methods",
+   "query": "online conformal prediction feedback",
+   "source": "arxiv",
+   "hits": 25
+  },
+  {
+   "strategy": "conformal_prediction_methods",
+   "query": "online conformal prediction feedback",
+   "source": "semanticscholar",
+   "error": "skipped (source failing repeatedly or time budget exhausted)"
+  },
+  {
+   "strategy": "conformal_prediction_methods",
+   "query": "group conditional conformal coverage",
+   "source": "openalex",
+   "hits": 25
+  },
+  {
+   "strategy": "conformal_prediction_methods",
+   "query": "group conditional conformal coverage",
+   "source": "arxiv",
+   "hits": 25
+  },
+  {
+   "strategy": "conformal_prediction_methods",
+   "query": "group conditional conformal coverage",
+   "source": "semanticscholar",
+   "error": "skipped (source failing repeatedly or time budget exhausted)"
+  },
+  {
+   "strategy": "conformal_in_robotics",
+   "query": "conformal prediction robotics",
+   "source": "openalex",
+   "hits": 25
+  },
+  {
+   "strategy": "conformal_in_robotics",
+   "query": "conformal prediction robotics",
+   "source": "arxiv",
+   "hits": 0
+  },
+  {
+   "strategy": "conformal_in_robotics",
+   "query": "conformal prediction robotics",
+   "source": "semanticscholar",
+   "error": "skipped (source failing repeatedly or time budget exhausted)"
+  },
+  {
+   "strategy": "conformal_in_robotics",
+   "query": "conformal prediction motion planning",
+   "source": "openalex",
+   "hits": 25
+  },
+  {
+   "strategy": "conformal_in_robotics",
+   "query": "conformal prediction motion planning",
+   "source": "arxiv",
+   "hits": 25
+  },
+  {
+   "strategy": "conformal_in_robotics",
+   "query": "conformal prediction motion planning",
+   "source": "semanticscholar",
+   "error": "skipped (source failing repeatedly or time budget exhausted)"
+  },
+  {
+   "strategy": "conformal_in_robotics",
+   "query": "conformal prediction robot safety",
+   "source": "openalex",
+   "hits": 25
+  },
+  {
+   "strategy": "conformal_in_robotics",
+   "query": "conformal prediction robot safety",
+   "source": "arxiv",
+   "hits": 25
+  },
+  {
+   "strategy": "conformal_in_robotics",
+   "query": "conformal prediction robot safety",
+   "source": "semanticscholar",
+   "error": "skipped (source failing repeatedly or time budget exhausted)"
+  },
+  {
+   "strategy": "conformal_in_robotics",
+   "query": "uncertainty calibration robot manipulation",
+   "source": "openalex",
+   "hits": 25
+  },
+  {
+   "strategy": "conformal_in_robotics",
+   "query": "uncertainty calibration robot manipulation",
+   "source": "arxiv",
+   "hits": 25
+  },
+  {
+   "strategy": "conformal_in_robotics",
+   "query": "uncertainty calibration robot manipulation",
+   "source": "semanticscholar",
+   "error": "skipped (source failing repeatedly or time budget exhausted)"
+  },
+  {
+   "strategy": "tactile_simulation_and_benchmarks",
+   "query": "tactile sensor simulation MuJoCo",
+   "source": "openalex",
+   "hits": 25
+  },
+  {
+   "strategy": "tactile_simulation_and_benchmarks",
+   "query": "tactile sensor simulation MuJoCo",
+   "source": "arxiv",
+   "hits": 8
+  },
+  {
+   "strategy": "tactile_simulation_and_benchmarks",
+   "query": "tactile sensor simulation MuJoCo",
+   "source": "semanticscholar",
+   "error": "skipped (source failing repeatedly or time budget exhausted)"
+  },
+  {
+   "strategy": "tactile_simulation_and_benchmarks",
+   "query": "simulated tactile manipulation benchmark",
+   "source": "openalex",
+   "hits": 25
+  },
+  {
+   "strategy": "tactile_simulation_and_benchmarks",
+   "query": "simulated tactile manipulation benchmark",
+   "source": "arxiv",
+   "hits": 25
+  },
+  {
+   "strategy": "tactile_simulation_and_benchmarks",
+   "query": "simulated tactile manipulation benchmark",
+   "source": "semanticscholar",
+   "error": "skipped (source failing repeatedly or time budget exhausted)"
+  },
+  {
+   "strategy": "tactile_simulation_and_benchmarks",
+   "query": "soft contact model friction simulation",
+   "source": "openalex",
+   "hits": 25
+  },
+  {
+   "strategy": "tactile_simulation_and_benchmarks",
+   "query": "soft contact model friction simulation",
+   "source": "arxiv",
+   "hits": 25
+  },
+  {
+   "strategy": "tactile_simulation_and_benchmarks",
+   "query": "soft contact model friction simulation",
+   "source": "semanticscholar",
+   "error": "skipped (source failing repeatedly or time budget exhausted)"
+  },
+  {
+   "strategy": "tactile_simulation_and_benchmarks",
+   "query": "tactile learning grasping simulation",
+   "source": "openalex",
+   "hits": 25
+  },
+  {
+   "strategy": "tactile_simulation_and_benchmarks",
+   "query": "tactile learning grasping simulation",
+   "source": "arxiv",
+   "hits": 25
+  },
+  {
+   "strategy": "tactile_simulation_and_benchmarks",
+   "query": "tactile learning grasping simulation",
+   "source": "semanticscholar",
+   "error": "skipped (source failing repeatedly or time budget exhausted)"
+  },
+  {
+   "strategy": "seminal",
+   "query": "grasp force optimization friction cone",
+   "source": "openalex",
+   "hits": 25
+  },
+  {
+   "strategy": "seminal",
+   "query": "grasp force optimization friction cone",
+   "source": "arxiv",
+   "hits": 2
+  },
+  {
+   "strategy": "seminal",
+   "query": "grasp force optimization friction cone",
+   "source": "semanticscholar",
+   "error": "skipped (source failing repeatedly or time budget exhausted)"
+  },
+  {
+   "strategy": "seminal",
+   "query": "human grip force slip reflex",
+   "source": "openalex",
+   "hits": 25
+  },
+  {
+   "strategy": "seminal",
+   "query": "human grip force slip reflex",
+   "source": "arxiv",
+   "hits": 0
+  },
+  {
+   "strategy": "seminal",
+   "query": "human grip force slip reflex",
+   "source": "semanticscholar",
+   "error": "skipped (source failing repeatedly or time budget exhausted)"
+  },
+  {
+   "strategy": "seminal",
+   "query": "distribution-free predictive inference regression",
+   "source": "openalex",
+   "hits": 25
+  },
+  {
+   "strategy": "seminal",
+   "query": "distribution-free predictive inference regression",
+   "source": "arxiv",
+   "hits": 25
+  },
+  {
+   "strategy": "seminal",
+   "query": "distribution-free predictive inference regression",
+   "source": "semanticscholar",
+   "error": "skipped (source failing repeatedly or time budget exhausted)"
+  },
+  {
+   "strategy": "seminal",
+   "query": "algorithmic learning random world",
+   "source": "openalex",
+   "hits": 25
+  },
+  {
+   "strategy": "seminal",
+   "query": "algorithmic learning random world",
+   "source": "arxiv",
+   "hits": 25
+  },
+  {
+   "strategy": "seminal",
+   "query": "algorithmic learning random world",
+   "source": "semanticscholar",
+   "error": "skipped (source failing repeatedly or time budget exhausted)"
+  }
+ ],
+ "raw_records": 1115,
+ "unique_candidates": 872
+}
