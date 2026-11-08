@@ -121,3 +121,14 @@ test5 500 episodes per cell, val3 500, S8 kept, E7 decided after the pilot timin
   frozen H5a / H5b / H2-v5 / baseline / Holm rules; it fixes the two details the amendment left open: H5b weights =
   1 / bootstrap variance of each cell's Δ_succ (held fixed across replicates), and travel in radians (also reported per
   100°). A cell is analysed only when every method has all 300 test5 episodes.
+
+## Addendum v5.1g — E6 job-1 extension (run 36, 2026-11-08; E6 is report-only, no hypothesis reads it)
+- **Observed:** E6 job 1 (500 decisions) met the v3 Lat′ completeness rule (every bootstrap CI half-width ≤ 10 % of its
+  median) only in A16-2. In S2 / S4 / S8 / S12 the full-G\* timings are multimodal across decision steps (e.g. S2
+  quartiles 3.1 / 4.9 / 5.2 s), so the median CI is wide. Students' latency CIs pass everywhere.
+- **Rule applied (pre-existing, v3 hypotheses table, Lat′ row):** "not complete → 500 more decisions". Because pooling
+  two runners would break the "same machine" property of job 1, the four cells are re-timed in **one job each with
+  1,000 decisions** (same pilot3 states order, same configs; `experiments/v5_e6_lat_d1000.json`). That record becomes
+  the job-1 record (`analysis_e6_v5.py` prefers `<tag>_s701_gstar_d1000.jsonl`); the 500-decision records stay
+  committed and are mentioned in the appendix. If a 1,000-decision CI still fails the 10 % rule, it is reported as is
+  with its CI and the multimodality noted; no further extension.

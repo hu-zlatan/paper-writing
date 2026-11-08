@@ -1,0 +1,21 @@
+{
+ "purpose": "v5 E6 job 1 extension (addendum v5.1g, v3 Lat' rule '500 more decisions'): cells whose job-1 CI half-width > 10 % of a median re-timed with 1,000 decisions on one runner",
+ "jobs": [
+  {
+   "id": "v5_e6_lat_S2_s701_gstar_d1000",
+   "cmd": "python main.py latency3 --set S --kappa 2 --tau 4.7 --split pilot3 --start 0 --count 300 --weights ../results/v5/d5/S_k2_s701_r2.npz --warmup 20 --decisions 1000 --configs g2000_512_64 g125_512_16 g500_512_4 --no-pruned --out ../results/v5/lat/S_k2_s701_gstar_d1000"
+  },
+  {
+   "id": "v5_e6_lat_S4_s701_gstar_d1000",
+   "cmd": "python main.py latency3 --set S --kappa 4 --tau 4.8 --split pilot3 --start 0 --count 300 --weights ../results/v5/d5/S_k4_s701_r2.npz --warmup 20 --decisions 1000 --configs g2000_512_64 g125_512_16 g500_512_4 --no-pruned --out ../results/v5/lat/S_k4_s701_gstar_d1000"
+  },
+  {
+   "id": "v5_e6_lat_S8_s701_gstar_d1000",
+   "cmd": "python main.py latency3 --set S --kappa 8 --tau 4.8 --split pilot3 --start 0 --count 300 --weights ../results/v5/d5/S_k8_s701_r2.npz --warmup 20 --decisions 1000 --configs g2000_512_64 g125_512_16 g500_512_4 --no-pruned --out ../results/v5/lat/S_k8_s701_gstar_d1000"
+  },
+  {
+   "id": "v5_e6_lat_S12_s701_gstar_d1000",
+   "cmd": "python main.py latency3 --set S --kappa 12 --tau 4.9 --split pilot3 --start 0 --count 300 --weights ../results/v5/d5/S_k12_s701_r2.npz --warmup 20 --decisions 1000 --configs g2000_512_64 g125_512_16 g500_512_4 --no-pruned --out ../results/v5/lat/S_k12_s701_gstar_d1000"
+  }
+ ]
+}

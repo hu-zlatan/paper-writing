@@ -34,8 +34,12 @@ def main():
     rng = np.random.default_rng(0)
     out = {}
     for c, tag in CELLS.items():
-        recs, fin = rows(os.path.join(ROOT, "lat", f"{tag}_s701_gstar.jsonl"))
         res = {}
+        # addendum v5.1g: a cell whose 500-decision job 1 failed the 10 % half-width rule is re-timed with 1,000
+        # decisions on one runner (v3 Lat' "500 more decisions"); that record, when present, is the job-1 record.
+        p1000 = os.path.join(ROOT, "lat", f"{tag}_s701_gstar_d1000.jsonl")
+        res["job1_source"] = os.path.basename(p1000) if os.path.exists(p1000) else f"{tag}_s701_gstar.jsonl"
+        recs, fin = rows(os.path.join(ROOT, "lat", res["job1_source"]))
         if recs:
             ms = list(recs[0]["timers"])
             res["job1"] = {m: med_ci([x["timers"][m]["L_dec"] for x in recs], rng) for m in ms}
