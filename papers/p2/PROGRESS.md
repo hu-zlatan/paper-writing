@@ -233,3 +233,9 @@ Run order when both papers are active: AUTOPILOT §7.
 - **Next (run 40):** implement the CRC route (λ-grid replays on the cal and test instances, ≈ 2,000 × 20 + audits) and
   write the analysis code (`docs/08c_analysis_plan.md`: COMP selection, seeds, bootstrap) before fitting / reading
   any cal or test result; then `main.py fit` per arm × seed.
+- **Run 39, later:** addendum `docs/08c_analysis_plan.md` committed before any predictor / cal / test statistic
+  (H1 not confirmed; CRC route with a 20-point λ-grid built on the selection split, monotonised binary loss, per-stratum
+  CRC; seed 0 primary; COMP selection by even/odd halves of the selection split; 2,000-draw object bootstrap, 97.5 %).
+  Offline fits dispatched: `experiments/p2_fit_a010.json` (12 arms × 5 seeds, Actions run 185).
+  **Where to resume (run 40):** fits landed → COMP selection script + commit → λ-grids + CRC replay command
+  (`main.py crc`, cal + test × 20 λ for the §4 arms) → manifest → analysis script with a synthetic test → read-out.
