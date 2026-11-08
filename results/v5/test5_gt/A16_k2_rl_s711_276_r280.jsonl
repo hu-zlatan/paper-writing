@@ -1,0 +1,9 @@
+{"header": true, "args": {"cmd": "gt3", "src": ["/home/claude/paper-writing/code/../results/v5/test5/A16_k2_rl_s711_276_r280.jsonl"], "J": 16, "L": 4095, "out": "/home/claude/paper-writing/code/../results/v5/test5_gt/.A16_k2_rl_s711_276_r280"}, "env": {"TOUCHBED_NPHI": "64", "action_set": "64x8", "A": 512, "numpy": "2.5.3", "python": "3.13.18", "threads": {"OMP_NUM_THREADS": "1", "OPENBLAS_NUM_THREADS": "1", "MKL_NUM_THREADS": "1"}}}
+{"episode": 280, "set": "A16", "split": "test5", "kappa": 2.0, "tau": 3.4, "method": "rl", "g_T": 5.548406995066174, "n_probes": 3, "J": 16, "L": 4095}
+{"episode": 281, "set": "A16", "split": "test5", "kappa": 2.0, "tau": 3.4, "method": "rl", "g_T": 4.4943000572097365, "n_probes": 3, "J": 16, "L": 4095}
+{"episode": 282, "set": "A16", "split": "test5", "kappa": 2.0, "tau": 3.4, "method": "rl", "g_T": 7.395802535088595, "n_probes": 2, "J": 16, "L": 4095}
+{"episode": 283, "set": "A16", "split": "test5", "kappa": 2.0, "tau": 3.4, "method": "rl", "g_T": 8.20755461503159, "n_probes": 3, "J": 16, "L": 4095}
+{"episode": 284, "set": "A16", "split": "test5", "kappa": 2.0, "tau": 3.4, "method": "rl", "g_T": 8.317763694209924, "n_probes": 2, "J": 16, "L": 4095}
+{"episode": 285, "set": "A16", "split": "test5", "kappa": 2.0, "tau": 3.4, "method": "rl", "g_T": 6.902230011278739, "n_probes": 3, "J": 16, "L": 4095}
+{"episode": 286, "set": "A16", "split": "test5", "kappa": 2.0, "tau": 3.4, "method": "rl", "g_T": 6.290692203860511, "n_probes": 2, "J": 16, "L": 4095}
+{"episode": 287, "set": "A16", "split": "test5", "kappa": 2.0, "tau": 3.4, "method": "rl", "g_T": 0.9012219660065792, "n_probes": 3, "J": 16, "L": 4095}
