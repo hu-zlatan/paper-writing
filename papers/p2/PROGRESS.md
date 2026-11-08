@@ -70,3 +70,20 @@ Run order when both papers are active: AUTOPILOT §7.
 - **Environment note (for stage 10):** pip `mujoco` 4.0.0 installs in the sandbox and loads the
   `mujoco.sensor.touch_grid` plugin (smoke test only; no experiment).
 - **Decision:** PROCEED → stage 5 LITERATURE_SCREEN [gate, auto-approve with logged reasons].
+
+## Stage 5. LITERATURE_SCREEN [GATE]     [v1]
+
+- **Finished:** 2026-11-08T09:00Z (run 37). Plan: `plans/stage_05_literature_screen.md`.
+- **Outputs produced:** `docs/04_prefiltered.tsv` (824 after year / ID / abstract filter), `docs/04_screen_decisions.json`,
+  `docs/04_shortlist.jsonl` — **52 papers**: grip force & slip 17, guarantees / risk in grasping 5, conformal methods 13,
+  conformal in robotics / control 11, tactile simulation & benchmarks 5 (+ the 9 stage-1 seeds, all kept). Code:
+  `code/literature/screen_p2.py` (adapted from paper 1's `code/literature/screen.py`, noted in its docstring),
+  `code/literature/screen_decisions_v1.py`.
+- **GATE — auto-approved (AUTOPILOT §1).** Evidence: 52 ≥ 30 (template) and ≥ 20 (`RESTRICTS.yaml`
+  `min_papers_after_screen`); every entry keeps its original `cite_key` / DOI / arXiv ID and has a verifiable ID; all
+  entries ≥ 2018 except 2 recorded seminal exceptions; off-topic rejections recorded in the script docstring. Reason:
+  coverage spans every stage-2 sub-question (SQ1–SQ6) and the closest guarantee-type competitors (FIRMGrasp, tactile
+  CBF grasping, conformal decision theory). Known gap for stage 6–7: no paper found that conformally calibrates grip
+  force; to be re-checked with a targeted search in stage 7.
+- **RSS CFP:** still not re-verified (WebFetch unavailable this run). Last verified 2026-11-06.
+- **Decision:** PROCEED → stage 6 KNOWLEDGE_EXTRACT.

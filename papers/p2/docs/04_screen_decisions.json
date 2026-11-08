@@ -1,0 +1,375 @@
+{
+ "prompt": "pipeline/references/stage_prompts/literature_screen.md",
+ "keep_rule": "relevance>=0.6 & quality>=0.5",
+ "seminal_pre_2018_exceptions": [
+  "lei2017distribution",
+  "vovk2005algorithmic"
+ ],
+ "n_candidates": 872,
+ "shortlist": [
+  {
+   "title": "A Switched Adaptive Controller for Robotic Gripping of Novel Objects With Minimal Force",
+   "cite_key": "almohammed2022switched",
+   "relevance_score": 0.9,
+   "quality_score": 0.7,
+   "keep_reason": "Adaptive controller gripping novel objects with minimal force (slip velocities to zero); closest control-theoretic minimal-force baseline, no slip-rate guarantee."
+  },
+  {
+   "title": "Maintaining Grasps within Slipping Bounds by Monitoring Incipient Slip",
+   "cite_key": "dong2019maintaining",
+   "relevance_score": 0.85,
+   "quality_score": 0.7,
+   "keep_reason": "Keeps grasps within slipping bounds by monitoring incipient slip with a vision-based tactile sensor; reactive regulation baseline family."
+  },
+  {
+   "title": "Real-time Friction Estimation for Grip Force Control",
+   "cite_key": "khamis2021real",
+   "relevance_score": 0.85,
+   "quality_score": 0.65,
+   "keep_reason": "Grip force from real-time friction estimation (tactile) — friction-model × safety-margin baseline family."
+  },
+  {
+   "title": "Tracing Energy Flow: Learning Tactile-Based Grasping Force Control to Reduce Slippage in Dynamic Object Interaction",
+   "cite_key": "kuo2025tracing",
+   "relevance_score": 0.85,
+   "quality_score": 0.65,
+   "keep_reason": "RA-L: learned tactile grasping-force control to reduce slippage under unknown mass/friction."
+  },
+  {
+   "title": "Learning to estimate incipient slip with tactile sensing to gently grasp objects",
+   "cite_key": "boonstra2024estimate",
+   "relevance_score": 0.85,
+   "quality_score": 0.6,
+   "keep_reason": "Learns incipient-slip estimates from touch to grasp gently (minimal force)."
+  },
+  {
+   "title": "Synchronized Online Friction Estimation and Adaptive Grasp Control for Robust Gentle Grasp",
+   "cite_key": "niu2026synchronized",
+   "relevance_score": 0.85,
+   "quality_score": 0.55,
+   "keep_reason": "Particle-filter friction estimation + adaptive grasp control for gentle grasping; model-based minimal-force alternative."
+  },
+  {
+   "title": "TactileReflex: Noise-Statistics-Driven Vision-Tactile Reflex Control for Force-Sensitive Manipulation",
+   "cite_key": "feng2026tactilereflex",
+   "relevance_score": 0.85,
+   "quality_score": 0.55,
+   "keep_reason": "Tactile reflex anti-slip / force control with noise-statistics thresholds; no probabilistic guarantee (stage-1 seed)."
+  },
+  {
+   "title": "Zero-Shot Transfer of a Tactile-based Continuous Force Control Policy from Simulation to Robot",
+   "cite_key": "lach2024zero",
+   "relevance_score": 0.8,
+   "quality_score": 0.6,
+   "keep_reason": "IROS: tactile continuous grasp-force control policy trained in simulation, zero-shot to robot — sim-trained force control precedent."
+  },
+  {
+   "title": "Grip Stabilization through Independent Finger Tactile Feedback Control",
+   "cite_key": "veiga2020grip",
+   "relevance_score": 0.8,
+   "quality_score": 0.7,
+   "keep_reason": "Grip stabilization via per-finger tactile feedback control (slip prediction)."
+  },
+  {
+   "title": "Exp-Force: Experience-Conditioned Pre-Grasp Force Selection with Vision-Language Models",
+   "cite_key": "shang2026exp",
+   "relevance_score": 0.75,
+   "quality_score": 0.5,
+   "keep_reason": "Pre-contact grasp-force selection (too little vs too much force); same decision variable, no guarantee."
+  },
+  {
+   "title": "Tactile Sensors for Friction Estimation and Incipient Slip Detection—Toward Dexterous Robotic Manipulation: A Review",
+   "cite_key": "chen2018tactile",
+   "relevance_score": 0.8,
+   "quality_score": 0.75,
+   "keep_reason": "Review: tactile friction estimation and incipient slip detection for dexterous grasping."
+  },
+  {
+   "title": "Methods and Sensors for Slip Detection in Robotics: A Survey",
+   "cite_key": "romeo2020methods",
+   "relevance_score": 0.75,
+   "quality_score": 0.75,
+   "keep_reason": "Survey of slip-detection methods and sensors in robotics."
+  },
+  {
+   "title": "Slip Detection for Grasp Stabilization With a Multifingered Tactile Robot Hand",
+   "cite_key": "james2020slip",
+   "relevance_score": 0.75,
+   "quality_score": 0.7,
+   "keep_reason": "Slip detection for grasp stabilisation with a multifingered tactile hand."
+  },
+  {
+   "title": "Autonomous Slip-Prevention Grip Force Control and Its Potential in Shared Control of Robotic Prosthetic Hands",
+   "cite_key": "berman2025autonomous",
+   "relevance_score": 0.7,
+   "quality_score": 0.55,
+   "keep_reason": "Slip-triggered grip-force increase controller (threshold reflex), validated on a prosthetic hand; reactive baseline family."
+  },
+  {
+   "title": "Reactive Slip Control in Multifingered Grasping: Hybrid Tactile Sensing and Internal-Force Optimization",
+   "cite_key": "ayral2026reactive",
+   "relevance_score": 0.7,
+   "quality_score": 0.55,
+   "keep_reason": "Reactive slip control in multifingered grasping with tactile sensing and internal-force optimisation."
+  },
+  {
+   "title": "Learning to Detect Slip with Barometric Tactile Sensors and a Temporal Convolutional Neural Network",
+   "cite_key": "grover2022detect",
+   "relevance_score": 0.65,
+   "quality_score": 0.6,
+   "keep_reason": "Learned slip detection from barometric tactile sensors (TCN) — slip label/detector context."
+  },
+  {
+   "title": "Grip force control under sudden change of friction",
+   "cite_key": "willemet2024grip",
+   "relevance_score": 0.65,
+   "quality_score": 0.65,
+   "keep_reason": "Human grip-force control under a sudden change of friction — motivates adaptation to friction shift."
+  },
+  {
+   "title": "FIRMGrasp: A Friction-Informed Risk Margin for Robust Grasp Synthesis",
+   "cite_key": "enwerem2026firmgrasp",
+   "relevance_score": 0.95,
+   "quality_score": 0.55,
+   "keep_reason": "Closest guarantee-type work: CVaR friction risk margin under an assumed friction prior, offline grasp synthesis (stage-1 seed)."
+  },
+  {
+   "title": "Robust Adaptive Safe Robotic Grasping with Tactile Sensing",
+   "cite_key": "kim2024robust",
+   "relevance_score": 0.9,
+   "quality_score": 0.6,
+   "keep_reason": "Tactile CBF safe grasping with bounded-disturbance (non-probabilistic) guarantees (stage-1 seed)."
+  },
+  {
+   "title": "Control Barrier Functions for Mechanical Systems: Theory and Application to Robotic Grasping",
+   "cite_key": "cortez2019control",
+   "relevance_score": 0.75,
+   "quality_score": 0.75,
+   "keep_reason": "Control barrier functions for grasping (slip / force constraints) — deterministic guarantee contrast."
+  },
+  {
+   "title": "Variational Neural Belief Parameterizations for Robust Dexterous Grasping under Multimodal Uncertainty",
+   "cite_key": "enwerem2026variational",
+   "relevance_score": 0.65,
+   "quality_score": 0.55,
+   "keep_reason": "Risk-sensitive (tail-aware) grasp execution under contact uncertainty; risk-measure contrast to distribution-free control."
+  },
+  {
+   "title": "Examining the Robustness of Grasping Force Optimization Methods Using Uncertainty Analysis",
+   "cite_key": "cloutier2018examining",
+   "relevance_score": 0.65,
+   "quality_score": 0.55,
+   "keep_reason": "Robustness of grasp-force optimisation under parameter uncertainty (friction cone margins)."
+  },
+  {
+   "title": "Algorithmic Learning in a Random World",
+   "cite_key": "vovk2005algorithmic",
+   "relevance_score": 0.8,
+   "quality_score": 0.9,
+   "keep_reason": "Seminal: conformal prediction foundations (book)."
+  },
+  {
+   "title": "Distribution-Free Predictive Inference for Regression",
+   "cite_key": "lei2017distribution",
+   "relevance_score": 0.85,
+   "quality_score": 0.9,
+   "keep_reason": "Seminal: split conformal regression, finite-sample marginal coverage."
+  },
+  {
+   "title": "Conformalized Quantile Regression",
+   "cite_key": "romano2019conformalized",
+   "relevance_score": 0.9,
+   "quality_score": 0.85,
+   "keep_reason": "Conformalized quantile regression — the one-sided quantile calibration we use."
+  },
+  {
+   "title": "Conformal Prediction: A Gentle Introduction",
+   "cite_key": "angelopoulos2023conformal",
+   "relevance_score": 0.75,
+   "quality_score": 0.85,
+   "keep_reason": "Tutorial on conformal prediction / risk control; notation and finite-sample bands."
+  },
+  {
+   "title": "Conformal Risk Control",
+   "cite_key": "angelopoulos2022conformal",
+   "relevance_score": 0.95,
+   "quality_score": 0.85,
+   "keep_reason": "Conformal risk control: bounds expected monotone loss — slip-rate control as risk control."
+  },
+  {
+   "title": "Conformal risk control for non-monotonic losses",
+   "cite_key": "angelopoulos2026conformal",
+   "relevance_score": 0.85,
+   "quality_score": 0.7,
+   "keep_reason": "Conformal risk control for non-monotonic losses — fallback if slip is non-monotone in force (risk R1)."
+  },
+  {
+   "title": "Non-Exchangeable Conformal Risk Control",
+   "cite_key": "farinhas2023non",
+   "relevance_score": 0.7,
+   "quality_score": 0.7,
+   "keep_reason": "Non-exchangeable conformal risk control — shift setting (SQ5)."
+  },
+  {
+   "title": "Adaptive Conformal Inference Under Distribution Shift",
+   "cite_key": "gibbs2021adaptive",
+   "relevance_score": 0.95,
+   "quality_score": 0.85,
+   "keep_reason": "Adaptive conformal inference: long-run coverage under arbitrary shift from the miscoverage indicator — online variant."
+  },
+  {
+   "title": "Conformal Inference for Online Prediction with Arbitrary Distribution Shifts",
+   "cite_key": "gibbs2022conformal",
+   "relevance_score": 0.8,
+   "quality_score": 0.75,
+   "keep_reason": "Dynamically-tuned ACI (step-size aggregation) — choice of γ (SQ5)."
+  },
+  {
+   "title": "Conformal PID Control for Time Series Prediction",
+   "cite_key": "angelopoulos2023conformala",
+   "relevance_score": 0.75,
+   "quality_score": 0.75,
+   "keep_reason": "Conformal PID control for online calibration — alternative online update."
+  },
+  {
+   "title": "Online conformal prediction with decaying step sizes",
+   "cite_key": "angelopoulos2024online",
+   "relevance_score": 0.75,
+   "quality_score": 0.75,
+   "keep_reason": "Online conformal prediction with decaying step sizes — long-run and per-step guarantees."
+  },
+  {
+   "title": "Stochastic Online Conformal Prediction with Semi-Bandit Feedback",
+   "cite_key": "ge2024stochastic",
+   "relevance_score": 0.65,
+   "quality_score": 0.6,
+   "keep_reason": "Online conformal prediction with semi-bandit (partial) feedback — related to binary slip feedback."
+  },
+  {
+   "title": "Training-conditional coverage for distribution-free predictive inference",
+   "cite_key": "bian2023training",
+   "relevance_score": 0.6,
+   "quality_score": 0.7,
+   "keep_reason": "Training-conditional coverage — calibration-set-conditional validity (resampling design)."
+  },
+  {
+   "title": "Class-Conditional Conformal Prediction with Many Classes",
+   "cite_key": "ding2023class",
+   "relevance_score": 0.6,
+   "quality_score": 0.7,
+   "keep_reason": "Class-conditional conformal prediction — group-conditional coverage (SQ6)."
+  },
+  {
+   "title": "Conformal Decision Theory: Safe Autonomous Decisions from Imperfect Predictions",
+   "cite_key": "lekeufack2024conformal",
+   "relevance_score": 0.85,
+   "quality_score": 0.75,
+   "keep_reason": "Conformal decision theory: risk-controlled decisions (not sets) from imperfect predictions in robotics — closest framing."
+  },
+  {
+   "title": "Formal Verification and Control With Conformal Prediction: Practical Safety Guarantees For Autonomous Systems",
+   "cite_key": "lindemann2025formal",
+   "relevance_score": 0.8,
+   "quality_score": 0.75,
+   "keep_reason": "Review: formal verification and control with conformal prediction in autonomous systems."
+  },
+  {
+   "title": "Adaptive Conformal Prediction for Motion Planning among Dynamic Agents",
+   "cite_key": "dixit2022adaptive",
+   "relevance_score": 0.8,
+   "quality_score": 0.7,
+   "keep_reason": "Adaptive conformal prediction for motion planning among dynamic agents — ACI in robotics."
+  },
+  {
+   "title": "Particle-Based Conformal Prediction for Contact-Aware Uncertainty Calibration in Stratified Configuration Spaces",
+   "cite_key": "marques2026particle",
+   "relevance_score": 0.85,
+   "quality_score": 0.55,
+   "keep_reason": "Particle-based conformal prediction for contact-aware planning (stage-1 seed); contact but not grip force."
+  },
+  {
+   "title": "Conformal Prediction for STL Runtime Verification",
+   "cite_key": "lindemann2023conformal",
+   "relevance_score": 0.65,
+   "quality_score": 0.7,
+   "keep_reason": "Conformal prediction for STL runtime verification."
+  },
+  {
+   "title": "Robots That Ask For Help: Uncertainty Alignment for Large Language Model Planners",
+   "cite_key": "ren2023robots",
+   "relevance_score": 0.65,
+   "quality_score": 0.8,
+   "keep_reason": "Conformal prediction for calibrated LLM robot planners (ask for help)."
+  },
+  {
+   "title": "Conformal Policy Learning for Sensorimotor Control Under Distribution Shifts",
+   "cite_key": "huang2023conformal",
+   "relevance_score": 0.7,
+   "quality_score": 0.55,
+   "keep_reason": "Conformal policy learning for sensorimotor control under distribution shift."
+  },
+  {
+   "title": "Conformal Predictive Safety Filter for RL Controllers in Dynamic Environments",
+   "cite_key": "strawn2023conformal",
+   "relevance_score": 0.65,
+   "quality_score": 0.6,
+   "keep_reason": "Conformal predictive safety filter for RL controllers."
+  },
+  {
+   "title": "Bayesian Optimization With Formal Safety Guarantees via Online Conformal Prediction",
+   "cite_key": "zhang2024bayesian",
+   "relevance_score": 0.65,
+   "quality_score": 0.65,
+   "keep_reason": "Online conformal prediction for safety guarantees in Bayesian optimisation (feedback-driven calibration)."
+  },
+  {
+   "title": "Conformalized Interactive Imitation Learning: Handling Expert Shift and Intermittent Feedback",
+   "cite_key": "zhao2024conformalized",
+   "relevance_score": 0.65,
+   "quality_score": 0.55,
+   "keep_reason": "Conformalized interactive imitation learning under expert shift and intermittent feedback (online CP in robot learning)."
+  },
+  {
+   "title": "Learnable Conformal Prediction for Safe and Efficient Robotics under Perception and Planning Uncertainties",
+   "cite_key": "kumar2026learnable",
+   "relevance_score": 0.6,
+   "quality_score": 0.55,
+   "keep_reason": "ICRA: learnable conformal prediction for perception and planning uncertainty in robotics."
+  },
+  {
+   "title": "TACTO: A Fast, Flexible, and Open-Source Simulator for High-Resolution Vision-Based Tactile Sensors",
+   "cite_key": "wang2022tacto",
+   "relevance_score": 0.6,
+   "quality_score": 0.8,
+   "keep_reason": "TACTO vision-based tactile simulator — tactile simulation context."
+  },
+  {
+   "title": "TacSL: A Library for Visuotactile Sensor Simulation and Learning",
+   "cite_key": "akinola2025tacsl",
+   "relevance_score": 0.6,
+   "quality_score": 0.7,
+   "keep_reason": "TacSL visuotactile simulation and learning library."
+  },
+  {
+   "title": "HydroelasticTouch: Simulation of Tactile Sensors with Hydroelastic Contact Surfaces",
+   "cite_key": "leins2025hydroelastictouch",
+   "relevance_score": 0.6,
+   "quality_score": 0.55,
+   "keep_reason": "Tactile sensor simulation with hydroelastic contact — contact-model fidelity (sim-only threat)."
+  },
+  {
+   "title": "ManiFeel: Benchmarking and Understanding Visuotactile Manipulation Policy Learning",
+   "cite_key": "luu2025manifeel",
+   "relevance_score": 0.6,
+   "quality_score": 0.6,
+   "keep_reason": "Visuotactile policy-learning benchmark — 'does touch help' context for the ablation (stage-1 seed)."
+  },
+  {
+   "title": "The impact of tactile sensor configurations on grasp learning efficiency -- a comparative evaluation in simulation",
+   "cite_key": "birtalan2026impact",
+   "relevance_score": 0.65,
+   "quality_score": 0.5,
+   "keep_reason": "Tactile-sensor configuration vs grasp learning efficiency in simulation (stage-1 seed)."
+  }
+ ]
+}
