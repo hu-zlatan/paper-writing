@@ -1438,3 +1438,19 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
     (3) `python tools_v5_gt.py` in the sandbox for new test5 files (commit `results/v5/test5_gt/`, never the
     dot-prefixed temp files). (4) E6 landed → `analysis_e6_v5.py`. (5) All cells complete → `analysis_test5_v5.py` →
     stage 14. `analysis_test5_v5.py --check` prints counts only.
+
+- **Run 36 (2026-11-08, from ≈ 01:40 UTC, scheduled) — stage 13 v5 continued.** No open issues; AUTOPILOT §1 unchanged.
+  `add_repo` not available as a tool; the sandbox checkout was a shallow stale copy → reset onto origin/main and
+  unshallowed (nothing local was lost; the old run-22–26 commits are on origin). All run-35 dispatches had finished
+  without failures (last at 00:02 UTC). Plan: `plans/stage_13_v5_run36_followups.md`.
+  - **Follow-ups dispatched:** `v5_val_S4_S8_A162_f1` (79 shards: S4 4 / 14 ep, S8 10 / 31 ep, A16-2 65 / 360 ep, all
+    time-guarded) and `v5_test5_S2_S12_f1` (141 shards: S2 38 / 369 ep, S12 103 / 651 ep; frozen weights unchanged).
+  - **E6 landed** (`results/v5/14_e6_analysis.json`, report-only): all 10 jobs complete (500 decisions each). The v3
+    Lat′ completeness rule (CI half-width ≤ 10 % of every median) holds in A16-2 only; in S2/S4/S8/S12 the full-G\*
+    decision times are multimodal across steps, so the median CI is wide. Student latency CIs pass everywhere (seed
+    medians 0.3–0.5 ms). **Addendum v5.1g:** the existing v3 rule "500 more decisions" applied as one 1,000-decision
+    job per cell (same runner keeps job 1's same-machine property) → `v5_e6_lat_d1000` (4 jobs) dispatched;
+    `analysis_e6_v5.py` prefers the `_d1000` record when present. No further extension whatever it shows.
+  - **g_T** (`tools_v5_gt.py`, sandbox, after `pip install -r code/requirements.txt` — the fresh sandbox lacked
+    shapely): 148 new test5 files → `results/v5/test5_gt/` (464 total; not read).
+  - **E5** still blocked: `tools_v5_e5.py` reports S12 G\* missing 3 of test5 0–199 (in the follow-up).
