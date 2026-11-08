@@ -12,7 +12,12 @@ from certgrip.data import DISTS, FAMILIES, SALT, make_instance, sample_object, s
 
 def test_splits_disjoint_and_sized():
     s = [split_of("id", i) for i in range(500)]
-    assert s.count("train") == 200 and s.count("select") == 50 and s.count("cal") == 125 and s.count("test") == 125
+    assert s.count("train") == 150 and s.count("select") == 50 and s.count("cal") == 125 and s.count("test") == 175
+    from certgrip.data import N_OBJ, h3_role
+    r = [h3_role("id", i) for i in range(500)]
+    assert r.count("oracle") == 44 and r.count("stream") == 131 and r.count("none") == 325
+    t = [split_of("s2", i) for i in range(N_OBJ["s2"])]
+    assert t.count("oracle") == 175 and t.count("stream") == 375
     assert len(set(SALT.values())) == len(SALT)
 
 

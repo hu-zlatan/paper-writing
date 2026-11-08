@@ -195,3 +195,18 @@ Run order when both papers are active: AUTOPILOT §7.
     H2a (vs COMP) and H2b (vs CSF-μ̂, TOST), H4/D-μ/H3 premises re-stated, no slip-reference reset after the probe.
   - **Next (run 39+):** implement 08a (detector + noise, CSF-μ̂, tests), re-pilot on pilot objects 25–124 under the
     new protocol, then write and commit `docs/08b_preregistration.md` (freeze) before any main-pool data → stage 12.
+- **Run 39 (2026-11-08, ≈ 20:00–21:40 UTC): increment 5 + re-pilot + freeze — stage 10 DONE.**
+  - 5a/5b: amendment 08a implemented (protocol `"rd"`: ramp-down probe with a touch-only incipient-slip detector,
+    taxel noise, onset feature with σ, CSF-μ̂; tests 18 / 18). Detector constants tuned on pilot objects 0–24 only;
+    a first re-pilot attempt (objects 25–124, older constants) failed UT8 on probe slips and was set aside unused
+    (`results/pilot/rd_attempt1/`); full log in `docs/08a_pilot_amendment.md`.
+  - 5c: re-pilot on fresh pilot objects 125–224 (`results/pilot/rd/`): 0 / 140 non-monotone, unavoidable ≤ 1 / 1,600
+    per pool, S1 shift Δlog F\* 0.509 (Coulomb 0.511). 12 predictor arms (equal 30-config search) on Actions run
+    42519521710, reproduced in the sandbox to 1e-15. Read-out `results/pilot/rd/pilot_analysis_rd.json`: RE at α 0.10
+    CSF-1 0.80, P 0.89, S+squeeze 0.90, CertGrip-full (σ 0.2) 0.46, onset-only 0.45, CSF-μ̂ 0.43, oracle 0.16.
+    So the friction probe carries the gain; static / squeeze touch add nothing; the learned model does not beat the
+    physics plug-in with the same onset estimate (pilot).
+  - **Freeze:** `docs/08b_preregistration.md` FROZEN (four core decisions at 0.0125: H1, H2a vs COMP, H2b vs CSF-μ̂,
+    H3). Pilot power rules applied: 50 train objects per family moved to test (H2b SE 0.037 > 0.035); H3 oracle share
+    175 objects (S2 pool 550 objects) and H3 pre-registered with reduced power (projected half-width ≈ 0.12).
+  - Next: stage 11 RESOURCE_PLANNING (`docs/09_schedule.json`), then stage 12 main-pool labels on Actions.

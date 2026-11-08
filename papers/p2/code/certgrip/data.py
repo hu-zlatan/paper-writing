@@ -17,19 +17,31 @@ from .sim import Instance
 FAMILIES = ("F1", "F2", "F3", "F4")
 DISTS = ("D1", "D2", "D3", "D4")
 SALT = {"id": 1001, "s2": 2002, "pilot": 3003}       # pool -> salt (disjoint objects across pools)
-N_OBJ = {"id": 500, "s2": 500, "pilot": 225}   # pilot 0-24 first pilot / detector tuning; 25-124 attempt 1 (discarded);
+N_OBJ = {"id": 500, "s2": 550, "pilot": 225}   # pilot 0-24 first pilot / detector tuning; 25-124 attempt 1 (discarded);
 #                                               125-224 re-pilot under the frozen 08a protocol
 SHIFTS = {None: {}, "S1": {"mu": 0.6}, "S1m": {"mu": 0.9}, "S3": {"amp": 1.5}}
 
 
 def split_of(pool: str, obj: int) -> str:
-    """Object-level split. id pool: 0-199 train, 200-249 selection (held out of train), 250-374 cal, 375-499 test.
-    s2 pool (shift family F5): 0-124 oracle calibration, 125-499 stream. pilot: all pilot."""
+    """Object-level split (frozen in docs/08b_preregistration.md §5; the pilot power rule moved 50 train objects per
+    family to test). id pool: 0-149 train, 150-199 selection (held out of train), 200-324 cal, 325-499 test.
+    s2 pool (shift family F5): 0-174 oracle calibration, 175-549 stream. pilot: all pilot."""
     if pool == "id":
-        return "train" if obj < 200 else "select" if obj < 250 else "cal" if obj < 375 else "test"
+        return "train" if obj < 150 else "select" if obj < 200 else "cal" if obj < 325 else "test"
     if pool == "s2":
-        return "oracle" if obj < 125 else "stream"
+        return "oracle" if obj < 175 else "stream"
     return "pilot"
+
+
+def h3_role(pool: str, obj: int) -> str:
+    """H3 stream roles (08b §5). Paired shifts S1 / S1m / S3 re-simulate the id test objects: 325-368 per family
+    (176 objects) are the oracle-recalibration objects (their unshifted instances also feed the 500 pre-shift steps),
+    369-499 (524 objects) the shifted stream. S2: split_of('s2', obj)."""
+    if pool == "s2":
+        return split_of(pool, obj)
+    if pool == "id" and obj >= 325:
+        return "oracle" if obj < 369 else "stream"
+    return "none"
 
 
 def _fam_index(family: str) -> int:

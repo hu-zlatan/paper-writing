@@ -1,7 +1,7 @@
-# p2 · Pre-registration freeze 08b (CertGrip) — DRAFT, not frozen
+# p2 · Pre-registration freeze 08b (CertGrip) — FROZEN (run 39, 2026-11-08)
 
-**Status:** DRAFT written in run 39 while the re-pilot predictors run. It becomes the freeze only when the line
-"FROZEN at commit …" below is filled in and committed **before any main-pool (salt 1001 / 2002) instance is simulated**.
+**Status:** FROZEN in the commit that adds this line (`git log -- papers/p2/docs/08b_preregistration.md`), before any
+main-pool (salt 1001 / 2002) instance has been simulated. Later changes go to a dated addendum, never into this file.
 Canonical design: `07_hypotheses.md` (stage 8) as amended by `08a_pilot_amendment.md`; experiment plan
 `08_experiment_plan.yaml` (stage 9 gate). This file only (i) fixes every pilot-dependent constant, (ii) restates the
 decisions that 08a changed, and (iii) records the power re-projection. Where it is silent, 07_hypotheses applies.
@@ -44,7 +44,50 @@ calibration / test access.
 Also reported: σ\* = the smallest σ in the grid at which the lower limit of D(H2a) falls below 0.10 (descriptive).
 
 ## 5. Pilot-dependent constants and power re-projection
-[PILOT — filled from `results/pilot/rd/pilot_analysis_rd.json` once all 12 arms exist.]
+Source: `results/pilot/rd/pilot_analysis_rd.json` (re-pilot, pilot objects 125–224, 1,600 ID + 400 F5 + 1,600 S1 +
+1,600 S3 labels, 140 monotonicity grids; 12 predictor arms with the equal 30-config search, OOF files computed on
+Actions run 42519521710 and reproduced in the sandbox to 1e-15; 200 random cal / eval object splits, α 0.10).
+Pilot numbers are planning inputs, not results.
+- **H1-M look / UT8:** 0 / 140 non-monotone; unavoidable 0 / 1,600 (ID), 1 / 1,600 (S1), 0 / 1,600 (S3), 0 / 400 (F5)
+  → UT8 (≤ 1 %) holds; F_max = 100 N kept. Onset found 100 %; onset displacement median 0.13 mm (p99 0.4–0.7 mm).
+- **Shift sizes:** S1 mean Δlog F\* = 0.509 (Coulomb prediction 0.511), S3 0.189.
+- **Onset quality (log μ̂ vs log μ, ID):** corr 0.97 / 0.93 / 0.84 / 0.64 at σ 0 / 0.1 / 0.2 / 0.4.
+- **Pilot RE at α 0.10 (mean over splits):** CSF-1 0.80, P 0.89, S 0.88, S+squeeze 0.90, oracle 0.16;
+  CertGrip-full 0.26 / 0.34 / 0.46 / 0.68 and onset-only 0.23 / 0.33 / 0.45 / 0.68 at σ 0 / 0.1 / 0.2 / 0.4;
+  CSF-μ̂ 0.19 / 0.27 / 0.43 / 0.93. Mondrian-CSF was not run in the pilot (it enters COMP on the selection split).
+- **D-μ (CV R² of log μ on the residual):** P 0.75, S 0.75, S+squeeze 0.74, CSF-1 0.60; CertGrip-full 0.00 / 0.06 /
+  0.15 / 0.49 by σ; CSF-μ̂ ≈ 0 (the onset feature is the friction channel).
+- **η:** pilot 0.1 × IQR = 0.035; the frozen η is computed from the main ID calibration scores (07_hypotheses §1.4).
+  Score density at the 0.9 quantile f ≈ 0.69 per log unit (KDE; 07_hypotheses assumed 1.5).
+- **Power, H2a** (COMP proxy CSF-1, the best non-tactile arm in the pilot): D ≈ 1 − 0.46/0.80 ≈ 0.43; projected
+  SE(D) ≈ 0.051 × √(200/500) / 0.80 ≈ 0.040 → the decision is well powered.
+- **Power, H2b** (vs CSF-μ̂, σ 0.2): pilot D ≈ 1 − 0.456/0.430 ≈ −0.06; projected SE(D) ≈ 0.025 × √(200/500) / 0.43 ≈
+  0.037 > 0.035 → **pilot rule applied: 50 train objects per family move to test** (`split_of`: train 0–149,
+  selection 150–199, cal 200–324, test 325–499; n_cal = 500 per stratum unchanged; 2,800 test instances), giving
+  SE(D) ≈ 0.031. **Stated expectation:** at the pilot effect, superiority is very unlikely, TOST equivalence has
+  ≈ 17 % probability and inferiority (upper limit < 0) ≈ 40 %; the likely report is "learned touch does not beat a
+  physics plug-in that uses the same onset estimate".
+- **Power, H3:** with f ≈ 0.69 the oracle's quantile SE per stratum at 125 objects is ≈ 0.039 log units and the
+  projected CI\*\* half-width of R_E ≈ 0.14 (> 0.06) → **pilot rule applied: oracle share 175 objects** (S1 / S1m / S3:
+  `h3_role` — id test objects 325–368 per family are oracle-recalibration objects, 369–499 (524 objects, 2,096
+  instances) the stream; the 500 pre-shift steps are drawn from the unshifted instances of the oracle objects. S2:
+  `N_OBJ["s2"]` = 550, oracle 0–174, stream 175–549, 1,500 instances; pre-shift steps from the ID test objects).
+  The half-width stays ≈ 0.12 > 0.06, so **H3 is pre-registered with reduced power**: it can pass only if the true
+  R_E is ≲ 0.97; an inconclusive H3 is the expected outcome and will be reported as such.
+- **Compute:** ≈ 0.01 s per replay → main simulation ≈ 2–3 CPU-h; the 90 CPU-h plan is far from binding.
+
+## 5b. Code state at the freeze (sha256, first 16 hex)
+  - `code/certgrip/__init__.py` e3b0c44298fc1c14
+  - `code/certgrip/baselines.py` ce7eca030940ea09
+  - `code/certgrip/conformal.py` 9a2f82f8dfe8892c
+  - `code/certgrip/data.py` 003ae695f3f47bfc
+  - `code/certgrip/featsets.py` ace7f4be11ee7c5a
+  - `code/certgrip/features.py` c95885e878972bf4
+  - `code/certgrip/models.py` efa9f726504e1240
+  - `code/certgrip/sim.py` 07947aba0465489d
+  - `code/main.py` 718a169ad2624dc1
+  - `code/requirements.txt` cf08783c1bd06a0e
+Tests: `code/tests` 18 / 18 pass; `pipeline/scripts/check_numpy2_compat.py papers/p2/code` 0 errors.
 
 ## 6. Secondary and diagnostics changed by 08a
 H4a in steps P → S → S+squeeze → +onset (the pilot expectation that the squeeze adds ≈ nothing is stated up front);
@@ -54,4 +97,5 @@ no-probe arms. H2-M (no mass) reported, not used for the friction story. S1 / H3
 applies to no-probe arms only; the probe arm gets separate in / out-of-support predictions and a two-sided TOST in H3-L.
 
 ## 7. Freeze
-FROZEN at commit: — (not yet)
+FROZEN: run 39, 2026-11-08, in the commit "p2 stage 10 ... 08b FROZEN". No file under `papers/p2/results/` from the id or
+s2 pools existed at that commit (checked: `ls papers/p2/results` → `pilot`, `v1/logs` only).

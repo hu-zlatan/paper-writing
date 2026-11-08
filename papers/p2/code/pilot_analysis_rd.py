@@ -189,7 +189,11 @@ def main():
     out["paired_D"] = {k: {"mean": float(np.mean(v)), "sd_over_splits": float(np.std(v))} for k, v in dpair.items()}
     s_full = y - oof[f"full_rd@{0.2 if 0.2 in sigmas else sigmas[0]}"]
     q25, q75 = np.percentile(s_full, [25, 75])
-    out["eta_pilot_rd"] = {"IQR_scores_full_rd": float(q75 - q25), "eta": float(0.1 * (q75 - q25))}
+    from scipy.stats import gaussian_kde
+    q90 = float(np.quantile(s_full, 0.9))
+    out["eta_pilot_rd"] = {"IQR_scores_full_rd": float(q75 - q25), "eta": float(0.1 * (q75 - q25)),
+                           "score_q90": q90, "score_density_at_q90_kde": float(gaussian_kde(s_full)(q90)[0]),
+                           "RE_full_rd": float(np.mean(res[f"full_rd@{0.2 if 0.2 in sigmas else sigmas[0]}"]["RE"]))}
     out["n_rows_ID"] = len(allrows)
     out["n_unavoidable_ID"] = n_unav
     out["feature_dims"] = {n: int(matrix(rows[:1], fs, sigma=s).shape[1]) for n, (fs, s) in zip(names, arms)}
