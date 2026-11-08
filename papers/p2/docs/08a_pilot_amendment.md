@@ -52,22 +52,29 @@ recovered μ almost exactly in simulation, we model a tactile detector with pre-
 squeeze-only design as a pre-registered arm, and test whether learned touch improves on a physics plug-in using the
 same friction estimate. No main-pool data existed when the change was made.
 
-## Implementation record (run 39, 2026-11-08 ≈ 20:10–20:50 UTC) — before the re-pilot, before any main-pool data
+## Implementation record (run 39, 2026-11-08 ≈ 20:10–21:30 UTC) — before any main-pool data
 `code/certgrip/sim.py` protocol `"rd"` (`Sim(..., protocol="rd")`, `main.py ... --protocol rd`; the old protocol stays
 the default, timing digest 70368455… unchanged). Detector constants `RD2` / `TAXEL_NOISE` were set on the **first
-pilot objects 0–24 only** (already used in run 38) and are frozen from here; the re-pilot uses objects 25–124.
-- **Probe:** after the squeeze, force F0 → 0.005 F0 log-linearly over 0.5 s; on detection, back to F0 in 0.02 s, hold
-  0.1 s. Slip reference = pose **before** the probe (probe slip counts, item 2).
+pilot objects 0–24 only** (already used in run 38) and are frozen from here.
+- **Probe:** after the squeeze, force F0 → 0.005 F0 log-linearly over 0.25 s; on detection, back to F0 in 0.02 s,
+  hold 0.1 s. Slip reference = pose **before** the probe (probe slip counts, item 2).
 - **Detector (touch only):** 500 Hz frames; noisy shear/normal ratio r = Σ_pads |shear sum| / Σ normal from noisy
   taxels (per-taxel multiplicative lognormal 0.05, additive 0.002 N, per-instance channel gain lognormal 0.10, seeded
-  per instance); log r smoothed over 10 frames; onset = 4 consecutive frames whose 10-frame rise is < ½ of the stick
-  rise, armed only when smoothed r > 0.1 (below the lowest μ of any pool), or normal reading < 1 mN. Not found →
-  censored at the floor. Feature = [log F_onset + σ·ε, found], ε ~ N(0,1) per instance (stored), σ ∈ {0, 0.1, 0.2, 0.4},
-  primary 0.2. CSF-μ̂: μ̂ = m g / (2 F_onset_noisy) clipped to [0.1, 3].
-- **Why these constants (tuning log, objects 0–24, D4 + D1, F = 60 N):** a 100 Hz / 3-frame rule had 3 false early
-  triggers on light objects; a 2-consecutive 5-frame rule had a long lag and the probe made 156 / 250 instances slip;
-  a 1 s / 20-frame rule had no false triggers but 91 / 250 probe slips. Final rule: 250 / 250 found, 1 early
-  trigger, 1 / 250 probe slip at 60 N, onset displacement median 0.27 mm (p99 1.4 mm), log(m g / 2F_onset) vs log μ
-  corr 0.95, offset 0.25 (detection lag), SD 0.10 at σ = 0. So even σ = 0 is not a perfect friction sensor.
+  per instance); log r smoothed over 6 frames; onset = 2 consecutive frames whose 8-frame rise is < ½ of the stick
+  rise, armed only when smoothed r > 0.1 (below the lowest μ of any pool, 0.3 × 0.6), or normal reading < 1 mN.
+  Not found → censored at the floor. Feature = [log F_onset + σ·ε, found], ε ~ N(0,1) per instance (stored),
+  σ ∈ {0, 0.1, 0.2, 0.4}, primary 0.2. CSF-μ̂: μ̂ = m g / (2 F_onset_noisy) clipped to [0.1, 3].
+- **Tuning log (objects 0–24 only, 5 families × 4 disturbances, ID and S1, F = 100 N; criteria: probe slips, early
+  triggers, onset accuracy):** 100 Hz / 3-frame rule → 3 false early triggers on light objects; 100 Hz / 2 × 5-frame →
+  long lag, the probe made 156 / 250 slip; 1 s ramp / 20-frame → 91 / 250 probe slips; 0.5 s / 10-frame / 4 consec →
+  ID 3 / 500, S1 34 / 500 probe slips. Faster ramps help (post-onset displacement ∝ ramp rate × lag³ and the lag falls
+  with the rate): 0.25 s / w 6 / k 8 / 2 consec → **0 / 500 probe slips in ID and in S1, 0 early triggers**, onset
+  displacement median 0.13 mm (p99 0.4 / 0.7 mm), log(m g / 2F_onset) vs log μ corr 0.988 (ID) / 0.984 (S1), offset
+  0.32 (detection lag), SD 0.05 at σ = 0 — near-perfect, which is why σ = 0 is only an upper bound and σ = 0.2 primary.
+- **Attempt 1 discarded (transparency):** with the 0.5 s rule, a re-pilot on objects 25–124 was started; only its
+  unavoidable counts were looked at (ID 26 / 1,600 = 1.6 %, S1 F1 38 / 400 — probe-induced, light low-μ objects, onset
+  displacement 1.5–3 mm), which fails UT8 (≤ 1 %). No predictor was fitted on it. The detector was re-tuned on objects
+  0–24 (above) and those files were moved to `results/pilot/rd_attempt1/` (kept, not used). The re-pilot under the
+  frozen protocol uses fresh pilot objects **125–224** (`N_OBJ["pilot"]` = 225).
 - Tests: `code/tests/test_rd_probe.py` (determinism / force independence of the probe, onset vs Coulomb force,
   no drop at F_max + monotone bracket, old protocol unchanged, CSF-μ̂, feature sets with σ) — 18 / 18 pass.

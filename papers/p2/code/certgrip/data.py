@@ -17,7 +17,8 @@ from .sim import Instance
 FAMILIES = ("F1", "F2", "F3", "F4")
 DISTS = ("D1", "D2", "D3", "D4")
 SALT = {"id": 1001, "s2": 2002, "pilot": 3003}       # pool -> salt (disjoint objects across pools)
-N_OBJ = {"id": 500, "s2": 500, "pilot": 125}   # pilot 0-24 first pilot; 25-124 re-pilot (amendment 08a)
+N_OBJ = {"id": 500, "s2": 500, "pilot": 225}   # pilot 0-24 first pilot / detector tuning; 25-124 attempt 1 (discarded);
+#                                               125-224 re-pilot under the frozen 08a protocol
 SHIFTS = {None: {}, "S1": {"mu": 0.6}, "S1m": {"mu": 0.9}, "S3": {"amp": 1.5}}
 
 

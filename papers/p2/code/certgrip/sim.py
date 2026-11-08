@@ -29,7 +29,7 @@ PAD_HALF = (0.004, 0.02, 0.03)  # pad box half-sizes (x thickness, y width, z he
 T_RD, RD_FLOOR, RD_DISP, RD_ROT = 0.4, 0.02, 0.0003, math.radians(1.0)  # ramp-down probe (pilot candidate)
 GRID = 8                        # touch_grid resolution per pad (GRID x GRID)
 # Amendment 08a protocol "rd": ramp-down probe with a touch-only incipient-slip detector (fixed before the re-pilot).
-RD2 = {"T": 0.5, "floor": 0.005, "frame_steps": 1, "w": 10, "k": 10, "consec": 4, "slope_frac": 0.5,
+RD2 = {"T": 0.25, "floor": 0.005, "frame_steps": 1, "w": 6, "k": 8, "consec": 2, "slope_frac": 0.5,
        "r_arm": 0.1, "n_min": 1e-3, "t_up": 0.02}
 TAXEL_NOISE = {"mult": 0.05, "add": 0.002, "gain": 0.10}   # per-taxel multiplicative / additive [N], per-instance gain
 
