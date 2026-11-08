@@ -1490,5 +1490,15 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
   - **E6 d1000 read-out** (`results/v5/14_e6_analysis.json`, report-only): the 1,000-decision jobs still leave the
     full-G\* median CI > 10 % in S2/S4/S8/S12 (multimodal decision times); student CIs pass everywhere. Per addendum
     v5.1g no further extension; reported as is (full-G\* / student median ratio ≈ 7,000–10,000× in S2/S4).
-  - **g_T** (`tools_v5_gt.py`) running in the sandbox on new test5 files (not read).
+  - **g_T** (`tools_v5_gt.py`, sandbox): outputs for the test5 files committed so far are in `results/v5/test5_gt/`
+    (stopped at the end of the run; temp files removed; the tool resumes on the remaining files). Not read.
   - No test5 outcome read.
+  - **Paper 2 this run:** stages 2–9 done (gates 5 and 9 auto-approved, evidence in `papers/p2/PROGRESS.md`), stage 10
+    increment 1 (simulator + pilot smoke). WebFetch was unavailable this run (permission prompt unanswered), so the
+    RSS CFP re-check is still pending; literature came through the Actions collector.
+  - **Where to resume (run 38):** (1) runs 168/170/173/174 (test5 S4_p0, S8_p0, A16-2 p0/p1), 175 (test5 f2), 176
+    (E5 sub 16) → follow-up manifests via `tools_resume_manifest.py` on each finished manifest (S4_p0, S8_p0, A162_p0/p1,
+    and `v5_test5_f2.json`); (2) `pip install -r code/requirements.txt` then `python code/tools_v5_gt.py --workers 2`
+    in the background, commit outputs (never dot-prefixed temps); (3) E5 landed → `analysis_e5_v5.py`, commit;
+    (4) all cells complete → `analysis_test5_v5.py --check`, then the read-out → stage 14. Then paper 2 stage 10
+    increment 2 (`papers/p2/plans/stage_10_code_generation.md`).

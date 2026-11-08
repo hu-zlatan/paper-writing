@@ -1,0 +1,14 @@
+{"header": true, "args": {"cmd": "gt3", "src": ["/home/claude/paper-writing/code/../results/v5/test5/A16_k2_student_s704_026.jsonl"], "J": 16, "L": 4095, "out": "/home/claude/paper-writing/code/../results/v5/test5_gt/.A16_k2_student_s704_026"}, "env": {"TOUCHBED_NPHI": "64", "action_set": "64x8", "A": 512, "numpy": "2.5.3", "python": "3.13.18", "threads": {"OMP_NUM_THREADS": "1", "OPENBLAS_NUM_THREADS": "1", "MKL_NUM_THREADS": "1"}}}
+{"episode": 26, "set": "A16", "split": "test5", "kappa": 2.0, "tau": 3.4, "method": "student", "g_T": 8.31751472425673, "n_probes": 3, "J": 16, "L": 4095}
+{"episode": 27, "set": "A16", "split": "test5", "kappa": 2.0, "tau": 3.4, "method": "student", "g_T": 7.456812164072444, "n_probes": 3, "J": 16, "L": 4095}
+{"episode": 28, "set": "A16", "split": "test5", "kappa": 2.0, "tau": 3.4, "method": "student", "g_T": 8.317736734517515, "n_probes": 3, "J": 16, "L": 4095}
+{"episode": 29, "set": "A16", "split": "test5", "kappa": 2.0, "tau": 3.4, "method": "student", "g_T": 7.495381380420293, "n_probes": 3, "J": 16, "L": 4095}
+{"episode": 30, "set": "A16", "split": "test5", "kappa": 2.0, "tau": 3.4, "method": "student", "g_T": 4.3819939494668425, "n_probes": 3, "J": 16, "L": 4095}
+{"episode": 31, "set": "A16", "split": "test5", "kappa": 2.0, "tau": 3.4, "method": "student", "g_T": 6.804803672042613, "n_probes": 3, "J": 16, "L": 4095}
+{"episode": 32, "set": "A16", "split": "test5", "kappa": 2.0, "tau": 3.4, "method": "student", "g_T": 8.317756424442429, "n_probes": 3, "J": 16, "L": 4095}
+{"episode": 33, "set": "A16", "split": "test5", "kappa": 2.0, "tau": 3.4, "method": "student", "g_T": 6.568093246820551, "n_probes": 2, "J": 16, "L": 4095}
+{"episode": 34, "set": "A16", "split": "test5", "kappa": 2.0, "tau": 3.4, "method": "student", "g_T": 7.077855295642577, "n_probes": 3, "J": 16, "L": 4095}
+{"episode": 35, "set": "A16", "split": "test5", "kappa": 2.0, "tau": 3.4, "method": "student", "g_T": 6.610987217731458, "n_probes": 3, "J": 16, "L": 4095}
+{"episode": 36, "set": "A16", "split": "test5", "kappa": 2.0, "tau": 3.4, "method": "student", "g_T": 7.83464225473458, "n_probes": 3, "J": 16, "L": 4095}
+{"episode": 37, "set": "A16", "split": "test5", "kappa": 2.0, "tau": 3.4, "method": "student", "g_T": 8.24588284535032, "n_probes": 3, "J": 16, "L": 4095}
+{"episode": 38, "set": "A16", "split": "test5", "kappa": 2.0, "tau": 3.4, "method": "student", "g_T": 8.3177660631891, "n_probes": 3, "J": 16, "L": 4095}
