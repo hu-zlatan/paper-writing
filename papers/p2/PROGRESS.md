@@ -189,6 +189,9 @@ Run order when both papers are active: AUTOPILOT §7.
     oracle 0.39; every non-oracle residual correlates ≈ −0.79 with log μ → **the squeeze probe gives touch almost no
     friction information.** Candidate fix tested behind a flag (default protocol unchanged): an incipient-slip
     ramp-down probe; its onset force recovers μ with corr 0.999 in simulation (a perfect detector, so too optimistic).
-  - **Open design decision before the freeze (next run):** keep the squeeze design, or amend (ramp-down probe with a
-    robot-observable detector and onset-noise sensitivity, re-stated H2/H4/H3-L/D-μ), after a fresh-context skeptic
-    review. Then freeze `docs/08b_preregistration.md` and start the main labels (stage 12).
+  - **Design decision (same run, after a fresh-context skeptic subagent review): option C** —
+    `docs/08a_pilot_amendment.md`: ramp-down probe for every method, onset detected from pad readings with a noise
+    model (primary σ 0.2 in log units; σ 0 only an upper bound), new comparator CSF-μ̂ and CSF-1 in COMP, H2 split into
+    H2a (vs COMP) and H2b (vs CSF-μ̂, TOST), H4/D-μ/H3 premises re-stated, no slip-reference reset after the probe.
+  - **Next (run 39+):** implement 08a (detector + noise, CSF-μ̂, tests), re-pilot on pilot objects 25–124 under the
+    new protocol, then write and commit `docs/08b_preregistration.md` (freeze) before any main-pool data → stage 12.
