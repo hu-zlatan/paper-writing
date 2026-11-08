@@ -9,7 +9,7 @@
 **Topic:** Amortized, non-myopic active tactile localization (TouchBED)
 **Initialised:** 2026-10-28T07:56:44Z
 **Current version:** v5
-**Latest stage:** Stage 13 ITERATIVE_REFINE [v5] in progress (main-run execution on Actions); see run 35 at the end of this file
+**Latest stage:** Stage 13 ITERATIVE_REFINE [v5] in progress (main-run execution on Actions); see run 37 at the end of this file
 
 ---
 
@@ -1479,3 +1479,16 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
     `analysis_e6_v5.py`, commit. (5) A cell with every method at 300 test5 episodes → `analysis_test5_v5.py --check`,
     then the read-out once all cells are complete → stage 14. If an eval run is queued behind long test5 waves and has
     only a few episodes, running the identical command in the sandbox is fine (log it).
+
+- **Run 37 (2026-11-08, from ≈ 07:50 UTC, scheduled) — stage 13 v5 continued, then paper 2 (AUTOPILOT §7).** No open
+  issues; AUTOPILOT §1 unchanged since the 11-08 paper-2 directive. Checkout was shallow → unshallowed and fast-forwarded.
+  Plan: `plans/stage_13_v5_run37_followups.md`.
+  - **Finished since run 36:** test5 S2/S12 f1 (run 166), S4_p1 (169), S8_p1 (171), E6 d1000 (167). Still running:
+    S4_p0 (168), S8_p0 (170), A16-2 p0/p1 (173/174).
+  - **Dispatched:** `v5_test5_f2` (42 follow-up shards: S2 14, S12 17, S4 3, S8 8; frozen weights unchanged) and
+    `v5_e5_sub16` (56 shards: sub-16 re-read of test5 0–199, G\* and student 701, S2/S12 — `tools_v5_e5.py` passed).
+  - **E6 d1000 read-out** (`results/v5/14_e6_analysis.json`, report-only): the 1,000-decision jobs still leave the
+    full-G\* median CI > 10 % in S2/S4/S8/S12 (multimodal decision times); student CIs pass everywhere. Per addendum
+    v5.1g no further extension; reported as is (full-G\* / student median ratio ≈ 7,000–10,000× in S2/S4).
+  - **g_T** (`tools_v5_gt.py`) running in the sandbox on new test5 files (not read).
+  - No test5 outcome read.
