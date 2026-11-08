@@ -91,3 +91,16 @@ Pilot pool only (salt 3003; main pools untouched). Sandbox, 2026-11-08 ≈ 14:15
   D-μ premises (D-μ R² ≤ 0.05 no longer holds for that arm; S1 then becomes partly visible to the predictor), and
   (iii) get a fresh-context skeptic review (stage-8 style) before the freeze. Alternative kept open: no probe change,
   report H2 as designed (pilot D ≈ 0.08 vs the 0.10 target, underpowered pilot).
+
+## Increment 5 (run 39) — amendment 08a implemented; re-pilot under the frozen protocol
+- 5a: protocol `"rd"` in `sim.py` (touch-only incipient-slip detector with taxel noise), onset record + ε in
+  `features.py`, feature sets `full_rd` / `S_onset` / `P_onset` with σ in `featsets.py`, CSF-μ̂ in `baselines.py`,
+  `main.py --protocol`, tests `tests/test_rd_probe.py` (18 / 18 pass). Old protocol default; timing digest unchanged.
+- 5b: detector re-tuned on pilot objects 0–24 after attempt 1 (objects 25–124) showed probe-induced unavoidable
+  instances above UT8; attempt 1 kept in `results/pilot/rd_attempt1/`, unused. Details in `docs/08a_pilot_amendment.md`.
+- 5c: re-pilot on fresh pilot objects 125–224 (`code/repilot_rd.sh`, sandbox): labels ID F1–F4 1,600, F5 400,
+  S1 1,600, S3 1,600 → `results/pilot/rd/labels/`; monotonicity 35-point grid on 140 instances → `results/pilot/rd/mono/`.
+  Counts only so far: unavoidable 0 in ID / F5, 1 / 3,200 in the shift pools; 0 / 140 non-monotone.
+- Predictors (equal 30-config search, 12 arms) are too slow for the sandbox (≈ 600 fits per arm): `main.py pilotoof`
+  per arm on Actions (`experiments/p2_pilotoof_rd.json`, 12 jobs), then `python pilot_analysis_rd.py` loads the
+  OOF files → `results/pilot/rd/pilot_analysis_rd.json` → write `docs/08b_preregistration.md` (freeze) → stage 12.

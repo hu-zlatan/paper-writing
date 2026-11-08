@@ -1,0 +1,53 @@
+{
+ "purpose": "p2 re-pilot (amendment 08a, pilot objects 125-224): per-arm cross-fitted OOF predictions, equal 30-config search; read-out by pilot_analysis_rd.py. Pilot only, not a paper result.",
+ "jobs": [
+  {
+   "id": "p2_pilotoof_P",
+   "cmd": "python main.py pilotoof --fset P --sigma 0.0 --configs 30 --out ../results/pilot/rd/oof/P"
+  },
+  {
+   "id": "p2_pilotoof_S",
+   "cmd": "python main.py pilotoof --fset S --sigma 0.0 --configs 30 --out ../results/pilot/rd/oof/S"
+  },
+  {
+   "id": "p2_pilotoof_full",
+   "cmd": "python main.py pilotoof --fset full --sigma 0.0 --configs 30 --out ../results/pilot/rd/oof/full"
+  },
+  {
+   "id": "p2_pilotoof_oracle",
+   "cmd": "python main.py pilotoof --fset oracle --sigma 0.0 --configs 30 --out ../results/pilot/rd/oof/oracle"
+  },
+  {
+   "id": "p2_pilotoof_full_rd_s0.0",
+   "cmd": "python main.py pilotoof --fset full_rd --sigma 0.0 --configs 30 --out ../results/pilot/rd/oof/full_rd_s0.0"
+  },
+  {
+   "id": "p2_pilotoof_full_rd_s0.1",
+   "cmd": "python main.py pilotoof --fset full_rd --sigma 0.1 --configs 30 --out ../results/pilot/rd/oof/full_rd_s0.1"
+  },
+  {
+   "id": "p2_pilotoof_full_rd_s0.2",
+   "cmd": "python main.py pilotoof --fset full_rd --sigma 0.2 --configs 30 --out ../results/pilot/rd/oof/full_rd_s0.2"
+  },
+  {
+   "id": "p2_pilotoof_full_rd_s0.4",
+   "cmd": "python main.py pilotoof --fset full_rd --sigma 0.4 --configs 30 --out ../results/pilot/rd/oof/full_rd_s0.4"
+  },
+  {
+   "id": "p2_pilotoof_P_onset_s0.0",
+   "cmd": "python main.py pilotoof --fset P_onset --sigma 0.0 --configs 30 --out ../results/pilot/rd/oof/P_onset_s0.0"
+  },
+  {
+   "id": "p2_pilotoof_P_onset_s0.1",
+   "cmd": "python main.py pilotoof --fset P_onset --sigma 0.1 --configs 30 --out ../results/pilot/rd/oof/P_onset_s0.1"
+  },
+  {
+   "id": "p2_pilotoof_P_onset_s0.2",
+   "cmd": "python main.py pilotoof --fset P_onset --sigma 0.2 --configs 30 --out ../results/pilot/rd/oof/P_onset_s0.2"
+  },
+  {
+   "id": "p2_pilotoof_P_onset_s0.4",
+   "cmd": "python main.py pilotoof --fset P_onset --sigma 0.4 --configs 30 --out ../results/pilot/rd/oof/P_onset_s0.4"
+  }
+ ]
+}

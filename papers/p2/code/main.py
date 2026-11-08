@@ -173,7 +173,16 @@ def main(argv=None):
         p.add_argument("--protocol", default="squeeze", choices=["squeeze", "rd"],
                        help="squeeze = stage-9 design; rd = amendment 08a ramp-down probe (the frozen study uses rd)")
         p.add_argument("--out", required=True)
+    po = sub.add_parser("pilotoof", help="re-pilot (08a): one arm's cross-fitted OOF predictions on the pilot labels")
+    po.add_argument("--fset", required=True)
+    po.add_argument("--sigma", type=float, default=0.0)
+    po.add_argument("--configs", type=int, default=30)
+    po.add_argument("--out", required=True)
     a = ap.parse_args(argv)
+    if a.cmd == "pilotoof":
+        import pilot_analysis_rd
+        pilot_analysis_rd.run_arm(a.fset, a.sigma, a.configs, a.out)
+        return
     {"label": cmd_label, "mono": cmd_mono, "timing": cmd_timing}[a.cmd](a)
 
 

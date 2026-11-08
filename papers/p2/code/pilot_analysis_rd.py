@@ -12,6 +12,8 @@ Reads results/pilot/rd/labels/*.jsonl and results/pilot/rd/mono/*.jsonl, writes 
 Unavoidable instances (F_max slips, incl. probe-induced slip) have no F*: excluded from training and RE, counted as a
 slip for every method in the label slip rate.
 usage (from papers/p2/code): python pilot_analysis_rd.py [--configs 30] [--splits 200] [--jobs 2]
+Per-arm OOF predictions can be precomputed on Actions (`python main.py pilotoof --fset full_rd --sigma 0.2 --out
+../results/pilot/rd/oof/full_rd_s0.2`); existing files in results/pilot/rd/oof/ are loaded instead of refitting.
 """
 import argparse
 import glob
@@ -49,6 +51,39 @@ def oof_predict(X, y, groups, configs, seed=0):
     for te, pr, _ in res:
         p[te] = pr
     return p
+
+
+def arm_rows():
+    """ID pilot rows (avoidable), sorted by (family, obj, dist) — the row order of every OOF file."""
+    base = {(r["family"], r["obj"], r["dist"]): r for r in load("labels/pilot_F[1-4].jsonl")}
+    return [base[k] for k in sorted(base) if not base[k]["unavoidable"]]
+
+
+def arm_name(fs, s):
+    return fs if fs in ("P", "S", "full", "oracle") else f"{fs}@{s}"
+
+
+def run_arm(fs, sigma, configs, out):
+    """One arm's cross-fitted OOF predictions -> JSON (Actions job via `main.py pilotoof`)."""
+    rows = arm_rows()
+    y = np.log([r["F_hi"] for r in rows])
+    groups = np.array([f"{r['family']}_{r['obj']}" for r in rows])
+    p = oof_predict(matrix(rows, fs, sigma=sigma), y, groups, configs)
+    keys = [[r["family"], r["obj"], r["dist"]] for r in rows]
+    os.makedirs(os.path.dirname(os.path.abspath(out)), exist_ok=True)
+    json.dump({"arm": arm_name(fs, sigma), "fset": fs, "sigma": sigma, "configs": configs, "keys": keys,
+               "oof": p.tolist()}, open(out + ".json", "w"))
+    print(f"arm: {arm_name(fs, sigma)}")
+    print(f"oof_pinball: {float(np.mean(np.maximum(TAU * (y - p), (TAU - 1) * (y - p)))):.5f}")
+
+
+def load_or_fit(rows, fs, s, y, groups, configs):
+    f = os.path.join(ROOT, "oof", arm_name(fs, s).replace("@", "_s") + ".json")
+    if os.path.exists(f):
+        d = json.load(open(f))
+        assert d["keys"] == [[r["family"], r["obj"], r["dist"]] for r in rows] and d["configs"] == configs, f
+        return np.array(d["oof"])
+    return oof_predict(matrix(rows, fs, sigma=s), y, groups, configs)
 
 
 def cv_r2(resid, logmu, groups):
@@ -112,9 +147,8 @@ def main():
     logmu = np.log([r["inst"]["mu"] for r in rows])
     arms = [("P", 0.0), ("S", 0.0), ("full", 0.0), ("oracle", 0.0)]
     arms += [("full_rd", s) for s in sigmas] + [("P_onset", s) for s in sigmas]
-    names = [f"{fs}" if fs in ("P", "S", "full", "oracle") else f"{fs}@{s}" for fs, s in arms]
-    preds = Parallel(n_jobs=a.jobs)(delayed(oof_predict)(matrix(rows, fs, sigma=s), y, groups, a.configs)
-                                    for fs, s in arms)
+    names = [arm_name(fs, s) for fs, s in arms]
+    preds = Parallel(n_jobs=a.jobs)(delayed(load_or_fit)(rows, fs, s, y, groups, a.configs) for fs, s in arms)
     oof = dict(zip(names, preds))
     oof["CSF-1"] = np.log([f_nom(r["inst"]["mass"], r["dist"], r["inst"]["amp"], r["inst"]["freq"]) for r in rows])
     for s in sigmas:
