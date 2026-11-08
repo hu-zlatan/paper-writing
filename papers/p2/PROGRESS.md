@@ -99,3 +99,13 @@ Run order when both papers are active: AUTOPILOT §7.
   slip-rate guarantee; online calibration from partial / binary feedback exists in other robotics settings
   (`lekeufack2024conformal`, `zhang2024bayesian`, `ge2024stochastic`, `zhao2024conformalized`).
 - **Decision:** PROCEED → stage 7 SYNTHESIS.
+
+## Stage 7. SYNTHESIS     [v1]
+
+- **Finished:** 2026-11-08T09:45Z (run 37). Plan: `plans/stage_07_synthesis.md`.
+- **Outputs produced:** `docs/06_synthesis.md` — 7 clusters (reactive slip control; force selection by estimation;
+  guarantees / risk in grasping; offline conformal / risk control; online conformal under shift and partial feedback;
+  conformal in robotics; tactile simulation & human grip), 6 falsifiable gaps, ranked opportunities. Key observation:
+  with a monotone slip threshold the ACI miscoverage indicator equals the observed slip event, so online calibration
+  needs no F\* label at deployment. Targeted WebSearch (2 queries) found no conformal grip-force / slip-rate work.
+- **Decision:** PROCEED → stage 8 HYPOTHESIS_GEN (fresh-context proposer / skeptic / methodologist subagents).
