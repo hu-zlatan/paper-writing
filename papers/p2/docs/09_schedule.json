@@ -1,0 +1,96 @@
+{
+ "tasks": [
+  {
+   "id": "L-ID",
+   "name": "label id pool F1-F4 x 500 objects x 4 dist (8,000)",
+   "depends_on": [],
+   "gpu_count": 0,
+   "estimated_minutes": 16.5,
+   "priority": 1
+  },
+  {
+   "id": "L-S1",
+   "name": "label S1 (mu x0.6) on id test objects 325-499 (2,800)",
+   "depends_on": [],
+   "gpu_count": 0,
+   "estimated_minutes": 5.8,
+   "priority": 2
+  },
+  {
+   "id": "L-S1m",
+   "name": "label S1m (mu x0.9) on id test objects (2,800)",
+   "depends_on": [],
+   "gpu_count": 0,
+   "estimated_minutes": 5.8,
+   "priority": 3
+  },
+  {
+   "id": "L-S3",
+   "name": "label S3 (amplitude x1.5) on id test objects (2,800)",
+   "depends_on": [],
+   "gpu_count": 0,
+   "estimated_minutes": 5.8,
+   "priority": 4
+  },
+  {
+   "id": "L-S2",
+   "name": "label s2 pool F5 x 550 objects x 4 dist (2,200)",
+   "depends_on": [],
+   "gpu_count": 0,
+   "estimated_minutes": 4.5,
+   "priority": 5
+  },
+  {
+   "id": "H1M",
+   "name": "monotonicity grids, 800 id instances (25 log + 10 dense + bisection), + 100 per shift pool",
+   "depends_on": [
+    "L-ID",
+    "L-S1",
+    "L-S3",
+    "L-S2"
+   ],
+   "gpu_count": 0,
+   "estimated_minutes": 8.6,
+   "priority": 6
+  },
+  {
+   "id": "OFF",
+   "name": "offline predictors (equal 30-config search, all arms, 5 seeds) + conformal + bootstrap",
+   "depends_on": [
+    "L-ID"
+   ],
+   "gpu_count": 0,
+   "estimated_minutes": 240,
+   "priority": 7
+  },
+  {
+   "id": "H1V",
+   "name": "direct-replay audits (2,800 primary + secondary)",
+   "depends_on": [
+    "OFF"
+   ],
+   "gpu_count": 0,
+   "estimated_minutes": 2.7,
+   "priority": 8
+  },
+  {
+   "id": "H3",
+   "name": "OQT / oracle streams (label replays) + 2,000 stream audit replays",
+   "depends_on": [
+    "OFF",
+    "L-S1",
+    "L-S1m",
+    "L-S3",
+    "L-S2"
+   ],
+   "gpu_count": 0,
+   "estimated_minutes": 60,
+   "priority": 9
+  }
+ ],
+ "total_gpu_budget": 0,
+ "total_estimated_cpu_minutes": 349.7,
+ "pilot_timing_comment": "TIME_ESTIMATE: 0.124s per label instance (sandbox, main.py label --protocol rd, 5 pilot objects x 4 dist, run 39); replay 0.0102 s",
+ "scaling_rules": "not triggered (<100 conditions; far under budget)",
+ "generated": "2026-11-08 run 39"
+}
