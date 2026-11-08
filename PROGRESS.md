@@ -1454,3 +1454,10 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
   - **g_T** (`tools_v5_gt.py`, sandbox, after `pip install -r code/requirements.txt` — the fresh sandbox lacked
     shapely): 148 new test5 files → `results/v5/test5_gt/` (464 total; not read).
   - **E5** still blocked: `tools_v5_e5.py` reports S12 G\* missing 3 of test5 0–199 (in the follow-up).
+  - **D5 read-out S4 / S8** (`results/v5/12_d5_analysis.json`; val3 0–499 complete after the follow-up): **D5 fails in
+    both cells.** S4: Δ_succ(student − G\*) = −5.48 pp (SE 2.15, threshold −1.50), Δ_BI = −0.133 nats (passes ii),
+    seeds within δ 1/5. S8: Δ_succ = −3.64 pp (SE 2.03, threshold −1.64), Δ_BI = −0.046 (passes ii), seeds 4/5 (passes
+    iii; fails i). S2/S12 unchanged. D5 has no remedy step → reported as H5a with the test5 contrasts; no retraining.
+    A16-2 val3 still incomplete (422 / 500; 11 follow-up shards running).
+  - **FREEZE S4, S8** (`results/v5/13_freeze.json`, sha256 of 5 students r2 + 5 RL cfg 6 per cell), committed in
+    df338d3 before any test5 job of these cells.
