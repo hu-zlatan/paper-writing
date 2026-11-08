@@ -87,3 +87,15 @@ Run order when both papers are active: AUTOPILOT §7.
   force; to be re-checked with a targeted search in stage 7.
 - **RSS CFP:** still not re-verified (WebFetch unavailable this run). Last verified 2026-11-06.
 - **Decision:** PROCEED → stage 6 KNOWLEDGE_EXTRACT.
+
+## Stage 6. KNOWLEDGE_EXTRACT     [v1]
+
+- **Finished:** 2026-11-08T09:20Z (run 37). Plan: `plans/stage_06_knowledge_extract.md`.
+- **Outputs produced:** `docs/05_knowledge_cards.json` (52 cards, abstracts only), `code/literature/build_cards_v1.py`.
+  Extraction by a fresh Sonnet subagent with the stage template; the session checked keys (52/52, none extra) and that
+  every number in findings / data / metrics occurs in the source abstract (0 violations).
+- **Notes for stage 7:** closest grasping-side evidence is reactive / margin-based (e.g. a fixed 20 % safety margin
+  giving 9–30 % excess force in `khamis2021real`; a tactile safety-margin CNN in `boonstra2024estimate`), none with a
+  slip-rate guarantee; online calibration from partial / binary feedback exists in other robotics settings
+  (`lekeufack2024conformal`, `zhang2024bayesian`, `ge2024stochastic`, `zhao2024conformalized`).
+- **Decision:** PROCEED → stage 7 SYNTHESIS.
