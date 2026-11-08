@@ -74,3 +74,16 @@ def test_featsets_sigma():
     assert X0.shape[1] == Xf.shape[1] + 2
     assert np.allclose(X0[:, :-2], Xf) and abs((X2 - X0)[0, -2] - 0.2 * row["rec"]["onset"]["eps"]) < 1e-9
     assert matrix([row], "P_onset").shape[1] == matrix([row], "P").shape[1] + 2
+
+
+def test_mono_h1m_matches_label(tmp_path):
+    """H1-M design: the embedded bisection reproduces the label bracket (deterministic replays)."""
+    import json
+    import main as M
+    M.main(["label", "--pool", "pilot", "--family", "F2", "--start", "140", "--count", "1", "--dists", "D3",
+            "--protocol", "rd", "--out", str(tmp_path / "l")])
+    M.main(["mono", "--pool", "pilot", "--family", "F2", "--start", "140", "--count", "1", "--dists", "D3",
+            "--protocol", "rd", "--design", "h1m", "--out", str(tmp_path / "m")])
+    lab = [json.loads(x) for x in open(tmp_path / "l.jsonl")][1]
+    mon = [json.loads(x) for x in open(tmp_path / "m.jsonl")][1]
+    assert abs(lab["F_hi"] - mon["F_hi"]) < 1e-12 and mon["n_forces"] >= 40

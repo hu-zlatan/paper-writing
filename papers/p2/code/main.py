@@ -105,15 +105,43 @@ def cmd_label(a):
 
 
 def cmd_mono(a):
-    grid = np.exp(np.linspace(math.log(a.f_min_grid), math.log(a.f_max), a.grid))
+    """H1-M. --design grid (pilot): --grid log points on [f_min_grid, f_max]. --design h1m (frozen, 07_hypotheses H1-M):
+    25 log points on [f_min, f_max] + the 11 bisection replays + 10 log points on [F*_hi, 1.5 F*_hi]; non-monotone =
+    any F_a < F_b with slip(F_a) = 0 and slip(F_b) = 1 among all simulated forces."""
+    if a.design == "grid":
+        grid = np.exp(np.linspace(math.log(a.f_min_grid), math.log(a.f_max), a.grid))
 
-    def body(sim):
-        t0 = time.perf_counter()
-        out = [bool(sim.run(float(F))["slip"]) for F in grid]
-        first_ok = next((k for k, o in enumerate(out) if not o), None)
-        nonmono = first_ok is not None and any(out[first_ok:])
-        return {"grid": grid.round(6).tolist(), "slip_grid": out, "non_monotone": bool(nonmono),
-                "seconds": time.perf_counter() - t0}
+        def body(sim):
+            t0 = time.perf_counter()
+            out = [bool(sim.run(float(F))["slip"]) for F in grid]
+            first_ok = next((k for k, o in enumerate(out) if not o), None)
+            nonmono = first_ok is not None and any(out[first_ok:])
+            return {"grid": grid.round(6).tolist(), "slip_grid": out, "non_monotone": bool(nonmono),
+                    "seconds": time.perf_counter() - t0}
+    else:
+        def body(sim):
+            t0 = time.perf_counter()
+            pts = {}
+            for F in np.exp(np.linspace(math.log(a.f_min), math.log(a.f_max), 25)):
+                pts[float(F)] = bool(sim.run(float(F))["slip"])
+            lo, hi = math.log(a.f_min), math.log(a.f_max)
+            pts[a.f_max] = bool(sim.run(a.f_max)["slip"])
+            F_hi = None
+            if not pts[a.f_max]:
+                for _ in range(a.halvings):
+                    mid = 0.5 * (lo + hi)
+                    sl = bool(sim.run(math.exp(mid))["slip"])
+                    pts[math.exp(mid)] = sl
+                    lo, hi = (mid, hi) if sl else (lo, mid)
+                F_hi = math.exp(hi)
+                for F in np.exp(np.linspace(math.log(F_hi), math.log(1.5 * F_hi), 10)):
+                    pts[float(F)] = bool(sim.run(float(F))["slip"])
+            Fs = sorted(pts)
+            sl = [pts[F] for F in Fs]
+            first_ok = next((k for k, o in enumerate(sl) if not o), None)
+            nonmono = first_ok is not None and any(sl[first_ok:])
+            return {"forces": [round(F, 6) for F in Fs], "slip": sl, "F_hi": F_hi, "non_monotone": bool(nonmono),
+                    "n_forces": len(Fs), "seconds": time.perf_counter() - t0}
     rows = run_loop(a, "mono", body)
     if rows:
         print(f"instances: {len(rows)}")
@@ -153,6 +181,32 @@ def cmd_timing(a):
     print(f"digest: {res['digest']}")
 
 
+def cmd_fit(a):
+    """Equal 30-config grouped-CV search on the id train objects (avoidable instances), tau = 1 - alpha, refit, then
+    log-predictions for every labelled row (id select / cal / test, shift pools). Cal / test labels are never read
+    here except to write the row keys; only train rows enter the fit."""
+    from certgrip.featsets import matrix
+    from certgrip.io import key, load_rows
+    from certgrip.models import fit_quantile
+    rows = load_rows(a.labels)
+    tr = [r for r in rows if r["pool"] == a.train_pool and r["shift"] is None and r["split"] == a.train_split and not r["unavoidable"]]
+    y = np.log([r["F_hi"] for r in tr])
+    g = np.array([f"{r['family']}_{r['obj']}" for r in tr])
+    t0 = time.time()
+    m, info = fit_quantile(matrix(tr, a.fset, a.no_mass, a.sigma), y, g, 1 - a.alpha, seed=a.seed, n_configs=a.configs)
+    pred = m.predict(matrix(rows, a.fset, a.no_mass, a.sigma))
+    os.makedirs(os.path.dirname(os.path.abspath(a.out)), exist_ok=True)
+    res = header(a, "fit")
+    res.update({"fset": a.fset, "sigma": a.sigma, "no_mass": a.no_mass, "alpha": a.alpha, "seed": a.seed,
+                "configs": a.configs, "n_train_rows": len(tr), "best": info["best"], "cv_pinball": info["cv_pinball"],
+                "keys": [list(key(r)) for r in rows], "log_pred": [round(float(p), 7) for p in pred],
+                "seconds": time.time() - t0})
+    with open(a.out + ".json", "w") as f:
+        json.dump(res, f)
+    print(f"n_train_rows: {len(tr)}")
+    print(f"cv_pinball: {info['cv_pinball']:.5f}")
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser()
     sub = ap.add_subparsers(dest="cmd", required=True)
@@ -169,16 +223,31 @@ def main(argv=None):
         p.add_argument("--halvings", type=int, default=10)
         p.add_argument("--f-min-grid", type=float, default=0.3)
         p.add_argument("--grid", type=int, default=35)
+        p.add_argument("--design", default="grid", choices=["grid", "h1m"], help="mono only: pilot grid or frozen H1-M design")
         p.add_argument("--budget-minutes", type=float, default=25.0)
         p.add_argument("--protocol", default="squeeze", choices=["squeeze", "rd"],
                        help="squeeze = stage-9 design; rd = amendment 08a ramp-down probe (the frozen study uses rd)")
         p.add_argument("--out", required=True)
+    fi = sub.add_parser("fit", help="stage 12: train one arm on the id train objects; predict log F for every row")
+    fi.add_argument("--fset", required=True)
+    fi.add_argument("--sigma", type=float, default=0.2)
+    fi.add_argument("--no-mass", action="store_true")
+    fi.add_argument("--alpha", type=float, default=0.10)
+    fi.add_argument("--seed", type=int, default=0)
+    fi.add_argument("--configs", type=int, default=30)
+    fi.add_argument("--labels", default="v1/labels/*.jsonl", help="glob under results/")
+    fi.add_argument("--train-pool", default="id", help="smoke tests only: pilot")
+    fi.add_argument("--train-split", default="train", help="smoke tests only: pilot")
+    fi.add_argument("--out", required=True)
     po = sub.add_parser("pilotoof", help="re-pilot (08a): one arm's cross-fitted OOF predictions on the pilot labels")
     po.add_argument("--fset", required=True)
     po.add_argument("--sigma", type=float, default=0.0)
     po.add_argument("--configs", type=int, default=30)
     po.add_argument("--out", required=True)
     a = ap.parse_args(argv)
+    if a.cmd == "fit":
+        cmd_fit(a)
+        return
     if a.cmd == "pilotoof":
         import pilot_analysis_rd
         pilot_analysis_rd.run_arm(a.fset, a.sigma, a.configs, a.out)
