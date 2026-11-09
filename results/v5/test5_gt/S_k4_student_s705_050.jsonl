@@ -1,0 +1,26 @@
+{"header": true, "args": {"cmd": "gt3", "src": ["../results/v5/test5/S_k4_student_s705_050.jsonl"], "J": 16, "L": 4095, "out": "../results/v5/test5_gt/S_k4_student_s705_050"}, "env": {"TOUCHBED_NPHI": "64", "action_set": "64x8", "A": 512, "numpy": "2.5.4", "python": "3.12.16", "threads": {"OMP_NUM_THREADS": "1", "OPENBLAS_NUM_THREADS": "1", "MKL_NUM_THREADS": "1"}}}
+{"episode": 50, "set": "S", "split": "test5", "kappa": 4.0, "tau": 4.8, "method": "student", "g_T": 8.317691619206395, "n_probes": 4, "J": 16, "L": 4095}
+{"episode": 51, "set": "S", "split": "test5", "kappa": 4.0, "tau": 4.8, "method": "student", "g_T": -2.3003092267974488, "n_probes": 4, "J": 16, "L": 4095}
+{"episode": 52, "set": "S", "split": "test5", "kappa": 4.0, "tau": 4.8, "method": "student", "g_T": 4.699788649243384, "n_probes": 4, "J": 16, "L": 4095}
+{"episode": 53, "set": "S", "split": "test5", "kappa": 4.0, "tau": 4.8, "method": "student", "g_T": 8.223633083371354, "n_probes": 4, "J": 16, "L": 4095}
+{"episode": 54, "set": "S", "split": "test5", "kappa": 4.0, "tau": 4.8, "method": "student", "g_T": 2.4317009876671243, "n_probes": 4, "J": 16, "L": 4095}
+{"episode": 55, "set": "S", "split": "test5", "kappa": 4.0, "tau": 4.8, "method": "student", "g_T": 5.95925982849594, "n_probes": 4, "J": 16, "L": 4095}
+{"episode": 56, "set": "S", "split": "test5", "kappa": 4.0, "tau": 4.8, "method": "student", "g_T": 4.504319354407837, "n_probes": 4, "J": 16, "L": 4095}
+{"episode": 57, "set": "S", "split": "test5", "kappa": 4.0, "tau": 4.8, "method": "student", "g_T": -8.541218969151014, "n_probes": 4, "J": 16, "L": 4095}
+{"episode": 58, "set": "S", "split": "test5", "kappa": 4.0, "tau": 4.8, "method": "student", "g_T": 7.609396354402024, "n_probes": 4, "J": 16, "L": 4095}
+{"episode": 59, "set": "S", "split": "test5", "kappa": 4.0, "tau": 4.8, "method": "student", "g_T": 8.31766974783879, "n_probes": 4, "J": 16, "L": 4095}
+{"episode": 60, "set": "S", "split": "test5", "kappa": 4.0, "tau": 4.8, "method": "student", "g_T": 8.31774169835672, "n_probes": 4, "J": 16, "L": 4095}
+{"episode": 61, "set": "S", "split": "test5", "kappa": 4.0, "tau": 4.8, "method": "student", "g_T": 7.304696155697229, "n_probes": 4, "J": 16, "L": 4095}
+{"episode": 62, "set": "S", "split": "test5", "kappa": 4.0, "tau": 4.8, "method": "student", "g_T": 8.31677980175003, "n_probes": 4, "J": 16, "L": 4095}
+{"episode": 63, "set": "S", "split": "test5", "kappa": 4.0, "tau": 4.8, "method": "student", "g_T": 8.306381421200923, "n_probes": 4, "J": 16, "L": 4095}
+{"episode": 64, "set": "S", "split": "test5", "kappa": 4.0, "tau": 4.8, "method": "student", "g_T": 8.299498420457608, "n_probes": 4, "J": 16, "L": 4095}
+{"episode": 65, "set": "S", "split": "test5", "kappa": 4.0, "tau": 4.8, "method": "student", "g_T": 6.8006019021031285, "n_probes": 4, "J": 16, "L": 4095}
+{"episode": 66, "set": "S", "split": "test5", "kappa": 4.0, "tau": 4.8, "method": "student", "g_T": 8.308824771483538, "n_probes": 4, "J": 16, "L": 4095}
+{"episode": 67, "set": "S", "split": "test5", "kappa": 4.0, "tau": 4.8, "method": "student", "g_T": 7.920704738598878, "n_probes": 4, "J": 16, "L": 4095}
+{"episode": 68, "set": "S", "split": "test5", "kappa": 4.0, "tau": 4.8, "method": "student", "g_T": -0.1496743144667967, "n_probes": 4, "J": 16, "L": 4095}
+{"episode": 69, "set": "S", "split": "test5", "kappa": 4.0, "tau": 4.8, "method": "student", "g_T": 7.687908559585086, "n_probes": 4, "J": 16, "L": 4095}
+{"episode": 70, "set": "S", "split": "test5", "kappa": 4.0, "tau": 4.8, "method": "student", "g_T": 8.317659448660837, "n_probes": 4, "J": 16, "L": 4095}
+{"episode": 71, "set": "S", "split": "test5", "kappa": 4.0, "tau": 4.8, "method": "student", "g_T": 7.8419463456326834, "n_probes": 4, "J": 16, "L": 4095}
+{"episode": 72, "set": "S", "split": "test5", "kappa": 4.0, "tau": 4.8, "method": "student", "g_T": 7.650808959743937, "n_probes": 4, "J": 16, "L": 4095}
+{"episode": 73, "set": "S", "split": "test5", "kappa": 4.0, "tau": 4.8, "method": "student", "g_T": 8.317677736266997, "n_probes": 4, "J": 16, "L": 4095}
+{"episode": 74, "set": "S", "split": "test5", "kappa": 4.0, "tau": 4.8, "method": "student", "g_T": 8.263023892930175, "n_probes": 4, "J": 16, "L": 4095}
