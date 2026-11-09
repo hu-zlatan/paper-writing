@@ -257,3 +257,21 @@ Run order when both papers are active: AUTOPILOT §7.
   - **Next:** CRC analysis script (`analysis_crc.py`: per-stratum λ̂, RE, physical slip, D(H2a)/D(H2b), object-cluster
     bootstrap 2,000 draws with λ̂ recomputed) + synthetic test, committed **before** reading the replay files; then the
     read-out; then H1-V, H3 stream (OQT), H4 diagnostics.
+  - **(later, run 40) H3 streams.** Addendum `docs/08d_h3_stream_plan.md` committed before any stream quantity
+    (per-stratum trackers initialised at the offline q̂, η = 0.1 × IQR of CertGrip's pooled ID cal scores = 0.0341,
+    label-rule feedback for the 20 orderings and the regenerated-ordering bootstrap, two ordering-0 direct-replay
+    audits: the pre-registered steps 501–1,000 and, added for 08c §3, the whole window for OQT vs Oracle). One wording
+    error in 08d (unavoidable steps) corrected before any result. Code `code/h3_streams.py` + tests (3 passed),
+    `main.py replay`; 10,000 audit replays in the sandbox (≈ 0.015 s each). A 40-draw timing smoke of the committed
+    read-out printed the point R_E values before the full run (same script; the 2,000-draw run below is the result).
+  - **H3 read-out** (`results/v1/h3_analysis.json`, 2,000 draws, CI\*\* 97.5 %): R_E = OQT / Oracle window RE —
+    S1 0.878 [0.740, 1.120], S2 1.174 [1.023, 1.428], S3 0.963 [0.836, 1.145] → **all three inconclusive** (none has
+    upper < 1.10, none lower > 1.10); H3 not confirmed — the reduced-power outcome 08b §5 stated in advance.
+    The matched-rate co-requirement (physical window slip, ordering 0) **fails for S1 (+0.032) and S2 (−0.035)**,
+    holds for S3 (+0.009): the 175-object oracle q̂ is itself off α in the window (label slip S1 7.5 %, S2 13.5 %),
+    while OQT sits at 10.0–10.2 % on every shift. So the excess ratios on S1 / S2 are unmatched and reported only
+    next to the slip rates. Frozen CertGrip breaks under S1 (30.6 %) and S3 (24.6 %), not under S2 / S1m; decaying-step
+    OQT does not recover under S1 / S3 (20.2 % / 18.1 %). Physical vs label disagreement Δ in all 14 audits between
+    −0.8 % and 0 (physical slip never above the label rule; CI\*\* upper ≤ 0). H3-L: ρ_s − ρ_ID S1 +0.086
+    [−0.044, 0.186] (TOST ±0.05 not met → not confirmed), S2 +0.064, S3 +0.082, S1m −0.019.
+  - **CRC replays** (Actions, 60 jobs) still landing; `analysis_crc.py --check` gates the H2 read-out.

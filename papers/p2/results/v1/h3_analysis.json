@@ -1,0 +1,624 @@
+{
+ "purpose": "p2 H3 streams (07 H3, addendum 08d): label-rule feedback, 20 orderings, bootstrap CI** 97.5 %",
+ "eta": 0.03412492930534316,
+ "q_offline": [
+  [
+   0.015374985072078129,
+   0.46525522320446067
+  ],
+  [
+   0.01162913662425602,
+   0.43704236219764314
+  ],
+  [
+   0.07710309873621157,
+   1.0211721448777467
+  ],
+  [
+   0.04229319230490036,
+   0.9894746017761643
+  ]
+ ],
+ "draws": 2000,
+ "shifts": {
+  "S1": {
+   "arms": {
+    "OQT-CertGrip": {
+     "RE_window": 0.47627228482066053,
+     "slip_label_window": 0.10155,
+     "capped_window": 0.0,
+     "slip_label_all": 0.11190000000000003
+    },
+    "OQT-COMP": {
+     "RE_window": 0.8087243368057256,
+     "slip_label_window": 0.10295000000000001,
+     "capped_window": 0.0,
+     "slip_label_all": 0.13137500000000002
+    },
+    "OQTdecay-CertGrip": {
+     "RE_window": 0.3118508630193918,
+     "slip_label_window": 0.2021,
+     "capped_window": 0.0,
+     "slip_label_all": 0.19262500000000002
+    },
+    "Frozen-CertGrip": {
+     "RE_window": 0.2061573715220976,
+     "slip_label_window": 0.30555,
+     "capped_window": 0.0,
+     "slip_label_all": 0.25770000000000004
+    },
+    "Frozen-COMP": {
+     "RE_window": 0.060066971379161616,
+     "slip_label_window": 0.5101499999999999,
+     "capped_window": 0.0,
+     "slip_label_all": 0.4135
+    },
+    "Oracle-CertGrip": {
+     "RE_window": 0.5425570972128015,
+     "slip_label_window": 0.07509999999999999,
+     "capped_window": 0.0,
+     "slip_label_all": 0.085525
+    },
+    "Oracle-COMP": {
+     "RE_window": 0.8368686881653872,
+     "slip_label_window": 0.09740000000000001,
+     "capped_window": 0.0,
+     "slip_label_all": 0.10305000000000002
+    }
+   },
+   "R_E": 0.8778288723294633,
+   "R_E_CI**": [
+    0.7404380328853423,
+    1.1203725733529062
+   ],
+   "decision": "inconclusive",
+   "rho": -0.5294683957661886,
+   "matched_label_window_diff": 0.026450000000000015,
+   "arms_RE_CI**": {
+    "OQT-CertGrip": [
+     0.4371327615261175,
+     0.500683873447897
+    ],
+    "OQT-COMP": [
+     0.746525844794906,
+     0.8614336805580184
+    ],
+    "OQTdecay-CertGrip": [
+     0.28789187318701015,
+     0.33189325369065475
+    ],
+    "Frozen-CertGrip": [
+     0.18058044529008174,
+     0.22978818289678463
+    ],
+    "Frozen-COMP": [
+     0.02373519899912761,
+     0.09931325962738267
+    ],
+    "Oracle-CertGrip": [
+     0.42243300246127774,
+     0.6257585332238882
+    ],
+    "Oracle-COMP": [
+     0.7067579188181538,
+     0.9672096224455924
+    ]
+   },
+   "rho_minus_rhoID": 0.08568887775093226,
+   "rho_minus_rhoID_CI**": [
+    -0.044445043976826804,
+    0.18587971674532186
+   ]
+  },
+  "S2": {
+   "arms": {
+    "OQT-CertGrip": {
+     "RE_window": 0.4262174114654981,
+     "slip_label_window": 0.09985000000000002,
+     "capped_window": 0.0,
+     "slip_label_all": 0.10035000000000001
+    },
+    "OQT-COMP": {
+     "RE_window": 0.739823024634054,
+     "slip_label_window": 0.09975,
+     "capped_window": 0.0,
+     "slip_label_all": 0.10070000000000001
+    },
+    "OQTdecay-CertGrip": {
+     "RE_window": 0.42433422131988524,
+     "slip_label_window": 0.09395,
+     "capped_window": 0.0,
+     "slip_label_all": 0.10037500000000002
+    },
+    "Frozen-CertGrip": {
+     "RE_window": 0.4160426033810972,
+     "slip_label_window": 0.10164999999999999,
+     "capped_window": 0.0,
+     "slip_label_all": 0.10785
+    },
+    "Frozen-COMP": {
+     "RE_window": 0.7224637727362764,
+     "slip_label_window": 0.10505000000000002,
+     "capped_window": 0.0,
+     "slip_label_all": 0.10787499999999998
+    },
+    "Oracle-CertGrip": {
+     "RE_window": 0.3630825535077716,
+     "slip_label_window": 0.1346,
+     "capped_window": 0.0,
+     "slip_label_all": 0.13235
+    },
+    "Oracle-COMP": {
+     "RE_window": 0.6689071622200282,
+     "slip_label_window": 0.12465,
+     "capped_window": 0.0,
+     "slip_label_all": 0.121875
+    }
+   },
+   "R_E": 1.1738856834286728,
+   "R_E_CI**": [
+    1.0233802648114094,
+    1.4283245696864444
+   ],
+   "decision": "inconclusive",
+   "rho": -0.5514614300608756,
+   "matched_label_window_diff": -0.034749999999999975,
+   "arms_RE_CI**": {
+    "OQT-CertGrip": [
+     0.40338091428947787,
+     0.4563580105545673
+    ],
+    "OQT-COMP": [
+     0.6725208096757983,
+     0.8061318578798047
+    ],
+    "OQTdecay-CertGrip": [
+     0.39889815093363845,
+     0.4505612213709105
+    ],
+    "Frozen-CertGrip": [
+     0.38961973932884675,
+     0.44286739128563324
+    ],
+    "Frozen-COMP": [
+     0.6553649851344916,
+     0.7925052035693868
+    ],
+    "Oracle-CertGrip": [
+     0.2998779113319673,
+     0.4168180987790998
+    ],
+    "Oracle-COMP": [
+     0.5531350570755161,
+     0.8042083630762981
+    ]
+   },
+   "rho_minus_rhoID": 0.06369584345624535,
+   "rho_minus_rhoID_CI**": [
+    -0.05818826923335122,
+    0.18821741877651652
+   ]
+  },
+  "S3": {
+   "arms": {
+    "OQT-CertGrip": {
+     "RE_window": 0.5066586904104615,
+     "slip_label_window": 0.10000000000000002,
+     "capped_window": 0.0,
+     "slip_label_all": 0.110375
+    },
+    "OQT-COMP": {
+     "RE_window": 0.8634711078461781,
+     "slip_label_window": 0.10040000000000002,
+     "capped_window": 0.0,
+     "slip_label_all": 0.10915000000000001
+    },
+    "OQTdecay-CertGrip": {
+     "RE_window": 0.3429939304939842,
+     "slip_label_window": 0.18085,
+     "capped_window": 0.0,
+     "slip_label_all": 0.1735
+    },
+    "Frozen-CertGrip": {
+     "RE_window": 0.25921412254236204,
+     "slip_label_window": 0.24610000000000004,
+     "capped_window": 0.0,
+     "slip_label_all": 0.215225
+    },
+    "Frozen-COMP": {
+     "RE_window": 0.5933295827035262,
+     "slip_label_window": 0.191,
+     "capped_window": 0.0,
+     "slip_label_all": 0.1729
+    },
+    "Oracle-CertGrip": {
+     "RE_window": 0.5261564598982473,
+     "slip_label_window": 0.0863,
+     "capped_window": 0.0,
+     "slip_label_all": 0.094375
+    },
+    "Oracle-COMP": {
+     "RE_window": 0.891412388164445,
+     "slip_label_window": 0.09615000000000001,
+     "capped_window": 0.0,
+     "slip_label_all": 0.101525
+    }
+   },
+   "R_E": 0.9629430198546712,
+   "R_E_CI**": [
+    0.8363490279288642,
+    1.1449344456230872
+   ],
+   "decision": "inconclusive",
+   "rho": -0.5331228552336889,
+   "matched_label_window_diff": 0.013700000000000018,
+   "arms_RE_CI**": {
+    "OQT-CertGrip": [
+     0.4782172853099652,
+     0.5372182155603084
+    ],
+    "OQT-COMP": [
+     0.7988881590538064,
+     0.9149997985047235
+    ],
+    "OQTdecay-CertGrip": [
+     0.3190262550738233,
+     0.36830436169405495
+    ],
+    "Frozen-CertGrip": [
+     0.23363357267099097,
+     0.28350247359688896
+    ],
+    "Frozen-COMP": [
+     0.5375371976673927,
+     0.650916896902309
+    ],
+    "Oracle-CertGrip": [
+     0.4481815863208407,
+     0.6061318071125877
+    ],
+    "Oracle-COMP": [
+     0.7540429692054114,
+     1.0438889096950328
+    ]
+   },
+   "rho_minus_rhoID": 0.08203441828343205,
+   "rho_minus_rhoID_CI**": [
+    -0.025456399551888043,
+    0.1912431847003946
+   ]
+  },
+  "S1m": {
+   "arms": {
+    "OQT-CertGrip": {
+     "RE_window": 0.42880720835754566,
+     "slip_label_window": 0.1012,
+     "capped_window": 0.0,
+     "slip_label_all": 0.10217500000000002
+    },
+    "OQT-COMP": {
+     "RE_window": 0.8085023736628049,
+     "slip_label_window": 0.10195000000000001,
+     "capped_window": 0.0,
+     "slip_label_all": 0.108425
+    },
+    "OQTdecay-CertGrip": {
+     "RE_window": 0.40851653847989755,
+     "slip_label_window": 0.1086,
+     "capped_window": 0.0,
+     "slip_label_all": 0.108125
+    },
+    "Frozen-CertGrip": {
+     "RE_window": 0.39123605670483114,
+     "slip_label_window": 0.11574999999999999,
+     "capped_window": 0.0,
+     "slip_label_all": 0.115475
+    },
+    "Frozen-COMP": {
+     "RE_window": 0.5888243381701475,
+     "slip_label_window": 0.19155000000000003,
+     "capped_window": 0.0,
+     "slip_label_all": 0.1729
+    },
+    "Oracle-CertGrip": {
+     "RE_window": 0.4833982358531676,
+     "slip_label_window": 0.07635,
+     "capped_window": 0.0,
+     "slip_label_all": 0.0858
+    },
+    "Oracle-COMP": {
+     "RE_window": 0.8420870730758916,
+     "slip_label_window": 0.09305,
+     "capped_window": 0.0,
+     "slip_label_all": 0.09865
+    }
+   },
+   "R_E": 0.8870682111628475,
+   "R_E_CI**": [
+    0.7722942359002943,
+    1.0264606899039386
+   ],
+   "decision": "non-inferior",
+   "rho": -0.6341761947469648,
+   "matched_label_window_diff": 0.024849999999999997,
+   "arms_RE_CI**": {
+    "OQT-CertGrip": [
+     0.3994139912186485,
+     0.45304754505658795
+    ],
+    "OQT-COMP": [
+     0.7500564436840045,
+     0.8649360649680093
+    ],
+    "OQTdecay-CertGrip": [
+     0.3803691621235662,
+     0.4360484040647994
+    ],
+    "Frozen-CertGrip": [
+     0.361942194764852,
+     0.4181014636542442
+    ],
+    "Frozen-COMP": [
+     0.5314246450649226,
+     0.6438432269833503
+    ],
+    "Oracle-CertGrip": [
+     0.4150654905802274,
+     0.5535297319605433
+    ],
+    "Oracle-COMP": [
+     0.7002209657821626,
+     0.9779908207350939
+    ]
+   },
+   "rho_minus_rhoID": -0.019018921229843944,
+   "rho_minus_rhoID_CI**": [
+    -0.14420220943862688,
+    0.08051174880420392
+   ]
+  },
+  "ID": {
+   "arms": {
+    "OQT-CertGrip": {
+     "RE_window": 0.43858404681141006,
+     "slip_label_window": 0.0995,
+     "capped_window": 0.0,
+     "slip_label_all": 0.09985000000000001
+    },
+    "OQT-COMP": {
+     "RE_window": 0.8113574716550114,
+     "slip_label_window": 0.09975,
+     "capped_window": 0.0,
+     "slip_label_all": 0.10155
+    },
+    "OQTdecay-CertGrip": {
+     "RE_window": 0.4436548965681821,
+     "slip_label_window": 0.09655000000000001,
+     "capped_window": 0.0,
+     "slip_label_all": 0.099475
+    },
+    "Frozen-CertGrip": {
+     "RE_window": 0.4357857941572991,
+     "slip_label_window": 0.10170000000000001,
+     "capped_window": 0.0,
+     "slip_label_all": 0.106375
+    },
+    "Frozen-COMP": {
+     "RE_window": 0.7637845038184244,
+     "slip_label_window": 0.11485000000000001,
+     "capped_window": 0.0,
+     "slip_label_all": 0.11560000000000004
+    },
+    "Oracle-CertGrip": {
+     "RE_window": 0.45870353951815124,
+     "slip_label_window": 0.08970000000000002,
+     "capped_window": 0.0,
+     "slip_label_all": 0.09720000000000002
+    },
+    "Oracle-COMP": {
+     "RE_window": 0.8442527101521673,
+     "slip_label_window": 0.093,
+     "capped_window": 0.0,
+     "slip_label_all": 0.099125
+    }
+   },
+   "R_E": 0.9561383530463361,
+   "R_E_CI**": [
+    0.8259546187620586,
+    1.0908929965741163
+   ],
+   "decision": "non-inferior",
+   "rho": -0.6151572735171209,
+   "matched_label_window_diff": 0.00979999999999999,
+   "arms_RE_CI**": {
+    "OQT-CertGrip": [
+     0.4152202751309376,
+     0.4667846723900241
+    ],
+    "OQT-COMP": [
+     0.7490652487840457,
+     0.8648035308903519
+    ],
+    "OQTdecay-CertGrip": [
+     0.415902140046511,
+     0.47192834839965503
+    ],
+    "Frozen-CertGrip": [
+     0.408786065832027,
+     0.46501503636941127
+    ],
+    "Frozen-COMP": [
+     0.7018952455570722,
+     0.8224372530415863
+    ],
+    "Oracle-CertGrip": [
+     0.4028605594824954,
+     0.530597318563561
+    ],
+    "Oracle-COMP": [
+     0.7002941464863331,
+     0.9782223046155806
+    ]
+   }
+  }
+ },
+ "H3_primary": {
+  "S1": "inconclusive",
+  "S2": "inconclusive",
+  "S3": "inconclusive"
+ },
+ "audit": {
+  "S1|OQT-CertGrip|501-1000": {
+   "n": 500,
+   "slip_direct": 0.134,
+   "slip_label": 0.134,
+   "Delta": 0.0,
+   "Delta_CI**": [
+    0.0,
+    0.0
+   ]
+  },
+  "S1|OQT-COMP|501-1000": {
+   "n": 500,
+   "slip_direct": 0.198,
+   "slip_label": 0.2,
+   "Delta": -0.002,
+   "Delta_CI**": [
+    -0.007889741250945265,
+    0.0
+   ]
+  },
+  "S1|OQT-CertGrip|1001-2000": {
+   "n": 1000,
+   "slip_direct": 0.103,
+   "slip_label": 0.105,
+   "Delta": -0.002,
+   "Delta_CI**": [
+    -0.005964214711729622,
+    0.0
+   ]
+  },
+  "S1|Oracle-CertGrip|1001-2000": {
+   "n": 1000,
+   "slip_direct": 0.071,
+   "slip_label": 0.073,
+   "Delta": -0.002,
+   "Delta_CI**": [
+    -0.005970223583278825,
+    0.0
+   ]
+  },
+  "S1m|OQT-CertGrip|501-1000": {
+   "n": 500,
+   "slip_direct": 0.102,
+   "slip_label": 0.11,
+   "Delta": -0.008,
+   "Delta_CI**": [
+    -0.018108651911468814,
+    0.0
+   ]
+  },
+  "S1m|OQT-COMP|501-1000": {
+   "n": 500,
+   "slip_direct": 0.118,
+   "slip_label": 0.122,
+   "Delta": -0.004,
+   "Delta_CI**": [
+    -0.012170385395537525,
+    0.0
+   ]
+  },
+  "S2|OQT-CertGrip|501-1000": {
+   "n": 500,
+   "slip_direct": 0.098,
+   "slip_label": 0.1,
+   "Delta": -0.002,
+   "Delta_CI**": [
+    -0.007890133370902603,
+    0.0
+   ]
+  },
+  "S2|OQT-COMP|501-1000": {
+   "n": 500,
+   "slip_direct": 0.102,
+   "slip_label": 0.104,
+   "Delta": -0.002,
+   "Delta_CI**": [
+    -0.00784332986632767,
+    0.0
+   ]
+  },
+  "S2|OQT-CertGrip|1001-2000": {
+   "n": 1000,
+   "slip_direct": 0.092,
+   "slip_label": 0.1,
+   "Delta": -0.008,
+   "Delta_CI**": [
+    -0.014911094252035146,
+    -0.0028803897622687352
+   ]
+  },
+  "S2|Oracle-CertGrip|1001-2000": {
+   "n": 1000,
+   "slip_direct": 0.127,
+   "slip_label": 0.128,
+   "Delta": -0.001,
+   "Delta_CI**": [
+    -0.003972243993832438,
+    0.0
+   ]
+  },
+  "S3|OQT-CertGrip|501-1000": {
+   "n": 500,
+   "slip_direct": 0.128,
+   "slip_label": 0.13,
+   "Delta": -0.002,
+   "Delta_CI**": [
+    -0.007936507936507936,
+    0.0
+   ]
+  },
+  "S3|OQT-COMP|501-1000": {
+   "n": 500,
+   "slip_direct": 0.132,
+   "slip_label": 0.134,
+   "Delta": -0.002,
+   "Delta_CI**": [
+    -0.007920792079207921,
+    0.0
+   ]
+  },
+  "S3|OQT-CertGrip|1001-2000": {
+   "n": 1000,
+   "slip_direct": 0.101,
+   "slip_label": 0.104,
+   "Delta": -0.003,
+   "Delta_CI**": [
+    -0.007905138339920948,
+    0.0
+   ]
+  },
+  "S3|Oracle-CertGrip|1001-2000": {
+   "n": 1000,
+   "slip_direct": 0.092,
+   "slip_label": 0.096,
+   "Delta": -0.004,
+   "Delta_CI**": [
+    -0.009137288214365017,
+    0.0
+   ]
+  },
+  "S1|matched_physical": {
+   "diff": 0.032,
+   "matched": false
+  },
+  "S2|matched_physical": {
+   "diff": -0.035,
+   "matched": false
+  },
+  "S3|matched_physical": {
+   "diff": 0.009000000000000008,
+   "matched": true
+  }
+ }
+}
