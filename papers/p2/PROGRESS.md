@@ -334,3 +334,30 @@ Run order when both papers are active: AUTOPILOT §7.
     estimate, not from static / squeeze touch features.
   - **Still to do (paper 2 secondaries):** H4c shuffled-touch fits, D-μ, H2-T tail, H2-M no-mass fits, H3-B location
     prediction, UT3 (new fits → Actions manifest), then stage 13 freeze note → stage 14.
+
+- **Run 42 (2026-11-09, from ≈ 13:52 UTC, scheduled).** No open issues; AUTOPILOT §1 unchanged (paper 1 still waits for
+  the owner's stage-20 choice). `add_repo` not available as a tool; the existing checkout was reset onto origin/main.
+  - **Addendum `docs/08f_secondaries_batch.md`** (committed before any of these quantities were computed) fixes the
+    operational details 07 §4 / 08b §6 left open for H2-T, H4c, H2-M (no-mass only; mass-noise not run), H3-B, D-μ, UT3.
+    Code `code/secondaries_08f.py`, feature set `full_rd_shuf` (+ `tests/test_shuffle.py`; tests 27 / 27 pass), committed
+    before running. All results below are secondary; CI\*\* 97.5 %, 2,000 object-cluster draws unless stated.
+  - **H2-T** (`results/v1/sec08f_tail.json`): T = P95 RE(CertGrip-full σ 0.2) / P95 RE(CSF-1) — CRC 08c (primary route)
+    0.592 [0.554, 0.656], CRC 08e 0.602 [0.549, 0.649], label 0.601 [0.552, 0.646] → **pass** on every route (upper
+    < 1.10). P95 RE 1.17 vs 1.98: the mean gain does not come with a worse tail.
+  - **H3-B** (`results/v1/sec08f_h3b.json`): for the no-onset arms (P, S, full, CSF-1) the location model predicts the
+    frozen offline slip rate within 0.004 on S1 (p_obs 0.50–0.52) and S1m (0.18–0.19); all CI\*\* inside ±0.02 →
+    **pass** (S1 is a pure location shift for these arms). The onset arm full_rd σ 0.2 is far below the location
+    prediction (S1 p_obs 0.304 vs 0.782; S1m 0.125 vs 0.213) — the onset probe partially tracks the friction change
+    (not tested: 08b never specified its prediction). S3 p_obs 0.19–0.25 (up, as predicted). S2: no arm breaks
+    (p_obs 0.094–0.096, CI\*\* within ±0.05 of α).
+  - **D-μ** (`results/v1/sec08f_dmu.json`, 500-draw 95 % intervals): residual CV R² of log μ — P 0.794, S 0.788, full
+    0.779 (no-probe touch does not see friction; the R² ≤ 0.05 premise for no-probe arms is *not* about these values —
+    08b's premise concerns the residual of the no-probe arms *containing* μ; read: the friction is left in their
+    residual), CSF-1 0.603; full_rd σ 0 / 0.1 / 0.2 / 0.4 = 0.011 / 0.045 / 0.214 / 0.566; onset-only σ 0.2 0.197;
+    CSF-μ̂ ≈ 0.003–0.006 at every σ; oracle 0.016. The learned onset arm leaves more friction in its residual than the
+    physics plug-in at σ ≥ 0.2 (it shrinks the noisy estimate), consistent with H2b.
+  - **UT3** (`results/v1/sec08f_ut3.json`, 1,000 re-splits, K = 160 cells, z 3.60): **160 / 160 pass**; worst cell
+    CSF-1 D3 α 0.01 n 500 (mean miss 0.0103, band [0.0073, 0.0107]). Re-split SD of miss ≤ 0.025 (n 500), ≤ 0.059
+    (n 50). The label-rule pipeline is correct.
+  - H4c and H2-M fits running in the sandbox (`a010_full_rd_shuf_s0.2_seed0`, `a010_P_nomass_seed0`,
+    `a010_full_rd_nomass_s0.2_seed0`); then `secondaries_08f.py label`.
