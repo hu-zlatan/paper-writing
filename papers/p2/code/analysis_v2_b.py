@@ -36,7 +36,7 @@ def main():
     ap.add_argument("--edge", action="store_true", help="B1 edge rule: CSF-proxy@0.2 on 08e-recipe grids vs CertGrip-full 08e")
     a = ap.parse_args()
     if a.edge:
-        return edge(a.draws)
+        return b1_edge(a.draws)
     G9, k9, rep9, missing = load09()
     print(f"instances {len(k9)}, missing {len(missing)}")
     if missing:
@@ -83,7 +83,7 @@ def main():
         print("margin", m, round(r["test"]["slip_phys"], 4), round(r["test"]["RE_mid"], 4))
 
 
-def edge(draws):
+def b1_edge(draws):
     G9, k9, rep9, missing = load09("09e")
     print(f"instances {len(k9)}, missing {len(missing)}")
     if missing:
