@@ -306,3 +306,22 @@ Run order when both papers are active: AUTOPILOT §7.
   - **Where to resume (run 41):** `p2_crc_v2` (60 jobs, dispatched ≈ 02:30 UTC) → `python analysis_crc.py --v2 --check`,
     then `--v2` read-out → report per 08e's reporting rule. Then the remaining secondaries (H4a steps, H4c shuffle fits,
     D-μ, H2-T tail, H2-M no-mass, H3-B location prediction, UT3) and stage 13/14 for paper 2.
+
+- **Run 41 (2026-11-09, from ≈ 07:50 UTC, scheduled).** No open issues; AUTOPILOT §1 unchanged. `add_repo` not available
+  as a tool; the existing checkout was reset onto origin/main. `p2_crc_v2` (Actions run 190, 60 jobs) `success`.
+  - **08e sensitivity read-out** (`python code/analysis_crc.py --v2 --check` → 4,800 / 4,800 instances, 0 duplicates;
+    then `--v2` → `results/v1/crc_analysis_v2.json`, 2,000 draws, CI\*\* 97.5 %). **No floor- or ceiling-bound λ̂**:
+    every arm × stratum selects grid index 20–22 of 0–40, so the 08c defect is removed.
+    RE at λ̂: CertGrip σ 0.2 0.444 (phys. slip 9.0 %), CSF-1 0.778 (10.0 %), CSF-μ̂ σ 0.2 0.455 (7.5 %), onset-only 0.435.
+    **H2a D = 0.429 [0.358, 0.477] → superiority** (same decision as 08c and the label route).
+    **H2b D = 0.024 [−0.095, 0.100] → not confirmed** (same decision as 08c; the label route said equivalence).
+    H4e −0.022 [−0.121, 0.037] not confirmed. σ curve, H2b: σ 0 −0.152 [−0.303, −0.060] **inferiority**;
+    σ 0.1 −0.102 [−0.191, 0.022] not confirmed; σ 0.4 +0.332 [0.234, 0.406] superiority. H2a: σ 0 / 0.1 / 0.2 / 0.4
+    = 0.692 / 0.587 / 0.429 / 0.161, all superiority.
+  - **Per the 08e reporting rule:** the sensitivity changes the 08c CRC decisions for H2b at σ 0 and σ 0.1 (08c:
+    "superiority", now inferiority / not confirmed) → those two pre-registered CRC results are reported as unreliable
+    because of the grid defect. No decision is upgraded. Honest reading: the learned model is worse than the physics
+    plug-in when the onset estimate is clean (σ ≤ 0.1), indistinguishable at the pre-registered σ 0.2, and better only
+    at the heaviest noise σ 0.4 (σ\* = 0.4 is where H2a itself is weakest, 0.16).
+  - **Next:** the remaining secondaries (H4a steps, H4c shuffle fits, D-μ, H2-T tail, H2-M no-mass, H3-B location
+    prediction, UT3) → stage 13 freeze note → stage 14 RESULT_ANALYSIS.
