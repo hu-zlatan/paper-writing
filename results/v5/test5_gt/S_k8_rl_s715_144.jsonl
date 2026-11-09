@@ -1,0 +1,19 @@
+{"header": true, "args": {"cmd": "gt3", "src": ["../results/v5/test5/S_k8_rl_s715_144.jsonl"], "J": 16, "L": 4095, "out": "../results/v5/test5_gt/S_k8_rl_s715_144"}, "env": {"TOUCHBED_NPHI": "64", "action_set": "64x8", "A": 512, "numpy": "2.5.4", "python": "3.12.16", "threads": {"OMP_NUM_THREADS": "1", "OPENBLAS_NUM_THREADS": "1", "MKL_NUM_THREADS": "1"}}}
+{"episode": 144, "set": "S", "split": "test5", "kappa": 8.0, "tau": 4.8, "method": "rl", "g_T": -0.651282523080468, "n_probes": 3, "J": 16, "L": 4095}
+{"episode": 145, "set": "S", "split": "test5", "kappa": 8.0, "tau": 4.8, "method": "rl", "g_T": 7.774600322846522, "n_probes": 3, "J": 16, "L": 4095}
+{"episode": 146, "set": "S", "split": "test5", "kappa": 8.0, "tau": 4.8, "method": "rl", "g_T": 8.280221072362778, "n_probes": 3, "J": 16, "L": 4095}
+{"episode": 147, "set": "S", "split": "test5", "kappa": 8.0, "tau": 4.8, "method": "rl", "g_T": 5.4267161992526045, "n_probes": 3, "J": 16, "L": 4095}
+{"episode": 148, "set": "S", "split": "test5", "kappa": 8.0, "tau": 4.8, "method": "rl", "g_T": 8.317390365927565, "n_probes": 3, "J": 16, "L": 4095}
+{"episode": 149, "set": "S", "split": "test5", "kappa": 8.0, "tau": 4.8, "method": "rl", "g_T": 2.82330966399406, "n_probes": 3, "J": 16, "L": 4095}
+{"episode": 150, "set": "S", "split": "test5", "kappa": 8.0, "tau": 4.8, "method": "rl", "g_T": 0.9003208936662848, "n_probes": 3, "J": 16, "L": 4095}
+{"episode": 151, "set": "S", "split": "test5", "kappa": 8.0, "tau": 4.8, "method": "rl", "g_T": 4.409487506224371, "n_probes": 3, "J": 16, "L": 4095}
+{"episode": 152, "set": "S", "split": "test5", "kappa": 8.0, "tau": 4.8, "method": "rl", "g_T": 7.93814872331486, "n_probes": 3, "J": 16, "L": 4095}
+{"episode": 153, "set": "S", "split": "test5", "kappa": 8.0, "tau": 4.8, "method": "rl", "g_T": 5.316095286782172, "n_probes": 3, "J": 16, "L": 4095}
+{"episode": 154, "set": "S", "split": "test5", "kappa": 8.0, "tau": 4.8, "method": "rl", "g_T": 8.254981676590539, "n_probes": 3, "J": 16, "L": 4095}
+{"episode": 155, "set": "S", "split": "test5", "kappa": 8.0, "tau": 4.8, "method": "rl", "g_T": 3.659396903673958, "n_probes": 3, "J": 16, "L": 4095}
+{"episode": 156, "set": "S", "split": "test5", "kappa": 8.0, "tau": 4.8, "method": "rl", "g_T": 8.317765149004702, "n_probes": 3, "J": 16, "L": 4095}
+{"episode": 157, "set": "S", "split": "test5", "kappa": 8.0, "tau": 4.8, "method": "rl", "g_T": 7.789653719701407, "n_probes": 3, "J": 16, "L": 4095}
+{"episode": 158, "set": "S", "split": "test5", "kappa": 8.0, "tau": 4.8, "method": "rl", "g_T": 3.857834083502789, "n_probes": 3, "J": 16, "L": 4095}
+{"episode": 159, "set": "S", "split": "test5", "kappa": 8.0, "tau": 4.8, "method": "rl", "g_T": 5.379479884884951, "n_probes": 3, "J": 16, "L": 4095}
+{"episode": 160, "set": "S", "split": "test5", "kappa": 8.0, "tau": 4.8, "method": "rl", "g_T": 7.414507658762618, "n_probes": 3, "J": 16, "L": 4095}
+{"episode": 161, "set": "S", "split": "test5", "kappa": 8.0, "tau": 4.8, "method": "rl", "g_T": 8.317437703101762, "n_probes": 3, "J": 16, "L": 4095}
