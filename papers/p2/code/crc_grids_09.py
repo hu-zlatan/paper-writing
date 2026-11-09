@@ -33,6 +33,32 @@ def f_proxy(r, sp):
     return i["mass"] * (G + commanded_acc(r["dist"], i["amp"], i["freq"])) / (2 * mu_t)
 
 
+def main_edge():
+    """Amendment 09 B1 edge rule: CSF-proxy@0.2 put lambda-hat on grid index 0 in D1 / D2 (results/v2/b_analysis.json),
+    so that arm is re-gridded with the 08e recipe (per-stratum q_sel on the selection split, +-0.8, 41 points).
+    Writes results/v2/crc_grids_09e.json."""
+    rows = load_rows("v1/labels/*.jsonl")
+    ks = hashlib.sha256(json.dumps([list(key(r)) for r in rows]).encode()).hexdigest()
+    unshift_id = [r["pool"] == "id" and r["shift"] is None for r in rows]
+    sel = np.array([u and r["split"] == "select" and not r["unavoidable"] for u, r in zip(unshift_id, rows)])
+    ct = [i for i, (u, r) in enumerate(zip(unshift_id, rows)) if u and r["split"] in ("cal", "test")]
+    dist = np.array([r["dist"] for r in rows])
+    log_fhi = np.log([r["F_hi"] if r["F_hi"] else 1.0 for r in rows])
+    lg = np.log([f_proxy(r, 0.2) for r in rows])
+    grids, qs = {}, {}
+    for d in ("D1", "D2", "D3", "D4"):
+        m = sel & (dist == d)
+        qs[d] = qhat(log_fhi[m] - lg[m], ALPHA)
+        grids[d] = [round(float(x), 6) for x in qs[d] + np.linspace(-0.8, 0.8, 41)]
+    out = {"purpose": "p2 amendment 09 B1 edge rule: CSF-proxy@0.2 on 08e-recipe grids", "alpha": ALPHA,
+           "n_grid": 41, "half_width": 0.8, "F_max": 100.0, "keys_sha256": ks,
+           "instances": [list(key(rows[i])) for i in ct],
+           "arms": {"CSF-proxy@0.2": {"kind": "proxy", "source": 0.2, "q_sel": qs, "grids": grids,
+                                      "log_g": [round(float(lg[i]), 6) for i in ct]}}}
+    json.dump(out, open(os.path.join(ROOT, "v2/crc_grids_09e.json"), "w"))
+    print(qs)
+
+
 def main():
     rows = load_rows("v1/labels/*.jsonl")
     ks = hashlib.sha256(json.dumps([list(key(r)) for r in rows]).encode()).hexdigest()
@@ -60,4 +86,5 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    import sys
+    main_edge() if "--edge" in sys.argv else main()

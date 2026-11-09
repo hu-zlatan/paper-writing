@@ -1,0 +1,53 @@
+{
+ "purpose": "p2 amendment 09 B1 edge rule: CSF-proxy@0.2 on 08e-recipe grids (41 points, per stratum)",
+ "jobs": [
+  {
+   "id": "p2_crc09e_F1_200",
+   "cmd": "python main.py crc --family F1 --start 200 --count 100 --budget-minutes 60 --grids ../v2/crc_grids_09e.json --out ../results/v2/crc09e/F1_200"
+  },
+  {
+   "id": "p2_crc09e_F1_300",
+   "cmd": "python main.py crc --family F1 --start 300 --count 100 --budget-minutes 60 --grids ../v2/crc_grids_09e.json --out ../results/v2/crc09e/F1_300"
+  },
+  {
+   "id": "p2_crc09e_F1_400",
+   "cmd": "python main.py crc --family F1 --start 400 --count 100 --budget-minutes 60 --grids ../v2/crc_grids_09e.json --out ../results/v2/crc09e/F1_400"
+  },
+  {
+   "id": "p2_crc09e_F2_200",
+   "cmd": "python main.py crc --family F2 --start 200 --count 100 --budget-minutes 60 --grids ../v2/crc_grids_09e.json --out ../results/v2/crc09e/F2_200"
+  },
+  {
+   "id": "p2_crc09e_F2_300",
+   "cmd": "python main.py crc --family F2 --start 300 --count 100 --budget-minutes 60 --grids ../v2/crc_grids_09e.json --out ../results/v2/crc09e/F2_300"
+  },
+  {
+   "id": "p2_crc09e_F2_400",
+   "cmd": "python main.py crc --family F2 --start 400 --count 100 --budget-minutes 60 --grids ../v2/crc_grids_09e.json --out ../results/v2/crc09e/F2_400"
+  },
+  {
+   "id": "p2_crc09e_F3_200",
+   "cmd": "python main.py crc --family F3 --start 200 --count 100 --budget-minutes 60 --grids ../v2/crc_grids_09e.json --out ../results/v2/crc09e/F3_200"
+  },
+  {
+   "id": "p2_crc09e_F3_300",
+   "cmd": "python main.py crc --family F3 --start 300 --count 100 --budget-minutes 60 --grids ../v2/crc_grids_09e.json --out ../results/v2/crc09e/F3_300"
+  },
+  {
+   "id": "p2_crc09e_F3_400",
+   "cmd": "python main.py crc --family F3 --start 400 --count 100 --budget-minutes 60 --grids ../v2/crc_grids_09e.json --out ../results/v2/crc09e/F3_400"
+  },
+  {
+   "id": "p2_crc09e_F4_200",
+   "cmd": "python main.py crc --family F4 --start 200 --count 100 --budget-minutes 60 --grids ../v2/crc_grids_09e.json --out ../results/v2/crc09e/F4_200"
+  },
+  {
+   "id": "p2_crc09e_F4_300",
+   "cmd": "python main.py crc --family F4 --start 300 --count 100 --budget-minutes 60 --grids ../v2/crc_grids_09e.json --out ../results/v2/crc09e/F4_300"
+  },
+  {
+   "id": "p2_crc09e_F4_400",
+   "cmd": "python main.py crc --family F4 --start 400 --count 100 --budget-minutes 60 --grids ../v2/crc_grids_09e.json --out ../results/v2/crc09e/F4_400"
+  }
+ ]
+}
