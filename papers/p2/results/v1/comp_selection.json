@@ -1,0 +1,29 @@
+{
+ "purpose": "p2 COMP selection (08b \u00a73, 08c \u00a73): selection split only, label rule, alpha 0.10, even/odd object halves, mean RE over both halves; smallest wins",
+ "n_instances": 800,
+ "n_unavoidable_excluded": 0,
+ "objects": "200 objects (150-199 per family)",
+ "candidates": {
+  "CSF-1": {
+   "RE_even_cal": 0.7921080916548238,
+   "RE_odd_cal": 0.7450284374856984,
+   "RE_mean": 0.7685682645702611,
+   "label_slip_avoidable_mean": 0.095
+  },
+  "Mondrian-CSF": {
+   "RE_even_cal": 0.8344137973202712,
+   "RE_odd_cal": 0.824422348610938,
+   "RE_mean": 0.8294180729656047,
+   "label_slip_avoidable_mean": 0.0725
+  },
+  "CertGrip-P": {
+   "RE_even_cal": 0.8453653413284726,
+   "RE_odd_cal": 0.8216903571912365,
+   "RE_mean": 0.8335278492598546,
+   "label_slip_avoidable_mean": 0.0975
+  }
+ },
+ "COMP": "CSF-1",
+ "pred_file": "v1/preds/a010_P_seed0.json",
+ "keys_sha256": "8019eef9f428aeb599ba7da1c5b3c132e7f3c1865225d870c9c97cd7ddc4194b"
+}
