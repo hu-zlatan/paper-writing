@@ -18,11 +18,11 @@ TARGET, SP = "full_rd@0.2#0", (0.2, 0.4, 0.8)
 MARGINS = (0.0, 0.25, 0.5, 1.0)
 
 
-def load09():
-    G = json.load(open(os.path.join(A.ROOT, "v2/crc_grids_09.json")))
+def load09(tag="09"):
+    G = json.load(open(os.path.join(A.ROOT, f"v2/crc_grids_{tag}.json")))
     keys = [tuple(k) for k in G["instances"]]
     rep = {}
-    for f in sorted(glob.glob(os.path.join(A.ROOT, "v2/crc09/*.jsonl"))):
+    for f in sorted(glob.glob(os.path.join(A.ROOT, f"v2/crc{tag}/*.jsonl"))):
         for line in open(f):
             r = json.loads(line)
             if "key" in r:
@@ -33,7 +33,10 @@ def load09():
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--draws", type=int, default=2000)
+    ap.add_argument("--edge", action="store_true", help="B1 edge rule: CSF-proxy@0.2 on 08e-recipe grids vs CertGrip-full 08e")
     a = ap.parse_args()
+    if a.edge:
+        return edge(a.draws)
     G9, k9, rep9, missing = load09()
     print(f"instances {len(k9)}, missing {len(missing)}")
     if missing:
@@ -78,6 +81,32 @@ def main():
     print("edge", edge)
     for m, r in b2.items():
         print("margin", m, round(r["test"]["slip_phys"], 4), round(r["test"]["RE_mid"], 4))
+
+
+def edge(draws):
+    G9, k9, rep9, missing = load09("09e")
+    print(f"instances {len(k9)}, missing {len(missing)}")
+    if missing:
+        print("incomplete: refusing to analyse")
+        return
+    A.V2 = True
+    G1, k1, _, rep1, miss1, _ = A.load_real()
+    assert k1 == k9 and not miss1
+    D1 = A.build(G1, k1, rep1)
+    D = A.build(G9, k9, rep9)
+    D["L"][TARGET], D["F"][TARGET] = D1["L"][TARGET], D1["F"][TARGET]
+    old = A.contrasts
+    A.contrasts = lambda: {"H5@0.2_08e": (TARGET, "CSF-proxy@0.2")}
+    res = A.analyse(D, draws=draws)
+    A.contrasts = old
+    c = res["contrasts"]["H5@0.2_08e"]
+    lo, hi = c["CI**"]["mid"]
+    c["decision_09"] = "superiority" if lo > 0 else ("inferiority" if hi < 0 else "not shown")
+    out = {"purpose": "p2 v2 amendment 09 B1 edge rule (08e-recipe grids, 41 points)", "draws": draws,
+           "H5": res["contrasts"], "arms": res["arms"],
+           "grid_edge_lam_idx": {arm: {s: j for s, j in v["lam_idx"].items() if j in (0, 40)} for arm, v in res["arms"].items()}}
+    json.dump(out, open(os.path.join(A.ROOT, "v2/b_analysis_edge.json"), "w"), indent=1)
+    print(round(c["D"]["mid"], 4), [round(x, 4) for x in c["CI**"]["mid"]], c["decision_09"], out["grid_edge_lam_idx"])
 
 
 if __name__ == "__main__":
