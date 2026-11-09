@@ -1,4 +1,4 @@
-<!-- Stage 17 PAPER_DRAFT [v5], run 41, 2026-11-09; revised in stage 19 [v5] pass 1 (merged review items 1-7, S1-S6); fresh-context subagent; template paper_draft.md verbatim; prompts paper/mypaper/prompts/stage17_v5_*.txt, stage19_v5_*.txt -->
+<!-- Stage 17 PAPER_DRAFT [v5], run 41, 2026-11-09; revised in stage 19 [v5] pass 1 (merged review items 1-7, S1-S6) and pass 2 (merged review items P1-P8); fresh-context subagent; template paper_draft.md verbatim; prompts paper/mypaper/prompts/stage17_v5_*.txt, stage19_v5_*.txt -->
 
 ```
 FIGURE 1 PROMPT (v5; generated schematic for panels A-C, panel D plotted separately from results/v5/results_v5.json)
@@ -180,7 +180,9 @@ full G\* is 2,523–9,933× slower per decision than the student.
   both splits and is not shown to lie within the pre-registered margin δ. Together with the two earlier rounds, the
   amortization hypothesis has failed its pre-registered gate in every cell tested.
 - **C2. A cheap policy that beats pilot-chosen heuristics.** The student exceeds H\* in 4/5 cells under Holm, reported
-  beside the post-hoc margins over the best test5 heuristic and the per-decision latency range.
+  beside the post-hoc margins over the best test5 heuristic and the per-decision latency range, and beside the only
+  accuracy evidence for a smaller planner, prior S12 rows from the previous round, plus a report-only action-agreement
+  read-out against full G\*.
 - **C3. Distillation versus RL on the same objective.** The pre-registered advantage on RL's objective holds only in
   A16-2, where RL collapses; the inversion check is false everywhere; the student − RL success contrasts are
   uncorrected.
@@ -225,8 +227,10 @@ cost couples decisions, because where the finger ends up after one probe sets th
 the kind of structure that weakens these guarantees. All of these results concern the greedy planner itself, not a
 learned copy of it. We therefore treat G\* as the reference that a learned policy is measured against, not as an
 optimum, and we make no claim about how far G\* is from the optimal policy. A planner with fewer particles, candidates
-or outcome samples is the obvious cheap alternative to a learned copy; we time two such configurations but did not
-measure their accuracy, so the comparison between shrinking the planner and learning from it remains open.
+or outcome samples is the obvious cheap alternative to a learned copy. We time two such configurations in every cell,
+but their accuracy exists only from the previous round, in one cell (S12) and on another test split, so the
+comparison between shrinking the planner and learning from it is answered here only partially and only as prior
+evidence.
 
 **Amortized Bayesian experimental design.** Deep adaptive design trains a design network on contrastive information
 bounds so that each decision is one forward pass \cite{foster2021deep}. Implicit-likelihood and RL formulations remove
@@ -293,7 +297,9 @@ vertices, each with a trivial symmetry group, rejection-sampled for a minimum ed
 self-confusability (`code/touchbed/shapes.py`). A16 therefore differs from S in three ways at once, the shape family
 (asymmetric irregular instead of near-symmetric with variants), the number of identities $K$ and the probe count
 $n^\*$, and it is run at one travel cost only; the A16-2 cell cannot separate these factors from one another or from
-travel cost. The five pre-registered cells are listed in Table 0. For A16 the
+travel cost. A16 is also not wholly new: it is generated from the same seed stream as the asymmetric library A
+($K = 8$) of the earlier rounds, so its first 8 identities are exactly that library (`make_set_A`,
+`code/touchbed/shapes.py`), and only the other 8 are new. The five pre-registered cells are listed in Table 0. For A16 the
 probe count $n^\* = 3$ came from the pre-registered rule, and a keep check at κ = 0 and τ = $n^\*$ on 200 calibration
 episodes gave G\* success 0.8, inside the pre-registered keep range [0.30, 0.90].
 
@@ -322,8 +328,10 @@ $$\mathrm{EIG}_B(a;b) = \frac{1}{M}\sum_{m=1}^{M}\Big[\log\!\!\sum_{n \in B(s_{j
 
 The deployed configuration is `g2000_512_64`: $N = 2{,}000$ particles, all $C = 512$
 candidate actions scored, and $M = 64$ sampled outcomes per candidate. Two reduced configurations, named the same way,
-`g125_512_16` and `g500_512_4`, are timed in the latency study (Section 4) and nowhere else; their accuracy was not
-measured in this round, so they serve as timing references and not as evaluated baselines. At each decision G\*
+`g125_512_16` and `g500_512_4`, are timed in the latency study (Section 4) in every cell. Their accuracy was not
+measured in this round. The registered accuracy side for them is the previous round's E5 rows, which exist for S12
+only, on that round's test split (addendum v5.1f; Section 5.2), so in the other four cells they serve as timing
+references and not as evaluated baselines. At each decision G\*
 exports the score vector $s(a) = \max(0, \mathrm{EIG}_B(a;b))/c(a)$ over feasible actions (zero elsewhere), whose argmax
 is G\*'s action; this vector is the distillation label. **Complexity.** Per decision, G\* evaluates $O(MNC)$ likelihoods for $C$ scored
 candidates and builds ball-neighbour lists in $O(N^2)$, on top of assimilating the last observation; the latter two
@@ -367,7 +375,10 @@ seeds 701–705 and the same hyper-parameters (hp 0) in every cell \cite{ross201
 > Budgets: 3,000 labelled G\* episodes per cell (300 held out for $\bar R$, so round r0 trains on 2,700); two DAgger
 > rounds of 800 episodes each ($\beta_{\mathrm{DAgger}}$ = 0.5, then 0; 3,500 and 4,300 training episodes); a fixed 200
 > epochs per round. hp 0: Adam, learning rate 0.001, batch 256, hidden width 128, $\beta_T = 4.0$, λ = 0.5, regret
-> floor ρ = 0.05.
+> floor ρ = 0.05. In S2 and S12 the round-r0 labels, including the held-out block, are not newly generated: they are
+> the label files of the previous round (S2) and of the round before (S12), re-used because amendment v5.0 (E1)
+> allows re-use where set, κ, τ and code path match (`experiments/v5_d5_r0_S2_S12_rerun.json`); the DAgger rounds
+> r1 and r2 are new in every cell.
 
 Keeping the best held-out checkpoint is the pre-declared answer to an over-fitting finding of the previous round,
 where held-out regret rose after an early minimum under a last-checkpoint recipe. One qualifier applies to the label
@@ -385,10 +396,12 @@ uniformly in $B(s_0)$,
 $$g_t = \log \hat p_B(h_t \mid s_0) - \log\Big[\tfrac{1}{L+1}\Big(\hat p_B(h_t \mid s_0) + \sum_{l=1}^{L} p(h_t \mid
 s_l)\Big)\Big], \qquad \hat p_B(h \mid s_0) = \tfrac{1}{J}\sum_j p(h \mid s_0^{(j)}),$$
 
-and $r_t = g_t - g_{t-1}$, so the return telescopes to $g_T$, RL's own objective. The configuration was swept on S2
+and $r_t = g_t - g_{t-1}$, so the return telescopes to $g_T$, RL's own objective. The test5 read-out of $g_T$ uses $J = 16$ and $L = 4{,}095$
+with no grid, on histories rebuilt from the recorded actions (`gt3`, addendum v5.1f). The configuration was swept on S2
 only: 8 configurations, each trained with a single seed (719) for 100,096 episodes (100,032 at batch 64) and selected by the earlier rounds'
-rule, highest final ball-sPCE on the trainer's validation stream (92,160 episodes), ties within 0.02 nats to the lower
-index. The rule selected cfg 6 (learning rate 1.257e-3, entropy coefficient 9.504e-4, batch 256, critic learning rate
+rule, highest final ball-sPCE on the trainer's validation stream, ties within 0.02 nats to the lower
+index. That stream is the trainer's own 500-episode validation stream (not val3), last read at 92,160 training
+episodes in every configuration. The rule selected cfg 6 (learning rate 1.257e-3, entropy coefficient 9.504e-4, batch 256, critic learning rate
 4.925e-4), with final validation ball-sPCE 6.300 against 6.241 for cfg 0, the configuration of the earlier rounds. On
 the sampled-policy version of the same metric, cfg 1 scores higher (6.316 against 6.205 for cfg 6). cfg 6 is reused in
 every cell with seeds 711–715, each trained to the 2 × 10⁵-episode cap (200,192 episodes logged for every run; PPO clip 0.2,
@@ -432,8 +445,11 @@ addendum v5.1e; when that sizing projected more than the compute limit, step (1)
 applied and the primary test split lost 200 of its 500 episodes per method and cell. The cut was made before any
 test5 episode and depended only on wall-time records, but a different ordering of the two addenda would have kept the
 larger test split. (b) The latency–accuracy frontier. Amendment v5.0 promised a latency–accuracy frontier figure for
-E6, and addendum v5.1f kept the frontier as a read-out of the job-1 timings. No reduced-G\* accuracy was measured on
-test5, so the reduced configurations were timed only and no frontier is reported. (c) Flip rates per contrast.
+E6. Addendum v5.1f defined its accuracy side as test5 success and BI for G\* and the students and, for the reduced
+configurations, the previous round's E5 rows only where they exist (S12), and it added no new reduced-G\* accuracy
+runs. Those S12 rows exist and are reported in Section 5.2 as PRIOR evidence, at their own logged latencies; for S2,
+S4, S8 and A16-2 no reduced-G\* accuracy exists, because none was registered. The deviation is that no frontier
+figure was drawn, and that the earlier draft of this paper omitted the S12 rows. (c) Flip rates per contrast.
 Amendment v5.0 asked that every success contrast be reported next to the measured flip rate. E5 measured flip rates
 in two cells (S2, S12) for one student seed (701) only, so the other cells and seeds have no flip rate of their own and
 the E5 caveat is applied to them generically. (d) The `rl_success` control was truncated by the trainer's time guard
@@ -465,9 +481,12 @@ resamples. Bootstrap p-values resolve to 0.0002, so a reported p of zero is prin
 p < 0.0002. Holm's step-down procedure over the five cells is applied to two families only, student − G\* success (H5a)
 and student − H\* success [CITE-MISSING: Holm (1979) step-down procedure]. H2-v5 is met iff the one-sided 95 % lower
 bound of $g_T(\text{student}) - g_T(\text{RL})$ exceeds +0.10 nats. The registered inversion check asks, per cell,
-whether $g_T$ and the posterior success read-out order the student and RL in opposite directions, and it is claimed
-only where both orderings are resolved, that is, where the ci95 of the $g_T$ contrast and the ci95 of the success
-contrast both exclude 0 (amendment v5.0, H2-v5); it is run for cfg-6 RL in every cell and for `rl_success` in S2 and
+whether $g_T$ and the posterior success read-out order the student and RL differently, and it is claimed only where
+both orderings have intervals excluding 0 (amendment v5.0, H2-v5). As implemented
+(`code/analysis_test5_v5.py`), the check tests one direction only: inversion is claimed iff RL is higher on $g_T$ and
+the student is higher on success, with the ci95 of RL − student $g_T$ and the ci95 of student − RL success both
+excluding 0. The reverse pattern (student higher on $g_T$, RL higher on success) is not tested; no cell shows it as
+a point estimate (Tables 2b and 3). The check is run for cfg-6 RL in every cell and for `rl_success` in S2 and
 S12. H5b is a weighted least-squares slope of the five test5 success deficits on G\*'s mean test5 travel, read through
 the ci95 of the slope. Only the weighting rule was fixed in advance (addendum v5.1f, before any test5 number was read):
 each cell is weighted by the inverse bootstrap variance of its test5 success deficit, held fixed across replicates.
@@ -511,19 +530,25 @@ per-cell ratio is reported with its bootstrap ci95 over decisions and the pre-re
 bootstrap uses B = 2,000 resamples (`code/analysis_e6_v5.py`), not the 10,000 of the test5 contrasts. The latency is
 per decision of compute on a 2-core runner; no physical time model of a probe (approach, contact, retract) is part of
 the protocol, so the timings are not converted into task time. The pre-registered latency–accuracy frontier was not
-produced (see Deviations above).
+drawn as a figure; its only reduced-G\* accuracy side is the prior S12 rows (see Deviations above and Section 5.2).
+As a report-only addition, the actions that student seed 701 and the two reduced configurations recorded on the job-1
+states are compared with full G\*'s action on the same state (top-1 agreement; `code/tools_lat_agreement_v5.py`,
+no CI). Agreement is not accuracy, and because G\* samples its outcomes (M = 64), full G\* would not agree with
+itself on a re-run with probability 1; that self-agreement was not measured.
 
 **Implementation.** Everything is numpy with hand-written backpropagation and single-threaded BLAS, run on
-GitHub-hosted 2-core runners (CPU model not logged); runners differ across cells. Table S lists the settings that the
-results record holds; the remaining design constants (action grid, planner sizes, label and DAgger budgets, RL
-episodes per seed, bootstrap resamples) are taken from the code and the amendments, not from a results field.
+GitHub-hosted 2-core runners (CPU model not logged); runners differ across cells. Table S lists the settings. The RL
+episodes trained per seed and their PPO settings, the distillation configuration and the student training-episode
+counts per round are in the results record (`results_v5.json` > `16_report_rows.json`, extracted unchanged from the
+training logs, report-only). The remaining design constants (action grid, planner sizes, $g_T$ estimator sizes,
+bootstrap resamples) are taken from the code and the amendments, not from a results field.
 
 **Table S. Settings.**
 
 | Component | Setting |
 |---|---|
 | Cells | Table 0 (κ, $n^\*$, τ) |
-| G\* | `g2000_512_64`; reduced `g125_512_16`, `g500_512_4` (timed only); `g`N`_`C`_`M = particles, candidates scored, outcome samples |
+| G\* | `g2000_512_64`; reduced `g125_512_16`, `g500_512_4` (timed in every cell; accuracy only from the previous round, S12); `g`N`_`C`_`M = particles, candidates scored, outcome samples |
 | Student | DeepSets head; DAgger rounds r0–r2; best held-out $\bar R$ checkpoint per round; hp 0 in every cell; seeds 701–705; 3,000 label episodes (300 held out); 2 DAgger rounds × 800 episodes (β 0.5, 0); 200 epochs per round; Adam, lr 0.001, batch 256, width 128 |
 | RL | PPO, critic baseline; cfg 6 selected on S2 by a single-seed sweep (seed 719; Section 3.3) and reused in every cell; seeds 711–715; 2 × 10⁵ episodes per seed (cap reached in every run); clip 0.2, 4 epochs |
 | `rl_success` | terminal-success reward, cfg 6, S2 and S12 only, seeds 711–715; 9 of 10 runs stopped by the wall-clock time guard; training lengths in Section 5.3 |
@@ -572,8 +597,9 @@ round before, the other cells from this one), so the five validation gaps are no
 equivalence is not shown: the CIs are 9.6–12.3 pp wide. A shortfall of up to 6.1 pp (the tightest lower bound, S8) is
 consistent with the data in every cell, and up to 8.3 pp in S4. Test5 point gaps are smaller than the validation gaps
 in every cell. A post-hoc, approximate check, which is not a registered read-out, applies clause (i) of the D5 rule to
-test5 with each SE approximated as the ci95 half-width divided by 1.96; under that approximation the rule would still
-fail in about 4 of 5 cells, so test5 does not contradict the D5 verdict. The exception is A16-2, which is the worst
+test5 with each SE approximated as the ci95 half-width divided by 1.96; under that approximation (post hoc) the rule
+would still fail in 4 of 5 cells, A16-2 being the exception, so test5 does not contradict the D5 verdict in the four
+S cells. A16-2 is the worst
 cell on validation (−6.0 pp, 0/5 seeds within δ) and has the smallest test5 point gap (−0.2 pp). This reversal
 between the splits is the largest disagreement in the record. Its G\* validation rows were run in this round, so it is
 not an artefact of mixing G\* sources; with test5 intervals of about ±6 pp in that cell it is compatible with sampling
@@ -585,7 +611,10 @@ point estimate is positive, with a CI that includes 0.
 
 **Prior cells, the previous test gap, and the teacher's variance.** The two earlier rounds failed their gates in S12
 (twice) and S2 (Table 1). The previous round's test3 gap (−10.2 pp, ci95 [−16.6, −4.3]; different test split and
-training recipe) lies outside the v5 S2 test5 ci95 [−7.6, +2.7] pp; the two were not formally compared. With this
+training recipe) lies outside the v5 S2 test5 ci95 [−7.6, +2.7] pp; the two were not formally compared. On
+validation, the S2 gap of this round, −0.0328 with five seeds under the best-checkpoint recipe, is no smaller than the
+previous round's −0.028 with three seeds under the last-checkpoint recipe (PRIOR comparison, no test; the seeds and
+recipes differ), so the pre-declared remedy for the earlier over-fitting finding did not close the S2 gap. With this
 round, the amortization hypothesis has now failed its pre-registered gate in every cell tested across three rounds.
 G\* was run once per cell (`n_seeds` = [5, 1]), so any run-to-run variability of G\*, which uses nested Monte Carlo
 estimates, is missing from the student − G\* CIs, and those CIs may be too narrow. This variability was not measured
@@ -654,16 +683,55 @@ reference rather than a credible competitor (we did not test why it scores so lo
 heuristics in general are poor.
 
 **Latency (E6, report-only).** With seed-701 timings, full G\* is 2,523–9,933× slower per decision (median paired
-ratio, CI rule met only in A16-2; Table 4). Other seeds' student medians (0.36–0.51 ms) differ by up to about 24 %
-within a cell, so each per-cell ratio is uncertain at about that level; the job-2 ratios are a post-hoc sensitivity
-column (ratio of medians, not paired). Only S2 (9,933×) and A16-2 (8,301×) lie in the 7,000–10,000× band, so no single
+ratio, CI rule met only in A16-2; Table 4). The job-2 medians of students 702–705 (0.36–0.51 ms) differ from one
+another by at most about 3 % within a cell. The larger differences, up to about 24 % (S4, S12, A16-2), are between
+seed 701, timed in job 1, and the job-2 seeds, which ran on a different runner; they mix seed with job and runner and
+are not seed variation, but they bound how much a per-cell ratio can move with the runner. The job-2 ratios are a
+post-hoc sensitivity column (ratio of medians, not paired). Only S2 (9,933×) and A16-2 (8,301×) lie in the 7,000–10,000× band, so no single
 band describes all cells. The seed-701 student median varies between 0.326 and 0.500 ms, whereas full G\* varies
-between 0.910 and 4.880 s, so most of the cross-cell spread of the ratio comes from G\*'s time. The two reduced G\* configurations are listed as timings only; their
-accuracy was not measured on test5, so the table supports no latency–accuracy frontier and no matched-accuracy claim.
-This is a deviation from the registration (Section 4), and it leaves the most obvious cheap alternative to learning
-unevaluated: `g125_512_16` and `g500_512_4` already take 22.05–115.6 ms and 48.04–194.3 ms per decision, and whether
-they lose success against full G\* is unknown. All timings were taken on 2-core runners that differ across cells, and
-the ratio CIs come from a bootstrap over decisions with B = 2,000.
+between 0.910 and 4.880 s, so most of the cross-cell spread of the ratio comes from G\*'s time. All timings were taken
+on 2-core runners that differ across cells, and the ratio CIs come from a bootstrap over decisions with B = 2,000.
+
+**The smaller planner (PRIOR accuracy, S12 only).** In this round the two reduced G\* configurations take 22.05–115.6 ms
+(`g125_512_16`) and 48.04–194.3 ms (`g500_512_4`) per decision (Table 4); their accuracy was not measured on test5.
+The registered accuracy side for them (addendum v5.1f) is the previous round's E5 rows, which exist for S12 only:
+the reduced configurations were run on S12 test3 0–299 (300 episodes, sub 8) and paired with the S12 G\* and student
+rows of the round before (Table 4b). There, `g125_512_16` reaches success 0.36 against 0.4267 for full G\*
+(−0.06667, ci95 [−0.12, −0.01]) and `g500_512_4` reaches 0.3767 (−0.05, ci95 [−0.11, +0.01333]), at logged median
+latencies of 20.76 ms and 45.99 ms on that round's runners. Against the two earlier S12 students on the same episodes
+(three seeds each, two recipes), the reduced configurations are lower on success by 0.005556 to 0.05 as point
+estimates, with every ci95 including 0, and lower on BI with every ci95 excluding 0 (uncorrected, exploratory). These
+rows come from another round, another test split and other student recipes, so they cannot be compared like for like
+with the v5 student, and they were not tested against it. For S2, S4, S8 and A16-2 no reduced-G\* accuracy exists,
+because none was registered. On the one cell where it was measured, then, shrinking the planner cost 5 to 7 pp of
+success against full G\*, with the CI excluding 0 for `g125_512_16` only.
+
+**Action agreement with full G\* (report-only).** On the E6 job-1 states, full G\*'s recorded action can be compared
+with the action each faster method recorded on the same state (Table 4b, no CI). Student seed 701 agrees with full
+G\* on 0.182, 0.299, 0.462 and 0.513 of decisions in S2, S4, S8 and S12, and on 0.326 in A16-2. `g125_512_16` agrees on
+0.099 to 0.312 and `g500_512_4` on 0.072 to 0.243 in the S cells, and on 0.146 and 0.092 in A16-2. So on G\*'s own
+states the student picks G\*'s action more often than either reduced planner in every cell, and in the S cells all
+three agree more often as κ rises. Two caveats bound this read-out. Agreement is not accuracy: it counts only identical choices among
+512 actions, says nothing about the success or information of a differing choice, and none of these numbers is a
+success rate.
+And full G\* samples its outcomes (M = 64), so a second run of G\* on the same state would not reproduce its own
+action every time; that self-agreement, the natural ceiling of this read-out, was not measured.
+
+**Table 4b. The smaller planner: PRIOR S12 accuracy and report-only action agreement.** Upper rows: previous round's
+E5, S12 test3 0–299 (sub 8), 300 episodes, two-sided ci95, uncorrected, latency = logged median of that round. Lower
+rows: top-1 agreement with full G\*'s action on the E6 job-1 states of this round (n = 1000 per S cell, 500 in A16-2;
+student = seed 701; no CI; G\* self-agreement not measured; agreement is not accuracy).
+
+| Row | Full G\* | Student | `g125_512_16` | `g500_512_4` |
+|---|---|---|---|---|
+| S12 test3 success (PRIOR) | 0.4267 | 0.3822 / 0.41 (two earlier students) | 0.36 | 0.3767 |
+| − full G\* success [ci95] (PRIOR) | — | — | −0.06667 [−0.12, −0.01] | −0.05 [−0.11, +0.01333] |
+| Logged median latency (PRIOR, ms) | — | — | 20.76 | 45.99 |
+| Agreement with full G\*, S2 | — | 0.182 | 0.099 | 0.072 |
+| Agreement, S4 | — | 0.299 | 0.175 | 0.116 |
+| Agreement, S8 | — | 0.462 | 0.235 | 0.212 |
+| Agreement, S12 | — | 0.513 | 0.312 | 0.243 |
+| Agreement, A16-2 | — | 0.326 | 0.146 | 0.092 |
 
 **Table 4. Per-decision latency (E6).** Medians; ratio = full G\* / student seed 701, median paired ratio with
 bootstrap ci95 over decisions (B = 2,000); "CI rule" is the pre-registered half-width check. Job-2 range: full G\* median over the medians of
@@ -682,8 +750,8 @@ students 702–705 (post hoc, no CI).
 H2-v5 is met only in A16-2 (LB 0.596 > 0.10; Table 1), where cfg-6 RL collapses to 2 of 3 probes in 4/5 seeds and G\*
 also beats RL by 0.85 nats, so the result reflects RL failing to transfer rather than a student advantage. In S2, S4
 and S8, RL has the higher $g_T$ as a point estimate while the student has the higher success, but no RL-higher $g_T$
-CI excludes 0 (Table 3); since the inversion is claimed only where both the $g_T$ and the success intervals exclude 0,
-it is false in every cell; the `rl_success` check is also false in S2 and S12.
+CI excludes 0 (Table 3); since the inversion is claimed only where RL is higher on $g_T$ and the student higher on
+success with both intervals excluding 0 (the one direction the code tests), it is false in every cell; the `rl_success` check is also false in S2 and S12.
 Without multiplicity correction, the student beats cfg-6 RL on success with CIs excluding 0 in S2, S12 and A16-2
 (A16-2 confounded by RL collapse; Table 2b).
 
@@ -759,8 +827,13 @@ of compute, without a physical time model: we did not model probe duration, nor 
 or in parallel to motion, so the speed-up of 2,523–9,933× is not translated into any saving of task time, and with
 three to four probes per episode a planner that takes seconds per decision may or may not dominate the time of a real
 probing cycle. Second, the reduced G\* configurations are already more than an order of magnitude faster than full G\* (Table 4),
-and their success was not measured, so this study cannot say whether learning is needed to obtain a fast policy at
-all, rather than a cheaper planner.
+and their success is known only from the previous round, in S12, on another test split: there they lost 5 to 7 pp
+against full G\*, with a CI excluding 0 for `g125_512_16` only, and their point estimates lay below both earlier S12
+students with CIs including 0 (Table 4b, PRIOR). On this round's states the student also picks full G\*'s action
+more often than either reduced planner in every cell, but agreement is not accuracy and G\*'s self-agreement was not
+measured. The prior S12 rows therefore lean against the view that a smaller planner simply dominates a learned copy,
+but they come from one cell, another split and other students, so this study still cannot say, in the five v5 cells,
+whether learning is needed to obtain a fast policy at all, rather than a cheaper planner.
 
 **What the RL comparison says.** RL on the same objective, with one configuration tuned on S2, does not transfer to
 A16-2, where it collapses to fewer probes than the budget allows. The one cell in which distillation scores higher on
@@ -784,8 +857,9 @@ improvable in success, and it carries no information about noise in G\*'s own EI
 **Open questions.** Does label regret measured on student-visited states, rather than G\*-visited ones, explain the
 shortfall? Would per-cell RL tuning change the RL rows outside S2? How much would a second G\* run per cell widen the
 student − G\* intervals? Why does the student travel less than G\* in every cell while staying below it on success?
-Do the reduced G\* configurations keep full G\*'s success at a fraction of its latency, and what does the comparison
-look like under a physical time model of a probe?
+Does the 5 to 7 pp loss of the reduced G\* configurations seen in the prior S12 rows hold on test5 and in the other
+four cells, how does it compare with the v5 student's gap on the same episodes, and what does the comparison look
+like under a physical time model of a probe?
 
 ## 7 Limitations
 
@@ -807,9 +881,12 @@ look like under a physical time model of a probe?
 6. **Multiplicity.** More than 30 BI, RL, `rl_success` and $g_T$ contrasts are reported without correction.
 7. **Latency.** The CI rule is met in 1/5 cells, the ratios rest on one student seed, their bootstrap uses
    B = 2,000 resamples, and the runners differ across cells. No physical time model of a probe is used, so no task-time
-   benefit is shown. The reduced G\* configurations were timed but never evaluated on test5, so the cheapest
-   alternative to learning, a smaller planner, is unevaluated, and the pre-registered latency–accuracy frontier was
-   not produced.
+   benefit is shown. The reduced G\* configurations were timed in every cell but never evaluated on test5. Their
+   only accuracy evidence is the previous round's S12 rows (test3, other students, uncorrected), so in S2, S4, S8
+   and A16-2 the cheapest alternative to learning, a smaller planner, is unevaluated, and in S12 it is compared with
+   the v5 student only across rounds and splits. The action-agreement read-out has no CI, no G\* self-agreement
+   ceiling and is not accuracy. The latency–accuracy frontier figure was not drawn. The student-latency differences
+   of up to about 24 % within a cell mix seed with job and runner.
 8. **Validation sources.** The G\* validation rows of D5 come from three rounds (S2 previous round, S12 the round before).
 9. **Scope.** Simulation only, planar shapes, a single fingertip on a fixed circle, a likelihood shared by planner,
    filter and evaluator, horizons of three to four probes, two shape libraries, one κ for A16, the sub-8 read-out, and
@@ -817,11 +894,15 @@ look like under a physical time model of a probe?
    and $n^\*$ at once, so library effects cannot be separated from one another or from travel cost.
 10. **Not run, by decision.** Retraining or remedy rounds, per-cell RL re-tuning, more test5 episodes, a G\* rerun,
     latency re-timing, a test of the post-hoc margins, and any new BI or $g_T$ test were not run.
-11. **Design constants.** Several design constants (action grid, planner sizes, label and DAgger budgets, RL episodes per
-    seed, bootstrap resamples) are not yet in a citable results field; they are taken from the code and the
-    amendments.
+11. **Design constants and provenance.** The RL episodes per seed, the distillation configuration and the student
+    training-episode counts are in a results field only as a report-only extract of the training logs
+    (`16_report_rows.json`); the action grid, the planner sizes, the $g_T$ estimator sizes and the bootstrap resamples
+    are not in any results field and are taken from the code and the amendments. The S2 and S12 round-0 labels are
+    re-used from earlier rounds, and half of A16's identities are the earlier library A, so neither the labels of
+    those cells nor the second library is wholly new to this round.
 12. **Deviations.** The test5 cut followed from E7 having run before the test5 sizing; the latency–accuracy frontier
-    and per-contrast flip rates were registered but not delivered (Section 4).
+    figure and per-contrast flip rates were registered but not delivered, and the frontier's reduced-G\* accuracy side
+    exists only for S12, from the previous round (Section 4).
 13. **DAgger.** Checkpoints are selected on regret over G\*-visited decisions, on which the r0 and r2 kept $\bar R$
     ranges overlap in every cell, so the benefit of the DAgger rounds is not shown on the selection metric.
 
@@ -837,6 +918,7 @@ RL's own objective only where RL collapses, and no inversion between that object
 detected. Fourth, no travel-cost trend in the gap is detected, and a change of about 7 pp is not excluded. Concrete
 next steps follow from the record rather than from new claims: regret measured on student-visited states, per-cell RL
 tuning, repeated G\* runs to put the teacher's variance into the intervals, a finer evaluator check on all seeds, an
-accuracy measurement of the reduced planner configurations under a physical time model, and more test episodes for an
-equivalence test. The contribution is a measurement in a planar simulator, not a method. Pre-registered; simulation;
+accuracy measurement of the reduced planner configurations on test5 in every cell, beyond the single prior S12
+comparison in which they lost 5 to 7 pp against full G\*, read under a physical time model, and more test episodes for
+an equivalence test. The contribution is a measurement in a planar simulator, not a method. Pre-registered; simulation;
 preliminary.

@@ -9,7 +9,7 @@
 **Topic:** Amortized, non-myopic active tactile localization (TouchBED)
 **Initialised:** 2026-10-28T07:56:44Z
 **Current version:** v5
-**Latest stage:** Stage 19 PAPER_REVISION [v5] pass 1 done (run 41) → second stage-18 pass, then stage 19 pass 2, then stage 20; see run 41 at the end of this file
+**Latest stage:** Stage 19 PAPER_REVISION [v5] pass 2 done (run 41) → next stage 20 QUALITY_GATE [v5]; see run 41 at the end of this file
 
 ---
 
@@ -1704,3 +1704,16 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
   (action agreement with full G\* on the E6 states; student 0.182–0.513 vs reduced G\* 0.072–0.312; caveat: G\* is
   sampled, self-agreement not measured, agreement ≠ accuracy).
 - **Next:** stage 19 pass 2 (prompt `stage19_v5_pass2_user.txt`), then stage 20.
+
+## Stage 19. PAPER_REVISION     [v5] — pass 2
+
+- **Finished:** 2026-11-09 (run 41). Prompt `stage19_v5_pass2_user.txt` (builder `build_stage19_v5.py --pass2`), fresh
+  opus subagent, targeted edits for P1–P8. Snapshot after: `paper/mypaper/v5/draft_v5_stage19pass2.md`.
+- P1: S12 reduced-G\* PRIOR accuracy rows from `v4:14_e5_analysis.json` (g125_512_16 −0.06667 [−0.12, −0.01],
+  g500_512_4 −0.05 [−0.11, +0.01333] vs G\*, 300 episodes) + Table 4b; P2–P6 wording / disclosures; P7 action-agreement
+  rows with caveat; P8 S2 PRIOR comparison (v4 last-checkpoint recipe confirmed in `docs/07c_amendment_v4_0.md` l.20).
+  Main session reverted a reviewer-derived "≈ 25 %" to the analysis's binding "about 24 %".
+- Words ≈ 13,700 (file), no section shorter; number audit 2 unmatched (known mantissas); 33 cite keys all in cards.
+- Note: `code/analysis_rl_sweep_v5.py` docstring says the last validation was at 40,960 episodes, the JSON says 92,160;
+  the JSON (code output) is used; docstring left as is (no code change without re-run).
+- **Next:** stage 20 QUALITY_GATE [v5].
