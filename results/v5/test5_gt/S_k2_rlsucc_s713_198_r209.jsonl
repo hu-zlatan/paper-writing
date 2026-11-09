@@ -1,0 +1,12 @@
+{"header": true, "args": {"cmd": "gt3", "src": ["../results/v5/test5/S_k2_rlsucc_s713_198_r209.jsonl"], "J": 16, "L": 4095, "out": "../results/v5/test5_gt/S_k2_rlsucc_s713_198_r209"}, "env": {"TOUCHBED_NPHI": "64", "action_set": "64x8", "A": 512, "numpy": "2.5.4", "python": "3.12.16", "threads": {"OMP_NUM_THREADS": "1", "OPENBLAS_NUM_THREADS": "1", "MKL_NUM_THREADS": "1"}}}
+{"episode": 209, "set": "S", "split": "test5", "kappa": 2.0, "tau": 4.7, "method": "rl", "g_T": 3.313407559706217, "n_probes": 3, "J": 16, "L": 4095}
+{"episode": 210, "set": "S", "split": "test5", "kappa": 2.0, "tau": 4.7, "method": "rl", "g_T": 6.730303362214746, "n_probes": 3, "J": 16, "L": 4095}
+{"episode": 211, "set": "S", "split": "test5", "kappa": 2.0, "tau": 4.7, "method": "rl", "g_T": 5.299752020106292, "n_probes": 3, "J": 16, "L": 4095}
+{"episode": 212, "set": "S", "split": "test5", "kappa": 2.0, "tau": 4.7, "method": "rl", "g_T": 5.5913929433002725, "n_probes": 3, "J": 16, "L": 4095}
+{"episode": 213, "set": "S", "split": "test5", "kappa": 2.0, "tau": 4.7, "method": "rl", "g_T": 8.317765774546274, "n_probes": 3, "J": 16, "L": 4095}
+{"episode": 214, "set": "S", "split": "test5", "kappa": 2.0, "tau": 4.7, "method": "rl", "g_T": 4.145379315032233, "n_probes": 3, "J": 16, "L": 4095}
+{"episode": 215, "set": "S", "split": "test5", "kappa": 2.0, "tau": 4.7, "method": "rl", "g_T": 8.316738802882616, "n_probes": 3, "J": 16, "L": 4095}
+{"episode": 216, "set": "S", "split": "test5", "kappa": 2.0, "tau": 4.7, "method": "rl", "g_T": 8.317766039784203, "n_probes": 3, "J": 16, "L": 4095}
+{"episode": 217, "set": "S", "split": "test5", "kappa": 2.0, "tau": 4.7, "method": "rl", "g_T": 8.258828314202638, "n_probes": 3, "J": 16, "L": 4095}
+{"episode": 218, "set": "S", "split": "test5", "kappa": 2.0, "tau": 4.7, "method": "rl", "g_T": 0.6776221356691075, "n_probes": 3, "J": 16, "L": 4095}
+{"episode": 219, "set": "S", "split": "test5", "kappa": 2.0, "tau": 4.7, "method": "rl", "g_T": 8.317469326349126, "n_probes": 3, "J": 16, "L": 4095}
