@@ -9,7 +9,7 @@
 **Topic:** Amortized, non-myopic active tactile localization (TouchBED)
 **Initialised:** 2026-10-28T07:56:44Z
 **Current version:** v5
-**Latest stage:** Stage 19 PAPER_REVISION [v5] pass 2 done (run 41) → next stage 20 QUALITY_GATE [v5]; see run 41 at the end of this file
+**Latest stage:** Stage 20 QUALITY_GATE [v5] = 5.5 / 10, FAIL (evidence-level), refine cap 4 / 4 used → STOPPED, waiting for the owner's direction (OWNER_TODO run 41); only low-risk paper-level work meanwhile; see run 41 at the end of this file
 
 ---
 
@@ -1717,3 +1717,22 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
 - Note: `code/analysis_rl_sweep_v5.py` docstring says the last validation was at 40,960 episodes, the JSON says 92,160;
   the JSON (code output) is used; docstring left as is (no code change without re-run).
 - **Next:** stage 20 QUALITY_GATE [v5].
+
+## Stage 20. QUALITY_GATE     [v5]
+
+- **Finished:** 2026-11-09 (run 41). Plan `plans/stage_20_quality_gate_v5.md`; template `quality_gate.md` verbatim
+  (threshold 7.5), fresh opus subagent, paper only → `paper/mypaper/20_quality_gate.json`.
+- **Score 5.5 / 10 (v3 5.5, v4 5.0) → FAIL. Not auto-approved** (AUTOPILOT §1 auto-approves a gate only with evidence; a
+  score below threshold is no such evidence). 15 weaknesses (8 evidence-level) and 13 required actions (8
+  evidence-level: reduced G\* accuracy on test5 in all cells + frontier, more test5 power / TOST, a second G\* run per
+  cell, per-cell RL tuning, DAgger-vs-BC on success, E5 in all cells / seeds, an information-based heuristic, A16 at more κ).
+  The gate found the numbers internally consistent.
+- **Decision (template table):** below threshold with evidence-level weaknesses → stage 13, which is unavailable
+  (`max_refine_cycles` 4 / 4, owner-authorised maximum; 15_decision §4.5 d). → **Stop the loop and ask the owner**
+  (OWNER_TODO, run 41): RSS Stage 2 full paper / CoRL 2027 / RA-L / workshop, or a further RESTRICTS override.
+- **Meanwhile (low-risk, paper-level only, no new experiments):** resolve the 3 [CITE-MISSING] with verified entries,
+  render Figure 1 panel D from `results_v5.json`, rewrite internal identifiers for an external reader, gate-calibration
+  paragraph. These do not change any number or verdict.
+- **Where to resume (run 42):** read AUTOPILOT §1 / issues for the owner's choice. Without one: the paper-level items
+  above on `draft_v5.md`, then paper 2 (remaining secondaries → stage 13/14), which has its own cap and is the active
+  research thread.
