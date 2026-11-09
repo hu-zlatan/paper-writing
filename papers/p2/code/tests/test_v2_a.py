@@ -23,3 +23,10 @@ def test_matched_re_interpolates():
     fr = [(0.2, 0.1), (0.12, 0.2), (0.08, 0.4), (0.05, 0.6)]
     assert abs(matched_re(fr) - 0.3) < 1e-12
     assert matched_re([(0.05, 1.0), (0.04, 2.0)]) is None
+
+
+def test_eps_p_deterministic_and_independent_of_onset():
+    from crc_grids_09 import eps_p
+    r = {"family": "F1", "obj": 3, "dist": "D2"}
+    assert eps_p(r) == eps_p(dict(r))
+    assert eps_p(r) != eps_p({"family": "F1", "obj": 4, "dist": "D2"})
