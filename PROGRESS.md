@@ -1595,3 +1595,35 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
   `pipeline/references/topic_constraint_block.md`; the v4 condensed draft `paper/mypaper/sections/draft_v4_condensed.md`
   is earlier material only (its numbers are v4). Then paper 2: read `p2_crc_v2` (Actions) via
   `python papers/p2/code/analysis_crc.py --v2` once `--check`-complete, then H4 / D-μ / H2-T / H3-B secondaries → stage 14.
+
+- **Run 41 (2026-11-09, from ≈ 07:50 UTC, scheduled) — paper 2 read-out, then stage 16 v5.** No open issues;
+  AUTOPILOT §1 unchanged. `add_repo` not available as a tool; the existing checkout was reset onto origin/main.
+  - **Paper 2 first** (AUTOPILOT §7; paper 1 had nothing on Actions): 08e CRC grid sensitivity read
+    (`papers/p2/results/v1/crc_analysis_v2.json`; details in `papers/p2/PROGRESS.md`).
+  - **Stage 15 §4.1 task 1 (report-only):** `code/tools_posthoc_v5.py` → `results/v5/15_posthoc_derived.json`
+    (arithmetic on existing fields, no CI), collected into `results_v5.json`. Margins vs the best test5 heuristic:
+    S2 +5.87, S4 +5.13, S8 +6.07, S12 +3.47, A16-2 +14.47 pp; full-G\* / job-2 student latency ratios S12 ≈ 2,083–2,150×,
+    S8 ≈ 3,356–3,397×, A16-2 ≈ 6,640–6,688×, S4 ≈ 8,060–8,123×, S2 ≈ 9,521–9,569×; H5b span 0.1112–0.8213 rad →
+    slope × span −1.1 pp, CI [−7.4, +5.2] pp. Task 2 (OWNER_TODO correction) was already done in run 40.
+
+## Stage 16. PAPER_OUTLINE     [v5]
+
+- **Finished:** 2026-11-09 (run 41). Plan `plans/stage_16_paper_outline_v5.md`.
+- Template `paper_outline.md` verbatim; fresh-context subagent (opus); prompts `paper/mypaper/prompts/stage16_v5_*.txt`
+  (builder `build_stage16_v5.py`; feedback = v4 stage-18 review + v4 stage-20 gate). v4 outline snapshotted to
+  `paper/mypaper/v4/00_outline_v4.md`.
+- **Output:** `paper/mypaper/sections/00_outline.md` (≈ 7,700 words; body target 3,430 words for the 5-page Stage 1
+  abstract; C1–C5 in the decision's order; Table 1 / Table 2 / X1–X10 row map with JSON keys and DEC/GATE/REP/EXPL/PH/PRIOR
+  tags; Figure 1 = schematic panels A–C + data panel D, student − G\* vs G\* travel over the five cells). 33 cite_keys,
+  all present in `docs/05_knowledge_cards.json`; 3 [CITE-MISSING] (DeepSets, Holm 1979, Efron bootstrap); 12 [NEED]
+  (design constants / records not in the analysis JSON — to be filled in stage 17 from the frozen amendments or dropped).
+- **Erratum to binding stage-14 item m8 (main-session check):** m8 says v4's −10.2 pp test3 gap has no interval; it does
+  (`results/v4/results_v4.json` → `14_s2_analysis.json.test3_sub8.diffs["student-gstar:success"]` = −0.1022,
+  ci95 [−0.1656, −0.0433]). Approved wording keeps m8's scope (no formal comparison claim) and adds the interval.
+- **Open for stage 17** (flagged by the outline subagent): amendment v5.1c requires per-seed `rl_success` episode counts
+  next to every `rl_success` number; amendment v5.0 E2 pre-declared a last-checkpoint sensitivity row for students —
+  neither is in `results_v5.json` yet (report-only extraction from existing files, no new runs); no claim scope exists
+  for a latency–accuracy frontier → only reduced-planner timings are reported.
+- **Where to resume (run 42):** stage 17 PAPER_DRAFT [v5] (template `paper_draft.md`, fresh subagent, outline +
+  `results_v5.json` + knowledge cards), after the two report-only extractions above. Paper 2: remaining secondaries →
+  stage 13/14.

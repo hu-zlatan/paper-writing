@@ -1,0 +1,1051 @@
+Target: RSS 2027 Stage 1 extended abstract (deadline 2026-12-04 AoE): <= 5 content pages + 1 page of references; methods complete, experiments may be preliminary. Paper type: measurement / characterisation paper only (results/v5/15_decision.md sections 4.2-4.4 give the frame, the contribution order C1-C5, and the allowed and disallowed claims; they are binding). Word targets scaled to 5 pages (about 3,000-3,500 words main body), a stated deviation from the 9-page floors of hard_constraints section 3; a master draft may be longer and is condensed in stage 22. This is the v5 revision of the v4 outline (paper/mypaper/v4/00_outline_v4.md) and draft (paper/mypaper/v4/draft_v4_final.md); v3 (S12) and v4 (S2) gate results enter as prior cells. Evidence links must name keys of results/v5/results_v5.json (blocks 12_d5_analysis.json, 14_test5_analysis.json, 14_e5_analysis.json, 14_e6_analysis.json, 12_e7_analysis.json, 12_base_hstar.json, 12_rl_sweep_selection.json, 13_freeze.json, 15_posthoc_derived.json) or results/v4/results_v4.json / results/v3/results_v3.json, and cite_keys from docs/05_knowledge_cards.json. Values from 15_posthoc_derived.json must be labelled post hoc, no CI.
+
+
+Create a detailed paper outline in markdown.
+
+Include per-section goals and evidence links.
+
+=== HARD TOPIC CONSTRAINT ===
+
+The paper MUST be about: Amortizing a cost-aware greedy information-gain touch planner (G*) for active tactile localization under travel cost: a pre-registered five-cell characterisation (travel cost kappa = 2/4/8/12 on one shape library and a second shape library A16 at kappa = 2) of whether a policy distilled from the planner matches it, how it compares with reinforcement learning on the same objective and with hand-designed probing heuristics, and how the gap behaves as travel cost changes
+
+PROHIBITED content (unless user explicitly specifies case-study mode):
+
+- Do NOT treat environment setup, dependency installation, or infrastructure failures as a research contribution.
+
+- Do NOT present debugging logs, system errors, or configuration issues as experimental findings.
+
+- Do NOT drift to tangential topics not directly related to the stated topic.
+
+- Every section MUST connect back to the core research question.
+
+- The Abstract and Introduction MUST clearly state the research problem derived from: Amortizing a cost-aware greedy information-gain touch planner (G*) for active tactile localization under travel cost: a pre-registered five-cell characterisation (travel cost kappa = 2/4/8/12 on one shape library and a second shape library A16 at kappa = 2) of whether a policy distilled from the planner matches it, how it compares with reinforcement learning on the same objective and with hand-designed probing heuristics, and how the gap behaves as travel cost changes
+
+- The Method section MUST describe a technical approach, not a workflow.
+
+- The Results section MUST report quantitative outcomes of experiments, not environment status.
+
+=== END CONSTRAINT ===
+Prior feedback (v4 stage 18 peer review summary and v4 stage 20 quality gate, 5.0/10, which led to the owner-authorised v5 loop; v5 was designed to answer its evidence-level items):
+
+# Stage 18 PEER_REVIEW [v4] — merged record (run 10, 2026-11-01)
+
+Draft: `paper/mypaper/sections/draft_v4.md`. Template verbatim (prompts `paper/mypaper/prompts/stage18_v4_*`), two
+fresh opus subagents; run 2 as a strict RSS/CoRL pair. Full reviews: `18_review_v4_run1.md`, `18_review_v4_run2.md`.
+v3 record: `v3/18_peer_review_v3.md`.
+
+## Verdict
+- Scores: run 1 A 4 / B 3; run 2 A 4 / B 3 (v3: 4/3, 3/4). **CRITICAL_FABRICATION: no** in both runs (> 100 numbers,
+  all trial/episode/seed counts, the crossed bootstrap B = 10,000, the D3/D3-B/D4 thresholds, H2-S2 and E5 recomputed
+  from raw per-episode files; Holm/TOST correctly described as not run).
+- → stage 19 (no rollback). All mismatches are incidental text errors → option (b) (fix the claim).
+
+## Mismatches (fix in stage 19)
+| id | location | issue | fix |
+|---|---|---|---|
+| M1 | §3.1 | "K = 8 … base/variant pairs" — code has 4 bases + 4 variants | "K = 8 identities (4 base/variant pairs)" |
+| M2 | Table 2 R1, §1, §3.1 | S2 Cal′ reported "pass"; no S_k2 verify run exists (only S_k12, A_k12) | state τ set by the Cal′ rule, probe-count verification not run (or run it); test3 G\* 3.873 probes reported as observation |
+| M3 | §4, §7, Table 5, Fig. 1D | random anchor "215 of 300" stale; follow-up running | fill from final JSON |
+| M4 | Table 4, §5.2, Fig. 1B | travel definition omitted; logged travel includes the initial snap onto the 5.625° grid (≈ 1.4° for every policy) | define travel; add discretionary travel (computed from logs by code) |
+| M5 | Table 1 | "batch 256" is decisions-equivalent (256 // T episodes per step) | state it |
+| M6 | §5.3, §7 | S2 val3 scored inline (`eval3`), S2 test3 by `regrid3` re-read — not named as a candidate cause of the val/test gap | name it; run a pipeline check if cheap |
+| M7 | §5.4 | "2.9 half-widths (0.293)": lower half-width is 0.303 → ratio 2.8 | use 0.303 / 2.8 |
+| M8 | Table 2 R6, §5.4 | "H2 is rejected" overstates; should be "not detected" (same term as H2-S2) | reword |
+| M9 | draft | Figure 1 generation prompt inside the manuscript | keep only in `figures/figure1_prompt.txt` (LaTeX comment in stage 22) |
+
+## Triage of substantive asks
+Refine cycles are exhausted (3 of 3), so no new pre-registered experiment. Classified as:
+- **Text / analysis of existing logs (stage 19):** M1–M9; BI as the primary metric where success contrasts are within
+  the 7.5 % flip rate; consolidate hedging into Limitations; demote C4 (instrument notes) from the contribution list;
+  post-hoc minimum detectable effect for H2/D4 from the observed SE (labelled post hoc); test-split reuse disclosed.
+- **Cheap report-only diagnostics (allowed by `results/v4/15_decision.md`, ≤ 4 CPU-h):** S_k2 Cal′ verification
+  (probe count at τ = 4.7); val3 subset re-read through the test pipeline (M6). Added if they finish before stage 20;
+  otherwise listed as not run.
+- **Out of scope for this cycle (Limitations / future work):** 512-action or structured two-step H3 screen, V_LA
+  selection-bias re-estimate, S2 B-spread/B-cov and an S2 H★, S2 student/RL sweeps, probe-count-constrained RL,
+  belief-input capacity fix, regret on student-visited states, sub-16 evaluator check, more cells/seeds, held-out
+  shapes, 3D/contact dynamics, hardware.
+
+---
+
+# Second pass (stage 19 pass-1 revision grew the body > 30 %) — run 10
+
+Prompt `paper/mypaper/prompts/stage18_v4_pass2_user.txt` (revised draft, current `results_v4.json`), two fresh opus
+reviewers: `18_review_v4_pass2_run1.md`, `18_review_v4_pass2_run2.md`. Scores 4/3 and 4/3; **CRITICAL_FABRICATION: no**
+in both (all counts, the bootstrap, H2-S2, D4, the S2 Cal′ 3.875 probes and S2 travel reproduced from raw files).
+
+## Mismatches (fix in stage 19 pass 2)
+| id | location | issue | fix |
+|---|---|---|---|
+| P1 | Abstract, §6, §8 | g_T-vs-grid ordering stated "in both cells"; S12 is marginal (G\* 5.299 vs 5.368; 3 of 6 seeds below G\*; BI ci95 includes 0) | state for S2; S12 marginal |
+| P2 | §1 | 79.3 % zero moves attributed to test3 0–299; it is 0–499 (0–299: 80.9 %, `14_review2_checks`) | fix range / number |
+| P3 | §5.3 | "≈ 2.0 combined SE" not labelled derived | label |
+| P4 | §4, §5.4, Abstract | post-hoc 7.5 pp "BI first" rule: flip rate is per-episode, not a contrast bound; applied unevenly (S12 G\* − RL +7.0 pp); S2 student − B-fan +8.1 pp clears it by 0.6 pp | drop the numeric threshold; lead with BI everywhere and mark every success contrast with its CI; abstract calls +8.1 pp exploratory |
+| P5 | §4, Tables 2/5, §7 | random anchor PENDING | fill from final JSON |
+| P6 | §1 vs §5.6 | 0.16–0.23 vs 0.16–0.27 nats | say which comparison |
+| P7 | §5.2 | random travels "most" in first leg (S2 52 %) | fix |
+| P8 | §5.3, §6, §7 | S2 students over-fit: held-out R̄ lowest at epochs 22–130, rises 0.007–0.026 to the kept epoch-200 checkpoint, train loss still falling (`14_review2_checks`) | report; the fixed-200-epoch recipe (pre-registered) keeps the last checkpoint |
+| P9 | Abstract, §8 | E5 cell not named | "in S12" |
+| P10 | §4, Table 2 R2 | the one counted E′ flip came from set A (A12 B-fan) | state |
+| P11 | §5.4 | "cap saturation is rare" counts exact-cap only; RL end-of-training 23–31 % within 0.5 nats of the cap | qualify, cite `v3:14_behaviour.rl_final` |
+| P12 | Abstract, §1 | 4.3° / 44.8° come from a report-only post-review analysis | label |
+| P13 | §4 | D-gate SE·√0.5 ≈ 88 % one-sided, G\* run once per episode | explain (pre-registered formula, unchanged) |
+| P14 | §4 | H3 0.03 threshold registered with a near-identical estimate known | already labelled; keep |
+
+
+{
+  "score_1_to_10": 5.0,
+  "verdict": "Below threshold (5.0 < 7.5): not ready for a top-conference submission. The manuscript is an unusually honest, carefully hedged, pre-registered characterisation study, but its contributions are narrow (one cell per regime, planar simulation, three seeds, mostly null or exploratory learning results), and the draft still contains unfinished content (a [PENDING] random row and a placeholder Figure 1). Its main positive finding (small one-step headroom) is expected from theory and is bounded only over 32 screened actions with a reduced completion. The most transferable observation (the g_T versus grid-posterior ordering inversion) rests on point estimates in one cell, with no interval.",
+  "strengths": [
+    "Rigorous pre-registration discipline: frozen hypotheses, gates, outcome map and an amendment before S2. Failed gates (D3 twice, D4) are reported plainly, and exploratory rows are clearly separated from registered ones.",
+    "Validated headroom estimator: notch and travel-notch constructions with known exact gaps, a zero-gap false-positive bank and an on-belief bias check, plus an explicit statement that G is one-step-deviation headroom, not the gap to the optimal policy.",
+    "Controlled learner comparison: the same belief-free DeepSets head, action set and feasibility mask for DAgger distillation and PPO, so the training signal is the isolated variable.",
+    "The g_T (sPCE-type) versus posterior ordering disagreement is a potentially useful methodological warning for amortized experimental-design work that reports contrastive bounds as policy quality.",
+    "Careful behavioural diagnostics: the travel decomposition separates the grid snap from between-probe travel, and the probe counts, zero-move fractions and per-seed travel correlations show what each policy actually does in each regime.",
+    "Honest cost analysis: the latency decomposition explains why candidate pruning cannot reach the 10x target, and reduced-size planners are compared against the students, which is the fair alternative to amortization.",
+    "The limitations section is thorough, and nearly every quantitative claim carries a paired crossed-bootstrap ci95 and a statement of its evidential status."
+  ],
+  "weaknesses": [
+    "Unfinished manuscript: the S2 random test row is still [PENDING:...] in Table 2, Table 5 and Section 7, and Figure 1 is an explicit placeholder. Either alone blocks submission.",
+    "Thin empirical scope: one cell per regime, one planar shape library (K = 8), simulated Gaussian sensing with no contact dynamics, no held-out shapes, no 3D objects and no hardware. Every regime-dependent claim is an untested two-cell comparison.",
+    "Low statistical power: three seeds per learner make H2 and H2-S2 sensitive only to advantages of about 0.5 nats. No equivalence test was run, there is no multiplicity correction, and the test split was reused by all S2 rows, E5, B-fan and the long student.",
+    "The headline result H3 (Hold) is close to what adaptive-submodularity arguments predict, and it covers only 32 mostly random screened first actions with a reduced greedy completion. The upward selection bias of V_LA was not measured, and there is no full 512-action screen or structured travel-then-fan family. Its novelty and informativeness are limited.",
+    "The learning results are mostly negative or unresolved: no learner reaches G*, H2 is not detected in either cell, and the belief-input control is under-fit and isolates nothing. As a result the paper yields few actionable conclusions.",
+    "The RL comparator is weak and untuned for S2: it uses a single configuration selected at the edge of the learning-rate grid, and all six PPO policies collapse to exactly three probes. This undermines H2 and H2-S2 as a comparison of distillation against RL in general.",
+    "The g_T/posterior inversion, the most transferable claim, has no interval for g_T(G*) - g_T(learner) in either cell. It is marginal in S12, near-cap compression was not measured on test, and it is confounded with RL's fixed three-probe behaviour.",
+    "The evaluator is not shown to have converged: gate E' failed, no sub-16 check was run, and the 7.5 % success flip rate between subdivisions is of the same order as most success contrasts, including the S2 student versus B-fan +8.1 pp.",
+    "The S2 validation/test discrepancy is unexplained (about 2 combined SE, wider for every seed). The S2 training record shows over-fitting under the registered last-checkpoint recipe, which weakens the S2 learnability conclusion as a statement about distillation rather than about this recipe.",
+    "Baselines in S2 are incomplete: only B-fan (the S12 H*) was run. The S2 separation is therefore from a stay-and-fan heuristic that is mismatched to a travelling regime, not from the best available heuristic.",
+    "S2 Cal' verification was done after the experiments, and the E5 latencies are logged medians on free runners rather than Lat' measurements.",
+    "Presentation: the text is dense with qualifiers, derived figures and parenthetical caveats, which obscures a clear take-home message. Several numbers are repeated across the abstract, introduction, results and conclusion with slightly different splits."
+  ],
+  "required_actions": [
+    "Complete the S2 random test3 row and remove every [PENDING] marker. Produce Figure 1, or remove the reference to it.",
+    "Add more cells per regime (several kappa values and at least one more shape library) and more learner seeds (at least 5 to 10), so that regime-dependent claims can be tested across cells rather than stated anecdotally.",
+    "Compute bootstrap intervals for g_T(G*) - g_T(learner) in both cells, measure near-cap compression of g_T on test, and run a probe-count-aware or S2-tuned RL variant so that the g_T/posterior inversion can be separated from RL's three-probe collapse.",
+    "Strengthen H3: run a full 512-action first-step screen and a structured travel-then-fan candidate family, measure the selection bias of V_LA (for example with an independent re-estimate of the selected action), and ideally add a two-step look-ahead estimate.",
+    "Validate the evaluator at a finer grid (sub-16) on set S, or report success contrasts with the evaluator's resolution folded into the uncertainty.",
+    "Use a fresh, untouched test split for the S2 rows and the student versus B-fan claims, or confine those claims explicitly to exploratory status in the abstract.",
+    "Investigate the S2 validation/test gap with more episodes and seeds, and test early stopping on held-out regret as a pre-declared sensitivity analysis.",
+    "Run B-spread and B-cov (or select an S2 H* on S2 pilot data) so that the travelling-regime comparison is against the best available heuristic.",
+    "Fit a working belief-input or attention-based head so that the representation question can be answered, and measure regret on student-visited states to test the covariate-shift explanation.",
+    "Time the reduced planners and the students under the Lat' protocol and plot a latency-accuracy frontier.",
+    "Tighten the writing: state one clear take-home message per contribution, move derived and post-hoc sensitivity figures to an appendix, and remove repeated numbers across sections."
+  ]
+}
+
+
+Analysis:
+
+# Stage 14 RESULT_ANALYSIS [v5] — merged report (run 40, 2026-11-09)
+
+**How this file was made.** Pass 1 (fresh-context analyst, `14_analysis_pass1.md`) and pass 2 (fresh-context
+adversarial area chair, `14_analysis_pass2.md`), both with the stage-14 template verbatim (prompts in
+`results/v5/prompts/`), data context = unaltered `results_v5.json`. Merge rule (as v3 / v4): pass 1 is the body;
+**every pass-2 item (3 S, 8 M, 8 m) is binding** — where a pass-1 sentence is listed there, the pass-2 "supported
+rewrite" replaces it for every later stage. Pass 2 found **no pre-registered verdict wrong**: D5 fails 5 / 5 (m = 0);
+H5a test5 student − G\* −0.2 to −2.5 pp, no Holm rejection, every ci95 lower limit below −4 pp (a match within δ is not
+shown); student > pilot-chosen H\* in 4 / 5 cells (Holm), but the pilot H\* is not the best test5 heuristic in 4 / 5
+cells, so the margin over the best test5 heuristic is +3.5 to +14.5 pp; H5b no trend detected (not "no dependence");
+H2-v5 met only in A16-2, mostly through RL collapse there; no inversion.
+
+**Binding corrections in short.** The gap is not "small" (validation S4 −5.5, A16-2 −6.0 pp); no pooled "true gap"
+exists in the data; test5 does not contradict D5 (D5's own rule would still fail ≈ 4 / 5 cells on test5); latency
+ratios rest on one student seed per cell; G\* headroom per E7 must not be overstated; E5 evaluator flips (up to 3 pp)
+sit next to every success contrast.
+
+---
+
+# Stage 14 Analysis (v5, pass 1)
+
+Scope: this report uses only the JSON block in `results/v5/prompts/stage14_pass1_user.txt`. Every number is cited by its JSON path. Paths are relative to the top-level JSON object, and the file-name key is written first (for example `14_test5_analysis.json.S2...`). Values are rounded to about 4 significant figures. "pp" means percentage points of success rate. A value marked *(derived)* is simple arithmetic on cited values. No bootstrap was run for derived values, so they carry no CI.
+
+Cells: S2, S4, S8, S12 (shape set S, travel cost kappa = 2/4/8/12) and A16-2 (shape set A16, kappa 2). On test5 each method has 300 episodes per cell (`14_test5_analysis.json.<cell>.episodes_per_method.*` = 300; `complete` = true in all five cells).
+
+---
+
+## 1. Metrics Summary
+
+### 1.1 Pre-registered validation gate D5 (val3, 500 episodes, delta = 0.04)
+
+| Cell | student succ | G* succ | delta_hat succ | threshold | succ passes | delta_hat BI | BI passes | cell passes |
+|---|---|---|---|---|---|---|---|---|
+| S2 | 0.4812 | 0.514 | -0.0328 | -0.01454 | false | -0.06820 | true | false |
+| S4 | 0.4492 | 0.504 | -0.0548 | -0.01503 | false | -0.1334 | true | false |
+| S8 | 0.4116 | 0.448 | -0.0364 | -0.01639 | false | -0.04650 | true | false |
+| S12 | 0.4136 | 0.446 | -0.0324 | -0.01722 | false | -0.06348 | true | false |
+| A16-2 | 0.4124 | 0.472 | -0.0596 | -0.01229 | false | -0.06293 | true | false |
+
+Sources: `12_d5_analysis.json.<cell>.succ.{student_mean,gstar_mean,delta_hat,threshold,passes}`, `12_d5_analysis.json.<cell>.bi.{delta_hat,passes}` (BI threshold = -0.15), `12_d5_analysis.json.<cell>.passes`, and `12_d5_analysis.json.<cell>.delta` = 0.04. **No cell passes D5:** `12_d5_analysis.json.H5a_validation.cells_pass` = [] and `14_test5_analysis.json.H5a.validation_cells_within_delta` = [], so the validation count is m = 0 of 5. Every per-seed success difference is negative, from -0.068 (`12_d5_analysis.json.A16-2.succ.per_seed.701`) to -0.01 (`12_d5_analysis.json.S12.succ.per_seed.701`). In A16-2 no seed passes (`12_d5_analysis.json.A16-2.seeds_ok.*` = false for all five).
+
+### 1.2 Test5 mean success (300 episodes per method)
+
+| Cell | G* | student seeds 701–705 (min–max) | RL seeds 711–715 (min–max) | random | b_fan | b_spread | b_cov | H* (pilot-chosen) |
+|---|---|---|---|---|---|---|---|---|
+| S2 | 0.5333 | 0.4967–0.53 | 0.39–0.48 | 0.1033 | 0.35 | 0.04667 | 0.45 | b_cov |
+| S4 | 0.4967 | 0.4333–0.5033 | 0.3833–0.4567 | 0.08333 | 0.3733 | 0.09 | 0.42 | b_fan |
+| S8 | 0.4567 | 0.42–0.4567 | 0.3833–0.43 | 0.09667 | 0.3833 | 0.05 | 0.3733 | b_cov |
+| S12 | 0.4567 | 0.42–0.46 | 0.3367–0.3867 | 0.07667 | 0.38 | 0.07 | 0.4067 | b_fan |
+| A16-2 | 0.49 | 0.4567–0.5133 | 0.1833–0.29 | 0.03333 | 0.32 | 0.01 | 0.3433 | b_fan |
+
+Sources: `14_test5_analysis.json.<cell>.means.<method>.success` and `14_test5_analysis.json.<cell>.H_star`. Example endpoints: `14_test5_analysis.json.S2.means.student_s701.success` = 0.4967, `...S2.means.student_s705.success` = 0.53, `...A16-2.means.rl_s713.success` = 0.1833.
+
+### 1.3 Test5 travel and probes (G* vs student)
+
+| Cell | G* travel_rad | student travel_rad (min–max) | RL travel_rad (min–max) | G* n_probes | student n_probes (min–max) | RL n_probes (min–max) |
+|---|---|---|---|---|---|---|
+| S2 | 0.8213 | 0.5000–0.6675 | 2.061–2.545 | 3.863 | 3.94–3.963 | 3.0–3.0 |
+| S4 | 0.4046 | 0.1966–0.2909 | 1.210–1.404 | 3.913 | 3.947–3.983 | 2.813–3.01 |
+| S8 | 0.1641 | 0.08765–0.09848 | 0.5029–0.6563 | 3.933 | 3.987–3.997 | 3.0–3.083 |
+| S12 | 0.1112 | 0.04288–0.05787 | 0.3932–0.4367 | 3.97 | 3.99–4.0 | 3.0–3.097 |
+| A16-2 | 0.3704 | 0.2998–0.3554 | 0.7056–2.069 | 2.933 | 2.9–2.973 | 2.0–2.773 |
+
+Sources: `14_test5_analysis.json.<cell>.means.<method>.{travel_rad,n_probes}`. In every cell the student travels less than G*, and RL travels more than both.
+
+### 1.4 Latency (E6, job 1, seed 701)
+
+| Cell | student median (s) | full G* `g2000_512_64` median (s) | ratio G*/student median [ci95] | ratio half_width_ok | job1_complete |
+|---|---|---|---|---|---|
+| S2 | 0.0004996 | 4.880 | 9933 [8179, 10224] | false | false |
+| S4 | 0.0004942 | 3.375 | 6990 [4747, 7270] | false | false |
+| S8 | 0.0003577 | 1.234 | 3463 [2680, 3645] | false | false |
+| S12 | 0.0003579 | 0.9103 | 2523 [2068, 2675] | false | false |
+| A16-2 | 0.0003261 | 2.702 | 8301 [8080, 8472] | true | true |
+
+Sources: `14_e6_analysis.json.<cell>.job1.student.median`, `...job1.g2000_512_64.median`, `...job1.ratio_full_gstar_over_student.{median,ci95,half_width_ok}`, and `14_e6_analysis.json.<cell>.job1_complete`. The other student seeds (job 2, n = 500 each) have medians from 0.0003632 s (`14_e6_analysis.json.S8.job2.703.median`) to 0.0005126 s (`14_e6_analysis.json.S2.job2.704.median`).
+
+---
+
+## 2. Comparative Findings
+
+### 2.1 Student vs G* on test5 (H5a; crossed episode x seed bootstrap)
+
+| Cell | succ diff | ci95 | p (two-sided) | Holm reject (5 cells) | BI diff | BI ci95 | BI p |
+|---|---|---|---|---|---|---|---|
+| S2 | -0.02467 | [-0.076, 0.02667] | 0.3526 | false | -0.07862 | [-0.1615, 0.004763] | 0.061 |
+| S4 | -0.02533 | [-0.08333, 0.03267] | 0.3888 | false | -0.1314 | [-0.2112, -0.05320] | 0.002 |
+| S8 | -0.01267 | [-0.06133, 0.03733] | 0.63 | false | -0.06764 | [-0.1392, 0.003764] | 0.0624 |
+| S12 | -0.01533 | [-0.06333, 0.03267] | 0.5378 | false | -0.09100 | [-0.1681, -0.01867] | 0.0124 |
+| A16-2 | -0.002 | [-0.06267, 0.06067] | 0.9572 | false | +0.08477 | [-0.05888, 0.2320] | 0.2642 |
+
+Sources: `14_test5_analysis.json.<cell>.student_minus_gstar.success.{diff,ci95,p_two_sided,holm_reject_5cells}` and `...student_minus_gstar.ball_info.{diff,ci95,p_two_sided}`.
+
+- All five success point estimates are negative, from -2.533 pp (S4) to -0.2 pp (A16-2), and every ci95 includes 0. **The test does not show equivalence.** Every lower bound is below -delta = -0.04: -0.076, -0.08333, -0.06133, -0.06333 and -0.06267. A student shortfall of 6–8 pp is therefore consistent with the data in every cell.
+- The test5 student–G* success gaps are smaller in magnitude than the D5 validation gaps in every cell: S2 -0.02467 vs -0.0328, S4 -0.02533 vs -0.0548, S8 -0.01267 vs -0.0364, S12 -0.01533 vs -0.0324, A16-2 -0.002 vs -0.0596 (`14_test5_analysis.json.<cell>.student_minus_gstar.success.diff` vs `12_d5_analysis.json.<cell>.succ.delta_hat`). This contradicts the pre-registered D5 verdict (m = 0) only in its point estimates. The test5 CIs are wide enough to contain the validation values.
+- On ball information, the student is below G* with a ci95 that excludes 0 in S4 (-0.1314) and S12 (-0.0910). These BI contrasts are not Holm-adjusted. In A16-2 the student BI point estimate is above G* (+0.08477, CI includes 0).
+
+### 2.2 Student vs best heuristic H*
+
+| Cell | H* | succ diff | ci95 | p | Holm reject | BI diff [ci95] |
+|---|---|---|---|---|---|---|
+| S2 | b_cov | +0.05867 | [-0.001333, 0.118] | 0.0558 | false | +0.1441 [0.03379, 0.2520] |
+| S4 | b_fan | +0.098 | [0.04667, 0.1487] | 0.0 | true | +0.4180 [0.3301, 0.5094] |
+| S8 | b_cov | +0.07067 | [0.01667, 0.1247] | 0.0098 | true | +0.1948 [0.09552, 0.2963] |
+| S12 | b_fan | +0.06133 | [0.01067, 0.112] | 0.0178 | true | +0.2361 [0.1568, 0.3168] |
+| A16-2 | b_fan | +0.168 | [0.106, 0.23] | 0.0 | true | +0.7842 [0.6135, 0.9579] |
+
+Sources: `14_test5_analysis.json.<cell>.student_minus_hstar.{success,ball_info}.*`. The student beats H* on success after Holm correction in 4 of 5 cells. S2 is the exception: its CI lower bound is -0.001333. The heuristic ranking from pilot data does not always hold on test5. In S4, S12 and A16-2, H* = b_fan, but b_cov scores higher on test5: 0.42 vs 0.3733 (`...S4.means.b_cov.success`, `...S4.means.b_fan.success`), 0.4067 vs 0.38 (S12) and 0.3433 vs 0.32 (A16-2). Against the best heuristic *on test5*, the student's margin would be smaller: about +0.0513 (S4), +0.0347 (S12) and +0.1447 (A16-2) *(derived: G* success + student_minus_gstar.success.diff − b_cov success; no CI)*. This post-hoc comparison is not pre-registered.
+
+### 2.3 Student vs RL
+
+| Cell | student − RL succ [ci95], p | student − RL BI [ci95], p | student − RLsucc succ [ci95], p |
+|---|---|---|---|
+| S2 | +0.08467 [0.03067, 0.1373], 0.0032 | +0.2297 [0.1469, 0.3139], 0.0 | +0.1087 [0.05933, 0.158], 0.0 |
+| S4 | +0.05467 [-0.002, 0.11], 0.0584 | +0.1577 [0.04248, 0.2783], 0.0046 | n/a |
+| S8 | +0.032 [-0.01467, 0.07933], 0.19 | +0.08290 [-0.007993, 0.1794], 0.079 | n/a |
+| S12 | +0.07267 [0.02467, 0.1207], 0.0032 | +0.2475 [0.1124, 0.3878], 0.0002 | +0.07933 [0.022, 0.134], 0.0078 |
+| A16-2 | +0.266 [0.1993, 0.33], 0.0 | +1.025 [0.8492, 1.190], 0.0 | n/a |
+
+Sources: `14_test5_analysis.json.<cell>.student_minus_rl.*` and `...student_minus_rlsucc.success.*` (RLsucc was run only in S2 and S12). The RL policy was tuned on S2 (`12_rl_sweep_selection.json.selected_cfg` = 6). In A16-2 it transfers badly: seeds 712–715 use 2.0 probes and reach success 0.1833–0.2267 (`14_test5_analysis.json.A16-2.means.rl_s712..rl_s715.{n_probes,success}`), where the budget n* = 3 (`12_cal_analysis.json.n_star.A16.n_star`).
+
+### 2.4 H2-v5: student vs RL on the RL objective g_T
+
+| Cell | student − RL g_T | one-sided 95% LB | claim (LB > +0.10) | RL − student g_T [ci95], p | means g_T (student / RL / G*) | inversion |
+|---|---|---|---|---|---|---|
+| S2 | -0.2044 | -0.4971 | false | +0.2044 [-0.1216, 0.5435], 0.232 | 5.666 / 5.870 / 5.480 | false |
+| S4 | -0.3164 | -0.6555 | false | +0.3164 [-0.07608, 0.7258], 0.1152 | 5.506 / 5.822 / 5.385 | false |
+| S8 | -0.1712 | -0.4861 | false | +0.1712 [-0.1856, 0.5379], 0.3476 | 5.541 / 5.712 / 5.380 | false |
+| S12 | +0.03084 | -0.3044 | false | -0.03084 [-0.4196, 0.3711], 0.8718 | 5.275 / 5.245 / 5.068 | false |
+| A16-2 | +0.8332 | +0.5964 | **true** | -0.8332 [-1.117, -0.5464], 0.0 | 6.899 / 6.066 / 6.920 | false |
+
+Sources: `14_test5_analysis.json.<cell>.H2_v5.{student_minus_rl_gT.diff,student_minus_rl_gT.lower_one_sided_95,claim_student_higher_on_rl_objective,rl_minus_student_gT,means_gT,inversion}`. H2-v5 holds only in A16-2. In S2/S4/S8, RL has higher g_T as a point estimate while the student has higher success, but none of the RL-higher CIs excludes 0, so the pre-registered "inversion" is false everywhere. In all four S cells, G* has the lowest mean g_T of the three methods. For example, `...S2.H2_v5.gstar_minus_rl_gT.diff` = -0.3900 [-0.8566, 0.06472] and `...S4.H2_v5.gstar_minus_rl_gT.diff` = -0.4371 [-0.9095, 0.01035], p = 0.056. Neither CI excludes 0.
+
+### 2.5 H5b: travel-cost trend
+
+The WLS slope of test5 Δsucc on G* mean travel over the 5 cells is -0.01571 per rad, ci95 [-0.1041, 0.07277] (`14_test5_analysis.json.H5b.slope_per_rad`, `...ci95_per_rad`), or -0.02741 per 100° [-0.1817, 0.1270] (`...slope_per_100deg`, `...ci95_per_100deg`). The verdict is "no trend detected over 5 cells" (`14_test5_analysis.json.H5b.verdict`). The cell weights range from 1048 (A16-2) to 1643 (S12) (`14_test5_analysis.json.H5b.weights`).
+
+### 2.6 Planner headroom (E7, report-only)
+
+The independent-estimate gap grows when G* considers more candidates. The paired 512-minus-32 `indep_gap` is 0.04838 nats [0.01681, 0.08697] in S2 and 0.01830 [0.004013, 0.03652] in S12 (`12_e7_analysis.json.cells.<cell>.paired_indep_gap_512_minus_32`). The selection bias is positive with a CI excluding 0 in S2: 0.01926 [0.001030, 0.04193] at C1_32 and 0.02179 [0.004270, 0.04013] at C1_512. It is null in S12: 0.004470 [-0.007718, 0.01884] and -0.002040 [-0.01574, 0.01258] (`12_e7_analysis.json.cells.<cell>.<C1_32|C1_512>.selection_bias_nats`). G* is a greedy planner with measurable headroom, not an optimal ceiling.
+
+---
+
+## 3. Statistical Checks
+
+Only the procedures below appear in the data.
+
+1. **Bootstrap 95% CIs and two-sided bootstrap p-values** on test5 contrasts. The resampling is crossed over episodes and seeds: `n_episodes` = 300; `n_seeds` = [5, 1] for student vs G*/H* and [5, 5] for student vs RL (e.g. `14_test5_analysis.json.S2.student_minus_gstar.success.n_seeds`). Several p-values are reported as exactly 0.0 (e.g. `14_test5_analysis.json.S4.student_minus_hstar.success.p_two_sided`). The number of resamples is not in the data, so read these as "below the bootstrap resolution", not as p = 0.
+2. **Holm correction over 5 cells** applies only to the success contrasts student − G* and student − H*. Results: 0/5 rejections for student − G* (`...<cell>.student_minus_gstar.success.holm_reject_5cells` all false) and 4/5 for student − H* (S2 false). The BI, RL, RLsucc and g_T contrasts carry no multiplicity correction.
+3. **One-sided 95% lower bound** for H2-v5 (`...H2_v5.student_minus_rl_gT.lower_one_sided_95`) against the pre-registered +0.10 nats bar. 1/5 cells qualifies (A16-2, LB 0.5964).
+4. **WLS slope with ci95** for H5b (`14_test5_analysis.json.H5b`). The CI contains 0, so no trend is claimed, as pre-registered.
+5. **D5 gate**: a point estimate is compared against a per-cell threshold that depends on the SE. For example, S2 has se = 0.02189 and threshold = -0.01454 (`12_d5_analysis.json.S2.succ.{se,threshold}`). Success fails in 5/5 cells and BI passes in 5/5. Per the pre-registration, D5 has no remedy step.
+6. **Evaluator resolution check (E5, sub-8 vs sub-16, episodes 0–199)**:
+   - Outcome flip rates are 0.065–0.08 (`14_e5_analysis.json.<S2|S12>.<gstar|student_s701>.flip_rate`).
+   - G* success moves 0.54 → 0.54 (S2) and 0.48 → 0.505 (S12).
+   - Student 701 moves 0.465 → 0.485 (S2) and 0.455 → 0.45 (S12).
+   - The student − G* contrast changes by +0.02 (S2) and -0.03 (S12) (`14_e5_analysis.json.<cell>.contrast_change_student_minus_gstar`). Both changes are similar in size to the test5 point gaps themselves (0.02467 and 0.01533).
+   - The mean |ΔBI| is at most 0.004034 nats (`14_e5_analysis.json.S2.student_s701.mean_abs_dBI`), which is negligible for BI.
+7. **Latency completeness rule** (median CI half-width ≤ 10%): it fails for the full-G* ratio in S2/S4/S8/S12 (`14_e6_analysis.json.<cell>.job1.ratio_full_gstar_over_student.half_width_ok` = false) and passes only in A16-2.
+8. **Data integrity**: test5 is complete for every method and cell (`complete` and `gt_complete` = true), and weights were frozen before test5 (`13_freeze.json.cells.<cell>.sha256`, 15 files each for S2/S12 and 10 each for S4/S8/A16-2).
+
+---
+
+## 4. Limitations
+
+1. **Power and equivalence.** With 300 episodes per cell, the student − G* success CIs are about 10–12 pp wide (e.g. S2 [-0.076, 0.02667]). They cannot rule out a gap larger than the pre-registered delta = 0.04 in any cell. "No significant difference" here does not mean "matched". Test5 was cut from 500 to 300 episodes (addendum v5.1e), which widened these CIs.
+2. **The validation gate failed everywhere.** D5 gives m = 0/5 (`12_d5_analysis.json.H5a_validation.cells_pass` = []). Under the pre-registration, the favourable-looking test5 point estimates cannot override this. Read together, validation (500 episodes) and test (300 episodes) suggest a true success gap of roughly 1–5 pp, and that range is what the paper should report.
+3. **The G* references for D5 are heterogeneous.** The S2 G* validation runs come from v4 files and S12 from v3 files, while S4/S8/A16-2 come from v5 (`12_d5_analysis.json.<cell>.gstar_source`).
+4. **G* is a single deterministic arm.** `n_seeds` = [5, 1], so the CIs carry no G* seed variance. E7 also shows that G* is improvable: the 512-vs-32 candidate gap is 0.04838 nats in S2. The student is being compared with a sub-optimal greedy reference.
+5. **Evaluator noise is comparable to the effect.** E5 shows that changing posterior resolution flips 6.5–8% of outcomes and moves the student − G* contrast by up to 0.03, which exceeds the S8/S12/A16-2 test5 point gaps. E5 covers only 2 cells, 200 episodes and one student seed (701).
+6. **The heuristic baseline depends on the selection sample.** H* was picked on 200 pilot episodes (`12_base_hstar.json.rule`). In 3/5 cells, a different heuristic (b_cov) does better on test5, so the student − H* margins are optimistic relative to the best test heuristic.
+7. **RL is under-tuned outside S2.** One configuration (cfg 6, chosen on S2 val_v2 with ball-sPCE 6.300 vs 6.241 for cfg 0; `12_rl_sweep_selection.json.rows[6].final_val_ball_spce`, `rows[0]...`) was reused in every cell. On the sampled-policy metric, cfg 1 scores higher (6.316 vs 6.205; `rows[1].final_val_ball_spce_sampled`, `rows[6]...`). In A16-2, 4/5 RL seeds use only 2.0 probes. The large student-vs-RL margin in A16-2 (+0.266) therefore partly reflects RL failure rather than student strength. RLsucc exists only in S2/S12.
+8. **The latency ratio is not a single number.** The medians span 2523× (S12) to 9933× (S2), so the "~7,000–10,000×" framing holds only for S2, A16-2 and S4. The completeness rule fails in 4/5 cells, the CIs are asymmetric (S4 [4747, 7270]), and the hardware was 2-core CPU runners and a sandbox.
+9. **Multiplicity.** BI, RL, RLsucc and g_T contrasts (more than 30 tests) are uncorrected. Single p-values of about 0.01 among them (e.g. S12 BI p = 0.0124) should be read with that in mind.
+10. **Scope.** The study is simulation-only (TouchBED) with two shape sets and one kappa for A16, and it uses a sub-8 grid read-out for all success metrics. The H5b trend uses only 5 points, with travel ranging from 0.1112 to 0.8213 rad (`14_test5_analysis.json.H5b.gstar_mean_travel_rad`).
+
+---
+
+## 5. Conclusion
+
+- **Primary question (does the student match G*?): not established.** The pre-registered validation gate D5 fails in all 5 cells (success delta_hat from -0.0324 to -0.0596, all below threshold). On test5 the student is below G* in every cell (-0.2 to -2.533 pp), with no Holm rejection. However, every ci95 lower bound (-6.133 to -8.333 pp) lies beyond -delta = -0.04, so equivalence is not shown either. The defensible statement is: "the student's success gap to G* is small (point estimates 0.2–2.5 pp on test5 and 3.2–6.0 pp on validation) but not shown to be within 4 pp."
+- **Relative to v4**, the v5 test5 gap in S2 (-0.02467) is much closer to its validation gap (-0.0328) than v4's test gap was, according to the run description. This suggests v4's -10.2 pp test3 result was not reproduced. The v4 values are not in the JSON and are quoted from the run description only.
+- **Student vs baselines.** The student beats the pilot-chosen heuristic H* in 4/5 cells after Holm correction (+6.1 to +16.8 pp), and beats cfg-6 RL on success with a CI excluding 0 in S2, S12 and A16-2. H2-v5 (higher on RL's own objective) holds only in A16-2 (LB 0.5964), and no "inversion" is detected.
+- **No dependence on travel cost.** H5b slope = -0.01571/rad, ci95 [-0.1041, 0.07277].
+- **Cost.** The student decides in about 0.33–0.50 ms. Full G* is 2523× to 9933× slower per decision (median ratios), and the CI-completeness rule is met only in A16-2.
+
+---
+
+# Pass 2 (binding)
+
+# Stage 14 Analysis (v5, pass 2): area-chair audit of pass 1
+
+Scope: each claim in `14_analysis_pass1.md` was checked against the JSON block and run context in `results/v5/prompts/stage14_pass1_user.txt`, and nothing else. JSON paths are written as in pass 1, with the file-name key first. Values marked *(derived)* are hand arithmetic on cited values and have no CI. Severity: **S** = changes a verdict or headline, **M** = material overstatement or missing caveat, **m** = minor.
+
+All tables in pass 1 (sections 1.1–1.4, 2.1–2.4) were checked cell by cell and match the JSON. The problems are in the prose built on top of the tables.
+
+---
+
+## S: changes a verdict or headline
+
+**S1. The primary-question headline calls the gap "small".**
+- Claim (section 5, bullet 1): "the student's success gap to G* is small (point estimates 0.2–2.5 pp on test5 and 3.2–6.0 pp on validation) but not shown to be within 4 pp."
+- Evidence:
+  - In two cells the validation point estimate already lies beyond the pre-registered margin delta = 0.04: `12_d5_analysis.json.S4.succ.delta_hat` = -0.0548 and `12_d5_analysis.json.A16-2.succ.delta_hat` = -0.0596.
+  - All 25 per-seed validation differences are negative (`12_d5_analysis.json.<cell>.succ.per_seed.*`, range -0.068 to -0.01).
+  - The test5 lower bounds reach -0.08333 (`14_test5_analysis.json.S4.student_minus_gstar.success.ci95[0]`).
+  - Nothing in the data supports the word "small" relative to the 4 pp margin the study set for itself.
+- Supported rewrite: "The student is below G* in every cell on both splits (validation 3.2–6.0 pp, with S4 and A16-2 beyond the 4 pp margin; test5 0.2–2.5 pp, CIs down to -8.3 pp), and the pre-registered gate failed in all cells, so matching G* is not supported."
+
+**S2. Pass 1 invents a pooled "true gap of roughly 1–5 pp" and tells the paper to report it.**
+- Claim (section 4, item 2): "Read together, validation (500 episodes) and test (300 episodes) suggest a true success gap of roughly 1–5 pp, and that range is what the paper should report."
+- Evidence:
+  - No pooled estimate or interval exists in the data.
+  - The validation point estimates are 0.0324–0.0596 (`12_d5_analysis.json.<cell>.succ.delta_hat`), so two cells lie above 5 pp.
+  - The test5 point estimates are 0.002–0.02533 (`14_test5_analysis.json.<cell>.student_minus_gstar.success.diff`), so A16-2 lies below 1 pp.
+  - The test5 CIs run from -0.08333 to +0.06067.
+  - The two splits also use different G* sources in S2 and S12 (`12_d5_analysis.json.S2.gstar_source` = v4, `...S12.gstar_source` = v3).
+- Supported rewrite: "Validation point gaps are 3.2–6.0 pp and test5 point gaps are 0.2–2.5 pp (test5 95% CIs from -8.3 to +6.1 pp); no pooled estimate was computed, so the paper should report both splits separately with their intervals."
+
+**S3. The conclusion says there is "No dependence on travel cost."**
+- Claim (section 5, bullet 4): "**No dependence on travel cost.** H5b slope = -0.01571/rad, ci95 [-0.1041, 0.07277]."
+- Evidence:
+  - The pre-registered verdict is only "no trend detected over 5 cells" (`14_test5_analysis.json.H5b.verdict`).
+  - Over the observed G* travel span of 0.1112–0.8213 rad (`...H5b.gstar_mean_travel_rad`), the CI still allows a change in Δsucc of about -7.4 to +5.2 pp *(derived: ci95_per_rad × 0.7101 rad)*.
+  - The regressor is G* mean travel, not kappa, and the regression mixes two shape sets, since A16-2 is one of the 5 points (`...H5b.cells`).
+  - With 5 points, failing to detect a trend is not evidence that there is none.
+- Supported rewrite: "H5b detects no trend of Δsucc on G* travel over 5 cells (slope -0.0157/rad, ci95 [-0.104, 0.073]), but a change of up to about 7 pp across the observed travel range cannot be excluded."
+
+---
+
+## M: material overstatement or missing caveat
+
+**M1. Pass 1 says test5 "contradicts" the D5 verdict in its point estimates.**
+- Claim (section 2.1): "This contradicts the pre-registered D5 verdict (m = 0) only in its point estimates."
+- Evidence:
+  - D5 does not compare a point estimate with -delta. It compares delta_hat with an SE-dependent threshold. For all five cells, threshold = -0.04 + 1.163·se (e.g. S2: -0.04 + 1.163×0.02189 = -0.01454; `12_d5_analysis.json.<cell>.succ.{se,threshold}`) *(derived)*.
+  - Approximate test5 SEs come from CI half-width / 1.96: S2 ≈ 0.026, S4 ≈ 0.030, S8 ≈ 0.025, S12 ≈ 0.025, A16-2 ≈ 0.032.
+  - With those SEs, the same rule gives thresholds of about -0.010, -0.006, -0.011, -0.012 and -0.003. Then S2 (-0.0247), S4 (-0.0253), S8 (-0.0127) and S12 (-0.0153) would still fail, and only A16-2 (-0.002) would pass *(derived, approximate)*.
+  - The val-vs-test comparison in S2 and S12 also changes the G* source (v4 and v3 files on validation), so it is not a like-for-like comparison.
+- Supported rewrite: "Test5 point gaps are smaller than the validation gaps in every cell, but applying the D5 rule to test5 would still fail in about 4 of 5 cells, so test5 does not contradict the D5 verdict."
+
+**M2. Pass 1 undercounts the cells where H* is not the best test5 heuristic, so the student−H* margins look better than they are.**
+- Claims:
+  - Section 4, item 6: "In 3/5 cells, a different heuristic (b_cov) does better on test5."
+  - Section 2.2 lists only S4, S12 and A16-2.
+  - Section 5: "beats the pilot-chosen heuristic H* in 4/5 cells after Holm correction (+6.1 to +16.8 pp)".
+- Evidence:
+  - S8 is also inverted. H* = b_cov (`14_test5_analysis.json.S8.H_star`), but on test5 b_fan = 0.3833 > b_cov = 0.3733 (`...S8.means.b_fan.success`, `...S8.means.b_cov.success`).
+  - So the count is 4/5 cells, not 3/5. The better heuristic is b_cov in three cells and b_fan in S8.
+  - Against the best test5 heuristic, the student's margins are S4 +0.0513, S8 +0.0607, S12 +0.0347 and A16-2 +0.1447 *(derived; no CI, not pre-registered)*.
+- Supported rewrite: "The student beats the pilot-chosen H* in 4/5 cells after Holm (+6.1 to +16.8 pp). In 4/5 cells, though, H* is not the best heuristic on test5, and against the best test5 heuristic the post-hoc margin falls to +3.5 to +14.5 pp, with no CI."
+
+**M3. Pass 1 overstates the shortfall that is "consistent with the data in every cell".**
+- Claim (section 2.1): "A student shortfall of 6–8 pp is therefore consistent with the data in every cell."
+- Evidence: the lower bounds are -0.076 (S2), -0.08333 (S4), -0.06133 (S8), -0.06333 (S12) and -0.06267 (A16-2) (`14_test5_analysis.json.<cell>.student_minus_gstar.success.ci95[0]`). An 8 pp shortfall lies outside four of the five CIs.
+- Supported rewrite: "A shortfall of up to 6.1 pp (the tightest lower bound, S8) is consistent with the data in every cell, and up to 8.3 pp in S4."
+
+**M4. The latency ratio rests on a single student seed whose timing is not representative.**
+- Claims:
+  - Section 5: "The student decides in about 0.33–0.50 ms. Full G* is 2523× to 9933× slower per decision."
+  - Section 4, item 8.
+- Evidence:
+  - All ratios use the job-1 seed-701 student timing (`14_e6_analysis.json.<cell>.job1.ratio_full_gstar_over_student.median`).
+  - Within the same cell, the job-2 student medians differ from seed 701 by up to about 24%:
+    - A16-2: 0.000326 s for seed 701 vs 0.000404–0.000407 s (`...A16-2.job1.student.median`, `...A16-2.job2.70x.median`).
+    - S12: 0.000358 s vs 0.000423–0.000437 s.
+    - S4: 0.000494 s vs 0.000415–0.000419 s.
+  - Dividing the job-1 G* median by the job-2 student medians gives roughly S12 ≈ 2,080–2,150×, A16-2 ≈ 6,640–6,690× and S4 ≈ 8,060–8,120× *(derived, ratio of medians, not paired)*.
+  - Across all seeds, the student medians span 0.326–0.513 ms.
+  - Most of the spread across cells comes from G* time (0.910–4.880 s, `...job1.g2000_512_64.median`).
+- Supported rewrite: "With seed-701 timings, full G* is 2,523–9,933× slower per decision (median paired ratio, CI rule met only in A16-2). Other seeds' student medians (0.36–0.51 ms) differ by up to about 24% within a cell, so each per-cell ratio is uncertain at about that level."
+
+**M5. "G* is a single deterministic arm" is not supported by the data.**
+- Claim (section 4, item 4): "**G* is a single deterministic arm.** `n_seeds` = [5, 1], so the CIs carry no G* seed variance."
+- Evidence:
+  - The data show only that G* was run once per cell (`14_test5_analysis.json.<cell>.student_minus_gstar.success.n_seeds` = [5, 1]). Nothing in the data says G* is deterministic.
+  - E7 reports a non-zero selection bias in the G* value estimates (`12_e7_analysis.json.cells.S2.C1_512.selection_bias_nats` = 0.02179 [0.00427, 0.04013]). That points to noisy Monte-Carlo estimation, which can make G* vary from run to run.
+- Supported rewrite: "G* was run once per cell (n_seeds = [5, 1]), so any run-to-run variability of G* (E7 shows noisy, upward-biased value estimates in S2) is missing from the student−G* CIs, and those CIs may be too narrow."
+
+**M6. E7 is used to call the deployed G* sub-optimal.**
+- Claims:
+  - Section 2.6: "G* is a greedy planner with measurable headroom, not an optimal ceiling."
+  - Section 4, item 4: "The student is being compared with a sub-optimal greedy reference."
+- Evidence:
+  - E7 compares a 32-candidate setting with a 512-candidate setting on 32 beliefs in 2 cells (`12_e7_analysis.json.cells.<cell>.paired_indep_gap_512_minus_32`, n = 32).
+  - The JSON does not link either setting to the G* configuration used on test5 (`g2000_512_64` in E6).
+  - The gaps are one-decision values in nats (0.0484 in S2, 0.0183 in S12). They are not converted into success.
+  - In S12 the selection bias is null in both settings (`...S12.C1_32/C1_512.selection_bias_nats` CIs include 0).
+- Supported rewrite: "In S2 and S12, a 512-candidate G* setting gives a larger independent-estimate gap than a 32-candidate setting (+0.048 and +0.018 nats per belief, n = 32). Whether the deployed G* has headroom in success terms was not measured."
+
+**M7. The A16-2 H2-v5 "true" verdict is reported without the RL-collapse caveat.**
+- Claim (section 5, bullet 3): "H2-v5 (higher on RL's own objective) holds only in A16-2 (LB 0.5964)".
+- Evidence:
+  - In A16-2, 4/5 RL seeds use 2.0 probes against a budget of n* = 3 (`14_test5_analysis.json.A16-2.means.rl_s712..rl_s715.n_probes` = 2.0; `12_cal_analysis.json.n_star.A16.n_star` = 3).
+  - RL success there (0.1833–0.29) is below the b_fan heuristic (0.32).
+  - G* also beats RL on g_T by +0.854 [0.567, 1.144] (`...A16-2.H2_v5.gstar_minus_rl_gT`).
+  - The verdict is mechanically correct, but it measures how badly RL transferred, not a property of the student.
+- Supported rewrite: "H2-v5 is met only in A16-2 (LB 0.596 > 0.10), where cfg-6 RL collapses to 2 of 3 probes in 4/5 seeds and G* also beats RL by 0.85 nats, so the result reflects RL failing to transfer rather than a student advantage."
+
+**M8. E5 is described as evaluator noise "comparable to the effect".**
+- Claim (section 4, item 5): "**Evaluator noise is comparable to the effect.** ... moves the student − G* contrast by up to 0.03, which exceeds the S8/S12/A16-2 test5 point gaps."
+- Evidence:
+  - E5 covers one student seed, 200 episodes and 2 cells (`14_e5_analysis.json.<cell>.n_episodes`).
+  - The two contrast changes have opposite signs: +0.02 in S2 and -0.03 in S12 (`...contrast_change_student_minus_gstar`).
+  - Gains and losses largely offset: G* in S2 has 8 gains and 8 losses.
+  - The effect on the 5-seed, 300-episode test5 contrast was never measured, so comparing it with the S8/S12/A16-2 gaps compares different estimands.
+- Supported rewrite: "Re-reading at sub-16 flips 6.5–8% of single-seed outcomes and shifts the seed-701 student−G* contrast by +0.02 (S2) and -0.03 (S12) on 200 episodes; its effect on the 5-seed test5 contrast was not measured."
+
+---
+
+## m: minor
+
+**m1. CI width range.**
+- Claim (section 4, item 1): "the student − G* success CIs are about 10–12 pp wide".
+- Evidence: the widths are 9.6 pp (S12), 9.87 (S8), 10.27 (S2), 11.6 (S4) and 12.33 (A16-2) *(derived from `...student_minus_gstar.success.ci95`)*.
+- Supported rewrite: "The student−G* success CIs are 9.6–12.3 pp wide."
+
+**m2. The "~7,000–10,000×" framing for S4.**
+- Claim (section 4, item 8): "the '~7,000–10,000×' framing holds only for S2, A16-2 and S4."
+- Evidence: the S4 median is 6,990, which is below 7,000, and its ci95 is [4,747, 7,270] with half_width_ok = false (`14_e6_analysis.json.S4.job1.ratio_full_gstar_over_student`).
+- Supported rewrite: "Only S2 (9,933×) and A16-2 (8,301×) fall in the 7,000–10,000× band; S4 is at 6,990× with a CI down to 4,747×."
+
+**m3. Bootstrap resolution.**
+- Claim (section 3, item 1): "The number of resamples is not in the data".
+- Evidence: every reported p-value is a multiple of 0.0002 (e.g. `14_test5_analysis.json.S12.student_minus_rl.ball_info.p_two_sided` = 0.0002 and `...S8.student_minus_hstar.success.p_two_sided` = 0.0098). That is consistent with about 5,000 resamples *(inferred)*.
+- Supported rewrite: "The resample count is not stated, but every p-value is a multiple of 0.0002, so 'p = 0.0' should be read as p < 0.0002."
+
+**m4. Freeze timing.**
+- Claim (section 3, item 8): "weights were frozen before test5 (`13_freeze.json.cells.<cell>.sha256` ...)".
+- Evidence: `13_freeze.json` holds only the hashes and the rule text. The timing comes from the run context ("frozen per cell ... before that cell's test5 jobs"), not from the JSON.
+- Supported rewrite: "13_freeze.json records 15 (S2, S12) or 10 (S4, S8, A16-2) weight hashes per cell; that they were recorded before test5 is stated in the run context."
+
+**m5. E5 changes "similar in size" to the gaps.**
+- Claim (section 3, item 6): "Both changes are similar in size to the test5 point gaps themselves (0.02467 and 0.01533)."
+- Evidence: in S12 the change of -0.03 (`14_e5_analysis.json.S12.contrast_change_student_minus_gstar`) is about twice the S12 gap of 0.01533.
+- Supported rewrite: "The E5 contrast change is about 0.8× the test5 gap in S2 and about 2× in S12."
+
+**m6. RL "under-tuned outside S2".**
+- Claim (section 4, item 7): "**RL is under-tuned outside S2.**"
+- Evidence:
+  - Direct evidence of failure exists only in A16-2 (2.0 probes in 4/5 seeds).
+  - In S4, S8 and S12, RL uses about 3 probes and its success (0.3367–0.4567) is in line with the heuristics.
+  - No per-cell tuning was run, so "under-tuned" is an untested hypothesis.
+- Supported rewrite: "One RL configuration chosen on S2 was reused everywhere; it visibly fails in A16-2, and whether it is under-tuned in S4, S8 or S12 was not tested."
+
+**m7. Missing multiplicity caveat on the student-vs-RL claim in the conclusion.**
+- Claim (section 5): "beats cfg-6 RL on success with a CI excluding 0 in S2, S12 and A16-2".
+- Evidence: the student−RL contrasts carry no Holm field (`14_test5_analysis.json.<cell>.student_minus_rl.success`), and pass 1's own section 3, item 2 says they are uncorrected.
+- Supported rewrite: "Without multiplicity correction, the student beats cfg-6 RL on success with CIs excluding 0 in S2, S12 and A16-2 (A16-2 confounded by RL collapse)."
+
+**m8. Comparison with v4.**
+- Claim (section 5, bullet 2): "This suggests v4's -10.2 pp test3 result was not reproduced."
+- Evidence:
+  - The v5 S2 validation uses v4 G* files (`12_d5_analysis.json.S2.gstar_source`), so the "validation" side is not independent of v4.
+  - The v4 numbers come only from the run context, with no CI.
+  - -10.2 pp lies outside the v5 S2 test5 CI [-7.6, +2.67] pp, but v4's own uncertainty is unknown.
+- Supported rewrite: "v4's test3 gap (-10.2 pp, run context only) lies outside the v5 S2 test5 ci95 [-7.6, +2.7] pp, but without v4's interval the two cannot be formally compared."
+
+---
+
+## Are any pre-registered verdicts in pass 1 wrong?
+
+No. Each pre-registered verdict in pass 1 matches the JSON flags:
+- **D5:** fails in 5/5 cells (`12_d5_analysis.json.H5a_validation.cells_pass` = []), so m = 0.
+- **H5a:** no Holm rejection for student−G* in any cell.
+- **Student−H* (Holm):** rejected in 4/5 cells; S2 is not.
+- **H5b:** no trend, because the CI contains 0.
+- **H2-v5:** met only in A16-2, with LB 0.5964 > 0.10.
+- **Inversion:** false in every cell, including both RLsucc checks.
+
+The errors are in the interpretation layered on top of these verdicts:
+- A "small gap" headline, when two validation cells exceed delta (S1).
+- An invented pooled 1–5 pp range (S2).
+- "No dependence on travel cost" drawn from a null with only 5 points (S3).
+- The claim that test5 contradicts D5, when the D5 rule would still fail on test5 in about 4/5 cells (M1).
+- An undercount of the cells where H* is not the best test5 heuristic (M2).
+
+These change how the paper reads, but none of them overturns a pre-registered decision.
+
+
+Post-hoc derived values (results/v5/15_posthoc_derived.json):
+
+{
+ "provenance": "arithmetic on existing fields of 14_test5_analysis.json / 14_e6_analysis.json; post hoc, not pre-registered, no CI, no test (results/v5/15_decision.md section 4.1)",
+ "cells": {
+  "S2": {
+   "student_success_mean_from_diff": 0.5086666666666667,
+   "student_success_mean_of_listed_seed_means": 0.5086666666666667,
+   "rl_success_mean_from_diff": 0.42400000000000004,
+   "rl_seed_means_listed": {
+    "rl_s711": 0.4033333333333333,
+    "rl_s712": 0.48,
+    "rl_s713": 0.39,
+    "rl_s714": 0.42333333333333334,
+    "rl_s715": 0.42333333333333334
+   },
+   "heuristic_success": {
+    "b_fan": 0.35,
+    "b_spread": 0.04666666666666667,
+    "b_cov": 0.45
+   },
+   "H_star_preregistered": "b_cov",
+   "best_test5_heuristic": "b_cov",
+   "margin_student_minus_best_test5_heuristic": 0.0586666666666667,
+   "margin_student_minus_H_star": 0.05866666666666667,
+   "latency": {
+    "ratio_full_gstar_over_student_s701_median": 9932.799730044364,
+    "ratio_full_gstar_median_over_job2_student_medians": {
+     "702": 9527.551660826333,
+     "703": 9568.92166085524,
+     "704": 9521.324511146066,
+     "705": 9527.560963177804
+    },
+    "note": "ratio of medians, not paired; job-2 students timed in a different job"
+   }
+  },
+  "S4": {
+   "student_success_mean_from_diff": 0.4713333333333333,
+   "student_success_mean_of_listed_seed_means": 0.47133333333333327,
+   "rl_success_mean_from_diff": 0.41666666666666663,
+   "rl_seed_means_listed": {
+    "rl_s711": 0.41333333333333333,
+    "rl_s712": 0.45666666666666667,
+    "rl_s713": 0.3933333333333333,
+    "rl_s714": 0.38333333333333336,
+    "rl_s715": 0.43666666666666665
+   },
+   "heuristic_success": {
+    "b_fan": 0.37333333333333335,
+    "b_spread": 0.09,
+    "b_cov": 0.42
+   },
+   "H_star_preregistered": "b_fan",
+   "best_test5_heuristic": "b_cov",
+   "margin_student_minus_best_test5_heuristic": 0.05133333333333334,
+   "margin_student_minus_H_star": 0.09799999999999999,
+   "latency": {
+    "ratio_full_gstar_over_student_s701_median": 6989.879146671704,
+    "ratio_full_gstar_median_over_job2_student_medians": {
+     "702": 8122.648031632806,
+     "703": 8086.6965667344075,
+     "704": 8059.657177737497,
+     "705": 8110.281127319892
+    },
+    "note": "ratio of medians, not paired; job-2 students timed in a different job"
+   }
+  },
+  "S8": {
+   "student_success_mean_from_diff": 0.444,
+   "student_success_mean_of_listed_seed_means": 0.44399999999999995,
+   "rl_success_mean_from_diff": 0.412,
+   "rl_seed_means_listed": {
+    "rl_s711": 0.42333333333333334,
+    "rl_s712": 0.38333333333333336,
+    "rl_s713": 0.4166666666666667,
+    "rl_s714": 0.4066666666666667,
+    "rl_s715": 0.43
+   },
+   "heuristic_success": {
+    "b_fan": 0.38333333333333336,
+    "b_spread": 0.05,
+    "b_cov": 0.37333333333333335
+   },
+   "H_star_preregistered": "b_cov",
+   "best_test5_heuristic": "b_fan",
+   "margin_student_minus_best_test5_heuristic": 0.06066666666666665,
+   "margin_student_minus_H_star": 0.07066666666666667,
+   "latency": {
+    "ratio_full_gstar_over_student_s701_median": 3463.414155965248,
+    "ratio_full_gstar_median_over_job2_student_medians": {
+     "702": 3356.307721300311,
+     "703": 3396.6454814571457,
+     "704": 3375.20167890365,
+     "705": 3387.8651141006444
+    },
+    "note": "ratio of medians, not paired; job-2 students timed in a different job"
+   }
+  },
+  "S12": {
+   "student_success_mean_from_diff": 0.44133333333333336,
+   "student_success_mean_of_listed_seed_means": 0.4413333333333333,
+   "rl_success_mean_from_diff": 0.3686666666666667,
+   "rl_seed_means_listed": {
+    "rl_s711": 0.37333333333333335,
+    "rl_s712": 0.38333333333333336,
+    "rl_s713": 0.33666666666666667,
+    "rl_s714": 0.36333333333333334,
+    "rl_s715": 0.38666666666666666
+   },
+   "heuristic_success": {
+    "b_fan": 0.38,
+    "b_spread": 0.07,
+    "b_cov": 0.4066666666666667
+   },
+   "H_star_preregistered": "b_fan",
+   "best_test5_heuristic": "b_cov",
+   "margin_student_minus_best_test5_heuristic": 0.03466666666666668,
+   "margin_student_minus_H_star": 0.06133333333333333,
+   "latency": {
+    "ratio_full_gstar_over_student_s701_median": 2523.17484877243,
+    "ratio_full_gstar_median_over_job2_student_medians": {
+     "702": 2149.8212849926495,
+     "703": 2131.2962400150695,
+     "704": 2083.1723824290684,
+     "705": 2124.8885416523935
+    },
+    "note": "ratio of medians, not paired; job-2 students timed in a different job"
+   }
+  },
+  "A16-2": {
+   "student_success_mean_from_diff": 0.488,
+   "student_success_mean_of_listed_seed_means": 0.488,
+   "rl_success_mean_from_diff": 0.22199999999999998,
+   "rl_seed_means_listed": {
+    "rl_s711": 0.29,
+    "rl_s712": 0.18666666666666668,
+    "rl_s713": 0.18333333333333332,
+    "rl_s714": 0.22333333333333333,
+    "rl_s715": 0.22666666666666666
+   },
+   "heuristic_success": {
+    "b_fan": 0.32,
+    "b_spread": 0.01,
+    "b_cov": 0.3433333333333333
+   },
+   "H_star_preregistered": "b_fan",
+   "best_test5_heuristic": "b_cov",
+   "margin_student_minus_best_test5_heuristic": 0.14466666666666667,
+   "margin_student_minus_H_star": 0.168,
+   "latency": {
+    "ratio_full_gstar_over_student_s701_median": 8301.417645934474,
+    "ratio_full_gstar_median_over_job2_student_medians": {
+     "702": 6674.353157829622,
+     "703": 6664.852229250687,
+     "704": 6688.423615665732,
+     "705": 6640.091505551228
+    },
+    "note": "ratio of medians, not paired; job-2 students timed in a different job"
+   }
+  }
+ },
+ "H5b_span_translation": {
+  "travel_span_rad": [
+   0.11123263962919303,
+   0.8212994329650907
+  ],
+  "span_rad": 0.7100667933358976,
+  "slope_times_span": -0.011152259157421728,
+  "ci95_times_span": [
+   -0.07393379130308364,
+   0.051669382335385115
+  ]
+ }
+}
+
+
+Decision:
+
+# Stage 15 · Research decision (v5)
+
+> System (verbatim, `results/v5/prompts/stage15_system.txt`): "You are a research program lead making go/no-go
+> decisions."
+> Task (verbatim opening and output spec, `results/v5/prompts/stage15_user.txt`): "Make a PROCEED, REFINE, or PIVOT
+> decision from analysis. … Output markdown with: Decision, Justification, Evidence (with cited numbers from the
+> analysis), Next Actions (specific stage and tasks)." `{analysis}` = the merged stage-14 [v5] report (pass 1 body plus
+> pass 2, whose items S1–S3, M1–M8 and m1–m8 are binding and replace the pass-1 sentences they cite).
+>
+> Fresh subagent, 2026-11-09. Inputs read: `results/v5/prompts/stage15_system.txt`,
+> `results/v5/prompts/stage15_user.txt` (in full), `pipeline/references/stage_prompts/research_decision.md` (hard rules),
+> `RESTRICTS.yaml`, `results/v4/15_decision.md`, `OWNER_TODO.md`. No other file was read and no code was run. Every
+> number below is quoted from the stage-14 analysis. Where pass 2 rewrote a pass-1 sentence, the pass-2 wording is used.
+> Numbers marked *(derived)* are my own arithmetic on quoted values; they have no CI.
+
+---
+
+## 1. Decision
+
+**PROCEED to stage 16, in the characterisation (measurement-paper) sense only, as in v4.** The paper reports a
+pre-registered, five-cell measurement. Its headline is that the distilled student is **not shown to match G\***. It is
+**not** a method paper. The template's PROCEED hard rule is **not met in its method sense** (§2.1).
+
+**How the conflict is resolved.** The PROCEED rule is not met, but REFINE is not available:
+- `RESTRICTS.yaml` sets `loops.max_refine_cycles: 4`, raised from 3 on the owner's instruction for v5. v5 is the 4th
+  loop, so the cap is used up. With `escalate_on_cap_hit: true`, a REFINE or PIVOT can only go to the owner as a
+  request. It cannot start a v6.
+- REFINE would also be the wrong call on its own terms (§2.2). PIVOT is not warranted (§2.3).
+
+So I take the only executable option that keeps the record honest. That option is a measurement paper whose claims are
+limited to settled, pre-registered verdicts plus labelled exploratory rows (§4.3–§4.4). Alongside it, the fact that the
+method-sense PROCEED rule failed goes to the owner (§4.5). This is the same resolution as v4 §1, applied to the larger
+v5 record.
+
+---
+
+## 2. Justification
+
+### 2.1 The PROCEED hard rules, applied as written
+
+| Hard rule (`research_decision.md`) | Status | Reason |
+|---|---|---|
+| Primary metric difference between proposed method and best baseline is statistically meaningful (p < 0.05, or effect > 0.5σ across seeds) | **Not met (method sense)**. Partly met only against the pre-registered pilot-chosen H\* | See below. |
+| Every claimed "effective component" has a non-degenerate ablation | Vacuous, so met | The paper claims no effective component, and no sentence may claim one (§4.4). |
+| No CRITICAL FABRICATION flags from stage 14 | Met | Pass 2 checked "all tables in pass 1 (sections 1.1–1.4, 2.1–2.4) … cell by cell" and found that they "match the JSON". It found **no** pre-registered verdict wrong. Its S/M/m items concern interpretation, not fabrication. |
+
+**Why the first rule fails in the method sense.**
+
+1. **The pre-registered primary contrast is the student against G\* (D5 / H5a), and it fails.**
+   - D5 fails in 5 of 5 cells, so m = 0.
+   - Validation Δ̂_succ ranges from −3.24 to −5.96 pp. S4 (−5.48) and A16-2 (−5.96) already lie beyond δ = 4 pp.
+   - All 25 per-seed differences are negative.
+   - On test5 the student is below G\* in every cell, by −0.2 to −2.53 pp, with no Holm rejection. Every ci95 lower bound
+     lies beyond −δ (−6.13 to −8.33 pp).
+   - So the primary contrast is neither a match nor a shown difference. Per pass 2 S1, "matching G\* is not supported."
+2. **The student against the pilot-chosen heuristic H\* (pre-registered).** This success contrast is Holm-significant
+   in 4 of 5 cells (S2 is not: p 0.0558).
+   - It meets the letter of the p < 0.05 disjunct, but only against the *pilot-chosen* heuristic.
+   - In 4 of 5 cells H\* is **not** the best heuristic on test5 (pass 2 M2). Against the best test5 heuristic the
+     post-hoc margin falls to +3.5 to +14.5 pp, with no CI and no test.
+3. **The student against the best non-oracle baseline on test5, cell by cell.** Recovered *(derived)* from G\*
+   success + student−G\* diff, and student − student−RL diff:
+
+   | Cell | Student mean *(derived)* | Best non-oracle baseline on test5 | Margin | Test? |
+   |---|---|---|---|---|
+   | S2 | 0.5087 | b_cov 0.45 (= H\*) | +5.87 pp | ci95 [−0.13, +11.8], p 0.0558, **not significant** |
+   | S4 | 0.4713 | b_cov 0.42 (RL ≈ 0.4167 *(derived)*) | +5.13 pp *(derived)* | none (post-hoc) |
+   | S8 | 0.4440 | cfg-6 RL ≈ 0.412 *(derived)* (b_fan 0.3833) | +3.2 pp | ci95 [−1.47, +7.93], p 0.19, **not significant** |
+   | S12 | 0.4413 | b_cov 0.4067 (RL ≈ 0.3687 *(derived)*) | +3.47 pp *(derived)* | none (post-hoc) |
+   | A16-2 | 0.488 | b_cov 0.3433 (RL ≈ 0.222 *(derived)*) | +14.47 pp *(derived)* | none (post-hoc) |
+
+   So against the strongest non-oracle comparator in each cell, no tested contrast clears p < 0.05. In the two cells
+   where a test exists (S2, S8), it does not.
+4. **The effect-size disjunct (> 0.5σ across seeds).** It cannot be evaluated from the analysis, because per-seed SDs of
+   the contrasts are not reported. As in v4, I do not reach for it after the fact; doing so would break
+   `forbid_unsupported_claims`.
+
+**The sense in which I proceed** is the same standard as v3 and v4 (`results/v4/15_decision.md` §2.1). Every claim in
+the paper must:
+- be the outcome of a pre-registered rule, evaluated as written on complete data;
+- be worded within what that outcome licenses.
+
+Anything else is labelled exploratory and given its interval. All decision-bearing items in v5 are settled:
+- D5: 0/5, no remedy step by pre-registration.
+- H5a test5: 0/5 Holm.
+- Student − H\*: 4/5 Holm.
+- H2-v5: 1/5 (A16-2).
+- Inversion: 0/5.
+- H5b: no trend detected.
+- test5 complete in all cells; weights hashed in `13_freeze.json`.
+
+The remaining open items are wording or report items (§2.4). A measurement paper is therefore licensed. A method claim
+is not.
+
+### 2.2 Why not REFINE
+
+- **It cannot run.** The cap is 4/4, and v5 is the owner-authorised maximum. Without the owner, a REFINE is only an
+  escalation (§4.5).
+- **Its precondition fails.** REFINE assumes "the hypothesis is correct". The amortisation hypothesis (the student
+  matches G\* within δ) has now failed its pre-registered gate in every cell tested across v3–v5:
+  - S12 (D3, twice);
+  - S2 (D4);
+  - all five v5 cells (D5, 0/5, with 5 seeds per cell and a fresh test set).
+  These were exactly the fixes that v4's gate review asked for ("more seeds, more conditions").
+- **The fixes left on the table would re-decide D5 after seeing it fail.** v5 pre-registered "no remedy step" for D5.
+  Retraining students, re-tuning RL per cell, or raising test5 from 300 to 500 episodes after unblinding would all be
+  post-hoc. The weaknesses that remain all bear on *secondary* rows, not on the primary verdict, which fails on
+  validation regardless of test5:
+  - RL is transferred from S2 and collapses in A16-2;
+  - H\* was chosen on a 200-episode pilot;
+  - G\* was run once per cell;
+  - the latency CI rule is met in only 1/5 cells.
+  They go into the limitations.
+
+### 2.3 Why not PIVOT
+
+- **The hypothesis is not "clearly wrong across the board".** The student beats the pilot-chosen H\* in 4/5 cells
+  (Holm). It sits 0.2–2.5 pp below G\* on test5, and it decides 2,523–9,933× faster on seed-701 timings. What failed is
+  the *matching* claim, not the existence of a useful amortised policy.
+- **No new hypothesis emerges that could be tested before 2026-12-04.**
+  - The most interesting open questions are why the student travels less than G\* in every cell, and why g_T and BI rank
+    policies differently. They are methods observations for the paper.
+  - A pivot means a new pre-registration and new runs (stage 8 onward). That is outside the cap and outside the time
+    left: 25 days to the deadline *(derived: 2026-11-09 → 2026-12-04)*.
+
+### 2.4 Open items: none blocks drafting, each binds the wording
+
+1. **Validation vs test5 gap** (validation −3.2 to −6.0 pp, test5 −0.2 to −2.5 pp).
+   - D5 is decided on validation. Pass 2 M1 shows the D5 rule applied to test5 would still fail in about 4/5 cells, so
+     test5 does not contradict D5.
+   - Report both splits separately with their intervals (pass 2 S2). Note that S2 and S12 validation use v4 and v3 G\*
+     files.
+2. **Latency.** The CI completeness rule is met only in A16-2. The ratios rest on seed 701, with about 24 % within-cell
+   spread (M4, m2). Report the range with that caveat. No re-timing.
+3. **Heuristic-selection optimism** (M2). Report the pre-registered H\* contrast as the verdict. Report the margins
+   against the best test5 heuristic beside it, labelled post-hoc, with no CI.
+4. **RL in A16-2** (M7, m6). Any student-vs-RL statement about A16-2 carries the collapse caveat (2.0 of n\* = 3 probes
+   in 4/5 seeds).
+5. **E5 / E7** are report-only, worded per M8 and M6.
+
+---
+
+## 3. Evidence (quoted from the stage-14 [v5] analysis)
+
+### 3.1 Pre-registered gate D5 (val3, 500 episodes, δ = 0.04)
+
+| Cell | Student | G\* | Δ̂_succ | Threshold | Δ̂_BI (≥ −0.15 passes) | Cell |
+|---|---|---|---|---|---|---|
+| S2 | 0.4812 | 0.514 | −0.0328 | −0.01454 | −0.0682 ✓ | fail |
+| S4 | 0.4492 | 0.504 | −0.0548 | −0.01503 | −0.1334 ✓ | fail |
+| S8 | 0.4116 | 0.448 | −0.0364 | −0.01639 | −0.0465 ✓ | fail |
+| S12 | 0.4136 | 0.446 | −0.0324 | −0.01722 | −0.0635 ✓ | fail |
+| A16-2 | 0.4124 | 0.472 | −0.0596 | −0.01229 | −0.0629 ✓ | fail |
+
+- m = 0 of 5.
+- Per-seed differences run from −0.068 to −0.01, and all are negative. No A16-2 seed passes.
+- G\* sources: S2 from v4, S12 from v3, the other cells from v5.
+
+### 3.2 test5 (300 episodes per method, crossed episode × seed bootstrap)
+
+**Student − G\*, success.**
+
+| Cell | Diff | ci95 | p | Holm |
+|---|---|---|---|---|
+| S2 | −0.02467 | [−0.076, +0.02667] | 0.3526 | no |
+| S4 | −0.02533 | [−0.08333, +0.03267] | 0.3888 | no |
+| S8 | −0.01267 | [−0.06133, +0.03733] | 0.63 | no |
+| S12 | −0.01533 | [−0.06333, +0.03267] | 0.5378 | no |
+| A16-2 | −0.002 | [−0.06267, +0.06067] | 0.9572 | no |
+
+- CI widths are 9.6–12.3 pp (m1).
+- A shortfall of up to 6.1 pp is consistent with the data in every cell, and up to 8.3 pp in S4 (M3).
+
+**Student − G\*, BI.** The ci95 excludes 0 in S4 (−0.1314) and S12 (−0.0910). These are uncorrected. A16-2 is
++0.08477, with a CI that includes 0.
+
+**Student − H\*, success.**
+
+| Cell | H\* | Diff | ci95 | Holm |
+|---|---|---|---|---|
+| S2 | b_cov | +0.05867 | [−0.00133, 0.118] | no |
+| S4 | b_fan | +0.098 | [0.04667, 0.1487] | yes |
+| S8 | b_cov | +0.07067 | [0.01667, 0.1247] | yes |
+| S12 | b_fan | +0.06133 | [0.01067, 0.112] | yes |
+| A16-2 | b_fan | +0.168 | [0.106, 0.23] | yes |
+
+H\* is not the best test5 heuristic in S4, S8, S12 and A16-2. Against the best test5 heuristic, the post-hoc margins are
++5.13 / +6.07 / +3.47 / +14.47 pp, with no CI.
+
+**Student − RL (cfg 6, tuned on S2), success, uncorrected.**
+
+| Cell | Diff | ci95 |
+|---|---|---|
+| S2 | +0.08467 | [0.03067, 0.1373] |
+| S4 | +0.05467 | [−0.002, 0.11] |
+| S8 | +0.032 | [−0.01467, 0.07933] |
+| S12 | +0.07267 | [0.02467, 0.1207] |
+| A16-2 | +0.266 | [0.1993, 0.33] |
+
+In A16-2, RL seeds 712–715 use 2.0 probes against n\* = 3, with success 0.1833–0.2267.
+
+**H2-v5 (one-sided 95 % LB of student − RL on g_T, against +0.10).**
+
+| Cell | LB |
+|---|---|
+| S2 | −0.4971 |
+| S4 | −0.6555 |
+| S8 | −0.4861 |
+| S12 | −0.3044 |
+| A16-2 | +0.5964, met |
+
+- In A16-2, G\* also beats RL by 0.854 nats [0.567, 1.144] (M7).
+- Inversion is false in all cells.
+
+**H5b.**
+- Slope −0.01571 per rad, ci95 [−0.1041, 0.07277]. The verdict is "no trend detected over 5 cells".
+- Across the observed travel span of 0.1112–0.8213 rad, a change of about −7.4 to +5.2 pp cannot be excluded (S3,
+  derived in the analysis).
+
+**Behaviour.**
+- The student travels less than G\* in every cell. For example, in S2 the student travels 0.500–0.668 rad against
+  0.8213 for G\*.
+- RL travels more than both.
+- Probe counts: student 2.9–4.0, G\* 2.93–3.97.
+
+### 3.3 Cost and report-only checks
+
+- **E6 latency.**
+  - Student median: 0.326–0.500 ms (seed 701).
+  - Full-G\* / student median ratios: S2 9,933×, S4 6,990×, S8 3,463×, S12 2,523×, A16-2 8,301×.
+  - The half-width rule is met only in A16-2.
+  - Other seeds' student medians differ by up to about 24 % within a cell (M4).
+- **E5 (sub-8 → sub-16).**
+  - The flip rate is 6.5–8 % for one seed, on 200 episodes in 2 cells.
+  - The student−G\* contrast shifts by +0.02 (S2) and −0.03 (S12).
+  - Mean |ΔBI| is at most 0.004 nats.
+- **E7.** The 512-minus-32 independent-estimate gap is +0.048 nats in S2 and +0.018 in S12 (n = 32 beliefs). It is not
+  linked to the deployed G\* or to success (M6).
+- **Bootstrap resolution.** p = 0.0 means p < 0.0002 (m3).
+
+### 3.4 Weaknesses (stated, not fixable inside the cap)
+
+- **G\*.** Run once per cell, so its run-to-run variance is missing from the CIs (M5).
+- **H\*.** Chosen on a 200-episode pilot (M2).
+- **RL.** One S2-selected configuration reused everywhere. It visibly fails only in A16-2 (m6). RLsucc was run only in
+  S2 and S12.
+- **test5 size.** Cut from 500 to 300 episodes (addendum v5.1e).
+- **Multiplicity.** More than 30 uncorrected BI, RL and g_T contrasts.
+- **Scope.** Simulation only (TouchBED), two shape sets, one κ for A16, sub-8 read-out.
+
+---
+
+## 4. Next actions
+
+### 4.1 Record completion (report-only, no new runs, by 2026-11-12)
+
+These tasks change no threshold, cell, seed, metric or verdict, and none of them is a REFINE.
+
+1. Write the post-hoc derived values into `results_v5.json`, with provenance ("arithmetic on existing fields, not
+   pre-registered, no CI"), so the paper can cite them:
+   - the margins against the best test5 heuristic (M2);
+   - the student means recovered from the diffs (§2.1);
+   - the latency ratios against the job-2 student medians (M4);
+   - the H5b span translation (S3).
+2. Correct the owner-facing summary in `OWNER_TODO.md` (run-36 update). It currently reads "稳定落后 G\* 约 3–6 个百分点"
+   ("consistently 3–6 pp behind G\*"). That range is validation-only. Replace it with the S1 wording: validation 3.2–6.0
+   pp; test5 0.2–2.5 pp, with CIs down to −8.3 pp; gate failed in all cells. Filing this is for the main session; this
+   decision edits no other file.
+3. **Not to be run:**
+   - any retraining or remedy round;
+   - per-cell RL re-tuning;
+   - more test5 episodes;
+   - a G\* rerun for seed variance;
+   - latency re-timing;
+   - a CI or test for the post-hoc best-heuristic margins;
+   - any new test of BI or g_T.
+   Each of these goes into the limitations.
+
+### 4.2 Stage 16 (paper outline), from 2026-11-09, in parallel with §4.1
+
+- **Frame.** A pre-registered, five-cell characterisation of amortising a cost-aware information-gain touch planner (G\*)
+  by distillation, across travel cost κ = 2/4/8/12 and a second shape set. The v3/v4 record (S12 D3, S2 D4) enters as
+  prior cells.
+- **Contributions, in order:**
+  - **C1, learnability across five cells.** D5 fails in 5/5. The student is below G\* in every cell on both splits and is
+    not shown within δ. Pair this with the v3/v4 gate failures.
+  - **C2, a cheap policy that beats pilot-chosen heuristics.**
+    - The student beats the pre-registered H\* in 4/5 cells (Holm).
+    - Beside it go the post-hoc best-test5-heuristic margins and the latency range with its caveats.
+  - **C3, distillation vs RL.**
+    - H2-v5 is met only in A16-2, where RL collapses.
+    - Inversion is false everywhere.
+    - The student−RL success rows are uncorrected.
+  - **C4, travel cost and behaviour.**
+    - H5b: no trend detected, about 7 pp not excluded.
+    - The student travels less than G\* in every cell.
+  - **C5, methods note.** E5 evaluator resolution, E7, the g_T / BI ordering difference, and the val/test reporting.
+- **Venue.** RSS 2027 Stage 1 extended abstract, ≤ 5 content pages + 1 reference page. Preliminary experiments are
+  allowed. Lead with C1 and C2. C3 and C4 get one paragraph each. C5 goes into methods and limitations.
+- **Schedule (pipeline estimate, not official).**
+  - Stages 16–20 produce a draft by 2026-11-22.
+  - The stage 20 gate and the citation audit follow.
+  - The abstract is in `paper/` by 2026-12-01, so the owner can check and submit by 2026-12-04 AoE.
+  - This follows owner choice (c): "若 12-01 前走完第 20 阶段就准备 RSS Stage 1" ("if stage 20 is done before 12-01,
+    prepare RSS Stage 1"). Otherwise the target becomes the Stage 2 full paper or CoRL 2027, decided by the owner.
+
+### 4.3 What the paper may claim (exact scope)
+
+- **D5.** "The pre-registered gate failed in all five cells (m = 0). The student is below G\* in every cell on both splits
+  (validation 3.2–6.0 pp, with S4 and A16-2 beyond the 4 pp margin; test5 0.2–2.5 pp, CIs down to −8.3 pp), so matching
+  G\* is not supported." (S1)
+- **Splits.** Report them separately, with intervals. No pooled estimate. (S2)
+- **D5 on test5.** Test5 does not contradict D5: the D5 rule would still fail in about 4/5 cells. (M1)
+- **Heuristics.** The student beats the pilot-chosen H\* in 4/5 cells after Holm (+6.1 to +16.8 pp). Against the best
+  test5 heuristic, the post-hoc margin is +3.5 to +14.5 pp, with no CI. (M2)
+- **RL.** Uncorrected student−RL success CIs exclude 0 in S2, S12 and A16-2. A16-2 is confounded by RL collapse. (m7)
+- **H2-v5.** Met only in A16-2, and it reflects RL failing to transfer. (M7)
+- **H5b.** No trend detected, and a change of up to about 7 pp across the observed travel range cannot be excluded. (S3)
+- **Latency.** Full G\* is 2,523–9,933× slower per decision (seed-701 median ratios; CI rule met only in A16-2; about
+  24 % within-cell seed uncertainty). (M4, m2)
+- **Report-only items.** E5, E7 and the v4 comparison use the M8, M6 and m8 wording.
+
+### 4.4 What the paper may not claim
+
+- "The student matches / reaches / is equivalent to G\*", or any wording that the gap to G\* is "small" or "negligible".
+- A pooled "true gap of 1–5 pp".
+- "Consistently 3–6 pp behind" as a headline, because it is validation-only.
+- "Test5 contradicts / overturns D5".
+- "No dependence on travel cost".
+- "The student beats the best heuristic" without the pilot-choice qualifier and the post-hoc margins.
+- "Distillation beats RL", or "the student beats RL" without the multiplicity and A16-2 caveats.
+- A16-2 H2-v5 as a student advantage.
+- "G\* is deterministic". "G\* is sub-optimal" or "G\* has headroom in success terms".
+- A blanket "~7,000–10,000× faster".
+- "A 6–8 pp shortfall is consistent in every cell".
+- "RL is under-tuned in S4/S8/S12".
+- "p = 0".
+- Any "effective component" claim.
+- Any cross-cell comparison worded as a finding beyond H5b.
+- Any claim that v4's −10.2 pp was formally refuted.
+
+### 4.5 Escalation to the owner (for the main session to file in `OWNER_TODO.md`)
+
+The owner should be told five things:
+- (a) The refine-cycle cap (4, owner-authorised) is used up. The method-sense PROCEED rule is still not met: D5 fails in
+  0/5 cells, and no tested contrast against the strongest per-cell non-oracle baseline is significant. The pipeline is
+  therefore proceeding with a measurement paper, not a method paper.
+- (b) No further experiment loop happens without an explicit owner override of `RESTRICTS.yaml`.
+- (c) The default target stays the RSS 2027 Stage 1 extended abstract (2026-12-04 AoE), with a draft by about 11-22.
+  The owner registers and submits; the pipeline does not.
+- (d) If the stage 20 gate again fails on evidence-level grounds, it cannot loop. The pipeline will stop and ask, with
+  the RSS Stage 2 full paper, CoRL 2027, RA-L or a workshop as the options.
+- (e) The run-36 "3–6 pp behind" summary is validation-only and is being corrected (§4.1, task 2).
+
