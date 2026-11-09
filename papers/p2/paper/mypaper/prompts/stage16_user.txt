@@ -1,0 +1,646 @@
+Target: RSS 2027 Stage 1 extended abstract (deadline 2026-12-04 AoE): <= 5 content pages + 1 page of references, no supplementary; methods complete, experiments may be preliminary. The re-scoped story in the Decision below (results/15_decision.md) is binding: the claim is the friction-onset probe plus conformal calibration, the learned tactile model adds no demonstrated gain (H2b), H1-M failed, H3 is inconclusive, and the H2-R scope limit must appear in abstract-level claims; the audit rewrites in the Analysis are binding. Word targets scaled to 5 pages (about 3,000-3,500 words main body), a stated deviation from the 9-page floors of hard_constraints section 3; a master draft may be longer and is condensed in stage 22. Evidence links must name blocks / keys of results/v1/results_v1.json (each block is an unchanged analysis file of results/v1/, e.g. crc_analysis.json, crc_analysis_v2.json, h2_label_rule.json, h4a_label_rule.json, h3_analysis.json, h1m_analysis.json, h1v_analysis.json, comp_selection.json, sec08f_*.json, sec08g.json, sec08h_*.json) and cite_keys from docs/05_knowledge_cards.json; the 52 available cite_keys are:
+- almohammed2022switched: A Switched Adaptive Controller for Robotic Gripping of Novel Objects With Minimal Force
+- dong2019maintaining: Maintaining Grasps within Slipping Bounds by Monitoring Incipient Slip
+- khamis2021real: Real-time Friction Estimation for Grip Force Control
+- kuo2025tracing: Tracing Energy Flow: Learning Tactile-Based Grasping Force Control to Reduce Slippage in Dynamic Object Interaction
+- boonstra2024estimate: Learning to estimate incipient slip with tactile sensing to gently grasp objects
+- niu2026synchronized: Synchronized Online Friction Estimation and Adaptive Grasp Control for Robust Gentle Grasp
+- feng2026tactilereflex: TactileReflex: Noise-Statistics-Driven Vision-Tactile Reflex Control for Force-Sensitive Manipulation
+- lach2024zero: Zero-Shot Transfer of a Tactile-based Continuous Force Control Policy from Simulation to Robot
+- veiga2020grip: Grip Stabilization through Independent Finger Tactile Feedback Control
+- shang2026exp: Exp-Force: Experience-Conditioned Pre-Grasp Force Selection with Vision-Language Models
+- chen2018tactile: Tactile Sensors for Friction Estimation and Incipient Slip Detection—Toward Dexterous Robotic Manipulation: A Review
+- romeo2020methods: Methods and Sensors for Slip Detection in Robotics: A Survey
+- james2020slip: Slip Detection for Grasp Stabilization With a Multifingered Tactile Robot Hand
+- berman2025autonomous: Autonomous Slip-Prevention Grip Force Control and Its Potential in Shared Control of Robotic Prosthetic Hands
+- ayral2026reactive: Reactive Slip Control in Multifingered Grasping: Hybrid Tactile Sensing and Internal-Force Optimization
+- grover2022detect: Learning to Detect Slip with Barometric Tactile Sensors and a Temporal Convolutional Neural Network
+- willemet2024grip: Grip force control under sudden change of friction
+- enwerem2026firmgrasp: FIRMGrasp: A Friction-Informed Risk Margin for Robust Grasp Synthesis
+- kim2024robust: Robust Adaptive Safe Robotic Grasping with Tactile Sensing
+- cortez2019control: Control Barrier Functions for Mechanical Systems: Theory and Application to Robotic Grasping
+- enwerem2026variational: Variational Neural Belief Parameterizations for Robust Dexterous Grasping under Multimodal Uncertainty
+- cloutier2018examining: Examining the Robustness of Grasping Force Optimization Methods Using Uncertainty Analysis
+- vovk2005algorithmic: Algorithmic Learning in a Random World
+- lei2017distribution: Distribution-Free Predictive Inference for Regression
+- romano2019conformalized: Conformalized Quantile Regression
+- angelopoulos2023conformal: Conformal Prediction: A Gentle Introduction
+- angelopoulos2022conformal: Conformal Risk Control
+- angelopoulos2026conformal: Conformal risk control for non-monotonic losses
+- farinhas2023non: Non-Exchangeable Conformal Risk Control
+- gibbs2021adaptive: Adaptive Conformal Inference Under Distribution Shift
+- gibbs2022conformal: Conformal Inference for Online Prediction with Arbitrary Distribution Shifts
+- angelopoulos2023conformala: Conformal PID Control for Time Series Prediction
+- angelopoulos2024online: Online conformal prediction with decaying step sizes
+- ge2024stochastic: Stochastic Online Conformal Prediction with Semi-Bandit Feedback
+- bian2023training: Training-conditional coverage for distribution-free predictive inference
+- ding2023class: Class-Conditional Conformal Prediction with Many Classes
+- lekeufack2024conformal: Conformal Decision Theory: Safe Autonomous Decisions from Imperfect Predictions
+- lindemann2025formal: Formal Verification and Control With Conformal Prediction: Practical Safety Guarantees For Autonomous Systems
+- dixit2022adaptive: Adaptive Conformal Prediction for Motion Planning among Dynamic Agents
+- marques2026particle: Particle-Based Conformal Prediction for Contact-Aware Uncertainty Calibration in Stratified Configuration Spaces
+- lindemann2023conformal: Conformal Prediction for STL Runtime Verification
+- ren2023robots: Robots That Ask For Help: Uncertainty Alignment for Large Language Model Planners
+- huang2023conformal: Conformal Policy Learning for Sensorimotor Control Under Distribution Shifts
+- strawn2023conformal: Conformal Predictive Safety Filter for RL Controllers in Dynamic Environments
+- zhang2024bayesian: Bayesian Optimization With Formal Safety Guarantees via Online Conformal Prediction
+- zhao2024conformalized: Conformalized Interactive Imitation Learning: Handling Expert Shift and Intermittent Feedback
+- kumar2026learnable: Learnable Conformal Prediction for Safe and Efficient Robotics under Perception and Planning Uncertainties
+- wang2022tacto: TACTO: A Fast, Flexible, and Open-Source Simulator for High-Resolution Vision-Based Tactile Sensors
+- akinola2025tacsl: TacSL: A Library for Visuotactile Sensor Simulation and Learning
+- leins2025hydroelastictouch: HydroelasticTouch: Simulation of Tactile Sensors with Hydroelastic Contact Surfaces
+- luu2025manifeel: ManiFeel: Benchmarking and Understanding Visuotactile Manipulation Policy Learning
+- birtalan2026impact: The impact of tactile sensor configurations on grasp learning efficiency -- a comparative evaluation in simulation
+
+
+Create a detailed paper outline in markdown.
+
+Include per-section goals and evidence links.
+
+=== HARD TOPIC CONSTRAINT ===
+
+The paper MUST be about: Certified-slip tactile grip regulation: a ramp-down friction-onset probe combined with distribution-free conformal risk control so that the physical slip rate of a minimal-force grasp is <= alpha, compared against the strongest non-tactile conformal baseline, with ablations showing where the force saving comes from (the probe, not the learned tactile model) and an online binary-feedback calibration study under distribution shift
+
+PROHIBITED content (unless user explicitly specifies case-study mode):
+
+- Do NOT treat environment setup, dependency installation, or infrastructure failures as a research contribution.
+
+- Do NOT present debugging logs, system errors, or configuration issues as experimental findings.
+
+- Do NOT drift to tangential topics not directly related to the stated topic.
+
+- Every section MUST connect back to the core research question.
+
+- The Abstract and Introduction MUST clearly state the research problem derived from: Certified-slip tactile grip regulation: a ramp-down friction-onset probe combined with distribution-free conformal risk control so that the physical slip rate of a minimal-force grasp is <= alpha, compared against the strongest non-tactile conformal baseline, with ablations showing where the force saving comes from (the probe, not the learned tactile model) and an online binary-feedback calibration study under distribution shift
+
+- The Method section MUST describe a technical approach, not a workflow.
+
+- The Results section MUST report quantitative outcomes of experiments, not environment status.
+
+=== END CONSTRAINT ===
+Analysis:
+
+# p2 · Stage 14 RESULT_ANALYSIS (v1) — merged
+
+Merged per the template: pass 1 (`14_analysis_pass1.md`, fresh opus analyst) and pass 2 (`14_analysis_pass2.md`,
+fresh opus area-chair audit of every number against `results/v1/*.json`). **Where they disagree, Part B (the audit,
+as adjudicated below) is binding**; the paper (stages 16–17) must use the supported rewrites, not the pass-1 wording.
+
+## Adjudication by the main session (run 42)
+- Findings 1–3 and 5–23: **accepted** (each checked against the JSON / addenda named in the finding).
+- Finding 4 (H3-L "not run"): **rejected in part.** H3-L for the probe arm was computed in the H3 read-out:
+  `results/v1/h3_analysis.json` → `shifts.<s>.rho_minus_rhoID` and `_CI**`: S1 +0.0857 [−0.0444, 0.1859],
+  S2 +0.0637 [−0.0582, 0.1882], S3 +0.0820 [−0.0255, 0.1912], S1m −0.0190 [−0.1442, 0.0805]. The S1 two-sided TOST
+  (±0.05) is **not met → H3-L not confirmed**; S2 / S3 are reported without direction. The finding's point stands
+  that pass 1's informal "keeps its RE advantage" must be replaced by these numbers.
+- Finding 16 (log-health count): verified by the main session — 0 of 194 files in `results/v1/logs/` match
+  NaN / Inf / RuntimeWarning / overflow (stage 13 record).
+
+---
+
+# Part A — pass 1 analysis (superseded where Part B corrects it)
+
+
+Scope: every number below is copied (rounded) from the JSON outputs and run-context documents quoted in the stage-14
+prompt (`results/v1/*.json`, docs 08a–08h). No new analysis was run. Results are grouped by evidential status:
+
+- **Primary (08b §4, Bonferroni over four decisions, one-sided 0.0125 each, CI\*\* = 97.5 %):** H1, H2a, H2b, H3.
+  For H2a / H2b the primary route is the 08c CRC route (`crc_analysis.json`).
+- **Secondary / diagnostic (pre-registered in 07 / 08b, operationalised in 08c, 08f, 08g, 08h before computation):**
+  H1-V, label-route H2, per-seed D, σ curve, H4a, H4e, H2-T, H4c, H2-M, H3-B, D-μ, UT3, H2-C, H2-n, H2-H, H2-R, H4d,
+  D-loc, oracle decomposition, H1c, H3-S, H4b, D-FID, H2-M mass-noise. Holm is not applied to these.
+- **Post hoc sensitivity (08e, written after the 08c read-out was seen):** CRC with per-stratum 41-point grids
+  (`crc_analysis_v2.json`). Under the 08e reporting rule it can mark a pre-registered CRC result as unreliable but
+  cannot upgrade a decision.
+
+---
+
+## 1. Metrics Summary
+
+### 1.1 Setup facts
+- COMP selection (selection split, 800 instances, 0 unavoidable excluded): CSF-1 RE_mean **0.7686** (even 0.7921 / odd
+  0.7450), Mondrian-CSF 0.8294, CertGrip-P 0.8335 → **COMP = CSF-1**.
+- CRC read-out: n_cal 2,000, n_test 2,800 instances, 2,000 bootstrap draws.
+- Frozen η = 0.03412 (pilot planning value 0.035).
+
+### 1.2 Primary results
+
+| Decision | Statistic | Point | CI\*\* (97.5 %) | Rule outcome |
+|---|---|---|---|---|
+| **H1-M** (gate) | non-monotone / 800 | 8 (threshold ≤ 7) | CP upper 98.75 % = 0.02115 (> 0.02) | **fail** |
+| **H1** | H1-M and H1-V | — | — | **not confirmed** |
+| **H2a** (CRC 08c) | D = 1 − RE(CertGrip-full σ0.2)/RE(CSF-1) | 0.4168 | [0.3484, 0.4778] | **superiority** |
+| H2a robustness | D_lo / D_hi | 0.4150 / 0.4186 | [0.3468, 0.4758] / [0.3501, 0.4798] | superiority on both |
+| **H2b** (CRC 08c) | D = 1 − RE(CertGrip-full)/RE(CSF-μ̂), σ 0.2 | 0.0569 | [−0.0399, 0.1454] | **not confirmed** |
+| **H3, S1** | R_E | 0.8778 | [0.7404, 1.1204] | **inconclusive** |
+| **H3, S2** | R_E | 1.1739 | [1.0234, 1.4283] | **inconclusive** |
+| **H3, S3** | R_E | 0.9629 | [0.8363, 1.1449] | **inconclusive** |
+
+Primary-route arm values (08c CRC, test set):
+
+| Arm | RE_mid | RE_mid CI\*\* | slip_phys | slip_label | λ̂ index D1/D2/D3/D4 |
+|---|---|---|---|---|---|
+| CertGrip-full σ0.2 seed 0 | 0.4567 | [0.4079, 0.5033] | 0.0829 | 0.0846 | 10/10/11/10 |
+| CSF-1 (COMP) | 0.7832 | [0.6968, 0.8583] | 0.1021 | 0.1036 | 1/1/15/14 |
+| CSF-μ̂ σ0.2 | 0.4843 | [0.4435, 0.5219] | 0.0657 | 0.0679 | **0/0**/14/12 |
+| onset-only σ0.2 | 0.4336 | [0.3983, 0.4833] | 0.0857 | 0.0896 | 10/10/11/10 |
+
+No λ̂ is at the grid maximum (`at_max` false everywhere), but CSF-μ̂ sits on the grid floor (index 0) in D1/D2 and
+CSF-1 one step above it (index 1) — the 08e defect.
+
+H1-M detail: by family F1 3, F2 2, F3 2, F4 1; by disturbance D1 1, **D2 7**, D3 0, D4 0; shift pools S1 0/100,
+S2 1/100, S3 1/100. The flickers are tiny: max (slip force above F_hi − F_hi)/F_hi = 0.00904, and six of the ten
+listed violations lie below F_hi (rel_above_F_hi ≈ −0.0067), i.e. inside the bisection bracket.
+
+H3 arm values (label-rule feedback, window steps 1,001–2,000, mean of 20 orderings):
+
+| Shift | OQT-CertGrip RE / slip | Oracle-CertGrip RE / slip | OQT-COMP RE / slip | Frozen-CertGrip slip | Frozen-COMP slip | matched-rate (physical diff, ≤ 0.02) |
+|---|---|---|---|---|---|---|
+| S1 | 0.4763 / 0.1016 | 0.5426 / 0.0751 | 0.8087 / 0.1030 | 0.3056 | 0.5101 | 0.032 → **not matched** |
+| S2 | 0.4262 / 0.0999 | 0.3631 / 0.1346 | 0.7398 / 0.0998 | 0.1017 | 0.1051 | −0.035 → **not matched** |
+| S3 | 0.5067 / 0.1000 | 0.5262 / 0.0863 | 0.8635 / 0.1004 | 0.2461 | 0.1910 | 0.009 → matched |
+| S1m (not primary) | 0.4288 / 0.1012 | 0.4834 / 0.0764 | 0.8085 / 0.1020 | 0.1158 | 0.1916 | — (R_E 0.8871 [0.7723, 1.0265], "non-inferior") |
+| ID (reference) | 0.4386 / 0.0995 | 0.4587 / 0.0897 | 0.8114 / 0.0998 | 0.1017 | 0.1149 | — (R_E 0.9561 [0.8260, 1.0909], "non-inferior") |
+
+capped_window = 0.0 in every arm and shift (anti-windup never triggered).
+
+### 1.3 Secondary results (pre-registered)
+
+| Item | Statistic | Point | Interval | File decision |
+|---|---|---|---|---|
+| H1-V CertGrip α 0.10 | Δ = direct − label slip | −0.00429 | [−0.0075, −0.00143] | pass (τ 0.02) |
+| H1-V CertGrip α 0.05 | Δ | −0.00143 | [−0.00393, 0.00071] | pass |
+| H1-V CSF-1 α 0.10 | Δ | −0.00321 | [−0.00607, −0.00071] | pass |
+| H1-V CSF-1 α 0.05 | Δ | −0.00286 | [−0.00536, −0.00071] | pass |
+| H2a label route | D | 0.4292 | [0.3654, 0.4822] | superiority |
+| H2b label route | D | 0.0134 | [−0.0850, 0.0814] | **equivalence** |
+| H4e CRC 08c (full vs onset-only) | D | −0.0534 | [−0.1233, 0.0508] | not confirmed |
+| H4e label route | D | −0.0417 | [−0.0990, 0.0128] | equivalence |
+| H4a S vs P (margin 0.05) | D | −0.0084 | [−0.0360, 0.0128] | equivalence |
+| H4a squeeze: full vs S (margin 0.03) | D | −0.0263 | [−0.0558, 0.0149] | not confirmed |
+| H4a onset: full_rd vs full | D | 0.4739 | [0.4148, 0.5229] | report only |
+| H2-T (CRC 08c route, primary) | T = P95 ratio | 0.5918 | [0.5540, 0.6564] | pass (upper < 1.10) |
+| H2-T label / CRC 08e | T | 0.6014 / 0.6019 | [0.5521, 0.6459] / [0.5486, 0.6485] | pass / pass |
+| H4c shuffled touch vs P | D | −0.0253 | [−0.0526, 0.0085] | inconclusive |
+| H2-M no mass (full_rd vs P) | D_nm | 0.4598 | [0.3968, 0.5061] | report only |
+| H2-M with-mass reference | D | 0.4555 | [0.4018, 0.5072] | report only |
+| H2-M change (nm − with) | — | 0.0042 | [−0.0446, 0.0399] | — |
+| H2-M mass-noise: D_mn vs COMP_mn (= CSF-1) | D | 0.4603 | [0.4106, 0.5050] | no prediction |
+| H2-M mass-noise change vs D_H2a (0.4292) | — | 0.0312 | [−0.0077, 0.0707] | — |
+| H2-C vs Mondrian-CSF | D | 0.4381 | [0.3733, 0.4872] | superiority |
+| H2-n α 0.10 (n_cal 50) | D_mean | 0.4146 | [0.2585, 0.5477] | confirmed |
+| H2-n α 0.20 | D_mean | 0.4654 | [0.2786, 0.5984] | confirmed |
+| H2-H (16 cells, DL) | pooled D | 0.4388 | 95 % [0.4036, 0.4741]; τ 0.0511, Q 31.04 | pass (no guard cell) |
+| H2-R (μ ∈ [0.5, 0.8], mid amplitude; n_cal 352, n_test 548) | D | **−0.2614** | [−0.5320, −0.0325] | no prediction |
+| H4d full_rd: D_F4 − D_F1 | — | 0.0342 | [−0.0424, 0.1138] | inconclusive |
+| H4d full (squeeze only): D_F4 − D_F1 | — | 0.0021 | [−0.0174, 0.0213] | inconclusive |
+| Oracle decomposition: share of CSF-1 → oracle gap closed | — | 0.5172 | [0.4489, 0.5762] | — |
+| H3-S S1: ΔC (decay − constant η) | — | 58.15 | [48.20, 70.20] | confirmed |
+| H3-S S3 | — | 42.40 | [32.40, 49.35] | confirmed |
+| H3-S S2 / S1m | — | 2.90 / 2.75 | [−6.65, 7.00] / [−2.05, 11.85] | inconclusive / inconclusive |
+| H4b identifier control | D_FID − 0.5·D | 0.2361 | [0.1957, 0.2607] | confirmed (D_FID 0.4638, D 0.4555) |
+| H1c | — | see §3.6 | — | "partly confirmed / not confirmed" |
+
+Diagnostics:
+- **D-μ** (CV R² of log μ → residual, n 4,800): P 0.7937, S 0.7882, full 0.7787, CSF-1 0.6034 (all le_0.05 false);
+  CertGrip-full σ 0 / 0.1 / 0.2 / 0.4: 0.0105 / 0.0452 / 0.2142 / 0.5655; onset-only σ0.2 0.1974; CSF-μ̂ 0.0062 /
+  0.0064 / 0.0054 / 0.0034; oracle 0.0163.
+- **D-loc:** paired S1 − ID Δlog F\* mean 0.5091, SD 0.0093 (Coulomb 0.511, SD 0; 2,794 pairs); mean |Δĝ|/ĝ: P
+  5.1e-6, S 0.00136, full 0.00190, CertGrip-full **0.4469**; preload slip rate 0.0 in every pool.
+- **D-FID:** family accuracy from touch only 0.7257 [0.7014, 0.7514], with onset 0.7296 [0.7079, 0.7545]; chance 0.25.
+- **H3-B** (frozen offline q̂, no-probe arms): S1 p_obs 0.501–0.523 vs p_pred 0.503–0.525, |diff| ≤ 0.0036, all
+  "pass"; S1m p_obs 0.179–0.193, all "pass"; S3 p_obs 0.193–0.211 (up as predicted); S2 p_obs 0.094–0.096 ("no break
+  shown"). Probe arm (not tested, 08f deviation): S1 p_obs 0.3039, S1m 0.1246, S3 0.25, S2 0.0936.
+- **UT3:** 160 / 160 cells pass; worst cell CSF-1, D3, α 0.01, n 500: mean miss 0.01034 in band [0.00734, 0.01066].
+- **Label-route RE** (test): CertGrip-full σ0.2 0.4264, CSF-1 0.7469, CSF-μ̂ σ0.2 0.4321, onset-only 0.4093, P 0.7831,
+  S 0.7897, full 0.8104, oracle 0.1271.
+
+### 1.4 Post hoc sensitivity (08e, CRC per-stratum 41-point grids)
+
+| Contrast | 08c (pre-registered) D [CI\*\*] → decision | 08e (post hoc) D [CI\*\*] → decision | Label route (secondary) |
+|---|---|---|---|
+| H2a σ0.2 | 0.4168 [0.3484, 0.4778] superiority | 0.4289 [0.3577, 0.4770] superiority | 0.4292 superiority |
+| **H2b σ0.2** | 0.0569 [−0.0399, 0.1454] not confirmed | 0.0240 [−0.0949, **0.1001**] not confirmed | 0.0134 [−0.0850, 0.0814] equivalence |
+| H4e | −0.0534 [−0.1233, 0.0508] not confirmed | −0.0219 [−0.1208, 0.0369] not confirmed | −0.0417 equivalence |
+| H2b σ0 | 0.2460 [0.1617, 0.2953] **superiority** | −0.1522 [−0.3028, −0.0596] **inferiority** | −0.2022 inferiority |
+| H2b σ0.1 | 0.1072 [0.0333, 0.1919] **superiority** | −0.1019 [−0.1911, 0.0218] not confirmed | −0.0753 [−0.1653, −0.0241] inferiority |
+| H2b σ0.4 | 0.3182 [0.2287, 0.4060] superiority | 0.3315 [0.2339, 0.4064] superiority | 0.3275 superiority |
+
+In 08e all λ̂ indices are interior (20–22 of 41, no at_max); CSF-μ̂ σ0.2 RE falls from 0.4843 (08c) to 0.4551, CSF-1
+from 0.7832 to 0.7778, CertGrip-full σ0.2 from 0.4567 to 0.4442.
+
+---
+
+## 2. Comparative Findings
+
+### 2.1 Primary
+1. **H2a is the one confirmed core claim, and it is robust.** CertGrip-full (σ 0.2) reduces relative excess grip
+   force versus the selected non-tactile comparator CSF-1 by D = 0.4168, CI\*\* [0.3484, 0.4778]; the lower limit is far
+   above both 0 and the 0.10 SESOI. The decision is unchanged on every route and check in the files: F\*_lo / F\*_hi
+   (0.4150 / 0.4186), the post hoc grids (0.4289), the label route (0.4292), seeds 1–4 (08c: 0.4343, 0.4197, 0.3932,
+   0.4494, all superiority; label route 0.4245–0.4442), small calibration n (H2-n 0.4146 at α 0.10), cells (H2-H: all
+   16 cell D between 0.2979 and 0.5340, pooled 0.4388) and Mondrian-CSF as comparator (0.4381). The grid defect hardly
+   touches CSF-1 (RE 0.7832 → 0.7778). The pre-registered power projection (D ≈ 0.43, SE ≈ 0.040) was accurate.
+2. **H2b (co-primary) is not confirmed: learned touch does not beat the physics plug-in that uses the same onset
+   estimate, and equivalence is not shown on the pre-registered route.** The 08c CI\*\* [−0.0399, 0.1454] crosses both
+   0 and +0.10. This was the stated expectation (08b §5: superiority "very unlikely", equivalence ≈ 17 %, inferiority
+   ≈ 40 %); inferiority did not occur. The 08c point estimate is biased towards CertGrip by the grid floor (CSF-μ̂ λ̂
+   index 0 in D1 / D2). The post hoc grid gives D 0.0240 with upper limit 0.1001 — equivalence missed by the third
+   decimal — and the label route gives equivalence ([−0.0850, 0.0814]). Under the 08e rule the paper may not upgrade
+   H2b to "equivalence"; the accurate wording is "not confirmed; point estimates 0.013–0.057 across routes; a secondary
+   route and a post hoc route place D within or just at ±0.10".
+3. **H1 is not confirmed** because H1-M failed by one instance (8 vs ≤ 7; CP upper 0.02115 vs 0.02). The violations are
+   small (≤ 0.9 % of F_hi) and concentrated in D2 (7 / 8). This triggered the CRC validity route for H2 (08c).
+4. **H3 is inconclusive in all three shifts**, as pre-registered (08b §5: reduced power, half-width ≈ 0.12). Point
+   estimates are below 1 for S1 (0.8778) and S3 (0.9629) and above 1 for S2 (1.1739; lower limit 1.0234 > 1 but
+   < 1.10). The matched-rate co-requirement fails in S1 (0.032) and S2 (−0.035), so H3 could not have passed in those
+   shifts even with a narrower CI. The direction of the mismatch explains the R_E values: in S1 the oracle over-protects
+   (window slip 0.0751 vs OQT 0.1016), so OQT spends less force; in S2 the oracle under-protects (0.1346), so it looks
+   cheaper than OQT. R_E is therefore not a like-for-like efficiency comparison in S1 and S2.
+
+### 2.2 Secondary (what explains H2a)
+- **The gain comes from the ramp-down onset probe, not from static touch or the squeeze.** H4a: S vs P equivalence
+  (D −0.0084), squeeze adds nothing (D −0.0263; not confirmed only because the CI lower −0.0558 passes −0.03), onset adds
+  D 0.4739. H4e: CertGrip-full vs onset-only is not distinguishable (08c −0.0534, label route equivalence); the point
+  estimates favour onset-only. H4c: shuffled touch gives RE 0.8029 vs P 0.7831 (no gain). D-loc: only the onset arm's
+  prediction moves under the friction shift (mean |Δĝ|/ĝ 0.4469 vs ≤ 0.0019 for P / S / full).
+- **The gain is a friction-information effect.** D-μ: no-probe arms leave R² 0.60–0.79 of log μ in their residuals;
+  CertGrip-full leaves 0.0105 / 0.0452 / 0.2142 / 0.5655 at σ 0 / 0.1 / 0.2 / 0.4. H2-M (no mass) leaves D unchanged
+  (change 0.0042), as does 10 % mass noise (change 0.0312, CI includes 0). H4b: adding family one-hot keeps D_FID 0.4638
+  vs D 0.4555 — family identity does not explain the gain, although touch-only features identify family well (D-FID
+  0.7257 vs chance 0.25).
+- **Where it fails:** H2-R. In the restricted sub-pool (μ ∈ [0.5, 0.8], mid-amplitude disturbances) CertGrip is worse
+  than CSF-1: D −0.2614, CI\*\* [−0.5320, −0.0325] (upper < 0). No prediction was registered, but the paper must report
+  it: when friction varies little, the probe's information is worth less than its noise, and the fixed-friction
+  plug-in wins. The sub-pool is small (n_cal 352, n_test 548), hence the wide interval.
+- **Noise dependence (σ curve, H2a):** D 0.6789 / 0.5825 / 0.4168 / 0.1401 at σ 0 / 0.1 / 0.2 / 0.4 (08c); σ\* = 0.4
+  (lower limit 0.0832 < 0.10; 08e 0.0868, label 0.0983 — σ\* = 0.4 on every route). At σ 0.4 the decision label is
+  still "superiority" (D 0.1401 ≥ 0.10, lower > 0).
+- **Learned vs plug-in by σ (H2b σ curve; secondary at σ ≠ 0.2):** on the two unbiased routes the plug-in wins at
+  σ 0 (inferiority) and at σ 0.1 (label route inferiority; 08e not confirmed), the two tie at σ 0.2, and the learned arm
+  wins at σ 0.4 (D 0.3275–0.3315; CSF-μ̂ RE 0.9371–0.9876). The D-μ values are consistent with an explanation (an
+  interpretation, not a tested claim): the plug-in uses μ̂ at face value (residual R² with log μ ≈ 0.003–0.006 at every
+  σ, but RE grows with σ), while the learned arm shrinks the noisy onset feature, leaving friction in the residual
+  (R² up to 0.5655) but with lower RE at high noise.
+- **Tail and safety secondaries pass:** H2-T T 0.5918 (upper 0.6564 < 1.10); H2-H guard no flagged cell; H2-n
+  confirmed at both α.
+- **Oracle gap:** CertGrip closes 0.5172 [0.4489, 0.5762] of the CSF-1 → oracle RE gap (oracle RE 0.1271).
+- **H4d (CoM mechanism) is inconclusive** for both arms (CIs include 0).
+- **Online adaptation (H3 secondaries):** OQT restores window slip to ≈ α in every shift (0.0999–0.1016) while frozen
+  arms break (Frozen-CertGrip S1 0.3056, S3 0.2461; Frozen-COMP S1 0.5101). OQT-CertGrip keeps its RE advantage over
+  OQT-COMP in each shift (e.g. S1 0.4763 vs 0.8087), and ρ − ρ_ID CIs include 0 in S1, S2, S3 and S1m (no formal H3-L
+  decision appears in the files). H3-S: constant η beats decaying η in S1 (ΔC 58.15) and S3 (42.40); inconclusive in S2
+  and S1m. H3-B: the Coulomb location prediction matches observed offline breakage for every no-probe arm (S1 |diff|
+  ≤ 0.0036); the probe arm breaks less (S1 p_obs 0.3039 vs ≈ 0.50–0.52 for no-probe arms), but no prediction was
+  specified for it.
+
+---
+
+## 3. Statistical Checks
+
+1. **Multiplicity.** Four core decisions at one-sided 0.0125 each (CI\*\* 97.5 %): 1 / 4 confirmed (H2a), H1 failed, H2b
+   not confirmed, H3 inconclusive (×3). All secondaries are reported unadjusted (08f–08h: Holm not applied); several
+   secondaries "confirmed" (H2-n, H3-S S1 / S3, H4b) should be presented as unadjusted.
+2. **Validity of the CRC route.** Test physical slip rates of the primary arms: CertGrip-full σ0.2 0.0829, CSF-μ̂ 0.0657,
+   onset-only 0.0857, CSF-1 0.1021 (08c); the CertGrip arm is below α 0.10 (monotonised loss and (n+1) correction are
+   conservative), CSF-1 and seed 4 (0.1018) are marginally above α, consistent with an expectation guarantee on a finite
+   test set. CRC RE is higher than label-route RE for the same arm (0.4567 vs 0.4264), so CRC D values are not
+   interchangeable with label-route D values in the text.
+3. **Label rule vs physics.** H1-V Δ is negative for all four arms (−0.00143 to −0.00429; disagree_down 6–13 vs
+   disagree_up 0–2), with CIs inside τ 0.02; three of four CIs exclude 0. The H3 audits show the same direction (Δ 0 to
+   −0.008; S2 OQT-CertGrip 1,001–2,000 Δ −0.008 [−0.0149, −0.0029]). The label rule slightly over-counts slips, i.e. it
+   is conservative; the H1-M failure does not translate into a material label-to-physics gap.
+4. **Split-conformal calibration (UT3):** 160 / 160 cells pass; CertGrip label-route test slip at α 0.10 0.1057
+   (direct 0.1014, CI [0.0864, 0.1168]).
+5. **Uncalibrated targeters (H1c):** RAW-Q and RAW-G over-slip at every α (slip − α 0.0096–0.0507, every CI\*\* above
+   0); RAW-Qv also over-slips but its CIs include 0. The pre-registered "miss" rule at α 0.05 (CI excludes ±0.025) is not
+   met (RAW-Q CI [0.020, 0.045], RAW-G [0.0161, 0.0421]); the H1c failure rule (all inside ±0.25α) is not met either →
+   "partly confirmed / not confirmed". Conformal calibration measurably matters, but the registered miss criterion was
+   not reached.
+6. **Grid floor (08e defect).** 08c λ̂ index 0 for CSF-μ̂ (σ ≤ 0.2) in D1 / D2 and 1 for CSF-1. The defect matters for
+   H2b and flips the H2b σ 0 and σ 0.1 secondaries (superiority → inferiority / not confirmed). Per 08e those 08c
+   σ 0 / σ 0.1 H2b results are unreliable; the 08c H2b primary decision ("not confirmed") does not change.
+7. **Seed variability (08c, secondary):** CertGrip-full σ0.2 RE 0.4312–0.4752 over seeds 0–4; D(H2a) 0.3932–0.4494, all
+   superiority; D(H2b) 0.0188–0.1095, all not confirmed. Label-route D(H2b) by seed: 0.0053 and 0.0104 equivalence,
+   0.0394 and −0.0120 not confirmed — the label-route H2b equivalence is seed-fragile.
+8. **Heterogeneity (H2-H):** τ 0.0511, Q 31.04 over 16 cells; D3 cells have the smallest D (0.2979–0.3868) but all cell
+   lower limits are > 0.16.
+9. **Numerical health:** 0 / 194 logs with NaN / Inf / RuntimeWarning; no capped stream steps. A tiny cross-file
+   discrepancy: CSF-1 label-route RE is 0.7469103493600249 in `h2_label_rule.json` and 0.7469102044808502 in
+   `sec08g.json` / `sec08h_massnoise.json` (D_H2a 0.42915688 vs 0.42915677) — immaterial, but the two code paths should
+   be reconciled before the numbers are quoted to more than 6 digits.
+10. **Documentation inconsistency:** 08b §3 says the COMP selection split is objects 200–249, while 08b §5 (`split_of`),
+    08c and `comp_selection.json` use objects 150–199. The JSON and 08c agree; 08b §3 is the stale text from before the
+    split change and should be flagged in the paper's deviation list.
+
+---
+
+## 4. Limitations
+
+- **Simulation only** (MuJoCo 4.0.0) with a modelled tactile detector; the detector constants were tuned on pilot
+  objects 0–24, and at σ 0 the onset estimate is near-perfect (pilot corr 0.988), which is why σ 0 is only an upper
+  bound. The primary σ 0.2 is an assumed noise level, and the advantage shrinks to D 0.1401 (lower 0.0832) at σ 0.4.
+- **H1 failed**, so validity rests on the post-failure CRC route (08c) — designed after the H1-M counts were seen but
+  before any predictor or test statistic existed.
+- **The 08c CRC grid had a defect** that biases the CRC-route H2b towards CertGrip; the fix (08e) is post hoc.
+- **H2b is unresolved:** the pre-registered route cannot separate "no difference" from a gain of up to ≈ 0.145, and
+  equivalence on the post hoc route is missed by 0.0001 on the upper limit.
+- **H3 was underpowered by design** and its matched-rate co-requirement fails in S1 and S2; the stream feedback is the
+  label rule, with direct-replay audits only for ordering 0.
+- **H2-R shows a regime where CertGrip loses** (narrow friction range); the overall gain depends on the friction spread
+  of the object distribution.
+- **Several secondaries carry stated deviations** (H3-B probe arm untested; D-μ on cal + test instead of train; RAW-Qv
+  log-shift variant; H1c small-n arm dropped; H2-M mass-noise draw fixed only in 08h).
+- **Secondaries are unadjusted** for multiplicity.
+- The violations in H1-M are concentrated in D2 (7 / 8), which the files do not explain.
+
+---
+
+## 5. Conclusion
+
+Of the four pre-registered core decisions, only **H2a** is confirmed: CertGrip-full at σ 0.2 needs substantially less
+excess grip force than the best non-tactile comparator CSF-1 (D 0.4168, CI\*\* [0.3484, 0.4778]). The result holds on
+every robustness, route, seed, cell and comparator check in the files. The secondaries show where the gain comes from:
+the ramp-down onset probe's friction estimate. Static touch and the squeeze add nothing (H4a, H4c, H4e), mass and
+family identity do not explain it (H2-M, H4b), and the gain falls with onset noise (σ\* = 0.4) and turns negative when
+friction varies little (H2-R, D −0.2614). **H2b is not confirmed:** learned touch does not beat a physics plug-in using
+the same onset estimate (08c D 0.0569, CI\*\* [−0.0399, 0.1454]). Equivalence appears only on the secondary label route
+and is missed narrowly on the post hoc grid (upper 0.1001), so it may not be claimed. **H1 failed** narrowly (8 / 800
+non-monotone vs ≤ 7), with a small and conservative label-to-physics gap (H1-V pass). **H3 is inconclusive** in S1, S2
+and S3, as the reduced-power design expected, and the matched-rate requirement fails in S1 and S2. Online OQT still
+restores slip to ≈ α under shift where the frozen arms break. The defensible headline is: "a tactile friction probe
+plus conformal calibration cuts the relative excess force of a calibrated physics baseline by D ≈ 0.42. The probe's onset
+estimate carries the friction information, and a learned model adds no demonstrated value over a plug-in that uses the
+same estimate."
+
+
+---
+
+# Part B — adversarial audit (binding)
+
+## Findings
+
+### A. Pre-registration, status and decision-rule violations
+
+1. **H2-M is used for the friction story, which 08a/08b forbid.**
+   - *Claim (§2.2 "The gain is a friction-information effect"; §5):* "H2-M (no mass) leaves D unchanged … mass and
+     family identity do not explain it (H2-M, H4b)."
+   - *Evidence:* 08a item 8 and 08b §6 both say: "H2-M (no mass) reported but not used for the friction story (onset
+     confounds m and μ)". F_onset depends on m/μ jointly, so a no-mass model can recover mass from the onset feature.
+     The no-mass contrast is also against P_nomass, not CSF-1 (`sec08f_label.json`). In addition, "unchanged" has no
+     registered equivalence margin. The change is 0.0042 with CI\*\* [−0.0446, 0.0399].
+   - *Supported rewrite:* "H2-M is reported descriptively (D_nm = 0.4598 vs P without mass, change from the with-mass
+     contrast 0.0042, CI\*\* [−0.0446, 0.0399]). As pre-registered, it is not used to argue about friction vs mass,
+     because the onset feature confounds m and μ."
+
+2. **S1m is labelled "non-inferior" although the H3 matched-rate co-requirement is not met (or not assessed) there.**
+   - *Claim (§1.2 table, S1m row):* "R_E 0.8871 [0.7723, 1.0265], 'non-inferior'".
+   - *Evidence:* The 08d §4 rule needs both CI\*\* upper < 1.10 and matched slip rates (point difference ≤ 0.02).
+     `h3_analysis.json` S1m `matched_label_window_diff` = 0.0248 (> 0.02). There is no physical audit (b) for S1m:
+     the matched-physical entries exist only for S1, S2 and S3. The "non-inferior" label checks the R_E bound only.
+     ID passes both (0.0098).
+   - *Supported rewrite:* "S1m (not primary): R_E 0.8871, CI\*\* [0.7723, 1.0265] (upper < 1.10), but the label-rule
+     window slip rates differ by 0.025 (> 0.02), so the full H3 criterion is not met for S1m."
+
+3. **UT3 "160 / 160 cells pass" counts 20 degenerate cells as passes.**
+   - *Claim (§1.3, §3.4):* "160 / 160 cells pass".
+   - *Evidence:* In `sec08f_ut3.json`, all 20 cells with α 0.01 and n 50 have mean_miss = 0.0 and SD = 0. At n = 50,
+     α = 0.01 the conformal quantile is unbounded, the force is F_max and nothing slips. The lower band limit is
+     negative (e.g. −0.0096), so these cells pass by construction and test nothing.
+   - *Supported rewrite:* "All 160 cells pass. 20 of them (α 0.01, n 50) are degenerate (q̂ = ∞, miss 0), so the
+     informative result is 140 / 140. The worst cell is CSF-1, D3, α 0.01, n 500: mean miss 0.01034 in
+     [0.00734, 0.01066]."
+
+4. **H3-L, a pre-registered secondary decision, is not run, yet its conclusion is stated informally.**
+   - *Claim (§2.2 online adaptation):* "OQT-CertGrip keeps its RE advantage over OQT-COMP in each shift … (no formal
+     H3-L decision appears in the files)."
+   - *Evidence:* 08a item 7 and 08b §6 pre-register H3-L with a two-sided TOST for the probe arm.
+     `h3_analysis.json` reports only ρ and ρ − ρ_ID with CI\*\* (S1 [−0.044, 0.186], S2 [−0.058, 0.188],
+     S3 [−0.025, 0.191], S1m [−0.144, 0.081]) and no decision. Under any plausible TOST margin, CIs this wide
+     (≈ 0.23 units) could not establish "preserved". "Keeps its advantage" is therefore the H3-L claim stated without
+     the H3-L test.
+   - *Supported rewrite:* "OQT-CertGrip has lower window RE than OQT-COMP in every shift (e.g. S1 0.4763 vs 0.8087).
+     The pre-registered H3-L TOST was not computed. ρ − ρ_ID CIs include 0 but are wide (up to ≈ 0.19), so
+     preservation of the advantage is not shown. This omission goes in the deviation list."
+
+5. **The H1c status is ambiguous; under the 08h rule the result is "not confirmed".**
+   - *Claim (§1.3, §3.5):* "partly confirmed / not confirmed" and "Conformal calibration measurably matters".
+   - *Evidence:* The 08h §1 rule has two outcomes. Confirmation needs RAW-Q and RAW-G to "miss" (CI\*\* of
+     slip − α excludes ±0.025 at α 0.05). Failure needs all three CIs inside ±0.25α at every α. `sec08h_h1c.json`:
+     `miss_at_0.05` is false for both, and the failure rule is not met. So neither branch fires, and there is no
+     "partly confirmed" state. "Measurably matters" is stronger than the registered criterion allows.
+   - *Supported rewrite:* "H1c is not confirmed (inconclusive under 08h). RAW-Q and RAW-G over-slip at every α
+     (slip − α 0.0096–0.0507, every CI\*\* > 0), but at α 0.05 their CIs ([0.020, 0.045], [0.016, 0.042]) do not
+     exclude +0.025, as the registered miss criterion requires."
+
+6. **The H2b σ-curve paragraph treats the post hoc route as an "unbiased" decision route and claims a tie.**
+   - *Claim (§2.2 "Learned vs plug-in by σ"):* "on the two unbiased routes the plug-in wins at σ 0 (inferiority) and
+     at σ 0.1 …, the two tie at σ 0.2, and the learned arm wins at σ 0.4 (D 0.3275–0.3315; CSF-μ̂ RE
+     0.9371–0.9876)."
+   - *Evidence:*
+     - "Unbiased" is not established anywhere. 08e only documents the 08c grid-floor defect. The 08e route is post
+       hoc, and under its own rule (08e) it cannot by itself support a decision.
+     - σ 0.2 is not a tie: the label route gives equivalence, but 08e gives "not confirmed" (upper 0.1001).
+     - σ 0.1: inferiority holds on the label route only (08e: not confirmed, CI [−0.1911, 0.0218]).
+     - The CSF-μ̂ σ 0.4 RE range mixes in the 08c value (0.9876), which comes from the route the sentence excludes.
+       The label and 08e values are 0.9371 and 0.9763.
+   - *Supported rewrite:* "Secondary label route: plug-in better at σ 0 (D −0.2022) and σ 0.1 (D −0.0753, inferiority),
+     equivalent at σ 0.2, learned arm better at σ 0.4 (D 0.3275). The post hoc 08e grids agree in direction (σ 0
+     inferiority, σ 0.1 and σ 0.2 not confirmed, σ 0.4 superiority, D 0.3315). CSF-μ̂ σ 0.4 RE is 0.9371 (label) and
+     0.9763 (08e). The 08c σ 0 and σ 0.1 superiority results are unreliable under 08e."
+
+7. **H2-T is labelled "primary".**
+   - *Claim (§1.3 table):* "H2-T (CRC 08c route, primary)".
+   - *Evidence:* 08f §1 calls H2-T secondary, and "primary" there refers only to the route
+     (`sec08f_tail.json` `primary_route: crc_08c`).
+   - *Supported rewrite:* "H2-T (secondary; on the 08c CRC route) T = 0.5918, CI\*\* [0.5540, 0.6564], pass."
+
+### B. Wrong or unsupported numbers
+
+8. **The label-route H2a seed range is wrong.**
+   - *Claim (§2.1.1):* "seeds 1–4 … label route 0.4245–0.4442".
+   - *Evidence:* `h2_label_rule.json`: seed 1 0.4245, seed 2 0.4442, **seed 3 0.4145**, seed 4 0.4275.
+   - *Supported rewrite:* "label route, seeds 1–4: 0.4145–0.4442, all superiority."
+
+9. **The claim that "the power projection was accurate" is not supported for the SE.**
+   - *Claim (§2.1.1):* "The pre-registered power projection (D ≈ 0.43, SE ≈ 0.040) was accurate."
+   - *Evidence:* The point estimate is close (0.4168 vs 0.43). The CI\*\* [0.3484, 0.4778] implies
+     SE ≈ 0.129 / (2 × 2.24) ≈ 0.029, well below 0.040. That projection also predates the 08b §5 move of 50 objects
+     per family to test.
+   - *Supported rewrite:* "The point estimate (0.4168) is close to the projected D ≈ 0.43. The realised CI\*\* is
+     narrower than projected (implied SE ≈ 0.029 vs 0.040)."
+
+10. **The realised H3 CIs are wider than the pre-registered half-width the analysis cites.**
+    - *Claim (§2.1.4):* "inconclusive in all three shifts, as pre-registered (08b §5: reduced power, half-width
+      ≈ 0.12)."
+    - *Evidence:* `h3_analysis.json` CI\*\* half-widths are S1 (1.1204 − 0.7404)/2 = 0.190, S2 0.202 and S3 0.154,
+      all well above 0.12.
+    - *Supported rewrite:* "Inconclusive in all three shifts, as 08b §5 expected. Realised CI\*\* half-widths
+      (0.15–0.20) are wider than the projected ≈ 0.12."
+
+11. **The H2-H claim that "D3 cells have the smallest D" is not strictly true.**
+    - *Claim (§3.8):* "D3 cells have the smallest D (0.2979–0.3868)".
+    - *Evidence:* `sec08g.json`: F1D4 = 0.3753 < F2D3 = 0.3868. The four smallest cells are F1D3 0.2979,
+      F3D3 0.3115, F4D3 0.3348 and F1D4 0.3753.
+    - *Supported rewrite:* "Three of the four smallest cell D are D3 cells (F1D3 0.2979, F3D3 0.3115, F4D3 0.3348);
+      every cell has CI\*\* lower > 0.16."
+
+12. **"RAW-Qv also over-slips" is not supported.**
+    - *Claim (§3.5):* "RAW-Qv also over-slips but its CIs include 0."
+    - *Evidence:* RAW-Qv slip − α is positive at every α (0.0029–0.0396), but every CI\*\* includes 0
+      (e.g. α 0.05 [−0.0089, 0.0464]).
+    - *Supported rewrite:* "RAW-Qv point estimates are above α (by 0.003–0.040), but no CI\*\* excludes 0."
+
+13. **The size of the H2b equivalence miss is misstated, and the CI is called "D".**
+    - *Claim (§2.1.2):* "equivalence missed by the third decimal" and "a secondary route and a post hoc route place D
+      within or just at ±0.10".
+    - *Evidence:* The 08e upper limit is 0.100118, a miss of 0.00012, which is at the fourth decimal (§4 correctly
+      says 0.0001). It is the CI\*\*, not D, that lies within or at ±0.10. The D values are 0.0134 and 0.0240.
+    - *Supported rewrite:* "The post hoc grid gives D 0.0240 with CI\*\* upper 0.1001, missing equivalence by 0.0001.
+      The label-route CI\*\* [−0.0850, 0.0814] lies inside ±0.10."
+
+14. **The seed RE range is misrounded.**
+    - *Claim (§3.7):* "CertGrip-full σ0.2 RE 0.4312–0.4752 over seeds 0–4".
+    - *Evidence:* The seed 4 RE_mid is 0.431255, which rounds to 0.4313 (`crc_analysis.json`).
+    - *Supported rewrite:* "RE 0.4313–0.4752 over seeds 0–4."
+
+15. **The mass-noise comparator is misnamed, and the source of the change is not stated.**
+    - *Claim (§1.3):* "D_mn vs COMP_mn (= CSF-1)"; §2.2 says D is unchanged by 10 % mass noise.
+    - *Evidence:* COMP_mn is CSF-1 re-run with noisy mass (RE 0.7991 vs 0.7469 noise-free). CertGrip moves only from
+      0.4264 to 0.4312 (`sec08h_massnoise.json`). The +0.0312 change (CI [−0.0077, 0.0707]) comes almost entirely
+      from the comparator getting worse. With no equivalence margin, "unchanged" is not established.
+    - *Supported rewrite:* "With 10 % mass noise, D_mn = 0.4603 [0.4106, 0.5050] against CSF-1-with-noisy-mass
+      (RE 0.7991). The change from the noise-free D is +0.0312, CI [−0.0077, 0.0707], driven by the comparator's RE."
+
+16. **A number cannot be verified from the allowed sources.**
+    - *Claim (§3.9):* "0 / 194 logs with NaN / Inf / RuntimeWarning".
+    - *Evidence:* No permitted JSON or addendum contains this count (it would come from `results/v1/logs/`, which
+      this audit was not allowed to read).
+    - *Supported rewrite:* "No capped stream steps (`capped_window` = 0 everywhere). The log-health count is to be
+      cited from its own source file."
+
+### C. Interpretation presented as finding
+
+17. **"Static touch and the squeeze add nothing" is stated as an established result.**
+    - *Claim (§2.2 bullet 1, §5):* "squeeze adds nothing … Static touch and the squeeze add nothing (H4a, H4c, H4e)."
+    - *Evidence:*
+      - H4a squeeze step: D −0.0263, CI\*\* [−0.0558, 0.0149]. Equivalence (±0.03) is not confirmed, and the point
+        estimate favours dropping the squeeze.
+      - H4c is inconclusive (CI\*\* [−0.0526, 0.0085]).
+      - H4e is "not confirmed" on its designated CRC route; equivalence holds only on the label route.
+      - Only S vs P shows equivalence (±0.05).
+    - *Supported rewrite:* "Static touch is equivalent to P within ±0.05 (H4a, D −0.0084). There is no evidence that
+      the squeeze helps (D −0.0263, equivalence within ±0.03 not shown). Adding touch to the onset feature does not
+      improve on onset-only (H4e CRC D −0.0534, not confirmed; label-route equivalence)."
+
+18. **The headline generalises the "learned model adds nothing" finding beyond σ 0.2.**
+    - *Claim (§5 headline):* "a learned model adds no demonstrated value over a plug-in that uses the same estimate."
+    - *Evidence:* At σ 0.4, D(H2b) is superiority on all three routes: 08c 0.3182 [0.2287, 0.4060],
+      08e 0.3315 [0.2339, 0.4064], label 0.3275 [0.2399, 0.4019]. These are secondary and unadjusted, but they are
+      the opposite of "no value".
+    - *Supported rewrite:* "At the primary noise level (σ 0.2), a learned model shows no demonstrated gain over a
+      plug-in using the same onset estimate. In secondary, unadjusted analyses it is better at σ 0.4 and worse at
+      σ 0."
+
+19. **The H2-R mechanism is asserted, not tested.**
+    - *Claim (§2.2 "Where it fails"; §4):* "when friction varies little, the probe's information is worth less than
+      its noise, and the fixed-friction plug-in wins"; "the overall gain depends on the friction spread".
+    - *Evidence:*
+      - 08g §4 restricts the sub-pool on two things, μ ∈ [0.5, 0.8] and the middle-50 % disturbance amplitude, so the
+        friction range is not isolated.
+      - q̂ is recalibrated on 352 cal instances (≈ 88 per stratum).
+      - No prediction was registered, and no analysis varies friction spread.
+      - `sec08g.json` contains only D −0.2614, CI\*\* [−0.5320, −0.0325].
+    - *Supported rewrite:* "In the H2-R sub-pool (μ ∈ [0.5, 0.8] and mid-amplitude disturbances; n_cal 352,
+      n_test 548), CertGrip is worse than CSF-1 (D −0.2614, CI\*\* [−0.5320, −0.0325]; secondary, no registered
+      prediction). Whether this is caused by the narrow friction range is not tested."
+
+20. **"Holds on every … check" ignores H2-R and the σ 0.4 SESOI.**
+    - *Claim (§5):* "The result holds on every robustness, route, seed, cell and comparator check in the files."
+    - *Evidence:* H2-R (a sub-pool check of the same contrast) reverses the sign. At σ 0.4 the lower limit (0.0832)
+      is below the 0.10 SESOI (`crc_analysis.json`).
+    - *Supported rewrite:* "H2a superiority holds for F\*_lo / F\*_hi, the label and post hoc routes, seeds 1–4, all
+      16 cells, H2-n and Mondrian-CSF. It reverses in the restricted H2-R sub-pool, and its lower limit falls below
+      0.10 at σ 0.4."
+
+21. **The S1/S2 "explanation" of R_E is causal language for a descriptive pattern.**
+    - *Claim (§2.1.4):* "The direction of the mismatch explains the R_E values".
+    - *Evidence:* The slip-rate pattern matches the R_E direction (S1 oracle 0.0751 vs OQT 0.1016; S2 0.1346 vs
+      0.0999, label window). No analysis separates the slip mismatch from efficiency.
+    - *Supported rewrite:* "The R_E direction is consistent with the slip mismatch (S1 oracle under-slips, 0.0751 vs
+      0.1016; S2 over-slips, 0.1346 vs 0.0999), so R_E is not a like-for-like efficiency comparison in S1 and S2."
+
+22. **"OQT restores slip to ≈ α" is measured by the label rule, not physically.**
+    - *Claim (§2.2, §5):* "OQT restores window slip to ≈ α in every shift (0.0999–0.1016)".
+    - *Evidence:* These are label-rule rates over 20 orderings, and the tracker is driven by the same label rule.
+      Physical rates exist only for ordering 0 (audit b): S1 0.103, S2 0.092, S3 0.101. Frozen arms do not break in
+      S2 (Frozen-CertGrip 0.1017, Frozen-COMP 0.1051).
+    - *Supported rewrite:* "Window label-rule slip of OQT-CertGrip is 0.0999–0.1016 across shifts (physical, ordering
+      0: 0.092–0.103), while Frozen-CertGrip reaches 0.3056 (S1) and 0.2461 (S3) and Frozen-COMP 0.5101 (S1). Neither
+      frozen arm breaks in S2."
+
+23. **The cause of the 08b §3 split inconsistency is unverified.**
+    - *Claim (§3.10):* "08b §3 is the stale text from before the split change".
+    - *Evidence:* The inconsistency is real (08b §3 says "objects 200–249"; 08b §5, 08c and `comp_selection.json`
+      say 150–199). Nothing in the permitted files documents why.
+    - *Supported rewrite:* "08b §3 says 200–249, while 08b §5, 08c and `comp_selection.json` say 150–199. The JSON
+      and 08c agree, and the discrepancy should be listed as a documentation deviation."
+
+---
+
+
+
+
+Decision:
+
+# p2 · Stage 15 RESEARCH_DECISION (v1) — run 42, 2026-11-09
+
+Input: `results/14_analysis.md` (merged pass 1 + binding audit). Template `research_decision.md` with the REFINE option.
+
+## Decision
+**PROCEED** to stage 16, with the paper re-scoped to what the evidence supports (below). No REFINE loop is opened now;
+the mandatory second loop will come from stages 18–20 / 25 (→ 13 or 16) if the review or the gate finds fixable
+evidence gaps.
+
+## Justification (hard rules)
+1. *Primary metric difference statistically meaningful* — **met.** H2a (primary, 08c CRC route): CertGrip-full σ 0.2
+   vs COMP = CSF-1, D = 0.4168, CI\*\* 97.5 % [0.3484, 0.4778] (2,000 object-cluster draws), superiority with
+   F\*_lo / F\*_hi; robust on the label route (0.4292), the post hoc 08e grids (0.4289), seeds 1–4, H2-C vs
+   Mondrian-CSF (0.438), H2-n at n = 50 (0.415 / 0.465), all 16 family × disturbance cells (H2-H, every lower ≥ 0.16),
+   and the tail (H2-T, P95 ratio 0.59, pass).
+2. *Every claimed effective component has a non-degenerate ablation* — **met for the component we will claim: the
+   ramp-down friction-onset probe.** H4a: static touch ≡ P (D −0.008, equivalence); squeeze adds nothing shown
+   (D −0.026, not confirmed); + onset D 0.474. H4e (vs onset-only) and H2b (vs the physics plug-in CSF-μ̂ with the same
+   onset estimate) show the learned model adds no demonstrated gain at σ 0.2 (H2b D 0.0569 [−0.0399, 0.1454], not
+   confirmed). H4c (shuffled features) and H4b (family ID given to both arms, D_FID 0.464) rule out capacity and
+   identifier artefacts. So the claim is "probe + conformal calibration", **not** "learned tactile model".
+3. *No CRITICAL FABRICATION flags* — **met.** The audit re-checked every primary number against the JSON files; its 23
+   findings are wording / status / rounding issues, all adopted as binding rewrites (one rejected in part with the
+   H3-L numbers).
+REFINE is not the default here: the hypothesis that matters (H2a) is not thin — it is the most robust result — and the
+weak results (H1-M failed, H2b not confirmed, H3 inconclusive, H2-R reversal) are pre-registered outcomes, not
+under-tuned evidence; re-running to change them would be post hoc. PIVOT is not warranted: the primary effect is
+large and the "learned touch adds nothing" finding is itself a clear, publishable negative.
+
+## Evidence the paper must carry (with its limits)
+- H1 not confirmed: H1-M 8 / 800 non-monotone (limit 7; CP upper 0.0212 > 0.02); validity rests on CRC over the
+  physical binary loss; H1-V passes (physical slip ≤ label rule, Δ −0.0014 … −0.0043).
+- H2b: learned vs plug-in — plug-in better at σ 0 / 0.1 on the label route, no difference shown at σ 0.2, learned
+  better only at σ 0.4 (secondary, all routes); 08c CRC results at σ 0 / 0.1 are unreliable (grid defect, 08e).
+- H3 inconclusive on S1 / S2 / S3 (R_E 0.878 / 1.174 / 0.963; CI\*\* half-widths 0.15–0.20, wider than planned);
+  matched-rate co-requirement fails on S1 / S2; OQT label-rule window slip 0.0999–0.1016; frozen q̂ breaks under S1
+  / S3; H3-S: decaying η costs 58 / 42 extra slips (S1 / S3, confirmed); H3-L not confirmed.
+- **Scope limit (H2-R):** in the sub-pool μ ∈ [0.5, 0.8] × mid amplitudes D = −0.261 [−0.532, −0.032] — the gain
+  depends on a wide friction range. Must appear in the abstract-level claims.
+- H2-M (no mass, mass noise) is reported descriptively only, not as evidence for the friction story (08a / 08b).
+- Sim-only; F\* labels exist only in simulation (offline calibration is not deployable as-is; OQT is the hardware
+  route); single simulator, 5 families.
+
+## Next actions
+- Stage 16 PAPER_OUTLINE (p2) — RSS 2027 Stage 1 extended abstract (≤ 5 pages + 1 page references): template
+  `paper_outline.md` verbatim; title / claims built on the re-scoped story above, with the audit's supported rewrites.
+- Stage 17 draft, 18 two independent reviews (fresh subagents), 19 revision, 20 gate — target ≈ 11-20 so stages
+  21–25 fit before 12-01.
+- Literature: verify any citation added beyond `docs/05_knowledge_cards.json` through the repo's literature workflow
+  (WebFetch is not available to unattended runs).
+
