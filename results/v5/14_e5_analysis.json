@@ -1,0 +1,54 @@
+{
+ "S2": {
+  "n_episodes": {
+   "gstar": 200,
+   "student_s701": 200
+  },
+  "complete": true,
+  "gstar": {
+   "flip_rate": 0.08,
+   "flips_8to16_gain": 8,
+   "flips_8to16_loss": 8,
+   "success_sub8": 0.54,
+   "success_sub16": 0.54,
+   "mean_abs_dBI": 0.0024594735834976957,
+   "mean_dBI": 0.00033790297279100655
+  },
+  "student_s701": {
+   "flip_rate": 0.07,
+   "flips_8to16_gain": 9,
+   "flips_8to16_loss": 5,
+   "success_sub8": 0.465,
+   "success_sub16": 0.485,
+   "mean_abs_dBI": 0.004033843232066654,
+   "mean_dBI": 0.0006682656610981619
+  },
+  "contrast_change_student_minus_gstar": 0.019999999999999962
+ },
+ "S12": {
+  "n_episodes": {
+   "gstar": 200,
+   "student_s701": 200
+  },
+  "complete": true,
+  "gstar": {
+   "flip_rate": 0.075,
+   "flips_8to16_gain": 10,
+   "flips_8to16_loss": 5,
+   "success_sub8": 0.48,
+   "success_sub16": 0.505,
+   "mean_abs_dBI": 0.0024565969123434782,
+   "mean_dBI": 0.00024062939238834959
+  },
+  "student_s701": {
+   "flip_rate": 0.065,
+   "flips_8to16_gain": 6,
+   "flips_8to16_loss": 7,
+   "success_sub8": 0.455,
+   "success_sub16": 0.45,
+   "mean_abs_dBI": 0.002933817416872211,
+   "mean_dBI": -0.0005474247449028713
+  },
+  "contrast_change_student_minus_gstar": -0.030000000000000027
+ }
+}
