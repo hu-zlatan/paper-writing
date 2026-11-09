@@ -2969,5 +2969,177 @@
     }
    }
   }
+ },
+ "15_posthoc_derived.json": {
+  "provenance": "arithmetic on existing fields of 14_test5_analysis.json / 14_e6_analysis.json; post hoc, not pre-registered, no CI, no test (results/v5/15_decision.md section 4.1)",
+  "cells": {
+   "S2": {
+    "student_success_mean_from_diff": 0.5086666666666667,
+    "student_success_mean_of_listed_seed_means": 0.5086666666666667,
+    "rl_success_mean_from_diff": 0.42400000000000004,
+    "rl_seed_means_listed": {
+     "rl_s711": 0.4033333333333333,
+     "rl_s712": 0.48,
+     "rl_s713": 0.39,
+     "rl_s714": 0.42333333333333334,
+     "rl_s715": 0.42333333333333334
+    },
+    "heuristic_success": {
+     "b_fan": 0.35,
+     "b_spread": 0.04666666666666667,
+     "b_cov": 0.45
+    },
+    "H_star_preregistered": "b_cov",
+    "best_test5_heuristic": "b_cov",
+    "margin_student_minus_best_test5_heuristic": 0.0586666666666667,
+    "margin_student_minus_H_star": 0.05866666666666667,
+    "latency": {
+     "ratio_full_gstar_over_student_s701_median": 9932.799730044364,
+     "ratio_full_gstar_median_over_job2_student_medians": {
+      "702": 9527.551660826333,
+      "703": 9568.92166085524,
+      "704": 9521.324511146066,
+      "705": 9527.560963177804
+     },
+     "note": "ratio of medians, not paired; job-2 students timed in a different job"
+    }
+   },
+   "S4": {
+    "student_success_mean_from_diff": 0.4713333333333333,
+    "student_success_mean_of_listed_seed_means": 0.47133333333333327,
+    "rl_success_mean_from_diff": 0.41666666666666663,
+    "rl_seed_means_listed": {
+     "rl_s711": 0.41333333333333333,
+     "rl_s712": 0.45666666666666667,
+     "rl_s713": 0.3933333333333333,
+     "rl_s714": 0.38333333333333336,
+     "rl_s715": 0.43666666666666665
+    },
+    "heuristic_success": {
+     "b_fan": 0.37333333333333335,
+     "b_spread": 0.09,
+     "b_cov": 0.42
+    },
+    "H_star_preregistered": "b_fan",
+    "best_test5_heuristic": "b_cov",
+    "margin_student_minus_best_test5_heuristic": 0.05133333333333334,
+    "margin_student_minus_H_star": 0.09799999999999999,
+    "latency": {
+     "ratio_full_gstar_over_student_s701_median": 6989.879146671704,
+     "ratio_full_gstar_median_over_job2_student_medians": {
+      "702": 8122.648031632806,
+      "703": 8086.6965667344075,
+      "704": 8059.657177737497,
+      "705": 8110.281127319892
+     },
+     "note": "ratio of medians, not paired; job-2 students timed in a different job"
+    }
+   },
+   "S8": {
+    "student_success_mean_from_diff": 0.444,
+    "student_success_mean_of_listed_seed_means": 0.44399999999999995,
+    "rl_success_mean_from_diff": 0.412,
+    "rl_seed_means_listed": {
+     "rl_s711": 0.42333333333333334,
+     "rl_s712": 0.38333333333333336,
+     "rl_s713": 0.4166666666666667,
+     "rl_s714": 0.4066666666666667,
+     "rl_s715": 0.43
+    },
+    "heuristic_success": {
+     "b_fan": 0.38333333333333336,
+     "b_spread": 0.05,
+     "b_cov": 0.37333333333333335
+    },
+    "H_star_preregistered": "b_cov",
+    "best_test5_heuristic": "b_fan",
+    "margin_student_minus_best_test5_heuristic": 0.06066666666666665,
+    "margin_student_minus_H_star": 0.07066666666666667,
+    "latency": {
+     "ratio_full_gstar_over_student_s701_median": 3463.414155965248,
+     "ratio_full_gstar_median_over_job2_student_medians": {
+      "702": 3356.307721300311,
+      "703": 3396.6454814571457,
+      "704": 3375.20167890365,
+      "705": 3387.8651141006444
+     },
+     "note": "ratio of medians, not paired; job-2 students timed in a different job"
+    }
+   },
+   "S12": {
+    "student_success_mean_from_diff": 0.44133333333333336,
+    "student_success_mean_of_listed_seed_means": 0.4413333333333333,
+    "rl_success_mean_from_diff": 0.3686666666666667,
+    "rl_seed_means_listed": {
+     "rl_s711": 0.37333333333333335,
+     "rl_s712": 0.38333333333333336,
+     "rl_s713": 0.33666666666666667,
+     "rl_s714": 0.36333333333333334,
+     "rl_s715": 0.38666666666666666
+    },
+    "heuristic_success": {
+     "b_fan": 0.38,
+     "b_spread": 0.07,
+     "b_cov": 0.4066666666666667
+    },
+    "H_star_preregistered": "b_fan",
+    "best_test5_heuristic": "b_cov",
+    "margin_student_minus_best_test5_heuristic": 0.03466666666666668,
+    "margin_student_minus_H_star": 0.06133333333333333,
+    "latency": {
+     "ratio_full_gstar_over_student_s701_median": 2523.17484877243,
+     "ratio_full_gstar_median_over_job2_student_medians": {
+      "702": 2149.8212849926495,
+      "703": 2131.2962400150695,
+      "704": 2083.1723824290684,
+      "705": 2124.8885416523935
+     },
+     "note": "ratio of medians, not paired; job-2 students timed in a different job"
+    }
+   },
+   "A16-2": {
+    "student_success_mean_from_diff": 0.488,
+    "student_success_mean_of_listed_seed_means": 0.488,
+    "rl_success_mean_from_diff": 0.22199999999999998,
+    "rl_seed_means_listed": {
+     "rl_s711": 0.29,
+     "rl_s712": 0.18666666666666668,
+     "rl_s713": 0.18333333333333332,
+     "rl_s714": 0.22333333333333333,
+     "rl_s715": 0.22666666666666666
+    },
+    "heuristic_success": {
+     "b_fan": 0.32,
+     "b_spread": 0.01,
+     "b_cov": 0.3433333333333333
+    },
+    "H_star_preregistered": "b_fan",
+    "best_test5_heuristic": "b_cov",
+    "margin_student_minus_best_test5_heuristic": 0.14466666666666667,
+    "margin_student_minus_H_star": 0.168,
+    "latency": {
+     "ratio_full_gstar_over_student_s701_median": 8301.417645934474,
+     "ratio_full_gstar_median_over_job2_student_medians": {
+      "702": 6674.353157829622,
+      "703": 6664.852229250687,
+      "704": 6688.423615665732,
+      "705": 6640.091505551228
+     },
+     "note": "ratio of medians, not paired; job-2 students timed in a different job"
+    }
+   }
+  },
+  "H5b_span_translation": {
+   "travel_span_rad": [
+    0.11123263962919303,
+    0.8212994329650907
+   ],
+   "span_rad": 0.7100667933358976,
+   "slope_times_span": -0.011152259157421728,
+   "ci95_times_span": [
+    -0.07393379130308364,
+    0.051669382335385115
+   ]
+  }
  }
 }
