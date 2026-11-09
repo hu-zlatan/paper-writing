@@ -418,3 +418,12 @@ Run order when both papers are active: AUTOPILOT §7.
   - **Where to resume (run 43):** stage 13 freeze note for p2 v1 (all result files, sha256) → stage 14 RESULT_ANALYSIS
     (fresh subagent, template verbatim) → stage 15 decision. Writing (stage 16) must start by ≈ 11-16 for the 12-04 RSS
     Stage 1 deadline.
+
+## Stage 13. ITERATIVE_REFINE     [v1]
+
+- **Finished:** 2026-11-09 (run 42). Plan `plans/stage_13_iterative_refine.md`, template `iterative_refine.md`.
+  13a: numpy-2 check 0 errors, tests 28 / 28; 13b: 0 / 194 run logs with NaN / Inf / RuntimeWarning / overflow → no
+  repair needed; 13c (improve) deliberately not used — the study is pre-registered, so weak or negative registered
+  outcomes are results, not things to tune away. Freeze: `results/v1/13_freeze.json` (sha256 of every result file).
+- **Next:** stage 14 RESULT_ANALYSIS (fresh subagent, `result_analysis.md` verbatim) → `results/14_analysis.md`.
+
