@@ -565,6 +565,10 @@ Run order when both papers are active: AUTOPILOT §7.
 - **B2 (probe + fixed margin, no calibration)**: test physical slip 0.9582 / 0.8257 / 0.6182 / 0.335 at m 0 / 0.25 /
   0.5 / 1.0 (D3 / D4 ≥ 0.619 even at m 1.0) — the bare Coulomb force is far below F\*; calibration is what sets the
   margin. Descriptive.
+- **B1 edge rule read (`results/v2/b_analysis_edge.json`, 08e-recipe grids, both arms off the grid edges):**
+  D(CertGrip-full vs CSF-proxy@0.2) = −0.0299 [−0.1903, 0.0816] → not shown (RE 0.4442 vs 0.4312; test slip 0.09 vs
+  0.0825). So a non-tactile friction prior with log-error 0.2 does as well as the probe at onset noise σ 0.2: the
+  paper must say the probe's value is "a friction estimate of about that quality", not touch per se.
 - **B3 (online, physical feedback)**: not started (pilot-gated; next run).
-- **Next (run 44):** read the edge-rule replays (`analysis_v2_b.py --edge`), B3 pilot → run or downscale; then stage 14
+- **Next (run 44):** B3 pilot → run or downscale; then stage 14
   [v2] (fresh subagent), 15, and stages 16–20 again on draft_v1 (v2 rows enter as secondary, v1 verdicts unchanged).
