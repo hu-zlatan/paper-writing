@@ -487,3 +487,11 @@ Run order when both papers are active: AUTOPILOT §7.
   classic citations) for stage 20.
 - Report-only rows: `code/tools_stage19_rows.py` → `results/v1/19_report_rows.json` (now in results_v1.json).
 - **Next:** stage 19 PAPER_REVISION (template `paper_revision.md`, fresh subagent, length-protected).
+
+## Stage 19. PAPER_REVISION     [v1] — pass 1
+
+- **Finished:** 2026-11-09 (run 43). Plan `plans/stage_19_paper_revision.md`; snapshot before
+  `paper/mypaper/v1/draft_v1_stage17.md`, after `v1/draft_v1_stage19pass1.md`. Template verbatim
+  (`build_stage19.py`), fresh opus subagent, targeted edits for merged items 1–10; E1–E5 only as limitations.
+- Words 7,333 → 9,639 (+31 %), no section shorter; number audit 0 unmatched; cite keys unchanged (52, all in cards).
+- +31 % > 30 % → **second stage-18 pass** (template rule) before stage 20.
