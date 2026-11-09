@@ -325,3 +325,12 @@ Run order when both papers are active: AUTOPILOT §7.
     at the heaviest noise σ 0.4 (σ\* = 0.4 is where H2a itself is weakest, 0.16).
   - **Next:** the remaining secondaries (H4a steps, H4c shuffle fits, D-μ, H2-T tail, H2-M no-mass, H3-B location
     prediction, UT3) → stage 13 freeze note → stage 14 RESULT_ANALYSIS.
+  - **H4a steps (secondary; `code/h4a_label_rule.py` committed before it was run; label-rule route, 2,000 draws,
+    CI\*\* 97.5 %, seed-0 predictors; `results/v1/h4a_label_rule.json`):** RE P 0.783, S 0.790, S+squeeze (full) 0.810,
+    +onset (full_rd σ 0.2) 0.426. S vs P D = −0.008 [−0.036, 0.013] → **equivalence** (±0.05): static touch adds nothing;
+    full vs S D = −0.026 [−0.056, 0.015] → **not confirmed** (±0.03): the squeeze probe adds nothing (the pilot
+    expectation stated in 08b §6), so the registered "probe-specific claim" is dropped for the squeeze; +onset D = 0.474
+    [0.415, 0.523] (no registered margin, reported only). Consistent with H2b: the gain comes from the ramp-down onset
+    estimate, not from static / squeeze touch features.
+  - **Still to do (paper 2 secondaries):** H4c shuffled-touch fits, D-μ, H2-T tail, H2-M no-mass fits, H3-B location
+    prediction, UT3 (new fits → Actions manifest), then stage 13 freeze note → stage 14.
