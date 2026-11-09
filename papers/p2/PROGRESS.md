@@ -427,3 +427,25 @@ Run order when both papers are active: AUTOPILOT §7.
   outcomes are results, not things to tune away. Freeze: `results/v1/13_freeze.json` (sha256 of every result file).
 - **Next:** stage 14 RESULT_ANALYSIS (fresh subagent, `result_analysis.md` verbatim) → `results/14_analysis.md`.
 
+## Stage 14. RESULT_ANALYSIS     [v1]
+
+- **Finished:** 2026-11-09 (run 42). Plan `plans/stage_14_result_analysis.md`; template `result_analysis.md` verbatim
+  (`docs/prompts/build_stage14.py` → `stage14_{system,user}.txt`, every analysis JSON unaltered + 08a–08h).
+  Pass 1: fresh opus subagent → `results/14_analysis_pass1.md`. Pass 2 (template's area-chair prompt verbatim): fresh
+  opus subagent re-checked every number against the JSON → `results/14_analysis_pass2.md`, 23 findings, no
+  fabrication. Merged `results/14_analysis.md` (audit binding). Main-session adjudication: 22 accepted; "H3-L not run"
+  rejected in part (it is in `h3_analysis.json`: S1 ρ−ρ_ID +0.0857 [−0.0444, 0.1859] → not confirmed).
+- Corrections to this file's run-42 notes, adopted from the audit: UT3's 160 / 160 includes 20 degenerate cells
+  (α 0.01, n 50: q̂ = ∞, miss 0) → 140 informative cells, all pass; H2-M (no mass / mass noise) is descriptive only
+  and must not be used for the friction story (08a / 08b); H1c is "not confirmed"; H2-T is a secondary.
+
+## Stage 15. RESEARCH_DECISION     [v1]
+
+- **Finished:** 2026-11-09 (run 42). Plan `plans/stage_15_research_decision.md`, template `research_decision.md` +
+  REFINE option → `results/15_decision.md`. **Decision: PROCEED**, re-scoped: the contribution is the friction-onset
+  probe + conformal calibration (H2a D 0.4168 [0.3484, 0.4778], robust on every route / seed / cell), with the
+  learned tactile model adding no demonstrated gain (H2b), H1-M failed, H3 inconclusive, and the H2-R scope limit
+  (D −0.261 when μ varies little). All three PROCEED hard rules met; REFINE rejected (the weak results are
+  pre-registered outcomes, not thin evidence); loops still owed via stages 18–20 / 25. Refine cycles used 0 / 3.
+- **Next (run 43):** stage 16 PAPER_OUTLINE for the RSS 2027 Stage 1 extended abstract (≤ 5 pages + references).
+
