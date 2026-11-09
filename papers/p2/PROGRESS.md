@@ -350,14 +350,29 @@ Run order when both papers are active: AUTOPILOT §7.
     prediction (S1 p_obs 0.304 vs 0.782; S1m 0.125 vs 0.213) — the onset probe partially tracks the friction change
     (not tested: 08b never specified its prediction). S3 p_obs 0.19–0.25 (up, as predicted). S2: no arm breaks
     (p_obs 0.094–0.096, CI\*\* within ±0.05 of α).
-  - **D-μ** (`results/v1/sec08f_dmu.json`, 500-draw 95 % intervals): residual CV R² of log μ — P 0.794, S 0.788, full
-    0.779 (no-probe touch does not see friction; the R² ≤ 0.05 premise for no-probe arms is *not* about these values —
-    08b's premise concerns the residual of the no-probe arms *containing* μ; read: the friction is left in their
-    residual), CSF-1 0.603; full_rd σ 0 / 0.1 / 0.2 / 0.4 = 0.011 / 0.045 / 0.214 / 0.566; onset-only σ 0.2 0.197;
-    CSF-μ̂ ≈ 0.003–0.006 at every σ; oracle 0.016. The learned onset arm leaves more friction in its residual than the
-    physics plug-in at σ ≥ 0.2 (it shrinks the noisy estimate), consistent with H2b.
+  - **D-μ** (`results/v1/sec08f_dmu.json`, 500-draw 95 % intervals): CV R² of log μ → each arm's residual — P 0.794,
+    S 0.788, full 0.779, CSF-1 0.603 (the friction variation stays in the residual of every no-onset arm: static and
+    squeeze touch do not see friction, which is the premise 07 / 08b state for no-probe arms; 08b measures it on the
+    residual, so the 07 "R² ≤ 0.05 of touch features" threshold is not on this scale and is not applied);
+    full_rd σ 0 / 0.1 / 0.2 / 0.4 = 0.011 / 0.045 / 0.214 / 0.566; onset-only σ 0.2 0.197; CSF-μ̂ 0.003–0.006 at every σ;
+    oracle 0.016. At σ ≥ 0.2 the learned onset arm leaves more friction in its residual than the physics plug-in
+    (it shrinks the noisy estimate), consistent with H2b.
   - **UT3** (`results/v1/sec08f_ut3.json`, 1,000 re-splits, K = 160 cells, z 3.60): **160 / 160 pass**; worst cell
     CSF-1 D3 α 0.01 n 500 (mean miss 0.0103, band [0.0073, 0.0107]). Re-split SD of miss ≤ 0.025 (n 500), ≤ 0.059
     (n 50). The label-rule pipeline is correct.
-  - H4c and H2-M fits running in the sandbox (`a010_full_rd_shuf_s0.2_seed0`, `a010_P_nomass_seed0`,
-    `a010_full_rd_nomass_s0.2_seed0`); then `secondaries_08f.py label`.
+  - **Fits** (sandbox, `OMP_NUM_THREADS=1`; two parallel processes with the default threads were ≈ 10× slower from
+    over-subscription and were restarted): `a010_full_rd_shuf_s0.2_seed0`, `a010_P_nomass_seed0`,
+    `a010_full_rd_nomass_s0.2_seed0`. Reproducibility check: refitting `a010_P_seed0` with one thread reproduced the
+    committed Actions predictions exactly (max |Δ| 0, same config, same CV pinball).
+  - **H4c** (`results/v1/sec08f_label.json`, label route): RE shuffled 0.803 vs P 0.783, D = −0.025 [−0.053, +0.009] →
+    **inconclusive** (lower limit 0.003 outside the ±0.05 equivalence band); the failure condition (shuffled beats P by
+    > 5 %) is clearly not met — no capacity / tuning artefact; permuted touch + onset features are at best useless.
+  - **H2-M, no mass** (COMP re-selected = CertGrip-P no mass, the only non-tactile candidate without mass): RE P 0.792,
+    CertGrip-full 0.428; D_nm = 0.460 [0.397, 0.506] vs with mass (label route, same draws) 0.456 [0.402, 0.507];
+    change +0.004 [−0.045, +0.040]. Removing the mass feature changes nothing for the learned arms. Mass-noise not run.
+  - **Gap found (honest record):** 07 §4 also pre-registered H1c, H2-C, H2-n, H2-H, H2-R, H3-S, H4b, H4d and the
+    diagnostics D-FID, D-loc and the oracle decomposition; none of them has been run yet, and earlier "still to do"
+    lists omitted them. They are cheap (existing labels / replays; H4b and D-FID need small new fits).
+  - **Where to resume (run 43):** addendum 08g (operational details for those items, before computing) → run them →
+    stage 13 freeze note → stage 14 RESULT_ANALYSIS (fresh subagent). Writing must start by ≈ 11-16 for the 12-04
+    RSS Stage 1 deadline.

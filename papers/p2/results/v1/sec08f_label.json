@@ -1,0 +1,68 @@
+{
+ "purpose": "08f \u00a72-3 H4c shuffled-touch and H2-M no-mass (label route)",
+ "arms": {
+  "P#0": {
+   "RE": 0.7830903768295072,
+   "slip_label": 0.11285714285714285
+  },
+  "full_rd@0.2#0": {
+   "RE": 0.426368634535423,
+   "slip_label": 0.10571428571428572
+  },
+  "full_rd_shuf@0.2#0": {
+   "RE": 0.8028855697290662,
+   "slip_label": 0.10392857142857143
+  },
+  "P_nomass#0": {
+   "RE": 0.7916533438414473,
+   "slip_label": 0.10857142857142857
+  },
+  "full_rd_nomass@0.2#0": {
+   "RE": 0.42767408152439407,
+   "slip_label": 0.10357142857142858
+  }
+ },
+ "contrasts": {
+  "H4c_shuf_vs_P": {
+   "target": "full_rd_shuf@0.2#0",
+   "comparator": "P#0",
+   "margin": 0.05,
+   "D": -0.02527829926821945,
+   "CI**": [
+    -0.05258564565157986,
+    0.008517042300417717
+   ],
+   "decision": "inconclusive"
+  },
+  "H2M_nomass_full_rd_vs_P": {
+   "target": "full_rd_nomass@0.2#0",
+   "comparator": "P_nomass#0",
+   "margin": null,
+   "D": 0.4597710161254004,
+   "CI**": [
+    0.39684035127556366,
+    0.5060974788127627
+   ],
+   "decision": "report only"
+  },
+  "H2M_ref_withmass_full_rd_vs_P": {
+   "target": "full_rd@0.2#0",
+   "comparator": "P#0",
+   "margin": null,
+   "D": 0.4555307444056983,
+   "CI**": [
+    0.40183000911728084,
+    0.5071802903324323
+   ],
+   "decision": "report only"
+  },
+  "H2M_change_nomass_minus_withmass": {
+   "value": 0.004240271719702093,
+   "CI**": [
+    -0.04462346756767428,
+    0.039910085018008
+   ]
+  }
+ },
+ "draws": 2000
+}
