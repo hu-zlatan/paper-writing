@@ -1590,3 +1590,8 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
   Escalation items filed in `OWNER_TODO.md` (run 40). Target: RSS 2027 Stage 1 extended abstract (12-04 AoE), draft
   ≈ 11-22, in `paper/` by 12-01; the owner submits or not.
 - **Next:** stage 16 PAPER_OUTLINE [v5] (`results/v5/15_decision.md` §4 lists the allowed / disallowed claims).
+- **Where to resume (run 41):** stage 16 PAPER_OUTLINE [v5] for the RSS Stage 1 extended abstract (≤ 5 pages body),
+  from `results/v5/14_analysis.md` + `15_decision.md` §4 (allowed / disallowed claims) with
+  `pipeline/references/topic_constraint_block.md`; the v4 condensed draft `paper/mypaper/sections/draft_v4_condensed.md`
+  is earlier material only (its numbers are v4). Then paper 2: read `p2_crc_v2` (Actions) via
+  `python papers/p2/code/analysis_crc.py --v2` once `--check`-complete, then H4 / D-μ / H2-T / H3-B secondaries → stage 14.

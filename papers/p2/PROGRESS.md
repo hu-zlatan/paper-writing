@@ -303,3 +303,6 @@ Run order when both papers are active: AUTOPILOT §7.
     plug-in that uses the same friction-onset estimate (H2b equivalent on the label route; CRC route biased by the grid).
   - **Next:** addendum 08e (post hoc, decided before its outcome): per-stratum-centred, wider λ-grid CRC replays for the
     plug-in and onset arms as a sensitivity check of H2b; then stage 13/14 (H4 diagnostics, D-μ, H2-T, H3-B).
+  - **Where to resume (run 41):** `p2_crc_v2` (60 jobs, dispatched ≈ 02:30 UTC) → `python analysis_crc.py --v2 --check`,
+    then `--v2` read-out → report per 08e's reporting rule. Then the remaining secondaries (H4a steps, H4c shuffle fits,
+    D-μ, H2-T tail, H2-M no-mass, H3-B location prediction, UT3) and stage 13/14 for paper 2.
