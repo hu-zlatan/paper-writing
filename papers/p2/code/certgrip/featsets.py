@@ -73,7 +73,31 @@ def privileged(r: dict) -> list:
             + [math.log(i["mu"]), math.log(i["mass"]), i["amp"], i["freq"], i["com"], i["grasp_dz"]] + size)
 
 
+def _group_seed(name: str) -> int:
+    import hashlib
+    return int(hashlib.sha256(name.encode()).hexdigest()[:8], 16)
+
+
+def shuffled(rows, no_mass: bool = False, sigma: float = SIGMA_PRIMARY) -> np.ndarray:
+    """Addendum 08f §2 (H4c): full_rd features whose non-P columns (static touch, preload-slip flag, squeeze probe,
+    onset) are permuted across rows within each (pool, shift, split, dist) group; P columns stay with their row.
+    The permutation of a group depends only on the group name and the sorted object keys in it (deterministic)."""
+    X = np.array([row_features(r, "full_rd", no_mass, sigma) for r in rows])
+    n_p = len(row_features(rows[0], "P", no_mass, sigma))
+    groups = {}
+    for i, r in enumerate(rows):
+        groups.setdefault((r["pool"], str(r.get("shift")), r["split"], r["dist"]), []).append(i)
+    for g, idx in groups.items():
+        idx = sorted(idx, key=lambda i: (rows[i]["family"], rows[i]["obj"]))
+        perm = np.random.default_rng(_group_seed("|".join(g))).permutation(len(idx))
+        src = np.array(idx)[perm]
+        X[np.array(idx), n_p:] = X[src, n_p:]
+    return X
+
+
 def matrix(rows, fset: str, no_mass: bool = False, sigma: float = SIGMA_PRIMARY) -> np.ndarray:
     if fset == "oracle":
         return np.array([privileged(r) for r in rows])
+    if fset == "full_rd_shuf":
+        return shuffled(rows, no_mass, sigma)
     return np.array([row_features(r, fset, no_mass, sigma) for r in rows])
