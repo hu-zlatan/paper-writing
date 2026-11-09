@@ -239,3 +239,21 @@ Run order when both papers are active: AUTOPILOT §7.
   Offline fits dispatched: `experiments/p2_fit_a010.json` (12 arms × 5 seeds, Actions run 185).
   **Where to resume (run 40):** fits landed → COMP selection script + commit → λ-grids + CRC replay command
   (`main.py crc`, cal + test × 20 λ for the §4 arms) → manifest → analysis script with a synthetic test → read-out.
+- **Run 40 (2026-11-09, from ≈ 02:00 UTC): 08c §5 steps 2–3.**
+  - Fits (Actions run 185, 12 arms × 5 seeds) all landed: `results/v1/preds/` (60 files, keys_sha256 matches the labels).
+  - **COMP selection** (`code/comp_selection.py`, test `tests/test_comp_selection.py`; selection split only, even/odd
+    object halves, label rule, α 0.10) → `results/v1/comp_selection.json`: CSF-1 RE 0.769, Mondrian-CSF 0.829,
+    CertGrip-P 0.834 → **COMP = CSF-1** (committed in 04c6343 before any cal / test statistic). The learned no-touch
+    model does not beat the one-parameter formula on the selection split. (08b §3 still says "objects 200–249" for the
+    selection split — stale text from before the pilot power rule moved the split; `split_of` and 08c use 150–199.)
+  - **λ-grids** (`code/crc_grids.py` → `results/v1/crc_grids.json`; selection split only): 14 arms — CertGrip-full seed 0
+    at σ 0 / 0.1 / 0.2 / 0.4, seeds 1–4 at σ 0.2 (decision made now: per-seed D under the CRC route too, so the 08c §3
+    secondary uses the same route as the primary), CSF-1 (COMP), CSF-μ̂ at the four σ, onset-only σ 0.2. q_sel ≈ 0.01–0.04
+    for the learned onset arms, 0.82 for CSF-1, 0.96–1.19 for CSF-μ̂.
+  - **`main.py crc`** (new command; sim / features / conformal code unchanged): protocol rd, 20 grid forces per arm,
+    identical forces replayed once; ≈ 3.6 s per instance in the sandbox; two identical smoke runs bit-identical (one
+    smoke shard printed the slip pattern of 4 calibration instances of F2 obj 200 — a code check, no statistic).
+    Manifest `experiments/p2_crc_v1.json` (60 jobs, 4,800 cal + test instances, ≈ 4.8 CPU-h) dispatched.
+  - **Next:** CRC analysis script (`analysis_crc.py`: per-stratum λ̂, RE, physical slip, D(H2a)/D(H2b), object-cluster
+    bootstrap 2,000 draws with λ̂ recomputed) + synthetic test, committed **before** reading the replay files; then the
+    read-out; then H1-V, H3 stream (OQT), H4 diagnostics.

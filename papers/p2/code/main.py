@@ -208,6 +208,53 @@ def cmd_fit(a):
     print(f"cv_pinball: {info['cv_pinball']:.5f}")
 
 
+def cmd_crc(a):
+    """08c §2: direct replays of one shard of id cal / test instances (protocol rd) at every arm's 20 grid forces
+    F = min(F_max, g e^lambda) from results/v1/crc_grids.json; one line per instance with slip[arm] (20 booleans).
+    Identical forces within an instance are replayed once. No label value is read."""
+    a.protocol = "rd"
+    G = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "results", "v1", "crc_grids.json")))
+    index = {tuple(k): i for i, k in enumerate(G["instances"])}
+    f_max = G["F_max"]
+    os.makedirs(os.path.dirname(os.path.abspath(a.out)), exist_ok=True)
+    t0, n, n_rep = time.time(), 0, 0
+    with open(a.out + ".jsonl", "w") as f:
+        h = header(a, "crc")
+        h.update({"grids_keys_sha256": G["keys_sha256"], "arms": list(G["arms"])})
+        f.write(json.dumps(h) + "\n")
+        for obj in range(a.start, a.start + a.count):
+            if time.time() - t0 > 0.8 * a.budget_minutes * 60:
+                f.write(json.dumps({"EARLY_STOP_AT_80_PCT_BUDGET": True, "next_index": obj}) + "\n")
+                print("EARLY_STOP_AT_80_PCT_BUDGET", flush=True)
+                break
+            for d in DISTS:
+                k = ("id", a.family, obj, d, None)
+                if k not in index:
+                    continue
+                i = index[k]
+                inst = make_instance("id", a.family, obj, d, None)
+                sim = Sim(inst, preload_force(), delta_t=SLIP["delta_t"], rot_t_deg=SLIP["rot_t_deg"], protocol="rd")
+                cache, slips, forces = {}, {}, {}
+                for arm, A in G["arms"].items():
+                    Fs = [min(f_max, math.exp(A["log_g"][i] + lam)) for lam in A["grid"]]
+                    out = []
+                    for F in Fs:
+                        fk = round(F, 9)
+                        if fk not in cache:
+                            cache[fk] = bool(sim.run(F)["slip"])
+                        out.append(cache[fk])
+                    slips[arm] = out
+                    forces[arm] = [round(F, 6) for F in Fs]
+                n += 1
+                n_rep += len(cache)
+                f.write(json.dumps({"key": list(k), "split": split_of("id", obj), "slip": slips, "F": forces,
+                                    "n_replays": len(cache)}) + "\n")
+                f.flush()
+    print(f"instances: {n}")
+    print(f"replays: {n_rep}")
+    print(f"seconds: {time.time() - t0:.1f}")
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser()
     sub = ap.add_subparsers(dest="cmd", required=True)
@@ -245,7 +292,16 @@ def main(argv=None):
     po.add_argument("--sigma", type=float, default=0.0)
     po.add_argument("--configs", type=int, default=30)
     po.add_argument("--out", required=True)
+    cr = sub.add_parser("crc", help="08c: CRC grid replays for one family x object range (id cal / test instances)")
+    cr.add_argument("--family", required=True, choices=["F1", "F2", "F3", "F4"])
+    cr.add_argument("--start", type=int, required=True)
+    cr.add_argument("--count", type=int, required=True)
+    cr.add_argument("--budget-minutes", type=float, default=25.0)
+    cr.add_argument("--out", required=True)
     a = ap.parse_args(argv)
+    if a.cmd == "crc":
+        cmd_crc(a)
+        return
     if a.cmd == "fit":
         cmd_fit(a)
         return
