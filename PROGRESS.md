@@ -1736,3 +1736,12 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
 - **Where to resume (run 42):** read AUTOPILOT §1 / issues for the owner's choice. Without one: the paper-level items
   above on `draft_v5.md`, then paper 2 (remaining secondaries → stage 13/14), which has its own cap and is the active
   research thread.
+
+## Run 43 (2026-11-09) — paper 1 check
+
+- No open issues and no new owner directive in AUTOPILOT §1 → paper 1 stays stopped at the v5 stage-20 decision
+  (OWNER_TODO run 41). No paper-1 files changed this run; the run went to paper 2 (stages 16–20, loop to v2 stage 13).
+- Note: on this run's start the local clone's main had diverged from origin/main (origin had been force-updated
+  before this run); the run reset its local copy to origin/main and pushed only fast-forward commits.
+- **Where to resume (run 44):** paper 1 — owner decision; meanwhile the low-risk items (3 [CITE-MISSING], Figure 1
+  panel D, internal identifiers). Paper 2 — `papers/p2/PROGRESS.md` (v2 stage 13: B3 pilot, then 14–20).
