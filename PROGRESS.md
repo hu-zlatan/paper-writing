@@ -1558,3 +1558,13 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
     `v5_gt_r1.json`, runs 187 / 188), plus two sandbox-computed files recomputed into `results/v5/test5_gt_check/`.
   - **Stage 14 v5 plan written before any test5 outcome** (`plans/stage_14_result_analysis_v5.md`) and a collector
     `code/tools_results_v5.py`. No test5 outcome read (counts only).
+  - **test5 complete** (f5 run 186 landed; g_T: runner jobs + the last 2 files in the sandbox; the 2-file
+    runner/sandbox check agrees to 1e-14) → **frozen read-out** `code/analysis_test5_v5.py` (written run 35) →
+    `results/v5/14_test5_analysis.json`; collector → `results/v5/results_v5.json`.
+    **H5a (test5, 300 episodes, 5 student seeds):** student − G\\* success S2 −2.5 pp [−7.6, 2.7], S4 −2.5 [−8.3, 3.3],
+    S8 −1.3 [−6.1, 3.7], S12 −1.5 [−6.3, 3.3], A16-2 −0.2 [−6.3, 6.1]; no Holm rejection in any cell (validation:
+    0 / 5 cells within δ, gaps 3–6 pp). **H5b:** slope −2.7 pp per 100° [−18.2, 12.7] → no trend detected over 5 cells.
+    **Student vs best heuristic H\\*:** +5.9 (S2, n.s.), +9.8 (S4), +7.1 (S8), +6.1 (S12), +16.8 pp (A16-2), Holm rejects
+    in 4 / 5. **Student vs RL (cfg 6) success:** +8.5 (S2), +5.5 (S4, CI touches 0), +3.2 (S8, n.s.), +7.3 (S12),
+    +26.6 pp (A16-2). **H2-v5** (g_T student − RL, LB > +0.10): only A16-2 (+0.83, LB 0.60); no inversion anywhere.
+    E5 (sub-16) flip rate 6.5–8 % moves the student − G\\* contrast by up to 3 pp — the size of every test5 gap.
