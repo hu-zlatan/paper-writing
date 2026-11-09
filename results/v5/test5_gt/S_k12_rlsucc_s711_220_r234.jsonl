@@ -1,0 +1,7 @@
+{"header": true, "args": {"cmd": "gt3", "src": ["../results/v5/test5/S_k12_rlsucc_s711_220_r234.jsonl"], "J": 16, "L": 4095, "out": "../results/v5/test5_gt/S_k12_rlsucc_s711_220_r234"}, "env": {"TOUCHBED_NPHI": "64", "action_set": "64x8", "A": 512, "numpy": "2.5.4", "python": "3.12.16", "threads": {"OMP_NUM_THREADS": "1", "OPENBLAS_NUM_THREADS": "1", "MKL_NUM_THREADS": "1"}}}
+{"episode": 234, "set": "S", "split": "test5", "kappa": 12.0, "tau": 4.9, "method": "rl", "g_T": -0.47219568314146443, "n_probes": 3, "J": 16, "L": 4095}
+{"episode": 235, "set": "S", "split": "test5", "kappa": 12.0, "tau": 4.9, "method": "rl", "g_T": 4.320813769223365, "n_probes": 3, "J": 16, "L": 4095}
+{"episode": 236, "set": "S", "split": "test5", "kappa": 12.0, "tau": 4.9, "method": "rl", "g_T": 8.180966510166623, "n_probes": 3, "J": 16, "L": 4095}
+{"episode": 237, "set": "S", "split": "test5", "kappa": 12.0, "tau": 4.9, "method": "rl", "g_T": 5.6418239814191224, "n_probes": 3, "J": 16, "L": 4095}
+{"episode": 238, "set": "S", "split": "test5", "kappa": 12.0, "tau": 4.9, "method": "rl", "g_T": 7.790467526088991, "n_probes": 3, "J": 16, "L": 4095}
+{"episode": 239, "set": "S", "split": "test5", "kappa": 12.0, "tau": 4.9, "method": "rl", "g_T": 8.03303040399011, "n_probes": 3, "J": 16, "L": 4095}
