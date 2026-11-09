@@ -1,0 +1,139 @@
+{
+ "purpose": "08h \u00a71 H1c uncalibrated targeters (CertGrip-full features), label slip on id test",
+ "results": {
+  "alpha_0.01": {
+   "RAW-Q": {
+    "slip": 0.033928571428571426,
+    "slip_minus_alpha": 0.023928571428571424,
+    "CI**": [
+     0.015714285714285715,
+     0.03214285714285714
+    ],
+    "outside_pm_0.5alpha": true,
+    "inside_pm_0.25alpha": false
+   },
+   "RAW-G": {
+    "slip": 0.019642857142857142,
+    "slip_minus_alpha": 0.009642857142857142,
+    "CI**": [
+     0.003571428571428571,
+     0.01607142857142857
+    ],
+    "outside_pm_0.5alpha": false,
+    "inside_pm_0.25alpha": false
+   },
+   "RAW-Qv": {
+    "slip": 0.012857142857142857,
+    "slip_minus_alpha": 0.0028571428571428567,
+    "CI**": [
+     -0.0067857142857142855,
+     0.024290178571428588
+    ],
+    "outside_pm_0.5alpha": false,
+    "inside_pm_0.25alpha": false
+   }
+  },
+  "alpha_0.05": {
+   "RAW-Q": {
+    "slip": 0.0825,
+    "slip_minus_alpha": 0.0325,
+    "CI**": [
+     0.020000000000000004,
+     0.0450044642857143
+    ],
+    "outside_pm_0.5alpha": false,
+    "inside_pm_0.25alpha": false
+   },
+   "RAW-G": {
+    "slip": 0.07857142857142857,
+    "slip_minus_alpha": 0.028571428571428567,
+    "CI**": [
+     0.01607142857142857,
+     0.042142857142857135
+    ],
+    "outside_pm_0.5alpha": false,
+    "inside_pm_0.25alpha": false
+   },
+   "RAW-Qv": {
+    "slip": 0.06607142857142857,
+    "slip_minus_alpha": 0.01607142857142857,
+    "CI**": [
+     -0.008928571428571432,
+     0.04643303571428573
+    ],
+    "outside_pm_0.5alpha": false,
+    "inside_pm_0.25alpha": false
+   }
+  },
+  "alpha_0.1": {
+   "RAW-Q": {
+    "slip": 0.13285714285714287,
+    "slip_minus_alpha": 0.03285714285714286,
+    "CI**": [
+     0.01678571428571428,
+     0.05035714285714285
+    ],
+    "outside_pm_0.5alpha": false,
+    "inside_pm_0.25alpha": false
+   },
+   "RAW-G": {
+    "slip": 0.14892857142857144,
+    "slip_minus_alpha": 0.04892857142857143,
+    "CI**": [
+     0.03142857142857142,
+     0.06857142857142856
+    ],
+    "outside_pm_0.5alpha": false,
+    "inside_pm_0.25alpha": false
+   },
+   "RAW-Qv": {
+    "slip": 0.1125,
+    "slip_minus_alpha": 0.012499999999999997,
+    "CI**": [
+     -0.022151785714285714,
+     0.058575892857142854
+    ],
+    "outside_pm_0.5alpha": false,
+    "inside_pm_0.25alpha": false
+   }
+  },
+  "alpha_0.2": {
+   "RAW-Q": {
+    "slip": 0.235,
+    "slip_minus_alpha": 0.034999999999999976,
+    "CI**": [
+     0.012857142857142845,
+     0.057499999999999996
+    ],
+    "outside_pm_0.5alpha": false,
+    "inside_pm_0.25alpha": false
+   },
+   "RAW-G": {
+    "slip": 0.2507142857142857,
+    "slip_minus_alpha": 0.05071428571428571,
+    "CI**": [
+     0.027142857142857135,
+     0.07500000000000001
+    ],
+    "outside_pm_0.5alpha": false,
+    "inside_pm_0.25alpha": false
+   },
+   "RAW-Qv": {
+    "slip": 0.23964285714285713,
+    "slip_minus_alpha": 0.03964285714285712,
+    "CI**": [
+     -0.012500000000000011,
+     0.08892857142857141
+    ],
+    "outside_pm_0.5alpha": false,
+    "inside_pm_0.25alpha": false
+   }
+  }
+ },
+ "miss_at_0.05": {
+  "RAW-Q": false,
+  "RAW-G": false
+ },
+ "decision": "partly confirmed / not confirmed",
+ "draws": 2000
+}

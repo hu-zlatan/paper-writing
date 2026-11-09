@@ -1,0 +1,24 @@
+{
+ "purpose": "08h \u00a74 D-FID family classification from touch-only features",
+ "results": {
+  "touch_only": {
+   "accuracy": 0.7257142857142858,
+   "CI95": [
+    0.7014285714285714,
+    0.7514285714285714
+   ],
+   "chance": 0.25,
+   "n_test": 2800
+  },
+  "touch_plus_onset": {
+   "accuracy": 0.7296428571428571,
+   "CI95": [
+    0.7078571428571429,
+    0.7544732142857143
+   ],
+   "chance": 0.25,
+   "n_test": 2800
+  }
+ },
+ "draws": 500
+}

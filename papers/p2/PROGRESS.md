@@ -391,7 +391,30 @@ Run order when both papers are active: AUTOPILOT §7.
   - **D-loc:** S1 is a pure location shift in F\* (mean Δlog F\* 0.509, SD 0.009, 2,794 pairs; Coulomb 0.511, 0). Under
     S1 the predictions of P / S / full move by < 0.2 % (touch does not see the friction change), CertGrip's by 44.7 %
     (the onset probe follows ≈ 2/3 of the e^0.51 − 1 = 67 % change). Preload-slip rate 0 in every pool.
-  - **Not yet run (need new fits / stream code, a further addendum first):** H1c (RAW-Q / RAW-Qv / RAW-G), H3-S, H4b,
-    D-FID, H2-M mass-noise.
-  - **Where to resume (run 43):** addendum 08h for those five → run → stage 13 freeze note → stage 14 RESULT_ANALYSIS
-    (fresh subagent). Writing must start by ≈ 11-16 for the 12-04 RSS Stage 1 deadline.
+  - **Last batch: addendum `docs/08h_secondaries_batch3.md`** (before any fit), code (`_fid` / `_mn` feature sets,
+    `touch_only`, `main.py fitg`, `secondaries_08h.py`; tests 28 / 28) committed before running. 8 new seed-0 fits on
+    the id train objects in the sandbox (`OMP_NUM_THREADS=1`): `a001/a005/a020_full_rd_s0.2`, `g_full_rd_s0.2` (RAW-G,
+    config of the α 0.10 search), `a010_P_fid`, `a010_full_rd_fid_s0.2`, `a010_P_mn`, `a010_full_rd_mn_s0.2`.
+  - **H1c** (`results/v1/sec08h_h1c.json`, label slip of uncalibrated targeters on id test, CI\*\* of slip − α):
+    RAW-Q 3.4 / 8.3 / 13.3 / 23.5 % at α 1 / 5 / 10 / 20 %; RAW-G 2.0 / 7.9 / 14.9 / 25.1 %; RAW-Qv (log-shift variant,
+    deviation stated in 08h) 1.3 / 6.6 / 11.3 / 24.0 %. RAW-Q and RAW-G under-cover at every α (CI\*\* lower > 0), but at
+    α 0.05 their CI\*\* (RAW-Q [+0.020, +0.045], RAW-G [+0.016, +0.042]) does not exclude ±0.025 → the registered
+    "miss by ≥ 0.5α" prediction is **not confirmed**; the failure condition (all inside ±0.25α) is not met either. RAW-Qv
+    is indistinguishable from α everywhere (CI\*\* includes 0). Honest read: in distribution, a validation-tuned
+    quantile is roughly enough; the uncalibrated learners miss by 1.3–3.4× at α 0.01 and by about +3 points elsewhere.
+  - **H3-S** (`results/v1/sec08h_h3s.json`, 20 orderings, 2,000 draws): extra slips Σ(slip − α) over shifted steps
+    1–500, constant vs decaying η — S1 19.3 vs 77.5, ΔC 58.2 [48.2, 70.2]; S3 18.6 vs 61.0, ΔC 42.4 [32.4, 49.4] →
+    **confirmed**; S2 ΔC 2.9 [−6.7, 7.0], S1m 2.8 [−2.1, 11.9] → inconclusive (small shifts).
+  - **H4b** (`results/v1/sec08h_h4b.json`): with family ID given to both arms D_FID = 0.464 [0.394, 0.514] vs D = 0.456
+    [0.393, 0.513]; D_FID − 0.5 D = 0.236 [0.196, 0.261] → **confirmed**: the touch gain is not a family identifier.
+  - **D-FID** (`results/v1/sec08h_dfid.json`): touch-only features identify the family with accuracy 0.726 [0.701,
+    0.751] (chance 0.25; + onset 0.730) — touch does carry family information, but H4b shows the gain does not come
+    from it.
+  - **H2-M mass-noise** (`results/v1/sec08h_massnoise.json`): COMP re-selected on the selection split = CSF-1 (noisy
+    mass; RE 0.761 vs Mondrian 0.897, P 0.892). RE CertGrip-mn 0.431 vs CSF-1-mn 0.799: D_mn 0.460 [0.411, 0.505] vs
+    noise-free D(H2a, label) 0.429 [0.373, 0.482]; change +0.031 [−0.008, +0.071]. 10 % mass noise hurts the formula
+    more than the learner.
+  - **All 07 §4 secondaries and diagnostics have now been run** (H2-M fully, both conditions).
+  - **Where to resume (run 43):** stage 13 freeze note for p2 v1 (all result files, sha256) → stage 14 RESULT_ANALYSIS
+    (fresh subagent, template verbatim) → stage 15 decision. Writing (stage 16) must start by ≈ 11-16 for the 12-04 RSS
+    Stage 1 deadline.

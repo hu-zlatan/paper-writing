@@ -1,0 +1,47 @@
+{
+ "purpose": "08h \u00a72 H3-S cumulative (slip - alpha) over shifted steps 1-500, decay minus constant eta",
+ "eta": 0.03412492930534316,
+ "results": {
+  "S1": {
+   "C_constant": 19.3,
+   "C_decay": 77.45,
+   "Delta_C": 58.150000000000006,
+   "CI**": [
+    48.20000000000001,
+    70.20062500000002
+   ],
+   "decision": "confirmed (lower > 0)"
+  },
+  "S2": {
+   "C_constant": -1.3000000000000007,
+   "C_decay": 1.599999999999999,
+   "Delta_C": 2.8999999999999995,
+   "CI**": [
+    -6.650624999999999,
+    7.000625000000004
+   ],
+   "decision": "inconclusive"
+  },
+  "S3": {
+   "C_constant": 18.599999999999994,
+   "C_decay": 61.0,
+   "Delta_C": 42.400000000000006,
+   "CI**": [
+    32.400000000000006,
+    49.35
+   ],
+   "decision": "confirmed (lower > 0)"
+  },
+  "S1m": {
+   "C_constant": 1.799999999999999,
+   "C_decay": 4.549999999999999,
+   "Delta_C": 2.75,
+   "CI**": [
+    -2.0506249999999993,
+    11.85
+   ],
+   "decision": "inconclusive"
+  }
+ },
+ "draws": 2000
+}
