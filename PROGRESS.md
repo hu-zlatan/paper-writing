@@ -9,7 +9,7 @@
 **Topic:** Amortized, non-myopic active tactile localization (TouchBED)
 **Initialised:** 2026-10-28T07:56:44Z
 **Current version:** v5
-**Latest stage:** Stage 15 RESEARCH_DECISION [v5] = PROCEED (measurement paper) → next stage 16 PAPER_OUTLINE [v5]; see run 40 at the end of this file
+**Latest stage:** Stage 16 PAPER_OUTLINE [v5] done (run 41) → next stage 17 PAPER_DRAFT [v5]; see run 41 at the end of this file
 
 ---
 
@@ -1624,6 +1624,12 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
   next to every `rl_success` number; amendment v5.0 E2 pre-declared a last-checkpoint sensitivity row for students —
   neither is in `results_v5.json` yet (report-only extraction from existing files, no new runs); no claim scope exists
   for a latency–accuracy frontier → only reduced-planner timings are reported.
+- **Report-only extractions done (same run):** `code/tools_report_rows_v5.py` → `results/v5/16_report_rows.json`
+  (collected into `results_v5.json`): `rl_success` training episodes per seed (S2 711–715: 123,392 / 124,672 /
+  181,760 / 200,192 / 125,440; S12: 184,576 / 113,408 / 111,104 / 162,304 / 165,888; 9 / 10 time-guard stops — matches
+  addendum v5.1c) and the E2 last-checkpoint sensitivity row (held-out label regret R̄ of the kept vs last-epoch
+  checkpoint, every cell / seed / round; the last-epoch R̄ is higher in every one of the 75 rows). No success
+  evaluation of last checkpoints exists and none is run.
 - **Where to resume (run 42):** stage 17 PAPER_DRAFT [v5] (template `paper_draft.md`, fresh subagent, outline +
-  `results_v5.json` + knowledge cards), after the two report-only extractions above. Paper 2: remaining secondaries →
+  `results_v5.json` + knowledge cards). Paper 2: remaining secondaries →
   stage 13/14.

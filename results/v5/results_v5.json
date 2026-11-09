@@ -3141,5 +3141,807 @@
     0.051669382335385115
    ]
   }
+ },
+ "16_report_rows.json": {
+  "provenance": "extracted unchanged from training logs; report-only, not a hypothesis test",
+  "rl_success": {
+   "S_k12_rlsucc_cfg6_sd711": {
+    "status": "EARLY_STOP_AT_80_PCT_BUDGET",
+    "episodes_trained": 184576,
+    "plateau_at": 112640,
+    "wall_s": 15854.12595796585
+   },
+   "S_k12_rlsucc_cfg6_sd712": {
+    "status": "EARLY_STOP_AT_80_PCT_BUDGET",
+    "episodes_trained": 113408,
+    "plateau_at": null,
+    "wall_s": 15873.429614543915
+   },
+   "S_k12_rlsucc_cfg6_sd713": {
+    "status": "EARLY_STOP_AT_80_PCT_BUDGET",
+    "episodes_trained": 111104,
+    "plateau_at": null,
+    "wall_s": 15858.881291389465
+   },
+   "S_k12_rlsucc_cfg6_sd714": {
+    "status": "EARLY_STOP_AT_80_PCT_BUDGET",
+    "episodes_trained": 162304,
+    "plateau_at": 112640,
+    "wall_s": 15854.3397564888
+   },
+   "S_k12_rlsucc_cfg6_sd715": {
+    "status": "EARLY_STOP_AT_80_PCT_BUDGET",
+    "episodes_trained": 165888,
+    "plateau_at": null,
+    "wall_s": 15864.309572696686
+   },
+   "S_k2_rlsucc_cfg6_sd711": {
+    "status": "EARLY_STOP_AT_80_PCT_BUDGET",
+    "episodes_trained": 123392,
+    "plateau_at": 112640,
+    "wall_s": 15853.185495376587
+   },
+   "S_k2_rlsucc_cfg6_sd712": {
+    "status": "EARLY_STOP_AT_80_PCT_BUDGET",
+    "episodes_trained": 124672,
+    "plateau_at": 102400,
+    "wall_s": 15855.370569229126
+   },
+   "S_k2_rlsucc_cfg6_sd713": {
+    "status": "EARLY_STOP_AT_80_PCT_BUDGET",
+    "episodes_trained": 181760,
+    "plateau_at": 112640,
+    "wall_s": 15861.571291923523
+   },
+   "S_k2_rlsucc_cfg6_sd714": {
+    "status": "max_episodes",
+    "episodes_trained": 200192,
+    "plateau_at": 112640,
+    "wall_s": 13454.812042951584
+   },
+   "S_k2_rlsucc_cfg6_sd715": {
+    "status": "EARLY_STOP_AT_80_PCT_BUDGET",
+    "episodes_trained": 125440,
+    "plateau_at": 112640,
+    "wall_s": 15859.252221107483
+   }
+  },
+  "student_checkpoint_sensitivity": {
+   "A16_k2": {
+    "701": {
+     "r0": {
+      "keep": "best",
+      "best_epoch": 54,
+      "status": "max_epochs",
+      "R_bar_kept": 0.11752336875098471,
+      "R_bar_last": 0.12431510414603401,
+      "n_val_decisions": 880,
+      "R_bar_last_minus_kept": 0.006791735395049306
+     },
+     "r1": {
+      "keep": "best",
+      "best_epoch": 37,
+      "status": "max_epochs",
+      "R_bar_kept": 0.11733749996223036,
+      "R_bar_last": 0.134620100653615,
+      "n_val_decisions": 880,
+      "R_bar_last_minus_kept": 0.017282600691384625
+     },
+     "r2": {
+      "keep": "best",
+      "best_epoch": 0,
+      "status": "max_epochs",
+      "R_bar_kept": 0.11528693236141178,
+      "R_bar_last": 0.13539591906610746,
+      "n_val_decisions": 880,
+      "R_bar_last_minus_kept": 0.020108986704695672
+     }
+    },
+    "702": {
+     "r0": {
+      "keep": "best",
+      "best_epoch": 96,
+      "status": "max_epochs",
+      "R_bar_kept": 0.11287087751738276,
+      "R_bar_last": 0.13156971833575826,
+      "n_val_decisions": 880,
+      "R_bar_last_minus_kept": 0.0186988408183755
+     },
+     "r1": {
+      "keep": "best",
+      "best_epoch": 2,
+      "status": "max_epochs",
+      "R_bar_kept": 0.11503698567417091,
+      "R_bar_last": 0.1366918691224236,
+      "n_val_decisions": 880,
+      "R_bar_last_minus_kept": 0.021654883448252685
+     },
+     "r2": {
+      "keep": "best",
+      "best_epoch": 14,
+      "status": "max_epochs",
+      "R_bar_kept": 0.11550014815967886,
+      "R_bar_last": 0.12788881232328403,
+      "n_val_decisions": 880,
+      "R_bar_last_minus_kept": 0.012388664163605165
+     }
+    },
+    "703": {
+     "r0": {
+      "keep": "best",
+      "best_epoch": 121,
+      "status": "max_epochs",
+      "R_bar_kept": 0.11736575830363064,
+      "R_bar_last": 0.12050642331051022,
+      "n_val_decisions": 880,
+      "R_bar_last_minus_kept": 0.003140665006879581
+     },
+     "r1": {
+      "keep": "best",
+      "best_epoch": 11,
+      "status": "max_epochs",
+      "R_bar_kept": 0.11722267060727494,
+      "R_bar_last": 0.12975053680198376,
+      "n_val_decisions": 880,
+      "R_bar_last_minus_kept": 0.012527866194708817
+     },
+     "r2": {
+      "keep": "best",
+      "best_epoch": 47,
+      "status": "max_epochs",
+      "R_bar_kept": 0.11730095738904735,
+      "R_bar_last": 0.13143195259210114,
+      "n_val_decisions": 880,
+      "R_bar_last_minus_kept": 0.01413099520305379
+     }
+    },
+    "704": {
+     "r0": {
+      "keep": "best",
+      "best_epoch": 95,
+      "status": "max_epochs",
+      "R_bar_kept": 0.11535110951259242,
+      "R_bar_last": 0.13000949741849052,
+      "n_val_decisions": 880,
+      "R_bar_last_minus_kept": 0.014658387905898101
+     },
+     "r1": {
+      "keep": "best",
+      "best_epoch": 55,
+      "status": "max_epochs",
+      "R_bar_kept": 0.11516237160616524,
+      "R_bar_last": 0.12887112203963022,
+      "n_val_decisions": 880,
+      "R_bar_last_minus_kept": 0.013708750433464978
+     },
+     "r2": {
+      "keep": "best",
+      "best_epoch": 29,
+      "status": "max_epochs",
+      "R_bar_kept": 0.11228879919372141,
+      "R_bar_last": 0.12536241042479163,
+      "n_val_decisions": 880,
+      "R_bar_last_minus_kept": 0.013073611231070217
+     }
+    },
+    "705": {
+     "r0": {
+      "keep": "best",
+      "best_epoch": 84,
+      "status": "max_epochs",
+      "R_bar_kept": 0.11784050672857524,
+      "R_bar_last": 0.12687169444580781,
+      "n_val_decisions": 880,
+      "R_bar_last_minus_kept": 0.009031187717232575
+     },
+     "r1": {
+      "keep": "best",
+      "best_epoch": 24,
+      "status": "max_epochs",
+      "R_bar_kept": 0.11400201526352531,
+      "R_bar_last": 0.12619829172699853,
+      "n_val_decisions": 880,
+      "R_bar_last_minus_kept": 0.012196276463473224
+     },
+     "r2": {
+      "keep": "best",
+      "best_epoch": 28,
+      "status": "max_epochs",
+      "R_bar_kept": 0.11615027410922865,
+      "R_bar_last": 0.12919191464216767,
+      "n_val_decisions": 880,
+      "R_bar_last_minus_kept": 0.01304164053293902
+     }
+    }
+   },
+   "S_k12": {
+    "701": {
+     "r0": {
+      "keep": "best",
+      "best_epoch": 72,
+      "status": "max_epochs",
+      "R_bar_kept": 0.1764047081179293,
+      "R_bar_last": 0.18413889685470272,
+      "n_val_decisions": 1196,
+      "R_bar_last_minus_kept": 0.007734188736773423
+     },
+     "r1": {
+      "keep": "best",
+      "best_epoch": 50,
+      "status": "max_epochs",
+      "R_bar_kept": 0.1764871532466402,
+      "R_bar_last": 0.19524356847309604,
+      "n_val_decisions": 1196,
+      "R_bar_last_minus_kept": 0.018756415226455853
+     },
+     "r2": {
+      "keep": "best",
+      "best_epoch": 70,
+      "status": "max_epochs",
+      "R_bar_kept": 0.17297084856680142,
+      "R_bar_last": 0.19197234293422935,
+      "n_val_decisions": 1196,
+      "R_bar_last_minus_kept": 0.01900149436742793
+     }
+    },
+    "702": {
+     "r0": {
+      "keep": "best",
+      "best_epoch": 68,
+      "status": "max_epochs",
+      "R_bar_kept": 0.16778568232552132,
+      "R_bar_last": 0.19078273406792096,
+      "n_val_decisions": 1196,
+      "R_bar_last_minus_kept": 0.022997051742399632
+     },
+     "r1": {
+      "keep": "best",
+      "best_epoch": 32,
+      "status": "max_epochs",
+      "R_bar_kept": 0.1672909387621062,
+      "R_bar_last": 0.18727131813341547,
+      "n_val_decisions": 1196,
+      "R_bar_last_minus_kept": 0.019980379371309254
+     },
+     "r2": {
+      "keep": "best",
+      "best_epoch": 43,
+      "status": "max_epochs",
+      "R_bar_kept": 0.16736856944369782,
+      "R_bar_last": 0.1845359190125469,
+      "n_val_decisions": 1196,
+      "R_bar_last_minus_kept": 0.017167349568849077
+     }
+    },
+    "703": {
+     "r0": {
+      "keep": "best",
+      "best_epoch": 93,
+      "status": "max_epochs",
+      "R_bar_kept": 0.17445133752354297,
+      "R_bar_last": 0.18814968702686496,
+      "n_val_decisions": 1196,
+      "R_bar_last_minus_kept": 0.013698349503321994
+     },
+     "r1": {
+      "keep": "best",
+      "best_epoch": 45,
+      "status": "max_epochs",
+      "R_bar_kept": 0.17527285345396632,
+      "R_bar_last": 0.19782994098252307,
+      "n_val_decisions": 1196,
+      "R_bar_last_minus_kept": 0.022557087528556757
+     },
+     "r2": {
+      "keep": "best",
+      "best_epoch": 4,
+      "status": "max_epochs",
+      "R_bar_kept": 0.17652889474944844,
+      "R_bar_last": 0.1956786640507032,
+      "n_val_decisions": 1196,
+      "R_bar_last_minus_kept": 0.019149769301254754
+     }
+    },
+    "704": {
+     "r0": {
+      "keep": "best",
+      "best_epoch": 187,
+      "status": "max_epochs",
+      "R_bar_kept": 0.16469820116501166,
+      "R_bar_last": 0.1777249288404331,
+      "n_val_decisions": 1196,
+      "R_bar_last_minus_kept": 0.013026727675421429
+     },
+     "r1": {
+      "keep": "best",
+      "best_epoch": 80,
+      "status": "max_epochs",
+      "R_bar_kept": 0.16574241627652458,
+      "R_bar_last": 0.1831941145612276,
+      "n_val_decisions": 1196,
+      "R_bar_last_minus_kept": 0.017451698284703027
+     },
+     "r2": {
+      "keep": "best",
+      "best_epoch": 41,
+      "status": "max_epochs",
+      "R_bar_kept": 0.1647393756811431,
+      "R_bar_last": 0.18327541769842995,
+      "n_val_decisions": 1196,
+      "R_bar_last_minus_kept": 0.01853604201728684
+     }
+    },
+    "705": {
+     "r0": {
+      "keep": "best",
+      "best_epoch": 187,
+      "status": "max_epochs",
+      "R_bar_kept": 0.1756269505733411,
+      "R_bar_last": 0.18415294043984862,
+      "n_val_decisions": 1196,
+      "R_bar_last_minus_kept": 0.008525989866507516
+     },
+     "r1": {
+      "keep": "best",
+      "best_epoch": 3,
+      "status": "max_epochs",
+      "R_bar_kept": 0.1777921323563681,
+      "R_bar_last": 0.19501720488329868,
+      "n_val_decisions": 1196,
+      "R_bar_last_minus_kept": 0.01722507252693059
+     },
+     "r2": {
+      "keep": "best",
+      "best_epoch": 50,
+      "status": "max_epochs",
+      "R_bar_kept": 0.17179389359861308,
+      "R_bar_last": 0.19118127660620796,
+      "n_val_decisions": 1196,
+      "R_bar_last_minus_kept": 0.019387383007594877
+     }
+    }
+   },
+   "S_k2": {
+    "701": {
+     "r0": {
+      "keep": "best",
+      "best_epoch": 89,
+      "status": "max_epochs",
+      "R_bar_kept": 0.2847828756235211,
+      "R_bar_last": 0.30898307678891873,
+      "n_val_decisions": 1161,
+      "R_bar_last_minus_kept": 0.024200201165397617
+     },
+     "r1": {
+      "keep": "best",
+      "best_epoch": 73,
+      "status": "max_epochs",
+      "R_bar_kept": 0.2847979884926376,
+      "R_bar_last": 0.29687545179866404,
+      "n_val_decisions": 1161,
+      "R_bar_last_minus_kept": 0.012077463306026437
+     },
+     "r2": {
+      "keep": "best",
+      "best_epoch": 124,
+      "status": "max_epochs",
+      "R_bar_kept": 0.2814141425721637,
+      "R_bar_last": 0.29379344600358576,
+      "n_val_decisions": 1161,
+      "R_bar_last_minus_kept": 0.012379303431422073
+     }
+    },
+    "702": {
+     "r0": {
+      "keep": "best",
+      "best_epoch": 46,
+      "status": "max_epochs",
+      "R_bar_kept": 0.28366353838101505,
+      "R_bar_last": 0.31026959086127703,
+      "n_val_decisions": 1161,
+      "R_bar_last_minus_kept": 0.026606052480261988
+     },
+     "r1": {
+      "keep": "best",
+      "best_epoch": 10,
+      "status": "max_epochs",
+      "R_bar_kept": 0.28286338099001745,
+      "R_bar_last": 0.31135193762244484,
+      "n_val_decisions": 1161,
+      "R_bar_last_minus_kept": 0.028488556632427386
+     },
+     "r2": {
+      "keep": "best",
+      "best_epoch": 8,
+      "status": "max_epochs",
+      "R_bar_kept": 0.28433400898441125,
+      "R_bar_last": 0.3029133314292382,
+      "n_val_decisions": 1161,
+      "R_bar_last_minus_kept": 0.018579322444826962
+     }
+    },
+    "703": {
+     "r0": {
+      "keep": "best",
+      "best_epoch": 39,
+      "status": "max_epochs",
+      "R_bar_kept": 0.28032406769848595,
+      "R_bar_last": 0.3037396547884554,
+      "n_val_decisions": 1161,
+      "R_bar_last_minus_kept": 0.023415587089969436
+     },
+     "r1": {
+      "keep": "best",
+      "best_epoch": 43,
+      "status": "max_epochs",
+      "R_bar_kept": 0.2847140971481099,
+      "R_bar_last": 0.30010029371716085,
+      "n_val_decisions": 1161,
+      "R_bar_last_minus_kept": 0.015386196569050936
+     },
+     "r2": {
+      "keep": "best",
+      "best_epoch": 50,
+      "status": "max_epochs",
+      "R_bar_kept": 0.283882720467071,
+      "R_bar_last": 0.29533849736320394,
+      "n_val_decisions": 1161,
+      "R_bar_last_minus_kept": 0.011455776896132919
+     }
+    },
+    "704": {
+     "r0": {
+      "keep": "best",
+      "best_epoch": 68,
+      "status": "max_epochs",
+      "R_bar_kept": 0.28231838003548526,
+      "R_bar_last": 0.2892599087659918,
+      "n_val_decisions": 1161,
+      "R_bar_last_minus_kept": 0.006941528730506519
+     },
+     "r1": {
+      "keep": "best",
+      "best_epoch": 4,
+      "status": "max_epochs",
+      "R_bar_kept": 0.27728394799276224,
+      "R_bar_last": 0.30477219419136176,
+      "n_val_decisions": 1161,
+      "R_bar_last_minus_kept": 0.02748824619859952
+     },
+     "r2": {
+      "keep": "best",
+      "best_epoch": 7,
+      "status": "max_epochs",
+      "R_bar_kept": 0.27756100328879046,
+      "R_bar_last": 0.29537119450292554,
+      "n_val_decisions": 1161,
+      "R_bar_last_minus_kept": 0.017810191214135074
+     }
+    },
+    "705": {
+     "r0": {
+      "keep": "best",
+      "best_epoch": 106,
+      "status": "max_epochs",
+      "R_bar_kept": 0.2805292145520537,
+      "R_bar_last": 0.29900252913833664,
+      "n_val_decisions": 1161,
+      "R_bar_last_minus_kept": 0.01847331458628293
+     },
+     "r1": {
+      "keep": "best",
+      "best_epoch": 9,
+      "status": "max_epochs",
+      "R_bar_kept": 0.28571206328358656,
+      "R_bar_last": 0.30492298971735904,
+      "n_val_decisions": 1161,
+      "R_bar_last_minus_kept": 0.01921092643377248
+     },
+     "r2": {
+      "keep": "best",
+      "best_epoch": 5,
+      "status": "max_epochs",
+      "R_bar_kept": 0.28573422247561925,
+      "R_bar_last": 0.28600953351268155,
+      "n_val_decisions": 1161,
+      "R_bar_last_minus_kept": 0.000275311037062298
+     }
+    }
+   },
+   "S_k4": {
+    "701": {
+     "r0": {
+      "keep": "best",
+      "best_epoch": 44,
+      "status": "max_epochs",
+      "R_bar_kept": 0.23573089394645935,
+      "R_bar_last": 0.25110712591747236,
+      "n_val_decisions": 1180,
+      "R_bar_last_minus_kept": 0.01537623197101301
+     },
+     "r1": {
+      "keep": "best",
+      "best_epoch": 40,
+      "status": "max_epochs",
+      "R_bar_kept": 0.2367612333052816,
+      "R_bar_last": 0.25445139151119567,
+      "n_val_decisions": 1180,
+      "R_bar_last_minus_kept": 0.017690158205914075
+     },
+     "r2": {
+      "keep": "best",
+      "best_epoch": 17,
+      "status": "max_epochs",
+      "R_bar_kept": 0.23776414152357847,
+      "R_bar_last": 0.24763420881583395,
+      "n_val_decisions": 1180,
+      "R_bar_last_minus_kept": 0.00987006729225548
+     }
+    },
+    "702": {
+     "r0": {
+      "keep": "best",
+      "best_epoch": 74,
+      "status": "max_epochs",
+      "R_bar_kept": 0.22992841161465288,
+      "R_bar_last": 0.2514801241807554,
+      "n_val_decisions": 1180,
+      "R_bar_last_minus_kept": 0.0215517125661025
+     },
+     "r1": {
+      "keep": "best",
+      "best_epoch": 11,
+      "status": "max_epochs",
+      "R_bar_kept": 0.2319507779609131,
+      "R_bar_last": 0.24900975179791515,
+      "n_val_decisions": 1180,
+      "R_bar_last_minus_kept": 0.017058973837002056
+     },
+     "r2": {
+      "keep": "best",
+      "best_epoch": 126,
+      "status": "max_epochs",
+      "R_bar_kept": 0.2229995093642322,
+      "R_bar_last": 0.24218930441366368,
+      "n_val_decisions": 1180,
+      "R_bar_last_minus_kept": 0.01918979504943147
+     }
+    },
+    "703": {
+     "r0": {
+      "keep": "best",
+      "best_epoch": 65,
+      "status": "max_epochs",
+      "R_bar_kept": 0.2349033348222046,
+      "R_bar_last": 0.2611469906832821,
+      "n_val_decisions": 1180,
+      "R_bar_last_minus_kept": 0.02624365586107752
+     },
+     "r1": {
+      "keep": "best",
+      "best_epoch": 27,
+      "status": "max_epochs",
+      "R_bar_kept": 0.23224439471708497,
+      "R_bar_last": 0.26396393834091336,
+      "n_val_decisions": 1180,
+      "R_bar_last_minus_kept": 0.031719543623828395
+     },
+     "r2": {
+      "keep": "best",
+      "best_epoch": 36,
+      "status": "max_epochs",
+      "R_bar_kept": 0.23283472495458424,
+      "R_bar_last": 0.2528960200544377,
+      "n_val_decisions": 1180,
+      "R_bar_last_minus_kept": 0.020061295099853438
+     }
+    },
+    "704": {
+     "r0": {
+      "keep": "best",
+      "best_epoch": 97,
+      "status": "max_epochs",
+      "R_bar_kept": 0.22977276502276633,
+      "R_bar_last": 0.24945969070504276,
+      "n_val_decisions": 1180,
+      "R_bar_last_minus_kept": 0.019686925682276424
+     },
+     "r1": {
+      "keep": "best",
+      "best_epoch": 6,
+      "status": "max_epochs",
+      "R_bar_kept": 0.22813737215938998,
+      "R_bar_last": 0.24470037846854367,
+      "n_val_decisions": 1180,
+      "R_bar_last_minus_kept": 0.016563006309153694
+     },
+     "r2": {
+      "keep": "best",
+      "best_epoch": 10,
+      "status": "max_epochs",
+      "R_bar_kept": 0.22672452734132212,
+      "R_bar_last": 0.24250281045189853,
+      "n_val_decisions": 1180,
+      "R_bar_last_minus_kept": 0.015778283110576413
+     }
+    },
+    "705": {
+     "r0": {
+      "keep": "best",
+      "best_epoch": 92,
+      "status": "max_epochs",
+      "R_bar_kept": 0.2313543006534152,
+      "R_bar_last": 0.25593077809862663,
+      "n_val_decisions": 1180,
+      "R_bar_last_minus_kept": 0.024576477445211437
+     },
+     "r1": {
+      "keep": "best",
+      "best_epoch": 23,
+      "status": "max_epochs",
+      "R_bar_kept": 0.2275801970710726,
+      "R_bar_last": 0.25173003367272295,
+      "n_val_decisions": 1180,
+      "R_bar_last_minus_kept": 0.02414983660165035
+     },
+     "r2": {
+      "keep": "best",
+      "best_epoch": 14,
+      "status": "max_epochs",
+      "R_bar_kept": 0.22951259199993848,
+      "R_bar_last": 0.23882126633735185,
+      "n_val_decisions": 1180,
+      "R_bar_last_minus_kept": 0.009308674337413364
+     }
+    }
+   },
+   "S_k8": {
+    "701": {
+     "r0": {
+      "keep": "best",
+      "best_epoch": 115,
+      "status": "max_epochs",
+      "R_bar_kept": 0.18390071103069588,
+      "R_bar_last": 0.20069318979029183,
+      "n_val_decisions": 1179,
+      "R_bar_last_minus_kept": 0.01679247875959594
+     },
+     "r1": {
+      "keep": "best",
+      "best_epoch": 92,
+      "status": "max_epochs",
+      "R_bar_kept": 0.18230114114724763,
+      "R_bar_last": 0.1935096034065015,
+      "n_val_decisions": 1179,
+      "R_bar_last_minus_kept": 0.01120846225925387
+     },
+     "r2": {
+      "keep": "best",
+      "best_epoch": 30,
+      "status": "max_epochs",
+      "R_bar_kept": 0.1858720437006587,
+      "R_bar_last": 0.19898843455917392,
+      "n_val_decisions": 1179,
+      "R_bar_last_minus_kept": 0.013116390858515209
+     }
+    },
+    "702": {
+     "r0": {
+      "keep": "best",
+      "best_epoch": 101,
+      "status": "max_epochs",
+      "R_bar_kept": 0.18002185145006677,
+      "R_bar_last": 0.20048255994030562,
+      "n_val_decisions": 1179,
+      "R_bar_last_minus_kept": 0.020460708490238844
+     },
+     "r1": {
+      "keep": "best",
+      "best_epoch": 2,
+      "status": "max_epochs",
+      "R_bar_kept": 0.17992258579404577,
+      "R_bar_last": 0.21051503757067344,
+      "n_val_decisions": 1179,
+      "R_bar_last_minus_kept": 0.03059245177662767
+     },
+     "r2": {
+      "keep": "best",
+      "best_epoch": 25,
+      "status": "max_epochs",
+      "R_bar_kept": 0.17886543742092897,
+      "R_bar_last": 0.2000637619664449,
+      "n_val_decisions": 1179,
+      "R_bar_last_minus_kept": 0.02119832454551593
+     }
+    },
+    "703": {
+     "r0": {
+      "keep": "best",
+      "best_epoch": 109,
+      "status": "max_epochs",
+      "R_bar_kept": 0.18020545785287653,
+      "R_bar_last": 0.19879437957286428,
+      "n_val_decisions": 1179,
+      "R_bar_last_minus_kept": 0.018588921719987744
+     },
+     "r1": {
+      "keep": "best",
+      "best_epoch": 44,
+      "status": "max_epochs",
+      "R_bar_kept": 0.17914523304795857,
+      "R_bar_last": 0.20199347375529583,
+      "n_val_decisions": 1179,
+      "R_bar_last_minus_kept": 0.022848240707337264
+     },
+     "r2": {
+      "keep": "best",
+      "best_epoch": 54,
+      "status": "max_epochs",
+      "R_bar_kept": 0.17815085871838734,
+      "R_bar_last": 0.20203363065854707,
+      "n_val_decisions": 1179,
+      "R_bar_last_minus_kept": 0.023882771940159725
+     }
+    },
+    "704": {
+     "r0": {
+      "keep": "best",
+      "best_epoch": 83,
+      "status": "max_epochs",
+      "R_bar_kept": 0.182833135043079,
+      "R_bar_last": 0.2009208608790807,
+      "n_val_decisions": 1179,
+      "R_bar_last_minus_kept": 0.01808772583600171
+     },
+     "r1": {
+      "keep": "best",
+      "best_epoch": 58,
+      "status": "max_epochs",
+      "R_bar_kept": 0.1838003860714137,
+      "R_bar_last": 0.20543261589154355,
+      "n_val_decisions": 1179,
+      "R_bar_last_minus_kept": 0.021632229820129856
+     },
+     "r2": {
+      "keep": "best",
+      "best_epoch": 63,
+      "status": "max_epochs",
+      "R_bar_kept": 0.17728192237667995,
+      "R_bar_last": 0.19433502860587437,
+      "n_val_decisions": 1179,
+      "R_bar_last_minus_kept": 0.017053106229194426
+     }
+    },
+    "705": {
+     "r0": {
+      "keep": "best",
+      "best_epoch": 98,
+      "status": "max_epochs",
+      "R_bar_kept": 0.18087515696709044,
+      "R_bar_last": 0.19766107093894061,
+      "n_val_decisions": 1179,
+      "R_bar_last_minus_kept": 0.01678591397185017
+     },
+     "r1": {
+      "keep": "best",
+      "best_epoch": 27,
+      "status": "max_epochs",
+      "R_bar_kept": 0.1763683004860738,
+      "R_bar_last": 0.20311842430224444,
+      "n_val_decisions": 1179,
+      "R_bar_last_minus_kept": 0.026750123816170646
+     },
+     "r2": {
+      "keep": "best",
+      "best_epoch": 41,
+      "status": "max_epochs",
+      "R_bar_kept": 0.17869120309644265,
+      "R_bar_last": 0.19815905457810554,
+      "n_val_decisions": 1179,
+      "R_bar_last_minus_kept": 0.019467851481662884
+     }
+    }
+   }
+  }
  }
 }
