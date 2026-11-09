@@ -1,0 +1,28 @@
+FIGURE 1 PROMPT
+Full-width, three-panel vector figure for a robotics paper (RSS style), white background, sans-serif labels,
+colour-blind-safe palette (probe arm = deep blue, non-tactile baseline CSF-1 = orange, physics plug-in CSF-mu-hat =
+teal, onset-only = light blue, alpha line = dashed grey). Title strip above the panels: "Probe, then certify".
+
+(a) Protocol timeline. x-axis: time within one grasp episode; y-axis: grip force (log scale). Segments, left to right:
+"preload F0 = 32.7 N (same for every object)" as a flat line; "squeeze F0 -> 1.5 F0 -> F0" as a small triangular bump;
+"ramp-down probe" as a log-linear descent from F0 towards 0.005 F0 over 0.25 s, cut short by a red marker labelled
+"incipient-slip onset F_onset" followed by a fast return to F0; then "ramp to F = g(x) e^lambda-hat" and a shaded
+"disturbance window (0.6 s)" with four small icons D1 lift acceleration, D2 shake, D3 lateral pull, D4 payload.
+Shade only the probe segment in light blue and label it "only friction channel". Inset next to the onset marker: the
+pad shear/normal ratio vs time, rising during stick and flattening at onset, with the detector rule
+"8-frame rise < 1/2 stick rise, 2 consecutive frames" annotated.
+
+(b) Certification. For one disturbance stratum, x-axis: lambda (log force multiplier) on a 20-point grid centred on
+the selection-split quantile; y-axis: monotonised empirical slip risk (n R_n(lambda) + 1)/(n + 1). Two staircase
+curves decreasing in lambda: CertGrip-full (blue) and CSF-1 (orange). Horizontal dashed line at alpha = 0.10. Mark
+lambda-hat as the first grid point where each curve falls below alpha, with a vertical tick. Caption tag inside the
+panel: "schematic; drawn from the per-stratum lambda-hat indices". Note "loss = 1{physical slip in direct replay}".
+
+(c) Result bars (test set, alpha = 0.10, conformal-risk-control route). Four bars of mean relative excess force
+(F - F*)/F* with 97.5 % object-cluster bootstrap error bars: CSF-1 0.7832 [0.6968, 0.8583]; CSF-mu-hat (sigma 0.2)
+0.4843 [0.4435, 0.5219]; CertGrip-full (sigma 0.2) 0.4567 [0.4079, 0.5033]; onset-only (sigma 0.2) 0.4336
+[0.3983, 0.4833]. On a secondary right axis, one dot per bar for the physical test slip rate: 0.1021, 0.0657, 0.0829,
+0.0857, against a dashed alpha = 0.10 line. Bracket between the CSF-1 and CertGrip-full bars annotated
+"D = 0.4168 [0.3484, 0.4778]". A small grey footnote marker at the bottom right: "narrow-friction, mid-amplitude
+sub-pool: D = -0.2614 (method worse)". Footer line under all panels: "Simulation (MuJoCo), modelled tactile
+detector, onset noise sigma = 0.2".

@@ -463,3 +463,14 @@ Run order when both papers are active: AUTOPILOT §7.
   Slip-Risk Control"; H2a + mandatory H2-R scope limit in the abstract; H1 / H2b not confirmed, H3 inconclusive;
   Figure 1 plan (force timeline with probe, CRC curve, RE bars); 45 result rows mapped to JSON keys.
 - **Next:** stage 17 PAPER_DRAFT (template `paper_draft.md`, fresh subagent) → `paper/mypaper/draft_v1.md`.
+
+## Stage 17. PAPER_DRAFT     [v1]
+
+- **Finished:** 2026-11-09 (run 43). Plan `plans/stage_17_paper_draft.md`; template `paper_draft.md` verbatim
+  (`paper/mypaper/prompts/build_stage17.py` → `stage17_{system,user}.txt`, results_v1.json pasted in full, 52 cards),
+  fresh opus subagent → `paper/mypaper/draft_v1.md` + `paper/mypaper/figures/figure1_prompt.txt`.
+- ≈ 7,300 words (all sections above the RESTRICTS floors; condensed to 5 pages at stage 22). Number audit 0 unmatched;
+  52 / 52 cite keys in cards. The one [NEED] (GBDT search space) filled by the main session from
+  `code/certgrip/models.py` (the code that ran). H2a, H2-R scope limit in abstract, H1 / H2b not confirmed, H3
+  inconclusive, H2-M descriptive, post hoc analyses labelled, five deviations listed.
+- **Next:** stage 18 PEER_REVIEW (two fresh subagents, evidence audit).
