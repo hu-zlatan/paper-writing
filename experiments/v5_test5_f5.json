@@ -1,0 +1,49 @@
+{
+ "purpose": "test5 follow-up f5: last 11 time-guarded random-baseline episodes (resume of f4a/f4b; frozen inputs, time guard only)",
+ "jobs": [
+  {
+   "id": "v5_t5_S4_random_021_r25_r29_c35_r37",
+   "cmd": "python main.py eval3 --set S --kappa 4 --tau 4.8 --n-star 4 --method random --split test5 --start 37 --count 1 --sub 8 --budget-minutes 60 --out ../results/v5/test5/S_k4_random_021_r25_r29_c35_r37"
+  },
+  {
+   "id": "v5_t5_S4_random_126_r129_r131_c140_r141",
+   "cmd": "python main.py eval3 --set S --kappa 4 --tau 4.8 --n-star 4 --method random --split test5 --start 141 --count 2 --sub 8 --budget-minutes 60 --out ../results/v5/test5/S_k4_random_126_r129_r131_c140_r141"
+  },
+  {
+   "id": "v5_t5_S4_random_168_r171_r172_c184_r186",
+   "cmd": "python main.py eval3 --set S --kappa 4 --tau 4.8 --n-star 4 --method random --split test5 --start 186 --count 1 --sub 8 --budget-minutes 60 --out ../results/v5/test5/S_k4_random_168_r171_r172_c184_r186"
+  },
+  {
+   "id": "v5_t5_S8_random_090_r92_r94_c97_r99",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method random --split test5 --start 99 --count 1 --sub 8 --budget-minutes 60 --out ../results/v5/test5/S_k8_random_090_r92_r94_c97_r99"
+  },
+  {
+   "id": "v5_t5_S8_random_162_r165_r169_c169_r171",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method random --split test5 --start 171 --count 1 --sub 8 --budget-minutes 60 --out ../results/v5/test5/S_k8_random_162_r165_r169_c169_r171"
+  },
+  {
+   "id": "v5_t5_S8_random_162_r165_r169_c175_r177",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method random --split test5 --start 177 --count 1 --sub 8 --budget-minutes 60 --out ../results/v5/test5/S_k8_random_162_r165_r169_c175_r177"
+  },
+  {
+   "id": "v5_t5_S2_random_022_r24_r27_r31_r33_c33_r35",
+   "cmd": "python main.py eval3 --set S --kappa 2 --tau 4.7 --n-star 4 --method random --split test5 --start 35 --count 1 --sub 8 --budget-minutes 60 --out ../results/v5/test5/S_k2_random_022_r24_r27_r31_r33_c33_r35"
+  },
+  {
+   "id": "v5_t5_S2_random_132_r136_r137_r139_r140_c143_r145",
+   "cmd": "python main.py eval3 --set S --kappa 2 --tau 4.7 --n-star 4 --method random --split test5 --start 145 --count 1 --sub 8 --budget-minutes 60 --out ../results/v5/test5/S_k2_random_132_r136_r137_r139_r140_c143_r145"
+  },
+  {
+   "id": "v5_t5_S2_random_242_r245_r250_r255_r258_c258_r260",
+   "cmd": "python main.py eval3 --set S --kappa 2 --tau 4.7 --n-star 4 --method random --split test5 --start 260 --count 1 --sub 8 --budget-minutes 60 --out ../results/v5/test5/S_k2_random_242_r245_r250_r255_r258_c258_r260"
+  },
+  {
+   "id": "v5_t5_S12_random_140_r143_r145_r147_r149_c149_r151",
+   "cmd": "python main.py eval3 --set S --kappa 12 --tau 4.9 --n-star 4 --method random --split test5 --start 151 --count 1 --sub 8 --budget-minutes 60 --out ../results/v5/test5/S_k12_random_140_r143_r145_r147_r149_c149_r151"
+  },
+  {
+   "id": "v5_t5_A16-2_random_012_r15_r18_c18_r20",
+   "cmd": "python main.py eval3 --set A16 --kappa 2 --tau 3.4 --n-star 3 --method random --split test5 --start 20 --count 1 --sub 8 --budget-minutes 60 --out ../results/v5/test5/A16_k2_random_012_r15_r18_c18_r20"
+  }
+ ]
+}
