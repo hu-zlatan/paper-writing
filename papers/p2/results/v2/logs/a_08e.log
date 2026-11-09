@@ -1,0 +1,13 @@
+RE_match@full_rd@0.2#0 0.4292 {'n_valid': 2000, 'ci': [0.4074326806088222, 0.45218819834301605]}
+RE_match@P_onset@0.2#0 0.4173 {'n_valid': 2000, 'ci': [0.3967559906672526, 0.4392804925221067]}
+RE_match@CSF-muhat@0.2 0.4045 {'n_valid': 2000, 'ci': [0.38918972514336136, 0.43694262535284434]}
+RE_match@CSF-1 0.7769 {'n_valid': 2000, 'ci': [0.7304664928124435, 0.8362759673601797]}
+D_match:full_rd@0.2#0 0.4475 {'n_valid': 2000, 'ci': [0.4110580940825185, 0.48795720088797245], 'decision': 'superiority'}
+D_ltt:full_rd@0.2#0 0.4015 {'n_valid': 2000, 'ci': [0.339081014096244, 0.4594496226773718], 'decision': 'superiority'}
+D_crc:full_rd@0.2#0 0.4289 {'n_valid': 2000, 'ci': [0.3576991626935568, 0.47703032673858325], 'decision': 'superiority'}
+D_match:P_onset@0.2#0 0.4629 {'n_valid': 2000, 'ci': [0.42734348786266674, 0.5013168799942304], 'decision': 'superiority'}
+D_ltt:P_onset@0.2#0 0.4303 {'n_valid': 2000, 'ci': [0.3726482261459964, 0.4856729471621106], 'decision': 'superiority'}
+D_crc:P_onset@0.2#0 0.4412 {'n_valid': 2000, 'ci': [0.3845655932166494, 0.4942084897569866], 'decision': 'superiority'}
+D_match:CSF-muhat@0.2 0.4793 {'n_valid': 2000, 'ci': [0.4240853222838455, 0.5189030027387251], 'decision': 'superiority'}
+D_ltt:CSF-muhat@0.2 0.404 {'n_valid': 2000, 'ci': [0.3111704959876403, 0.46301664804819875], 'decision': 'superiority'}
+D_crc:CSF-muhat@0.2 0.4149 {'n_valid': 2000, 'ci': [0.3321581325589177, 0.48897892165224993], 'decision': 'superiority'}
