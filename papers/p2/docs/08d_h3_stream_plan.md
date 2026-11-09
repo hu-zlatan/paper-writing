@@ -31,7 +31,8 @@ leave open and records how the H1-M failure (08c §1) is handled for H3. Later c
 
 ## 3. Feedback and the H1-M failure
 - **Simulated feedback = label rule** slip_t = 1{F_t < F\*_hi,t}, as designed in 07 ("cheap because it replays labels");
-  unavoidable instances give slip_t = 1 (and are capped, so they never update the tracker). This is what makes the 20
+  unavoidable instances give slip_t = 1 at every force (they update the tracker like any slip when the force is below
+  F_max; corrected in the same run before any stream result, the first wording wrongly said they never update). This is what makes the 20
   orderings and the regenerated-ordering bootstrap affordable.
 - Because H1 is not confirmed (8 / 800 non-monotone flickers just above F\*), the label rule is not the physical
   outcome. Two direct-replay audits (protocol rd, ordering 0 only) measure the difference:

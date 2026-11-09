@@ -255,6 +255,28 @@ def cmd_crc(a):
     print(f"seconds: {time.time() - t0:.1f}")
 
 
+def cmd_replay(a):
+    """08d §3: direct replays (protocol rd) of rows start..start+count of results/v1/h3/schedule_<shift>.json at the
+    scheduled force; one line per row with the physical slip outcome. No label value is read."""
+    a.protocol = "rd"
+    S = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "results", "v1", "h3",
+                                    f"schedule_{a.shift}.json")))
+    rows = S["rows"][a.start:a.start + a.count]
+    os.makedirs(os.path.dirname(os.path.abspath(a.out)), exist_ok=True)
+    t0 = time.time()
+    with open(a.out + ".jsonl", "w") as f:
+        f.write(json.dumps(header(a, "replay") | {"shift_schedule": a.shift}) + "\n")
+        for r in rows:
+            pool, fam, obj, d, sh = r["key"]
+            inst = make_instance(pool, fam, obj, d, sh)
+            sim = Sim(inst, preload_force(), delta_t=SLIP["delta_t"], rot_t_deg=SLIP["rot_t_deg"], protocol="rd")
+            out = sim.run(r["F"])
+            f.write(json.dumps({"shift": a.shift, "arm": r["arm"], "step": r["step"], "key": r["key"], "F": r["F"],
+                                "slip": bool(out["slip"]), "reason": out.get("reason")}) + "\n")
+    print(f"replays: {len(rows)}")
+    print(f"seconds: {time.time() - t0:.1f}")
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser()
     sub = ap.add_subparsers(dest="cmd", required=True)
@@ -298,7 +320,15 @@ def main(argv=None):
     cr.add_argument("--count", type=int, required=True)
     cr.add_argument("--budget-minutes", type=float, default=25.0)
     cr.add_argument("--out", required=True)
+    rp = sub.add_parser("replay", help="08d: H3 stream-audit direct replays from a schedule file")
+    rp.add_argument("--shift", required=True, choices=["S1", "S2", "S3", "S1m"])
+    rp.add_argument("--start", type=int, required=True)
+    rp.add_argument("--count", type=int, required=True)
+    rp.add_argument("--out", required=True)
     a = ap.parse_args(argv)
+    if a.cmd == "replay":
+        cmd_replay(a)
+        return
     if a.cmd == "crc":
         cmd_crc(a)
         return
