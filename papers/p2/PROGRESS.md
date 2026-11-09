@@ -449,3 +449,17 @@ Run order when both papers are active: AUTOPILOT §7.
   pre-registered outcomes, not thin evidence); loops still owed via stages 18–20 / 25. Refine cycles used 0 / 3.
 - **Next (run 43):** stage 16 PAPER_OUTLINE for the RSS 2027 Stage 1 extended abstract (≤ 5 pages + references).
 
+
+## Stage 16. PAPER_OUTLINE     [v1]
+
+- **Finished:** 2026-11-09 (run 43). Plan `plans/stage_16_paper_outline.md`; template `paper_outline.md` verbatim
+  (`paper/mypaper/prompts/build_stage16.py` → `stage16_{system,user}.txt`), fresh opus subagent →
+  `paper/mypaper/sections/00_outline.md` (≈ 4,200 words; 5-page extended-abstract targets ≈ 3,300 words body, a
+  stated deviation from the 9-page floors).
+- Pre-step: `code/tools_results_v1.py` → `results/v1/results_v1.json` (every v1 analysis JSON unchanged; grid dumps
+  and freeze referenced only). New `code/tools_number_audit.py` (p2 copy of paper 1's audit, reads results_v1.json):
+  outline 0 unmatched decimals.
+- Working title "Probe, Then Certify: Minimal-Force Grasping with a Tactile Friction-Onset Probe and Conformal
+  Slip-Risk Control"; H2a + mandatory H2-R scope limit in the abstract; H1 / H2b not confirmed, H3 inconclusive;
+  Figure 1 plan (force timeline with probe, CRC curve, RE bars); 45 result rows mapped to JSON keys.
+- **Next:** stage 17 PAPER_DRAFT (template `paper_draft.md`, fresh subagent) → `paper/mypaper/draft_v1.md`.
