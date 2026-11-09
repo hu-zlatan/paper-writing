@@ -1,63 +1,55 @@
-# Stage 18 PEER_REVIEW [v4] — merged record (run 10, 2026-11-01)
+# Stage 18 PEER_REVIEW [v5] — merged record (run 41, 2026-11-09)
 
-Draft: `paper/mypaper/sections/draft_v4.md`. Template verbatim (prompts `paper/mypaper/prompts/stage18_v4_*`), two
-fresh opus subagents; run 2 as a strict RSS/CoRL pair. Full reviews: `18_review_v4_run1.md`, `18_review_v4_run2.md`.
-v3 record: `v3/18_peer_review_v3.md`.
+Two independent runs of the stage-18 template (fresh opus subagents; full reviews in `18_review_v5_run1.md`,
+`18_review_v5_run2.md`; prompts `prompts/stage18_v5_*.txt`). Four reviewer perspectives. The v4 record is at
+`v4/18_peer_review.md`.
 
-## Verdict
-- Scores: run 1 A 4 / B 3; run 2 A 4 / B 3 (v3: 4/3, 3/4). **CRITICAL_FABRICATION: no** in both runs (> 100 numbers,
-  all trial/episode/seed counts, the crossed bootstrap B = 10,000, the D3/D3-B/D4 thresholds, H2-S2 and E5 recomputed
-  from raw per-episode files; Holm/TOST correctly described as not run).
-- → stage 19 (no rollback). All mismatches are incidental text errors → option (b) (fix the claim).
-
-## Mismatches (fix in stage 19)
-| id | location | issue | fix |
+| run | reviewer | score | verdict |
 |---|---|---|---|
-| M1 | §3.1 | "K = 8 … base/variant pairs" — code has 4 bases + 4 variants | "K = 8 identities (4 base/variant pairs)" |
-| M2 | Table 2 R1, §1, §3.1 | S2 Cal′ reported "pass"; no S_k2 verify run exists (only S_k12, A_k12) | state τ set by the Cal′ rule, probe-count verification not run (or run it); test3 G\* 3.873 probes reported as observation |
-| M3 | §4, §7, Table 5, Fig. 1D | random anchor "215 of 300" stale; follow-up running | fill from final JSON |
-| M4 | Table 4, §5.2, Fig. 1B | travel definition omitted; logged travel includes the initial snap onto the 5.625° grid (≈ 1.4° for every policy) | define travel; add discretionary travel (computed from logs by code) |
-| M5 | Table 1 | "batch 256" is decisions-equivalent (256 // T episodes per step) | state it |
-| M6 | §5.3, §7 | S2 val3 scored inline (`eval3`), S2 test3 by `regrid3` re-read — not named as a candidate cause of the val/test gap | name it; run a pipeline check if cheap |
-| M7 | §5.4 | "2.9 half-widths (0.293)": lower half-width is 0.303 → ratio 2.8 | use 0.303 / 2.8 |
-| M8 | Table 2 R6, §5.4 | "H2 is rejected" overstates; should be "not detected" (same term as H2-S2) | reword |
-| M9 | draft | Figure 1 generation prompt inside the manuscript | keep only in `figures/figure1_prompt.txt` (LaTeX comment in stage 22) |
+| 1 | A (methodology–evidence) | 4 / 10 | borderline, leaning reject |
+| 1 | B (novelty / significance) | 3 / 10 | reject (NeurIPS / ICML framing) |
+| 2 | A (significance, RSS / CoRL) | 4 / 10 | borderline, leaning reject |
+| 2 | B (methodology–evidence) | 5 / 10 | borderline |
 
-## Triage of substantive asks
-Refine cycles are exhausted (3 of 3), so no new pre-registered experiment. Classified as:
-- **Text / analysis of existing logs (stage 19):** M1–M9; BI as the primary metric where success contrasts are within
-  the 7.5 % flip rate; consolidate hedging into Limitations; demote C4 (instrument notes) from the contribution list;
-  post-hoc minimum detectable effect for H2/D4 from the observed SE (labelled post hoc); test-split reuse disclosed.
-- **Cheap report-only diagnostics (allowed by `results/v4/15_decision.md`, ≤ 4 CPU-h):** S_k2 Cal′ verification
-  (probe count at τ = 4.7); val3 subset re-read through the test pipeline (M6). Added if they finish before stage 20;
-  otherwise listed as not run.
-- **Out of scope for this cycle (Limitations / future work):** 512-action or structured two-step H3 screen, V_LA
-  selection-bias re-estimate, S2 B-spread/B-cov and an S2 H★, S2 student/RL sweeps, probe-count-constrained RL,
-  belief-input capacity fix, regret on student-visited states, sub-16 evaluator check, more cells/seeds, held-out
-  shapes, 3D/contact dynamics, hardware.
+**CRITICAL_FABRICATION: no** (both runs; 40 + 38 spot-checks). Trial / episode counts, seeds, tests, hyperparameters
+and weight hashes match; run 1 recomputed S4 and A16-2 test5 contrasts and run 2 the G\* test5 means and E5 sub-8
+values from raw episode files, all exact. → no rollback; stage 19 with the fixes below.
 
----
+## Factual / wording mismatches (must fix in stage 19)
+1. **E7 mis-described** (run 2, verified by the main session in `code/analysis_e7_v5.py` docstring and
+   `results/v5/12_e7_analysis.json`). E7 measures a one-step *look-ahead* screen's value over greedy (H3 headroom) and
+   that screen's max-selection bias — not noise or bias of G\*'s own value estimates. Rewrite the E7 note, §5.1 / C5,
+   §6 (G\* run once) and Limitation 2: drop "E7 shows noisy, upward-biased value estimates [of G\*]"; report the
+   independent-estimate gap at C1 = 512 (S2 +0.0658 nats [0.0297, 0.1084]; S12 from the JSON) as report-only
+   look-ahead headroom in nats, with the decision's limit that success-terms headroom was not measured.
+2. **H5b weights** (both runs): only the rule (inverse bootstrap variance, addendum v5.1f) was fixed before test5; the
+   values come from test5. Fix §4 / §5.4.
+3. **"D5 rule on test5 would fail in about 4 of 5 cells"** (both runs): approximate and post hoc (`14_analysis.md`
+   M1, SE ≈ half-width / 1.96, clause (i) only). Label it post hoc / approximate and name the exception (A16-2, the
+   worst validation cell). Run 2's exact recomputation (A16-2 passes all three clauses) is a reviewer computation not
+   in any results file → not cited as a number; at most "the exception is A16-2".
+4. **Inversion rule wording** (run 2): both g_T and success CIs must exclude 0 (amendment v5.0 H2-v5); fix paraphrase.
+5. **Deviations to state** (both runs): the pre-registered E6 latency–accuracy frontier was not produced (reduced G\*
+   was timed only); E5 per-contrast flip rates only for 2 cells / seed 701; the reduction-order history (E7 was run in
+   v5.1d before the v5.1e sizing, so step 1 was unavailable and test5 went 500 → 300).
+6. **Disclosure gaps:** latency bootstrap B = 2,000 (`code/analysis_e6_v5.py`) vs 10,000 elsewhere; RL sweep single
+   seed 719; 9 / 10 `rl_success` runs stopped by the wall-clock time guard (say so, not only "before the cap");
+   describe A16 (16 irregular asymmetric polygons, `code/touchbed/shapes.py`) and note it changes K, family and n\* at
+   once; §3.2 introduces the reduced G\* configurations twice; D5's effective margin at the observed SE (≈ −1.5 pp)
+   vs the nominal δ.
+7. **[CITE-MISSING] ×3** (DeepSets, Holm 1979, Efron): stage 23 / a targeted literature lookup; until then the
+   sentences stay with markers or the method is named without a citation.
 
-# Second pass (stage 19 pass-1 revision grew the body > 30 %) — run 10
+## Substantive points and triage
+| # | point | action |
+|---|---|---|
+| S1 | test5 CIs ±5–6 pp vs δ = 4 pp: the main comparison cannot decide; only validation is resolved | **Report** — already the decision's framing; make it the first sentence of §5.1. No new runs (cap used). |
+| S2 | Reduced G\* (22–194 ms) never evaluated on test5 — the obvious cheap baseline | **Limitation + deviation** (E6 frontier dropped); cannot run (refine cap 4 / 4; decision §4.1 forbids new runs). |
+| S3 | Latency speed-up has no task-time model | **Discussion**: state that per-decision latency is reported without a physical time model. |
+| S4 | DAgger barely moves held-out R̄ (r0 → r2 −0.0069 to +0.0052); student ≈ BC | **Report** from `16_report_rows.json` (report-only), as a qualifier on "DAgger". |
+| S5 | G\* single run per cell; RL tuned once on S2 with one seed; B-spread below Random in 4 / 5 cells | **Limitations** (already partly); add the sweep seed and the B-spread remark. |
+| S6 | Incremental novelty; planar, model-matched likelihood; 3–4 probes | **Positioning**: measurement paper; keep in Limitations. |
+| S7 | Over-length (≈ 8,500 words with tables) for RSS width | Master draft keeps floors; condense in stage 22 to the outline's 3,430-word body. |
 
-Prompt `paper/mypaper/prompts/stage18_v4_pass2_user.txt` (revised draft, current `results_v4.json`), two fresh opus
-reviewers: `18_review_v4_pass2_run1.md`, `18_review_v4_pass2_run2.md`. Scores 4/3 and 4/3; **CRITICAL_FABRICATION: no**
-in both (all counts, the bootstrap, H2-S2, D4, the S2 Cal′ 3.875 probes and S2 travel reproduced from raw files).
-
-## Mismatches (fix in stage 19 pass 2)
-| id | location | issue | fix |
-|---|---|---|---|
-| P1 | Abstract, §6, §8 | g_T-vs-grid ordering stated "in both cells"; S12 is marginal (G\* 5.299 vs 5.368; 3 of 6 seeds below G\*; BI ci95 includes 0) | state for S2; S12 marginal |
-| P2 | §1 | 79.3 % zero moves attributed to test3 0–299; it is 0–499 (0–299: 80.9 %, `14_review2_checks`) | fix range / number |
-| P3 | §5.3 | "≈ 2.0 combined SE" not labelled derived | label |
-| P4 | §4, §5.4, Abstract | post-hoc 7.5 pp "BI first" rule: flip rate is per-episode, not a contrast bound; applied unevenly (S12 G\* − RL +7.0 pp); S2 student − B-fan +8.1 pp clears it by 0.6 pp | drop the numeric threshold; lead with BI everywhere and mark every success contrast with its CI; abstract calls +8.1 pp exploratory |
-| P5 | §4, Tables 2/5, §7 | random anchor PENDING | fill from final JSON |
-| P6 | §1 vs §5.6 | 0.16–0.23 vs 0.16–0.27 nats | say which comparison |
-| P7 | §5.2 | random travels "most" in first leg (S2 52 %) | fix |
-| P8 | §5.3, §6, §7 | S2 students over-fit: held-out R̄ lowest at epochs 22–130, rises 0.007–0.026 to the kept epoch-200 checkpoint, train loss still falling (`14_review2_checks`) | report; the fixed-200-epoch recipe (pre-registered) keeps the last checkpoint |
-| P9 | Abstract, §8 | E5 cell not named | "in S12" |
-| P10 | §4, Table 2 R2 | the one counted E′ flip came from set A (A12 B-fan) | state |
-| P11 | §5.4 | "cap saturation is rare" counts exact-cap only; RL end-of-training 23–31 % within 0.5 nats of the cap | qualify, cite `v3:14_behaviour.rl_final` |
-| P12 | Abstract, §1 | 4.3° / 44.8° come from a report-only post-review analysis | label |
-| P13 | §4 | D-gate SE·√0.5 ≈ 88 % one-sided, G\* run once per episode | explain (pre-registered formula, unchanged) |
-| P14 | §4 | H3 0.03 threshold registered with a near-identical estimate known | already labelled; keep |
+## Decision
+No CRITICAL FABRICATION → **PROCEED to stage 19** (revision with items 1–7 and S1–S6). Mean score 4.0 / 10.

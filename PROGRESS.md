@@ -9,7 +9,7 @@
 **Topic:** Amortized, non-myopic active tactile localization (TouchBED)
 **Initialised:** 2026-10-28T07:56:44Z
 **Current version:** v5
-**Latest stage:** Stage 17 PAPER_DRAFT [v5] done (run 41) → next stage 18 PEER_REVIEW [v5]; see run 41 at the end of this file
+**Latest stage:** Stage 18 PEER_REVIEW [v5] done (run 41) → next stage 19 PAPER_REVISION [v5]; see run 41 at the end of this file
 
 ---
 
@@ -1658,3 +1658,19 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
   scientific-notation mantissas.
 - **Where to resume (run 42):** stage 18 PEER_REVIEW [v5] (two independent runs, fresh
   subagents, evidence audit). Paper 2: remaining secondaries → stage 13/14.
+
+## Stage 18. PEER_REVIEW     [v5]
+
+- **Finished:** 2026-11-09 (run 41). Plan `plans/stage_18_peer_review_v5.md`; template `peer_review.md` verbatim
+  (builder `paper/mypaper/prompts/build_stage18_v5.py`); two fresh opus subagents (run 2 as an RSS / CoRL pair).
+- **Scores:** run 1 A 4 / B 3; run 2 A 4 / B 5 (mean 4.0). **CRITICAL_FABRICATION: no** in both (40 + 38 spot-checks;
+  test5 contrasts and G\* means recomputed from raw episode files, exact; 60 weight hashes match).
+- **Must-fix (merged record `paper/mypaper/18_peer_review.md`):** E7 mis-described (it is look-ahead headroom over greedy
+  and that screen's selection bias, not G\*'s own value noise — verified in `code/analysis_e7_v5.py`); H5b weights are
+  test5-derived (only the rule was fixed); "D5 on test5 fails in ~4 / 5" is approximate post hoc, exception A16-2;
+  inversion-rule paraphrase; unstated deviations (E6 frontier not produced, reduction-order history, latency B = 2,000,
+  RL sweep seed 719, rl_success time-guard stops, A16 description); 3 [CITE-MISSING].
+- **Decision:** PROCEED → stage 19 PAPER_REVISION [v5].
+- **Where to resume (run 42):** stage 19 [v5] (template `paper_revision.md`, fresh subagent, draft_v5 + merged review;
+  length-protected; then a second review/revision pass as in v4), then stage 20 QUALITY_GATE. Paper 2: remaining
+  secondaries → stage 13/14.
