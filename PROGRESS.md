@@ -9,7 +9,7 @@
 **Topic:** Amortized, non-myopic active tactile localization (TouchBED)
 **Initialised:** 2026-10-28T07:56:44Z
 **Current version:** v5
-**Latest stage:** Stage 18 PEER_REVIEW [v5] done (run 41) → next stage 19 PAPER_REVISION [v5]; see run 41 at the end of this file
+**Latest stage:** Stage 19 PAPER_REVISION [v5] pass 1 done (run 41) → second stage-18 pass, then stage 19 pass 2, then stage 20; see run 41 at the end of this file
 
 ---
 
@@ -1674,3 +1674,19 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
 - **Where to resume (run 42):** stage 19 [v5] (template `paper_revision.md`, fresh subagent, draft_v5 + merged review;
   length-protected; then a second review/revision pass as in v4), then stage 20 QUALITY_GATE. Paper 2: remaining
   secondaries → stage 13/14.
+
+## Stage 19. PAPER_REVISION     [v5] — pass 1
+
+- **Finished:** 2026-11-09 (run 41). Plan `plans/stage_19_paper_revision_v5.md`; snapshot before revision
+  `paper/mypaper/v5/draft_v5_stage17.md`, after `v5/draft_v5_stage19pass1.md`. Template `paper_revision.md` verbatim
+  (builder `build_stage19_v5.py`; reviews = merged record + both reviews + binding block), fresh opus subagent, targeted edits.
+- All merged items 1–7 and S1–S6 addressed: E7 rewritten as report-only look-ahead headroom over greedy (S2 +0.0658
+  [0.0297, 0.1084], S12 +0.04216 [0.02503, 0.06138] nats at C1 = 512) in §4 / §5.1 / §6 / Limitation 2; H5b weights
+  test5-derived; D5-on-test5 sentence labelled post hoc approximate with A16-2 named; inversion rule exact; new
+  "Deviations from the registration" paragraph (reduction-order history, E6 frontier not produced, E5 coverage,
+  rl_success time-guard stops); latency B = 2,000; sweep seed 719; A16 described; DAgger R̄ report-only paragraph.
+- Words: file 9,943 → 12,191 (+22.6 %); no section shorter; Conclusion now ≥ 200. Number audit: 2 unmatched (the known
+  scientific-notation mantissas). [CITE-MISSING] ×3 kept.
+- Substantive rewrites (E7, deviations) → **second stage-18 pass** (as in v4) before stage 20.
+- **Where to resume (run 42):** stage 18 pass 2 [v5] on `draft_v5.md` (two fresh subagents, same template/evidence;
+  builder `build_stage18_v5.py`, outputs `18_review_v5_pass2_run{1,2}.md`), then stage 19 pass 2, then stage 20.
