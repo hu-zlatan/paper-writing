@@ -275,3 +275,9 @@ Run order when both papers are active: AUTOPILOT §7.
     −0.8 % and 0 (physical slip never above the label rule; CI\*\* upper ≤ 0). H3-L: ρ_s − ρ_ID S1 +0.086
     [−0.044, 0.186] (TOST ±0.05 not met → not confirmed), S2 +0.064, S3 +0.082, S1m −0.019.
   - **CRC replays** (Actions, 60 jobs) still landing; `analysis_crc.py --check` gates the H2 read-out.
+  - **H1-V (secondary after the H1-M failure; `code/h1v.py` committed before running; 11,200 direct replays in the
+    sandbox → `results/v1/h1v/`, read-out `results/v1/h1v_analysis.json`):** label-rule split conformal per stratum
+    (cal n = 500) on the 2,800 id test instances. Δ = mean(slip_direct − slip_label): CertGrip α 0.10 −0.0043
+    [−0.0075, −0.0014], α 0.05 −0.0014 [−0.0039, 0.0007]; CSF-1 α 0.10 −0.0032, α 0.05 −0.0029 → all **pass**
+    (CI\*\* upper ≤ 0.02). Physical slip is at or below the label rule; the H1-M flickers do not raise the physical
+    rate at the conformal force. H1 stays "not confirmed" (H1-M failed); H1-V is reported as the transfer check.
