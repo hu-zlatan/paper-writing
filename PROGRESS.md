@@ -9,7 +9,7 @@
 **Topic:** Amortized, non-myopic active tactile localization (TouchBED)
 **Initialised:** 2026-10-28T07:56:44Z
 **Current version:** v5
-**Latest stage:** Stage 13 ITERATIVE_REFINE [v5] in progress (main-run execution on Actions); see run 39 at the end of this file
+**Latest stage:** Stage 13 ITERATIVE_REFINE [v5] in progress (main-run execution on Actions); see run 40 at the end of this file
 
 ---
 
@@ -1541,3 +1541,20 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
     main-pool labels; **the pre-registered H1-M design gate failed (8 / 800 non-monotone, limit 7)** → pre-registered
     switch to the conformal-risk-control route (addendum 08c, written before any cal / test statistic); offline fits
     dispatched (`experiments/p2_fit_a010.json`, Actions run 185).
+
+- **Run 40 (2026-11-09, from ≈ 01:50 UTC, scheduled) — stage 13 v5 continued, then paper 2.** No open issues;
+  AUTOPILOT §1 unchanged. `add_repo` not available as a tool; the existing checkout was reset onto origin/main.
+  Plan: `plans/stage_13_v5_run40_followups.md`.
+  - **Finished since run 39 (all `success`):** f4a (182), f4b (183), e5_f2 (181); p2 fits (185).
+  - **test5:** 11 time-guarded random-baseline episodes left → `experiments/v5_test5_f5.json` (same commands,
+    frozen inputs) dispatched (Actions run 186).
+  - **E5 complete → read-out** (`results/v5/14_e5_analysis.json`, report-only, amendment v5.0 E5): sub-8 → sub-16
+    success flip rate on test5 0–199: S2 G\* 8.0 % (8 gains / 8 losses), student 701 7.0 %; S12 G\* 7.5 %, student
+    6.5 %. Success means move by ≤ 2.5 pp; the student − G\* contrast changes by +2.0 pp (S2) and −3.0 pp (S12).
+    So the evaluator grid alone moves a cell's student − G\* contrast by up to ≈ 3 pp — the same size as the D5 gaps
+    (3–6 pp); this must sit next to every test5 success contrast.
+  - **g_T moved to runners** (operational addendum v5.1h in the run plan): the sandbox pace (≈ 1 file / min, 483 files
+    left) would not finish in a run; same `gt3` command, one job per file (`experiments/v5_gt_r0.json` /
+    `v5_gt_r1.json`, runs 187 / 188), plus two sandbox-computed files recomputed into `results/v5/test5_gt_check/`.
+  - **Stage 14 v5 plan written before any test5 outcome** (`plans/stage_14_result_analysis_v5.md`) and a collector
+    `code/tools_results_v5.py`. No test5 outcome read (counts only).
