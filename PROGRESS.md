@@ -9,7 +9,7 @@
 **Topic:** Amortized, non-myopic active tactile localization (TouchBED)
 **Initialised:** 2026-10-28T07:56:44Z
 **Current version:** v5
-**Latest stage:** Stage 16 PAPER_OUTLINE [v5] done (run 41) → next stage 17 PAPER_DRAFT [v5]; see run 41 at the end of this file
+**Latest stage:** Stage 17 PAPER_DRAFT [v5] done (run 41) → next stage 18 PEER_REVIEW [v5]; see run 41 at the end of this file
 
 ---
 
@@ -1633,3 +1633,22 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
 - **Where to resume (run 42):** stage 17 PAPER_DRAFT [v5] (template `paper_draft.md`, fresh subagent, outline +
   `results_v5.json` + knowledge cards). Paper 2: remaining secondaries →
   stage 13/14.
+
+## Stage 17. PAPER_DRAFT     [v5]
+
+- **Finished:** 2026-11-09 (run 41). Plan `plans/stage_17_paper_draft_v5.md`.
+- Template `paper_draft.md` verbatim (system + user extracted by `paper/mypaper/prompts/build_stage17_v5.py`); fresh
+  opus subagent; v5 / v4 / v3 results JSONs pasted in full, 60 cite_keys, outline, v4 final draft as wording source.
+- **Output:** `paper/mypaper/sections/draft_v5.md` (master draft; main body ≈ 6,785 prose words, all RESTRICTS floors met,
+  above the 4,300–5,000 aim → Method / Experiments are the first cuts in stage 22), `paper/mypaper/figures/figure1_prompt.txt`
+  (panels A–C schematic, panel D data plot spec).
+- **Checks (main session):** `code/tools_number_audit.py` now also loads `results_v5.json` (one added block); against
+  v5 + v4 + v3 JSONs and amendments v5.0 / v5.1 → 2 unmatched decimals, both mantissas of scientific-notation RL
+  hyperparameters (ent 9.504e-4, critic lr 4.925e-4), verified against `results/v5/rl/*.json` config → 0 unsourced
+  numbers. 33 cite_keys, all in `docs/05_knowledge_cards.json`. Never-write list grep: only negated / qualified uses.
+  Markers left: 14 [NEED] in the body (design constants not in any results field: action grid, cost-formula source,
+  A16 identity count / keep range, `g2000_512_64` meaning, label / DAgger / epoch budgets, cfg-6 RL episodes per seed,
+  D5 clause-1 floor and per-seed count, bootstrap resample count) and 3 [CITE-MISSING] (DeepSets, Holm, Efron).
+- **Where to resume (run 42):** fill the [NEED] markers from the frozen design docs (`docs/07c_amendment_v5_0.md`,
+  `v5_1.md`, code constants) or drop the sentences; then stage 18 PEER_REVIEW [v5] (two independent runs, fresh
+  subagents, evidence audit). Paper 2: remaining secondaries → stage 13/14.

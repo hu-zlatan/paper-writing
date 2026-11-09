@@ -46,6 +46,9 @@ def main():
     v4 = os.path.join(root, "results/v4/results_v4.json")
     if os.path.exists(v4):                                                      # v4 rows (S2 cell, E5)
         vals = flat(json.load(open(v4)), vals)
+    v5 = os.path.join(root, "results/v5/results_v5.json")
+    if os.path.exists(v5):                                                      # v5 five-cell study
+        vals = flat(json.load(open(v5)), vals)
     design = " ".join(open(p).read() for p in sys.argv[2:])
     bad = []
     for m in re.finditer(r"(?<![\w.\[])[−-]?\d[\d,]*\.\d+", draft):          # decimals only; integers are counts/consts

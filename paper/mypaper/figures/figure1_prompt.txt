@@ -1,4 +1,4 @@
-FIGURE 1 PROMPT (v4; generated schematic for panels A-C, panel D plotted separately from the results JSON)
+FIGURE 1 PROMPT (v5; generated schematic for panels A-C, panel D plotted separately from results/v5/results_v5.json)
 
 Target model: Nano Banana 2 (image generation). Output: one wide scientific schematic figure, aspect ratio 3:1 (full
 text width of a two-column robotics paper, about one third of a page tall), pure white background (#FFFFFF), clean
@@ -6,10 +6,11 @@ flat-vector style, no photorealism, no 3D shading, no gradients, no drop shadows
 beyond those listed, no people, no robot arm, no logos, no watermark. Uniform line weights (thin 1.5 px outlines,
 2.5 px arrows). Font: one clean sans-serif (Helvetica/Arial-like), dark grey #222222, all text horizontal, no text
 other than the exact labels quoted below, spelled exactly as given (keep Greek letters and symbols exactly: φ, ψ, κ,
-Δφ, π, *, ×, °). Exactly two accent colours: BLUE #1F6FB4 = information / probing, ORANGE #E07B1A = travel / cost.
-Neutral greys for objects (#9A9A9A fill, #555555 outline). Four panels side by side, left to right, separated by
-generous white space, no boxes around panels A, B and C. Each panel has a bold panel letter in its top-left corner:
-"A", "B", "C", "D". Approximate widths: A 24 %, B 26 %, C 30 %, D 20 %.
+Δφ, π, *, ×, °, ′). Accent colours: BLUE #1F6FB4 = information / probing, ORANGE #E07B1A = travel / cost, and one
+second-library colour PURPLE #7A4FA3 used ONLY for the A16-2 outline in panel B. Neutral greys for objects (#9A9A9A
+fill, #555555 outline). Four panels side by side, left to right, separated by generous white space, no boxes around
+panels A, B and C. Each panel has a bold panel letter in its top-left corner: "A", "B", "C", "D". Approximate widths:
+A 22 %, B 30 %, C 28 %, D 20 %.
 
 PANEL A - "the task", top-down view:
  1. Centre: one flat irregular polygon (6 main sides, one small rectangular notch cut into its upper-right edge),
@@ -25,45 +26,49 @@ PANEL A - "the task", top-down view:
     circle: "φ_t".
  6. A curved ORANGE arrow running along the circle clockwise from the fingertip (8 o'clock) over the top to about
     1 o'clock, drawn just outside the circle line so both stay visible, arrowhead at the 1 o'clock end. Orange label
-    outside the circle: "travel cost c(a) = 1 + κ|Δφ|/π". A small open orange circle at the arrow end, labelled "φ′".
+    outside the circle: "c(a) = 1 + κ|Δφ|/π". A small open orange circle at the arrow end, labelled "φ′".
  7. From φ′, a straight BLUE arrow pointing inward toward the polygon, tilted about 15° away from the radial
     direction; a thin dotted grey radial reference line from φ′ to the centre shows the tilt, and a small arc between
     the radial line and the blue arrow is labelled "ψ" in blue.
  8. The blue arrow ends exactly on the polygon edge at a small filled blue diamond (contact) with a short blue tick
     perpendicular to the edge (measured normal). Small blue label: "contact + normal".
 
-PANEL B - "two travel regimes", two small schematic copies of the stand-off circle side by side (no polygon detail
-needed: a small grey polygon silhouette in each centre is enough):
- 1. Left copy, title above it: "S12, κ = 12". The fingertip dot sits at about 9 o'clock; from it, a fan of four short
-    BLUE probe arrows all start at the same point on the circle and point inward at slightly different tilts (a fan).
-    Almost no orange: only one very short orange arc (a few degrees) next to the dot. Label under the circle:
-    "6.1° / episode".
- 2. Right copy, title above it: "S2, κ = 2". Four BLUE probe arrows start from four different points spread around
-    the circle (about 9, 11, 1 and 3 o'clock), each pointing inward; consecutive start points are joined by ORANGE
-    arcs drawn just outside the circle. Label under the circle: "46.9° / episode".
- 3. One small grey italic word centred under both copies: "schematic".
+PANEL B - "five cells, ordered by planner travel": a single horizontal row of FIVE small copies of the stand-off
+circle, equal size, evenly spaced, each with a small grey polygon silhouette in its centre (no detail needed).
+ 1. Order from LEFT to RIGHT, with a title above each circle exactly as given:
+    "S12, κ = 12" | "S8, κ = 8" | "A16-2, κ = 2" | "S4, κ = 4" | "S2, κ = 2".
+ 2. Probe marks change smoothly from left to right:
+    - S12 (far left): fingertip dot at about 9 o'clock; a fan of four short BLUE probe arrows all starting at the same
+      point and pointing inward at slightly different tilts; one very short ORANGE arc (a few degrees) next to the dot.
+    - S8: the same fan, with a slightly longer short ORANGE arc.
+    - A16-2 (middle): THREE BLUE probe arrows (not four) from two nearby start points joined by one medium ORANGE arc;
+      this circle's outline is drawn in PURPLE #7A4FA3 instead of grey (second shape library).
+    - S4: four BLUE probe arrows from three start points joined by medium ORANGE arcs.
+    - S2 (far right): four BLUE probe arrows from four start points spread around the circle (about 9, 11, 1 and
+      3 o'clock), consecutive start points joined by long ORANGE arcs drawn just outside the circle.
+ 3. Label under each circle, exactly: "6.373°" (S12), "9.404°" (S8), "21.22°" (A16-2), "23.18°" (S4), "47.06°" (S2).
+ 4. One small grey line of text centred under the whole row: "planner travel per test episode · schematic traces".
 
-PANEL C - "three ways to pick the next touch", block diagram:
+PANEL C - "one planner, one learned head, three comparators", block diagram:
  1. At the far left, vertically centred, a small cloud of about 20 tiny grey dots inside a rounded outline: the
     belief icon. Label below: "belief b".
  2. From it, three thin grey arrows fan out into three horizontal lanes stacked top to bottom; each lane is a row of
     rounded rectangles (white fill, #555555 outline) joined by thin grey arrows.
- 3. Lane (i), top. Bold lane title at its left: "(i) Greedy G*". Blocks: "EIG / c over 512 actions" (inside, a tiny
-    row of 12 thin vertical BLUE bars of varying height, one taller and outlined darker) -> "argmax".
- 4. Lane (ii), middle. Bold title: "(ii) One-step look-ahead". Blocks: "screened first actions" -> a small tree glyph
-    (one root branching to four children, each continuing as a short dashed line to a leaf dot) with the label under
-    it: "completed by reduced greedy" -> "best first action".
- 5. Lane (iii), bottom. Bold title: "(iii) Learned policy". Blocks: a cluster of 4 small blue points with short tick
-    marks, labelled "touch history (finger frame)" -> "DeepSets" -> "512 masked logits" (inside: a tiny row of 12
-    thin bars, a few greyed out to suggest masking).
- 6. Two training arrows enter the "DeepSets" block:
-    - a SOLID BLUE arrow coming down from lane (i)'s "EIG / c over 512 actions" block, blue label:
-      "DAgger: G* score labels";
-    - a DASHED ORANGE arrow entering from below, orange label: "PPO: reward = ball-sPCE".
- 7. No other arrows and no numbers other than "512" (twice).
+ 3. Lane (i), top. Bold lane title at its left: "(i) Planner G*". Blocks: "EIG / c over feasible actions" (inside, a
+    tiny row of 12 thin vertical BLUE bars of varying height, one taller and outlined darker) -> "argmax".
+ 4. Lane (ii), middle. Bold title: "(ii) Learned head". Blocks: a cluster of 4 small blue points with short tick
+    marks, labelled "touch history (finger frame)" -> "DeepSets" -> "masked logits" (inside: a tiny row of 12 thin
+    bars, a few greyed out to suggest masking).
+ 5. Two training arrows enter the "DeepSets" block:
+    - a SOLID BLUE arrow coming down from lane (i)'s "EIG / c over feasible actions" block, blue label:
+      "DAgger on G* scores (best held-out checkpoint)";
+    - a DASHED ORANGE arrow entering from below, orange label: "PPO, reward = ball-sPCE (g_T)".
+ 6. Lane (iii), bottom. Bold title: "(iii) Heuristics". Three small rounded blocks side by side: "B-fan", "B-spread",
+    "B-cov", and under them one small grey label: "H* chosen on pilot".
+ 7. No numbers, timings or ratios anywhere in panel C.
 
 PANEL D - headline data inset: leave as an EMPTY placeholder, a plain white rectangle with a thin light-grey border
-(#DDDDDD), the panel letter "D" in its top-left corner and NOTHING else inside (no axes, bars, numbers or text). The
+(#DDDDDD), the panel letter "D" in its top-left corner and NOTHING else inside (no axes, points, numbers or text). The
 inset is plotted separately from the results JSON and pasted into this frame; the generator must not draw any chart,
 value or label here.
 
@@ -71,28 +76,28 @@ Global: balanced composition, generous margins, all labels legible when printed 
 clutter, no title above the figure, no caption inside the image.
 
 ---
-PANEL D INSET (plotted with matplotlib, not generated; values copied from the results JSONs):
- Main plot: grouped bars of test3 0-299 success (sub-8 evaluator), two groups "S12" and "S2"; bars G* / student / RL /
- B-fan (B-fan hatched, labelled "exploratory"). Whiskers are paired ci95 relative to G*, drawn on the learner bar.
-  S12 (v3:14_m4_analysis): G* 0.4267 (rows.gstar.success); student 0.3822 (rows.student.success), whisker from
-   diffs["student-gstar:success"].ci95 = [-0.0933, +0.0056]; RL 0.3567 (rows.rl.success), whisker from
-   diffs["gstar-rl:success"].ci95 = [+0.0022, +0.1367] sign-flipped; B-fan 0.36 (exploratory_b_fan.success), whisker
-   from exploratory_b_fan["b_fan-gstar:success"].ci95 = [-0.12, -0.01].
-  S2 (v4:14_s2_analysis.test3_sub8): G* 0.5533 (rows.gstar.success); student 0.4511 (rows.student.success), whisker from
-   diffs["student-gstar:success"].ci95 = [-0.1656, -0.0433]; RL 0.4233 (rows.rl.success), whisker from
-   diffs["gstar-rl:success"].ci95 = [+0.0644, +0.1944] sign-flipped; B-fan 0.37 (rows.b_fan.success), whisker from
-   diffs["b_fan-gstar:success"].ci95 = [-0.2467, -0.12].
-  No random bar (the S2 random anchor is complete but enters no contrast).
- Plotted by code/plot_figure1_panelD.py -> figure1_panelD.{pdf,png}; whisker = G* success + paired diff ci95.
- Side strip: H3 one-sided 95 % UB of G(kappa): 0.0221 at kappa = 12 (v3:12_g2_analysis.k12.ub95) and 0.0197 at
-  kappa = 2 (v3:12_g2_analysis.k2.ub95), dashed line at the pre-registered Hold threshold 0.03.
- Caption note: "paired ci95, uncorrected; one cell per regime; no cross-cell test".
+PANEL D INSET (plotted with matplotlib following the dataviz skill, NOT generated; values copied from
+results/v5/results_v5.json; multiply proportions by 100 to plot in pp):
+ x axis: G* mean test5 travel (rad), 14_test5_analysis.json > H5b > gstar_mean_travel_rad:
+   S2 0.8213, S4 0.4046, S8 0.1641, S12 0.1112, A16-2 0.3704.
+ y axis: student - G* success (pp).
+ Filled points with 95 % CI whiskers (test5; 14_test5_analysis.json > <cell> > student_minus_gstar > success > {diff, ci95}):
+   S2 -0.02467 [-0.07600, +0.02667]; S4 -0.02533 [-0.08333, +0.03267]; S8 -0.01267 [-0.06133, +0.03733];
+   S12 -0.01533 [-0.06333, +0.03267]; A16-2 -0.002000 [-0.06267, +0.06067].
+ Hollow points at the same x, NO whiskers (validation; 12_d5_analysis.json > <cell> > succ > delta_hat):
+   S2 -0.0328; S4 -0.0548; S8 -0.0364; S12 -0.0324; A16-2 -0.0596.
+ Horizontal dashed lines at 0 and at -delta = -0.04 (12_d5_analysis.json > <cell> > delta).
+ Point labels S2 / S4 / S8 / S12 / A16-2; A16-2 in the second-library colour #7A4FA3, S cells in #222222.
+ Corner text: "D5: 0/5 pass · H5b slope −0.0157/rad, ci95 [−0.104, 0.073], no trend detected".
+ No fitted line (the WLS intercept is not in the JSON). [NEED: WLS intercept, only if a fitted line is wanted.]
 
-Draft caption:
-Figure 1. Cost-aware touch selection in two travel regimes. (A) A finger on a stand-off circle chooses where to move,
-paying travel cost proportional to |Δφ|, and which way to probe; the belief is a particle set over identity and planar
-pose. (B) At κ = 12 the cost-aware greedy planner G* mostly stays and fans its probes (6.1° travel per episode); at
-κ = 2 it travels (46.9°). Traces are schematic. (C) We compare G*, a one-step look-ahead over a reduced greedy
-completion, and one belief-free DeepSets policy trained by DAgger on G*'s scores or by PPO on ball-sPCE. (D) One-step
-look-ahead gains ≤ 2.2 % at κ = 12 (one-sided 95 % bound), and neither learned policy was shown to reach G* in either
-regime (test success, paired ci95; one cell per regime, preliminary; B-fan exploratory).
+DRAFT CAPTION
+Figure 1. Amortizing a cost-aware touch planner across travel costs. (A) A finger on a stand-off circle chooses where
+to move, paying a travel cost proportional to |Δφ|, and which way to probe; the belief is a particle set over identity
+and planar pose. (B) The five pre-registered cells, ordered by the planner G*'s mean travel per test episode (6.373° at
+κ = 12 to 47.06° at κ = 2 on shape set S; A16-2 is a second shape set at κ = 2); traces are schematic. (C) One
+belief-free DeepSets head is trained by DAgger on G*'s scores or by PPO on G*'s information objective, and is compared
+with hand-designed probing heuristics. (D) Student − G* success: test5 mean with paired 95 % CI (filled; 300 episodes,
+5 student seeds) and validation point estimate (hollow; 500 episodes). The student is below G* in every cell on both
+splits, and the pre-registered gate fails in all five cells, so a match within δ = 4 pp (dashed) is not supported; no
+trend with travel is detected. Simulation; preliminary.
