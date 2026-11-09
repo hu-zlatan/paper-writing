@@ -542,3 +542,29 @@ Run order when both papers are active: AUTOPILOT §7.
 - **Refine cycles used:** 1 / 3. **Next stage:** 13 ITERATIVE_REFINE [v2]: implement A (sandbox), B1 / B2 replay code
   + tests, 5-minute pilot, then replays (Actions or sandbox) → `results/v2/`.
 - **Resuming under version:** v2. Writing time: deadline 12-04 AoE; stages 16–20 again by ≈ 11-22.
+
+## Stage 13. ITERATIVE_REFINE     [v2] — amendment 09 runs (in progress)
+
+- **Started:** 2026-11-09 (run 43). Plan = `docs/09_amendment_v2.md` (frozen before any v2 code). Code committed before
+  each run: `code/analysis_v2_a.py` (+ `tests/test_v2_a.py`, 32 / 32 tests), `code/crc_grids_09.py`,
+  `code/analysis_v2_b.py`. Replays on GitHub Actions (`experiments/p2_crc09_v2.json`, 12 jobs, ≈ 525 s each; logs
+  land in `results/v1/logs/p2_crc09_*` because of the workflow's tee path — new files only, frozen v1 files unchanged).
+- **A (existing replays, 2,000 draws; `results/v2/a_analysis.json`, `_08e.json`)**, all vs CSF-1, secondary:
+  matched slip 0.10 — D_match CertGrip-full 0.4563 [0.3975…] (08c) / 0.4475 [0.4111, 0.4880] (08e), onset-only 0.4736 /
+  0.4629, CSF-μ̂ 0.469 / 0.4793 → all superiority; Learn-then-Test (δ 0.10) — D_ltt CertGrip-full 0.4043 / 0.4015,
+  onset-only 0.4148 / 0.4303, CSF-μ̂ 0.3704 / 0.404, all superiority, no fallback; LTT test slip CertGrip-full 0.0696
+  (08c). A3: D(CSF-μ̂ vs CSF-1) 0.3816 [0.2965, 0.4505], D(onset-only vs CSF-1) 0.4464 → superiority. Caveat: CSF-μ̂
+  still sits at grid index 0 in D1 / D2 on 08c (also under LTT), so its 08c rows are biased against it; 08e rows are
+  the fair ones. Reading: the probe's saving survives matched slip and a high-probability certificate; the plug-in and
+  the learner are indistinguishable.
+- **B1 / H5 (`results/v2/b_analysis.json`)**: D(CertGrip-full vs CSF-proxy σ_p) = 0.0514 [−0.0673, 0.166] at σ_p 0.2
+  (not shown), 0.5042 [0.4362, 0.5635] at 0.4, 0.8361 at 0.8 (superiority). Prediction "margin shrinks as σ_p falls"
+  held; the CI\*\* first includes 0 at σ_p 0.2. CSF-proxy@0.4 is worse than CSF-1 (RE 0.9213 vs 0.783): a log-noise of
+  0.4 exceeds the log-μ prior spread. CSF-proxy@0.2 hit grid index 0 in D1 / D2 → edge rule: 08e-recipe grids
+  (`crc_grids_09e.json`, `experiments/p2_crc09e_v2.json`, dispatched) → `analysis_v2_b.py --edge`.
+- **B2 (probe + fixed margin, no calibration)**: test physical slip 0.9582 / 0.8257 / 0.6182 / 0.335 at m 0 / 0.25 /
+  0.5 / 1.0 (D3 / D4 ≥ 0.619 even at m 1.0) — the bare Coulomb force is far below F\*; calibration is what sets the
+  margin. Descriptive.
+- **B3 (online, physical feedback)**: not started (pilot-gated; next run).
+- **Next (run 44):** read the edge-rule replays (`analysis_v2_b.py --edge`), B3 pilot → run or downscale; then stage 14
+  [v2] (fresh subagent), 15, and stages 16–20 again on draft_v1 (v2 rows enter as secondary, v1 verdicts unchanged).
