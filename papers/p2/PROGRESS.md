@@ -550,10 +550,10 @@ Run order when both papers are active: AUTOPILOT §7.
   `code/analysis_v2_b.py`. Replays on GitHub Actions (`experiments/p2_crc09_v2.json`, 12 jobs, ≈ 525 s each; logs
   land in `results/v1/logs/p2_crc09_*` because of the workflow's tee path — new files only, frozen v1 files unchanged).
 - **A (existing replays, 2,000 draws; `results/v2/a_analysis.json`, `_08e.json`)**, all vs CSF-1, secondary:
-  matched slip 0.10 — D_match CertGrip-full 0.4563 [0.3975…] (08c) / 0.4475 [0.4111, 0.4880] (08e), onset-only 0.4736 /
+  matched slip 0.10 — D_match CertGrip-full 0.4563 [0.4096, 0.4896] (08c) / 0.4475 [0.4111, 0.4880] (08e), onset-only 0.4736 /
   0.4629, CSF-μ̂ 0.469 / 0.4793 → all superiority; Learn-then-Test (δ 0.10) — D_ltt CertGrip-full 0.4043 / 0.4015,
   onset-only 0.4148 / 0.4303, CSF-μ̂ 0.3704 / 0.404, all superiority, no fallback; LTT test slip CertGrip-full 0.0696
-  (08c). A3: D(CSF-μ̂ vs CSF-1) 0.3816 [0.2965, 0.4505], D(onset-only vs CSF-1) 0.4464 → superiority. Caveat: CSF-μ̂
+  (08c). A3: D(CSF-μ̂ vs CSF-1) 0.3816 [0.2965, 0.4505], D(onset-only vs CSF-1) 0.4464 [0.3776, 0.4906] → superiority. Caveat: CSF-μ̂
   still sits at grid index 0 in D1 / D2 on 08c (also under LTT), so its 08c rows are biased against it; 08e rows are
   the fair ones. Reading: the probe's saving survives matched slip and a high-probability certificate; the plug-in and
   the learner are indistinguishable.
