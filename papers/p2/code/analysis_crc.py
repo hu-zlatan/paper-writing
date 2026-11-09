@@ -137,12 +137,15 @@ def analyse(D, draws=2000, seed=2026):
             "n_cal_instances": int(len(cal_idx)), "n_test_instances": int(len(test_idx)), "draws": draws}
 
 
+V2 = False
+
+
 def load_real():
-    G = json.load(open(os.path.join(ROOT, "v1/crc_grids.json")))
+    G = json.load(open(os.path.join(ROOT, "v1/crc_grids_v2.json" if V2 else "v1/crc_grids.json")))
     keys = [tuple(k) for k in G["instances"]]
     idx = {k: i for i, k in enumerate(keys)}
     rep = {}
-    for f in sorted(glob.glob(os.path.join(ROOT, "v1/crc/*.jsonl"))):
+    for f in sorted(glob.glob(os.path.join(ROOT, "v1/crc_v2/*.jsonl" if V2 else "v1/crc/*.jsonl"))):
         for line in open(f):
             r = json.loads(line)
             if "key" in r:
@@ -172,7 +175,10 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--check", action="store_true")
     ap.add_argument("--draws", type=int, default=2000)
+    ap.add_argument("--v2", action="store_true", help="addendum 08e per-stratum grids")
     a = ap.parse_args()
+    global V2
+    V2 = a.v2
     G, keys, idx, rep, missing, dup = load_real()
     print(f"instances: {len(keys)}, with replays: {len(keys) - len(missing)}, duplicates: {dup}")
     if a.check or missing:
@@ -181,7 +187,7 @@ def main():
         return
     res = analyse(build(G, keys, rep), draws=a.draws)
     res["purpose"] = "p2 08c CRC read-out (H2a / H2b primary, sigma curve, H4e, per-seed D)"
-    json.dump(res, open(os.path.join(ROOT, "v1/crc_analysis.json"), "w"), indent=1)
+    json.dump(res, open(os.path.join(ROOT, "v1/crc_analysis_v2.json" if V2 else "v1/crc_analysis.json"), "w"), indent=1)
     for k in ("H2a", "H2b", "H4e_vs_onset_only"):
         c = res["contrasts"][k]
         print(f"{k}: D {c['D']['mid']:.3f} CI** {c['CI**']['mid'][0]:.3f}..{c['CI**']['mid'][1]:.3f} -> {c['decision']}")

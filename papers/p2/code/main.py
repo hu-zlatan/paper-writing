@@ -213,7 +213,7 @@ def cmd_crc(a):
     F = min(F_max, g e^lambda) from results/v1/crc_grids.json; one line per instance with slip[arm] (20 booleans).
     Identical forces within an instance are replayed once. No label value is read."""
     a.protocol = "rd"
-    G = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "results", "v1", "crc_grids.json")))
+    G = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "results", "v1", a.grids)))
     index = {tuple(k): i for i, k in enumerate(G["instances"])}
     f_max = G["F_max"]
     os.makedirs(os.path.dirname(os.path.abspath(a.out)), exist_ok=True)
@@ -236,7 +236,8 @@ def cmd_crc(a):
                 sim = Sim(inst, preload_force(), delta_t=SLIP["delta_t"], rot_t_deg=SLIP["rot_t_deg"], protocol="rd")
                 cache, slips, forces = {}, {}, {}
                 for arm, A in G["arms"].items():
-                    Fs = [min(f_max, math.exp(A["log_g"][i] + lam)) for lam in A["grid"]]
+                    grid = A["grids"][d] if "grids" in A else A["grid"]
+                    Fs = [min(f_max, math.exp(A["log_g"][i] + lam)) for lam in grid]
                     out = []
                     for F in Fs:
                         fk = round(F, 9)
@@ -319,6 +320,7 @@ def main(argv=None):
     cr.add_argument("--start", type=int, required=True)
     cr.add_argument("--count", type=int, required=True)
     cr.add_argument("--budget-minutes", type=float, default=25.0)
+    cr.add_argument("--grids", default="crc_grids.json", help="crc_grids_v2.json for addendum 08e")
     cr.add_argument("--out", required=True)
     rp = sub.add_parser("replay", help="08d: H3 stream-audit direct replays from a schedule file")
     rp.add_argument("--shift", required=True, choices=["S1", "S2", "S3", "S1m"])
