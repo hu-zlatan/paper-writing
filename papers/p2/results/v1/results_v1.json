@@ -1,5 +1,154 @@
 {
  "note": "p2 v1 (docs/08b_preregistration.md + 08c-08h); every block is the unchanged content of the named file; crc_grids*.json and 13_freeze.json are referenced, not inlined",
+ "19_report_rows.json": {
+  "note": "report-only rows for stage 19 (code/tools_stage19_rows.py); computed from existing raw files",
+  "detector_id_sigma0": {
+   "n_rows": 8000,
+   "found_rate": 1.0,
+   "pearson_r_logmu": 0.9479823536832105,
+   "bias_mean_diff": 0.3186408510241527,
+   "sd_diff": 0.11029390007374047,
+   "disp_at_onset_mm": {
+    "median": 0.12634499999999999,
+    "p95": 0.2542904999999997,
+    "max": 1.92376,
+    "n_ge_2mm": 0
+   }
+  },
+  "compute_logged_cpu_hours": {
+   "logs_by_prefix": {
+    "p2_crc": 5.719611111111114,
+    "p2_crcv2": 8.031638888888889
+   },
+   "rows_sum": {
+    "labels": 0.6030064457358231,
+    "mono": 0.14551709138305519
+   },
+   "total": 14.49977353711888
+  },
+  "per_stratum_test_slip_crc08c": {
+   "full_rd@0.2#0": {
+    "overall_slip_phys": 0.08285714285714285,
+    "lam_idx": {
+     "D1": 10,
+     "D2": 10,
+     "D3": 11,
+     "D4": 10
+    },
+    "D1": {
+     "n": 700,
+     "slip_phys": 0.08714285714285715
+    },
+    "D2": {
+     "n": 700,
+     "slip_phys": 0.07142857142857142
+    },
+    "D3": {
+     "n": 700,
+     "slip_phys": 0.07571428571428572
+    },
+    "D4": {
+     "n": 700,
+     "slip_phys": 0.09714285714285714
+    }
+   },
+   "CSF-1": {
+    "overall_slip_phys": 0.10214285714285715,
+    "lam_idx": {
+     "D1": 1,
+     "D2": 1,
+     "D3": 15,
+     "D4": 14
+    },
+    "D1": {
+     "n": 700,
+     "slip_phys": 0.11571428571428571
+    },
+    "D2": {
+     "n": 700,
+     "slip_phys": 0.08857142857142856
+    },
+    "D3": {
+     "n": 700,
+     "slip_phys": 0.10571428571428572
+    },
+    "D4": {
+     "n": 700,
+     "slip_phys": 0.09857142857142857
+    }
+   },
+   "CSF-muhat@0.2": {
+    "overall_slip_phys": 0.06571428571428571,
+    "lam_idx": {
+     "D1": 0,
+     "D2": 0,
+     "D3": 14,
+     "D4": 12
+    },
+    "D1": {
+     "n": 700,
+     "slip_phys": 0.05857142857142857
+    },
+    "D2": {
+     "n": 700,
+     "slip_phys": 0.03857142857142857
+    },
+    "D3": {
+     "n": 700,
+     "slip_phys": 0.08
+    },
+    "D4": {
+     "n": 700,
+     "slip_phys": 0.08571428571428572
+    }
+   },
+   "P_onset@0.2#0": {
+    "overall_slip_phys": 0.08571428571428572,
+    "lam_idx": {
+     "D1": 10,
+     "D2": 10,
+     "D3": 11,
+     "D4": 10
+    },
+    "D1": {
+     "n": 700,
+     "slip_phys": 0.09142857142857143
+    },
+    "D2": {
+     "n": 700,
+     "slip_phys": 0.08714285714285715
+    },
+    "D3": {
+     "n": 700,
+     "slip_phys": 0.07142857142857142
+    },
+    "D4": {
+     "n": 700,
+     "slip_phys": 0.09285714285714286
+    }
+   }
+  },
+  "h1m_violations_split": {
+   "id_count": 8,
+   "id_max_rel_above_F_hi": 0.002251148292912619,
+   "shift_count": 2,
+   "shift_max_rel_above_F_hi": 0.009035170084340738,
+   "shift_pools": {
+    "S1": {
+     "n": 100,
+     "non_monotone": 0
+    },
+    "S3": {
+     "n": 100,
+     "non_monotone": 1
+    },
+    "S2": {
+     "n": 100,
+     "non_monotone": 1
+    }
+   }
+  }
+ },
  "comp_selection.json": {
   "purpose": "p2 COMP selection (08b \u00a73, 08c \u00a73): selection split only, label rule, alpha 0.10, even/odd object halves, mean RE over both halves; smallest wins",
   "n_instances": 800,

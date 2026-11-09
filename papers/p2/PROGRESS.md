@@ -474,3 +474,16 @@ Run order when both papers are active: AUTOPILOT §7.
   `code/certgrip/models.py` (the code that ran). H2a, H2-R scope limit in abstract, H1 / H2b not confirmed, H3
   inconclusive, H2-M descriptive, post hoc analyses labelled, five deviations listed.
 - **Next:** stage 18 PEER_REVIEW (two fresh subagents, evidence audit).
+
+## Stage 18. PEER_REVIEW     [v1]
+
+- **Finished:** 2026-11-09 (run 43). Plan `plans/stage_18_peer_review.md`; template verbatim
+  (`paper/mypaper/prompts/build_stage18.py`); two fresh opus subagents. Scores run 1 A 4 / B 5, run 2 A 4 / B 5.
+  **CRITICAL_FABRICATION: no** (43 + 31 spot-checks; H2a / H2b D recomputed from raw replays, exact).
+- Merged record `paper/mypaper/18_peer_review.md`: 10 paper-level must-fix items (family description ≠ code, μ
+  independence by construction, grid floor binds H2b at σ 0.2 too, compute 14.5 CPU-h not 2–3, online-study feedback
+  is the label rule, H1-M max attribution, comparators, main-data detector quality, "certified" in expectation, C3
+  scope) and 5 evidence-level items (PAC / LTT variant, friction-proxy baseline, σ grounding, reactive baseline,
+  classic citations) for stage 20.
+- Report-only rows: `code/tools_stage19_rows.py` → `results/v1/19_report_rows.json` (now in results_v1.json).
+- **Next:** stage 19 PAPER_REVISION (template `paper_revision.md`, fresh subagent, length-protected).
