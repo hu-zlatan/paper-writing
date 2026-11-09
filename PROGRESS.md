@@ -9,7 +9,7 @@
 **Topic:** Amortized, non-myopic active tactile localization (TouchBED)
 **Initialised:** 2026-10-28T07:56:44Z
 **Current version:** v5
-**Latest stage:** Stage 13 ITERATIVE_REFINE [v5] in progress (main-run execution on Actions); see run 40 at the end of this file
+**Latest stage:** Stage 15 RESEARCH_DECISION [v5] = PROCEED (measurement paper) → next stage 16 PAPER_OUTLINE [v5]; see run 40 at the end of this file
 
 ---
 
@@ -1568,3 +1568,25 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
     in 4 / 5. **Student vs RL (cfg 6) success:** +8.5 (S2), +5.5 (S4, CI touches 0), +3.2 (S8, n.s.), +7.3 (S12),
     +26.6 pp (A16-2). **H2-v5** (g_T student − RL, LB > +0.10): only A16-2 (+0.83, LB 0.60); no inversion anywhere.
     E5 (sub-16) flip rate 6.5–8 % moves the student − G\\* contrast by up to 3 pp — the size of every test5 gap.
+
+## Stage 14. RESULT_ANALYSIS     [v5]
+
+- **Finished:** 2026-11-09 (run 40). Plan `plans/stage_14_result_analysis_v5.md`.
+- Pass 1 (fresh subagent, template verbatim, data = unaltered `results/v5/results_v5.json`) → `results/v5/14_analysis_pass1.md`;
+  pass 2 (fresh subagent, adversarial area-chair prompt) → `14_analysis_pass2.md` (3 S / 8 M / 8 m; no pre-registered
+  verdict wrong); merged `results/v5/14_analysis.md` (pass-2 items binding). Prompts in `results/v5/prompts/`.
+- Key binding corrections: the gap is not "small" on validation (S4 −5.5, A16-2 −6.0 pp); test5 does not contradict
+  D5; the pilot-chosen H\* is not the best test5 heuristic in 4 / 5 cells (margin over the best test5 heuristic
+  +3.5 to +14.5 pp); H5b = "no trend detected", not "no dependence"; latency ratio 2,523× (S12) – 9,933× (S2) on one
+  student seed per cell; A16-2's H2-v5 pass is mostly RL collapse (4 / 5 seeds use 2 probes).
+
+## Stage 15. RESEARCH_DECISION     [v5]
+
+- **Finished:** 2026-11-09 (run 40). Fresh subagent, template with the REFINE option verbatim (prompts
+  `results/v5/prompts/stage15_*.txt`) → `results/v5/15_decision.md`.
+- **Decision: PROCEED to stage 16 as a measurement / characterisation paper only** (same resolution as v4). The
+  method-sense PROCEED rule is not met (D5 0 / 5; no contrast vs the strongest per-cell baseline significant), REFINE
+  is unavailable (refine cap 4 / 4 used, owner-authorised maximum; D5 has no remedy step), PIVOT not warranted.
+  Escalation items filed in `OWNER_TODO.md` (run 40). Target: RSS 2027 Stage 1 extended abstract (12-04 AoE), draft
+  ≈ 11-22, in `paper/` by 12-01; the owner submits or not.
+- **Next:** stage 16 PAPER_OUTLINE [v5] (`results/v5/15_decision.md` §4 lists the allowed / disallowed claims).
