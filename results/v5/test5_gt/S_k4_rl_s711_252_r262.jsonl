@@ -1,0 +1,12 @@
+{"header": true, "args": {"cmd": "gt3", "src": ["../results/v5/test5/S_k4_rl_s711_252_r262.jsonl"], "J": 16, "L": 4095, "out": "../results/v5/test5_gt/S_k4_rl_s711_252_r262"}, "env": {"TOUCHBED_NPHI": "64", "action_set": "64x8", "A": 512, "numpy": "2.5.4", "python": "3.12.16", "threads": {"OMP_NUM_THREADS": "1", "OPENBLAS_NUM_THREADS": "1", "MKL_NUM_THREADS": "1"}}}
+{"episode": 262, "set": "S", "split": "test5", "kappa": 4.0, "tau": 4.8, "method": "rl", "g_T": 6.1913319542026155, "n_probes": 3, "J": 16, "L": 4095}
+{"episode": 263, "set": "S", "split": "test5", "kappa": 4.0, "tau": 4.8, "method": "rl", "g_T": 6.345740017090099, "n_probes": 3, "J": 16, "L": 4095}
+{"episode": 264, "set": "S", "split": "test5", "kappa": 4.0, "tau": 4.8, "method": "rl", "g_T": 5.908748930867672, "n_probes": 3, "J": 16, "L": 4095}
+{"episode": 265, "set": "S", "split": "test5", "kappa": 4.0, "tau": 4.8, "method": "rl", "g_T": 3.8541461529575063, "n_probes": 3, "J": 16, "L": 4095}
+{"episode": 266, "set": "S", "split": "test5", "kappa": 4.0, "tau": 4.8, "method": "rl", "g_T": -8.544435422171837, "n_probes": 3, "J": 16, "L": 4095}
+{"episode": 267, "set": "S", "split": "test5", "kappa": 4.0, "tau": 4.8, "method": "rl", "g_T": 5.1578179322846704, "n_probes": 3, "J": 16, "L": 4095}
+{"episode": 268, "set": "S", "split": "test5", "kappa": 4.0, "tau": 4.8, "method": "rl", "g_T": 8.288239995399127, "n_probes": 3, "J": 16, "L": 4095}
+{"episode": 269, "set": "S", "split": "test5", "kappa": 4.0, "tau": 4.8, "method": "rl", "g_T": 8.317652421143743, "n_probes": 3, "J": 16, "L": 4095}
+{"episode": 270, "set": "S", "split": "test5", "kappa": 4.0, "tau": 4.8, "method": "rl", "g_T": 4.660439258299213, "n_probes": 3, "J": 16, "L": 4095}
+{"episode": 271, "set": "S", "split": "test5", "kappa": 4.0, "tau": 4.8, "method": "rl", "g_T": 6.694503846790306, "n_probes": 3, "J": 16, "L": 4095}
+{"episode": 272, "set": "S", "split": "test5", "kappa": 4.0, "tau": 4.8, "method": "rl", "g_T": 4.122429679365874, "n_probes": 3, "J": 16, "L": 4095}
