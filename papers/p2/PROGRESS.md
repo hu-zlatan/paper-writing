@@ -281,3 +281,25 @@ Run order when both papers are active: AUTOPILOT §7.
     [−0.0075, −0.0014], α 0.05 −0.0014 [−0.0039, 0.0007]; CSF-1 α 0.10 −0.0032, α 0.05 −0.0029 → all **pass**
     (CI\*\* upper ≤ 0.02). Physical slip is at or below the label rule; the H1-M flickers do not raise the physical
     rate at the conformal force. H1 stays "not confirmed" (H1-M failed); H1-V is reported as the transfer check.
+  - **H2 read-out, CRC route (primary, `code/analysis_crc.py` committed before the replays were read;
+    `results/v1/crc_analysis.json`, 4,800 instances × 14 arms × 20 λ, 2,000 draws, CI\*\* 97.5 %):**
+    RE at λ̂: CertGrip-full σ 0.2 0.457 (phys. slip 8.3 %), CSF-1 (COMP) 0.783 (10.2 %), CSF-μ̂ σ 0.2 0.484 (6.6 %),
+    onset-only 0.434 (8.6 %). **H2a: D = 0.417 [0.348, 0.478], F\*_lo / F\*_hi 0.415 / 0.419 → superiority (confirmed).**
+    **H2b: D = 0.057 [−0.040, 0.145] → not confirmed** (neither superiority nor TOST equivalence). H4e (vs onset-only)
+    −0.053 [−0.123, 0.051]. Per seed: H2a 0.39–0.45, all superiority; H2b 0.02–0.11, all not confirmed. σ\* = 0.4
+    (H2a lower limit 0.083 < 0.10 at σ 0.4; D 0.68 / 0.58 / 0.42 / 0.14 at σ 0 / 0.1 / 0.2 / 0.4).
+  - **Defect found in the 08c λ-grid (reported, not hidden):** the grid is centred on the *pooled* selection q̂ ± 0.4,
+    and for the physics plug-ins the D1 / D2 strata need λ below the grid: λ̂ sits on the lowest grid point for CSF-μ̂ at
+    σ 0 / 0.1 / 0.2 in D1 and D2 (index 0) and one step above it for CSF-1. A floor-bound λ̂ over-protects (CSF-μ̂ σ 0
+    physical slip 2.7 % vs α 10 %) and inflates the comparator's RE, so the CRC-route D(H2b) is biased **in CertGrip's
+    favour** (CSF-1 in H2a is affected much less: index 1, not the floor). The H2b-σ "superiority" at σ 0 / 0.1 on the
+    CRC route is this artifact.
+  - **Label-rule route (08c §3 secondary, no grid; `code/h2_label_rule.py` → `results/v1/h2_label_rule.json`):**
+    H2a D = 0.429 [0.365, 0.482] → superiority (agrees); **H2b D = 0.013 [−0.085, 0.081] → equivalence**;
+    H4e −0.042 [−0.099, 0.013] → equivalence; H2b at σ 0 −0.202 and σ 0.1 −0.075 → **inferiority** (the physics
+    plug-in with a good onset estimate beats the learned model). Since H1-V passes (physical ≤ label rule), the
+    label-rule route is a valid, conservative read here. Honest summary so far: touch-with-probe beats the best
+    no-touch conformal method by ≈ 42 % force (H2a, robust to route), but the learned model adds nothing over a physics
+    plug-in that uses the same friction-onset estimate (H2b equivalent on the label route; CRC route biased by the grid).
+  - **Next:** addendum 08e (post hoc, decided before its outcome): per-stratum-centred, wider λ-grid CRC replays for the
+    plug-in and onset arms as a sensitivity check of H2b; then stage 13/14 (H4 diagnostics, D-μ, H2-T, H3-B).
