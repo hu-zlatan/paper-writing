@@ -516,3 +516,29 @@ Run order when both papers are active: AUTOPILOT §7.
   5-page condensation is stage 22). Number audit 0 unmatched; no new citations. Deviations list now 8 items (Holm
   dropped; 08a provenance; frontier not produced).
 - **Next:** stage 20 QUALITY_GATE.
+
+## Stage 20. QUALITY_GATE     [v1]
+
+- **Finished:** 2026-11-09 (run 43). Plan `plans/stage_20_quality_gate.md`; template verbatim (threshold 7.5), fresh
+  opus subagent, paper only → `paper/mypaper/20_quality_gate.json`.
+- **Score 6.5 / 10 → FAIL; not auto-approved** (below threshold). 11 required actions: 8 paper-level (risk–efficiency
+  frontier and a high-probability certificate from existing replays, CSF-μ̂ / onset-only vs CSF-1 contrasts,
+  descriptive names instead of document codes, a label-route H2b row wording error, classic related work, Figure 1
+  from data, exploratory stratifications) and 3 evidence-level (friction-proxy / probe + margin / reactive baselines;
+  online study with physical feedback; σ grounding).
+- **Decision (template table):** below threshold with evidence-level weaknesses → **stage 13** (refine cycles 0 / 3
+  used, so the loop is available). This is the paper's first mandatory loop.
+
+## LOOP MARKER — REFINE from stage 20 → stage 13     [version v1 → v2]
+
+- **Reason:** gate 6.5 < 7.5 with evidence-level weaknesses (`paper/mypaper/20_quality_gate.json`; also stage-18
+  E1–E4).
+- **Amendment of record (written before any v2 code / run):** `docs/09_amendment_v2.md` — A (frontier, Learn-then-Test
+  certificate, extra contrasts on existing replays), B1 CSF-proxy baseline σ_p ∈ {0.2, 0.4, 0.8} with registered
+  read-out H5, B2 probe + fixed margin, B3 online study with physical feedback (pilot-gated, downscale order), C not
+  done with reasons. All v2 rows secondary; v1 verdicts unchanged.
+- **Snapshot taken:** `paper/mypaper/v1/` (draft after stage 17, 19 pass 1, 19 pass 2; reviews and gate stay in
+  `paper/mypaper/`); `results/v1/` is the frozen v1 evidence (sha256 in `results/v1/13_freeze.json`).
+- **Refine cycles used:** 1 / 3. **Next stage:** 13 ITERATIVE_REFINE [v2]: implement A (sandbox), B1 / B2 replay code
+  + tests, 5-minute pilot, then replays (Actions or sandbox) → `results/v2/`.
+- **Resuming under version:** v2. Writing time: deadline 12-04 AoE; stages 16–20 again by ≈ 11-22.
