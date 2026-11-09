@@ -1649,6 +1649,12 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
   Markers left: 14 [NEED] in the body (design constants not in any results field: action grid, cost-formula source,
   A16 identity count / keep range, `g2000_512_64` meaning, label / DAgger / epoch budgets, cfg-6 RL episodes per seed,
   D5 clause-1 floor and per-seed count, bootstrap resample count) and 3 [CITE-MISSING] (DeepSets, Holm, Efron).
-- **Where to resume (run 42):** fill the [NEED] markers from the frozen design docs (`docs/07c_amendment_v5_0.md`,
-  `v5_1.md`, code constants) or drop the sentences; then stage 18 PEER_REVIEW [v5] (two independent runs, fresh
+- **[NEED] markers filled (same run, 0 left):** values from amendment v5.0 (D5 clause floor −2 pp and ≥ 4 / 5 seeds,
+  label / DAgger / epoch budgets, A16 K = 16 and keep range [0.30, 0.90]), code constants (`travel.py` 64 × 8 action
+  grid, cost formula; `geometry.py` 100 mm start radius; `distill.py` ρ = 0.05, Adam; `latency3.py` gN_C_M naming;
+  `analysis_test5_v5.py` 10,000 resamples) and run logs, the latter now extracted into `16_report_rows.json`
+  (cfg-6 RL: every run reached the 2 × 10⁵-episode cap, 200,192 logged, clip 0.2, 4 epochs; student distill config
+  identical in all 75 runs; training episodes 2,700 / 3,500 / 4,300 per round). Number audit: still only the two
+  scientific-notation mantissas.
+- **Where to resume (run 42):** stage 18 PEER_REVIEW [v5] (two independent runs, fresh
   subagents, evidence audit). Paper 2: remaining secondaries → stage 13/14.

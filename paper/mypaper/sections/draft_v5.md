@@ -92,7 +92,7 @@ results/v5/results_v5.json; multiply proportions by 100 to plot in pp):
  Horizontal dashed lines at 0 and at -delta = -0.04 (12_d5_analysis.json > <cell> > delta).
  Point labels S2 / S4 / S8 / S12 / A16-2; A16-2 in the second-library colour #7A4FA3, S cells in #222222.
  Corner text: "D5: 0/5 pass · H5b slope −0.0157/rad, ci95 [−0.104, 0.073], no trend detected".
- No fitted line (the WLS intercept is not in the JSON). [NEED: WLS intercept, only if a fitted line is wanted.]
+ No fitted line (the WLS intercept is not in the JSON).
 
 DRAFT CAPTION
 Figure 1. Amortizing a cost-aware touch planner across travel costs. (A) A finger on a stand-off circle chooses where
@@ -253,7 +253,8 @@ method.
 pose, so the state is $s = (k, x, y, \theta)$, with a uniform prior over identity, position in a bounded box and
 orientation. The finger rests on a stand-off circle at angle $\phi_t$, with a start angle shared by all methods on an
 episode. An action $a = (\phi', \psi)$ selects a target angle $\phi'$ and an approach offset $\psi$ from a discrete
-grid [NEED: action-grid size and stand-off geometry, copied from the frozen design doc into a citable source]. The
+grid of 64 target angles (5.625° apart) × 8 approach offsets (−35° to +35° in 10° steps), i.e. 512 actions; probes
+start on a circle of radius 100 mm. The
 finger travels the shorter way to $\phi'$, probes inward along direction $\phi' + \pi + \psi$, and then
 $\phi_{t+1} = \phi'$. A probe returns a contact point and a surface normal, both with Gaussian noise, or a miss
 $y = \varnothing$. Every method uses the same softened likelihood $p_\varepsilon(y \mid s, a)$, so differences between
@@ -264,7 +265,7 @@ $b = \{s_n, w_n\}_{n=1}^{N}$ over identity and pose \cite{petrovskaya2011global,
 
 $$c(a) = 1 + \kappa\,\frac{|\Delta\phi|}{\pi}, \qquad \Delta\phi = \mathrm{wrap}(\phi' - \phi_t) \in (-\pi, \pi],$$
 
-[NEED: cite the frozen design-doc line for the cost formula], so κ is the time to travel half the circle. With
+so κ is the time to travel half the circle. With
 remaining time $\tau_{\mathrm{rem}}$, the feasible set is $\mathcal{F}(\tau_{\mathrm{rem}}) = \{a : c(a) \le
 \tau_{\mathrm{rem}}\}$; every method chooses only within it, and the episode ends when no action is feasible. The
 budget τ of each cell is set by a calibration rule so that G\* executes about $n^\*$ probes: τ is derived from G\*'s
@@ -280,11 +281,9 @@ first leg from the continuous start angle onto the action grid, which no policy 
 degrees. We also log the number of probes.
 
 **Cells.** Shape library S has $K = 8$ identities, four near-symmetric base shapes and one symmetry-breaking variant of
-each. Library A16 is the second library [NEED: A16 identity count in a citable results/doc field; it is stated in
-`docs/07c_amendment_v5_0.md` P0, not in JSON]. The five pre-registered cells are listed in Table 0. For A16 the
+each. Library A16 is the second library, with $K = 16$ identities. The five pre-registered cells are listed in Table 0. For A16 the
 probe count $n^\* = 3$ came from the pre-registered rule, and a keep check at κ = 0 and τ = $n^\*$ on 200 calibration
-episodes gave G\* success 0.8, inside the pre-registered keep range [NEED: the keep range, stated in amendment v5.0
-P0, in a citable field].
+episodes gave G\* success 0.8, inside the pre-registered keep range [0.30, 0.90].
 
 **Table 0. The five cells.** τ is set by the calibration rule from G\*'s mean unbudgeted travel time (stroke units) over
 200 calibration episodes; the S2 and S12 values come from the earlier rounds.
@@ -309,8 +308,9 @@ $j_m \sim w$ and $y_m \sim p_\varepsilon(\cdot \mid s_{j_m}, a)$:
 $$\mathrm{EIG}_B(a;b) = \frac{1}{M}\sum_{m=1}^{M}\Big[\log\!\!\sum_{n \in B(s_{j_m})}\!\! w_n\, p_\varepsilon(y_m \mid s_n,a)
 - \log\!\!\sum_{n \in B(s_{j_m})}\!\! w_n - \log \sum_n w_n\, p_\varepsilon(y_m \mid s_n, a)\Big].$$
 
-The deployed configuration is `g2000_512_64` [NEED: meaning of the three numbers in `g2000_512_64` (particles /
-candidates / inner samples), from the frozen design doc]. At each decision G\* exports the score vector
+The deployed configuration is `g2000_512_64`: $N = 2{,}000$ particles, all $C = 512$
+candidate actions scored, and $M = 64$ sampled outcomes per candidate (the reduced configurations `g125_512_16` and
+`g500_512_4` are named the same way). At each decision G\* exports the score vector
 $s(a) = \max(0, \mathrm{EIG}_B(a;b))/c(a)$ over feasible actions (zero elsewhere), whose argmax is G\*'s action; this
 vector is the distillation label. Two reduced configurations, `g125_512_16` and `g500_512_4`, are timed in the latency
 study (Section 4) and nowhere else. **Complexity.** Per decision, G\* evaluates $O(MNC)$ likelihoods for $C$ scored
@@ -352,9 +352,10 @@ seeds 701–705 and the same hyper-parameters (hp 0) in every cell \cite{ross201
 >    label every visited belief with $s$, aggregate, and repeat step 2.
 > 4. Freeze the round-r2 kept checkpoint; record its weight hash before any test episode.
 >
-> [NEED: label episodes per cell, number of DAgger rounds and β schedule, episodes per round and epochs per round,
-> and the hp-0 values of $\beta_T$, λ, ρ, optimiser and batch, from `docs/07c_amendment_v5_0.md` E2, in a citable
-> field.]
+> Budgets: 3,000 labelled G\* episodes per cell (300 held out for $\bar R$, so round r0 trains on 2,700); two DAgger
+> rounds of 800 episodes each ($\beta_{\mathrm{DAgger}}$ = 0.5, then 0; 3,500 and 4,300 training episodes); a fixed 200
+> epochs per round. hp 0: Adam, learning rate 0.001, batch 256, hidden width 128, $\beta_T = 4.0$, λ = 0.5, regret
+> floor ρ = 0.05.
 
 Keeping the best held-out checkpoint is the pre-declared answer to an over-fitting finding of the previous round,
 where held-out regret rose after an early minimum under a last-checkpoint recipe.
@@ -373,7 +374,8 @@ rule, highest final ball-sPCE on the trainer's validation stream (92,160 episode
 index. The rule selected cfg 6 (learning rate 1.257e-3, entropy coefficient 9.504e-4, batch 256, critic learning rate
 4.925e-4), with final validation ball-sPCE 6.300 against 6.241 for cfg 0, the configuration of the earlier rounds. On
 the sampled-policy version of the same metric, cfg 1 scores higher (6.316 against 6.205 for cfg 6). cfg 6 is reused in
-every cell with seeds 711–715 [NEED: RL training episodes per seed for the cfg-6 test arm; not in `results_v5.json`]. A
+every cell with seeds 711–715, each trained to the 2 × 10⁵-episode cap (200,192 episodes logged for every run; PPO clip 0.2,
+4 epochs per update, hidden width 128). A
 control arm, `rl_success`, replaces the reward by a terminal-success reward and is run in S2 and S12 only; its
 per-seed training lengths are printed beside its results (Section 5.3). The reward contains no explicit term for probe
 count or travel; both enter only through the budget.
@@ -414,17 +416,16 @@ hashes of every learner were recorded, 15 per cell in S2 and S12 (students, RL a
 S8 and A16-2; that the recording preceded test5 is taken from the run context.
 
 **Gate D5.** On the 500 paired val3 episodes with five student seeds, D5 passes iff three clauses hold. (i) The success
-deficit clears an SE-dependent threshold, $\hat\Delta_{\mathrm{succ}} \ge -\delta + 1.163\,\mathrm{SE}$ with δ = 0.04
-(for example −0.01454 in S2) [NEED: the lower floor of clause 1 in a citable field; it is stated in amendment v5.0, not
-in JSON]. (ii) The BI deficit satisfies $\hat\Delta_{\mathrm{BI}} \ge -0.15$ nats. (iii) Enough seeds pass the
-per-seed clause on $\hat\Delta_{\mathrm{succ}}$ against −δ [NEED: the per-seed clause count in a citable field]. The
+deficit clears an SE-dependent threshold, $\hat\Delta_{\mathrm{succ}} \ge \max(-0.02,\, -\delta + 1.163\,\mathrm{SE})$ with δ = 0.04
+(for example −0.01454 in S2). (ii) The BI deficit satisfies $\hat\Delta_{\mathrm{BI}} \ge -0.15$ nats. (iii) At least 4 of the 5
+student seeds have $\Delta_{\mathrm{succ}} > -\delta$. The
 SE is the standard deviation of an episode × student-seed bootstrap; because the threshold adds a multiple of SE to −δ,
 it becomes stricter as the paired SE grows. No remedy round follows a failure. The number m of cells that pass D5 is
 the registered H5a validation count.
 
 **Statistics.** Test5 contrasts use a crossed episode × seed bootstrap for the two-sided ci95 and p-value, with
-`n_seeds` = [5, 1] against G\* and H\* (G\* and the heuristics are run once per cell) and [5, 5] against RL [NEED:
-bootstrap resample count; not in JSON]. Bootstrap p-values resolve to 0.0002, so a reported p of zero is printed as
+`n_seeds` = [5, 1] against G\* and H\* (G\* and the heuristics are run once per cell) and [5, 5] against RL, with 10,000
+resamples. Bootstrap p-values resolve to 0.0002, so a reported p of zero is printed as
 p < 0.0002. Holm's step-down procedure over the five cells is applied to two families only, student − G\* success (H5a)
 and student − H\* success [CITE-MISSING: Holm (1979) step-down procedure]. H2-v5 is met iff the one-sided 95 % lower
 bound of $g_T(\text{student}) - g_T(\text{RL})$ exceeds +0.10 nats. The registered inversion check asks, per cell,
@@ -467,14 +468,14 @@ results record holds; the remaining design constants are marked.
 | Component | Setting |
 |---|---|
 | Cells | Table 0 (κ, $n^\*$, τ) |
-| G\* | `g2000_512_64`; reduced `g125_512_16`, `g500_512_4` (timed only) [NEED: meaning of the three numbers] |
-| Student | DeepSets head; DAgger rounds r0–r2; best held-out $\bar R$ checkpoint per round; hp 0 in every cell; seeds 701–705 [NEED: label, DAgger and epoch budgets, hp-0 values] |
-| RL | PPO, critic baseline; cfg 6 selected on S2 (Section 3.3) and reused in every cell; seeds 711–715 [NEED: episodes per seed] |
+| G\* | `g2000_512_64`; reduced `g125_512_16`, `g500_512_4` (timed only); `g`N`_`C`_`M = particles, candidates scored, outcome samples |
+| Student | DeepSets head; DAgger rounds r0–r2; best held-out $\bar R$ checkpoint per round; hp 0 in every cell; seeds 701–705; 3,000 label episodes (300 held out); 2 DAgger rounds × 800 episodes (β 0.5, 0); 200 epochs per round; Adam, lr 0.001, batch 256, width 128 |
+| RL | PPO, critic baseline; cfg 6 selected on S2 (Section 3.3) and reused in every cell; seeds 711–715; 2 × 10⁵ episodes per seed (cap reached in every run); clip 0.2, 4 epochs |
 | `rl_success` | terminal-success reward, cfg 6, S2 and S12 only, seeds 711–715; training lengths in Section 5.3 |
 | Heuristics | Random, B-spread, B-fan, B-cov; H\* on pilot3 0–199, 200 episodes each |
 | Splits | cal3 0–199; pilot3 0–199; val3 0–499 (D5); test5 0–299, 300 episodes per method per cell |
 | Evaluator | adaptive grid posterior, sub 8; E5 re-read at sub 16 |
-| Statistics | crossed episode × seed bootstrap [NEED: resample count]; δ = 0.04; BI floor −0.15 nats; H2-v5 margin +0.10 nats; Holm over 5 cells (two families) |
+| Statistics | crossed episode × seed bootstrap, 10,000 resamples; δ = 0.04; BI floor −0.15 nats; H2-v5 margin +0.10 nats; Holm over 5 cells (two families) |
 | Latency | job 1 n = 1000 (S cells) / 500 (A16-2); job 2 n = 500 per seed |
 
 **Table 1. Decision record.** D5 on val3 0–499 (proportions; Δ̂ = student − G\*); H\* from pilot3; H5a, student − H\*

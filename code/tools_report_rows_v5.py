@@ -36,6 +36,29 @@ for p in sorted(glob.glob(os.path.join(b, "d5", "*.json"))):
            "n_val_decisions": r["final_val"]["n_decisions"]}
     row["R_bar_last_minus_kept"] = row["R_bar_last"] - row["R_bar_kept"]
     out["student_checkpoint_sensitivity"].setdefault(cell, {}).setdefault(seed, {})["r" + rnd] = row
+# (3) design constants of record, read from the run logs (for the paper's setup table)
+out["rl_main_cfg6"] = {}
+for p in sorted(glob.glob(os.path.join(b, "rl", "*_rel_cfg6_sd*.json"))):
+    r = json.load(open(p))
+    c = r["config"]
+    out["rl_main_cfg6"][os.path.basename(p)[:-5]] = {"status": r.get("status"), "episodes_trained": r["history"][-1]["episodes"],
+                                                    "max_episodes": c.get("max_episodes"), "clip": c.get("clip"),
+                                                    "epochs": c.get("epochs"), "hidden": c.get("hidden")}
+dc = {}
+for p in sorted(glob.glob(os.path.join(b, "d5", "*.json"))):
+    m = pat.match(os.path.basename(p))
+    if not m:
+        continue
+    r = json.load(open(p))
+    if "distill_config" not in r:
+        continue
+    key = json.dumps({k: r["distill_config"][k] for k in ("lr", "beta_T", "lam", "batch", "hidden", "max_epochs")},
+                     sort_keys=True)
+    dc.setdefault(key, []).append(os.path.basename(p))
+    out.setdefault("student_train_episodes", {})[os.path.basename(p)[:-5]] = r.get("n_train_episodes")
+    out.setdefault("student_env", {}).setdefault(r["env"]["action_set"] + "/A=" + str(r["env"]["A"]), 0)
+    out["student_env"][r["env"]["action_set"] + "/A=" + str(r["env"]["A"])] += 1
+out["student_distill_configs"] = {k: len(v) for k, v in dc.items()}
 json.dump(out, open(os.path.join(b, "16_report_rows.json"), "w"), indent=1)
 for k, v in out["rl_success"].items():
     print(k, v["status"], v["episodes_trained"])
