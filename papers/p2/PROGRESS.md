@@ -507,3 +507,12 @@ Run order when both papers are active: AUTOPILOT §7.
 - New report-only rows (`19_report_rows.json`): detector error vs log μ r −0.253, F3 SD 0.196; static touch = F0 and
   m g / 2 (99th pct rel. dev. 3.1e-4), preload slip 0 / 8,000.
 - **Next:** stage 19 pass 2 (`stage19_pass2_user.txt`), then stage 20.
+
+## Stage 19. PAPER_REVISION     [v1] — pass 2
+
+- **Finished:** 2026-11-09 (run 43). Prompt `stage19_pass2_user.txt` (`build_stage19.py --pass2`), fresh opus
+  subagent, targeted edits for P1–P9 (+ F4 inertial description). Snapshot after `v1/draft_v1_stage19pass2.md`.
+- Abstract 345 → 250 (reviewer request); all other sections no shorter; total ≈ 11,600 words (master draft; the
+  5-page condensation is stage 22). Number audit 0 unmatched; no new citations. Deviations list now 8 items (Holm
+  dropped; 08a provenance; frontier not produced).
+- **Next:** stage 20 QUALITY_GATE.
