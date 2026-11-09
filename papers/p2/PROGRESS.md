@@ -371,8 +371,27 @@ Run order when both papers are active: AUTOPILOT §7.
     CertGrip-full 0.428; D_nm = 0.460 [0.397, 0.506] vs with mass (label route, same draws) 0.456 [0.402, 0.507];
     change +0.004 [−0.045, +0.040]. Removing the mass feature changes nothing for the learned arms. Mass-noise not run.
   - **Gap found (honest record):** 07 §4 also pre-registered H1c, H2-C, H2-n, H2-H, H2-R, H3-S, H4b, H4d and the
-    diagnostics D-FID, D-loc and the oracle decomposition; none of them has been run yet, and earlier "still to do"
-    lists omitted them. They are cheap (existing labels / replays; H4b and D-FID need small new fits).
-  - **Where to resume (run 43):** addendum 08g (operational details for those items, before computing) → run them →
-    stage 13 freeze note → stage 14 RESULT_ANALYSIS (fresh subagent). Writing must start by ≈ 11-16 for the 12-04
-    RSS Stage 1 deadline.
+    diagnostics D-FID, D-loc and the oracle decomposition; none had been run, and earlier "still to do" lists omitted
+    them. Part 1 below (addendum `docs/08g_secondaries_batch2.md` + `code/secondaries_08g.py`, both committed before
+    running; label route, 2,000 draws; `results/v1/sec08g.json`):
+  - **H2-C** vs Mondrian-CSF (family-ID-privileged cells): D = 0.438 [0.373, 0.487] → superiority.
+  - **H2-n** (n = 50 cal per stratum): α 0.10 D 0.415 [0.259, 0.548], α 0.20 0.465 [0.279, 0.598] → confirmed (lower > 0).
+  - **H2-H** (16 family × disturbance cells, DerSimonian–Laird): pooled D 0.439 [0.404, 0.474], τ 0.051; cell D
+    0.30 (F1 D3) – 0.53 (F2 D2), every cell CI\*\* lower ≥ 0.16 → guard **pass** (no cell worse). D3 (external
+    disturbance) cells are the weakest in every family.
+  - **H2-R (design-range dependence) — important negative:** in the nested sub-pool μ ∈ [0.5, 0.8] × middle-50 %
+    amplitude (352 cal / 548 test instances, q̂ recalibrated inside) **D = −0.261 [−0.532, −0.032]: CertGrip uses more
+    force than CSF-1.** When friction varies little and sits near the formula's μ̄ (0.548), the noisy onset estimate
+    costs more than it gains; the 42 % H2a gain is a property of the wide μ range [0.3, 1.0]. The paper must state this.
+  - **H4d** (CoM mechanism, D_F4 − D_F1 of touch vs P): CertGrip-full 0.034 [−0.042, 0.114], squeeze-only `full`
+    0.002 [−0.017, 0.021] → both inconclusive (pressure-centroid / CoM story not supported; squeeze touch is ≈ P in
+    every family, D_F −0.02 to −0.06).
+  - **Oracle decomposition:** RE CSF-1 0.747, CertGrip 0.426, oracle 0.127 → CertGrip closes 51.7 % [44.9, 57.6] of the
+    CSF-1 → oracle gap.
+  - **D-loc:** S1 is a pure location shift in F\* (mean Δlog F\* 0.509, SD 0.009, 2,794 pairs; Coulomb 0.511, 0). Under
+    S1 the predictions of P / S / full move by < 0.2 % (touch does not see the friction change), CertGrip's by 44.7 %
+    (the onset probe follows ≈ 2/3 of the e^0.51 − 1 = 67 % change). Preload-slip rate 0 in every pool.
+  - **Not yet run (need new fits / stream code, a further addendum first):** H1c (RAW-Q / RAW-Qv / RAW-G), H3-S, H4b,
+    D-FID, H2-M mass-noise.
+  - **Where to resume (run 43):** addendum 08h for those five → run → stage 13 freeze note → stage 14 RESULT_ANALYSIS
+    (fresh subagent). Writing must start by ≈ 11-16 for the 12-04 RSS Stage 1 deadline.
