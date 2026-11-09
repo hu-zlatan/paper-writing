@@ -15,6 +15,42 @@
     "n_ge_2mm": 0
    }
   },
+  "detector_error_structure": {
+   "pearson_r_err_logmu": -0.2529412692530051,
+   "by_family": {
+    "F1": {
+     "n": 2000,
+     "bias": 0.31623643302992505,
+     "sd": 0.06183396177432344
+    },
+    "F2": {
+     "n": 2000,
+     "bias": 0.33081087135375264,
+     "sd": 0.045018125132648
+    },
+    "F3": {
+     "n": 2000,
+     "bias": 0.310936218704592,
+     "sd": 0.19645028299250414
+    },
+    "F4": {
+     "n": 2000,
+     "bias": 0.3165798810083412,
+     "sd": 0.06337855575922412
+    }
+   }
+  },
+  "static_touch_check": {
+   "note": "touch_preload[0], [7] = pad normal sums; [1], [8] = pad shear sums; compared with F0 and m g / 2",
+   "max_abs_normal_minus_F0": 0.1596969999999942,
+   "max_abs_shear_minus_mg2": 6.400561187080095,
+   "rel_shear_dev_percentiles_50_99": [
+    1.8974339738577458e-07,
+    0.0003069094800403495
+   ],
+   "n_rel_shear_dev_gt_1pct": 24,
+   "preload_slip_count": 0
+  },
   "compute_logged_cpu_hours": {
    "logs_by_prefix": {
     "p2_crc": 5.719611111111114,

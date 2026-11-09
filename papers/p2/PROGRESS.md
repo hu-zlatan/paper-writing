@@ -495,3 +495,15 @@ Run order when both papers are active: AUTOPILOT §7.
   (`build_stage19.py`), fresh opus subagent, targeted edits for merged items 1–10; E1–E5 only as limitations.
 - Words 7,333 → 9,639 (+31 %), no section shorter; number audit 0 unmatched; cite keys unchanged (52, all in cards).
 - +31 % > 30 % → **second stage-18 pass** (template rule) before stage 20.
+
+## Stage 18. PEER_REVIEW     [v1] — pass 2
+
+- **Finished:** 2026-11-09 (run 43) on `v1/draft_v1_stage19pass1.md`; same template / evidence (prompt
+  `stage18_pass2_user.txt`); two fresh opus subagents. Scores run 1 A 4 / B 5, run 2 A 4 / B 5 (mean 4.5).
+  **CRITICAL_FABRICATION: no** (headline values recomputed from raw replays by an independent CRC loop, exact).
+- Merged record `paper/mypaper/18_peer_review_pass2.md` (P1–P9): abstract names the wrong comparator for 0.4739 (vs
+  *full*); undisclosed Holm deviation (07 → 08f–08h); 08a provenance of the probe arm; CRC precondition; realised
+  slip; detector error structure; H4a is a simulator consistency check; online-study warm start; CI levels.
+- New report-only rows (`19_report_rows.json`): detector error vs log μ r −0.253, F3 SD 0.196; static touch = F0 and
+  m g / 2 (99th pct rel. dev. 3.1e-4), preload slip 0 / 8,000.
+- **Next:** stage 19 pass 2 (`stage19_pass2_user.txt`), then stage 20.

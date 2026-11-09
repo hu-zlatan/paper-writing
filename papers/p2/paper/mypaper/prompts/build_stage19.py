@@ -9,7 +9,19 @@ system = re.search(r"\*\*System:\*\*\n```\n(.*?)\n```", tpl, re.S).group(1)
 user_t = re.search(r"\*\*User:\*\*\n```\n(.*?)\n```\n", tpl, re.S).group(1)
 u16 = rd("paper/mypaper/prompts/stage16_user.txt")
 block = u16[u16.index("=== HARD TOPIC CONSTRAINT ==="):u16.index("=== END CONSTRAINT ===") + len("=== END CONSTRAINT ===")] + "\n"
-reviews = (rd("paper/mypaper/18_peer_review.md")
+import sys
+PASS2 = "--pass2" in sys.argv
+reviews = (rd("paper/mypaper/18_peer_review_pass2.md")
+           + "\n\n=== Full review pass 2 run 1 ===\n" + rd("paper/mypaper/18_review_pass2_run1.md")
+           + "\n\n=== Full review pass 2 run 2 ===\n" + rd("paper/mypaper/18_review_pass2_run2.md")
+           + "\n\n=== BINDING for this revision (main session) ===\n"
+           "- Address must-fix items P1-P9 of the pass-2 merged record. E1-E5 only as limitations / future work; no "
+           "citations outside docs/05_knowledge_cards.json.\n"
+           "- New numbers only from results/v1/results_v1.json (block 19_report_rows.json holds the new report-only rows: "
+           "detector_error_structure, static_touch_check). Reviewer-computed numbers not in that file must not be printed.\n"
+           "- Abstract <= 250 words (the only section allowed to get shorter, by the reviewers' explicit request); every "
+           "other section no shorter than now; Limitations not shortened or softened; keep the FIGURE 1 PROMPT block first.\n"
+           ) if PASS2 else (rd("paper/mypaper/18_peer_review.md")
            + "\n\n=== Full review run 1 (paper/mypaper/18_review_run1.md) ===\n" + rd("paper/mypaper/18_review_run1.md")
            + "\n\n=== Full review run 2 (paper/mypaper/18_review_run2.md) ===\n" + rd("paper/mypaper/18_review_run2.md")
            + "\n\n=== BINDING for this revision (main session) ===\n"
@@ -26,6 +38,7 @@ reviews = (rd("paper/mypaper/18_peer_review.md")
 user = (user_t.replace("{topic_constraint}", block).replace("{draft}", rd("paper/mypaper/draft_v1.md"))
         .replace("{reviews}", reviews))
 d = os.path.dirname(os.path.abspath(__file__))
-open(os.path.join(d, "stage19_system.txt"), "w").write(system + "\n")
-open(os.path.join(d, "stage19_user.txt"), "w").write(user)
+sfx = "_pass2" if PASS2 else ""
+open(os.path.join(d, f"stage19{sfx}_system.txt"), "w").write(system + "\n")
+open(os.path.join(d, f"stage19{sfx}_user.txt"), "w").write(user)
 print(len(user.split()), "words")

@@ -35,6 +35,24 @@ out["detector_id_sigma0"] = {"n_rows": len(rows), "found_rate": len(fo) / len(ro
                              "disp_at_onset_mm": {"median": float(np.median(dsp)), "p95": float(np.percentile(dsp, 95)),
                                                   "max": float(dsp.max()), "n_ge_2mm": int((dsp >= 2.0).sum())}}
 
+# (1b) detector error structure (pass-2 review): corr of the error with log mu, SD by family; static-touch check
+err = x - y
+fam = np.array([r["family"] for r in fo])
+out["detector_error_structure"] = {
+    "pearson_r_err_logmu": float(np.corrcoef(err, y)[0, 1]),
+    "by_family": {f: {"n": int((fam == f).sum()), "bias": float(err[fam == f].mean()),
+                      "sd": float(err[fam == f].std(ddof=1))} for f in sorted(set(fam))}}
+tp = [r["rec"]["touch_preload"] for r in rows]
+out["static_touch_check"] = {
+    "note": "touch_preload[0], [7] = pad normal sums; [1], [8] = pad shear sums; compared with F0 and m g / 2",
+    "max_abs_normal_minus_F0": float(max(abs(t[0] - 32.7) for t in tp) if tp else 0.0),
+    "max_abs_shear_minus_mg2": float(max(abs(abs(t[1]) - r["inst"]["mass"] * G9 / 2) for t, r in zip(tp, rows))),
+    "rel_shear_dev_percentiles_50_99": [float(v) for v in np.percentile(
+        [abs(abs(t[1]) - r["inst"]["mass"] * G9 / 2) / (r["inst"]["mass"] * G9 / 2) for t, r in zip(tp, rows)], [50, 99])],
+    "n_rel_shear_dev_gt_1pct": int(sum(abs(abs(t[1]) - r["inst"]["mass"] * G9 / 2) > 0.01 * r["inst"]["mass"] * G9 / 2
+                                       for t, r in zip(tp, rows))),
+    "preload_slip_count": int(sum(bool(r.get("preload_slip")) for r in rows))}
+
 # (2) compute
 by = {}
 for f in glob.glob(os.path.join(RES, "logs", "*.log")):

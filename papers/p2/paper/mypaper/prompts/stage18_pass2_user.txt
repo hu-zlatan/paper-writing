@@ -1,0 +1,6393 @@
+Simulate peer review from at least 2 reviewer perspectives.
+
+Output markdown with Reviewer A and Reviewer B, each including strengths, weaknesses, and actionable revisions.
+
+Check specifically:
+
+1. Does the paper stay on topic (Certified-slip tactile grip regulation: a ramp-down friction-onset probe combined with distribution-free conformal risk control so that the physical slip rate of a minimal-force grasp is <= alpha, compared against the strongest non-tactile conformal baseline, with ablations showing where the force saving comes from (the probe, not the learned tactile model) and an online binary-feedback calibration study under distribution shift)? Flag any sections where the paper drifts to unrelated topics or presents environment issues as contributions.
+
+2. METHODOLOGY-EVIDENCE CONSISTENCY: Compare the paper's claims about experimental setup (number of trials, statistical tests, hyperparameters, baselines) against the actual experiment evidence provided below. Flag any discrepancies where the paper claims something that is NOT supported by the actual code or results. For example:
+- Paper claims N trials but code shows a different number
+- Paper claims statistical tests (ANOVA, t-test) but code has none
+- Paper reports metrics not present in actual results
+- Paper describes methods not implemented in code
+
+3. TRIAL COUNT: The actual number of experiment runs is stated in the evidence below. If the paper claims a DIFFERENT number of trials (e.g., "100 independent trials" when only 1 was run), flag this as a CRITICAL fabrication that MUST be corrected.
+
+4. PAPER LENGTH: This paper targets NeurIPS/ICML submission (9 pages). Check that each section has adequate depth. Flag sections that are too short: Abstract (<150 words), Introduction (<700 words), Related Work (<500 words), Method (<800 words), Experiments (<600 words), Results (<500 words). A paper with fewer than 4000 total words is CRITICALLY under-length.
+
+5. REVIEW LIKE A TOP-CONFERENCE REVIEWER:
+- Is the contribution novel, or is it incremental over well-known work?
+- Are baselines properly tuned and competitive?
+- Are ablation studies present and meaningful?
+- Is every claim supported by evidence from the experiments?
+- Does the paper acknowledge its limitations honestly?
+- Would you recommend this paper be presented at NeurIPS/ICML? Why or why not?
+- Score the paper 1-10 following this rubric: 1-3 Reject (fundamental flaws), 4-5 Borderline (significant weaknesses), 6-7 Weak Accept (solid but not exciting), 8-9 Accept (strong contribution), 10 Strong Accept (exceptional).
+
+Paper draft:
+
+```
+FIGURE 1 PROMPT
+Full-width, three-panel vector figure for a robotics paper (RSS style), white background, sans-serif labels,
+colour-blind-safe palette (probe arm = deep blue, non-tactile baseline CSF-1 = orange, physics plug-in CSF-mu-hat =
+teal, onset-only = light blue, alpha line = dashed grey). Title strip above the panels: "Probe, then certify".
+
+(a) Protocol timeline. x-axis: time within one grasp episode; y-axis: grip force (log scale). Segments, left to right:
+"preload F0 = 32.7 N (same for every object)" as a flat line; "squeeze F0 -> 1.5 F0 -> F0" as a small triangular bump;
+"ramp-down probe" as a log-linear descent from F0 towards 0.005 F0 over 0.25 s, cut short by a red marker labelled
+"incipient-slip onset F_onset" followed by a fast return to F0; then "ramp to F = g(x) e^lambda-hat" and a shaded
+"disturbance window (0.6 s)" with four small icons D1 lift acceleration, D2 shake, D3 lateral pull, D4 payload.
+Shade only the probe segment in light blue and label it "only friction channel". Inset next to the onset marker: the
+pad shear/normal ratio vs time, rising during stick and flattening at onset, with the detector rule
+"8-frame rise < 1/2 stick rise, 2 consecutive frames" annotated.
+
+(b) Certification. For one disturbance stratum, x-axis: lambda (log force multiplier) on a 20-point grid centred on
+the selection-split quantile; y-axis: monotonised empirical slip risk (n R_n(lambda) + 1)/(n + 1). Two staircase
+curves decreasing in lambda: CertGrip-full (blue) and CSF-1 (orange). Horizontal dashed line at alpha = 0.10. Mark
+lambda-hat as the first grid point where each curve falls below alpha, with a vertical tick. Caption tag inside the
+panel: "schematic; drawn from the per-stratum lambda-hat indices". Note "loss = 1{physical slip in direct replay}".
+
+(c) Result bars (test set, alpha = 0.10, conformal-risk-control route). Four bars of mean relative excess force
+(F - F*)/F* with 97.5 % object-cluster bootstrap error bars: CSF-1 0.7832 [0.6968, 0.8583]; CSF-mu-hat (sigma 0.2)
+0.4843 [0.4435, 0.5219]; CertGrip-full (sigma 0.2) 0.4567 [0.4079, 0.5033]; onset-only (sigma 0.2) 0.4336
+[0.3983, 0.4833]. On a secondary right axis, one dot per bar for the physical test slip rate: 0.1021, 0.0657, 0.0829,
+0.0857, against a dashed alpha = 0.10 line. Bracket between the CSF-1 and CertGrip-full bars annotated
+"D = 0.4168 [0.3484, 0.4778]". A small grey footnote marker at the bottom right: "narrow-friction, mid-amplitude
+sub-pool (label route): D = -0.2614 (method worse)". Hatch the CSF-mu-hat bar lightly and add a small dagger with
+the note "dagger: lambda-hat at the grid floor in D1/D2 (08c grid), so this bar is over-protected (slip 0.0657) and
+its gap to CertGrip-full is biased towards CertGrip; post hoc 08e grid: D = 0.0240". Footer line under all panels:
+"Simulation (MuJoCo, rigid contact), modelled tactile detector, added onset noise sigma = 0.2; slip bound holds in
+expectation over calibration draws".
+```
+
+# Probe, Then Certify: Minimal-Force Grasping with a Tactile Friction-Onset Probe and Conformal Slip-Risk Control
+
+## Abstract
+
+A grasp controller that squeezes as little as possible should still come with a statement about how often the object slips. Two lines of work address this separately: tactile grip controllers react to slip or estimate friction but give no distribution-free bound on the slip rate, and conformal calibration can bound the slip rate of any force rule but stays conservative when the rule cannot see friction. We study whether a short tactile probe closes this gap. After a fixed preload that carries no mass or friction information, the gripper ramps its force down until a touch-only detector reports incipient slip. A gradient-boosted quantile predictor uses this onset, and conformal risk control (CRC) on the binary *physical* slip loss sets the force per disturbance stratum so that the expected slip rate, taken over calibration draws and test grasps, is at most α. In MuJoCo simulation at α = 0.10, under pre-registered decision rules (the CRC route was fixed after a monotonicity gate failed, before any test read-out), the probe arm needs less relative excess force than the strongest non-tactile conformal baseline, which was selected beforehand: D = 0.4168 (97.5 % CI [0.3484, 0.4778]), with test physical slip 0.0829. In our simulator friction is drawn independently of every non-tactile input, so this margin applies when friction cannot be predicted without touch. Ablations place the saving in the probe within this rigid-contact simulator. Static touch is equivalent to proprioception, adding the onset gives D = 0.4739 against the proprioceptive arm, and at onset noise σ = 0.2 the learned model shows no demonstrated gain over a physics plug-in that uses the same onset (not confirmed). In a sub-pool with narrow friction (μ ∈ [0.5, 0.8]) and mid-amplitude disturbances the method is worse than the baseline (D = −0.2614). Under friction and amplitude shifts, frozen calibration fails, and online quantile tracking from binary feedback (the simulator's label rule, with a physical audit on one stream ordering) keeps the window slip rate near α. Under a new-family shift neither frozen arm fails. Efficiency relative to oracle recalibration is inconclusive.
+
+## 1 Introduction
+
+Grasping fragile, compliant or valuable objects calls for the smallest grip force that still holds the object through the motions and loads the task imposes. Excess force damages soft or brittle objects, and slip prevention with limited force is a central concern in prosthetic hands \cite{berman2025autonomous}. Too little force drops the object. Tactile grip regulation has made steady progress on this trade-off. Controllers detect incipient slip and tighten the grasp \cite{dong2019maintaining, veiga2020grip}, estimate friction online and add a margin \cite{khamis2021real, niu2026synchronized}, or learn a map from tactile signals to a gentle grasp force \cite{boonstra2024estimate}. Human studies show that people regulate grip force in response to sudden changes of friction and load \cite{willemet2024grip}. What these controllers do not provide is a quantitative, distribution-free statement of the form "this force rule slips on at most a fraction α of grasps". Margins are set by hand, and their slip rate is whatever the experiment happens to show.
+
+Conformal methods supply exactly this kind of statement. Split conformal prediction \cite{lei2017distribution} and conformal risk control \cite{angelopoulos2022conformal} turn any predictor into a rule whose expected loss on an exchangeable test point is bounded by a target level, using a held-out calibration set and no distributional assumptions. Applied to grasping, the predictor proposes a force and the calibration step inflates it until the empirical slip risk on calibration grasps is at most α. The guarantee is cheap, but its price in force depends on what the predictor knows. A rule that cannot see friction must cover the whole friction range with a single inflation factor. With μ spanning a factor of more than three, the calibrated force is then conservative for most objects. The relevant comparison for any tactile method is therefore not an uncalibrated controller but the *strongest non-tactile conformal baseline*: a method that uses everything a robot knows without touch (mass, commanded motion, aperture, even privileged object-family identity) and is calibrated to the same α. In our study this comparator was selected on a disjoint selection split before any calibration or test data were accessed. The physics plug-in CSF-1 (mean relative excess 0.7686) beat Mondrian-CSF with privileged family identity (0.8294) and a learned proprioceptive predictor CertGrip-P (0.8335). One property of our instance distribution shapes how large this comparison can come out: friction is sampled independently of family, geometry, mass and disturbance, so no non-tactile input carries any friction information by construction. The size of the margin we report is therefore partly a property of that distribution. It speaks to settings where friction cannot be predicted without touch. It does not speak to settings where appearance or object category already predicts friction well.
+
+This framing raises three questions. First, can a short tactile probe supply enough friction information to cut excess grip force at a certified physical slip rate of at most α? Second, which component carries the saving: static touch, a probing squeeze, the friction-onset probe, or the learned model on top? Third, does calibration survive distribution shift when the only feedback available on a robot is whether the object slipped?
+
+Our answer is built around one mechanism and one statistical tool. The mechanism is a ramp-down friction-onset probe. After a fixed preload F₀ = 32.7 N, identical for every object and therefore uninformative about mass and friction, the gripper lowers its force log-linearly until a touch-only detector reports incipient slip, then returns to F₀. Under Coulomb friction the onset force gives an estimate μ̂ = m g/(2F_onset). In simulation this estimate is accurate but not exact: on the main in-distribution data, without added noise, it correlates with the true friction at 0.948 in log units, with a residual SD of 0.110 and a bias of +0.319. We add pre-registered onset noise on top of this intrinsic error and take σ = 0.2 log units as the primary level. The statistical tool is conformal risk control on the binary physical slip loss, applied per disturbance stratum. Its guarantee, which we call "certified" throughout, is marginal: within a disturbance stratum, the slip rate is at most α in expectation over the draw of the calibration set and the test grasp. It is not a high-probability bound for one fixed calibration set. We need CRC rather than plain split conformal because our pre-registered monotonicity gate failed: in 8 of 800 instances slip was not monotone in force. The CRC route itself was written after that gate failed and before any predictor was fitted or any test result was read. A certificate on bisection labels therefore does not automatically carry over to the physical outcome. For the online question we use score-space online quantile tracking \cite{angelopoulos2023conformala}, which updates a log-force offset from binary slip feedback alone.
+
+**Contributions.**
+- **(C1) A certifiable grasp protocol.** A fixed preload carries no mass or friction information, so a ramp-down onset probe is the only friction channel. CRC is applied on the monotonised physical slip loss, a route that stays valid when the bisection label rule is not exactly monotone in force (8 of 800 instances).
+- **(C2) A comparison, under pre-registered decision rules, against the best non-tactile conformal comparator.** When friction is not predictable from non-tactile inputs, as in our instance distribution, the probe arm at α = 0.10 reduces mean relative excess force by D = 0.4168 (CI\*\* [0.3484, 0.4778]) relative to CSF-1. The result holds under label-quantisation, seed, label-route, per-cell, small-calibration and post hoc grid checks.
+- **(C3) An ablation chain that locates the saving in the probe, in a rigid-contact simulator.** In our MuJoCo contact model the saving does not come from static touch, the squeeze, or the learned model. Static touch below the friction limit is uninformative about μ under rigid Coulomb contact, so this part of the attribution is a property of the simulator, not a claim about real elastomer sensors. The chain also reports a regime where the method loses, a narrow-friction, mid-amplitude sub-pool with D = −0.2614.
+- **(C4) An online binary-feedback study under three shifts.** Frozen calibration breaks under the friction and amplitude shifts but not under the new-family shift. Score-space quantile tracking restores the window slip rate near α in all three. The feedback in our streams is the simulator's label rule, and the physical outcome is audited on one ordering. Efficiency relative to a label-requiring oracle recalibration is inconclusive, and we report it as such.
+
+We state the confirmatory record plainly. Of the four pre-registered core decisions, one was confirmed (H2a, the main comparison). The validity premise H1 was not confirmed, the learned-versus-plug-in contrast H2b was not confirmed, and the online efficiency decision H3 was inconclusive in all three shifts. These outcomes are reported as they came out. Section 2 positions the work, Section 3 defines the problem and method, Section 4 gives the experimental protocol and the deviations from the pre-registration, Section 5 reports results, and Sections 6 to 8 discuss, list limitations and conclude.
+
+## 2 Related Work
+
+**Tactile slip detection and friction estimation for grip control.** Surveys of tactile friction estimation and slip detection \cite{chen2018tactile, romeo2020methods} describe a mature sensing literature in which incipient slip, the partial slip at the contact periphery that precedes gross sliding, is the key cue for friction. Slip detectors on multifingered hands \cite{james2020slip}, learned temporal detectors on barometric sensors \cite{grover2022detect}, and reactive multifingered controllers that combine slip onset with internal-force optimisation \cite{ayral2026reactive} trigger corrective tightening. Closer to minimal-force grasping, \cite{dong2019maintaining} keep grasps within slipping bounds by monitoring incipient slip, \cite{khamis2021real} estimate friction in real time and apply a safety margin to the target force, \cite{boonstra2024estimate} learn to estimate incipient slip for gentle grasping, and \cite{niu2026synchronized} couple online friction estimation with adaptive grasp control. Learned and reflex controllers extend this to dynamic interaction \cite{kuo2025tracing}, vision-tactile reflexes \cite{feng2026tactilereflex}, and sim-to-real force-control policies \cite{lach2024zero}. Adaptive analytical controllers for novel objects come with Lyapunov stability arguments \cite{almohammed2022switched}, and vision-language models select pre-grasp forces from experience \cite{shang2026exp}. Our probe uses the same physical cue as these works, in a simplified form: MuJoCo's rigid soft-constraint contacts do not resolve a peripheral partial-slip annulus, so our simulated detector responds to the saturation of the shear/normal ratio as gross sliding begins. Lowering the force until slip is itself a known way to read friction, and our contribution lies in coupling that reading to a certificate. They convert it into a reactive response or an estimated margin, and none of them states a distribution-free bound on the resulting slip rate. We keep the cue and replace the margin with a calibrated quantity.
+
+**Robust and safe grasping under uncertainty.** Model-based approaches bound the risk of losing a grasp through assumed uncertainty sets. Grasping-force optimisation has been examined under parameter uncertainty \cite{cloutier2018examining}. Control barrier functions enforce friction-cone constraints in mechanical systems \cite{cortez2019control} and, with disturbance observers and tactile sensing, give robust adaptive safe grasping \cite{kim2024robust}. Friction-informed risk margins \cite{enwerem2026firmgrasp} and variational belief parameterisations \cite{enwerem2026variational} make grasp synthesis robust to multimodal uncertainty. These guarantees hold relative to the model and its uncertainty set. Our certificate instead holds relative to the data-generating distribution of grasps, without a friction model. The price is that it is marginal over grasps and needs calibration data from that distribution.
+
+**Conformal prediction and risk control.** Conformal prediction gives finite-sample, distribution-free guarantees under exchangeability \cite{vovk2005algorithmic, lei2017distribution, angelopoulos2023conformal}. Conformalized quantile regression adapts interval width to the input \cite{romano2019conformalized}. Training-conditional \cite{bian2023training} and class-conditional or clustered \cite{ding2023class} variants refine the marginal statement. Conformal risk control generalises coverage to bounded monotone losses \cite{angelopoulos2022conformal}, and has been extended to non-monotone losses \cite{angelopoulos2026conformal} and non-exchangeable data \cite{farinhas2023non}. Under distribution shift, adaptive conformal inference \cite{gibbs2021adaptive, gibbs2022conformal}, conformal PID control and quantile tracking \cite{angelopoulos2023conformala}, decaying step sizes \cite{angelopoulos2024online}, and semi-bandit feedback \cite{ge2024stochastic} keep long-run coverage near target. In robotics, conformal tools certify decisions \cite{lekeufack2024conformal}, verification and control \cite{lindemann2025formal, lindemann2023conformal}, motion planning among dynamic agents \cite{dixit2022adaptive}, contact-aware state estimation \cite{marques2026particle}, LLM planners that ask for help \cite{ren2023robots}, sensorimotor policies under shift \cite{huang2023conformal}, RL safety filters \cite{strawn2023conformal}, safe Bayesian optimisation \cite{zhang2024bayesian}, interactive imitation learning \cite{zhao2024conformalized}, and perception-planning pipelines \cite{kumar2026learnable}. In these works the controlled quantity is a prediction set, a trajectory region or a decision loss. None of them certifies a physical contact outcome, the slip of a grasp, as a binary loss over a family of grip forces. None asks which sensing channel makes the certified force small. Our work sits at this intersection. The statistical machinery is standard, and the robotics content lies in the probe that makes the certificate cheap, in the attribution of the saving, and in the measured behaviour of binary-feedback recalibration under shift.
+
+## 3 Problem Formulation and Method
+
+### 3.1 Certified minimal-force grasping
+
+A grasp instance x comprises an object (family, geometry, mass m, friction coefficient μ, centre-of-mass offset), a grasp pose offset, and a disturbance of known type d ∈ {D1, D2, D3, D4} (lift acceleration, shake, lateral pull, payload added mid-hold) with an amplitude. In the simulator the hand stays still in every case. The lift and shake motions of D1 and D2 enter as the inertial pseudo-force −m a_hand(t) on the object in the hand frame, and D3 and D4 are external forces on the object. A parallel-jaw gripper commands a grip force F, and slip(F, x) ∈ {0, 1} is the physical outcome of a full episode. An episode counts as a slip if the object's displacement relative to the pad frame, projected onto the pad plane, exceeds δ_t = 2 mm, or if its rotation about the grasp axis exceeds 3°, or if contact with a pad is lost. The minimal no-slip force F\*(x) is bracketed in simulation by log-space bisection on [F_min, F_max] = [0.1, 100] N with one replay at F_max and 10 halvings (11 replays). This gives F\*_lo < F\*_hi with a relative bracket width of about 0.7 % and F\*_mid = √(F\*_lo F\*_hi). A force rule F(·) is evaluated by its mean relative excess
+
+$$\mathrm{RE}(F) = \mathbb{E}_x\big[(F(x) - F^*_{\mathrm{mid}}(x))/F^*_{\mathrm{mid}}(x)\big],$$
+
+which is signed and includes slipped instances. It excludes unavoidable instances with F\*_hi > F_max, for which F\* is undefined; the calibration and test sets contain none. A rule is also evaluated by its physical slip rate $\mathbb{E}_x[\mathrm{slip}(F(x), x)]$. The task is
+
+$$\min_F \ \mathrm{RE}(F) \quad \text{s.t.} \quad \mathbb{E}_x[\mathrm{slip}(F(x), x)] \le \alpha,$$
+
+where the constraint must hold without a model of the contact physics, using a calibration set of instances drawn from the same distribution as the test instances. Two rules A and B are compared by the paired ratio of means on identical test instances,
+
+$$D = 1 - \mathrm{RE}(A)/\mathrm{RE}(B),$$
+
+so D > 0 means A needs less excess force than B. The labels F\* exist only in simulation. This is why the certificate below is defined on the physical outcome and why Section 3.5 gives a label-free online route.
+
+### 3.2 Grasp protocol and the friction-onset probe
+
+Every method runs the same protocol, so every method sees the same physical history up to the moment it chooses F. The gripper first closes to a constant preload F₀ = 32.7 N (m g/μ with m_max = 1 kg and μ_min = 0.3) and holds it for 0.4 s. Because F₀ is the same for every instance, it encodes neither mass nor friction. A probe squeeze F₀ → 1.5 F₀ → F₀ follows over 0.3 s. Then comes the **ramp-down probe**: the force falls log-linearly from F₀ towards 0.005 F₀ over 0.25 s. A detector that reads only the pad touch grids at 500 Hz computes the noisy shear/normal ratio r = Σ_pads |shear sum| / Σ normal, smooths log r over 6 frames, and declares onset at the first 2 consecutive frames whose 8-frame rise is below half the stick-phase rise. This flatness rule counts only while the smoothed r exceeds 0.1, which is below the lowest friction coefficient in any pool. Separately, a total normal reading below 1 mN declares onset directly, because contact is then being lost. Inside the detector, taxel readings carry per-taxel multiplicative lognormal noise (0.05), additive noise (0.002 N) and a per-instance channel gain bias (lognormal 0.10). The static-touch features at the lifted preload and the probe-squeeze features used by the S and full arms are recorded from the raw, noise-free touch grids. This favours those arms, so it makes the attribution result below conservative. At onset the force returns to F₀ within 0.02 s and holds for 0.1 s. If no onset is found, the probe is censored at the floor. The gripper then ramps to the chosen F (0.1 s), settles (0.1 s), and runs the 0.6 s disturbance window. The slip reference is the pose before the probe, so a slip caused by the probe counts as a slip of the grasp.
+
+The onset force gives a Coulomb friction reading μ̂ = m g/(2 F_onset), clipped to [0.1, 3]. In simulation the detector is a good but imperfect friction sensor. On the 8,000 in-distribution instances (report-only computation from the existing raw rows), an onset was found on every instance, log(m g/2F_onset) correlates with log μ at 0.948, and the difference log(m g/2F_onset) − log μ has mean +0.319 and SD 0.110. The bias is constant across instances, so a calibrated rule absorbs it, while the SD is an intrinsic error of the detector. The probe itself is gentle: the object's displacement at the detected onset has median 0.126 mm, 95th percentile 0.254 mm and maximum 1.924 mm, and no instance reached the 2 mm slip threshold during the probe. Because simulated touch is still cleaner than a real sensor, we model a realistic tactile detector by adding onset noise in log units on top of this intrinsic error, $\tilde f = \log F_{\mathrm{onset}} + \sigma\varepsilon$ with $\varepsilon \sim \mathcal{N}(0,1)$ drawn once per instance and σ ∈ {0, 0.1, 0.2, 0.4}. All core decisions use **σ = 0.2**. The same noisy onset is passed to every arm that uses it.
+
+### 3.3 Predictors and baselines
+
+Learned arms use gradient-boosted quantile trees ĝ(x) at level τ = 1 − α, trained on disjoint training objects with the same 30-configuration random search and 4-fold object-grouped cross-validation for every feature set. The feature sets are nested. **P** (proprioception) contains the disturbance type (one-hot), the commanded acceleration, log mass and the aperture at contact. **S** adds static touch at the lifted preload and a preload-slip flag. **full** adds the probe-squeeze features. **CertGrip-full** adds the onset feature $(\tilde f, \text{found})$. **Onset-only** is P plus the onset feature. Mass is given to every method in the main analysis, on the stated assumption that a robot can weigh the object during the lift. External disturbance amplitudes (D3, D4) are hidden from all methods. The physics plug-ins are:
+
+- **CSF-1:** $F = F_{\mathrm{nom}}\, e^{\hat q}$ with $F_{\mathrm{nom}} = m(g + a_{\mathrm{cmd}})/(2\bar\mu)$ for D1/D2 and $m g/(2\bar\mu)$ for D3/D4, where $\bar\mu$ is the geometric mean of the μ range.
+- **Mondrian-CSF:** the same formula with one $\hat q$ per family × disturbance cell (16 cells) \cite{ding2023class}. It is given the privileged family identity.
+- **CSF-μ̂:** $F = m(g + a_{\mathrm{cmd}})/(2\hat\mu)\, e^{\hat q}$, with μ̂ from the same noisy onset as the CertGrip arm it is compared with.
+
+The comparator COMP is the best of {CSF-1, Mondrian-CSF, CertGrip-P} by mean label-rule RE at α = 0.10 on the selection split (even-index objects calibrate, odd-index objects evaluate, then the roles swap). It was chosen and committed before any calibration or test file was read. An oracle predictor on privileged inputs (μ, amplitude, CoM offset, geometry, mass) gives a ceiling.
+
+### 3.4 Conformal risk control on the physical slip loss
+
+For an arm with predictor g and calibration instance i, define the force family and the physical loss
+
+$$F_i(\lambda) = \min\big(F_{\max},\, g(x_i)\, e^{\lambda}\big), \qquad L_i(\lambda) = \mathbb{1}\{\text{slip in a direct replay at } F_i(\lambda)\}.$$
+
+The loss is the outcome of a fresh simulated episode, not the bisection label. Slip need not be monotone in force, so we use the monotonised loss
+
+$$\tilde L_i(\lambda) = \max_{\lambda' \ge \lambda,\ \lambda' \in \Lambda} L_i(\lambda'),$$
+
+which is non-increasing in λ and satisfies $\tilde L_i \ge L_i$. A risk bound on $\tilde L$ therefore implies the same bound on physical slip. The grid is fixed per arm before calibration: $\Lambda = \hat q_{\mathrm{sel}} + \mathrm{linspace}(-0.4, 0.4, 20)$, where $\hat q_{\mathrm{sel}}$ is the label-rule conformal quantile of the arm's scores on the selection split, pooled over strata. Within each disturbance stratum, with n = 500 calibration instances,
+
+$$\hat\lambda = \min\Big\{\lambda \in \Lambda : \frac{n \tilde R_n(\lambda) + 1}{n + 1} \le \alpha\Big\}, \qquad \tilde R_n(\lambda) = \frac{1}{n}\sum_{i=1}^n \tilde L_i(\lambda),$$
+
+and λ̂ = max Λ if no grid point qualifies. By \cite{angelopoulos2022conformal}, a test instance exchangeable with the stratum's calibration instances satisfies E[slip at F(λ̂)] ≤ α. The expectation runs over the calibration set and the test instance together. This is what "certified" means in this paper: a marginal, in-expectation bound per stratum. A particular calibration set can yield a realised slip rate somewhat above α, and a high-probability (training-conditional) version \cite{bian2023training} is not part of this study. Because each object contributes one instance per stratum, exchangeability holds at the object level. Splits are drawn by object within family with fixed family counts, so the statement holds for test grasps drawn with the same family proportions as calibration. It holds per stratum and hence marginally over strata, but not for an arbitrary family mix and not per object or per family. Unavoidable instances (F\*_hi > F_max) count as slips at every λ.
+
+```
+Algorithm 1: CertGrip-CRC (per arm, per disturbance stratum d)
+input : predictor g, selection-split quantile q_sel, calibration instances {x_i} in stratum d, level alpha
+1  Lambda <- q_sel + linspace(-0.4, 0.4, 20)
+2  for i in calibration set, for lambda in Lambda:
+3       L[i, lambda] <- slip of a direct replay at min(F_max, g(x_i) * exp(lambda))
+4  Ltilde[i, lambda] <- max_{lambda' >= lambda} L[i, lambda']        # monotonise
+5  lambda_hat <- first lambda in Lambda with (sum_i Ltilde[i, lambda] + 1)/(n + 1) <= alpha, else max(Lambda)
+6  deploy: probe, compute g(x), command F = min(F_max, g(x) * exp(lambda_hat))
+```
+
+**Design rationale.** The originally pre-registered certificate was split conformal on bisection labels with the one-sided CQR score $s = \log F^*_{\mathrm{hi}} - \log \hat g(x)$ \cite{romano2019conformalized}, $\hat q$ = the ⌈(n+1)(1−α)⌉-th smallest score in the stratum, and $F = \hat g\, e^{\hat q}$. This certifies the label event F < F\*_hi. It transfers to physical slip only if slip is monotone in F. The pre-registered monotonicity gate (H1-M) tested this on 800 instances with a 25-point global grid, a 10-point dense local grid on [F\*_hi, 1.5 F\*_hi] and the bisection points, and it failed (Section 5.4). Following the pre-registered failure branch, the primary route became CRC on the physical loss. Its operational details (the grid, the stratification, the loss) were written in 08c after the gate's counts were seen and before any predictor was trained or any calibration or test read-out existed. The label route is reported as a secondary analysis. The monotonised loss makes CRC valid without assuming monotonicity, at the cost of slight conservatism wherever the raw loss flickers. In practice the label route gives a nearly identical effect size (Section 5.1), and the H1-M violations are confined to within 1 % of F\*_hi. CRC therefore mainly supplies a cleaner validity argument rather than a different answer.
+
+**Cost.** The certificate needs |Λ| = 20 direct replays per calibration instance and per test instance for evaluation, which is 20 × 4,800 replays per arm. Choosing λ̂ is O(|Λ| n) per stratum. Because every instance is replayed on the full grid, the 2,000-draw bootstrap recomputes λ̂ without new simulation.
+
+### 3.5 Online calibration from binary slip feedback
+
+On hardware, F\* labels and replays are unavailable, but whether the object slipped is observed after every grasp. Score-space online quantile tracking (OQT) \cite{angelopoulos2023conformala} updates a per-stratum log-force offset:
+
+$$q_{t+1} = q_t + \eta\,(\mathrm{slip}_t - \alpha), \qquad F_t = \min\big(F_{\max},\, \hat g(x_t)\, e^{q_t}\big),$$
+
+initialised at the stratum's offline $\hat q$. The step size is pre-registered as η = 0.1 × IQR of the in-distribution calibration scores, which gave η = 0.03412. Anti-windup suppresses the update on a step whose force was capped at F_max. In our simulated streams the feedback slip_t is the label rule 1{F_t < F\*_hi,t}, which the H1-V audit shows to err slightly on the safe side of the physical outcome; the physical outcome itself is checked by direct-replay audits on one ordering (Section 4). On hardware, slip_t would be the observed physical slip. We track in score space rather than with adaptive conformal inference's level update \cite{gibbs2021adaptive}, because a friction drop shifts every score by about +0.51 in log-force. That can exceed the largest offline score, at which point a level-indexed tracker saturates at F_max. Reference arms are decaying-step OQT \cite{angelopoulos2024online}, with step η/√(n_u + 1) where n_u counts the uncapped steps so far, frozen offline calibration, and an oracle that recalibrates with labelled instances from the shifted distribution.
+
+## 4 Experimental Setup
+
+**Simulator and objects.** All experiments run in MuJoCo 4.0.0 (timestep 0.002 s, elliptic friction cone, impratio 10, condim 6, solref (0.004, 1), solimp (0.95, 0.99, 0.001)). The physics configuration is identical for every family and every shift, which a unit test asserts on the compiled models. The parallel-jaw gripper has a force-controlled closing axis and one touch grid per pad. Fast simulated tactile sensing has been demonstrated at scale \cite{wang2022tacto, akinola2025tacsl, leins2025hydroelastictouch}, and tactile configuration and modality matter for learned manipulation \cite{luu2025manifeel, birtalan2026impact}. We use MuJoCo's built-in pad grids with the explicit noise model of Section 3.2 rather than a rendered visuotactile sensor. The in-distribution families are F1 boxes, F2 cylinders, F3 capsules, and F4 composites: a colliding box that carries half the mass plus a non-colliding sphere that carries the other half and shifts the CoM, in one rigid body. F5, thin plates, is held out as a new-family shift. F5 objects are box geoms whose half-size along the jaw axis is 2–5 mm, so they are 4–10 mm thick, and they use the same collision primitive as F1. No ellipsoids or disks are simulated. All objects are rigid primitives, and the pads take the object's friction coefficient. Friction is log-uniform on [0.3, 1.0] and mass log-uniform on [0.05, 1.0] kg. Friction is drawn independently of family, geometry, mass, CoM offset and disturbance, so no non-tactile input carries friction information by construction. The CoM offset is uniform up to 40 % of the object's vertical half-extent, and up to 60 % for F4. Disturbances are applied with the hand held still. D1 and D2 enter as the exact inertial pseudo-force of the corresponding hand motion on the object, because a kinematic hand cannot drag the object through MuJoCo's velocity-level friction. D3 and D4 are forces on the object ramped in over 0.1 s. Their ranges are D1 lift acceleration U[1, 10] m/s², D2 shake of amplitude U[5, 20] mm at U[2, 5] Hz, D3 lateral pull U[0.5, 2]·m g, and D4 payload U[0.2, 1.0]·m added mid-hold. Every object receives exactly one instance per disturbance type, each with its own pose offset.
+
+**Splits.** Splits are by object within each family: train objects 0–149, selection 150–199, calibration 200–324, test 325–499. Calibration therefore has n = 500 instances per disturbance stratum (2,000 in total) and test has 2,800 instances. The selection split (800 instances from 200 objects) is used only to choose COMP and to centre the λ-grids. Pilot objects, used to set the detector constants and project power, are disjoint from all of these.
+
+**Shifts and streams.** We use four shifts: S1 lowers friction (μ × 0.6), S1m lowers it mildly (μ × 0.9, not a primary shift), S3 scales every disturbance amplitude by 1.5, and S2 introduces the new family F5. S1, S1m and S3 re-simulate the id test objects with only the shifted parameter changed. Test objects 325–368 per family serve as oracle-recalibration objects, and objects 369–499 (2,096 instances) form the stream. S2 uses 550 F5 objects, with objects 0–174 for the oracle and 175–549 (1,500 instances) for the stream. A stream has T = 2,000 steps: steps 1–500 are in-distribution, drawn from the unshifted instances of the oracle objects, and steps 501–2,000 are shifted. The evaluation window is steps 1,001–2,000. Each shift has 20 orderings. Feedback in the 20-ordering streams is the label rule slip_t = 1{F_t < F\*_hi,t}. Two direct-replay audits on ordering 0 measure the physical outcome: OQT-CertGrip and OQT-COMP over steps 501–1,000, and OQT-CertGrip and Oracle-CertGrip over the whole window.
+
+**Metrics and decision rules.** The efficiency metric is RE against F\*_mid with D as the effect size (Section 3.1). Robustness re-computes RE with F\*_lo and F\*_hi. Validity is the physical slip rate in direct replay. The four core decisions use a Bonferroni split of a 5 % family-wise level, one-sided 0.0125 each. All intervals CI\*\* are two-sided 97.5 % percentile intervals from 2,000 object-cluster bootstrap draws that resample calibration and test objects within family (all four instances of an object move together) and recompute λ̂ or q̂ per draw. The rules are:
+- **H1** is confirmed iff the one-sided 98.75 % Clopper–Pearson upper limit of the non-monotone rate is ≤ 2 % (at most 7 of 800) and the H1-V physical-minus-label disagreement Δ has CI\*\* upper limit ≤ 0.02.
+- **H2a (primary)** requires D ≥ 0.10 (the smallest effect size of interest, SESOI), a CI\*\* lower limit > 0, and both conditions again with F\*_lo and F\*_hi in place of F\*_mid.
+- **H2b (co-primary)** compares CertGrip-full with CSF-μ̂ at σ = 0.2. It declares superiority on the H2a rule and equivalence if the CI\*\* lies inside ±0.10 (two one-sided tests, TOST).
+- **H3** passes iff the CI\*\* upper limit of R_E = RE_window(OQT-CertGrip)/RE_window(Oracle-CertGrip) is < 1.10 for each of S1, S2 and S3, and the realised physical slip rates of the two arms in the window differ by ≤ 0.02.
+
+Secondary analyses (pre-registered in 07 and operationalised in 08f–08h before computation) are unadjusted and labelled as such. We also report σ\*, the smallest σ at which the CI\*\* lower limit of D(H2a) falls below 0.10.
+
+**Hyperparameters and reproducibility.**
+
+| Item | Value |
+|---|---|
+| Preload / squeeze | F₀ = 32.7 N for 0.4 s; F₀ → 1.5 F₀ → F₀ over 0.3 s |
+| Probe | F₀ → 0.005 F₀ log-linear over 0.25 s; return in 0.02 s, hold 0.1 s |
+| Detector | 500 Hz; 6-frame smoothing; 8-frame rise < ½ stick rise, 2 consecutive frames; armed at r > 0.1 |
+| Taxel noise | multiplicative lognormal 0.05; additive 0.002 N; channel gain lognormal 0.10 |
+| Onset noise σ | {0, 0.1, 0.2, 0.4}; primary 0.2 |
+| Labels | log bisection on [0.1, 100] N, 11 replays |
+| Target level α | 0.10 (H1-V, H1c and H2-n also at other levels) |
+| Calibration size | n = 500 per stratum (H2-n: 50) |
+| CRC grid (08c) | q̂_sel + linspace(−0.4, 0.4, 20), pooled |
+| CRC grid (08e, post hoc) | q̂_sel,d + linspace(−0.8, 0.8, 41), per stratum |
+| Learner | gradient-boosted quantile trees, τ = 1 − α; 30-config random search, 4-fold object-grouped CV, identical for all feature sets; scikit-learn HistGradientBoostingRegressor (quantile loss); search space (code/certgrip/models.py): learning rate log-uniform on [0.02, 0.3], max_iter ∈ {100, 200, 400, 800}, max_leaf_nodes ∈ {7, 15, 31, 63}, min_samples_leaf ∈ {5, 10, 20, 40}, l2_regularization ∈ {0, 0.1, 1}; selected configurations are logged with each fit |
+| OQT | η = 0.03412; anti-windup at F_max; one tracker per stratum |
+| Seeds | predictor seed 0 primary, seeds 1–4 refit; onset ε per instance; stream orderings `default_rng([4242, shift, ordering])` |
+| Inference | 2,000 object-cluster bootstrap draws; CI\*\* 97.5 %; SESOI 0.10 |
+
+**Compute.** Simulation is CPU-only. A replay costs about 0.01 s and is bit-identical across repeats on the same machine. The logged compute for the main study is 14.5 CPU-hours: 5.72 for the 08c CRC grid replays, 8.03 for the post hoc 08e grid replays, 0.60 for the bisection labels and 0.15 for the monotonicity gate. The CRC replays dominate because every calibration and test instance is replayed on the full grid for every arm.
+
+**Deviations from the pre-registration.**
+1. The CRC route (08c) was written after the H1-M counts were seen and before any predictor existed.
+2. The 08c λ-grid had a floor defect: λ̂ sat at grid index 0 in D1/D2 for CSF-μ̂ at σ ≤ 0.2, and at index 1 for CSF-1. The floor therefore also binds at the primary σ = 0.2 for the H2b comparator, so the 08c H2b point estimate at σ = 0.2 is biased towards CertGrip-full. A post hoc per-stratum 41-point grid (08e) was added. Under its pre-fixed reporting rule it can mark an 08c result as unreliable but cannot upgrade a decision. We lead the H2b read-out with the label route and the 08e grid for this reason.
+3. The pre-registration lists the selection objects once as 200–249 (08b §3) and elsewhere as 150–199 (08b §5, 08c). The code and the logged selection used 150–199.
+4. The probe arm's H3-B prediction was never specified and is untested. D-μ was computed on calibration plus test rather than on train objects. The H2-M mass-noise draw was fixed only in 08h.
+5. The H3-L TOST was evaluated after the ρ − ρ_ID read-out had been seen.
+
+## 5 Results
+
+### 5.1 Main comparison (H2a, primary)
+
+COMP selection returned CSF-1 (selection-split mean RE 0.7686, against 0.8294 for Mondrian-CSF and 0.8335 for CertGrip-P). Table 1 gives the pre-registered read-out. On the 2,800 test instances, CertGrip-full at σ = 0.2 has RE 0.4567 against 0.7832 for CSF-1, which gives D = 0.4168 with CI\*\* [0.3484, 0.4778]. The point estimate exceeds the SESOI of 0.10 and the lower limit is far above 0, so H2a is decided as superiority. The robustness requirement holds: with F\*_lo and F\*_hi in place of F\*_mid, D is 0.4150 and 0.4186. The physical test slip rate is 0.0829 for CertGrip-full and 0.1021 for CSF-1. The latter is marginally above α, which a guarantee on the expectation permits on a finite test set. Per stratum (report-only, 700 test instances each), CertGrip-full slips at 0.0871 (D1), 0.0714 (D2), 0.0757 (D3) and 0.0971 (D4). CSF-1 slips at 0.1157 (D1), 0.0886 (D2), 0.1057 (D3) and 0.0986 (D4), so two of its strata lie above α on this test set. This is again compatible with an in-expectation bound for one fixed calibration set, and it shows why we do not read "certified" as a per-deployment guarantee.
+
+The superiority holds across every pre-registered robustness view, though not in the H2-R sub-pool discussed below. It holds on the label route (D 0.4292), under the post hoc 08e grids (0.4289), for refits with seeds 1–4 (08c 0.3932–0.4494; label route 0.4145–0.4442), against Mondrian-CSF (0.4381), and with only 50 calibration instances per stratum (0.4146 at α 0.10, 0.4654 at α 0.20). Across the 16 family × disturbance cells, the random-effects pooled D is 0.4388 (τ = 0.0511), with heterogeneity statistic Q = 31.04 on 15 degrees of freedom, so the cells are not homogeneous. The heterogeneity has a clear pattern: the four lateral-pull (D3) cells are the weakest in every family, at 0.2979 (F1), 0.3868 (F2), 0.3115 (F3) and 0.3348 (F4). One reading is that a lateral pull loads the contact tangentially in the pad plane rather than along gravity, so the onset-based friction reading predicts the needed force less directly; we did not test this. Every cell has a CI\*\* lower limit above 0.16, so no cell violates the safety guard. The tail does not pay for the mean: the ratio of 95th-percentile relative excess is T = 0.5918 [0.5540, 0.6564]. The probe arm closes 0.5172 [0.4489, 0.5762] of the gap between CSF-1 and the privileged oracle (label route; oracle RE 0.1271). The advantage shrinks with onset noise: at σ = 0, 0.1, 0.2 and 0.4, D(H2a) is 0.6789, 0.5825, 0.4168 and 0.1401. At σ = 0.4 the lower limit is 0.0832, below the SESOI, so σ\* = 0.4.
+
+| Comparison (α 0.10, test) | Route | D | CI\*\* | Decision |
+|---|---|---|---|---|
+| **H2a: CertGrip-full σ0.2 vs CSF-1** | CRC 08c | **0.4168** | [0.3484, 0.4778] | superiority |
+| H2a with F\*_lo / F\*_hi | CRC 08c | 0.4150 / 0.4186 | [0.3468, 0.4758] / [0.3501, 0.4798] | holds |
+| H2a | label rule | 0.4292 | [0.3654, 0.4822] | superiority |
+| H2a (post hoc grids) | CRC 08e | 0.4289 | [0.3577, 0.4770] | superiority |
+| H2-C vs Mondrian-CSF | label rule | 0.4381 | [0.3733, 0.4872] | superiority |
+| H2-H pooled over 16 cells | label rule | 0.4388 | τ = 0.0511, Q = 31.04 | no harmful cell |
+| H2-T (P95 ratio T) | CRC 08c | 0.5918 | [0.5540, 0.6564] | pass (< 1.10) |
+| **H2-R narrow-μ, mid-amplitude sub-pool** | label rule | **−0.2614** | [−0.5320, −0.0325] | method worse |
+
+*Table 1. Main comparison and robustness. Arm RE (CRC 08c): CertGrip-full 0.4567 [0.4079, 0.5033], physical slip 0.0829; CSF-1 0.7832 [0.6968, 0.8583], physical slip 0.1021. Rows other than H2a are secondary and unadjusted.*
+
+### 5.2 Where the saving comes from
+
+Table 2 walks the feature chain on the label route (secondary). Its D values compare learned arms with each other along the nested chain, starting from the proprioceptive arm P; they are not comparisons against COMP and should not be read next to the H2a value as if they were. Static touch at the lifted preload adds nothing over proprioception: D(S vs P) = −0.0084 [−0.0360, 0.0128], equivalent within ±0.05. There is no evidence that the squeeze helps: D(full vs S) = −0.0263 [−0.0558, 0.0149], and equivalence within ±0.03 is not shown either. Adding the onset feature is where the change occurs, with D(CertGrip-full vs full) = 0.4739 [0.4148, 0.5229]. Conversely, the touch and squeeze features add nothing measurable to onset-only on the CRC route: onset-only reaches RE 0.4336 with physical slip 0.0857, and D(CertGrip-full vs onset-only) = −0.0534 [−0.1233, 0.0508] (H4e not confirmed; the label route gives −0.0417, recorded as equivalence). Shuffling the non-proprioceptive features across rows gives D = −0.0253 [−0.0526, 0.0085] against P (H4c inconclusive).
+
+**H2b (co-primary) is not confirmed.** We lead with the two read-outs that are not affected by the grid floor. On the label route, the learned arm against the physics plug-in CSF-μ̂ (same noisy onset) has D = 0.0134 [−0.0850, 0.0814], inside ±0.10. On the post hoc 08e grid it has D = 0.0240 with CI\*\* upper limit 0.1001, just above the ±0.10 equivalence margin. The pre-registered 08c read-out gives D = 0.0569 [−0.0399, 0.1454], whose interval contains both 0 and the SESOI. That read-out is compromised on the plug-in side. CSF-μ̂'s λ̂ sits at grid index 0, the floor of the 08c grid, in D1 and D2 at σ = 0.2 (report-only check of the per-stratum indices), so the plug-in cannot lower its force as far as its own calibration data would allow. It is over-protected, with RE 0.4843 and physical slip 0.0657 (0.0586 in D1 and 0.0386 in D2), and the 08c D is biased towards the learned arm. All three read-outs lie close to 0. We do **not** claim equivalence, because the decision-bearing 08c interval does not support it. We also do not claim that the learned model improves on the plug-in at σ = 0.2.
+
+The comparison depends on σ (secondary). On the label route the plug-in is better at σ = 0 (D −0.2022) and σ = 0.1 (−0.0753), the two are equivalent at σ = 0.2, and the learned arm is better at σ = 0.4 (0.3275). The 08e grids agree in direction (σ 0: −0.1522; σ 0.4: 0.3315). The 08c CRC route instead reports H2b superiority at σ = 0 (0.2461) and σ = 0.1 (0.1072). Under the 08e reporting rule we treat these two 08c results as unreliable, because the plug-ins' λ̂ sits at the grid floor in D1/D2. The same floor binds at σ = 0.2, as described above. There the 08c decision ("not confirmed") does not change under 08e, so the rule does not formally flag it, but its point estimate carries the same bias.
+
+A friction-information diagnostic is consistent with the attribution, with one qualification. D-μ, the cross-validated R² of log μ on each arm's log-force residual, is 0.7937 for P and 0.6034 for CSF-1, so the no-probe arms leave a large, systematic friction dependence in their residuals. For CertGrip-full it is 0.0105, 0.0452, 0.2142 and 0.5655 at σ = 0, 0.1, 0.2 and 0.4, and for CSF-μ̂ at σ = 0.2 it is 0.0054. D-μ measures only the part of the residual that is predictable from μ. It is blind to noise that is independent of friction, so an unbiased but noisy friction reading scores near 0 however large its error. A low D-μ therefore shows that an arm's errors are not systematically related to μ, not that the arm captures friction precisely. The RE values, not D-μ, carry the efficiency argument. Touch also identifies family (touch-only family accuracy 0.7257 against chance 0.25), but giving both arms the family identity leaves the gain intact: D_FID = 0.4638 against D = 0.4555 without it (H4b, unadjusted secondary). Both of these D values compare CertGrip-full with the proprioceptive arm P, with and without family identity, not with COMP. H2-M is descriptive only, because the onset feature confounds m and μ. Without mass, D = 0.4598 against the proprioceptive arm without mass (change 0.0042 [−0.0446, 0.0399]). With 10 % mass noise and COMP re-selected (again CSF-1, RE 0.7991), D = 0.4603.
+
+| Ablation (label route unless stated) | D | CI\*\* | Decision |
+|---|---|---|---|
+| H4a: S vs P (±0.05) | −0.0084 | [−0.0360, 0.0128] | equivalence |
+| H4a: full vs S (±0.03) | −0.0263 | [−0.0558, 0.0149] | not confirmed |
+| H4a: CertGrip-full vs full (+onset) | 0.4739 | [0.4148, 0.5229] | report only |
+| H4e: CertGrip-full vs onset-only (CRC 08c) | −0.0534 | [−0.1233, 0.0508] | not confirmed |
+| **H2b: CertGrip-full vs CSF-μ̂, σ0.2 (label rule)** | **0.0134** | [−0.0850, 0.0814] | equivalence (secondary) |
+| **H2b (CRC 08e, post hoc)** | **0.0240** | [−0.0949, 0.1001] | not confirmed |
+| **H2b (CRC 08c, pre-registered; comparator at grid floor in D1/D2)** | **0.0569** | [−0.0399, 0.1454] | **not confirmed** |
+| H4c: shuffled vs P (±0.05) | −0.0253 | [−0.0526, 0.0085] | inconclusive |
+| H4b: D_FID vs P (both arms given family ID) | 0.4638 | [0.3940, 0.5135] | D_FID ≥ 0.5 D |
+| H4d: D_F4 − D_F1 | 0.0342 | [−0.0424, 0.1138] | inconclusive |
+
+*Table 2. Attribution ablations. All rows except the 08c H2b row are secondary and unadjusted. The H4a, H4c and H4b rows are comparisons along the learned feature chain against P, not against COMP. The three H2b rows are given equal weight; the 08c row is the decision-bearing one but is biased towards CertGrip-full by the comparator's grid floor.*
+
+### 5.3 Where it fails
+
+H2-R recalibrates both methods inside the sub-pool with μ ∈ [0.5, 0.8] and disturbance amplitude in the middle 50 % of each type's range (n_cal 352, n_test 548). There the probe arm is worse than CSF-1: D = −0.2614 [−0.5320, −0.0325]. This is a secondary analysis that carried no registered prediction. A plausible reading is that a narrow friction range removes the variation the probe measures while the probe's noise remains. We did **not** test this explanation. The CoM mechanism test H4d is inconclusive (D_F4 − D_F1 = 0.0342 [−0.0424, 0.1138]).
+
+### 5.4 Validity of the certificate
+
+H1 is not confirmed. The monotonicity gate found 8 non-monotone instances of 800 in-distribution instances, giving a Clopper–Pearson upper limit of 0.02115 > 0.02. Seven of the eight occurred under D2 (shake). The violations are small: among the in-distribution instances, the largest slip force above F\*_hi exceeds it by a relative 0.00225. The gate also ran on three shift pools of 100 instances each, which do not enter the H1 decision. They added 2 violations, none in S1 and one each in S3 and S2, and the larger of the two lies a relative 0.00904 above F\*_hi. The physical audit H1-V passes for all four arm × α combinations. The label rule slightly over-counts slips, with Δ ranging from −0.00429 (CertGrip, α 0.10) to −0.00143 (CertGrip, α 0.05). The label-route split-conformal unit test UT3 passes 160 of 160 cells. Twenty of these (α 0.01, n 50) are degenerate, so the informative count is 140 of 140. Uncalibrated targeters over-slip. RAW-Q and RAW-G exceed α at every level (slip − α between 0.0096 and 0.0507, every CI\*\* above 0). At α = 0.05, however, their intervals ([0.020, 0.045] and [0.016, 0.042]) do not exclude the pre-registered +0.025 margin, so H1c is not confirmed.
+
+### 5.5 Online calibration under shift
+
+Table 3 summarises the streams. Frozen offline calibration breaks under the friction and amplitude shifts. Frozen-CertGrip's window slip reaches 0.3056 (S1) and 0.2461 (S3), and Frozen-COMP's reaches 0.5101 (S1). Neither frozen arm breaks under S2, so the rescue by online tracking is demonstrated for S1 and S3 only; under S2 the tracker matches an already valid frozen rule. In all 20 orderings the tracker's feedback is the label rule 1{F_t < F\*_hi,t}, not a physical replay. OQT-CertGrip holds the window label-rule slip between 0.0999 and 0.1016 across shifts, and the direct-replay audit of ordering 0 gives physical rates of 0.103 (S1), 0.092 (S2) and 0.101 (S3). OQT-CertGrip also needs less force than OQT-COMP in every shift (S1 RE 0.4763 against 0.8087). Whether its log-ratio advantage over COMP is preserved under S1 was tested by ρ − ρ_ID = 0.0857 [−0.0444, 0.1859]. The interval does not lie inside the ±0.05 TOST margin, so H3-L is not confirmed.
+
+**H3 is inconclusive** in all three shifts. R_E is 0.8778 [0.7404, 1.1204] in S1, 1.1739 [1.0234, 1.4283] in S2 and 0.9629 [0.8363, 1.1449] in S3. The realised CI\*\* half-widths, about 0.15–0.20, are wider than the projected ≈ 0.12. The matched-rate co-requirement fails in S1 (physical difference 0.032) and S2 (−0.035), and holds in S3 (0.009). The direction of R_E follows the slip mismatch: the oracle under-slips in S1 and over-slips in S2. R_E is therefore not a like-for-like efficiency comparison in S1 and S2. In S2 the whole R_E interval lies above 1: the tracker used more force than the oracle there, while also slipping less. "Inconclusive" is the correct H3 verdict, but its direction in S2 is unfavourable to the tracker. In S1m, R_E has an upper limit below 1.10 (0.8871 [0.7723, 1.0265]), but the window label-rule slip rates differ by 0.0248 > 0.02, so the full criterion is not met. Constant η beats decaying η in catch-up: the cumulative excess slips over the first 500 shifted steps are larger for the decaying schedule by ΔC = 58.15 [48.20, 70.20] in S1 and 42.40 [32.40, 49.35] in S3 (H3-S, unadjusted). In S2 and S1m, where the shift is small or frozen calibration stays valid, H3-S is inconclusive (ΔC = 2.90 [−6.65, 7.00] and 2.75 [−2.05, 11.85]). No step was capped at F_max in any window.
+
+| Shift | OQT-CertGrip slip / RE | OQT-COMP RE | Frozen-CertGrip / Frozen-COMP slip | Oracle-CertGrip slip / RE | R_E [CI\*\*] | H3 |
+|---|---|---|---|---|---|---|
+| S1 (μ × 0.6) | 0.1016 / 0.4763 | 0.8087 | 0.3056 / 0.5101 | 0.0751 / 0.5426 | 0.8778 [0.7404, 1.1204] | inconclusive |
+| S2 (F5) | 0.0999 / 0.4262 | 0.7398 | 0.1016 / 0.1051 | 0.1346 / 0.3631 | 1.1739 [1.0234, 1.4283] | inconclusive |
+| S3 (amp. × 1.5) | 0.1000 / 0.5067 | 0.8635 | 0.2461 / 0.1910 | 0.0863 / 0.5262 | 0.9629 [0.8363, 1.1449] | inconclusive |
+
+*Table 3. Online calibration, window steps 1,001–2,000, label-rule slip averaged over 20 orderings, α = 0.10. Tracker feedback is the label rule; physical outcomes are audited by direct replay on ordering 0 only (Section 4). The 20 orderings share the same instances, so the object-cluster bootstrap, not the ordering, is the unit of inference.*
+
+## 6 Discussion
+
+**What the evidence licenses.** The confirmed claim is narrow and, we think, useful. A friction-onset probe of a quarter second, read by a touch-only detector, carries enough friction information that a conformally certified grip force needs about 42 % less relative excess force than the best non-tactile conformal method. This holds at a physical slip rate that conformal risk control bounds in expectation over calibration draws, per disturbance stratum. Two conditions frame the figure. Friction in our instance distribution is independent of every non-tactile input, so a friction-blind certified rule must cover the full friction range with one factor; where vision or object category predicts friction, the margin over a non-tactile baseline that uses such a proxy would be smaller, and we have not measured it. The second condition is the assumed onset noise (σ = 0.2), discussed under Limitations. The ablations say where the saving comes from in our simulator. Static touch and the squeeze carry essentially no friction information in our protocol, as the pilot had already suggested, while the onset feature carries almost all of it. We scope this to the rigid-contact model. Under rigid Coulomb contact, μ does not change the static normal and shear readings below the friction limit, so static touch is uninformative about friction by construction. On real elastomer sensors, partial-slip fields under tangential load can carry friction information, and our result does not rule that out. The residual-friction diagnostic is consistent with this picture but is not independent evidence for it: no-probe arms leave a systematic friction dependence (cross-validated R² of 0.7937 for P) in their residuals, whereas the plug-in fed by the onset leaves almost none (0.0054). Because D-μ ignores friction-independent noise, it cannot show how precisely an arm tracks friction. At σ = 0.2, learning on top of the onset shows no demonstrated gain over the one-line physics formula that uses the same onset (H2b not confirmed). In the secondary, unadjusted σ sweep, the learned model is better at σ = 0.4 and worse at σ = 0. One reading is that a learner pays off only when the friction reading is noisy enough that other cues help to denoise it. Conformal calibration is what makes the saving *certifiable*, and the probe is what makes it *large*.
+
+**Unexpected results.** Five outcomes departed from the plan. First, the monotonicity premise failed narrowly (8 of 800), mostly under shake. The violations sit within 1 % of F\*_hi, and the physical audit shows the label rule erring on the safe side. Still, the failure forced the switch to CRC on the physical loss, and it is why we present that route, not the label route, as primary. Second, the narrow-friction, mid-amplitude sub-pool reverses the main result. The probe is therefore not a free lunch. When friction varies little, a noisy friction reading can cost more than it gains, and practitioners should expect the advantage to scale with the friction spread of their object set. Third, the online efficiency comparison was underpowered and confounded by unequal realised slip rates between the tracker and the oracle, so H3 could not be decided in either direction. Fourth, the comparator's λ-grid floor in D1/D2 affected not only the secondary σ levels but also the primary σ = 0.2 read-out of H2b, which is why we give the label route and the post hoc grid equal weight there. Fifth, lateral-pull disturbances were consistently the weakest cells for the probe arm, a pattern we did not anticipate and have not explained.
+
+**Relation to prior work.** Friction-estimating grip controllers \cite{khamis2021real, niu2026synchronized} and incipient-slip methods \cite{dong2019maintaining, boonstra2024estimate} use the same physical cue as our probe but leave the safety margin as a design parameter. Our results suggest that this cue, combined with a calibration step that requires no friction model, already provides most of the attainable saving relative to a friction-blind certified baseline. The learned components of tactile pipelines should therefore be compared against a calibrated physics plug-in on the same cue, not only against a friction-blind controller. On the conformal side, our online result is in line with the long-run guarantees of quantile tracking \cite{angelopoulos2023conformala} and with the known slow adaptation of decaying steps \cite{angelopoulos2024online}. The physical audit on one ordering suggests that these guarantees carry over to a contact outcome in simulation. In our streams the feedback was the label rule, which errs slightly on the safe side of physical slip, so a hardware study with physical slip as the feedback is still needed.
+
+**Practical implications.** A robot can run the probe on every grasp at a cost of under 0.4 s (descent, return and hold). In simulation it found an onset on every in-distribution instance and displaced the object by a median 0.126 mm at onset, with no probe reaching the 2 mm slip threshold. Objects for which even a sub-millimetre slip is unacceptable are outside the protocol's scope. The offline certificate requires F\* labels and replays, which only a simulator provides. The deployable route is the online tracker, warm-started from a simulation-calibrated offset and updated from observed slips. It commits the robot to about α T slips over T grasps plus a catch-up transient after a shift. It is therefore suited to objects that can be dropped safely.
+
+## 7 Limitations
+
+All results come from a single simulator (MuJoCo) with five object families and a modelled tactile detector. In simulation the detector recovers friction with an intrinsic log-error SD of 0.110, and the operating point σ = 0.2 is an assumed noise level added on top, not a measured property of any real sensor; we do not ground it in a published onset-noise value. The σ sweep shows that the main effect weakens quickly with noise, and its lower limit falls below the SESOI at σ = 0.4. The offline certificate needs F\* labels and per-instance replays on a 20-point force grid, which exist only in simulation. It is therefore not deployable as is, and online quantile tracking is the route to hardware. Validity rests on the CRC route adopted after the monotonicity gate failed, and the grid repair (08e) is post hoc. The 08c λ-grid floor defect makes the 08c H2b results at σ = 0 and 0.1 unreliable, and it also biases the primary σ = 0.2 H2b estimate towards the learned arm, because the plug-in's λ̂ sits at the grid floor in D1/D2 there too. H2b is unresolved at the primary σ. Friction is sampled independently of every non-tactile input, so the H2a margin is partly a property of this instance distribution; we did not test a non-tactile baseline with a friction proxy, or a pool in which friction correlates with observable attributes. Contact is rigid, objects are rigid primitives, and the static and squeeze touch features are noise-free, so the conclusion that static touch carries no friction information is specific to this contact model. There is no reactive slip-tightening baseline. The guarantee is in expectation over calibration draws; we did not compute a high-probability (training-conditional) variant on the existing replays, and per-stratum test slip of the baseline exceeds α in two strata. H3 was underpowered by design, its matched-rate requirement failed in two shifts, and the feedback in its 20 orderings is the label rule, with physical audits for one ordering only. Frozen calibration did not fail under the new-family shift, so the online rescue is shown for two of three shifts, and in that shift the tracker's force cost lies above the oracle's. The H2-R sub-pool is a regime in which the method loses, and its cause is untested. The concentration of non-monotone instances under D2 is unexplained. The certificate is marginal over grasps within a disturbance stratum and gives no per-object or per-family guarantee. All secondary analyses are unadjusted for multiplicity, and several (08e, the H3-L TOST) were specified after related read-outs had been seen. Mass is assumed to be measurable during the lift. The no-mass and noisy-mass conditions are descriptive only, because the onset confounds mass and friction. Classic work on friction estimation from incipient slip and on human grip-force regulation is not discussed beyond the cited cards, a gap in the literature coverage of this draft.
+
+## 8 Conclusion
+
+We asked whether a tactile probe can make a certified minimal-force grasp substantially gentler, and which component is responsible. In MuJoCo simulation, a ramp-down friction-onset probe combined with conformal risk control on the physical binary slip loss reduces mean relative excess grip force by D = 0.4168 (97.5 % CI [0.3484, 0.4778]) relative to the strongest non-tactile conformal baseline, which was selected beforehand, in an instance distribution where friction cannot be predicted from non-tactile inputs. The test physical slip rate is 0.0829 at α = 0.10, under a slip bound that holds in expectation over calibration draws, per disturbance stratum. Within this rigid-contact simulator the saving comes from the probe. Static touch and the squeeze contribute nothing measurable, and at the primary onset noise a learned model shows no demonstrated gain over a physics plug-in using the same onset. The result has a stated scope limit: in a narrow-friction, mid-amplitude sub-pool the method is worse than the baseline (D = −0.2614). Under friction and amplitude shifts, frozen calibration breaks, and online quantile tracking from binary feedback (the simulator's label rule, physically audited on one ordering) keeps the window slip rate near α. Under the new-family shift frozen calibration remains valid, and the tracker stays near α as well. Whether tracking does so at a force cost within 10 % of label-based recalibration is inconclusive. Of four pre-registered core decisions, one was confirmed. Future work should measure onset noise on a physical gripper with a real tactile sensor, replace the simulated σ by that measurement, add a high-probability version of the certificate, compare against a non-tactile baseline with a friction proxy and against reactive slip tightening, and run an online-only calibration study on hardware, where physical binary slip feedback is the only signal available.
+
+
+EXPERIMENT EVIDENCE
+
+(a) results/v1/results_v1.json (full; every block is an unchanged analysis file of results/v1/):
+{
+ "note": "p2 v1 (docs/08b_preregistration.md + 08c-08h); every block is the unchanged content of the named file; crc_grids*.json and 13_freeze.json are referenced, not inlined",
+ "19_report_rows.json": {
+  "note": "report-only rows for stage 19 (code/tools_stage19_rows.py); computed from existing raw files",
+  "detector_id_sigma0": {
+   "n_rows": 8000,
+   "found_rate": 1.0,
+   "pearson_r_logmu": 0.9479823536832105,
+   "bias_mean_diff": 0.3186408510241527,
+   "sd_diff": 0.11029390007374047,
+   "disp_at_onset_mm": {
+    "median": 0.12634499999999999,
+    "p95": 0.2542904999999997,
+    "max": 1.92376,
+    "n_ge_2mm": 0
+   }
+  },
+  "compute_logged_cpu_hours": {
+   "logs_by_prefix": {
+    "p2_crc": 5.719611111111114,
+    "p2_crcv2": 8.031638888888889
+   },
+   "rows_sum": {
+    "labels": 0.6030064457358231,
+    "mono": 0.14551709138305519
+   },
+   "total": 14.49977353711888
+  },
+  "per_stratum_test_slip_crc08c": {
+   "full_rd@0.2#0": {
+    "overall_slip_phys": 0.08285714285714285,
+    "lam_idx": {
+     "D1": 10,
+     "D2": 10,
+     "D3": 11,
+     "D4": 10
+    },
+    "D1": {
+     "n": 700,
+     "slip_phys": 0.08714285714285715
+    },
+    "D2": {
+     "n": 700,
+     "slip_phys": 0.07142857142857142
+    },
+    "D3": {
+     "n": 700,
+     "slip_phys": 0.07571428571428572
+    },
+    "D4": {
+     "n": 700,
+     "slip_phys": 0.09714285714285714
+    }
+   },
+   "CSF-1": {
+    "overall_slip_phys": 0.10214285714285715,
+    "lam_idx": {
+     "D1": 1,
+     "D2": 1,
+     "D3": 15,
+     "D4": 14
+    },
+    "D1": {
+     "n": 700,
+     "slip_phys": 0.11571428571428571
+    },
+    "D2": {
+     "n": 700,
+     "slip_phys": 0.08857142857142856
+    },
+    "D3": {
+     "n": 700,
+     "slip_phys": 0.10571428571428572
+    },
+    "D4": {
+     "n": 700,
+     "slip_phys": 0.09857142857142857
+    }
+   },
+   "CSF-muhat@0.2": {
+    "overall_slip_phys": 0.06571428571428571,
+    "lam_idx": {
+     "D1": 0,
+     "D2": 0,
+     "D3": 14,
+     "D4": 12
+    },
+    "D1": {
+     "n": 700,
+     "slip_phys": 0.05857142857142857
+    },
+    "D2": {
+     "n": 700,
+     "slip_phys": 0.03857142857142857
+    },
+    "D3": {
+     "n": 700,
+     "slip_phys": 0.08
+    },
+    "D4": {
+     "n": 700,
+     "slip_phys": 0.08571428571428572
+    }
+   },
+   "P_onset@0.2#0": {
+    "overall_slip_phys": 0.08571428571428572,
+    "lam_idx": {
+     "D1": 10,
+     "D2": 10,
+     "D3": 11,
+     "D4": 10
+    },
+    "D1": {
+     "n": 700,
+     "slip_phys": 0.09142857142857143
+    },
+    "D2": {
+     "n": 700,
+     "slip_phys": 0.08714285714285715
+    },
+    "D3": {
+     "n": 700,
+     "slip_phys": 0.07142857142857142
+    },
+    "D4": {
+     "n": 700,
+     "slip_phys": 0.09285714285714286
+    }
+   }
+  },
+  "h1m_violations_split": {
+   "id_count": 8,
+   "id_max_rel_above_F_hi": 0.002251148292912619,
+   "shift_count": 2,
+   "shift_max_rel_above_F_hi": 0.009035170084340738,
+   "shift_pools": {
+    "S1": {
+     "n": 100,
+     "non_monotone": 0
+    },
+    "S3": {
+     "n": 100,
+     "non_monotone": 1
+    },
+    "S2": {
+     "n": 100,
+     "non_monotone": 1
+    }
+   }
+  }
+ },
+ "comp_selection.json": {
+  "purpose": "p2 COMP selection (08b \u00a73, 08c \u00a73): selection split only, label rule, alpha 0.10, even/odd object halves, mean RE over both halves; smallest wins",
+  "n_instances": 800,
+  "n_unavoidable_excluded": 0,
+  "objects": "200 objects (150-199 per family)",
+  "candidates": {
+   "CSF-1": {
+    "RE_even_cal": 0.7921080916548238,
+    "RE_odd_cal": 0.7450284374856984,
+    "RE_mean": 0.7685682645702611,
+    "label_slip_avoidable_mean": 0.095
+   },
+   "Mondrian-CSF": {
+    "RE_even_cal": 0.8344137973202712,
+    "RE_odd_cal": 0.824422348610938,
+    "RE_mean": 0.8294180729656047,
+    "label_slip_avoidable_mean": 0.0725
+   },
+   "CertGrip-P": {
+    "RE_even_cal": 0.8453653413284726,
+    "RE_odd_cal": 0.8216903571912365,
+    "RE_mean": 0.8335278492598546,
+    "label_slip_avoidable_mean": 0.0975
+   }
+  },
+  "COMP": "CSF-1",
+  "pred_file": "v1/preds/a010_P_seed0.json",
+  "keys_sha256": "8019eef9f428aeb599ba7da1c5b3c132e7f3c1865225d870c9c97cd7ddc4194b"
+ },
+ "crc_analysis.json": {
+  "arms": {
+   "full_rd@0.0#0": {
+    "lam_idx": {
+     "D1": 10,
+     "D2": 10,
+     "D3": 11,
+     "D4": 10
+    },
+    "at_max": {
+     "D1": false,
+     "D2": false,
+     "D3": false,
+     "D4": false
+    },
+    "slip_phys": 0.062142857142857146,
+    "slip_label": 0.0675,
+    "RE_mid": 0.25145329730981475,
+    "RE_lo": 0.2556814850806084,
+    "RE_hi": 0.24723934688506582,
+    "RE_mid_CI": [
+     0.22593739747479621,
+     0.2752153920844483
+    ]
+   },
+   "full_rd@0.1#0": {
+    "lam_idx": {
+     "D1": 10,
+     "D2": 10,
+     "D3": 11,
+     "D4": 11
+    },
+    "at_max": {
+     "D1": false,
+     "D2": false,
+     "D3": false,
+     "D4": false
+    },
+    "slip_phys": 0.07071428571428572,
+    "slip_label": 0.07571428571428572,
+    "RE_mid": 0.326963024473286,
+    "RE_lo": 0.3314463310772434,
+    "RE_hi": 0.3224948142631043,
+    "RE_mid_CI": [
+     0.29407904637628063,
+     0.35722057431035426
+    ]
+   },
+   "full_rd@0.2#0": {
+    "lam_idx": {
+     "D1": 10,
+     "D2": 10,
+     "D3": 11,
+     "D4": 10
+    },
+    "at_max": {
+     "D1": false,
+     "D2": false,
+     "D3": false,
+     "D4": false
+    },
+    "slip_phys": 0.08285714285714285,
+    "slip_label": 0.08464285714285714,
+    "RE_mid": 0.4567326634839066,
+    "RE_lo": 0.4616544126584853,
+    "RE_hi": 0.4518274870468557,
+    "RE_mid_CI": [
+     0.40791013393190817,
+     0.5033147248235791
+    ]
+   },
+   "full_rd@0.4#0": {
+    "lam_idx": {
+     "D1": 11,
+     "D2": 11,
+     "D3": 11,
+     "D4": 11
+    },
+    "at_max": {
+     "D1": false,
+     "D2": false,
+     "D3": false,
+     "D4": false
+    },
+    "slip_phys": 0.08214285714285714,
+    "slip_label": 0.08535714285714285,
+    "RE_mid": 0.6734503020562516,
+    "RE_lo": 0.6791042582345568,
+    "RE_hi": 0.667815384136178,
+    "RE_mid_CI": [
+     0.576919319538465,
+     0.724962574516261
+    ]
+   },
+   "full_rd@0.2#1": {
+    "lam_idx": {
+     "D1": 10,
+     "D2": 10,
+     "D3": 11,
+     "D4": 10
+    },
+    "at_max": {
+     "D1": false,
+     "D2": false,
+     "D3": false,
+     "D4": false
+    },
+    "slip_phys": 0.09,
+    "slip_label": 0.09035714285714286,
+    "RE_mid": 0.4430413407522776,
+    "RE_lo": 0.44791683212126,
+    "RE_hi": 0.43818226635943763,
+    "RE_mid_CI": [
+     0.41708259809633924,
+     0.5001179968004106
+    ]
+   },
+   "full_rd@0.2#2": {
+    "lam_idx": {
+     "D1": 10,
+     "D2": 10,
+     "D3": 11,
+     "D4": 10
+    },
+    "at_max": {
+     "D1": false,
+     "D2": false,
+     "D3": false,
+     "D4": false
+    },
+    "slip_phys": 0.08357142857142857,
+    "slip_label": 0.08642857142857142,
+    "RE_mid": 0.454511678604906,
+    "RE_lo": 0.45942592391088277,
+    "RE_hi": 0.44961398076908965,
+    "RE_mid_CI": [
+     0.4001117702107548,
+     0.4913972664115403
+    ]
+   },
+   "full_rd@0.2#3": {
+    "lam_idx": {
+     "D1": 10,
+     "D2": 10,
+     "D3": 12,
+     "D4": 10
+    },
+    "at_max": {
+     "D1": false,
+     "D2": false,
+     "D3": false,
+     "D4": false
+    },
+    "slip_phys": 0.07928571428571428,
+    "slip_label": 0.08071428571428571,
+    "RE_mid": 0.47521400546066633,
+    "RE_lo": 0.48019819610573533,
+    "RE_hi": 0.4702465978088827,
+    "RE_mid_CI": [
+     0.4203277468859311,
+     0.5028269641595369
+    ]
+   },
+   "full_rd@0.2#4": {
+    "lam_idx": {
+     "D1": 10,
+     "D2": 10,
+     "D3": 11,
+     "D4": 10
+    },
+    "at_max": {
+     "D1": false,
+     "D2": false,
+     "D3": false,
+     "D4": false
+    },
+    "slip_phys": 0.10178571428571428,
+    "slip_label": 0.10357142857142858,
+    "RE_mid": 0.4312545499689089,
+    "RE_lo": 0.43609021822603056,
+    "RE_hi": 0.42643516459373715,
+    "RE_mid_CI": [
+     0.4126479768643152,
+     0.5018016432914274
+    ]
+   },
+   "CSF-1": {
+    "lam_idx": {
+     "D1": 1,
+     "D2": 1,
+     "D3": 15,
+     "D4": 14
+    },
+    "at_max": {
+     "D1": false,
+     "D2": false,
+     "D3": false,
+     "D4": false
+    },
+    "slip_phys": 0.10214285714285715,
+    "slip_label": 0.10357142857142858,
+    "RE_mid": 0.7831775535391942,
+    "RE_lo": 0.7892022366346287,
+    "RE_hi": 0.7771731570305171,
+    "RE_mid_CI": [
+     0.6967569787115186,
+     0.8582616708147731
+    ]
+   },
+   "CSF-muhat@0.0": {
+    "lam_idx": {
+     "D1": 0,
+     "D2": 0,
+     "D3": 14,
+     "D4": 11
+    },
+    "at_max": {
+     "D1": false,
+     "D2": false,
+     "D3": false,
+     "D4": false
+    },
+    "slip_phys": 0.026785714285714284,
+    "slip_label": 0.029642857142857144,
+    "RE_mid": 0.333512863105431,
+    "RE_lo": 0.33801829913896003,
+    "RE_hi": 0.32902259798089856,
+    "RE_mid_CI": [
+     0.3013061229966508,
+     0.3449708125554861
+    ]
+   },
+   "CSF-muhat@0.1": {
+    "lam_idx": {
+     "D1": 0,
+     "D2": 0,
+     "D3": 13,
+     "D4": 12
+    },
+    "at_max": {
+     "D1": false,
+     "D2": false,
+     "D3": false,
+     "D4": false
+    },
+    "slip_phys": 0.0425,
+    "slip_label": 0.04428571428571428,
+    "RE_mid": 0.3662023287448068,
+    "RE_lo": 0.3708182101294707,
+    "RE_hi": 0.361601990165746,
+    "RE_mid_CI": [
+     0.34129230858209225,
+     0.39426768846393323
+    ]
+   },
+   "CSF-muhat@0.2": {
+    "lam_idx": {
+     "D1": 0,
+     "D2": 0,
+     "D3": 14,
+     "D4": 12
+    },
+    "at_max": {
+     "D1": false,
+     "D2": false,
+     "D3": false,
+     "D4": false
+    },
+    "slip_phys": 0.06571428571428571,
+    "slip_label": 0.06785714285714285,
+    "RE_mid": 0.4842978919934079,
+    "RE_lo": 0.4893127736582949,
+    "RE_hi": 0.4792998966660032,
+    "RE_mid_CI": [
+     0.44352603115273515,
+     0.5219323594215001
+    ]
+   },
+   "CSF-muhat@0.4": {
+    "lam_idx": {
+     "D1": 2,
+     "D2": 2,
+     "D3": 15,
+     "D4": 14
+    },
+    "at_max": {
+     "D1": false,
+     "D2": false,
+     "D3": false,
+     "D4": false
+    },
+    "slip_phys": 0.08142857142857143,
+    "slip_label": 0.08321428571428571,
+    "RE_mid": 0.9876822176137585,
+    "RE_lo": 0.9943978446873416,
+    "RE_hi": 0.9809892037049016,
+    "RE_mid_CI": [
+     0.8709459950474983,
+     1.062979018497029
+    ]
+   },
+   "P_onset@0.2#0": {
+    "lam_idx": {
+     "D1": 10,
+     "D2": 10,
+     "D3": 11,
+     "D4": 10
+    },
+    "at_max": {
+     "D1": false,
+     "D2": false,
+     "D3": false,
+     "D4": false
+    },
+    "slip_phys": 0.08571428571428572,
+    "slip_label": 0.08964285714285715,
+    "RE_mid": 0.43357453110118327,
+    "RE_lo": 0.4384180376978363,
+    "RE_hi": 0.4287473337800933,
+    "RE_mid_CI": [
+     0.398273996527573,
+     0.48325833004490987
+    ]
+   }
+  },
+  "contrasts": {
+   "H2a": {
+    "target": "full_rd@0.2#0",
+    "comparator": "CSF-1",
+    "D": {
+     "mid": 0.4168210498118554,
+     "lo": 0.4150366139012679,
+     "hi": 0.4186270035712082
+    },
+    "CI**": {
+     "mid": [
+      0.3483925859894733,
+      0.4777919839082863
+     ],
+     "lo": [
+      0.34682530353312724,
+      0.4757872582145481
+     ],
+     "hi": [
+      0.3500633469059773,
+      0.4798205351537126
+     ]
+    },
+    "decision": "superiority"
+   },
+   "H2b": {
+    "target": "full_rd@0.2#0",
+    "comparator": "CSF-muhat@0.2",
+    "D": {
+     "mid": 0.05691791966312432,
+     "lo": 0.056524911035992,
+     "hi": 0.057317787485966054
+    },
+    "CI**": {
+     "mid": [
+      -0.0399170490491257,
+      0.14536670533596993
+     ],
+     "lo": [
+      -0.039626547674653505,
+      0.14435964172144936
+     ],
+     "hi": [
+      -0.04021284458226495,
+      0.1463803106388659
+     ]
+    },
+    "decision": "not confirmed"
+   },
+   "H4e_vs_onset_only": {
+    "target": "full_rd@0.2#0",
+    "comparator": "P_onset@0.2#0",
+    "D": {
+     "mid": -0.05341211423075709,
+     "lo": -0.053000499438081494,
+     "hi": -0.05383159602014076
+    },
+    "CI**": {
+     "mid": [
+      -0.12332119089891705,
+      0.050809091209607596
+     ],
+     "lo": [
+      -0.12241949155765579,
+      0.05043729081495636
+     ],
+     "hi": [
+      -0.12423938778323561,
+      0.051187698333997306
+     ]
+    },
+    "decision": "not confirmed"
+   },
+   "H2a_sigma@0.0": {
+    "target": "full_rd@0.0#0",
+    "comparator": "CSF-1",
+    "D": {
+     "mid": 0.6789319405625295,
+     "lo": 0.6760253922101093,
+     "hi": 0.6818735379001806
+    },
+    "CI**": {
+     "mid": [
+      0.6347148391143481,
+      0.7191585920687456
+     ],
+     "lo": [
+      0.6318079075014972,
+      0.7162573887353144
+     ],
+     "hi": [
+      0.6376586026573556,
+      0.7221929353079273
+     ]
+    },
+    "decision": "superiority"
+   },
+   "H2b_sigma@0.0": {
+    "target": "full_rd@0.0#0",
+    "comparator": "CSF-muhat@0.0",
+    "D": {
+     "mid": 0.24604617954323205,
+     "lo": 0.2435868539309548,
+     "hi": 0.24856423722172627
+    },
+    "CI**": {
+     "mid": [
+      0.16174569451560564,
+      0.2952987323757772
+     ],
+     "lo": [
+      0.1600348097230457,
+      0.29235291783596473
+     ],
+     "hi": [
+      0.16348224299159192,
+      0.29831477595502187
+     ]
+    },
+    "decision": "superiority"
+   },
+   "H2a_sigma@0.1": {
+    "target": "full_rd@0.1#0",
+    "comparator": "CSF-1",
+    "D": {
+     "mid": 0.5825173704280289,
+     "lo": 0.5800235786322401,
+     "hi": 0.5850412339312938
+    },
+    "CI**": {
+     "mid": [
+      0.5261856919899442,
+      0.6299842596837663
+     ],
+     "lo": [
+      0.523659688319437,
+      0.6275474125187662
+     ],
+     "hi": [
+      0.5287448431730146,
+      0.6324466058630844
+     ]
+    },
+    "decision": "superiority"
+   },
+   "H2b_sigma@0.1": {
+    "target": "full_rd@0.1#0",
+    "comparator": "CSF-muhat@0.1",
+    "D": {
+     "mid": 0.10715197908767327,
+     "lo": 0.10617568926423715,
+     "hi": 0.10814978060468183
+    },
+    "CI**": {
+     "mid": [
+      0.03332075810134228,
+      0.19194425855690397
+     ],
+     "lo": [
+      0.03300701855239467,
+      0.1902267281401959
+     ],
+     "hi": [
+      0.03364161004402934,
+      0.19369904888664474
+     ]
+    },
+    "decision": "superiority"
+   },
+   "H2a_sigma@0.2": {
+    "target": "full_rd@0.2#0",
+    "comparator": "CSF-1",
+    "D": {
+     "mid": 0.4168210498118554,
+     "lo": 0.4150366139012679,
+     "hi": 0.4186270035712082
+    },
+    "CI**": {
+     "mid": [
+      0.3483925859894733,
+      0.4777919839082863
+     ],
+     "lo": [
+      0.34682530353312724,
+      0.4757872582145481
+     ],
+     "hi": [
+      0.3500633469059773,
+      0.4798205351537126
+     ]
+    },
+    "decision": "superiority"
+   },
+   "H2b_sigma@0.2": {
+    "target": "full_rd@0.2#0",
+    "comparator": "CSF-muhat@0.2",
+    "D": {
+     "mid": 0.05691791966312432,
+     "lo": 0.056524911035992,
+     "hi": 0.057317787485966054
+    },
+    "CI**": {
+     "mid": [
+      -0.0399170490491257,
+      0.14536670533596993
+     ],
+     "lo": [
+      -0.039626547674653505,
+      0.14435964172144936
+     ],
+     "hi": [
+      -0.04021284458226495,
+      0.1463803106388659
+     ]
+    },
+    "decision": "not confirmed"
+   },
+   "H2a_sigma@0.4": {
+    "target": "full_rd@0.4#0",
+    "comparator": "CSF-1",
+    "D": {
+     "mid": 0.1401052047356095,
+     "lo": 0.13950540595216687,
+     "hi": 0.14071223626943274
+    },
+    "CI**": {
+     "mid": [
+      0.08317968877051111,
+      0.2337993314407141
+     ],
+     "lo": [
+      0.082826612422102,
+      0.23283401085219257
+     ],
+     "hi": [
+      0.08353699712672316,
+      0.23477599214169395
+     ]
+    },
+    "decision": "superiority"
+   },
+   "H2b_sigma@0.4": {
+    "target": "full_rd@0.4#0",
+    "comparator": "CSF-muhat@0.4",
+    "D": {
+     "mid": 0.31815082822559226,
+     "lo": 0.3170698610594026,
+     "hi": 0.31924288094706865
+    },
+    "CI**": {
+     "mid": [
+      0.2286685033065648,
+      0.4059824742382673
+     ],
+     "lo": [
+      0.2278197102678979,
+      0.404626443051576
+     ],
+     "hi": [
+      0.22952654477331674,
+      0.4072697382349769
+     ]
+    },
+    "decision": "superiority"
+   },
+   "H2a_seed1": {
+    "target": "full_rd@0.2#1",
+    "comparator": "CSF-1",
+    "D": {
+     "mid": 0.4343028107098251,
+     "lo": 0.4324435343324694,
+     "hi": 0.4361845074092908
+    },
+    "CI**": {
+     "mid": [
+      0.3487088652495096,
+      0.46991555921993977
+     ],
+     "lo": [
+      0.34704249782668944,
+      0.46798552552407485
+     ],
+     "hi": [
+      0.35039702429386965,
+      0.4718680897299328
+     ]
+    },
+    "decision": "superiority"
+   },
+   "H2b_seed1": {
+    "target": "full_rd@0.2#1",
+    "comparator": "CSF-muhat@0.2",
+    "D": {
+     "mid": 0.08518837666485624,
+     "lo": 0.08460016530437686,
+     "hi": 0.08578685410236608
+    },
+    "CI**": {
+     "mid": [
+      -0.030007901345699823,
+      0.13306125656157575
+     ],
+     "lo": [
+      -0.029804414929977388,
+      0.1321804683828658
+     ],
+     "hi": [
+      -0.03021488739996256,
+      0.13395689787117437
+     ]
+    },
+    "decision": "not confirmed"
+   },
+   "H2a_seed2": {
+    "target": "full_rd@0.2#2",
+    "comparator": "CSF-1",
+    "D": {
+     "mid": 0.4196569136194479,
+     "lo": 0.41786033720583604,
+     "hi": 0.4214751542796341
+    },
+    "CI**": {
+     "mid": [
+      0.3603367817070656,
+      0.4876811904549577
+     ],
+     "lo": [
+      0.3587189203186311,
+      0.4857260253003044
+     ],
+     "hi": [
+      0.36197484342030534,
+      0.48966184655655554
+     ]
+    },
+    "decision": "superiority"
+   },
+   "H2b_seed2": {
+    "target": "full_rd@0.2#2",
+    "comparator": "CSF-muhat@0.2",
+    "D": {
+     "mid": 0.06150390881508805,
+     "lo": 0.061079234707008156,
+     "hi": 0.06193599477781653
+    },
+    "CI**": {
+     "mid": [
+      -0.017292415421536943,
+      0.1625749990385923
+     ],
+     "lo": [
+      -0.017168554335714948,
+      0.1614881847275093
+     ],
+     "hi": [
+      -0.017418504354230056,
+      0.16368028799977874
+     ]
+    },
+    "decision": "not confirmed"
+   },
+   "H2a_seed3": {
+    "target": "full_rd@0.2#3",
+    "comparator": "CSF-1",
+    "D": {
+     "mid": 0.3932231544262661,
+     "lo": 0.39153974252096646,
+     "hi": 0.39492686596943594
+    },
+    "CI**": {
+     "mid": [
+      0.3400785764022058,
+      0.4595183430571985
+     ],
+     "lo": [
+      0.33845913303389535,
+      0.4576423009220351
+     ],
+     "hi": [
+      0.34171914232273176,
+      0.46141539887498045
+     ]
+    },
+    "decision": "superiority"
+   },
+   "H2b_seed3": {
+    "target": "full_rd@0.2#3",
+    "comparator": "CSF-muhat@0.2",
+    "D": {
+     "mid": 0.01875681617227687,
+     "lo": 0.01862730352288866,
+     "hi": 0.018888589211253692
+    },
+    "CI**": {
+     "mid": [
+      -0.04564475279201208,
+      0.12513154254763714
+     ],
+     "lo": [
+      -0.045304696965734734,
+      0.12426496557525397
+     ],
+     "hi": [
+      -0.04599112745705522,
+      0.12601293063416485
+     ]
+    },
+    "decision": "not confirmed"
+   },
+   "H2a_seed4": {
+    "target": "full_rd@0.2#4",
+    "comparator": "CSF-1",
+    "D": {
+     "mid": 0.4493527706200702,
+     "lo": 0.44742906446180775,
+     "hi": 0.45129967403520044
+    },
+    "CI**": {
+     "mid": [
+      0.3533346806155561,
+      0.4745638319837412
+     ],
+     "lo": [
+      0.3516885898456242,
+      0.4725731921276095
+     ],
+     "hi": [
+      0.3550021974192011,
+      0.47657812599153765
+     ]
+    },
+    "decision": "superiority"
+   },
+   "H2b_seed4": {
+    "target": "full_rd@0.2#4",
+    "comparator": "CSF-muhat@0.2",
+    "D": {
+     "mid": 0.10952627071360665,
+     "lo": 0.10877001030312694,
+     "hi": 0.11029573016808825
+    },
+    "CI**": {
+     "mid": [
+      -0.034242633508121366,
+      0.14428921919747703
+     ],
+     "lo": [
+      -0.033993444046192645,
+      0.14329902311478473
+     ],
+     "hi": [
+      -0.034496364019096906,
+      0.14529661089841295
+     ]
+    },
+    "decision": "not confirmed"
+   }
+  },
+  "sigma_star": 0.4,
+  "n_cal_instances": 2000,
+  "n_test_instances": 2800,
+  "draws": 2000,
+  "purpose": "p2 08c CRC read-out (H2a / H2b primary, sigma curve, H4e, per-seed D)"
+ },
+ "crc_analysis_v2.json": {
+  "arms": {
+   "full_rd@0.0#0": {
+    "lam_idx": {
+     "D1": 20,
+     "D2": 20,
+     "D3": 21,
+     "D4": 21
+    },
+    "at_max": {
+     "D1": false,
+     "D2": false,
+     "D3": false,
+     "D4": false
+    },
+    "slip_phys": 0.08142857142857143,
+    "slip_label": 0.08678571428571429,
+    "RE_mid": 0.23967482320293518,
+    "RE_lo": 0.24386321596077523,
+    "RE_hi": 0.23550053379156347,
+    "RE_mid_CI": [
+     0.21667263673239526,
+     0.27461418023107464
+    ]
+   },
+   "full_rd@0.1#0": {
+    "lam_idx": {
+     "D1": 20,
+     "D2": 20,
+     "D3": 22,
+     "D4": 21
+    },
+    "at_max": {
+     "D1": false,
+     "D2": false,
+     "D3": false,
+     "D4": false
+    },
+    "slip_phys": 0.07428571428571429,
+    "slip_label": 0.08107142857142857,
+    "RE_mid": 0.3211870700266555,
+    "RE_lo": 0.3256508618632553,
+    "RE_hi": 0.31673830887281973,
+    "RE_mid_CI": [
+     0.28877492389141746,
+     0.35611502179594795
+    ]
+   },
+   "full_rd@0.2#0": {
+    "lam_idx": {
+     "D1": 20,
+     "D2": 20,
+     "D3": 21,
+     "D4": 21
+    },
+    "at_max": {
+     "D1": false,
+     "D2": false,
+     "D3": false,
+     "D4": false
+    },
+    "slip_phys": 0.09,
+    "slip_label": 0.09464285714285714,
+    "RE_mid": 0.44415834262450105,
+    "RE_lo": 0.44903760792069763,
+    "RE_hi": 0.4392955070121861,
+    "RE_mid_CI": [
+     0.4063853918748868,
+     0.4973229563383708
+    ]
+   },
+   "full_rd@0.4#0": {
+    "lam_idx": {
+     "D1": 21,
+     "D2": 21,
+     "D3": 21,
+     "D4": 22
+    },
+    "at_max": {
+     "D1": false,
+     "D2": false,
+     "D3": false,
+     "D4": false
+    },
+    "slip_phys": 0.09107142857142857,
+    "slip_label": 0.09428571428571429,
+    "RE_mid": 0.6526055416312747,
+    "RE_lo": 0.6581890712412826,
+    "RE_hi": 0.6470408131359568,
+    "RE_mid_CI": [
+     0.5775438081853604,
+     0.7201994651895525
+    ]
+   },
+   "CSF-1": {
+    "lam_idx": {
+     "D1": 21,
+     "D2": 21,
+     "D3": 20,
+     "D4": 21
+    },
+    "at_max": {
+     "D1": false,
+     "D2": false,
+     "D3": false,
+     "D4": false
+    },
+    "slip_phys": 0.09964285714285714,
+    "slip_label": 0.10107142857142858,
+    "RE_mid": 0.7777533331402836,
+    "RE_lo": 0.7837596898447885,
+    "RE_hi": 0.7717672013130799,
+    "RE_mid_CI": [
+     0.6969947951078379,
+     0.8584636805502196
+    ]
+   },
+   "CSF-muhat@0.0": {
+    "lam_idx": {
+     "D1": 20,
+     "D2": 20,
+     "D3": 20,
+     "D4": 21
+    },
+    "at_max": {
+     "D1": false,
+     "D2": false,
+     "D3": false,
+     "D4": false
+    },
+    "slip_phys": 0.07821428571428571,
+    "slip_label": 0.0825,
+    "RE_mid": 0.20800633956329298,
+    "RE_lo": 0.21208773648234902,
+    "RE_hi": 0.20393868570945375,
+    "RE_mid_CI": [
+     0.18625177506641813,
+     0.23143416039828282
+    ]
+   },
+   "CSF-muhat@0.1": {
+    "lam_idx": {
+     "D1": 20,
+     "D2": 21,
+     "D3": 21,
+     "D4": 21
+    },
+    "at_max": {
+     "D1": false,
+     "D2": false,
+     "D3": false,
+     "D4": false
+    },
+    "slip_phys": 0.07607142857142857,
+    "slip_label": 0.07857142857142857,
+    "RE_mid": 0.2914931924696389,
+    "RE_lo": 0.2958566599152096,
+    "RE_hi": 0.2871444178899828,
+    "RE_mid_CI": [
+     0.27061946233654943,
+     0.3301832498002562
+    ]
+   },
+   "CSF-muhat@0.2": {
+    "lam_idx": {
+     "D1": 20,
+     "D2": 22,
+     "D3": 21,
+     "D4": 20
+    },
+    "at_max": {
+     "D1": false,
+     "D2": false,
+     "D3": false,
+     "D4": false
+    },
+    "slip_phys": 0.075,
+    "slip_label": 0.07678571428571429,
+    "RE_mid": 0.45506413868101875,
+    "RE_lo": 0.4599802505408195,
+    "RE_hi": 0.4501645805765233,
+    "RE_mid_CI": [
+     0.40889171630087695,
+     0.5004819499430962
+    ]
+   },
+   "CSF-muhat@0.4": {
+    "lam_idx": {
+     "D1": 21,
+     "D2": 22,
+     "D3": 21,
+     "D4": 20
+    },
+    "at_max": {
+     "D1": false,
+     "D2": false,
+     "D3": false,
+     "D4": false
+    },
+    "slip_phys": 0.08535714285714285,
+    "slip_label": 0.08571428571428572,
+    "RE_mid": 0.9762586547125982,
+    "RE_lo": 0.982935685884072,
+    "RE_hi": 0.9696041067439751,
+    "RE_mid_CI": [
+     0.8647062585113264,
+     1.0547292002875746
+    ]
+   },
+   "P_onset@0.2#0": {
+    "lam_idx": {
+     "D1": 20,
+     "D2": 21,
+     "D3": 21,
+     "D4": 21
+    },
+    "at_max": {
+     "D1": false,
+     "D2": false,
+     "D3": false,
+     "D4": false
+    },
+    "slip_phys": 0.08714285714285715,
+    "slip_label": 0.09107142857142857,
+    "RE_mid": 0.4346189284482034,
+    "RE_lo": 0.4394659636688171,
+    "RE_hi": 0.4297882143848959,
+    "RE_mid_CI": [
+     0.39497775903787335,
+     0.47595790815692324
+    ]
+   }
+  },
+  "contrasts": {
+   "H2a": {
+    "target": "full_rd@0.2#0",
+    "comparator": "CSF-1",
+    "D": {
+     "mid": 0.4289213254398383,
+     "lo": 0.4270723364075759,
+     "hi": 0.4307927231621511
+    },
+    "CI**": {
+     "mid": [
+      0.3576991626935568,
+      0.47703032673858325
+     ],
+     "lo": [
+      0.35599788633547064,
+      0.47501747287090834
+     ],
+     "hi": [
+      0.3595117524967143,
+      0.47905272080066674
+     ]
+    },
+    "decision": "superiority"
+   },
+   "H2b": {
+    "target": "full_rd@0.2#0",
+    "comparator": "CSF-muhat@0.2",
+    "D": {
+     "mid": 0.023965404279334357,
+     "lo": 0.02378937488567412,
+     "hi": 0.024144666269428017
+    },
+    "CI**": {
+     "mid": [
+      -0.09486600469220052,
+      0.10011772033276801
+     ],
+     "lo": [
+      -0.09411933733584267,
+      0.09937539057065613
+     ],
+     "hi": [
+      -0.09562719732610656,
+      0.10087379122345741
+     ]
+    },
+    "decision": "not confirmed"
+   },
+   "H4e_vs_onset_only": {
+    "target": "full_rd@0.2#0",
+    "comparator": "P_onset@0.2#0",
+    "D": {
+     "mid": -0.021948915594536933,
+     "lo": -0.021780171943176496,
+     "hi": -0.022120877932627403
+    },
+    "CI**": {
+     "mid": [
+      -0.12083174569224918,
+      0.03689519059987368
+     ],
+     "lo": [
+      -0.11988651731526752,
+      0.036625957861920216
+     ],
+     "hi": [
+      -0.12179526806109513,
+      0.037169340813902406
+     ]
+    },
+    "decision": "not confirmed"
+   },
+   "H2a_sigma@0.0": {
+    "target": "full_rd@0.0#0",
+    "comparator": "CSF-1",
+    "D": {
+     "mid": 0.6918369706816738,
+     "lo": 0.6888546079614422,
+     "hi": 0.6948554779331327
+    },
+    "CI**": {
+     "mid": [
+      0.6383775788782902,
+      0.7284469794228351
+     ],
+     "lo": [
+      0.6354422494093922,
+      0.7254604813044674
+     ],
+     "hi": [
+      0.641369519141757,
+      0.7314864363942519
+     ]
+    },
+    "decision": "superiority"
+   },
+   "H2b_sigma@0.0": {
+    "target": "full_rd@0.0#0",
+    "comparator": "CSF-muhat@0.0",
+    "D": {
+     "mid": -0.15224768488369067,
+     "lo": -0.1498223329903412,
+     "hi": -0.15476145672074737
+    },
+    "CI**": {
+     "mid": [
+      -0.30275169339095687,
+      -0.05961683114153892
+     ],
+     "lo": [
+      -0.2975013275374202,
+      -0.05869959012971566
+     ],
+     "hi": [
+      -0.30820941682910197,
+      -0.060566444256441025
+     ]
+    },
+    "decision": "inferiority"
+   },
+   "H2a_sigma@0.1": {
+    "target": "full_rd@0.1#0",
+    "comparator": "CSF-1",
+    "D": {
+     "mid": 0.5870322165900344,
+     "lo": 0.584501644977754,
+     "hi": 0.5895934572835912
+    },
+    "CI**": {
+     "mid": [
+      0.5282847753814639,
+      0.6334077130398647
+     ],
+     "lo": [
+      0.5258432190004957,
+      0.6308423746404255
+     ],
+     "hi": [
+      0.5307574756080486,
+      0.6360027753749615
+     ]
+    },
+    "decision": "superiority"
+   },
+   "H2b_sigma@0.1": {
+    "target": "full_rd@0.1#0",
+    "comparator": "CSF-muhat@0.1",
+    "D": {
+     "mid": -0.10186816819095834,
+     "lo": -0.10070485469748935,
+     "hi": -0.10306274173916075
+    },
+    "CI**": {
+     "mid": [
+      -0.1910582343305952,
+      0.02177725919383818
+     ],
+     "lo": [
+      -0.18872585278574625,
+      0.02155639171489511
+     ],
+     "hi": [
+      -0.1934173490935698,
+      0.02200346927278738
+     ]
+    },
+    "decision": "not confirmed"
+   },
+   "H2a_sigma@0.2": {
+    "target": "full_rd@0.2#0",
+    "comparator": "CSF-1",
+    "D": {
+     "mid": 0.4289213254398383,
+     "lo": 0.4270723364075759,
+     "hi": 0.4307927231621511
+    },
+    "CI**": {
+     "mid": [
+      0.3576991626935568,
+      0.47703032673858325
+     ],
+     "lo": [
+      0.35599788633547064,
+      0.47501747287090834
+     ],
+     "hi": [
+      0.3595117524967143,
+      0.47905272080066674
+     ]
+    },
+    "decision": "superiority"
+   },
+   "H2b_sigma@0.2": {
+    "target": "full_rd@0.2#0",
+    "comparator": "CSF-muhat@0.2",
+    "D": {
+     "mid": 0.023965404279334357,
+     "lo": 0.02378937488567412,
+     "hi": 0.024144666269428017
+    },
+    "CI**": {
+     "mid": [
+      -0.09486600469220052,
+      0.10011772033276801
+     ],
+     "lo": [
+      -0.09411933733584267,
+      0.09937539057065613
+     ],
+     "hi": [
+      -0.09562719732610656,
+      0.10087379122345741
+     ]
+    },
+    "decision": "not confirmed"
+   },
+   "H2a_sigma@0.4": {
+    "target": "full_rd@0.4#0",
+    "comparator": "CSF-1",
+    "D": {
+     "mid": 0.16090936055999638,
+     "lo": 0.16021571437078275,
+     "hi": 0.16161141334448303
+    },
+    "CI**": {
+     "mid": [
+      0.0867753138121016,
+      0.23827085163366366
+     ],
+     "lo": [
+      0.0863907115151636,
+      0.23722317199723572
+     ],
+     "hi": [
+      0.08716467314080674,
+      0.23933141337608205
+     ]
+    },
+    "decision": "superiority"
+   },
+   "H2b_sigma@0.4": {
+    "target": "full_rd@0.4#0",
+    "comparator": "CSF-muhat@0.4",
+    "D": {
+     "mid": 0.33152393734896424,
+     "lo": 0.3303843977856047,
+     "hi": 0.33267525515255625
+    },
+    "CI**": {
+     "mid": [
+      0.23391786234145454,
+      0.4064260430263518
+     ],
+     "lo": [
+      0.23301063282704712,
+      0.40494701737673283
+     ],
+     "hi": [
+      0.23483539246332621,
+      0.40792096542900536
+     ]
+    },
+    "decision": "superiority"
+   }
+  },
+  "sigma_star": 0.4,
+  "n_cal_instances": 2000,
+  "n_test_instances": 2800,
+  "draws": 2000,
+  "purpose": "p2 08c CRC read-out (H2a / H2b primary, sigma curve, H4e, per-seed D)"
+ },
+ "h1m_analysis.json": {
+  "n": 800,
+  "non_monotone": 8,
+  "cp_upper_98.75": 0.0211470978898265,
+  "threshold_count": 7,
+  "gate_pass": false,
+  "by_family": {
+   "F1": 3,
+   "F2": 2,
+   "F3": 2,
+   "F4": 1
+  },
+  "by_dist": {
+   "D1": 1,
+   "D2": 7,
+   "D3": 0,
+   "D4": 0
+  },
+  "shift_pools": {
+   "S1": {
+    "n": 100,
+    "non_monotone": 0
+   },
+   "S3": {
+    "n": 100,
+    "non_monotone": 1
+   },
+   "S2": {
+    "n": 100,
+    "non_monotone": 1
+   }
+  },
+  "violations": [
+   {
+    "pool": "id",
+    "shift": null,
+    "family": "F1",
+    "obj": 0,
+    "dist": "D2",
+    "F_hi": 0.7617911754341999,
+    "first_no_slip": 0.749894,
+    "max_slip_above": 0.75667,
+    "rel_above_F_hi": -0.006722544969467559
+   },
+   {
+    "pool": "id",
+    "shift": null,
+    "family": "F1",
+    "obj": 13,
+    "dist": "D2",
+    "F_hi": 0.997753907993274,
+    "first_no_slip": 0.997754,
+    "max_slip_above": 1.0,
+    "rel_above_F_hi": 0.002251148292912619
+   },
+   {
+    "pool": "id",
+    "shift": null,
+    "family": "F1",
+    "obj": 20,
+    "dist": "D2",
+    "F_hi": 1.7943462442492477,
+    "first_no_slip": 1.778279,
+    "max_slip_above": 1.782283,
+    "rel_above_F_hi": -0.006722918883637741
+   },
+   {
+    "pool": "id",
+    "shift": null,
+    "family": "F2",
+    "obj": 11,
+    "dist": "D1",
+    "F_hi": 1.0113065323601318,
+    "first_no_slip": 1.0,
+    "max_slip_above": 1.004507,
+    "rel_above_F_hi": -0.006723512745698712
+   },
+   {
+    "pool": "id",
+    "shift": null,
+    "family": "F2",
+    "obj": 40,
+    "dist": "D2",
+    "F_hi": 4.255065502465413,
+    "first_no_slip": 4.216965,
+    "max_slip_above": 4.226458,
+    "rel_above_F_hi": -0.006723163826464651
+   },
+   {
+    "pool": "id",
+    "shift": null,
+    "family": "F3",
+    "obj": 4,
+    "dist": "D2",
+    "F_hi": 1.0181517217181821,
+    "first_no_slip": 1.0,
+    "max_slip_above": 1.011307,
+    "rel_above_F_hi": -0.006722693260913348
+   },
+   {
+    "pool": "id",
+    "shift": null,
+    "family": "F3",
+    "obj": 45,
+    "dist": "D2",
+    "F_hi": 2.3981857192026848,
+    "first_no_slip": 2.371374,
+    "max_slip_above": 2.382062,
+    "rel_above_F_hi": -0.00672329881442435
+   },
+   {
+    "pool": "id",
+    "shift": null,
+    "family": "F4",
+    "obj": 13,
+    "dist": "D2",
+    "F_hi": 5.610782548347875,
+    "first_no_slip": 5.610783,
+    "max_slip_above": 5.623413,
+    "rel_above_F_hi": 0.002251103396591958
+   },
+   {
+    "pool": "id",
+    "shift": "S3",
+    "family": "F1",
+    "obj": 347,
+    "dist": "D2",
+    "F_hi": 2.35014008461349,
+    "first_no_slip": 2.35014,
+    "max_slip_above": 2.371374,
+    "rel_above_F_hi": 0.009035170084340738
+   },
+   {
+    "pool": "s2",
+    "shift": null,
+    "family": "F5",
+    "obj": 9,
+    "dist": "D2",
+    "F_hi": 5.573060401273889,
+    "first_no_slip": 5.57306,
+    "max_slip_above": 5.623413,
+    "rel_above_F_hi": 0.009034999641238661
+   }
+  ],
+  "max_rel_above_F_hi": 0.009035170084340738
+ },
+ "h1v_analysis.json": {
+  "purpose": "p2 H1-V direct-replay audit (secondary after the H1-M failure)",
+  "tau": 0.02,
+  "draws": 2000,
+  "CertGrip@0.1": {
+   "n": 2800,
+   "slip_direct": 0.10142857142857142,
+   "slip_label": 0.10571428571428572,
+   "Delta": -0.004285714285714286,
+   "Delta_CI**": [
+    -0.0075,
+    -0.0014285714285714286
+   ],
+   "slip_direct_CI**": [
+    0.08642410714285714,
+    0.11678571428571428
+   ],
+   "disagree_up": 1,
+   "disagree_down": 13,
+   "decision": "pass"
+  },
+  "CertGrip@0.05": {
+   "n": 2800,
+   "slip_direct": 0.0425,
+   "slip_label": 0.04392857142857143,
+   "Delta": -0.0014285714285714286,
+   "Delta_CI**": [
+    -0.003928571428571429,
+    0.0007142857142857143
+   ],
+   "slip_direct_CI**": [
+    0.03428571428571429,
+    0.05178571428571429
+   ],
+   "disagree_up": 2,
+   "disagree_down": 6,
+   "decision": "pass"
+  },
+  "CSF-1@0.1": {
+   "n": 2800,
+   "slip_direct": 0.11142857142857143,
+   "slip_label": 0.11464285714285714,
+   "Delta": -0.0032142857142857142,
+   "Delta_CI**": [
+    -0.006071428571428571,
+    -0.0007142857142857143
+   ],
+   "slip_direct_CI**": [
+    0.09107142857142857,
+    0.13357589285714286
+   ],
+   "disagree_up": 1,
+   "disagree_down": 10,
+   "decision": "pass"
+  },
+  "CSF-1@0.05": {
+   "n": 2800,
+   "slip_direct": 0.06035714285714286,
+   "slip_label": 0.06321428571428571,
+   "Delta": -0.002857142857142857,
+   "Delta_CI**": [
+    -0.005361607142857143,
+    -0.0007142857142857143
+   ],
+   "slip_direct_CI**": [
+    0.04606696428571428,
+    0.07643303571428572
+   ],
+   "disagree_up": 0,
+   "disagree_down": 8,
+   "decision": "pass"
+  }
+ },
+ "h2_label_rule.json": {
+  "purpose": "p2 08c \u00a73 secondary: H2 contrasts under label-rule split conformal (no lambda-grid)",
+  "arms": {
+   "full_rd@0.0#0": {
+    "RE_mid": 0.23008775109816335,
+    "RE_lo": 0.23424375276229,
+    "RE_hi": 0.22594574371174206,
+    "slip_label": 0.09535714285714286
+   },
+   "full_rd@0.1#0": {
+    "RE_mid": 0.2999949588255663,
+    "RE_lo": 0.30438715052685916,
+    "RE_hi": 0.2956175567118075,
+    "slip_label": 0.09678571428571428
+   },
+   "full_rd@0.2#0": {
+    "RE_mid": 0.426368634535423,
+    "RE_lo": 0.4311877951306691,
+    "RE_hi": 0.4215657012367774,
+    "slip_label": 0.10571428571428572
+   },
+   "full_rd@0.4#0": {
+    "RE_mid": 0.6301588297120946,
+    "RE_lo": 0.6356665203650792,
+    "RE_hi": 0.6246696848054167,
+    "slip_label": 0.10285714285714286
+   },
+   "full_rd@0.2#1": {
+    "RE_mid": 0.42986038545449184,
+    "RE_lo": 0.43469134335657034,
+    "RE_hi": 0.4250456945734418,
+    "slip_label": 0.09892857142857144
+   },
+   "full_rd@0.2#2": {
+    "RE_mid": 0.4151316480372691,
+    "RE_lo": 0.41991284310156485,
+    "RE_hi": 0.41036655243031256,
+    "slip_label": 0.11285714285714285
+   },
+   "full_rd@0.2#3": {
+    "RE_mid": 0.4373039426266952,
+    "RE_lo": 0.4421600494955585,
+    "RE_hi": 0.4324641874616045,
+    "slip_label": 0.09785714285714285
+   },
+   "full_rd@0.2#4": {
+    "RE_mid": 0.4276401864341923,
+    "RE_lo": 0.4324636431227884,
+    "RE_hi": 0.4228329715081976,
+    "slip_label": 0.10642857142857143
+   },
+   "CSF-1": {
+    "RE_mid": 0.7469103493600249,
+    "RE_lo": 0.7528124992778163,
+    "RE_hi": 0.7410280734297057,
+    "slip_label": 0.11464285714285714
+   },
+   "CSF-muhat@0.0": {
+    "RE_mid": 0.191382601089975,
+    "RE_lo": 0.1954078326787955,
+    "RE_hi": 0.18737092344391845,
+    "slip_label": 0.10464285714285715
+   },
+   "CSF-muhat@0.1": {
+    "RE_mid": 0.2789945223810862,
+    "RE_lo": 0.28331576154364124,
+    "RE_hi": 0.2746878338914517,
+    "slip_label": 0.08785714285714286
+   },
+   "CSF-muhat@0.2": {
+    "RE_mid": 0.43213889124216265,
+    "RE_lo": 0.4369775473542565,
+    "RE_hi": 0.42731652807285986,
+    "slip_label": 0.09107142857142857
+   },
+   "CSF-muhat@0.4": {
+    "RE_mid": 0.9371003906478648,
+    "RE_lo": 0.9436451208428657,
+    "RE_hi": 0.9305776981658528,
+    "slip_label": 0.09571428571428571
+   },
+   "P_onset@0.2#0": {
+    "RE_mid": 0.4092846865538851,
+    "RE_lo": 0.4140461269448794,
+    "RE_hi": 0.40453927910139603,
+    "slip_label": 0.10678571428571429
+   }
+  },
+  "contrasts": {
+   "H2a": {
+    "target": "full_rd@0.2#0",
+    "comparator": "CSF-1",
+    "D": {
+     "mid": 0.42915687953614723,
+     "lo": 0.4272308236854281,
+     "hi": 0.4311069764393112
+    },
+    "CI**": {
+     "mid": [
+      0.36543305565311607,
+      0.4822129403944597
+     ],
+     "lo": [
+      0.36369150519335985,
+      0.4801763302547898
+     ],
+     "hi": [
+      0.3671977540351031,
+      0.4842738694073601
+     ]
+    },
+    "decision": "superiority"
+   },
+   "H2b": {
+    "target": "full_rd@0.2#0",
+    "comparator": "CSF-muhat@0.2",
+    "D": {
+     "mid": 0.013352782690197795,
+     "lo": 0.013249541672431975,
+     "hi": 0.013458002343176179
+    },
+    "CI**": {
+     "mid": [
+      -0.08497612586547182,
+      0.08137615093383249
+     ],
+     "lo": [
+      -0.08426692334686238,
+      0.08078236377220768
+     ],
+     "hi": [
+      -0.08569982488812175,
+      0.0819807831573374
+     ]
+    },
+    "decision": "equivalence"
+   },
+   "H4e_vs_onset_only": {
+    "target": "full_rd@0.2#0",
+    "comparator": "P_onset@0.2#0",
+    "D": {
+     "mid": -0.04174098993388231,
+     "lo": -0.041400382880701914,
+     "hi": -0.042088427539600515
+    },
+    "CI**": {
+     "mid": [
+      -0.09902056622495335,
+      0.012771008069136095
+     ],
+     "lo": [
+      -0.09825940951399019,
+      0.012675911369686682
+     ],
+     "hi": [
+      -0.09989934086424737,
+      0.012867871045244951
+     ]
+    },
+    "decision": "equivalence"
+   },
+   "H2a_sigma@0.0": {
+    "target": "full_rd@0.0#0",
+    "comparator": "CSF-1",
+    "D": {
+     "mid": 0.6919472982329011,
+     "lo": 0.6888418391206266,
+     "hi": 0.6950915197234084
+    },
+    "CI**": {
+     "mid": [
+      0.6529694533784495,
+      0.7287294533585627
+     ],
+     "lo": [
+      0.6499652140446882,
+      0.72568447412366
+     ],
+     "hi": [
+      0.6560128590686252,
+      0.7317870486310283
+     ]
+    },
+    "decision": "superiority"
+   },
+   "H2b_sigma@0.0": {
+    "target": "full_rd@0.0#0",
+    "comparator": "CSF-muhat@0.0",
+    "D": {
+     "mid": -0.20223964868150057,
+     "lo": -0.19874290375724923,
+     "hi": -0.20587410020087415
+    },
+    "CI**": {
+     "mid": [
+      -0.29105198048753134,
+      -0.12212322402599035
+     ],
+     "lo": [
+      -0.2857695333276479,
+      -0.12002519161234318
+     ],
+     "hi": [
+      -0.29635438004319553,
+      -0.12430338001728265
+     ]
+    },
+    "decision": "inferiority"
+   },
+   "H2a_sigma@0.1": {
+    "target": "full_rd@0.1#0",
+    "comparator": "CSF-1",
+    "D": {
+     "mid": 0.5983521193907528,
+     "lo": 0.5956667153921301,
+     "hi": 0.6010710426345947
+    },
+    "CI**": {
+     "mid": [
+      0.5464791139599638,
+      0.6407387907036606
+     ],
+     "lo": [
+      0.5437368632474536,
+      0.6380451972248482
+     ],
+     "hi": [
+      0.5490890395621424,
+      0.6434644401809363
+     ]
+    },
+    "decision": "superiority"
+   },
+   "H2b_sigma@0.1": {
+    "target": "full_rd@0.1#0",
+    "comparator": "CSF-muhat@0.1",
+    "D": {
+     "mid": -0.07527185933706271,
+     "lo": -0.0743742207225282,
+     "hi": -0.07619457521597628
+    },
+    "CI**": {
+     "mid": [
+      -0.16534378237562122,
+      -0.02411841832079858
+     ],
+     "lo": [
+      -0.16324004760501173,
+      -0.02383337065778944
+     ],
+     "hi": [
+      -0.16750983803506841,
+      -0.02441136527374838
+     ]
+    },
+    "decision": "inferiority"
+   },
+   "H2a_sigma@0.2": {
+    "target": "full_rd@0.2#0",
+    "comparator": "CSF-1",
+    "D": {
+     "mid": 0.42915687953614723,
+     "lo": 0.4272308236854281,
+     "hi": 0.4311069764393112
+    },
+    "CI**": {
+     "mid": [
+      0.36543305565311607,
+      0.4822129403944597
+     ],
+     "lo": [
+      0.36369150519335985,
+      0.4801763302547898
+     ],
+     "hi": [
+      0.3671977540351031,
+      0.4842738694073601
+     ]
+    },
+    "decision": "superiority"
+   },
+   "H2b_sigma@0.2": {
+    "target": "full_rd@0.2#0",
+    "comparator": "CSF-muhat@0.2",
+    "D": {
+     "mid": 0.013352782690197795,
+     "lo": 0.013249541672431975,
+     "hi": 0.013458002343176179
+    },
+    "CI**": {
+     "mid": [
+      -0.08497612586547182,
+      0.08137615093383249
+     ],
+     "lo": [
+      -0.08426692334686238,
+      0.08078236377220768
+     ],
+     "hi": [
+      -0.08569982488812175,
+      0.0819807831573374
+     ]
+    },
+    "decision": "equivalence"
+   },
+   "H2a_sigma@0.4": {
+    "target": "full_rd@0.4#0",
+    "comparator": "CSF-1",
+    "D": {
+     "mid": 0.1563126280790813,
+     "lo": 0.15561109708608312,
+     "hi": 0.15702291559042636
+    },
+    "CI**": {
+     "mid": [
+      0.09829088808755959,
+      0.23095545321887095
+     ],
+     "lo": [
+      0.09782912230659835,
+      0.22997069772491746
+     ],
+     "hi": [
+      0.09875861615405519,
+      0.23195204903343428
+     ]
+    },
+    "decision": "superiority"
+   },
+   "H2b_sigma@0.4": {
+    "target": "full_rd@0.4#0",
+    "comparator": "CSF-muhat@0.4",
+    "D": {
+     "mid": 0.32754394726435443,
+     "lo": 0.32637121061220487,
+     "hi": 0.32872914745686865
+    },
+    "CI**": {
+     "mid": [
+      0.23989064068249447,
+      0.4019232268657111
+     ],
+     "lo": [
+      0.23899587425505603,
+      0.40050542299181924
+     ],
+     "hi": [
+      0.24079518951820747,
+      0.4033038207097608
+     ]
+    },
+    "decision": "superiority"
+   },
+   "H2a_seed1": {
+    "target": "full_rd@0.2#1",
+    "comparator": "CSF-1",
+    "D": {
+     "mid": 0.42448195312488424,
+     "lo": 0.42257687834145174,
+     "hi": 0.4264108070748255
+    },
+    "CI**": {
+     "mid": [
+      0.36554165880825956,
+      0.47501260505053056
+     ],
+     "lo": [
+      0.36361274863209603,
+      0.4729957152996494
+     ],
+     "hi": [
+      0.3674977686502346,
+      0.47710975332589395
+     ]
+    },
+    "decision": "superiority"
+   },
+   "H2b_seed1": {
+    "target": "full_rd@0.2#1",
+    "comparator": "CSF-muhat@0.2",
+    "D": {
+     "mid": 0.0052726237648301755,
+     "lo": 0.0052318569032397955,
+     "hi": 0.0053141719316572855
+    },
+    "CI**": {
+     "mid": [
+      -0.08584658064107713,
+      0.07091298839670229
+     ],
+     "lo": [
+      -0.08513112908071524,
+      0.07039359030846858
+     ],
+     "hi": [
+      -0.08657649670341412,
+      0.07144190332573616
+     ]
+    },
+    "decision": "equivalence"
+   },
+   "H2a_seed2": {
+    "target": "full_rd@0.2#2",
+    "comparator": "CSF-1",
+    "D": {
+     "mid": 0.44420150504947975,
+     "lo": 0.44220792892733163,
+     "hi": 0.4462199650129177
+    },
+    "CI**": {
+     "mid": [
+      0.3862413161455058,
+      0.49216355719724175
+     ],
+     "lo": [
+      0.3844338135458198,
+      0.4900988166433551
+     ],
+     "hi": [
+      0.3880720899978502,
+      0.49425283334322795
+     ]
+    },
+    "decision": "superiority"
+   },
+   "H2b_seed2": {
+    "target": "full_rd@0.2#2",
+    "comparator": "CSF-muhat@0.2",
+    "D": {
+     "mid": 0.039355965291638206,
+     "lo": 0.03905167292006728,
+     "hi": 0.0396660894887203
+    },
+    "CI**": {
+     "mid": [
+      -0.054497616247812644,
+      0.108264388394192
+     ],
+     "lo": [
+      -0.05402782464812277,
+      0.10741094349443205
+     ],
+     "hi": [
+      -0.05497727884063376,
+      0.10913445742147627
+     ]
+    },
+    "decision": "not confirmed"
+   },
+   "H2a_seed3": {
+    "target": "full_rd@0.2#3",
+    "comparator": "CSF-1",
+    "D": {
+     "mid": 0.4145161557857776,
+     "lo": 0.4126558074955864,
+     "hi": 0.41639972496584743
+    },
+    "CI**": {
+     "mid": [
+      0.36258798662193353,
+      0.46692346120358197
+     ],
+     "lo": [
+      0.36093724197475485,
+      0.4648456591461683
+     ],
+     "hi": [
+      0.36425955451887576,
+      0.4689276184073999
+     ]
+    },
+    "decision": "superiority"
+   },
+   "H2b_seed3": {
+    "target": "full_rd@0.2#3",
+    "comparator": "CSF-muhat@0.2",
+    "D": {
+     "mid": -0.01195229471174386,
+     "lo": -0.011859881984052079,
+     "hi": -0.012046478548255246
+    },
+    "CI**": {
+     "mid": [
+      -0.10151636780772146,
+      0.06608575003264296
+     ],
+     "lo": [
+      -0.1006695071858075,
+      0.06559245499961362
+     ],
+     "hi": [
+      -0.10238053269120204,
+      0.06658822606634289
+     ]
+    },
+    "decision": "not confirmed"
+   },
+   "H2a_seed4": {
+    "target": "full_rd@0.2#4",
+    "comparator": "CSF-1",
+    "D": {
+     "mid": 0.42745446384481456,
+     "lo": 0.42553604843482695,
+     "hi": 0.4293968249391732
+    },
+    "CI**": {
+     "mid": [
+      0.3689658387711979,
+      0.4768635890087752
+     ],
+     "lo": [
+      0.36720251626201816,
+      0.4748511310207909
+     ],
+     "hi": [
+      0.3709407319845106,
+      0.47890006431135035
+     ]
+    },
+    "decision": "superiority"
+   },
+   "H2b_seed4": {
+    "target": "full_rd@0.2#4",
+    "comparator": "CSF-muhat@0.2",
+    "D": {
+     "mid": 0.010410321540463507,
+     "lo": 0.010329831037768744,
+     "hi": 0.010492354660098235
+    },
+    "CI**": {
+     "mid": [
+      -0.0853304152717079,
+      0.0753142283850088
+     ],
+     "lo": [
+      -0.08463771070586708,
+      0.07475018318963432
+     ],
+     "hi": [
+      -0.08603695090574845,
+      0.0758888000547601
+     ]
+    },
+    "decision": "equivalence"
+   }
+  },
+  "draws": 2000
+ },
+ "h3_analysis.json": {
+  "purpose": "p2 H3 streams (07 H3, addendum 08d): label-rule feedback, 20 orderings, bootstrap CI** 97.5 %",
+  "eta": 0.03412492930534316,
+  "q_offline": [
+   [
+    0.015374985072078129,
+    0.46525522320446067
+   ],
+   [
+    0.01162913662425602,
+    0.43704236219764314
+   ],
+   [
+    0.07710309873621157,
+    1.0211721448777467
+   ],
+   [
+    0.04229319230490036,
+    0.9894746017761643
+   ]
+  ],
+  "draws": 2000,
+  "shifts": {
+   "S1": {
+    "arms": {
+     "OQT-CertGrip": {
+      "RE_window": 0.47627228482066053,
+      "slip_label_window": 0.10155,
+      "capped_window": 0.0,
+      "slip_label_all": 0.11190000000000003
+     },
+     "OQT-COMP": {
+      "RE_window": 0.8087243368057256,
+      "slip_label_window": 0.10295000000000001,
+      "capped_window": 0.0,
+      "slip_label_all": 0.13137500000000002
+     },
+     "OQTdecay-CertGrip": {
+      "RE_window": 0.3118508630193918,
+      "slip_label_window": 0.2021,
+      "capped_window": 0.0,
+      "slip_label_all": 0.19262500000000002
+     },
+     "Frozen-CertGrip": {
+      "RE_window": 0.2061573715220976,
+      "slip_label_window": 0.30555,
+      "capped_window": 0.0,
+      "slip_label_all": 0.25770000000000004
+     },
+     "Frozen-COMP": {
+      "RE_window": 0.060066971379161616,
+      "slip_label_window": 0.5101499999999999,
+      "capped_window": 0.0,
+      "slip_label_all": 0.4135
+     },
+     "Oracle-CertGrip": {
+      "RE_window": 0.5425570972128015,
+      "slip_label_window": 0.07509999999999999,
+      "capped_window": 0.0,
+      "slip_label_all": 0.085525
+     },
+     "Oracle-COMP": {
+      "RE_window": 0.8368686881653872,
+      "slip_label_window": 0.09740000000000001,
+      "capped_window": 0.0,
+      "slip_label_all": 0.10305000000000002
+     }
+    },
+    "R_E": 0.8778288723294633,
+    "R_E_CI**": [
+     0.7404380328853423,
+     1.1203725733529062
+    ],
+    "decision": "inconclusive",
+    "rho": -0.5294683957661886,
+    "matched_label_window_diff": 0.026450000000000015,
+    "arms_RE_CI**": {
+     "OQT-CertGrip": [
+      0.4371327615261175,
+      0.500683873447897
+     ],
+     "OQT-COMP": [
+      0.746525844794906,
+      0.8614336805580184
+     ],
+     "OQTdecay-CertGrip": [
+      0.28789187318701015,
+      0.33189325369065475
+     ],
+     "Frozen-CertGrip": [
+      0.18058044529008174,
+      0.22978818289678463
+     ],
+     "Frozen-COMP": [
+      0.02373519899912761,
+      0.09931325962738267
+     ],
+     "Oracle-CertGrip": [
+      0.42243300246127774,
+      0.6257585332238882
+     ],
+     "Oracle-COMP": [
+      0.7067579188181538,
+      0.9672096224455924
+     ]
+    },
+    "rho_minus_rhoID": 0.08568887775093226,
+    "rho_minus_rhoID_CI**": [
+     -0.044445043976826804,
+     0.18587971674532186
+    ]
+   },
+   "S2": {
+    "arms": {
+     "OQT-CertGrip": {
+      "RE_window": 0.4262174114654981,
+      "slip_label_window": 0.09985000000000002,
+      "capped_window": 0.0,
+      "slip_label_all": 0.10035000000000001
+     },
+     "OQT-COMP": {
+      "RE_window": 0.739823024634054,
+      "slip_label_window": 0.09975,
+      "capped_window": 0.0,
+      "slip_label_all": 0.10070000000000001
+     },
+     "OQTdecay-CertGrip": {
+      "RE_window": 0.42433422131988524,
+      "slip_label_window": 0.09395,
+      "capped_window": 0.0,
+      "slip_label_all": 0.10037500000000002
+     },
+     "Frozen-CertGrip": {
+      "RE_window": 0.4160426033810972,
+      "slip_label_window": 0.10164999999999999,
+      "capped_window": 0.0,
+      "slip_label_all": 0.10785
+     },
+     "Frozen-COMP": {
+      "RE_window": 0.7224637727362764,
+      "slip_label_window": 0.10505000000000002,
+      "capped_window": 0.0,
+      "slip_label_all": 0.10787499999999998
+     },
+     "Oracle-CertGrip": {
+      "RE_window": 0.3630825535077716,
+      "slip_label_window": 0.1346,
+      "capped_window": 0.0,
+      "slip_label_all": 0.13235
+     },
+     "Oracle-COMP": {
+      "RE_window": 0.6689071622200282,
+      "slip_label_window": 0.12465,
+      "capped_window": 0.0,
+      "slip_label_all": 0.121875
+     }
+    },
+    "R_E": 1.1738856834286728,
+    "R_E_CI**": [
+     1.0233802648114094,
+     1.4283245696864444
+    ],
+    "decision": "inconclusive",
+    "rho": -0.5514614300608756,
+    "matched_label_window_diff": -0.034749999999999975,
+    "arms_RE_CI**": {
+     "OQT-CertGrip": [
+      0.40338091428947787,
+      0.4563580105545673
+     ],
+     "OQT-COMP": [
+      0.6725208096757983,
+      0.8061318578798047
+     ],
+     "OQTdecay-CertGrip": [
+      0.39889815093363845,
+      0.4505612213709105
+     ],
+     "Frozen-CertGrip": [
+      0.38961973932884675,
+      0.44286739128563324
+     ],
+     "Frozen-COMP": [
+      0.6553649851344916,
+      0.7925052035693868
+     ],
+     "Oracle-CertGrip": [
+      0.2998779113319673,
+      0.4168180987790998
+     ],
+     "Oracle-COMP": [
+      0.5531350570755161,
+      0.8042083630762981
+     ]
+    },
+    "rho_minus_rhoID": 0.06369584345624535,
+    "rho_minus_rhoID_CI**": [
+     -0.05818826923335122,
+     0.18821741877651652
+    ]
+   },
+   "S3": {
+    "arms": {
+     "OQT-CertGrip": {
+      "RE_window": 0.5066586904104615,
+      "slip_label_window": 0.10000000000000002,
+      "capped_window": 0.0,
+      "slip_label_all": 0.110375
+     },
+     "OQT-COMP": {
+      "RE_window": 0.8634711078461781,
+      "slip_label_window": 0.10040000000000002,
+      "capped_window": 0.0,
+      "slip_label_all": 0.10915000000000001
+     },
+     "OQTdecay-CertGrip": {
+      "RE_window": 0.3429939304939842,
+      "slip_label_window": 0.18085,
+      "capped_window": 0.0,
+      "slip_label_all": 0.1735
+     },
+     "Frozen-CertGrip": {
+      "RE_window": 0.25921412254236204,
+      "slip_label_window": 0.24610000000000004,
+      "capped_window": 0.0,
+      "slip_label_all": 0.215225
+     },
+     "Frozen-COMP": {
+      "RE_window": 0.5933295827035262,
+      "slip_label_window": 0.191,
+      "capped_window": 0.0,
+      "slip_label_all": 0.1729
+     },
+     "Oracle-CertGrip": {
+      "RE_window": 0.5261564598982473,
+      "slip_label_window": 0.0863,
+      "capped_window": 0.0,
+      "slip_label_all": 0.094375
+     },
+     "Oracle-COMP": {
+      "RE_window": 0.891412388164445,
+      "slip_label_window": 0.09615000000000001,
+      "capped_window": 0.0,
+      "slip_label_all": 0.101525
+     }
+    },
+    "R_E": 0.9629430198546712,
+    "R_E_CI**": [
+     0.8363490279288642,
+     1.1449344456230872
+    ],
+    "decision": "inconclusive",
+    "rho": -0.5331228552336889,
+    "matched_label_window_diff": 0.013700000000000018,
+    "arms_RE_CI**": {
+     "OQT-CertGrip": [
+      0.4782172853099652,
+      0.5372182155603084
+     ],
+     "OQT-COMP": [
+      0.7988881590538064,
+      0.9149997985047235
+     ],
+     "OQTdecay-CertGrip": [
+      0.3190262550738233,
+      0.36830436169405495
+     ],
+     "Frozen-CertGrip": [
+      0.23363357267099097,
+      0.28350247359688896
+     ],
+     "Frozen-COMP": [
+      0.5375371976673927,
+      0.650916896902309
+     ],
+     "Oracle-CertGrip": [
+      0.4481815863208407,
+      0.6061318071125877
+     ],
+     "Oracle-COMP": [
+      0.7540429692054114,
+      1.0438889096950328
+     ]
+    },
+    "rho_minus_rhoID": 0.08203441828343205,
+    "rho_minus_rhoID_CI**": [
+     -0.025456399551888043,
+     0.1912431847003946
+    ]
+   },
+   "S1m": {
+    "arms": {
+     "OQT-CertGrip": {
+      "RE_window": 0.42880720835754566,
+      "slip_label_window": 0.1012,
+      "capped_window": 0.0,
+      "slip_label_all": 0.10217500000000002
+     },
+     "OQT-COMP": {
+      "RE_window": 0.8085023736628049,
+      "slip_label_window": 0.10195000000000001,
+      "capped_window": 0.0,
+      "slip_label_all": 0.108425
+     },
+     "OQTdecay-CertGrip": {
+      "RE_window": 0.40851653847989755,
+      "slip_label_window": 0.1086,
+      "capped_window": 0.0,
+      "slip_label_all": 0.108125
+     },
+     "Frozen-CertGrip": {
+      "RE_window": 0.39123605670483114,
+      "slip_label_window": 0.11574999999999999,
+      "capped_window": 0.0,
+      "slip_label_all": 0.115475
+     },
+     "Frozen-COMP": {
+      "RE_window": 0.5888243381701475,
+      "slip_label_window": 0.19155000000000003,
+      "capped_window": 0.0,
+      "slip_label_all": 0.1729
+     },
+     "Oracle-CertGrip": {
+      "RE_window": 0.4833982358531676,
+      "slip_label_window": 0.07635,
+      "capped_window": 0.0,
+      "slip_label_all": 0.0858
+     },
+     "Oracle-COMP": {
+      "RE_window": 0.8420870730758916,
+      "slip_label_window": 0.09305,
+      "capped_window": 0.0,
+      "slip_label_all": 0.09865
+     }
+    },
+    "R_E": 0.8870682111628475,
+    "R_E_CI**": [
+     0.7722942359002943,
+     1.0264606899039386
+    ],
+    "decision": "non-inferior",
+    "rho": -0.6341761947469648,
+    "matched_label_window_diff": 0.024849999999999997,
+    "arms_RE_CI**": {
+     "OQT-CertGrip": [
+      0.3994139912186485,
+      0.45304754505658795
+     ],
+     "OQT-COMP": [
+      0.7500564436840045,
+      0.8649360649680093
+     ],
+     "OQTdecay-CertGrip": [
+      0.3803691621235662,
+      0.4360484040647994
+     ],
+     "Frozen-CertGrip": [
+      0.361942194764852,
+      0.4181014636542442
+     ],
+     "Frozen-COMP": [
+      0.5314246450649226,
+      0.6438432269833503
+     ],
+     "Oracle-CertGrip": [
+      0.4150654905802274,
+      0.5535297319605433
+     ],
+     "Oracle-COMP": [
+      0.7002209657821626,
+      0.9779908207350939
+     ]
+    },
+    "rho_minus_rhoID": -0.019018921229843944,
+    "rho_minus_rhoID_CI**": [
+     -0.14420220943862688,
+     0.08051174880420392
+    ]
+   },
+   "ID": {
+    "arms": {
+     "OQT-CertGrip": {
+      "RE_window": 0.43858404681141006,
+      "slip_label_window": 0.0995,
+      "capped_window": 0.0,
+      "slip_label_all": 0.09985000000000001
+     },
+     "OQT-COMP": {
+      "RE_window": 0.8113574716550114,
+      "slip_label_window": 0.09975,
+      "capped_window": 0.0,
+      "slip_label_all": 0.10155
+     },
+     "OQTdecay-CertGrip": {
+      "RE_window": 0.4436548965681821,
+      "slip_label_window": 0.09655000000000001,
+      "capped_window": 0.0,
+      "slip_label_all": 0.099475
+     },
+     "Frozen-CertGrip": {
+      "RE_window": 0.4357857941572991,
+      "slip_label_window": 0.10170000000000001,
+      "capped_window": 0.0,
+      "slip_label_all": 0.106375
+     },
+     "Frozen-COMP": {
+      "RE_window": 0.7637845038184244,
+      "slip_label_window": 0.11485000000000001,
+      "capped_window": 0.0,
+      "slip_label_all": 0.11560000000000004
+     },
+     "Oracle-CertGrip": {
+      "RE_window": 0.45870353951815124,
+      "slip_label_window": 0.08970000000000002,
+      "capped_window": 0.0,
+      "slip_label_all": 0.09720000000000002
+     },
+     "Oracle-COMP": {
+      "RE_window": 0.8442527101521673,
+      "slip_label_window": 0.093,
+      "capped_window": 0.0,
+      "slip_label_all": 0.099125
+     }
+    },
+    "R_E": 0.9561383530463361,
+    "R_E_CI**": [
+     0.8259546187620586,
+     1.0908929965741163
+    ],
+    "decision": "non-inferior",
+    "rho": -0.6151572735171209,
+    "matched_label_window_diff": 0.00979999999999999,
+    "arms_RE_CI**": {
+     "OQT-CertGrip": [
+      0.4152202751309376,
+      0.4667846723900241
+     ],
+     "OQT-COMP": [
+      0.7490652487840457,
+      0.8648035308903519
+     ],
+     "OQTdecay-CertGrip": [
+      0.415902140046511,
+      0.47192834839965503
+     ],
+     "Frozen-CertGrip": [
+      0.408786065832027,
+      0.46501503636941127
+     ],
+     "Frozen-COMP": [
+      0.7018952455570722,
+      0.8224372530415863
+     ],
+     "Oracle-CertGrip": [
+      0.4028605594824954,
+      0.530597318563561
+     ],
+     "Oracle-COMP": [
+      0.7002941464863331,
+      0.9782223046155806
+     ]
+    }
+   }
+  },
+  "H3_primary": {
+   "S1": "inconclusive",
+   "S2": "inconclusive",
+   "S3": "inconclusive"
+  },
+  "audit": {
+   "S1|OQT-CertGrip|501-1000": {
+    "n": 500,
+    "slip_direct": 0.134,
+    "slip_label": 0.134,
+    "Delta": 0.0,
+    "Delta_CI**": [
+     0.0,
+     0.0
+    ]
+   },
+   "S1|OQT-COMP|501-1000": {
+    "n": 500,
+    "slip_direct": 0.198,
+    "slip_label": 0.2,
+    "Delta": -0.002,
+    "Delta_CI**": [
+     -0.007889741250945265,
+     0.0
+    ]
+   },
+   "S1|OQT-CertGrip|1001-2000": {
+    "n": 1000,
+    "slip_direct": 0.103,
+    "slip_label": 0.105,
+    "Delta": -0.002,
+    "Delta_CI**": [
+     -0.005964214711729622,
+     0.0
+    ]
+   },
+   "S1|Oracle-CertGrip|1001-2000": {
+    "n": 1000,
+    "slip_direct": 0.071,
+    "slip_label": 0.073,
+    "Delta": -0.002,
+    "Delta_CI**": [
+     -0.005970223583278825,
+     0.0
+    ]
+   },
+   "S1m|OQT-CertGrip|501-1000": {
+    "n": 500,
+    "slip_direct": 0.102,
+    "slip_label": 0.11,
+    "Delta": -0.008,
+    "Delta_CI**": [
+     -0.018108651911468814,
+     0.0
+    ]
+   },
+   "S1m|OQT-COMP|501-1000": {
+    "n": 500,
+    "slip_direct": 0.118,
+    "slip_label": 0.122,
+    "Delta": -0.004,
+    "Delta_CI**": [
+     -0.012170385395537525,
+     0.0
+    ]
+   },
+   "S2|OQT-CertGrip|501-1000": {
+    "n": 500,
+    "slip_direct": 0.098,
+    "slip_label": 0.1,
+    "Delta": -0.002,
+    "Delta_CI**": [
+     -0.007890133370902603,
+     0.0
+    ]
+   },
+   "S2|OQT-COMP|501-1000": {
+    "n": 500,
+    "slip_direct": 0.102,
+    "slip_label": 0.104,
+    "Delta": -0.002,
+    "Delta_CI**": [
+     -0.00784332986632767,
+     0.0
+    ]
+   },
+   "S2|OQT-CertGrip|1001-2000": {
+    "n": 1000,
+    "slip_direct": 0.092,
+    "slip_label": 0.1,
+    "Delta": -0.008,
+    "Delta_CI**": [
+     -0.014911094252035146,
+     -0.0028803897622687352
+    ]
+   },
+   "S2|Oracle-CertGrip|1001-2000": {
+    "n": 1000,
+    "slip_direct": 0.127,
+    "slip_label": 0.128,
+    "Delta": -0.001,
+    "Delta_CI**": [
+     -0.003972243993832438,
+     0.0
+    ]
+   },
+   "S3|OQT-CertGrip|501-1000": {
+    "n": 500,
+    "slip_direct": 0.128,
+    "slip_label": 0.13,
+    "Delta": -0.002,
+    "Delta_CI**": [
+     -0.007936507936507936,
+     0.0
+    ]
+   },
+   "S3|OQT-COMP|501-1000": {
+    "n": 500,
+    "slip_direct": 0.132,
+    "slip_label": 0.134,
+    "Delta": -0.002,
+    "Delta_CI**": [
+     -0.007920792079207921,
+     0.0
+    ]
+   },
+   "S3|OQT-CertGrip|1001-2000": {
+    "n": 1000,
+    "slip_direct": 0.101,
+    "slip_label": 0.104,
+    "Delta": -0.003,
+    "Delta_CI**": [
+     -0.007905138339920948,
+     0.0
+    ]
+   },
+   "S3|Oracle-CertGrip|1001-2000": {
+    "n": 1000,
+    "slip_direct": 0.092,
+    "slip_label": 0.096,
+    "Delta": -0.004,
+    "Delta_CI**": [
+     -0.009137288214365017,
+     0.0
+    ]
+   },
+   "S1|matched_physical": {
+    "diff": 0.032,
+    "matched": false
+   },
+   "S2|matched_physical": {
+    "diff": -0.035,
+    "matched": false
+   },
+   "S3|matched_physical": {
+    "diff": 0.009000000000000008,
+    "matched": true
+   }
+  }
+ },
+ "h4a_label_rule.json": {
+  "purpose": "p2 H4a steps P -> S -> full -> full_rd under the label-rule route (secondary)",
+  "arms": {
+   "P#0": {
+    "RE_mid": 0.7830903768295072,
+    "RE_lo": 0.7891147653877836,
+    "RE_hi": 0.7770862738662097,
+    "slip_label": 0.11285714285714285
+   },
+   "S#0": {
+    "RE_mid": 0.7896959085696333,
+    "RE_lo": 0.7957426147234469,
+    "RE_hi": 0.7836695631596204,
+    "slip_label": 0.11107142857142857
+   },
+   "full#0": {
+    "RE_mid": 0.8104471863268327,
+    "RE_lo": 0.8165640032063363,
+    "RE_hi": 0.8043509662711523,
+    "slip_label": 0.10571428571428572
+   },
+   "full_rd@0.2#0": {
+    "RE_mid": 0.426368634535423,
+    "RE_lo": 0.4311877951306691,
+    "RE_hi": 0.4215657012367774,
+    "slip_label": 0.10571428571428572
+   }
+  },
+  "contrasts": {
+   "H4a_S_vs_P": {
+    "target": "S#0",
+    "comparator": "P#0",
+    "margin": 0.05,
+    "D": {
+     "mid": -0.008435209952227796,
+     "lo": -0.00839909430969299,
+     "hi": -0.008471761134908773
+    },
+    "CI**": {
+     "mid": [
+      -0.03598011302174585,
+      0.012784601656809209
+     ],
+     "lo": [
+      -0.03581746595458586,
+      0.01273222848340144
+     ],
+     "hi": [
+      -0.03614480107430066,
+      0.01283758665001493
+     ]
+    },
+    "decision": "equivalence"
+   },
+   "H4a_squeeze_full_vs_S": {
+    "target": "full#0",
+    "comparator": "S#0",
+    "margin": 0.03,
+    "D": {
+     "mid": -0.02627755510951779,
+     "lo": -0.026165983947115556,
+     "hi": -0.026390463638970463
+    },
+    "CI**": {
+     "mid": [
+      -0.05578497985383552,
+      0.014898579893433026
+     ],
+     "lo": [
+      -0.05557154929393863,
+      0.014835482035553745
+     ],
+     "hi": [
+      -0.056000408022640516,
+      0.014962432716241258
+     ]
+    },
+    "decision": "not confirmed"
+   },
+   "H4a_onset_full_rd_vs_full": {
+    "target": "full_rd@0.2#0",
+    "comparator": "full#0",
+    "margin": null,
+    "D": {
+     "mid": 0.47390941479130577,
+     "lo": 0.4719485632019552,
+     "hi": 0.4758933364733914
+    },
+    "CI**": {
+     "mid": [
+      0.4147579627327994,
+      0.5228922340205723
+     ],
+     "lo": [
+      0.4128321795427904,
+      0.5207716618060585
+     ],
+     "hi": [
+      0.4166368903308963,
+      0.5250373995361024
+     ]
+    },
+    "decision": "report only (no registered margin)"
+   }
+  },
+  "draws": 2000,
+  "n_test_instances": 2800
+ },
+ "sec08f_dmu.json": {
+  "purpose": "08f \u00a75 D-mu: grouped 5-fold CV R^2 of log mu -> residual on the 4,800 id cal+test instances",
+  "results": {
+   "P#0": {
+    "cvR2": 0.7937206961671753,
+    "CI95": [
+     0.7802885224518247,
+     0.8058504234195292
+    ],
+    "le_0.05": false
+   },
+   "S#0": {
+    "cvR2": 0.7881759898525696,
+    "CI95": [
+     0.7737762050304674,
+     0.8008573877401663
+    ],
+    "le_0.05": false
+   },
+   "full#0": {
+    "cvR2": 0.7787036247378385,
+    "CI95": [
+     0.764070664156541,
+     0.7922008979338476
+    ],
+    "le_0.05": false
+   },
+   "full_rd@0.0#0": {
+    "cvR2": 0.010506256825744575,
+    "CI95": [
+     0.0047111740641058025,
+     0.021091694260363586
+    ],
+    "le_0.05": true
+   },
+   "full_rd@0.1#0": {
+    "cvR2": 0.04517520741151815,
+    "CI95": [
+     0.034281593173575244,
+     0.06224618787312471
+    ],
+    "le_0.05": true
+   },
+   "full_rd@0.2#0": {
+    "cvR2": 0.2142275820078301,
+    "CI95": [
+     0.19164773412615957,
+     0.2418359544694168
+    ],
+    "le_0.05": false
+   },
+   "full_rd@0.4#0": {
+    "cvR2": 0.5655298919842933,
+    "CI95": [
+     0.5420990473206996,
+     0.5887044095653229
+    ],
+    "le_0.05": false
+   },
+   "P_onset@0.2#0": {
+    "cvR2": 0.19738314815016722,
+    "CI95": [
+     0.17360399049811784,
+     0.2229904399694069
+    ],
+    "le_0.05": false
+   },
+   "CSF-1": {
+    "cvR2": 0.6033693230397056,
+    "CI95": [
+     0.5865478933572249,
+     0.6179190238984373
+    ],
+    "le_0.05": false
+   },
+   "CSF-muhat@0.0": {
+    "cvR2": 0.006247827611076118,
+    "CI95": [
+     0.003606602457549324,
+     0.009850738172142237
+    ],
+    "le_0.05": true
+   },
+   "CSF-muhat@0.1": {
+    "cvR2": 0.006426780099511142,
+    "CI95": [
+     0.0037797533079609565,
+     0.010421132611311253
+    ],
+    "le_0.05": true
+   },
+   "CSF-muhat@0.2": {
+    "cvR2": 0.005426830366006774,
+    "CI95": [
+     0.0029637820712792224,
+     0.009845693476396647
+    ],
+    "le_0.05": true
+   },
+   "CSF-muhat@0.4": {
+    "cvR2": 0.003352321552341997,
+    "CI95": [
+     0.000987644561001938,
+     0.008128344619727142
+    ],
+    "le_0.05": true
+   },
+   "oracle#0": {
+    "cvR2": 0.016278747862874088,
+    "CI95": [
+     0.005078244284532449,
+     0.03262085428003665
+    ],
+    "le_0.05": true
+   }
+  },
+  "draws": 500,
+  "n": 4800
+ },
+ "sec08f_h3b.json": {
+  "purpose": "08f \u00a74 H3-B offline breakage magnitude (label rule, frozen offline q-hat)",
+  "Delta": {
+   "S1": 0.511,
+   "S1m": 0.105
+  },
+  "results": {
+   "P#0": {
+    "S1": {
+     "p_obs": 0.5128571428571429,
+     "p_pred": 0.5160714285714286,
+     "diff": -0.003214285714285725,
+     "diff_CI**": [
+      -0.008571428571428563,
+      0.0014285714285714457
+     ],
+     "decision": "pass (|p_obs - p_pred| <= 0.02)",
+     "n": 2800
+    },
+    "S1m": {
+     "p_obs": 0.18678571428571428,
+     "p_pred": 0.18785714285714286,
+     "diff": -0.0010714285714285843,
+     "diff_CI**": [
+      -0.002857142857142836,
+      0.0035714285714285587
+     ],
+     "decision": "pass (|p_obs - p_pred| <= 0.02)",
+     "n": 2800
+    },
+    "S3": {
+     "p_obs": 0.2092857142857143,
+     "p_obs_CI**": [
+      0.16642410714285713,
+      0.24643750000000003
+     ],
+     "decision": "report (predicted direction: up)",
+     "n": 2800
+    },
+    "S2": {
+     "p_obs": 0.09409090909090909,
+     "p_obs_CI**": [
+      0.06272727272727273,
+      0.12545454545454546
+     ],
+     "decision": "no break shown",
+     "n": 2200
+    }
+   },
+   "S#0": {
+    "S1": {
+     "p_obs": 0.5082142857142857,
+     "p_pred": 0.5117857142857143,
+     "diff": -0.0035714285714285587,
+     "diff_CI**": [
+      -0.007857142857142785,
+      0.002142857142857224
+     ],
+     "decision": "pass (|p_obs - p_pred| <= 0.02)",
+     "n": 2800
+    },
+    "S1m": {
+     "p_obs": 0.18357142857142858,
+     "p_pred": 0.18321428571428572,
+     "diff": 0.0003571428571428614,
+     "diff_CI**": [
+      -0.0028571428571428636,
+      0.0035714285714285587
+     ],
+     "decision": "pass (|p_obs - p_pred| <= 0.02)",
+     "n": 2800
+    },
+    "S3": {
+     "p_obs": 0.21071428571428572,
+     "p_obs_CI**": [
+      0.16785267857142855,
+      0.24822767857142863
+     ],
+     "decision": "report (predicted direction: up)",
+     "n": 2800
+    },
+    "S2": {
+     "p_obs": 0.095,
+     "p_obs_CI**": [
+      0.06135227272727273,
+      0.12591477272727275
+     ],
+     "decision": "no break shown",
+     "n": 2200
+    }
+   },
+   "full#0": {
+    "S1": {
+     "p_obs": 0.5014285714285714,
+     "p_pred": 0.5025,
+     "diff": -0.001071428571428501,
+     "diff_CI**": [
+      -0.006785714285714284,
+      0.003214285714285725
+     ],
+     "decision": "pass (|p_obs - p_pred| <= 0.02)",
+     "n": 2800
+    },
+    "S1m": {
+     "p_obs": 0.17892857142857144,
+     "p_pred": 0.17714285714285713,
+     "diff": 0.0017857142857143071,
+     "diff_CI**": [
+      -0.0025000000000000022,
+      0.004642857142857143
+     ],
+     "decision": "pass (|p_obs - p_pred| <= 0.02)",
+     "n": 2800
+    },
+    "S3": {
+     "p_obs": 0.19892857142857143,
+     "p_obs_CI**": [
+      0.16356696428571427,
+      0.23714732142857145
+     ],
+     "decision": "report (predicted direction: up)",
+     "n": 2800
+    },
+    "S2": {
+     "p_obs": 0.09409090909090909,
+     "p_obs_CI**": [
+      0.06318181818181819,
+      0.1290909090909091
+     ],
+     "decision": "no break shown",
+     "n": 2200
+    }
+   },
+   "CSF-1": {
+    "S1": {
+     "p_obs": 0.5225,
+     "p_pred": 0.5246428571428572,
+     "diff": -0.002142857142857224,
+     "diff_CI**": [
+      -0.00642857142857145,
+      0.0028571428571427812
+     ],
+     "decision": "pass (|p_obs - p_pred| <= 0.02)",
+     "n": 2800
+    },
+    "S1m": {
+     "p_obs": 0.1925,
+     "p_pred": 0.19392857142857142,
+     "diff": -0.001428571428571418,
+     "diff_CI**": [
+      -0.0035714285714285587,
+      0.003214285714285725
+     ],
+     "decision": "pass (|p_obs - p_pred| <= 0.02)",
+     "n": 2800
+    },
+    "S3": {
+     "p_obs": 0.1925,
+     "p_obs_CI**": [
+      0.1575,
+      0.23
+     ],
+     "decision": "report (predicted direction: up)",
+     "n": 2800
+    },
+    "S2": {
+     "p_obs": 0.09636363636363636,
+     "p_obs_CI**": [
+      0.06954545454545455,
+      0.12773295454545455
+     ],
+     "decision": "no break shown",
+     "n": 2200
+    }
+   },
+   "full_rd@0.2#0": {
+    "S1": {
+     "p_obs": 0.30392857142857144,
+     "p_pred": 0.7817857142857143,
+     "diff": -0.47785714285714287,
+     "diff_CI**": [
+      -0.5035714285714286,
+      -0.44927678571428564
+     ],
+     "decision": "not tested (08b \u00a76: probe-arm predictions never specified)",
+     "n": 2800
+    },
+    "S1m": {
+     "p_obs": 0.12464285714285714,
+     "p_pred": 0.21285714285714286,
+     "diff": -0.08821428571428572,
+     "diff_CI**": [
+      -0.10821428571428571,
+      -0.061781249999999975
+     ],
+     "decision": "not tested (08b \u00a76: probe-arm predictions never specified)",
+     "n": 2800
+    },
+    "S3": {
+     "p_obs": 0.25,
+     "p_obs_CI**": [
+      0.21392857142857144,
+      0.28535714285714286
+     ],
+     "decision": "report (predicted direction: up)",
+     "n": 2800
+    },
+    "S2": {
+     "p_obs": 0.09363636363636364,
+     "p_obs_CI**": [
+      0.07,
+      0.12045454545454545
+     ],
+     "decision": "no break shown",
+     "n": 2200
+    }
+   }
+  },
+  "draws": 2000
+ },
+ "sec08f_label.json": {
+  "purpose": "08f \u00a72-3 H4c shuffled-touch and H2-M no-mass (label route)",
+  "arms": {
+   "P#0": {
+    "RE": 0.7830903768295072,
+    "slip_label": 0.11285714285714285
+   },
+   "full_rd@0.2#0": {
+    "RE": 0.426368634535423,
+    "slip_label": 0.10571428571428572
+   },
+   "full_rd_shuf@0.2#0": {
+    "RE": 0.8028855697290662,
+    "slip_label": 0.10392857142857143
+   },
+   "P_nomass#0": {
+    "RE": 0.7916533438414473,
+    "slip_label": 0.10857142857142857
+   },
+   "full_rd_nomass@0.2#0": {
+    "RE": 0.42767408152439407,
+    "slip_label": 0.10357142857142858
+   }
+  },
+  "contrasts": {
+   "H4c_shuf_vs_P": {
+    "target": "full_rd_shuf@0.2#0",
+    "comparator": "P#0",
+    "margin": 0.05,
+    "D": -0.02527829926821945,
+    "CI**": [
+     -0.05258564565157986,
+     0.008517042300417717
+    ],
+    "decision": "inconclusive"
+   },
+   "H2M_nomass_full_rd_vs_P": {
+    "target": "full_rd_nomass@0.2#0",
+    "comparator": "P_nomass#0",
+    "margin": null,
+    "D": 0.4597710161254004,
+    "CI**": [
+     0.39684035127556366,
+     0.5060974788127627
+    ],
+    "decision": "report only"
+   },
+   "H2M_ref_withmass_full_rd_vs_P": {
+    "target": "full_rd@0.2#0",
+    "comparator": "P#0",
+    "margin": null,
+    "D": 0.4555307444056983,
+    "CI**": [
+     0.40183000911728084,
+     0.5071802903324323
+    ],
+    "decision": "report only"
+   },
+   "H2M_change_nomass_minus_withmass": {
+    "value": 0.004240271719702093,
+    "CI**": [
+     -0.04462346756767428,
+     0.039910085018008
+    ]
+   }
+  },
+  "draws": 2000
+ },
+ "sec08f_tail.json": {
+  "purpose": "08f \u00a71 H2-T: P95 relative-excess ratio CertGrip-full s0.2 / CSF-1",
+  "routes": {
+   "label": {
+    "P95": {
+     "full_rd@0.2#0": 1.1478090901653661,
+     "CSF-1": 1.9087203421156504
+    },
+    "T": 0.6013500589054966,
+    "CI**": [
+     0.5520648618388807,
+     0.6459262373651764
+    ],
+    "decision": "pass (upper < 1.10)"
+   },
+   "crc_08c": {
+    "P95": {
+     "full_rd@0.2#0": 1.171846801912393,
+     "CSF-1": 1.9800094910357462
+    },
+    "T": 0.5918389821956854,
+    "CI**": [
+     0.5539865944233735,
+     0.6563629522397967
+    ],
+    "decision": "pass (upper < 1.10)"
+   },
+   "crc_08e": {
+    "P95": {
+     "full_rd@0.2#0": 1.1813091671516054,
+     "CSF-1": 1.9626454916103222
+    },
+    "T": 0.6018963547932227,
+    "CI**": [
+     0.5486235989643082,
+     0.6485061351505771
+    ],
+    "decision": "pass (upper < 1.10)"
+   }
+  },
+  "primary_route": "crc_08c",
+  "draws": 2000
+ },
+ "sec08f_ut3.json": {
+  "purpose": "08f \u00a76 UT3: label-rule split conformal coverage over 1,000 object-level re-splits",
+  "K": 160,
+  "z": 3.6047113948644247,
+  "n_pass": 160,
+  "worst_cell": {
+   "arm": "CSF-1",
+   "stratum": "D3",
+   "alpha": 0.01,
+   "n": 500,
+   "mean_miss": 0.01034,
+   "sd": 0.005808137480432418,
+   "band": [
+    0.007341916714283801,
+    0.010662075301684264
+   ],
+   "pass": true
+  },
+  "cells": [
+   {
+    "arm": "P#0",
+    "stratum": "D1",
+    "alpha": 0.01,
+    "n": 50,
+    "mean_miss": 0.0,
+    "sd": 0.0,
+    "band": [
+     -0.009607843137254901,
+     0.01
+    ],
+    "pass": true
+   },
+   {
+    "arm": "P#0",
+    "stratum": "D1",
+    "alpha": 0.01,
+    "n": 500,
+    "mean_miss": 0.010234285714285715,
+    "sd": 0.006113119951519364,
+    "band": [
+     0.0073071514625600645,
+     0.010696840553408
+    ],
+    "pass": true
+   },
+   {
+    "arm": "P#0",
+    "stratum": "D1",
+    "alpha": 0.05,
+    "n": 50,
+    "mean_miss": 0.03909130434782608,
+    "sd": 0.02645875360257448,
+    "band": [
+     0.027376097526575615,
+     0.053016059336169485
+    ],
+    "pass": true
+   },
+   {
+    "arm": "P#0",
+    "stratum": "D1",
+    "alpha": 0.05,
+    "n": 500,
+    "mean_miss": 0.05003571428571428,
+    "sd": 0.013240805919216924,
+    "band": [
+     0.04649465953149395,
+     0.051509332484474125
+    ],
+    "pass": true
+   },
+   {
+    "arm": "P#0",
+    "stratum": "D1",
+    "alpha": 0.1,
+    "n": 50,
+    "mean_miss": 0.09740521739130435,
+    "sd": 0.0398903996027164,
+    "band": [
+     0.07584501099365179,
+     0.10454714586909332
+    ],
+    "pass": true
+   },
+   {
+    "arm": "P#0",
+    "stratum": "D1",
+    "alpha": 0.1,
+    "n": 500,
+    "mean_miss": 0.09971857142857142,
+    "sd": 0.018233020509900864,
+    "band": [
+     0.09592559208218943,
+     0.10207839993377865
+    ],
+    "pass": true
+   },
+   {
+    "arm": "P#0",
+    "stratum": "D1",
+    "alpha": 0.2,
+    "n": 50,
+    "mean_miss": 0.19210260869565218,
+    "sd": 0.055921217706458595,
+    "band": [
+     0.17401764227725386,
+     0.20637451458549128
+    ],
+    "pass": true
+   },
+   {
+    "arm": "P#0",
+    "stratum": "D1",
+    "alpha": 0.2,
+    "n": 500,
+    "mean_miss": 0.19984428571428572,
+    "sd": 0.024741895316099216,
+    "band": [
+     0.19518363904380887,
+     0.20282035297215922
+    ],
+    "pass": true
+   },
+   {
+    "arm": "P#0",
+    "stratum": "D2",
+    "alpha": 0.01,
+    "n": 50,
+    "mean_miss": 0.0,
+    "sd": 0.0,
+    "band": [
+     -0.009607843137254901,
+     0.01
+    ],
+    "pass": true
+   },
+   {
+    "arm": "P#0",
+    "stratum": "D2",
+    "alpha": 0.01,
+    "n": 500,
+    "mean_miss": 0.010087142857142859,
+    "sd": 0.006272153481624326,
+    "band": [
+     0.0072890230741090535,
+     0.010714968941859013
+    ],
+    "pass": true
+   },
+   {
+    "arm": "P#0",
+    "stratum": "D2",
+    "alpha": 0.05,
+    "n": 50,
+    "mean_miss": 0.037716521739130426,
+    "sd": 0.026606597478179162,
+    "band": [
+     0.027359244657842237,
+     0.05303291220490287
+    ],
+    "pass": true
+   },
+   {
+    "arm": "P#0",
+    "stratum": "D2",
+    "alpha": 0.05,
+    "n": 500,
+    "mean_miss": 0.04989857142857143,
+    "sd": 0.013364396538937028,
+    "band": [
+     0.046480571315243524,
+     0.05152342070072455
+    ],
+    "pass": true
+   },
+   {
+    "arm": "P#0",
+    "stratum": "D2",
+    "alpha": 0.1,
+    "n": 50,
+    "mean_miss": 0.09681826086956523,
+    "sd": 0.042359410135168314,
+    "band": [
+     0.07556356605564164,
+     0.10482859080710347
+    ],
+    "pass": true
+   },
+   {
+    "arm": "P#0",
+    "stratum": "D2",
+    "alpha": 0.1,
+    "n": 500,
+    "mean_miss": 0.09972142857142856,
+    "sd": 0.01804713599119904,
+    "band": [
+     0.09594678124122924,
+     0.10205721077473884
+    ],
+    "pass": true
+   },
+   {
+    "arm": "P#0",
+    "stratum": "D2",
+    "alpha": 0.2,
+    "n": 50,
+    "mean_miss": 0.19337217391304345,
+    "sd": 0.05663184321101019,
+    "band": [
+     0.17393663737733617,
+     0.20645551948540897
+    ],
+    "pass": true
+   },
+   {
+    "arm": "P#0",
+    "stratum": "D2",
+    "alpha": 0.2,
+    "n": 500,
+    "mean_miss": 0.19947714285714285,
+    "sd": 0.02386454577645561,
+    "band": [
+     0.19528364898040199,
+     0.2027203430355661
+    ],
+    "pass": true
+   },
+   {
+    "arm": "P#0",
+    "stratum": "D3",
+    "alpha": 0.01,
+    "n": 50,
+    "mean_miss": 0.0,
+    "sd": 0.0,
+    "band": [
+     -0.009607843137254901,
+     0.01
+    ],
+    "pass": true
+   },
+   {
+    "arm": "P#0",
+    "stratum": "D3",
+    "alpha": 0.01,
+    "n": 500,
+    "mean_miss": 0.01,
+    "sd": 0.005896217229929752,
+    "band": [
+     0.0073318764170427,
+     0.010672115598925365
+    ],
+    "pass": true
+   },
+   {
+    "arm": "P#0",
+    "stratum": "D3",
+    "alpha": 0.05,
+    "n": 50,
+    "mean_miss": 0.03931217391304348,
+    "sd": 0.027730491980462305,
+    "band": [
+     0.027231130818566346,
+     0.05316102604417876
+    ],
+    "pass": true
+   },
+   {
+    "arm": "P#0",
+    "stratum": "D3",
+    "alpha": 0.05,
+    "n": 500,
+    "mean_miss": 0.05002285714285715,
+    "sd": 0.013076504208283192,
+    "band": [
+     0.046513388445057056,
+     0.051490603570911016
+    ],
+    "pass": true
+   },
+   {
+    "arm": "P#0",
+    "stratum": "D3",
+    "alpha": 0.1,
+    "n": 50,
+    "mean_miss": 0.09735913043478261,
+    "sd": 0.04171893897849536,
+    "band": [
+     0.07563657399247214,
+     0.10475558287027296
+    ],
+    "pass": true
+   },
+   {
+    "arm": "P#0",
+    "stratum": "D3",
+    "alpha": 0.1,
+    "n": 500,
+    "mean_miss": 0.10025714285714286,
+    "sd": 0.018069344068687817,
+    "band": [
+     0.09594424972064235,
+     0.10205974229532573
+    ],
+    "pass": true
+   },
+   {
+    "arm": "P#0",
+    "stratum": "D3",
+    "alpha": 0.2,
+    "n": 50,
+    "mean_miss": 0.19616521739130433,
+    "sd": 0.0544834180956394,
+    "band": [
+     0.17418153846846862,
+     0.2062106183942765
+    ],
+    "pass": true
+   },
+   {
+    "arm": "P#0",
+    "stratum": "D3",
+    "alpha": 0.2,
+    "n": 500,
+    "mean_miss": 0.19977,
+    "sd": 0.023623515331107008,
+    "band": [
+     0.19531112427783714,
+     0.20269286773813094
+    ],
+    "pass": true
+   },
+   {
+    "arm": "P#0",
+    "stratum": "D4",
+    "alpha": 0.01,
+    "n": 50,
+    "mean_miss": 0.0,
+    "sd": 0.0,
+    "band": [
+     -0.009607843137254901,
+     0.01
+    ],
+    "pass": true
+   },
+   {
+    "arm": "P#0",
+    "stratum": "D4",
+    "alpha": 0.01,
+    "n": 500,
+    "mean_miss": 0.00981,
+    "sd": 0.005959165759946076,
+    "band": [
+     0.007324700852218082,
+     0.010679291163749985
+    ],
+    "pass": true
+   },
+   {
+    "arm": "P#0",
+    "stratum": "D4",
+    "alpha": 0.05,
+    "n": 50,
+    "mean_miss": 0.037761739130434784,
+    "sd": 0.02671853757233464,
+    "band": [
+     0.027346484496455176,
+     0.05304567236628993
+    ],
+    "pass": true
+   },
+   {
+    "arm": "P#0",
+    "stratum": "D4",
+    "alpha": 0.05,
+    "n": 500,
+    "mean_miss": 0.04952857142857143,
+    "sd": 0.013121057966572749,
+    "band": [
+     0.046508309718346456,
+     0.051495682297621616
+    ],
+    "pass": true
+   },
+   {
+    "arm": "P#0",
+    "stratum": "D4",
+    "alpha": 0.1,
+    "n": 50,
+    "mean_miss": 0.09582521739130434,
+    "sd": 0.0414519632687236,
+    "band": [
+     0.0756670068161071,
+     0.10472515004663802
+    ],
+    "pass": true
+   },
+   {
+    "arm": "P#0",
+    "stratum": "D4",
+    "alpha": 0.1,
+    "n": 500,
+    "mean_miss": 0.0987057142857143,
+    "sd": 0.017658550450018046,
+    "band": [
+     0.09599107648910762,
+     0.10201291552686045
+    ],
+    "pass": true
+   },
+   {
+    "arm": "P#0",
+    "stratum": "D4",
+    "alpha": 0.2,
+    "n": 50,
+    "mean_miss": 0.19422,
+    "sd": 0.05874980466235991,
+    "band": [
+     0.17369520886921594,
+     0.2066969479935292
+    ],
+    "pass": true
+   },
+   {
+    "arm": "P#0",
+    "stratum": "D4",
+    "alpha": 0.2,
+    "n": 500,
+    "mean_miss": 0.19962142857142856,
+    "sd": 0.023739096827545384,
+    "band": [
+     0.1952979490294238,
+     0.2027060429865443
+    ],
+    "pass": true
+   },
+   {
+    "arm": "S#0",
+    "stratum": "D1",
+    "alpha": 0.01,
+    "n": 50,
+    "mean_miss": 0.0,
+    "sd": 0.0,
+    "band": [
+     -0.009607843137254901,
+     0.01
+    ],
+    "pass": true
+   },
+   {
+    "arm": "S#0",
+    "stratum": "D1",
+    "alpha": 0.01,
+    "n": 500,
+    "mean_miss": 0.010302857142857143,
+    "sd": 0.006211240626667692,
+    "band": [
+     0.007295966590332237,
+     0.010708025425635828
+    ],
+    "pass": true
+   },
+   {
+    "arm": "S#0",
+    "stratum": "D1",
+    "alpha": 0.05,
+    "n": 50,
+    "mean_miss": 0.03908521739130435,
+    "sd": 0.026287766318197427,
+    "band": [
+     0.027395588535228475,
+     0.052996568327516626
+    ],
+    "pass": true
+   },
+   {
+    "arm": "S#0",
+    "stratum": "D1",
+    "alpha": 0.05,
+    "n": 500,
+    "mean_miss": 0.05015857142857143,
+    "sd": 0.013338899907433765,
+    "band": [
+     0.04648347770133568,
+     0.05152051431463239
+    ],
+    "pass": true
+   },
+   {
+    "arm": "S#0",
+    "stratum": "D1",
+    "alpha": 0.1,
+    "n": 50,
+    "mean_miss": 0.09705478260869564,
+    "sd": 0.039744308151562095,
+    "band": [
+     0.07586166410179918,
+     0.10453049276094595
+    ],
+    "pass": true
+   },
+   {
+    "arm": "S#0",
+    "stratum": "D1",
+    "alpha": 0.1,
+    "n": 500,
+    "mean_miss": 0.09978857142857143,
+    "sd": 0.018073554711525976,
+    "band": [
+     0.09594376974532552,
+     0.10206022227064256
+    ],
+    "pass": true
+   },
+   {
+    "arm": "S#0",
+    "stratum": "D1",
+    "alpha": 0.2,
+    "n": 50,
+    "mean_miss": 0.1921904347826087,
+    "sd": 0.05601833831330848,
+    "band": [
+     0.17400657140379458,
+     0.20638558545895055
+    ],
+    "pass": true
+   },
+   {
+    "arm": "S#0",
+    "stratum": "D1",
+    "alpha": 0.2,
+    "n": 500,
+    "mean_miss": 0.1995385714285714,
+    "sd": 0.024837387467775023,
+    "band": [
+     0.19517275379955593,
+     0.20283123821641216
+    ],
+    "pass": true
+   },
+   {
+    "arm": "S#0",
+    "stratum": "D2",
+    "alpha": 0.01,
+    "n": 50,
+    "mean_miss": 0.0,
+    "sd": 0.0,
+    "band": [
+     -0.009607843137254901,
+     0.01
+    ],
+    "pass": true
+   },
+   {
+    "arm": "S#0",
+    "stratum": "D2",
+    "alpha": 0.01,
+    "n": 500,
+    "mean_miss": 0.009991428571428571,
+    "sd": 0.00599550470677272,
+    "band": [
+     0.0073205585399425555,
+     0.01068343347602551
+    ],
+    "pass": true
+   },
+   {
+    "arm": "S#0",
+    "stratum": "D2",
+    "alpha": 0.05,
+    "n": 50,
+    "mean_miss": 0.03793826086956522,
+    "sd": 0.026549173758278904,
+    "band": [
+     0.02736579044412999,
+     0.05302636641861511
+    ],
+    "pass": true
+   },
+   {
+    "arm": "S#0",
+    "stratum": "D2",
+    "alpha": 0.05,
+    "n": 500,
+    "mean_miss": 0.049718571428571424,
+    "sd": 0.01318993419847417,
+    "band": [
+     0.04650045844895612,
+     0.051503533567011955
+    ],
+    "pass": true
+   },
+   {
+    "arm": "S#0",
+    "stratum": "D2",
+    "alpha": 0.1,
+    "n": 50,
+    "mean_miss": 0.09692,
+    "sd": 0.04175457994816822,
+    "band": [
+     0.0756325112432986,
+     0.1047596456194465
+    ],
+    "pass": true
+   },
+   {
+    "arm": "S#0",
+    "stratum": "D2",
+    "alpha": 0.1,
+    "n": 500,
+    "mean_miss": 0.10022714285714286,
+    "sd": 0.018333665889221137,
+    "band": [
+     0.09591411941645087,
+     0.10208987259951721
+    ],
+    "pass": true
+   },
+   {
+    "arm": "S#0",
+    "stratum": "D2",
+    "alpha": 0.2,
+    "n": 50,
+    "mean_miss": 0.19422347826086958,
+    "sd": 0.05757733904187624,
+    "band": [
+     0.17382885937800838,
+     0.20656329748473676
+    ],
+    "pass": true
+   },
+   {
+    "arm": "S#0",
+    "stratum": "D2",
+    "alpha": 0.2,
+    "n": 500,
+    "mean_miss": 0.1995357142857143,
+    "sd": 0.024192854788020007,
+    "band": [
+     0.19524622471339564,
+     0.20275776730257244
+    ],
+    "pass": true
+   },
+   {
+    "arm": "S#0",
+    "stratum": "D3",
+    "alpha": 0.01,
+    "n": 50,
+    "mean_miss": 0.0,
+    "sd": 0.0,
+    "band": [
+     -0.009607843137254901,
+     0.01
+    ],
+    "pass": true
+   },
+   {
+    "arm": "S#0",
+    "stratum": "D3",
+    "alpha": 0.01,
+    "n": 500,
+    "mean_miss": 0.00991,
+    "sd": 0.005833699898304941,
+    "band": [
+     0.007339002829138736,
+     0.01066498918682933
+    ],
+    "pass": true
+   },
+   {
+    "arm": "S#0",
+    "stratum": "D3",
+    "alpha": 0.05,
+    "n": 50,
+    "mean_miss": 0.039459130434782615,
+    "sd": 0.027635449319304974,
+    "band": [
+     0.02724196482495318,
+     0.05315019203779192
+    ],
+    "pass": true
+   },
+   {
+    "arm": "S#0",
+    "stratum": "D3",
+    "alpha": 0.05,
+    "n": 500,
+    "mean_miss": 0.05002714285714285,
+    "sd": 0.01301707408318301,
+    "band": [
+     0.04652016294344615,
+     0.05148382907252192
+    ],
+    "pass": true
+   },
+   {
+    "arm": "S#0",
+    "stratum": "D3",
+    "alpha": 0.1,
+    "n": 50,
+    "mean_miss": 0.09765304347826087,
+    "sd": 0.04148035651363471,
+    "band": [
+     0.07566377024220476,
+     0.10472838662054035
+    ],
+    "pass": true
+   },
+   {
+    "arm": "S#0",
+    "stratum": "D3",
+    "alpha": 0.1,
+    "n": 500,
+    "mean_miss": 0.10057714285714286,
+    "sd": 0.018268983658846282,
+    "band": [
+     0.09592149260748385,
+     0.10208249940848423
+    ],
+    "pass": true
+   },
+   {
+    "arm": "S#0",
+    "stratum": "D3",
+    "alpha": 0.2,
+    "n": 50,
+    "mean_miss": 0.19616173913043478,
+    "sd": 0.05460097791855938,
+    "band": [
+     0.17416813770867465,
+     0.2062240191540705
+    ],
+    "pass": true
+   },
+   {
+    "arm": "S#0",
+    "stratum": "D3",
+    "alpha": 0.2,
+    "n": 500,
+    "mean_miss": 0.19999571428571428,
+    "sd": 0.023677669696284046,
+    "band": [
+     0.19530495116850857,
+     0.20269904084745952
+    ],
+    "pass": true
+   },
+   {
+    "arm": "S#0",
+    "stratum": "D4",
+    "alpha": 0.01,
+    "n": 50,
+    "mean_miss": 0.0,
+    "sd": 0.0,
+    "band": [
+     -0.009607843137254901,
+     0.01
+    ],
+    "pass": true
+   },
+   {
+    "arm": "S#0",
+    "stratum": "D4",
+    "alpha": 0.01,
+    "n": 500,
+    "mean_miss": 0.009842857142857143,
+    "sd": 0.005913498055734317,
+    "band": [
+     0.007329906558719536,
+     0.010674085457248529
+    ],
+    "pass": true
+   },
+   {
+    "arm": "S#0",
+    "stratum": "D4",
+    "alpha": 0.05,
+    "n": 50,
+    "mean_miss": 0.03795217391304348,
+    "sd": 0.026820784781083698,
+    "band": [
+     0.027334829236605185,
+     0.05305732762613992
+    ],
+    "pass": true
+   },
+   {
+    "arm": "S#0",
+    "stratum": "D4",
+    "alpha": 0.05,
+    "n": 500,
+    "mean_miss": 0.049698571428571425,
+    "sd": 0.013272096845529952,
+    "band": [
+     0.046491092648039745,
+     0.05151289936792833
+    ],
+    "pass": true
+   },
+   {
+    "arm": "S#0",
+    "stratum": "D4",
+    "alpha": 0.1,
+    "n": 50,
+    "mean_miss": 0.09574521739130436,
+    "sd": 0.04125375645176672,
+    "band": [
+     0.0756896006060397,
+     0.10470255625670541
+    ],
+    "pass": true
+   },
+   {
+    "arm": "S#0",
+    "stratum": "D4",
+    "alpha": 0.1,
+    "n": 500,
+    "mean_miss": 0.09900999999999999,
+    "sd": 0.017487055947103435,
+    "band": [
+     0.09601062531610026,
+     0.10199336669986782
+    ],
+    "pass": true
+   },
+   {
+    "arm": "S#0",
+    "stratum": "D4",
+    "alpha": 0.2,
+    "n": 50,
+    "mean_miss": 0.1938426086956522,
+    "sd": 0.058428463053092045,
+    "band": [
+     0.17373183891518446,
+     0.20666031794756068
+    ],
+    "pass": true
+   },
+   {
+    "arm": "S#0",
+    "stratum": "D4",
+    "alpha": 0.2,
+    "n": 500,
+    "mean_miss": 0.19965285714285716,
+    "sd": 0.023913114459760666,
+    "band": [
+     0.19527811258844158,
+     0.2027258794275265
+    ],
+    "pass": true
+   },
+   {
+    "arm": "full#0",
+    "stratum": "D1",
+    "alpha": 0.01,
+    "n": 50,
+    "mean_miss": 0.0,
+    "sd": 0.0,
+    "band": [
+     -0.009607843137254901,
+     0.01
+    ],
+    "pass": true
+   },
+   {
+    "arm": "full#0",
+    "stratum": "D1",
+    "alpha": 0.01,
+    "n": 500,
+    "mean_miss": 0.010261428571428572,
+    "sd": 0.00611853237952498,
+    "band": [
+     0.0073065344945704574,
+     0.010697457521397608
+    ],
+    "pass": true
+   },
+   {
+    "arm": "full#0",
+    "stratum": "D1",
+    "alpha": 0.05,
+    "n": 50,
+    "mean_miss": 0.03874173913043478,
+    "sd": 0.02656564467774952,
+    "band": [
+     0.027363912907826096,
+     0.05302824395491901
+    ],
+    "pass": true
+   },
+   {
+    "arm": "full#0",
+    "stratum": "D1",
+    "alpha": 0.05,
+    "n": 500,
+    "mean_miss": 0.05036,
+    "sd": 0.013184380962743701,
+    "band": [
+     0.04650109146775672,
+     0.051502900548211356
+    ],
+    "pass": true
+   },
+   {
+    "arm": "full#0",
+    "stratum": "D1",
+    "alpha": 0.1,
+    "n": 50,
+    "mean_miss": 0.09765130434782608,
+    "sd": 0.039916233137167106,
+    "band": [
+     0.07584206620366143,
+     0.10455009065908367
+    ],
+    "pass": true
+   },
+   {
+    "arm": "full#0",
+    "stratum": "D1",
+    "alpha": 0.1,
+    "n": 500,
+    "mean_miss": 0.10025142857142856,
+    "sd": 0.017998171775168527,
+    "band": [
+     0.09595236272035389,
+     0.10205162929561419
+    ],
+    "pass": true
+   },
+   {
+    "arm": "full#0",
+    "stratum": "D1",
+    "alpha": 0.2,
+    "n": 50,
+    "mean_miss": 0.1918191304347826,
+    "sd": 0.055403814429629175,
+    "band": [
+     0.17407662158546638,
+     0.20631553527727875
+    ],
+    "pass": true
+   },
+   {
+    "arm": "full#0",
+    "stratum": "D1",
+    "alpha": 0.2,
+    "n": 500,
+    "mean_miss": 0.19953,
+    "sd": 0.024643098438873606,
+    "band": [
+     0.19519490099697628,
+     0.2028090910189918
+    ],
+    "pass": true
+   },
+   {
+    "arm": "full#0",
+    "stratum": "D2",
+    "alpha": 0.01,
+    "n": 50,
+    "mean_miss": 0.0,
+    "sd": 0.0,
+    "band": [
+     -0.009607843137254901,
+     0.01
+    ],
+    "pass": true
+   },
+   {
+    "arm": "full#0",
+    "stratum": "D2",
+    "alpha": 0.01,
+    "n": 500,
+    "mean_miss": 0.009935714285714287,
+    "sd": 0.005766771506900241,
+    "band": [
+     0.007346632062275829,
+     0.010657359953692236
+    ],
+    "pass": true
+   },
+   {
+    "arm": "full#0",
+    "stratum": "D2",
+    "alpha": 0.05,
+    "n": 50,
+    "mean_miss": 0.03775652173913043,
+    "sd": 0.026813822190346916,
+    "band": [
+     0.027335622909168567,
+     0.05305653395357654
+    ],
+    "pass": true
+   },
+   {
+    "arm": "full#0",
+    "stratum": "D2",
+    "alpha": 0.05,
+    "n": 500,
+    "mean_miss": 0.04987,
+    "sd": 0.013067359974877847,
+    "band": [
+     0.046514430805213114,
+     0.05148956121075496
+    ],
+    "pass": true
+   },
+   {
+    "arm": "full#0",
+    "stratum": "D2",
+    "alpha": 0.1,
+    "n": 50,
+    "mean_miss": 0.09730000000000001,
+    "sd": 0.04183171079616508,
+    "band": [
+     0.07562371902210399,
+     0.10476843784064112
+    ],
+    "pass": true
+   },
+   {
+    "arm": "full#0",
+    "stratum": "D2",
+    "alpha": 0.1,
+    "n": 500,
+    "mean_miss": 0.09986857142857142,
+    "sd": 0.018101984337054868,
+    "band": [
+     0.0959405290243608,
+     0.10206346299160728
+    ],
+    "pass": true
+   },
+   {
+    "arm": "full#0",
+    "stratum": "D2",
+    "alpha": 0.2,
+    "n": 50,
+    "mean_miss": 0.1944808695652174,
+    "sd": 0.05682892871135823,
+    "band": [
+     0.17391417140738624,
+     0.2064779854553589
+    ],
+    "pass": true
+   },
+   {
+    "arm": "full#0",
+    "stratum": "D2",
+    "alpha": 0.2,
+    "n": 500,
+    "mean_miss": 0.19931714285714286,
+    "sd": 0.023604501928377923,
+    "band": [
+     0.19531329163430733,
+     0.20269070038166076
+    ],
+    "pass": true
+   },
+   {
+    "arm": "full#0",
+    "stratum": "D3",
+    "alpha": 0.01,
+    "n": 50,
+    "mean_miss": 0.0,
+    "sd": 0.0,
+    "band": [
+     -0.009607843137254901,
+     0.01
+    ],
+    "pass": true
+   },
+   {
+    "arm": "full#0",
+    "stratum": "D3",
+    "alpha": 0.01,
+    "n": 500,
+    "mean_miss": 0.009971428571428572,
+    "sd": 0.005825389227291629,
+    "band": [
+     0.007339950170698207,
+     0.010664041845269858
+    ],
+    "pass": true
+   },
+   {
+    "arm": "full#0",
+    "stratum": "D3",
+    "alpha": 0.05,
+    "n": 50,
+    "mean_miss": 0.039186956521739126,
+    "sd": 0.027742464425915023,
+    "band": [
+     0.027229766067738442,
+     0.05316239079500666
+    ],
+    "pass": true
+   },
+   {
+    "arm": "full#0",
+    "stratum": "D3",
+    "alpha": 0.05,
+    "n": 500,
+    "mean_miss": 0.050102857142857136,
+    "sd": 0.01305297700833832,
+    "band": [
+     0.04651607033370962,
+     0.05148792168225845
+    ],
+    "pass": true
+   },
+   {
+    "arm": "full#0",
+    "stratum": "D3",
+    "alpha": 0.1,
+    "n": 50,
+    "mean_miss": 0.09818086956521739,
+    "sd": 0.04251683259852633,
+    "band": [
+     0.07554562131427305,
+     0.10484653554847206
+    ],
+    "pass": true
+   },
+   {
+    "arm": "full#0",
+    "stratum": "D3",
+    "alpha": 0.1,
+    "n": 500,
+    "mean_miss": 0.10031571428571427,
+    "sd": 0.018151381608212086,
+    "band": [
+     0.09593489818085649,
+     0.10206909383511159
+    ],
+    "pass": true
+   },
+   {
+    "arm": "full#0",
+    "stratum": "D3",
+    "alpha": 0.2,
+    "n": 50,
+    "mean_miss": 0.19634347826086956,
+    "sd": 0.054710743536118295,
+    "band": [
+     0.17415562541801266,
+     0.20623653144473247
+    ],
+    "pass": true
+   },
+   {
+    "arm": "full#0",
+    "stratum": "D3",
+    "alpha": 0.2,
+    "n": 500,
+    "mean_miss": 0.20005571428571428,
+    "sd": 0.02369640563562777,
+    "band": [
+     0.1953028154403625,
+     0.2027011765756056
+    ],
+    "pass": true
+   },
+   {
+    "arm": "full#0",
+    "stratum": "D4",
+    "alpha": 0.01,
+    "n": 50,
+    "mean_miss": 0.0,
+    "sd": 0.0,
+    "band": [
+     -0.009607843137254901,
+     0.01
+    ],
+    "pass": true
+   },
+   {
+    "arm": "full#0",
+    "stratum": "D4",
+    "alpha": 0.01,
+    "n": 500,
+    "mean_miss": 0.009998571428571431,
+    "sd": 0.006114773064743023,
+    "band": [
+     0.007306963022558436,
+     0.01069702899340963
+    ],
+    "pass": true
+   },
+   {
+    "arm": "full#0",
+    "stratum": "D4",
+    "alpha": 0.05,
+    "n": 50,
+    "mean_miss": 0.037583478260869566,
+    "sd": 0.026415453001106412,
+    "band": [
+     0.027381033404708092,
+     0.05301112345803701
+    ],
+    "pass": true
+   },
+   {
+    "arm": "full#0",
+    "stratum": "D4",
+    "alpha": 0.05,
+    "n": 500,
+    "mean_miss": 0.04946857142857143,
+    "sd": 0.013117360978359466,
+    "band": [
+     0.04650873114166759,
+     0.05149526087430048
+    ],
+    "pass": true
+   },
+   {
+    "arm": "full#0",
+    "stratum": "D4",
+    "alpha": 0.1,
+    "n": 50,
+    "mean_miss": 0.09564,
+    "sd": 0.04106843709019918,
+    "band": [
+     0.07571072534226214,
+     0.10468143152048297
+    ],
+    "pass": true
+   },
+   {
+    "arm": "full#0",
+    "stratum": "D4",
+    "alpha": 0.1,
+    "n": 500,
+    "mean_miss": 0.09932571428571428,
+    "sd": 0.01764848584797562,
+    "band": [
+     0.09599222376298949,
+     0.10201176825297859
+    ],
+    "pass": true
+   },
+   {
+    "arm": "full#0",
+    "stratum": "D4",
+    "alpha": 0.2,
+    "n": 50,
+    "mean_miss": 0.19474347826086955,
+    "sd": 0.05822643154584589,
+    "band": [
+     0.1737548686853234,
+     0.20663728817742175
+    ],
+    "pass": true
+   },
+   {
+    "arm": "full#0",
+    "stratum": "D4",
+    "alpha": 0.2,
+    "n": 500,
+    "mean_miss": 0.19977857142857144,
+    "sd": 0.023757943915304544,
+    "band": [
+     0.19529580063136057,
+     0.20270819138460752
+    ],
+    "pass": true
+   },
+   {
+    "arm": "full_rd@0.2#0",
+    "stratum": "D1",
+    "alpha": 0.01,
+    "n": 50,
+    "mean_miss": 0.0,
+    "sd": 0.0,
+    "band": [
+     -0.009607843137254901,
+     0.01
+    ],
+    "pass": true
+   },
+   {
+    "arm": "full_rd@0.2#0",
+    "stratum": "D1",
+    "alpha": 0.01,
+    "n": 500,
+    "mean_miss": 0.010021428571428572,
+    "sd": 0.005569225383607153,
+    "band": [
+     0.007369150539088139,
+     0.010634841476879925
+    ],
+    "pass": true
+   },
+   {
+    "arm": "full_rd@0.2#0",
+    "stratum": "D1",
+    "alpha": 0.05,
+    "n": 50,
+    "mean_miss": 0.03969652173913043,
+    "sd": 0.02793764900098793,
+    "band": [
+     0.027207516786129513,
+     0.053184640076615594
+    ],
+    "pass": true
+   },
+   {
+    "arm": "full_rd@0.2#0",
+    "stratum": "D1",
+    "alpha": 0.05,
+    "n": 500,
+    "mean_miss": 0.05029857142857142,
+    "sd": 0.012642949365494364,
+    "band": [
+     0.04656280978783745,
+     0.05144118222813062
+    ],
+    "pass": true
+   },
+   {
+    "arm": "full_rd@0.2#0",
+    "stratum": "D1",
+    "alpha": 0.1,
+    "n": 50,
+    "mean_miss": 0.09530695652173912,
+    "sd": 0.043182327429738314,
+    "band": [
+     0.07546976090417971,
+     0.1049223959585654
+    ],
+    "pass": true
+   },
+   {
+    "arm": "full_rd@0.2#0",
+    "stratum": "D1",
+    "alpha": 0.1,
+    "n": 500,
+    "mean_miss": 0.10011714285714285,
+    "sd": 0.01758993710961393,
+    "band": [
+     0.09599889779123773,
+     0.10200509422473035
+    ],
+    "pass": true
+   },
+   {
+    "arm": "full_rd@0.2#0",
+    "stratum": "D1",
+    "alpha": 0.2,
+    "n": 50,
+    "mean_miss": 0.19304695652173914,
+    "sd": 0.055525503664276096,
+    "band": [
+     0.17406275010996983,
+     0.2063294067527753
+    ],
+    "pass": true
+   },
+   {
+    "arm": "full_rd@0.2#0",
+    "stratum": "D1",
+    "alpha": 0.2,
+    "n": 500,
+    "mean_miss": 0.19990857142857144,
+    "sd": 0.023675034321141968,
+    "band": [
+     0.195305251577512,
+     0.2026987404384561
+    ],
+    "pass": true
+   },
+   {
+    "arm": "full_rd@0.2#0",
+    "stratum": "D2",
+    "alpha": 0.01,
+    "n": 50,
+    "mean_miss": 0.0,
+    "sd": 0.0,
+    "band": [
+     -0.009607843137254901,
+     0.01
+    ],
+    "pass": true
+   },
+   {
+    "arm": "full_rd@0.2#0",
+    "stratum": "D2",
+    "alpha": 0.01,
+    "n": 500,
+    "mean_miss": 0.009734285714285714,
+    "sd": 0.0057159664337951,
+    "band": [
+     0.0073524233825082615,
+     0.010651568633459804
+    ],
+    "pass": true
+   },
+   {
+    "arm": "full_rd@0.2#0",
+    "stratum": "D2",
+    "alpha": 0.05,
+    "n": 50,
+    "mean_miss": 0.03838173913043478,
+    "sd": 0.026743358316025163,
+    "band": [
+     0.027343655155479298,
+     0.053048501707265806
+    ],
+    "pass": true
+   },
+   {
+    "arm": "full_rd@0.2#0",
+    "stratum": "D2",
+    "alpha": 0.05,
+    "n": 500,
+    "mean_miss": 0.049659999999999996,
+    "sd": 0.01292863135418308,
+    "band": [
+     0.046530244617077623,
+     0.05147374739889045
+    ],
+    "pass": true
+   },
+   {
+    "arm": "full_rd@0.2#0",
+    "stratum": "D2",
+    "alpha": 0.1,
+    "n": 50,
+    "mean_miss": 0.09700956521739129,
+    "sd": 0.04200903830350993,
+    "band": [
+     0.07560350528520161,
+     0.1047886515775435
+    ],
+    "pass": true
+   },
+   {
+    "arm": "full_rd@0.2#0",
+    "stratum": "D2",
+    "alpha": 0.1,
+    "n": 500,
+    "mean_miss": 0.09903428571428571,
+    "sd": 0.017507270280541772,
+    "band": [
+     0.09600832106435783,
+     0.10199567095161025
+    ],
+    "pass": true
+   },
+   {
+    "arm": "full_rd@0.2#0",
+    "stratum": "D2",
+    "alpha": 0.2,
+    "n": 50,
+    "mean_miss": 0.1925817391304348,
+    "sd": 0.056875821621952226,
+    "band": [
+     0.1739088260384047,
+     0.20648333082434042
+    ],
+    "pass": true
+   },
+   {
+    "arm": "full_rd@0.2#0",
+    "stratum": "D2",
+    "alpha": 0.2,
+    "n": 500,
+    "mean_miss": 0.19947571428571428,
+    "sd": 0.023457818980291593,
+    "band": [
+     0.19533001216777152,
+     0.20267397984819657
+    ],
+    "pass": true
+   },
+   {
+    "arm": "full_rd@0.2#0",
+    "stratum": "D3",
+    "alpha": 0.01,
+    "n": 50,
+    "mean_miss": 0.0,
+    "sd": 0.0,
+    "band": [
+     -0.009607843137254901,
+     0.01
+    ],
+    "pass": true
+   },
+   {
+    "arm": "full_rd@0.2#0",
+    "stratum": "D3",
+    "alpha": 0.01,
+    "n": 500,
+    "mean_miss": 0.010154285714285713,
+    "sd": 0.006075784055295288,
+    "band": [
+     0.007311407418077558,
+     0.010692584597890508
+    ],
+    "pass": true
+   },
+   {
+    "arm": "full_rd@0.2#0",
+    "stratum": "D3",
+    "alpha": 0.05,
+    "n": 50,
+    "mean_miss": 0.040402608695652174,
+    "sd": 0.027085090588530432,
+    "band": [
+     0.027304700757761195,
+     0.05308745610498391
+    ],
+    "pass": true
+   },
+   {
+    "arm": "full_rd@0.2#0",
+    "stratum": "D3",
+    "alpha": 0.05,
+    "n": 500,
+    "mean_miss": 0.04957714285714286,
+    "sd": 0.012863447935237991,
+    "band": [
+     0.04653767493908847,
+     0.051466317076879604
+    ],
+    "pass": true
+   },
+   {
+    "arm": "full_rd@0.2#0",
+    "stratum": "D3",
+    "alpha": 0.1,
+    "n": 50,
+    "mean_miss": 0.09977304347826085,
+    "sd": 0.042850557689508115,
+    "band": [
+     0.0755075796630491,
+     0.10488457719969602
+    ],
+    "pass": true
+   },
+   {
+    "arm": "full_rd@0.2#0",
+    "stratum": "D3",
+    "alpha": 0.1,
+    "n": 500,
+    "mean_miss": 0.09923142857142858,
+    "sd": 0.017754160708616032,
+    "band": [
+     0.0959801777817305,
+     0.10202381423423758
+    ],
+    "pass": true
+   },
+   {
+    "arm": "full_rd@0.2#0",
+    "stratum": "D3",
+    "alpha": 0.2,
+    "n": 50,
+    "mean_miss": 0.19646869565217392,
+    "sd": 0.05689806975923879,
+    "band": [
+     0.17390628995136206,
+     0.20648586691138307
+    ],
+    "pass": true
+   },
+   {
+    "arm": "full_rd@0.2#0",
+    "stratum": "D3",
+    "alpha": 0.2,
+    "n": 500,
+    "mean_miss": 0.19962428571428573,
+    "sd": 0.023556000350217314,
+    "band": [
+     0.19531882037688633,
+     0.20268517163908176
+    ],
+    "pass": true
+   },
+   {
+    "arm": "full_rd@0.2#0",
+    "stratum": "D4",
+    "alpha": 0.01,
+    "n": 50,
+    "mean_miss": 0.0,
+    "sd": 0.0,
+    "band": [
+     -0.009607843137254901,
+     0.01
+    ],
+    "pass": true
+   },
+   {
+    "arm": "full_rd@0.2#0",
+    "stratum": "D4",
+    "alpha": 0.01,
+    "n": 500,
+    "mean_miss": 0.010022857142857142,
+    "sd": 0.00597635566471012,
+    "band": [
+     0.0073227413580737154,
+     0.01068125065789435
+    ],
+    "pass": true
+   },
+   {
+    "arm": "full_rd@0.2#0",
+    "stratum": "D4",
+    "alpha": 0.05,
+    "n": 50,
+    "mean_miss": 0.03731652173913043,
+    "sd": 0.026406517909790133,
+    "band": [
+     0.027382051924551797,
+     0.0530101049381933
+    ],
+    "pass": true
+   },
+   {
+    "arm": "full_rd@0.2#0",
+    "stratum": "D4",
+    "alpha": 0.05,
+    "n": 500,
+    "mean_miss": 0.04979142857142857,
+    "sd": 0.012560546425621127,
+    "band": [
+     0.04657220297996833,
+     0.05143178903599974
+    ],
+    "pass": true
+   },
+   {
+    "arm": "full_rd@0.2#0",
+    "stratum": "D4",
+    "alpha": 0.1,
+    "n": 50,
+    "mean_miss": 0.09389652173913043,
+    "sd": 0.04081214686706651,
+    "band": [
+     0.07573994011676961,
+     0.1046522167459755
+    ],
+    "pass": true
+   },
+   {
+    "arm": "full_rd@0.2#0",
+    "stratum": "D4",
+    "alpha": 0.1,
+    "n": 500,
+    "mean_miss": 0.09964285714285714,
+    "sd": 0.017279680635737375,
+    "band": [
+     0.0960342642317246,
+     0.10196972778424347
+    ],
+    "pass": true
+   },
+   {
+    "arm": "full_rd@0.2#0",
+    "stratum": "D4",
+    "alpha": 0.2,
+    "n": 50,
+    "mean_miss": 0.19332521739130437,
+    "sd": 0.055951188267541155,
+    "band": [
+     0.17401422590353038,
+     0.20637793095921475
+    ],
+    "pass": true
+   },
+   {
+    "arm": "full_rd@0.2#0",
+    "stratum": "D4",
+    "alpha": 0.2,
+    "n": 500,
+    "mean_miss": 0.19962,
+    "sd": 0.02403876106337499,
+    "band": [
+     0.1952637900085657,
+     0.2027402020074024
+    ],
+    "pass": true
+   },
+   {
+    "arm": "CSF-1",
+    "stratum": "D1",
+    "alpha": 0.01,
+    "n": 50,
+    "mean_miss": 0.0,
+    "sd": 0.0,
+    "band": [
+     -0.009607843137254901,
+     0.01
+    ],
+    "pass": true
+   },
+   {
+    "arm": "CSF-1",
+    "stratum": "D1",
+    "alpha": 0.01,
+    "n": 500,
+    "mean_miss": 0.00982,
+    "sd": 0.005925960067111718,
+    "band": [
+     0.007328486001790558,
+     0.010675506014177508
+    ],
+    "pass": true
+   },
+   {
+    "arm": "CSF-1",
+    "stratum": "D1",
+    "alpha": 0.05,
+    "n": 50,
+    "mean_miss": 0.03814782608695653,
+    "sd": 0.026318093700811663,
+    "band": [
+     0.02739213148706781,
+     0.053000025375677294
+    ],
+    "pass": true
+   },
+   {
+    "arm": "CSF-1",
+    "stratum": "D1",
+    "alpha": 0.05,
+    "n": 500,
+    "mean_miss": 0.04977285714285714,
+    "sd": 0.012696352176238374,
+    "band": [
+     0.04655672234893759,
+     0.05144726966703048
+    ],
+    "pass": true
+   },
+   {
+    "arm": "CSF-1",
+    "stratum": "D1",
+    "alpha": 0.1,
+    "n": 50,
+    "mean_miss": 0.09812869565217391,
+    "sd": 0.040306044703263474,
+    "band": [
+     0.07579763119999756,
+     0.10459452566274755
+    ],
+    "pass": true
+   },
+   {
+    "arm": "CSF-1",
+    "stratum": "D1",
+    "alpha": 0.1,
+    "n": 500,
+    "mean_miss": 0.09965285714285714,
+    "sd": 0.018228973113340458,
+    "band": [
+     0.09592605344890257,
+     0.10207793856706551
+    ],
+    "pass": true
+   },
+   {
+    "arm": "CSF-1",
+    "stratum": "D1",
+    "alpha": 0.2,
+    "n": 50,
+    "mean_miss": 0.19498695652173917,
+    "sd": 0.05710092419479117,
+    "band": [
+     0.17388316637481643,
+     0.2065089904879287
+    ],
+    "pass": true
+   },
+   {
+    "arm": "CSF-1",
+    "stratum": "D1",
+    "alpha": 0.2,
+    "n": 500,
+    "mean_miss": 0.19989857142857143,
+    "sd": 0.024657402451574748,
+    "band": [
+     0.19519327046850546,
+     0.20281072154746263
+    ],
+    "pass": true
+   },
+   {
+    "arm": "CSF-1",
+    "stratum": "D2",
+    "alpha": 0.01,
+    "n": 50,
+    "mean_miss": 0.0,
+    "sd": 0.0,
+    "band": [
+     -0.009607843137254901,
+     0.01
+    ],
+    "pass": true
+   },
+   {
+    "arm": "CSF-1",
+    "stratum": "D2",
+    "alpha": 0.01,
+    "n": 500,
+    "mean_miss": 0.009657142857142859,
+    "sd": 0.005783295577110168,
+    "band": [
+     0.007344748467266905,
+     0.010659243548701161
+    ],
+    "pass": true
+   },
+   {
+    "arm": "CSF-1",
+    "stratum": "D2",
+    "alpha": 0.05,
+    "n": 50,
+    "mean_miss": 0.03827478260869565,
+    "sd": 0.02617740834665351,
+    "band": [
+     0.027408168348903576,
+     0.05298398851384153
+    ],
+    "pass": true
+   },
+   {
+    "arm": "CSF-1",
+    "stratum": "D2",
+    "alpha": 0.05,
+    "n": 500,
+    "mean_miss": 0.04962571428571429,
+    "sd": 0.012707902610105713,
+    "band": [
+     0.0465554057036252,
+     0.05144858631234287
+    ],
+    "pass": true
+   },
+   {
+    "arm": "CSF-1",
+    "stratum": "D2",
+    "alpha": 0.1,
+    "n": 50,
+    "mean_miss": 0.09773217391304348,
+    "sd": 0.040202077176157314,
+    "band": [
+     0.07580948256062842,
+     0.1045826743021167
+    ],
+    "pass": true
+   },
+   {
+    "arm": "CSF-1",
+    "stratum": "D2",
+    "alpha": 0.1,
+    "n": 500,
+    "mean_miss": 0.0997742857142857,
+    "sd": 0.018352783255535198,
+    "band": [
+     0.09591194020906943,
+     0.10209205180689865
+    ],
+    "pass": true
+   },
+   {
+    "arm": "CSF-1",
+    "stratum": "D2",
+    "alpha": 0.2,
+    "n": 50,
+    "mean_miss": 0.19485304347826085,
+    "sd": 0.05734611912007889,
+    "band": [
+     0.1738552163642187,
+     0.20653694049852644
+    ],
+    "pass": true
+   },
+   {
+    "arm": "CSF-1",
+    "stratum": "D2",
+    "alpha": 0.2,
+    "n": 500,
+    "mean_miss": 0.19985285714285714,
+    "sd": 0.024674398684471244,
+    "band": [
+     0.19519133305120767,
+     0.20281265896476042
+    ],
+    "pass": true
+   },
+   {
+    "arm": "CSF-1",
+    "stratum": "D3",
+    "alpha": 0.01,
+    "n": 50,
+    "mean_miss": 0.0,
+    "sd": 0.0,
+    "band": [
+     -0.009607843137254901,
+     0.01
+    ],
+    "pass": true
+   },
+   {
+    "arm": "CSF-1",
+    "stratum": "D3",
+    "alpha": 0.01,
+    "n": 500,
+    "mean_miss": 0.01034,
+    "sd": 0.005808137480432418,
+    "band": [
+     0.007341916714283801,
+     0.010662075301684264
+    ],
+    "pass": true
+   },
+   {
+    "arm": "CSF-1",
+    "stratum": "D3",
+    "alpha": 0.05,
+    "n": 50,
+    "mean_miss": 0.03904695652173913,
+    "sd": 0.028832745171294864,
+    "band": [
+     0.027105483893659434,
+     0.053286672969085666
+    ],
+    "pass": true
+   },
+   {
+    "arm": "CSF-1",
+    "stratum": "D3",
+    "alpha": 0.05,
+    "n": 500,
+    "mean_miss": 0.049954285714285715,
+    "sd": 0.013106560839483404,
+    "band": [
+     0.04650996226011627,
+     0.0514940297558518
+    ],
+    "pass": true
+   },
+   {
+    "arm": "CSF-1",
+    "stratum": "D3",
+    "alpha": 0.1,
+    "n": 50,
+    "mean_miss": 0.09819739130434783,
+    "sd": 0.04205047081072377,
+    "band": [
+     0.07559878235296981,
+     0.1047933745097753
+    ],
+    "pass": true
+   },
+   {
+    "arm": "CSF-1",
+    "stratum": "D3",
+    "alpha": 0.1,
+    "n": 500,
+    "mean_miss": 0.09958714285714286,
+    "sd": 0.01777203967961938,
+    "band": [
+     0.09597813974024806,
+     0.10202585227572002
+    ],
+    "pass": true
+   },
+   {
+    "arm": "CSF-1",
+    "stratum": "D3",
+    "alpha": 0.2,
+    "n": 50,
+    "mean_miss": 0.19692782608695653,
+    "sd": 0.05544939358082283,
+    "band": [
+     0.17407142597321054,
+     0.2063207308895346
+    ],
+    "pass": true
+   },
+   {
+    "arm": "CSF-1",
+    "stratum": "D3",
+    "alpha": 0.2,
+    "n": 500,
+    "mean_miss": 0.19952428571428574,
+    "sd": 0.023946500493940957,
+    "band": [
+     0.19527430688158176,
+     0.20272968513438633
+    ],
+    "pass": true
+   },
+   {
+    "arm": "CSF-1",
+    "stratum": "D4",
+    "alpha": 0.01,
+    "n": 50,
+    "mean_miss": 0.0,
+    "sd": 0.0,
+    "band": [
+     -0.009607843137254901,
+     0.01
+    ],
+    "pass": true
+   },
+   {
+    "arm": "CSF-1",
+    "stratum": "D4",
+    "alpha": 0.01,
+    "n": 500,
+    "mean_miss": 0.009504285714285715,
+    "sd": 0.0055253683136170725,
+    "band": [
+     0.007374149849614533,
+     0.010629842166353532
+    ],
+    "pass": true
+   },
+   {
+    "arm": "CSF-1",
+    "stratum": "D4",
+    "alpha": 0.05,
+    "n": 50,
+    "mean_miss": 0.03774521739130435,
+    "sd": 0.0275602502571609,
+    "band": [
+     0.027250536839979193,
+     0.053141620022765915
+    ],
+    "pass": true
+   },
+   {
+    "arm": "CSF-1",
+    "stratum": "D4",
+    "alpha": 0.05,
+    "n": 500,
+    "mean_miss": 0.048948571428571425,
+    "sd": 0.012691249373793373,
+    "band": [
+     0.046557304022405134,
+     0.05144668799356294
+    ],
+    "pass": true
+   },
+   {
+    "arm": "CSF-1",
+    "stratum": "D4",
+    "alpha": 0.1,
+    "n": 50,
+    "mean_miss": 0.09619478260869564,
+    "sd": 0.043225015385470564,
+    "band": [
+     0.07546489486213699,
+     0.10492726200060812
+    ],
+    "pass": true
+   },
+   {
+    "arm": "CSF-1",
+    "stratum": "D4",
+    "alpha": 0.1,
+    "n": 500,
+    "mean_miss": 0.09914571428571428,
+    "sd": 0.017404950787168014,
+    "band": [
+     0.09601998456400326,
+     0.10198400745196481
+    ],
+    "pass": true
+   },
+   {
+    "arm": "CSF-1",
+    "stratum": "D4",
+    "alpha": 0.2,
+    "n": 50,
+    "mean_miss": 0.19459130434782612,
+    "sd": 0.058909119401166006,
+    "band": [
+     0.17367704842550863,
+     0.2067151084372365
+    ],
+    "pass": true
+   },
+   {
+    "arm": "CSF-1",
+    "stratum": "D4",
+    "alpha": 0.2,
+    "n": 500,
+    "mean_miss": 0.19986285714285715,
+    "sd": 0.02423594061620564,
+    "band": [
+     0.1952413133174808,
+     0.2027626786984873
+    ],
+    "pass": true
+   }
+  ],
+  "draws": 1000,
+  "n_objects": 1200
+ },
+ "sec08g.json": {
+  "purpose": "p2 addendum 08g part 1 (label route, secondary)",
+  "draws": 2000,
+  "RE_point": {
+   "full_rd@0.2#0": 0.426368634535423,
+   "CSF-1": 0.7469102044808502,
+   "P#0": 0.7830903768295072,
+   "full#0": 0.8104471863268327,
+   "S#0": 0.7896959085696333,
+   "oracle#0": 0.1271104223338426
+  },
+  "H2C_vs_Mondrian": {
+   "D": 0.43810018155956754,
+   "CI**": [
+    0.3732981115147013,
+    0.4871632897542735
+   ],
+   "decision": "superiority"
+  },
+  "oracle_decomposition": {
+   "share_of_CSF1_to_oracle_gap_closed": 0.5171695427756691,
+   "CI**": [
+    0.4489396984944918,
+    0.5762178135728712
+   ],
+   "RE": {
+    "CSF-1": 0.7469102044808502,
+    "full_rd@0.2#0": 0.426368634535423,
+    "oracle#0": 0.1271104223338426
+   }
+  },
+  "H4d": {
+   "full_rd": {
+    "D_by_family": {
+     "F1": 0.4134578196589457,
+     "F2": 0.5037243391548785,
+     "F3": 0.44918550294042325,
+     "F4": 0.4476484797016862
+    },
+    "F4_minus_F1": 0.03419066004274052,
+    "CI**": [
+     -0.042437854521420265,
+     0.11383337229213611
+    ],
+    "decision": "inconclusive"
+   },
+   "full": {
+    "D_by_family": {
+     "F1": -0.021096959640664492,
+     "F2": -0.04046421113091747,
+     "F3": -0.056162822115290334,
+     "F4": -0.019003089586938193
+    },
+    "F4_minus_F1": 0.002093870053726299,
+    "CI**": [
+     -0.017419434219134552,
+     0.02128178766603432
+    ],
+    "decision": "inconclusive"
+   }
+  },
+  "H2R": {
+   "D": -0.261377551034218,
+   "CI**": [
+    -0.5319827124055064,
+    -0.03248535965457069
+   ],
+   "n_cal": 352,
+   "n_test": 548
+  },
+  "H2H": {
+   "pooled_D_RE": 0.43881726391279163,
+   "pooled_95CI": [
+    0.4035603647262499,
+    0.47407416309933337
+   ],
+   "tau": 0.05108585475019468,
+   "Q": 31.043547423364686,
+   "cells": {
+    "F1D1": {
+     "D": 0.48015201793078577,
+     "CI**": [
+      0.3502842147677596,
+      0.5802827483571029
+     ],
+     "se": 0.04997057262586342
+    },
+    "F1D2": {
+     "D": 0.47392788806388375,
+     "CI**": [
+      0.32504569587025106,
+      0.569216163055664
+     ],
+     "se": 0.05462783703271469
+    },
+    "F1D3": {
+     "D": 0.2978802744580348,
+     "CI**": [
+      0.1718858557267994,
+      0.42379848930789826
+     ],
+     "se": 0.05722205248322194
+    },
+    "F1D4": {
+     "D": 0.37528101549446424,
+     "CI**": [
+      0.2506458392334,
+      0.4712311686067977
+     ],
+     "se": 0.0486682626669698
+    },
+    "F2D1": {
+     "D": 0.5274882677273548,
+     "CI**": [
+      0.4213268631194489,
+      0.6168284531328264
+     ],
+     "se": 0.04389607721499382
+    },
+    "F2D2": {
+     "D": 0.533992797487673,
+     "CI**": [
+      0.4081688785820611,
+      0.6140755869339224
+     ],
+     "se": 0.04613170190174794
+    },
+    "F2D3": {
+     "D": 0.38680366001041666,
+     "CI**": [
+      0.26721137924064053,
+      0.497159055628759
+     ],
+     "se": 0.050106448806255866
+    },
+    "F2D4": {
+     "D": 0.44586171927356777,
+     "CI**": [
+      0.3508406631816356,
+      0.524304872220233
+     ],
+     "se": 0.039652552016016675
+    },
+    "F3D1": {
+     "D": 0.5235626294677332,
+     "CI**": [
+      0.41321602373983285,
+      0.610526860466252
+     ],
+     "se": 0.045187746262968495
+    },
+    "F3D2": {
+     "D": 0.44314731789748596,
+     "CI**": [
+      0.21098369947930765,
+      0.5939281720088866
+     ],
+     "se": 0.08711014355606653
+    },
+    "F3D3": {
+     "D": 0.3115386975961755,
+     "CI**": [
+      0.16016150721888964,
+      0.445098570055302
+     ],
+     "se": 0.06442771438615433
+    },
+    "F3D4": {
+     "D": 0.4072075624567415,
+     "CI**": [
+      0.3113927684248409,
+      0.4901444809940522
+     ],
+     "se": 0.04034304734814587
+    },
+    "F4D1": {
+     "D": 0.4881418161470745,
+     "CI**": [
+      0.3697486343968586,
+      0.5864010838964067
+     ],
+     "se": 0.04742201203427138
+    },
+    "F4D2": {
+     "D": 0.4721794291667859,
+     "CI**": [
+      0.3278798591750272,
+      0.5629974521840162
+     ],
+     "se": 0.05392315840624458
+    },
+    "F4D3": {
+     "D": 0.33475372197162445,
+     "CI**": [
+      0.20138864629594821,
+      0.462809228998695
+     ],
+     "se": 0.056946785962508364
+    },
+    "F4D4": {
+     "D": 0.4406409952692697,
+     "CI**": [
+      0.3363516510460673,
+      0.5230355850304245
+     ],
+     "se": 0.042996159710197185
+    }
+   },
+   "guard_cells_flagged": [],
+   "decision": "pass (no cell worse by > 10 %)"
+  },
+  "D_loc": {
+   "n_pairs": 2794,
+   "dlogF_mean": 0.5091454406069631,
+   "dlogF_sd": 0.009335401101161685,
+   "mean_abs_dg_over_g": {
+    "P#0": 5.14580327981875e-06,
+    "S#0": 0.0013605878913457742,
+    "full#0": 0.0018982823420474876,
+    "full_rd@0.2#0": 0.4469343717694929
+   },
+   "preload_slip_rate": {
+    "id": 0.0,
+    "S1": 0.0,
+    "S1m": 0.0,
+    "S3": 0.0,
+    "s2": 0.0
+   }
+  },
+  "H2n": {
+   "alpha_0.1": {
+    "D_mean": 0.41461620524800136,
+    "interval": [
+     0.2585147702224499,
+     0.5477153880729282
+    ],
+    "decision": "confirmed (lower > 0)"
+   },
+   "alpha_0.2": {
+    "D_mean": 0.4653507297598825,
+    "interval": [
+     0.27864175060393026,
+     0.598432638159404
+    ],
+    "decision": "confirmed (lower > 0)"
+   }
+  }
+ },
+ "sec08h_dfid.json": {
+  "purpose": "08h \u00a74 D-FID family classification from touch-only features",
+  "results": {
+   "touch_only": {
+    "accuracy": 0.7257142857142858,
+    "CI95": [
+     0.7014285714285714,
+     0.7514285714285714
+    ],
+    "chance": 0.25,
+    "n_test": 2800
+   },
+   "touch_plus_onset": {
+    "accuracy": 0.7296428571428571,
+    "CI95": [
+     0.7078571428571429,
+     0.7544732142857143
+    ],
+    "chance": 0.25,
+    "n_test": 2800
+   }
+  },
+  "draws": 500
+ },
+ "sec08h_h1c.json": {
+  "purpose": "08h \u00a71 H1c uncalibrated targeters (CertGrip-full features), label slip on id test",
+  "results": {
+   "alpha_0.01": {
+    "RAW-Q": {
+     "slip": 0.033928571428571426,
+     "slip_minus_alpha": 0.023928571428571424,
+     "CI**": [
+      0.015714285714285715,
+      0.03214285714285714
+     ],
+     "outside_pm_0.5alpha": true,
+     "inside_pm_0.25alpha": false
+    },
+    "RAW-G": {
+     "slip": 0.019642857142857142,
+     "slip_minus_alpha": 0.009642857142857142,
+     "CI**": [
+      0.003571428571428571,
+      0.01607142857142857
+     ],
+     "outside_pm_0.5alpha": false,
+     "inside_pm_0.25alpha": false
+    },
+    "RAW-Qv": {
+     "slip": 0.012857142857142857,
+     "slip_minus_alpha": 0.0028571428571428567,
+     "CI**": [
+      -0.0067857142857142855,
+      0.024290178571428588
+     ],
+     "outside_pm_0.5alpha": false,
+     "inside_pm_0.25alpha": false
+    }
+   },
+   "alpha_0.05": {
+    "RAW-Q": {
+     "slip": 0.0825,
+     "slip_minus_alpha": 0.0325,
+     "CI**": [
+      0.020000000000000004,
+      0.0450044642857143
+     ],
+     "outside_pm_0.5alpha": false,
+     "inside_pm_0.25alpha": false
+    },
+    "RAW-G": {
+     "slip": 0.07857142857142857,
+     "slip_minus_alpha": 0.028571428571428567,
+     "CI**": [
+      0.01607142857142857,
+      0.042142857142857135
+     ],
+     "outside_pm_0.5alpha": false,
+     "inside_pm_0.25alpha": false
+    },
+    "RAW-Qv": {
+     "slip": 0.06607142857142857,
+     "slip_minus_alpha": 0.01607142857142857,
+     "CI**": [
+      -0.008928571428571432,
+      0.04643303571428573
+     ],
+     "outside_pm_0.5alpha": false,
+     "inside_pm_0.25alpha": false
+    }
+   },
+   "alpha_0.1": {
+    "RAW-Q": {
+     "slip": 0.13285714285714287,
+     "slip_minus_alpha": 0.03285714285714286,
+     "CI**": [
+      0.01678571428571428,
+      0.05035714285714285
+     ],
+     "outside_pm_0.5alpha": false,
+     "inside_pm_0.25alpha": false
+    },
+    "RAW-G": {
+     "slip": 0.14892857142857144,
+     "slip_minus_alpha": 0.04892857142857143,
+     "CI**": [
+      0.03142857142857142,
+      0.06857142857142856
+     ],
+     "outside_pm_0.5alpha": false,
+     "inside_pm_0.25alpha": false
+    },
+    "RAW-Qv": {
+     "slip": 0.1125,
+     "slip_minus_alpha": 0.012499999999999997,
+     "CI**": [
+      -0.022151785714285714,
+      0.058575892857142854
+     ],
+     "outside_pm_0.5alpha": false,
+     "inside_pm_0.25alpha": false
+    }
+   },
+   "alpha_0.2": {
+    "RAW-Q": {
+     "slip": 0.235,
+     "slip_minus_alpha": 0.034999999999999976,
+     "CI**": [
+      0.012857142857142845,
+      0.057499999999999996
+     ],
+     "outside_pm_0.5alpha": false,
+     "inside_pm_0.25alpha": false
+    },
+    "RAW-G": {
+     "slip": 0.2507142857142857,
+     "slip_minus_alpha": 0.05071428571428571,
+     "CI**": [
+      0.027142857142857135,
+      0.07500000000000001
+     ],
+     "outside_pm_0.5alpha": false,
+     "inside_pm_0.25alpha": false
+    },
+    "RAW-Qv": {
+     "slip": 0.23964285714285713,
+     "slip_minus_alpha": 0.03964285714285712,
+     "CI**": [
+      -0.012500000000000011,
+      0.08892857142857141
+     ],
+     "outside_pm_0.5alpha": false,
+     "inside_pm_0.25alpha": false
+    }
+   }
+  },
+  "miss_at_0.05": {
+   "RAW-Q": false,
+   "RAW-G": false
+  },
+  "decision": "partly confirmed / not confirmed",
+  "draws": 2000
+ },
+ "sec08h_h3s.json": {
+  "purpose": "08h \u00a72 H3-S cumulative (slip - alpha) over shifted steps 1-500, decay minus constant eta",
+  "eta": 0.03412492930534316,
+  "results": {
+   "S1": {
+    "C_constant": 19.3,
+    "C_decay": 77.45,
+    "Delta_C": 58.150000000000006,
+    "CI**": [
+     48.20000000000001,
+     70.20062500000002
+    ],
+    "decision": "confirmed (lower > 0)"
+   },
+   "S2": {
+    "C_constant": -1.3000000000000007,
+    "C_decay": 1.599999999999999,
+    "Delta_C": 2.8999999999999995,
+    "CI**": [
+     -6.650624999999999,
+     7.000625000000004
+    ],
+    "decision": "inconclusive"
+   },
+   "S3": {
+    "C_constant": 18.599999999999994,
+    "C_decay": 61.0,
+    "Delta_C": 42.400000000000006,
+    "CI**": [
+     32.400000000000006,
+     49.35
+    ],
+    "decision": "confirmed (lower > 0)"
+   },
+   "S1m": {
+    "C_constant": 1.799999999999999,
+    "C_decay": 4.549999999999999,
+    "Delta_C": 2.75,
+    "CI**": [
+     -2.0506249999999993,
+     11.85
+    ],
+    "decision": "inconclusive"
+   }
+  },
+  "draws": 2000
+ },
+ "sec08h_h4b.json": {
+  "purpose": "08h \u00a73 H4b identifier control (label route)",
+  "results": {
+   "RE": {
+    "P#0": 0.7830903768295072,
+    "full_rd@0.2#0": 0.426368634535423,
+    "P_fid#0": 0.7920674205150369,
+    "full_rd_fid#0": 0.4246818474594423
+   },
+   "D_FID": {
+    "value": 0.4638311885327948,
+    "CI**": [
+     0.3940268940067174,
+     0.5135189083204742
+    ]
+   },
+   "D": {
+    "value": 0.4555307444056983,
+    "CI**": [
+     0.3930135934404065,
+     0.5132744166901483
+    ]
+   },
+   "D_FID_minus_half_D": {
+    "value": 0.23606581632994567,
+    "CI**": [
+     0.19574653766052566,
+     0.26067192009701173
+    ]
+   },
+   "decision": "confirmed (D_FID >= 0.5 D, lower > 0)"
+  },
+  "draws": 2000
+ },
+ "sec08h_massnoise.json": {
+  "purpose": "08h \u00a75 H2-M mass-noise (10 % multiplicative, per object)",
+  "results": {
+   "COMP_selection_mn": {
+    "candidates": {
+     "CSF-1": {
+      "RE_even_cal": 0.8392469358822078,
+      "RE_odd_cal": 0.6828598062660105,
+      "RE_mean": 0.7610533710741092,
+      "label_slip_avoidable_mean": 0.10500000000000001
+     },
+     "Mondrian-CSF": {
+      "RE_even_cal": 0.9562012074126138,
+      "RE_odd_cal": 0.8379287978545201,
+      "RE_mean": 0.8970650026335669,
+      "label_slip_avoidable_mean": 0.07375
+     },
+     "CertGrip-P": {
+      "RE_even_cal": 0.9885269552358228,
+      "RE_odd_cal": 0.7944963995519038,
+      "RE_mean": 0.8915116773938633,
+      "label_slip_avoidable_mean": 0.09875
+     }
+    },
+    "winner": "CSF-1"
+   },
+   "RE": {
+    "full_rd_mn": 0.4312376626859782,
+    "COMP_mn": 0.7990924859332839,
+    "full_rd": 0.426368634535423,
+    "CSF-1": 0.7469102044808502
+   },
+   "D_mn": {
+    "value": 0.46034073617608495,
+    "CI**": [
+     0.4105563246105922,
+     0.5050343289687103
+    ]
+   },
+   "D_H2a": {
+    "value": 0.42915676880894116,
+    "CI**": [
+     0.3733204496825495,
+     0.48198921617006146
+    ]
+   },
+   "change": {
+    "value": 0.031183967367143794,
+    "CI**": [
+     -0.007679754329767921,
+     0.07069514860113443
+    ]
+   }
+  },
+  "draws": 2000
+ }
+}
+
+(b) First 200 lines of the longest run log (results/v1/logs/p2_timing_runner_a.log), lines cut at 400 chars:
+replay_seconds_median: 0.0092
+all_within_identical: True
+digest: 70368455e212848b62d0e8c121f85c1a07d30dd3785723889e0d1d73c26b95f1
+
+(c) Statistical procedures actually present in code/ (grep):
+code/analysis_h1m.py:9:from scipy.stats import beta
+code/analysis_h1m.py:22:    return float(beta.ppf(level, k + 1, n - k)) if k < n else 1.0
+code/h3_streams.py:175:def bootstrap(pools, s, qoff, eta, draws, chunk=50, seed=777, n_ord=N_ORD):
+code/h3_streams.py:275:        bs = bootstrap(pools, s, qoff, eta, draws)
+code/pilot_analysis_rd.py:192:    from scipy.stats import gaussian_kde
+code/secondaries_08h.py:81:        bs = H.bootstrap(pools, s, qoff, eta, draws)
+
+
+(d) Pre-registration and amendments of record: docs/07_hypotheses.md, docs/08_experiment_plan.yaml, docs/08a_pilot_amendment.md ... docs/08h_secondaries_batch3.md (open them). Condition x seed combinations: see the per-arm keys (arm names carry feature set, sigma and seed, e.g. full_rd@0.2#0) and n / n_objects fields in (a). Run outputs: 443 files under results/v1/ (labels/, preds/, crc/, h3/, mono/, h1v/, logs/). The reviewer may open any file in code/, docs/ and results/ under /home/claude/paper-writing/papers/p2 to verify claims.
