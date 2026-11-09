@@ -1,0 +1,977 @@
+{
+ "purpose": "v5 H2-v5 g_T on runners (part 0): remaining test5 files, same gt3 command as tools_v5_gt.py; plus a 2-file sandbox/runner determinism check (results/v5/test5_gt_check/)",
+ "jobs": [
+  {
+   "id": "v5_gt_A16_k2_student_s705_221",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/A16_k2_student_s705_221.jsonl --out ../results/v5/test5_gt/A16_k2_student_s705_221"
+  },
+  {
+   "id": "v5_gt_A16_k2_student_s705_234",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/A16_k2_student_s705_234.jsonl --out ../results/v5/test5_gt/A16_k2_student_s705_234"
+  },
+  {
+   "id": "v5_gt_A16_k2_student_s705_247",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/A16_k2_student_s705_247.jsonl --out ../results/v5/test5_gt/A16_k2_student_s705_247"
+  },
+  {
+   "id": "v5_gt_A16_k2_student_s705_260",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/A16_k2_student_s705_260.jsonl --out ../results/v5/test5_gt/A16_k2_student_s705_260"
+  },
+  {
+   "id": "v5_gt_A16_k2_student_s705_273",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/A16_k2_student_s705_273.jsonl --out ../results/v5/test5_gt/A16_k2_student_s705_273"
+  },
+  {
+   "id": "v5_gt_A16_k2_student_s705_286",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/A16_k2_student_s705_286.jsonl --out ../results/v5/test5_gt/A16_k2_student_s705_286"
+  },
+  {
+   "id": "v5_gt_A16_k2_student_s705_299",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/A16_k2_student_s705_299.jsonl --out ../results/v5/test5_gt/A16_k2_student_s705_299"
+  },
+  {
+   "id": "v5_gt_S_k12_gstar_080_r97",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k12_gstar_080_r97.jsonl --out ../results/v5/test5_gt/S_k12_gstar_080_r97"
+  },
+  {
+   "id": "v5_gt_S_k12_rl_s711_000_r19",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k12_rl_s711_000_r19.jsonl --out ../results/v5/test5_gt/S_k12_rl_s711_000_r19"
+  },
+  {
+   "id": "v5_gt_S_k12_rl_s711_040_r59",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k12_rl_s711_040_r59.jsonl --out ../results/v5/test5_gt/S_k12_rl_s711_040_r59"
+  },
+  {
+   "id": "v5_gt_S_k12_rl_s711_060_r72",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k12_rl_s711_060_r72.jsonl --out ../results/v5/test5_gt/S_k12_rl_s711_060_r72"
+  },
+  {
+   "id": "v5_gt_S_k12_rl_s711_100_r115",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k12_rl_s711_100_r115.jsonl --out ../results/v5/test5_gt/S_k12_rl_s711_100_r115"
+  },
+  {
+   "id": "v5_gt_S_k12_rl_s711_140_r157",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k12_rl_s711_140_r157.jsonl --out ../results/v5/test5_gt/S_k12_rl_s711_140_r157"
+  },
+  {
+   "id": "v5_gt_S_k12_rl_s711_180_r196",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k12_rl_s711_180_r196.jsonl --out ../results/v5/test5_gt/S_k12_rl_s711_180_r196"
+  },
+  {
+   "id": "v5_gt_S_k12_rl_s711_220_r238",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k12_rl_s711_220_r238.jsonl --out ../results/v5/test5_gt/S_k12_rl_s711_220_r238"
+  },
+  {
+   "id": "v5_gt_S_k12_rl_s711_240_r253",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k12_rl_s711_240_r253.jsonl --out ../results/v5/test5_gt/S_k12_rl_s711_240_r253"
+  },
+  {
+   "id": "v5_gt_S_k12_rl_s711_280_r298",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k12_rl_s711_280_r298.jsonl --out ../results/v5/test5_gt/S_k12_rl_s711_280_r298"
+  },
+  {
+   "id": "v5_gt_S_k12_rl_s712_160_r179",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k12_rl_s712_160_r179.jsonl --out ../results/v5/test5_gt/S_k12_rl_s712_160_r179"
+  },
+  {
+   "id": "v5_gt_S_k12_rl_s713_000_r12",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k12_rl_s713_000_r12.jsonl --out ../results/v5/test5_gt/S_k12_rl_s713_000_r12"
+  },
+  {
+   "id": "v5_gt_S_k12_rl_s713_020_r39",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k12_rl_s713_020_r39.jsonl --out ../results/v5/test5_gt/S_k12_rl_s713_020_r39"
+  },
+  {
+   "id": "v5_gt_S_k12_rl_s713_040_r56",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k12_rl_s713_040_r56.jsonl --out ../results/v5/test5_gt/S_k12_rl_s713_040_r56"
+  },
+  {
+   "id": "v5_gt_S_k12_rl_s713_060_r79",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k12_rl_s713_060_r79.jsonl --out ../results/v5/test5_gt/S_k12_rl_s713_060_r79"
+  },
+  {
+   "id": "v5_gt_S_k12_rl_s713_100_r118",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k12_rl_s713_100_r118.jsonl --out ../results/v5/test5_gt/S_k12_rl_s713_100_r118"
+  },
+  {
+   "id": "v5_gt_S_k12_rl_s713_120_r132",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k12_rl_s713_120_r132.jsonl --out ../results/v5/test5_gt/S_k12_rl_s713_120_r132"
+  },
+  {
+   "id": "v5_gt_S_k12_rl_s713_140_r156",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k12_rl_s713_140_r156.jsonl --out ../results/v5/test5_gt/S_k12_rl_s713_140_r156"
+  },
+  {
+   "id": "v5_gt_S_k12_rl_s713_160_r176",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k12_rl_s713_160_r176.jsonl --out ../results/v5/test5_gt/S_k12_rl_s713_160_r176"
+  },
+  {
+   "id": "v5_gt_S_k12_rl_s713_180_r191",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k12_rl_s713_180_r191.jsonl --out ../results/v5/test5_gt/S_k12_rl_s713_180_r191"
+  },
+  {
+   "id": "v5_gt_S_k12_rl_s713_220_r234",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k12_rl_s713_220_r234.jsonl --out ../results/v5/test5_gt/S_k12_rl_s713_220_r234"
+  },
+  {
+   "id": "v5_gt_S_k12_rl_s713_240_r256",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k12_rl_s713_240_r256.jsonl --out ../results/v5/test5_gt/S_k12_rl_s713_240_r256"
+  },
+  {
+   "id": "v5_gt_S_k12_rl_s713_260_r279",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k12_rl_s713_260_r279.jsonl --out ../results/v5/test5_gt/S_k12_rl_s713_260_r279"
+  },
+  {
+   "id": "v5_gt_S_k12_rl_s713_280_r288",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k12_rl_s713_280_r288.jsonl --out ../results/v5/test5_gt/S_k12_rl_s713_280_r288"
+  },
+  {
+   "id": "v5_gt_S_k12_rl_s713_280_r288_r297",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k12_rl_s713_280_r288_r297.jsonl --out ../results/v5/test5_gt/S_k12_rl_s713_280_r288_r297"
+  },
+  {
+   "id": "v5_gt_S_k12_rl_s714_020_r33",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k12_rl_s714_020_r33.jsonl --out ../results/v5/test5_gt/S_k12_rl_s714_020_r33"
+  },
+  {
+   "id": "v5_gt_S_k12_rl_s714_040_r56",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k12_rl_s714_040_r56.jsonl --out ../results/v5/test5_gt/S_k12_rl_s714_040_r56"
+  },
+  {
+   "id": "v5_gt_S_k12_rl_s714_060_r77",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k12_rl_s714_060_r77.jsonl --out ../results/v5/test5_gt/S_k12_rl_s714_060_r77"
+  },
+  {
+   "id": "v5_gt_S_k12_rl_s714_100_r119",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k12_rl_s714_100_r119.jsonl --out ../results/v5/test5_gt/S_k12_rl_s714_100_r119"
+  },
+  {
+   "id": "v5_gt_S_k12_rl_s714_140_r159",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k12_rl_s714_140_r159.jsonl --out ../results/v5/test5_gt/S_k12_rl_s714_140_r159"
+  },
+  {
+   "id": "v5_gt_S_k12_rl_s714_160_r179",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k12_rl_s714_160_r179.jsonl --out ../results/v5/test5_gt/S_k12_rl_s714_160_r179"
+  },
+  {
+   "id": "v5_gt_S_k12_rl_s714_180_r196",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k12_rl_s714_180_r196.jsonl --out ../results/v5/test5_gt/S_k12_rl_s714_180_r196"
+  },
+  {
+   "id": "v5_gt_S_k12_rl_s714_220_r235",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k12_rl_s714_220_r235.jsonl --out ../results/v5/test5_gt/S_k12_rl_s714_220_r235"
+  },
+  {
+   "id": "v5_gt_S_k12_rl_s714_240_r249",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k12_rl_s714_240_r249.jsonl --out ../results/v5/test5_gt/S_k12_rl_s714_240_r249"
+  },
+  {
+   "id": "v5_gt_S_k12_rl_s714_260_r279",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k12_rl_s714_260_r279.jsonl --out ../results/v5/test5_gt/S_k12_rl_s714_260_r279"
+  },
+  {
+   "id": "v5_gt_S_k12_rl_s715_020_r36",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k12_rl_s715_020_r36.jsonl --out ../results/v5/test5_gt/S_k12_rl_s715_020_r36"
+  },
+  {
+   "id": "v5_gt_S_k12_rl_s715_180_r199",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k12_rl_s715_180_r199.jsonl --out ../results/v5/test5_gt/S_k12_rl_s715_180_r199"
+  },
+  {
+   "id": "v5_gt_S_k12_rl_s715_200_r215",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k12_rl_s715_200_r215.jsonl --out ../results/v5/test5_gt/S_k12_rl_s715_200_r215"
+  },
+  {
+   "id": "v5_gt_S_k12_rl_s715_220_r239",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k12_rl_s715_220_r239.jsonl --out ../results/v5/test5_gt/S_k12_rl_s715_220_r239"
+  },
+  {
+   "id": "v5_gt_S_k12_rlsucc_s711_060_r77",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k12_rlsucc_s711_060_r77.jsonl --out ../results/v5/test5_gt/S_k12_rlsucc_s711_060_r77"
+  },
+  {
+   "id": "v5_gt_S_k12_rlsucc_s711_140_r149",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k12_rlsucc_s711_140_r149.jsonl --out ../results/v5/test5_gt/S_k12_rlsucc_s711_140_r149"
+  },
+  {
+   "id": "v5_gt_S_k12_rlsucc_s711_180_r198",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k12_rlsucc_s711_180_r198.jsonl --out ../results/v5/test5_gt/S_k12_rlsucc_s711_180_r198"
+  },
+  {
+   "id": "v5_gt_S_k12_rlsucc_s711_220_r234",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k12_rlsucc_s711_220_r234.jsonl --out ../results/v5/test5_gt/S_k12_rlsucc_s711_220_r234"
+  },
+  {
+   "id": "v5_gt_S_k12_rlsucc_s711_240_r249",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k12_rlsucc_s711_240_r249.jsonl --out ../results/v5/test5_gt/S_k12_rlsucc_s711_240_r249"
+  },
+  {
+   "id": "v5_gt_S_k12_rlsucc_s711_260_r279",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k12_rlsucc_s711_260_r279.jsonl --out ../results/v5/test5_gt/S_k12_rlsucc_s711_260_r279"
+  },
+  {
+   "id": "v5_gt_S_k12_rlsucc_s712_000_r10",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k12_rlsucc_s712_000_r10.jsonl --out ../results/v5/test5_gt/S_k12_rlsucc_s712_000_r10"
+  },
+  {
+   "id": "v5_gt_S_k12_rlsucc_s712_020_r39",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k12_rlsucc_s712_020_r39.jsonl --out ../results/v5/test5_gt/S_k12_rlsucc_s712_020_r39"
+  },
+  {
+   "id": "v5_gt_S_k12_rlsucc_s712_040_r52",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k12_rlsucc_s712_040_r52.jsonl --out ../results/v5/test5_gt/S_k12_rlsucc_s712_040_r52"
+  },
+  {
+   "id": "v5_gt_S_k12_rlsucc_s712_060_r76",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k12_rlsucc_s712_060_r76.jsonl --out ../results/v5/test5_gt/S_k12_rlsucc_s712_060_r76"
+  },
+  {
+   "id": "v5_gt_S_k12_rlsucc_s712_080_r95",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k12_rlsucc_s712_080_r95.jsonl --out ../results/v5/test5_gt/S_k12_rlsucc_s712_080_r95"
+  },
+  {
+   "id": "v5_gt_S_k12_rlsucc_s712_100_r116",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k12_rlsucc_s712_100_r116.jsonl --out ../results/v5/test5_gt/S_k12_rlsucc_s712_100_r116"
+  },
+  {
+   "id": "v5_gt_S_k12_rlsucc_s712_120_r128",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k12_rlsucc_s712_120_r128.jsonl --out ../results/v5/test5_gt/S_k12_rlsucc_s712_120_r128"
+  },
+  {
+   "id": "v5_gt_S_k12_rlsucc_s712_140_r151",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k12_rlsucc_s712_140_r151.jsonl --out ../results/v5/test5_gt/S_k12_rlsucc_s712_140_r151"
+  },
+  {
+   "id": "v5_gt_S_k12_rlsucc_s712_160_r173",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k12_rlsucc_s712_160_r173.jsonl --out ../results/v5/test5_gt/S_k12_rlsucc_s712_160_r173"
+  },
+  {
+   "id": "v5_gt_S_k12_rlsucc_s712_160_r173_r179",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k12_rlsucc_s712_160_r173_r179.jsonl --out ../results/v5/test5_gt/S_k12_rlsucc_s712_160_r173_r179"
+  },
+  {
+   "id": "v5_gt_S_k12_rlsucc_s712_180_r198",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k12_rlsucc_s712_180_r198.jsonl --out ../results/v5/test5_gt/S_k12_rlsucc_s712_180_r198"
+  },
+  {
+   "id": "v5_gt_S_k12_rlsucc_s712_200_r213",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k12_rlsucc_s712_200_r213.jsonl --out ../results/v5/test5_gt/S_k12_rlsucc_s712_200_r213"
+  },
+  {
+   "id": "v5_gt_S_k12_rlsucc_s712_260_r271",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k12_rlsucc_s712_260_r271.jsonl --out ../results/v5/test5_gt/S_k12_rlsucc_s712_260_r271"
+  },
+  {
+   "id": "v5_gt_S_k12_rlsucc_s712_280_r299",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k12_rlsucc_s712_280_r299.jsonl --out ../results/v5/test5_gt/S_k12_rlsucc_s712_280_r299"
+  },
+  {
+   "id": "v5_gt_S_k12_rlsucc_s713_140_r158",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k12_rlsucc_s713_140_r158.jsonl --out ../results/v5/test5_gt/S_k12_rlsucc_s713_140_r158"
+  },
+  {
+   "id": "v5_gt_S_k12_rlsucc_s713_160_r176",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k12_rlsucc_s713_160_r176.jsonl --out ../results/v5/test5_gt/S_k12_rlsucc_s713_160_r176"
+  },
+  {
+   "id": "v5_gt_S_k12_rlsucc_s713_200_r213",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k12_rlsucc_s713_200_r213.jsonl --out ../results/v5/test5_gt/S_k12_rlsucc_s713_200_r213"
+  },
+  {
+   "id": "v5_gt_S_k12_rlsucc_s713_220_r235",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k12_rlsucc_s713_220_r235.jsonl --out ../results/v5/test5_gt/S_k12_rlsucc_s713_220_r235"
+  },
+  {
+   "id": "v5_gt_S_k12_rlsucc_s713_240_r259",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k12_rlsucc_s713_240_r259.jsonl --out ../results/v5/test5_gt/S_k12_rlsucc_s713_240_r259"
+  },
+  {
+   "id": "v5_gt_S_k12_rlsucc_s713_260_r271",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k12_rlsucc_s713_260_r271.jsonl --out ../results/v5/test5_gt/S_k12_rlsucc_s713_260_r271"
+  },
+  {
+   "id": "v5_gt_S_k12_rlsucc_s714_040_r59",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k12_rlsucc_s714_040_r59.jsonl --out ../results/v5/test5_gt/S_k12_rlsucc_s714_040_r59"
+  },
+  {
+   "id": "v5_gt_S_k12_rlsucc_s714_120_r134",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k12_rlsucc_s714_120_r134.jsonl --out ../results/v5/test5_gt/S_k12_rlsucc_s714_120_r134"
+  },
+  {
+   "id": "v5_gt_S_k12_rlsucc_s714_180_r199",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k12_rlsucc_s714_180_r199.jsonl --out ../results/v5/test5_gt/S_k12_rlsucc_s714_180_r199"
+  },
+  {
+   "id": "v5_gt_S_k12_rlsucc_s714_260_r271",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k12_rlsucc_s714_260_r271.jsonl --out ../results/v5/test5_gt/S_k12_rlsucc_s714_260_r271"
+  },
+  {
+   "id": "v5_gt_S_k12_rlsucc_s715_080_r95",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k12_rlsucc_s715_080_r95.jsonl --out ../results/v5/test5_gt/S_k12_rlsucc_s715_080_r95"
+  },
+  {
+   "id": "v5_gt_S_k12_rlsucc_s715_100_r115",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k12_rlsucc_s715_100_r115.jsonl --out ../results/v5/test5_gt/S_k12_rlsucc_s715_100_r115"
+  },
+  {
+   "id": "v5_gt_S_k12_rlsucc_s715_120_r136",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k12_rlsucc_s715_120_r136.jsonl --out ../results/v5/test5_gt/S_k12_rlsucc_s715_120_r136"
+  },
+  {
+   "id": "v5_gt_S_k12_rlsucc_s715_160_r175",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k12_rlsucc_s715_160_r175.jsonl --out ../results/v5/test5_gt/S_k12_rlsucc_s715_160_r175"
+  },
+  {
+   "id": "v5_gt_S_k12_student_s701_090_r107",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k12_student_s701_090_r107.jsonl --out ../results/v5/test5_gt/S_k12_student_s701_090_r107"
+  },
+  {
+   "id": "v5_gt_S_k12_student_s701_162_r177",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k12_student_s701_162_r177.jsonl --out ../results/v5/test5_gt/S_k12_student_s701_162_r177"
+  },
+  {
+   "id": "v5_gt_S_k12_student_s701_270_r283",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k12_student_s701_270_r283.jsonl --out ../results/v5/test5_gt/S_k12_student_s701_270_r283"
+  },
+  {
+   "id": "v5_gt_S_k12_student_s702_126_r142",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k12_student_s702_126_r142.jsonl --out ../results/v5/test5_gt/S_k12_student_s702_126_r142"
+  },
+  {
+   "id": "v5_gt_S_k12_student_s703_090_r107",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k12_student_s703_090_r107.jsonl --out ../results/v5/test5_gt/S_k12_student_s703_090_r107"
+  },
+  {
+   "id": "v5_gt_S_k12_student_s704_180_r195",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k12_student_s704_180_r195.jsonl --out ../results/v5/test5_gt/S_k12_student_s704_180_r195"
+  },
+  {
+   "id": "v5_gt_S_k12_student_s705_180_r196",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k12_student_s705_180_r196.jsonl --out ../results/v5/test5_gt/S_k12_student_s705_180_r196"
+  },
+  {
+   "id": "v5_gt_S_k12_student_s705_234_r249",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k12_student_s705_234_r249.jsonl --out ../results/v5/test5_gt/S_k12_student_s705_234_r249"
+  },
+  {
+   "id": "v5_gt_S_k2_rl_s712_132_r149",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k2_rl_s712_132_r149.jsonl --out ../results/v5/test5_gt/S_k2_rl_s712_132_r149"
+  },
+  {
+   "id": "v5_gt_S_k2_rl_s712_198_r217",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k2_rl_s712_198_r217.jsonl --out ../results/v5/test5_gt/S_k2_rl_s712_198_r217"
+  },
+  {
+   "id": "v5_gt_S_k2_rl_s713_110_r131",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k2_rl_s713_110_r131.jsonl --out ../results/v5/test5_gt/S_k2_rl_s713_110_r131"
+  },
+  {
+   "id": "v5_gt_S_k2_rl_s715_022_r41",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k2_rl_s715_022_r41.jsonl --out ../results/v5/test5_gt/S_k2_rl_s715_022_r41"
+  },
+  {
+   "id": "v5_gt_S_k2_rlsucc_s712_110_r128",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k2_rlsucc_s712_110_r128.jsonl --out ../results/v5/test5_gt/S_k2_rlsucc_s712_110_r128"
+  },
+  {
+   "id": "v5_gt_S_k2_rlsucc_s713_022_r40",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k2_rlsucc_s713_022_r40.jsonl --out ../results/v5/test5_gt/S_k2_rlsucc_s713_022_r40"
+  },
+  {
+   "id": "v5_gt_S_k2_rlsucc_s713_044_r61",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k2_rlsucc_s713_044_r61.jsonl --out ../results/v5/test5_gt/S_k2_rlsucc_s713_044_r61"
+  },
+  {
+   "id": "v5_gt_S_k2_rlsucc_s713_088_r101",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k2_rlsucc_s713_088_r101.jsonl --out ../results/v5/test5_gt/S_k2_rlsucc_s713_088_r101"
+  },
+  {
+   "id": "v5_gt_S_k2_rlsucc_s713_132_r143",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k2_rlsucc_s713_132_r143.jsonl --out ../results/v5/test5_gt/S_k2_rlsucc_s713_132_r143"
+  },
+  {
+   "id": "v5_gt_S_k2_rlsucc_s713_154_r174",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k2_rlsucc_s713_154_r174.jsonl --out ../results/v5/test5_gt/S_k2_rlsucc_s713_154_r174"
+  },
+  {
+   "id": "v5_gt_S_k2_rlsucc_s713_198_r209",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k2_rlsucc_s713_198_r209.jsonl --out ../results/v5/test5_gt/S_k2_rlsucc_s713_198_r209"
+  },
+  {
+   "id": "v5_gt_S_k2_rlsucc_s713_264_r280",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k2_rlsucc_s713_264_r280.jsonl --out ../results/v5/test5_gt/S_k2_rlsucc_s713_264_r280"
+  },
+  {
+   "id": "v5_gt_S_k2_rlsucc_s714_110_r129",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k2_rlsucc_s714_110_r129.jsonl --out ../results/v5/test5_gt/S_k2_rlsucc_s714_110_r129"
+  },
+  {
+   "id": "v5_gt_S_k2_student_s703_225_r244",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k2_student_s703_225_r244.jsonl --out ../results/v5/test5_gt/S_k2_student_s703_225_r244"
+  },
+  {
+   "id": "v5_gt_S_k2_student_s703_250_r274",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k2_student_s703_250_r274.jsonl --out ../results/v5/test5_gt/S_k2_student_s703_250_r274"
+  },
+  {
+   "id": "v5_gt_S_k4_gstar_000",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_gstar_000.jsonl --out ../results/v5/test5_gt/S_k4_gstar_000"
+  },
+  {
+   "id": "v5_gt_S_k4_gstar_021",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_gstar_021.jsonl --out ../results/v5/test5_gt/S_k4_gstar_021"
+  },
+  {
+   "id": "v5_gt_S_k4_gstar_042",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_gstar_042.jsonl --out ../results/v5/test5_gt/S_k4_gstar_042"
+  },
+  {
+   "id": "v5_gt_S_k4_gstar_063",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_gstar_063.jsonl --out ../results/v5/test5_gt/S_k4_gstar_063"
+  },
+  {
+   "id": "v5_gt_S_k4_gstar_084",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_gstar_084.jsonl --out ../results/v5/test5_gt/S_k4_gstar_084"
+  },
+  {
+   "id": "v5_gt_S_k4_gstar_105",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_gstar_105.jsonl --out ../results/v5/test5_gt/S_k4_gstar_105"
+  },
+  {
+   "id": "v5_gt_S_k4_gstar_126",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_gstar_126.jsonl --out ../results/v5/test5_gt/S_k4_gstar_126"
+  },
+  {
+   "id": "v5_gt_S_k4_gstar_147",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_gstar_147.jsonl --out ../results/v5/test5_gt/S_k4_gstar_147"
+  },
+  {
+   "id": "v5_gt_S_k4_gstar_168",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_gstar_168.jsonl --out ../results/v5/test5_gt/S_k4_gstar_168"
+  },
+  {
+   "id": "v5_gt_S_k4_gstar_189",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_gstar_189.jsonl --out ../results/v5/test5_gt/S_k4_gstar_189"
+  },
+  {
+   "id": "v5_gt_S_k4_gstar_210",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_gstar_210.jsonl --out ../results/v5/test5_gt/S_k4_gstar_210"
+  },
+  {
+   "id": "v5_gt_S_k4_gstar_231",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_gstar_231.jsonl --out ../results/v5/test5_gt/S_k4_gstar_231"
+  },
+  {
+   "id": "v5_gt_S_k4_gstar_252",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_gstar_252.jsonl --out ../results/v5/test5_gt/S_k4_gstar_252"
+  },
+  {
+   "id": "v5_gt_S_k4_gstar_252_r272",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_gstar_252_r272.jsonl --out ../results/v5/test5_gt/S_k4_gstar_252_r272"
+  },
+  {
+   "id": "v5_gt_S_k4_gstar_273",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_gstar_273.jsonl --out ../results/v5/test5_gt/S_k4_gstar_273"
+  },
+  {
+   "id": "v5_gt_S_k4_gstar_294",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_gstar_294.jsonl --out ../results/v5/test5_gt/S_k4_gstar_294"
+  },
+  {
+   "id": "v5_gt_S_k4_rl_s711_000",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_rl_s711_000.jsonl --out ../results/v5/test5_gt/S_k4_rl_s711_000"
+  },
+  {
+   "id": "v5_gt_S_k4_rl_s711_021",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_rl_s711_021.jsonl --out ../results/v5/test5_gt/S_k4_rl_s711_021"
+  },
+  {
+   "id": "v5_gt_S_k4_rl_s711_021_r35",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_rl_s711_021_r35.jsonl --out ../results/v5/test5_gt/S_k4_rl_s711_021_r35"
+  },
+  {
+   "id": "v5_gt_S_k4_rl_s711_042",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_rl_s711_042.jsonl --out ../results/v5/test5_gt/S_k4_rl_s711_042"
+  },
+  {
+   "id": "v5_gt_S_k4_rl_s711_042_r59",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_rl_s711_042_r59.jsonl --out ../results/v5/test5_gt/S_k4_rl_s711_042_r59"
+  },
+  {
+   "id": "v5_gt_S_k4_rl_s711_063",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_rl_s711_063.jsonl --out ../results/v5/test5_gt/S_k4_rl_s711_063"
+  },
+  {
+   "id": "v5_gt_S_k4_rl_s711_063_r83",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_rl_s711_063_r83.jsonl --out ../results/v5/test5_gt/S_k4_rl_s711_063_r83"
+  },
+  {
+   "id": "v5_gt_S_k4_rl_s711_084",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_rl_s711_084.jsonl --out ../results/v5/test5_gt/S_k4_rl_s711_084"
+  },
+  {
+   "id": "v5_gt_S_k4_rl_s711_084_r103",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_rl_s711_084_r103.jsonl --out ../results/v5/test5_gt/S_k4_rl_s711_084_r103"
+  },
+  {
+   "id": "v5_gt_S_k4_rl_s711_105",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_rl_s711_105.jsonl --out ../results/v5/test5_gt/S_k4_rl_s711_105"
+  },
+  {
+   "id": "v5_gt_S_k4_rl_s711_126",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_rl_s711_126.jsonl --out ../results/v5/test5_gt/S_k4_rl_s711_126"
+  },
+  {
+   "id": "v5_gt_S_k4_rl_s711_147",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_rl_s711_147.jsonl --out ../results/v5/test5_gt/S_k4_rl_s711_147"
+  },
+  {
+   "id": "v5_gt_S_k4_rl_s711_168",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_rl_s711_168.jsonl --out ../results/v5/test5_gt/S_k4_rl_s711_168"
+  },
+  {
+   "id": "v5_gt_S_k4_rl_s711_189",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_rl_s711_189.jsonl --out ../results/v5/test5_gt/S_k4_rl_s711_189"
+  },
+  {
+   "id": "v5_gt_S_k4_rl_s711_210",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_rl_s711_210.jsonl --out ../results/v5/test5_gt/S_k4_rl_s711_210"
+  },
+  {
+   "id": "v5_gt_S_k4_rl_s711_231",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_rl_s711_231.jsonl --out ../results/v5/test5_gt/S_k4_rl_s711_231"
+  },
+  {
+   "id": "v5_gt_S_k4_rl_s711_252",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_rl_s711_252.jsonl --out ../results/v5/test5_gt/S_k4_rl_s711_252"
+  },
+  {
+   "id": "v5_gt_S_k4_rl_s711_252_r262",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_rl_s711_252_r262.jsonl --out ../results/v5/test5_gt/S_k4_rl_s711_252_r262"
+  },
+  {
+   "id": "v5_gt_S_k4_rl_s711_273",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_rl_s711_273.jsonl --out ../results/v5/test5_gt/S_k4_rl_s711_273"
+  },
+  {
+   "id": "v5_gt_S_k4_rl_s711_273_r288",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_rl_s711_273_r288.jsonl --out ../results/v5/test5_gt/S_k4_rl_s711_273_r288"
+  },
+  {
+   "id": "v5_gt_S_k4_rl_s711_294",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_rl_s711_294.jsonl --out ../results/v5/test5_gt/S_k4_rl_s711_294"
+  },
+  {
+   "id": "v5_gt_S_k4_rl_s712_000",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_rl_s712_000.jsonl --out ../results/v5/test5_gt/S_k4_rl_s712_000"
+  },
+  {
+   "id": "v5_gt_S_k4_rl_s712_021",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_rl_s712_021.jsonl --out ../results/v5/test5_gt/S_k4_rl_s712_021"
+  },
+  {
+   "id": "v5_gt_S_k4_rl_s712_042",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_rl_s712_042.jsonl --out ../results/v5/test5_gt/S_k4_rl_s712_042"
+  },
+  {
+   "id": "v5_gt_S_k4_rl_s712_063",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_rl_s712_063.jsonl --out ../results/v5/test5_gt/S_k4_rl_s712_063"
+  },
+  {
+   "id": "v5_gt_S_k4_rl_s712_063_r75",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_rl_s712_063_r75.jsonl --out ../results/v5/test5_gt/S_k4_rl_s712_063_r75"
+  },
+  {
+   "id": "v5_gt_S_k4_rl_s712_084",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_rl_s712_084.jsonl --out ../results/v5/test5_gt/S_k4_rl_s712_084"
+  },
+  {
+   "id": "v5_gt_S_k4_rl_s712_105",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_rl_s712_105.jsonl --out ../results/v5/test5_gt/S_k4_rl_s712_105"
+  },
+  {
+   "id": "v5_gt_S_k4_rl_s712_126",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_rl_s712_126.jsonl --out ../results/v5/test5_gt/S_k4_rl_s712_126"
+  },
+  {
+   "id": "v5_gt_S_k4_rl_s712_147",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_rl_s712_147.jsonl --out ../results/v5/test5_gt/S_k4_rl_s712_147"
+  },
+  {
+   "id": "v5_gt_S_k4_rl_s712_168",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_rl_s712_168.jsonl --out ../results/v5/test5_gt/S_k4_rl_s712_168"
+  },
+  {
+   "id": "v5_gt_S_k4_rl_s712_189",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_rl_s712_189.jsonl --out ../results/v5/test5_gt/S_k4_rl_s712_189"
+  },
+  {
+   "id": "v5_gt_S_k4_rl_s712_210",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_rl_s712_210.jsonl --out ../results/v5/test5_gt/S_k4_rl_s712_210"
+  },
+  {
+   "id": "v5_gt_S_k4_rl_s712_231",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_rl_s712_231.jsonl --out ../results/v5/test5_gt/S_k4_rl_s712_231"
+  },
+  {
+   "id": "v5_gt_S_k4_rl_s712_252",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_rl_s712_252.jsonl --out ../results/v5/test5_gt/S_k4_rl_s712_252"
+  },
+  {
+   "id": "v5_gt_S_k4_rl_s712_273",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_rl_s712_273.jsonl --out ../results/v5/test5_gt/S_k4_rl_s712_273"
+  },
+  {
+   "id": "v5_gt_S_k4_rl_s712_294",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_rl_s712_294.jsonl --out ../results/v5/test5_gt/S_k4_rl_s712_294"
+  },
+  {
+   "id": "v5_gt_S_k4_rl_s713_000",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_rl_s713_000.jsonl --out ../results/v5/test5_gt/S_k4_rl_s713_000"
+  },
+  {
+   "id": "v5_gt_S_k4_rl_s713_021",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_rl_s713_021.jsonl --out ../results/v5/test5_gt/S_k4_rl_s713_021"
+  },
+  {
+   "id": "v5_gt_S_k4_rl_s713_042",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_rl_s713_042.jsonl --out ../results/v5/test5_gt/S_k4_rl_s713_042"
+  },
+  {
+   "id": "v5_gt_S_k4_rl_s713_063",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_rl_s713_063.jsonl --out ../results/v5/test5_gt/S_k4_rl_s713_063"
+  },
+  {
+   "id": "v5_gt_S_k4_rl_s713_084",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_rl_s713_084.jsonl --out ../results/v5/test5_gt/S_k4_rl_s713_084"
+  },
+  {
+   "id": "v5_gt_S_k4_rl_s713_105",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_rl_s713_105.jsonl --out ../results/v5/test5_gt/S_k4_rl_s713_105"
+  },
+  {
+   "id": "v5_gt_S_k4_rl_s713_126",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_rl_s713_126.jsonl --out ../results/v5/test5_gt/S_k4_rl_s713_126"
+  },
+  {
+   "id": "v5_gt_S_k4_rl_s713_147",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_rl_s713_147.jsonl --out ../results/v5/test5_gt/S_k4_rl_s713_147"
+  },
+  {
+   "id": "v5_gt_S_k4_rl_s713_168",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_rl_s713_168.jsonl --out ../results/v5/test5_gt/S_k4_rl_s713_168"
+  },
+  {
+   "id": "v5_gt_S_k4_rl_s713_189",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_rl_s713_189.jsonl --out ../results/v5/test5_gt/S_k4_rl_s713_189"
+  },
+  {
+   "id": "v5_gt_S_k4_rl_s713_210",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_rl_s713_210.jsonl --out ../results/v5/test5_gt/S_k4_rl_s713_210"
+  },
+  {
+   "id": "v5_gt_S_k4_rl_s713_231",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_rl_s713_231.jsonl --out ../results/v5/test5_gt/S_k4_rl_s713_231"
+  },
+  {
+   "id": "v5_gt_S_k4_rl_s713_252",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_rl_s713_252.jsonl --out ../results/v5/test5_gt/S_k4_rl_s713_252"
+  },
+  {
+   "id": "v5_gt_S_k4_rl_s713_273",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_rl_s713_273.jsonl --out ../results/v5/test5_gt/S_k4_rl_s713_273"
+  },
+  {
+   "id": "v5_gt_S_k4_rl_s713_294",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_rl_s713_294.jsonl --out ../results/v5/test5_gt/S_k4_rl_s713_294"
+  },
+  {
+   "id": "v5_gt_S_k4_rl_s714_000",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_rl_s714_000.jsonl --out ../results/v5/test5_gt/S_k4_rl_s714_000"
+  },
+  {
+   "id": "v5_gt_S_k4_rl_s714_000_r19",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_rl_s714_000_r19.jsonl --out ../results/v5/test5_gt/S_k4_rl_s714_000_r19"
+  },
+  {
+   "id": "v5_gt_S_k4_rl_s714_021",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_rl_s714_021.jsonl --out ../results/v5/test5_gt/S_k4_rl_s714_021"
+  },
+  {
+   "id": "v5_gt_S_k4_rl_s714_021_r38",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_rl_s714_021_r38.jsonl --out ../results/v5/test5_gt/S_k4_rl_s714_021_r38"
+  },
+  {
+   "id": "v5_gt_S_k4_rl_s714_042",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_rl_s714_042.jsonl --out ../results/v5/test5_gt/S_k4_rl_s714_042"
+  },
+  {
+   "id": "v5_gt_S_k4_rl_s714_042_r60",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_rl_s714_042_r60.jsonl --out ../results/v5/test5_gt/S_k4_rl_s714_042_r60"
+  },
+  {
+   "id": "v5_gt_S_k4_rl_s714_063",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_rl_s714_063.jsonl --out ../results/v5/test5_gt/S_k4_rl_s714_063"
+  },
+  {
+   "id": "v5_gt_S_k4_rl_s714_063_r81",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_rl_s714_063_r81.jsonl --out ../results/v5/test5_gt/S_k4_rl_s714_063_r81"
+  },
+  {
+   "id": "v5_gt_S_k4_rl_s714_084",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_rl_s714_084.jsonl --out ../results/v5/test5_gt/S_k4_rl_s714_084"
+  },
+  {
+   "id": "v5_gt_S_k4_rl_s714_084_r94",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_rl_s714_084_r94.jsonl --out ../results/v5/test5_gt/S_k4_rl_s714_084_r94"
+  },
+  {
+   "id": "v5_gt_S_k4_rl_s714_105",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_rl_s714_105.jsonl --out ../results/v5/test5_gt/S_k4_rl_s714_105"
+  },
+  {
+   "id": "v5_gt_S_k4_rl_s714_105_r117",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_rl_s714_105_r117.jsonl --out ../results/v5/test5_gt/S_k4_rl_s714_105_r117"
+  },
+  {
+   "id": "v5_gt_S_k4_rl_s714_126",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_rl_s714_126.jsonl --out ../results/v5/test5_gt/S_k4_rl_s714_126"
+  },
+  {
+   "id": "v5_gt_S_k4_rl_s714_126_r144",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_rl_s714_126_r144.jsonl --out ../results/v5/test5_gt/S_k4_rl_s714_126_r144"
+  },
+  {
+   "id": "v5_gt_S_k4_rl_s714_147",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_rl_s714_147.jsonl --out ../results/v5/test5_gt/S_k4_rl_s714_147"
+  },
+  {
+   "id": "v5_gt_S_k4_rl_s714_147_r159",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_rl_s714_147_r159.jsonl --out ../results/v5/test5_gt/S_k4_rl_s714_147_r159"
+  },
+  {
+   "id": "v5_gt_S_k4_rl_s714_168",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_rl_s714_168.jsonl --out ../results/v5/test5_gt/S_k4_rl_s714_168"
+  },
+  {
+   "id": "v5_gt_S_k4_rl_s714_168_r178",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_rl_s714_168_r178.jsonl --out ../results/v5/test5_gt/S_k4_rl_s714_168_r178"
+  },
+  {
+   "id": "v5_gt_S_k4_rl_s714_189",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_rl_s714_189.jsonl --out ../results/v5/test5_gt/S_k4_rl_s714_189"
+  },
+  {
+   "id": "v5_gt_S_k4_rl_s714_189_r209",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_rl_s714_189_r209.jsonl --out ../results/v5/test5_gt/S_k4_rl_s714_189_r209"
+  },
+  {
+   "id": "v5_gt_S_k4_rl_s714_210",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_rl_s714_210.jsonl --out ../results/v5/test5_gt/S_k4_rl_s714_210"
+  },
+  {
+   "id": "v5_gt_S_k4_rl_s714_231",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_rl_s714_231.jsonl --out ../results/v5/test5_gt/S_k4_rl_s714_231"
+  },
+  {
+   "id": "v5_gt_S_k4_rl_s714_252",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_rl_s714_252.jsonl --out ../results/v5/test5_gt/S_k4_rl_s714_252"
+  },
+  {
+   "id": "v5_gt_S_k4_rl_s714_252_r271",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_rl_s714_252_r271.jsonl --out ../results/v5/test5_gt/S_k4_rl_s714_252_r271"
+  },
+  {
+   "id": "v5_gt_S_k4_rl_s714_273",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_rl_s714_273.jsonl --out ../results/v5/test5_gt/S_k4_rl_s714_273"
+  },
+  {
+   "id": "v5_gt_S_k4_rl_s714_273_r287",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_rl_s714_273_r287.jsonl --out ../results/v5/test5_gt/S_k4_rl_s714_273_r287"
+  },
+  {
+   "id": "v5_gt_S_k4_rl_s714_294",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_rl_s714_294.jsonl --out ../results/v5/test5_gt/S_k4_rl_s714_294"
+  },
+  {
+   "id": "v5_gt_S_k4_rl_s715_000",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_rl_s715_000.jsonl --out ../results/v5/test5_gt/S_k4_rl_s715_000"
+  },
+  {
+   "id": "v5_gt_S_k4_rl_s715_021",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_rl_s715_021.jsonl --out ../results/v5/test5_gt/S_k4_rl_s715_021"
+  },
+  {
+   "id": "v5_gt_S_k4_rl_s715_021_r41",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_rl_s715_021_r41.jsonl --out ../results/v5/test5_gt/S_k4_rl_s715_021_r41"
+  },
+  {
+   "id": "v5_gt_S_k4_rl_s715_042",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_rl_s715_042.jsonl --out ../results/v5/test5_gt/S_k4_rl_s715_042"
+  },
+  {
+   "id": "v5_gt_S_k4_rl_s715_063",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_rl_s715_063.jsonl --out ../results/v5/test5_gt/S_k4_rl_s715_063"
+  },
+  {
+   "id": "v5_gt_S_k4_rl_s715_063_r76",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_rl_s715_063_r76.jsonl --out ../results/v5/test5_gt/S_k4_rl_s715_063_r76"
+  },
+  {
+   "id": "v5_gt_S_k4_rl_s715_084",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_rl_s715_084.jsonl --out ../results/v5/test5_gt/S_k4_rl_s715_084"
+  },
+  {
+   "id": "v5_gt_S_k4_rl_s715_105",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_rl_s715_105.jsonl --out ../results/v5/test5_gt/S_k4_rl_s715_105"
+  },
+  {
+   "id": "v5_gt_S_k4_rl_s715_126",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_rl_s715_126.jsonl --out ../results/v5/test5_gt/S_k4_rl_s715_126"
+  },
+  {
+   "id": "v5_gt_S_k4_rl_s715_147",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_rl_s715_147.jsonl --out ../results/v5/test5_gt/S_k4_rl_s715_147"
+  },
+  {
+   "id": "v5_gt_S_k4_rl_s715_168",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_rl_s715_168.jsonl --out ../results/v5/test5_gt/S_k4_rl_s715_168"
+  },
+  {
+   "id": "v5_gt_S_k4_rl_s715_189",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_rl_s715_189.jsonl --out ../results/v5/test5_gt/S_k4_rl_s715_189"
+  },
+  {
+   "id": "v5_gt_S_k4_rl_s715_210",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_rl_s715_210.jsonl --out ../results/v5/test5_gt/S_k4_rl_s715_210"
+  },
+  {
+   "id": "v5_gt_S_k4_rl_s715_231",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_rl_s715_231.jsonl --out ../results/v5/test5_gt/S_k4_rl_s715_231"
+  },
+  {
+   "id": "v5_gt_S_k4_rl_s715_252",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_rl_s715_252.jsonl --out ../results/v5/test5_gt/S_k4_rl_s715_252"
+  },
+  {
+   "id": "v5_gt_S_k4_rl_s715_273",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_rl_s715_273.jsonl --out ../results/v5/test5_gt/S_k4_rl_s715_273"
+  },
+  {
+   "id": "v5_gt_S_k4_rl_s715_294",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_rl_s715_294.jsonl --out ../results/v5/test5_gt/S_k4_rl_s715_294"
+  },
+  {
+   "id": "v5_gt_S_k4_student_s701_000",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_student_s701_000.jsonl --out ../results/v5/test5_gt/S_k4_student_s701_000"
+  },
+  {
+   "id": "v5_gt_S_k4_student_s701_025",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_student_s701_025.jsonl --out ../results/v5/test5_gt/S_k4_student_s701_025"
+  },
+  {
+   "id": "v5_gt_S_k4_student_s701_050",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_student_s701_050.jsonl --out ../results/v5/test5_gt/S_k4_student_s701_050"
+  },
+  {
+   "id": "v5_gt_S_k4_student_s701_075",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_student_s701_075.jsonl --out ../results/v5/test5_gt/S_k4_student_s701_075"
+  },
+  {
+   "id": "v5_gt_S_k4_student_s701_075_r94",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_student_s701_075_r94.jsonl --out ../results/v5/test5_gt/S_k4_student_s701_075_r94"
+  },
+  {
+   "id": "v5_gt_S_k4_student_s701_100",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_student_s701_100.jsonl --out ../results/v5/test5_gt/S_k4_student_s701_100"
+  },
+  {
+   "id": "v5_gt_S_k4_student_s701_125",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_student_s701_125.jsonl --out ../results/v5/test5_gt/S_k4_student_s701_125"
+  },
+  {
+   "id": "v5_gt_S_k4_student_s701_150",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_student_s701_150.jsonl --out ../results/v5/test5_gt/S_k4_student_s701_150"
+  },
+  {
+   "id": "v5_gt_S_k4_student_s701_175",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_student_s701_175.jsonl --out ../results/v5/test5_gt/S_k4_student_s701_175"
+  },
+  {
+   "id": "v5_gt_S_k4_student_s701_200",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_student_s701_200.jsonl --out ../results/v5/test5_gt/S_k4_student_s701_200"
+  },
+  {
+   "id": "v5_gt_S_k4_student_s701_200_r221",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_student_s701_200_r221.jsonl --out ../results/v5/test5_gt/S_k4_student_s701_200_r221"
+  },
+  {
+   "id": "v5_gt_S_k4_student_s701_225",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_student_s701_225.jsonl --out ../results/v5/test5_gt/S_k4_student_s701_225"
+  },
+  {
+   "id": "v5_gt_S_k4_student_s701_250",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_student_s701_250.jsonl --out ../results/v5/test5_gt/S_k4_student_s701_250"
+  },
+  {
+   "id": "v5_gt_S_k4_student_s701_275",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_student_s701_275.jsonl --out ../results/v5/test5_gt/S_k4_student_s701_275"
+  },
+  {
+   "id": "v5_gt_S_k4_student_s702_000",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_student_s702_000.jsonl --out ../results/v5/test5_gt/S_k4_student_s702_000"
+  },
+  {
+   "id": "v5_gt_S_k4_student_s702_025",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_student_s702_025.jsonl --out ../results/v5/test5_gt/S_k4_student_s702_025"
+  },
+  {
+   "id": "v5_gt_S_k4_student_s702_050",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_student_s702_050.jsonl --out ../results/v5/test5_gt/S_k4_student_s702_050"
+  },
+  {
+   "id": "v5_gt_S_k4_student_s702_050_r71",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_student_s702_050_r71.jsonl --out ../results/v5/test5_gt/S_k4_student_s702_050_r71"
+  },
+  {
+   "id": "v5_gt_S_k4_student_s702_075",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_student_s702_075.jsonl --out ../results/v5/test5_gt/S_k4_student_s702_075"
+  },
+  {
+   "id": "v5_gt_S_k4_student_s702_075_r94",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_student_s702_075_r94.jsonl --out ../results/v5/test5_gt/S_k4_student_s702_075_r94"
+  },
+  {
+   "id": "v5_gt_S_k4_student_s702_100",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_student_s702_100.jsonl --out ../results/v5/test5_gt/S_k4_student_s702_100"
+  },
+  {
+   "id": "v5_gt_S_k4_student_s702_125",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_student_s702_125.jsonl --out ../results/v5/test5_gt/S_k4_student_s702_125"
+  },
+  {
+   "id": "v5_gt_S_k4_student_s702_150",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_student_s702_150.jsonl --out ../results/v5/test5_gt/S_k4_student_s702_150"
+  },
+  {
+   "id": "v5_gt_S_k4_student_s702_175",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_student_s702_175.jsonl --out ../results/v5/test5_gt/S_k4_student_s702_175"
+  },
+  {
+   "id": "v5_gt_S_k4_student_s702_200",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_student_s702_200.jsonl --out ../results/v5/test5_gt/S_k4_student_s702_200"
+  },
+  {
+   "id": "v5_gt_S_k4_student_s702_225",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_student_s702_225.jsonl --out ../results/v5/test5_gt/S_k4_student_s702_225"
+  },
+  {
+   "id": "v5_gt_S_k4_student_s702_250",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_student_s702_250.jsonl --out ../results/v5/test5_gt/S_k4_student_s702_250"
+  },
+  {
+   "id": "v5_gt_S_k4_student_s702_275",
+   "cmd": "python main.py gt3 --src ../results/v5/test5/S_k4_student_s702_275.jsonl --out ../results/v5/test5_gt/S_k4_student_s702_275"
+  }
+ ]
+}
