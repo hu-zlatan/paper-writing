@@ -39,7 +39,29 @@ def onset_feats(r: dict, sigma: float) -> list:
     return [onset_log_force(r, sigma), float(r["rec"]["onset"]["found"])]
 
 
+FAMILIES4 = ("F1", "F2", "F3", "F4", "F5")
+
+
+def noisy_mass(r: dict) -> float:
+    """Addendum 08h §5: m * exp(0.1 eps), one N(0,1) draw per object (same for every disturbance / shifted copy)."""
+    import hashlib
+    seed = int(hashlib.sha256(f"massnoise|{r['family']}|{r['obj']}".encode()).hexdigest()[:8], 16)
+    return r["inst"]["mass"] * math.exp(0.1 * np.random.default_rng(seed).standard_normal())
+
+
+def touch_only(r: dict, onset: bool = False, sigma: float = SIGMA_PRIMARY) -> list:
+    """Addendum 08h §4 (D-FID): the non-P columns of `full` (static touch, preload-slip flag, squeeze deltas)."""
+    n_p = len(row_features(r, "P"))
+    x = row_features(r, "full")[n_p:]
+    return x + (onset_feats(r, sigma) if onset else [])
+
+
 def row_features(r: dict, fset: str, no_mass: bool = False, sigma: float = SIGMA_PRIMARY) -> list:
+    if fset.endswith("_fid"):   # 08h §3 (H4b): + family one-hot
+        return row_features(r, fset[:-4], no_mass, sigma) + [float(r["family"] == f) for f in FAMILIES4]
+    if fset.endswith("_mn"):    # 08h §5: log mass replaced by the noisy mass
+        x = row_features(r, fset[:-3], True, sigma)
+        return x[:5] + [math.log(noisy_mass(r))] + x[5:]
     if fset in ("full_rd", "P_onset", "S_onset"):
         return row_features(r, {"full_rd": "full", "P_onset": "P", "S_onset": "S"}[fset], no_mass) + onset_feats(r, sigma)
     i = r["inst"]

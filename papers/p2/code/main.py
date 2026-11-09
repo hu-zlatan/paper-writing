@@ -208,6 +208,27 @@ def cmd_fit(a):
     print(f"cv_pinball: {info['cv_pinball']:.5f}")
 
 
+def cmd_fitg(a):
+    """Addendum 08h §1 (H1c RAW-G): GaussianModel on the id train objects with a given config (the best config of an
+    existing quantile fit, no new search); writes mu and sigma log-predictions for every labelled row."""
+    from certgrip.featsets import matrix
+    from certgrip.io import key, load_rows
+    from certgrip.models import GaussianModel
+    rows = load_rows(a.labels)
+    tr = [r for r in rows if r["pool"] == "id" and r["shift"] is None and r["split"] == "train" and not r["unavoidable"]]
+    cfg = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "results", a.config_from)))["best"]
+    m = GaussianModel(seed=a.seed, **cfg).fit(matrix(tr, a.fset, False, a.sigma), np.log([r["F_hi"] for r in tr]))
+    X = matrix(rows, a.fset, False, a.sigma)
+    mu = m.mu.predict(X); sd = np.sqrt(np.pi / 2) * np.maximum(m.sd.predict(X), 1e-6)
+    res = header(a, "fitg")
+    res.update({"fset": a.fset, "sigma": a.sigma, "seed": a.seed, "config": cfg, "config_from": a.config_from,
+                "keys_sha256": hashlib.sha256(json.dumps([list(key(r)) for r in rows]).encode()).hexdigest(),
+                "mu": [round(float(v), 6) for v in mu], "sigma_hat": [round(float(v), 6) for v in sd]})
+    with open(a.out + ".json", "w") as f:
+        json.dump(res, f)
+    print(f"n_train_rows: {len(tr)}")
+
+
 def cmd_crc(a):
     """08c §2: direct replays of one shard of id cal / test instances (protocol rd) at every arm's 20 grid forces
     F = min(F_max, g e^lambda) from results/v1/crc_grids.json; one line per instance with slip[arm] (20 booleans).
@@ -310,6 +331,13 @@ def main(argv=None):
     fi.add_argument("--train-pool", default="id", help="smoke tests only: pilot")
     fi.add_argument("--train-split", default="train", help="smoke tests only: pilot")
     fi.add_argument("--out", required=True)
+    fg = sub.add_parser("fitg", help="08h: RAW-G Gaussian model with a fixed config")
+    fg.add_argument("--fset", default="full_rd")
+    fg.add_argument("--sigma", type=float, default=0.2)
+    fg.add_argument("--seed", type=int, default=0)
+    fg.add_argument("--config-from", default="v1/preds/a010_full_rd_s0.2_seed0.json")
+    fg.add_argument("--labels", default="v1/labels/*.jsonl")
+    fg.add_argument("--out", required=True)
     po = sub.add_parser("pilotoof", help="re-pilot (08a): one arm's cross-fitted OOF predictions on the pilot labels")
     po.add_argument("--fset", required=True)
     po.add_argument("--sigma", type=float, default=0.0)
@@ -336,6 +364,9 @@ def main(argv=None):
         return
     if a.cmd == "fit":
         cmd_fit(a)
+        return
+    if a.cmd == "fitg":
+        cmd_fitg(a)
         return
     if a.cmd == "pilotoof":
         import pilot_analysis_rd

@@ -28,3 +28,17 @@ def test_shuffle_properties():
         idx = [i for i, r in enumerate(rows) if (r["split"], r["dist"]) == key]
         a = sorted(map(tuple, X[idx, n_p:])); b = sorted(map(tuple, Y[idx, n_p:]))
         assert a == b
+
+
+def test_fid_and_massnoise_columns():
+    import math
+    from certgrip.featsets import noisy_mass, touch_only
+    rows = _rows()[:20]
+    for r in rows:
+        a = row_features(r, "full_rd"); b = row_features(r, "full_rd_fid"); c = row_features(r, "full_rd_mn")
+        assert b[:len(a)] == a and sum(b[len(a):]) == 1.0 and b[len(a) + int(r["family"][1]) - 1] == 1.0
+        assert len(c) == len(a) and c[:5] == a[:5] and c[6:] == a[6:]
+        assert abs(c[5] - math.log(noisy_mass(r))) < 1e-12 and c[5] != a[5]
+        assert len(touch_only(r)) == len(row_features(r, "full")) - len(row_features(r, "P"))
+    same = [r for r in _rows() if r["obj"] == rows[0]["obj"]]
+    assert len({round(noisy_mass(r) / r["inst"]["mass"], 12) for r in same}) == 1
