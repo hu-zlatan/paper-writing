@@ -4228,5 +4228,45 @@
   "student_distill_configs": {
    "{\"batch\": 256, \"beta_T\": 4.0, \"hidden\": 128, \"lam\": 0.5, \"lr\": 0.001, \"max_epochs\": 200}": 75
   }
+ },
+ "19_lat_agreement.json": {
+  "provenance": "report-only; agreement of recorded actions with g2000_512_64 on E6 job-1 states; no CI",
+  "cells": {
+   "S2": {
+    "source": "S_k2_s701_gstar_d1000.jsonl",
+    "n_decisions": 1000,
+    "student": 0.182,
+    "g125_512_16": 0.099,
+    "g500_512_4": 0.072
+   },
+   "S4": {
+    "source": "S_k4_s701_gstar_d1000.jsonl",
+    "n_decisions": 1000,
+    "student": 0.299,
+    "g125_512_16": 0.175,
+    "g500_512_4": 0.116
+   },
+   "S8": {
+    "source": "S_k8_s701_gstar_d1000.jsonl",
+    "n_decisions": 1000,
+    "student": 0.462,
+    "g125_512_16": 0.235,
+    "g500_512_4": 0.212
+   },
+   "S12": {
+    "source": "S_k12_s701_gstar_d1000.jsonl",
+    "n_decisions": 1000,
+    "student": 0.513,
+    "g125_512_16": 0.312,
+    "g500_512_4": 0.243
+   },
+   "A16-2": {
+    "source": "A16_k2_s701_gstar.jsonl",
+    "n_decisions": 500,
+    "student": 0.326,
+    "g125_512_16": 0.146,
+    "g500_512_4": 0.092
+   }
+  }
  }
 }

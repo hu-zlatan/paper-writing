@@ -1,6 +1,9 @@
 """Build the stage-19 [v5] prompt from the verbatim template (pipeline/references/stage_prompts/paper_revision.md)."""
 import os
 import re
+import sys
+PASS2 = "--pass2" in sys.argv
+SUF, RS, OUT = ("_v5_pass2", "_pass2", "stage19_v5_pass2_user.txt") if PASS2 else ("", "", "stage19_v5_user.txt")
 R = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", ".."))
 rd = lambda p: open(os.path.join(R, p)).read()
 tpl = rd("pipeline/references/stage_prompts/paper_revision.md")
@@ -11,7 +14,7 @@ block = u16[u16.index("=== HARD TOPIC CONSTRAINT ==="):u16.index("=== END CONSTR
 binding = """
 
 === BINDING INSTRUCTIONS FROM THE PIPELINE (main session; override anything in the reviews that conflicts) ===
-- Fix every item 1-7 and S1-S6 of the merged record above, in the way its 'action' column says. Do NOT claim anything
+- Fix every must-fix item of the merged record above (items 1-7 and S1-S6 in pass 1; P1-P8 in pass 2), in the way its 'action' column says. Do NOT claim anything
   the outline's never-write list (results/v5/15_decision.md section 4.4) forbids; this stays a measurement paper.
 - Numbers stay locked: every number must come from results/v5/results_v5.json (or v4 / v3 results for PRIOR cells),
   or from the frozen amendments docs/07c_amendment_v5_0.md / v5_1.md, or from code constants named in the reviews
@@ -27,12 +30,14 @@ binding = """
   qualifier "report-only".
 - Keep the three [CITE-MISSING: ...] markers as they are (fixed in stage 23).
 - Never shorten a section or soften Limitations. Keep the leading HTML comment line and the FIGURE 1 PROMPT block
-  (fix it only where item 1 or 2 makes it wrong). Change the leading comment to say 'revised in stage 19 [v5] pass 1'.
+  (fix it only where item 1 or 2 makes it wrong). Change the leading comment to say 'revised in stage 19 [v5] pass 1' (pass 2: '... pass 2').
+- Pass 2 only: P1 values from results/v4/results_v4.json > 14_e5_analysis.json; P7 values from
+  results/v5/results_v5.json > 19_lat_agreement.json, always with the stated caveat.
 """
-reviews = (rd("paper/mypaper/18_peer_review.md") + "\n\n=== FULL REVIEW, RUN 1 ===\n" + rd("paper/mypaper/18_review_v5_run1.md")
-           + "\n\n=== FULL REVIEW, RUN 2 ===\n" + rd("paper/mypaper/18_review_v5_run2.md") + binding)
+reviews = (rd(f"paper/mypaper/18_peer_review{SUF}.md") + "\n\n=== FULL REVIEW, RUN 1 ===\n" + rd(f"paper/mypaper/18_review_v5{RS}_run1.md")
+           + "\n\n=== FULL REVIEW, RUN 2 ===\n" + rd(f"paper/mypaper/18_review_v5{RS}_run2.md") + binding)
 user = user_t.replace("{topic_constraint}", block).replace("{draft}", rd("paper/mypaper/sections/draft_v5.md")).replace("{reviews}", reviews)
 d = os.path.dirname(os.path.abspath(__file__))
 open(os.path.join(d, "stage19_v5_system.txt"), "w").write(system + "\n")
-open(os.path.join(d, "stage19_v5_user.txt"), "w").write(user)
+open(os.path.join(d, OUT), "w").write(user)
 print(len(user.split()), "words")

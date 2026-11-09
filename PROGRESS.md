@@ -1690,3 +1690,17 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
 - Substantive rewrites (E7, deviations) → **second stage-18 pass** (as in v4) before stage 20.
 - **Where to resume (run 42):** stage 18 pass 2 [v5] on `draft_v5.md` (two fresh subagents, same template/evidence;
   builder `build_stage18_v5.py`, outputs `18_review_v5_pass2_run{1,2}.md`), then stage 19 pass 2, then stage 20.
+
+## Stage 18. PEER_REVIEW     [v5] — pass 2
+
+- **Finished:** 2026-11-09 (run 41) on `v5/draft_v5_stage19pass1.md`; same template / evidence (prompt
+  `stage18_v5_pass2_user.txt`); two fresh opus subagents. Scores: run 1 A 4 / B 3; run 2 A 3 / B 4 (mean 3.5).
+  **CRITICAL_FABRICATION: no** (45 + 40 spot-checks).
+- Merged record `paper/mypaper/18_peer_review_v5_pass2.md` (P1–P8). Main one, verified: the reduced-G\* accuracy side
+  of the frontier exists for S12 (v4 E5 rows, designated by addendum v5.1f) — the draft wrongly called it unevaluated.
+  Also: RL-sweep validation-stream size, one-directional inversion check, latency spread is a between-job difference,
+  label re-use and A16 ⊃ v3 set A disclosures.
+- New report-only row computed by the pipeline: `code/tools_lat_agreement_v5.py` → `results/v5/19_lat_agreement.json`
+  (action agreement with full G\* on the E6 states; student 0.182–0.513 vs reduced G\* 0.072–0.312; caveat: G\* is
+  sampled, self-agreement not measured, agreement ≠ accuracy).
+- **Next:** stage 19 pass 2 (prompt `stage19_v5_pass2_user.txt`), then stage 20.
