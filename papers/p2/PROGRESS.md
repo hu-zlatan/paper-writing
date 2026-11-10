@@ -672,3 +672,18 @@ Run order when both papers are active: AUTOPILOT §7.
   above α per seed / refined-grid stratum, σ vs σ_p scale claim wrong, weak unshrunk comparators, force accounting
   vs preload, §6 redundancy.
 - **Next:** stage 19 pass 2 (`prompts/stage19_v2_pass2_user.txt`, builder `build_stage19_v2.py --pass2`), then stage 20.
+
+## Stage 19. PAPER_REVISION     [v2] — pass 2
+
+- **Finished:** 2026-11-10 (run 45). Plan `plans/stage_19_paper_revision_v2_pass2.md`; template verbatim
+  (`prompts/stage19_v2_pass2_user.txt`, builder `build_stage19_v2.py --pass2`), fresh opus subagent, targeted edits.
+  Snapshot after `paper/mypaper/v2/draft_v2_stage19pass2.md`.
+- P1 H2b: registered TOST (±0.10, 0.0125 / side) not met on primary (0.1454) / refined (0.1001), met only on the label
+  route (secondary); the H5 "no equivalence test" sentence kept (09 registers none). P2 RAW-Qv point slip above α;
+  P3 heterogeneity (Q 31.04 / 15 df, guard only); P4 per-seed slips (seed 4 0.1018 > α), refined-grid strata above α
+  described without numbers; P5 σ / σ_p on one scale; P6 unshrunk comparators (plug-in σ 0.4 RE 0.9877 vs CSF-1 0.7832);
+  P7 force accounting vs preload, Frozen-CertGrip 0.2461 vs Frozen-COMP 0.1910 under S3; P8 ≈ 88 cal / stratum (352 / 4);
+  P9 §6 1,016 → 901 words (P9 asked to tighten; above floor).
+- Words 12,155 → 13,155 (+8 %); floors met; number audit 0 unmatched with design docs; main session spot-checked
+  0.1018, 0.2461, 0.1910, 0.9877, n_cal 352 in the results JSONs.
+- **Next:** stage 20 QUALITY_GATE [v2].
