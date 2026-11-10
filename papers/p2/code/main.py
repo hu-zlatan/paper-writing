@@ -233,7 +233,8 @@ def cmd_crc(a):
     """08c §2: direct replays of one shard of id cal / test instances (protocol rd) at every arm's 20 grid forces
     F = min(F_max, g e^lambda) from results/v1/crc_grids.json; one line per instance with slip[arm] (20 booleans).
     Identical forces within an instance are replayed once. No label value is read."""
-    a.protocol = "rd"
+    a.protocol = getattr(a, "rep_protocol", "rd")      # amendment 11: "noprobe" for S6; default rd (unchanged)
+    pool = getattr(a, "pool", "id")
     G = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "results", "v1", a.grids)))
     index = {tuple(k): i for i, k in enumerate(G["instances"])}
     f_max = G["F_max"]
@@ -249,12 +250,12 @@ def cmd_crc(a):
                 print("EARLY_STOP_AT_80_PCT_BUDGET", flush=True)
                 break
             for d in DISTS:
-                k = ("id", a.family, obj, d, None)
+                k = (pool, a.family, obj, d, None)
                 if k not in index:
                     continue
                 i = index[k]
-                inst = make_instance("id", a.family, obj, d, None)
-                sim = Sim(inst, preload_force(), delta_t=SLIP["delta_t"], rot_t_deg=SLIP["rot_t_deg"], protocol="rd")
+                inst = make_instance(pool, a.family, obj, d, None)
+                sim = Sim(inst, preload_force(), delta_t=SLIP["delta_t"], rot_t_deg=SLIP["rot_t_deg"], protocol=a.protocol)
                 cache, slips, forces = {}, {}, {}
                 for arm, A in G["arms"].items():
                     grid = A["grids"][d] if "grids" in A else A["grid"]
@@ -269,7 +270,7 @@ def cmd_crc(a):
                     forces[arm] = [round(F, 6) for F in Fs]
                 n += 1
                 n_rep += len(cache)
-                f.write(json.dumps({"key": list(k), "split": split_of("id", obj), "slip": slips, "F": forces,
+                f.write(json.dumps({"key": list(k), "split": split_of(pool, obj), "slip": slips, "F": forces,
                                     "n_replays": len(cache)}) + "\n")
                 f.flush()
     print(f"instances: {n}")
@@ -348,7 +349,9 @@ def main(argv=None):
     cr.add_argument("--start", type=int, required=True)
     cr.add_argument("--count", type=int, required=True)
     cr.add_argument("--budget-minutes", type=float, default=25.0)
-    cr.add_argument("--grids", default="crc_grids.json", help="crc_grids_v2.json for addendum 08e")
+    cr.add_argument("--grids", default="crc_grids.json", help="crc_grids_v2.json for addendum 08e; ../v4/... for v4")
+    cr.add_argument("--pool", default="id", choices=["id", "f4", "c4"], help="amendment 11 pools")
+    cr.add_argument("--rep-protocol", default="rd", choices=["rd", "noprobe"], help="amendment 11 S6: noprobe")
     cr.add_argument("--out", required=True)
     rp = sub.add_parser("replay", help="08d: H3 stream-audit direct replays from a schedule file")
     rp.add_argument("--shift", required=True, choices=["S1", "S2", "S3", "S1m"])

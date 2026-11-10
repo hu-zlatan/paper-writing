@@ -40,3 +40,14 @@ def test_noprobe_runs():
     sim = Sim(inst, preload_force(), delta_t=SLIP["delta_t"], rot_t_deg=SLIP["rot_t_deg"], protocol="noprobe")
     assert not sim.run(60.0)["slip"]
     assert sim.run(0.05)["slip"]
+
+
+def test_crc_default_unchanged(tmp_path):
+    """main.py crc with the default pool / protocol reproduces a stored v1 08c replay line exactly."""
+    import main as M
+    ref = [json.loads(l) for l in open(os.path.join(ROOT, "v1/crc/F1_200.jsonl"))][1]
+    obj = ref["key"][2]
+    out = str(tmp_path / "x")
+    M.main(["crc", "--family", "F1", "--start", str(obj), "--count", "1", "--out", out])
+    got = [json.loads(l) for l in open(out + ".jsonl")][1]
+    assert got["key"] == ref["key"] and got["slip"] == ref["slip"] and got["F"] == ref["F"]
