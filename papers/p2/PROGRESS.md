@@ -798,3 +798,8 @@ Run order when both papers are active: AUTOPILOT §7.
   changes no v1 verdict; ablations for probe and calibration; no fabrication). Refine cycles stay 2 / 3.
 - **Next:** A7 integrated-force / break-even by script (or state not produced); stage 16 PAPER_OUTLINE [v3] (revise
   `paper/mypaper/` outline with v3 rows), then 17–20 by ≈ 11-24.
+- **A7 integrated force done (run 46, script `code/analysis_v3_d.py`, arithmetic on `a_analysis.json`):**
+  `results/v3/a7_integrated.json`. Shared phases 27.4258 N·s (probe-specific squeeze + ramp-down 14.3458). CertGrip-full
+  σ 0.2 holds 1.085 N less than CSF-1 → break-even hold **13.22 s** (probe phases) / 25.28 s (all phases); for shorter
+  holds the probe costs more force-time than the lower hold force saves. Point values, no interval. To be stated in the
+  paper's Limitations. `results_v3.json` regenerated.

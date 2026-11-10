@@ -1,0 +1,147 @@
+{
+ "purpose": "p2 amendment 10 A7 integrated force / break-even (descriptive, point values, 08c CRC test split)",
+ "shared_phases_Ns": 27.42577276717804,
+ "probe_phases_Ns": 14.345772767178037,
+ "arms": {
+  "full_rd@0.0#0": {
+   "integrated_Ns": {
+    "1": 33.34423005539232,
+    "5": 57.01805920824947,
+    "30": 204.9794914136066
+   },
+   "hold_saving_vs_CSF1_N": 1.688022284642857,
+   "break_even_T_s_probe_phases": 8.498568352853969,
+   "break_even_T_s_all_phases": 16.247281221752733
+  },
+  "full_rd@0.1#0": {
+   "integrated_Ns": {
+    "1": 33.62631651253518,
+    "5": 58.42849149396376,
+    "30": 213.44208512789237
+   },
+   "hold_saving_vs_CSF1_N": 1.4059358274999987,
+   "break_even_T_s_probe_phases": 10.203718040735433,
+   "break_even_T_s_all_phases": 19.507129863776136
+  },
+  "full_rd@0.2#0": {
+   "integrated_Ns": {
+    "1": 33.947247238963755,
+    "5": 60.03314512610661,
+    "30": 223.07000692074948
+   },
+   "hold_saving_vs_CSF1_N": 1.0850051010714283,
+   "break_even_T_s_probe_phases": 13.221848222659759,
+   "break_even_T_s_all_phases": 25.277091084728955
+  },
+  "full_rd@0.4#0": {
+   "integrated_Ns": {
+    "1": 34.635444513963755,
+    "5": 63.47413150110661,
+    "30": 243.7159251707495
+   },
+   "hold_saving_vs_CSF1_N": 0.39680782607142717,
+   "break_even_T_s_probe_phases": 36.152948164373484,
+   "break_even_T_s_all_phases": 69.1160077126132
+  },
+  "full_rd@0.2#1": {
+   "integrated_Ns": {
+    "1": 33.91029281753518,
+    "5": 59.84837301896375,
+    "30": 221.9613742778923
+   },
+   "hold_saving_vs_CSF1_N": 1.1219595225,
+   "break_even_T_s_probe_phases": 12.786355015029551,
+   "break_even_T_s_all_phases": 24.444529608400412
+  },
+  "full_rd@0.2#2": {
+   "integrated_Ns": {
+    "1": 34.0338386743209,
+    "5": 60.466102302892324,
+    "30": 225.66774998146374
+   },
+   "hold_saving_vs_CSF1_N": 0.9984136657142857,
+   "break_even_T_s_probe_phases": 14.36856611624479,
+   "break_even_T_s_all_phases": 27.46934833625006
+  },
+  "full_rd@0.2#3": {
+   "integrated_Ns": {
+    "1": 34.012872116463754,
+    "5": 60.36126951360661,
+    "30": 225.03875324574946
+   },
+   "hold_saving_vs_CSF1_N": 1.0193802235714289,
+   "break_even_T_s_probe_phases": 14.07303421771044,
+   "break_even_T_s_all_phases": 26.90436025047752
+  },
+  "full_rd@0.2#4": {
+   "integrated_Ns": {
+    "1": 33.84748833110661,
+    "5": 59.53435058682089,
+    "30": 220.07723968503518
+   },
+   "hold_saving_vs_CSF1_N": 1.1847640089285711,
+   "break_even_T_s_probe_phases": 12.108548756601312,
+   "break_even_T_s_all_phases": 23.148722075023404
+  },
+  "CSF-1": {
+   "integrated_Ns": {
+    "1": 35.03225234003518,
+    "5": 65.45817063146376,
+    "30": 255.62015995289232
+   },
+   "hold_saving_vs_CSF1_N": 0.0,
+   "break_even_T_s_probe_phases": null,
+   "break_even_T_s_all_phases": null
+  },
+  "CSF-muhat@0.0": {
+   "integrated_Ns": {
+    "1": 33.7700012293209,
+    "5": 59.14691507789233,
+    "30": 217.75262663146378
+   },
+   "hold_saving_vs_CSF1_N": 1.2622511107142849,
+   "break_even_T_s_probe_phases": 11.365228871979385,
+   "break_even_T_s_all_phases": 21.727667763079484
+  },
+  "CSF-muhat@0.1": {
+   "integrated_Ns": {
+    "1": 33.9261211043209,
+    "5": 59.92751445289232,
+    "30": 222.43622288146375
+   },
+   "hold_saving_vs_CSF1_N": 1.1061312357142858,
+   "break_even_T_s_probe_phases": 12.96932253966613,
+   "break_even_T_s_all_phases": 24.794320856030982
+  },
+  "CSF-muhat@0.2": {
+   "integrated_Ns": {
+    "1": 34.48775988146375,
+    "5": 62.735708338606614,
+    "30": 239.28538619574948
+   },
+   "hold_saving_vs_CSF1_N": 0.5444924585714279,
+   "break_even_T_s_probe_phases": 26.34705502591662,
+   "break_even_T_s_all_phases": 50.369426307821406
+  },
+  "CSF-muhat@0.4": {
+   "integrated_Ns": {
+    "1": 36.86765915039233,
+    "5": 74.63520468324947,
+    "30": 310.6823642636066
+   },
+   "hold_saving_vs_CSF1_N": -1.835406810357143,
+   "break_even_T_s_probe_phases": null,
+   "break_even_T_s_all_phases": null
+  },
+  "P_onset@0.2#0": {
+   "integrated_Ns": {
+    "1": 33.944757057892325,
+    "5": 60.02069422074947,
+    "30": 222.99530148860663
+   },
+   "hold_saving_vs_CSF1_N": 1.0874952821428563,
+   "break_even_T_s_probe_phases": 13.191572416673287,
+   "break_even_T_s_all_phases": 25.21921080258564
+  }
+ }
+}
