@@ -580,3 +580,21 @@ Run order when both papers are active: AUTOPILOT §7.
   ≈ α under both shifts and the probe's force saving (≈ 41–44 %) is unchanged from the offline / label-feedback rows.
 - **Next (run 45):** stage 14
   [v2] (fresh subagent), 15, and stages 16–20 again on draft_v1 (v2 rows enter as secondary, v1 verdicts unchanged).
+
+## Stage 13. ITERATIVE_REFINE     [v2] — closed (run 44)
+
+- All amendment-09 rows done (A, B1 + edge rule, B2, B3); C items stay limitations (09 §C). numpy-2 check 0 / 0;
+  tests 33 / 33; 0 flagged logs. Frozen: `results/v2/13_freeze.json` (73 files, sha256).
+
+## Stage 14. RESULT_ANALYSIS     [v2]
+
+- **Finished:** 2026-11-10 (run 44). Plan `plans/stage_14_result_analysis_v2.md`; template verbatim via
+  `docs/prompts/build_stage14_v2.py` (v2 analysis JSONs + v1 crc / h3 read-outs, unaltered; 09 amendment + B3 plan).
+  Pass 1 fresh opus subagent → `results/14_analysis_v2_pass1.md`; pass 2 area-chair prompt verbatim, fresh opus
+  subagent → `results/14_analysis_v2_pass2.md`: 17 findings, 1 numeric (truncation by 0.0001), no fabrication; all
+  accepted. Merged `results/14_analysis_v2.md` with six statements of record (main session re-checked B2 per-stratum
+  slip and the v1 H2b σ rows against the JSON).
+- Key reading: the probe + calibration saving vs CSF-1 survives every route / grid and online physical feedback;
+  no demonstrated gain of the learned model over the probe-in-physics formula; a non-tactile friction prior of
+  log-error 0.2 is not distinguishable from the probe; uncalibrated margins miss α per stratum.
+- **Next:** stage 15 RESEARCH_DECISION [v2].
