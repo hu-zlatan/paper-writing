@@ -778,3 +778,15 @@ Run order when both papers are active: AUTOPILOT §7.
   mixed-grid edge row −0.0646); shrunk vs CSF-1 0.4484 [0.4015, 0.5146] superiority; slips 0.090 / 0.077 / 0.0996.
 - `code/tools_results_v3.py` → `results/v3/results_v3.json` (8 analysis files, unchanged content).
 - **Stage 13 [v3] complete. Next: stage 14 RESULT_ANALYSIS [v3]** (fresh subagent, template `result_analysis.md`).
+
+## Stage 14. RESULT_ANALYSIS     [v3]
+
+- **Finished:** 2026-11-10 (run 46). Plan `plans/stage_14_result_analysis_v3.md`; template verbatim via
+  `docs/prompts/build_stage14_v3.py` (v3 analysis JSONs + v1 crc / h3 read-outs unaltered; amendment 10 + context).
+  Pass 1 fresh opus → `results/14_analysis_v3_pass1.md`; pass 2 area-chair prompt verbatim, fresh opus →
+  `results/14_analysis_v3_pass2.md`: 15 findings, 3 numeric, **no fabrication**; all accepted. Merged
+  `results/14_analysis_v3.md` (7 statements of record).
+- Key reading: probe + calibration saving vs CSF-1 holds at pool level everywhere but reverses inside the 08e
+  μ ∈ [0.5, 0.8] sub-pools; a shrunk plug-in beats the learned model at σ 0.4; reactive controllers fail; Holm changes
+  no v1 verdict. Gap found: A7 integrated force / break-even (registered) not produced by code.
+- **Next:** stage 15 RESEARCH_DECISION [v3] (refine cycles 2 / 3 used).
