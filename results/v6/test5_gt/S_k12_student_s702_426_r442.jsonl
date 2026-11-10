@@ -1,0 +1,6 @@
+{"header": true, "args": {"cmd": "gt3", "src": ["/home/claude/paper-writing/code/../results/v6/test5/S_k12_student_s702_426_r442.jsonl"], "J": 16, "L": 4095, "out": "/home/claude/paper-writing/code/../results/v6/test5_gt/.S_k12_student_s702_426_r442"}, "env": {"TOUCHBED_NPHI": "64", "action_set": "64x8", "A": 512, "numpy": "2.5.3", "python": "3.13.18", "threads": {"OMP_NUM_THREADS": "1", "OPENBLAS_NUM_THREADS": "1", "MKL_NUM_THREADS": "1"}}}
+{"episode": 442, "set": "S", "split": "test5", "kappa": 12.0, "tau": 4.9, "method": "student", "g_T": 6.096433043758799, "n_probes": 4, "J": 16, "L": 4095}
+{"episode": 443, "set": "S", "split": "test5", "kappa": 12.0, "tau": 4.9, "method": "student", "g_T": 7.241809515781496, "n_probes": 4, "J": 16, "L": 4095}
+{"episode": 444, "set": "S", "split": "test5", "kappa": 12.0, "tau": 4.9, "method": "student", "g_T": 8.286807485516867, "n_probes": 4, "J": 16, "L": 4095}
+{"episode": 445, "set": "S", "split": "test5", "kappa": 12.0, "tau": 4.9, "method": "student", "g_T": 7.097668837499966, "n_probes": 4, "J": 16, "L": 4095}
+{"episode": 446, "set": "S", "split": "test5", "kappa": 12.0, "tau": 4.9, "method": "student", "g_T": -5.788130006906513, "n_probes": 4, "J": 16, "L": 4095}
