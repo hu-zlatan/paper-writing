@@ -569,6 +569,14 @@ Run order when both papers are active: AUTOPILOT §7.
   D(CertGrip-full vs CSF-proxy@0.2) = −0.0299 [−0.1903, 0.0816] → not shown (RE 0.4442 vs 0.4312; test slip 0.09 vs
   0.0825). So a non-tactile friction prior with log-error 0.2 does as well as the probe at onset noise σ 0.2: the
   paper must say the probe's value is "a friction estimate of about that quality", not touch per se.
-- **B3 (online, physical feedback)**: not started (pilot-gated; next run).
-- **Next (run 44):** B3 pilot → run or downscale; then stage 14
+- **B3 (online, physical feedback; run 44, plan `plans/stage_13_v2_b3_online_physical.md`, code `code/b3_online.py`
+  + `tests/test_b3.py` committed before any replay):** pilot 200 replays in 2.5 s → 40,000 replays ≈ 0.14 CPU-h ≤ 6 h,
+  so the full design ran (S1 / S3 × orderings 0–4 × 2 arms, sandbox, ≈ 25 s per stream; `results/v2/b3/`,
+  `results/v2/b3_analysis.json`). Physical slip, mean over 5 orderings (range), steps 1,501–2,000: CertGrip 0.1032
+  (0.100–0.106) S1 / 0.0992 (0.090–0.112) S3; CSF-1 0.0988 (0.082–0.110) / 0.0936 (0.088–0.100). RE_mid same window:
+  CertGrip 0.4626 / 0.5135, CSF-1 0.7998 / 0.8726 → D_RE 0.4216 (S1) / 0.4115 (S3); steps 1–500 D_RE 0.4387 / 0.4438.
+  Label-rule OQT on the same orderings (08d start): CertGrip RE 0.4723 / 0.515, slip_label 0.1012 / 0.1008.
+  Reading (descriptive, 5 orderings, no CI registered): with real slip feedback the tracker holds physical slip at
+  ≈ α under both shifts and the probe's force saving (≈ 41–44 %) is unchanged from the offline / label-feedback rows.
+- **Next (run 45):** stage 14
   [v2] (fresh subagent), 15, and stages 16–20 again on draft_v1 (v2 rows enter as secondary, v1 verdicts unchanged).
