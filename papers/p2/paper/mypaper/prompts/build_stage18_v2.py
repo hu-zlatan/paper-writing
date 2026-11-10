@@ -4,11 +4,12 @@ import os
 import runpy
 import sys
 
+SUF = sys.argv[1] if len(sys.argv) > 1 else "_v2"  # "_v2_pass2" for the second pass on the revised draft_v2.md
 d = os.path.dirname(os.path.abspath(__file__))
 P2 = os.path.join(d, "..", "..", "..")
-sys.argv = ["build_stage18.py", "paper/mypaper/draft_v2.md", "_v2"]
+sys.argv = ["build_stage18.py", "paper/mypaper/draft_v2.md", SUF]
 runpy.run_path(os.path.join(d, "build_stage18.py"), run_name="__main__")
-p = os.path.join(d, "stage18_v2_user.txt")
+p = os.path.join(d, f"stage18{SUF}_user.txt")
 u = open(p).read()
 anchor = "\n\n(b) First 200 lines of the longest run log"
 assert u.count(anchor) == 1
