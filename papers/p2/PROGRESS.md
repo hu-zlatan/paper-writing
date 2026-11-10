@@ -633,3 +633,16 @@ Run order when both papers are active: AUTOPILOT §7.
 - Number audit 0 unmatched; 55 / 55 cite keys in cards. Draft deviations from the outline noted by the drafter
   (onset-only label-route row not claimed within ±0.05; Discussion / Limitations split).
 - **Next:** stage 18 PEER_REVIEW [v2] (two fresh subagents, evidence audit).
+
+## Stage 18. PEER_REVIEW     [v2]
+
+- **Finished:** 2026-11-10 (run 44). Plan `plans/stage_18_peer_review_v2.md`; template verbatim
+  (`prompts/build_stage18_v2.py`); two fresh opus subagents. Run 1 A 5 / B 4, run 2 (RSS pair) A 4 / B 6
+  (mean 4.75; v1 pass 2 4.5). **CRITICAL_FABRICATION: no** (≈ 100 numbers checked, > 46 recomputed from raw
+  replays — H2a, all B3 windows, CSF-proxy@0.2 on crc09e — all exact).
+- Merged record `paper/mypaper/18_peer_review_v2.md`: 10 paper-level must-fix items (LTT plug-in sentence wrong;
+  RAW-Qv omitted from H1c; mixed-grid comparisons; one hedge for learned vs plug-in; headline conditional on σ;
+  "certified" scope; force accounting incl. preload; route labels; small fixes incl. D-FID; B2 framing; density) and
+  4 evidence-level items (reactive / tuned-margin baselines; σ grounding; direct learned-vs-plug-in at matched slip
+  + conditional tables; hardware / online with intervals) for stage 20.
+- **Next:** stage 19 PAPER_REVISION [v2] (`prompts/build_stage19_v2.py`; snapshot `paper/mypaper/v2/draft_v2_stage17.md`).
