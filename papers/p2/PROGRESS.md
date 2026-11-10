@@ -715,3 +715,23 @@ Run order when both papers are active: AUTOPILOT §7.
   Holm, sub-pool on CRC, shrunk plug-in, per-stratum tuned margin, force in N; then new replays: reactive baseline,
   adaptive preload, online study at 20 orderings × 3 shifts).
 - **Resuming under version:** v3. Deadline 12-04 AoE; stages 16–20 again by ≈ 11-24, else retarget (AUTOPILOT §1).
+
+## Stage 13. ITERATIVE_REFINE     [v3] — amendment 10 (in progress)
+
+- **Started:** 2026-11-10 (run 45). Plan `plans/stage_13_v3_amendment.md`; amendment `docs/10_amendment_v3.md`
+  committed before any v3 code; `code/analysis_v3_a.py` + `code/tests/test_analysis_v3_a.py` (3 passed) committed
+  before its first run.
+- **Part A done (existing replays, sandbox, ≈ 1 min):** `results/v3/a_analysis.json` (08c grids),
+  `results/v3/a_analysis_08e.json` (08e grids). Sanity: reproduces v1 H2a D 0.4168 and H2b 0.0569 [−0.0399, 0.1454].
+  - A1 re-splits (R 200): CRC overall test slip > α in 5 % (CertGrip-full) / 12 % (CSF-1) of splits on 08c grids
+    (9 % / 7.5 % on 08e), mean 0.085; some stratum > α in 41–69 % of splits. LTT: overall > α in ≤ 1.5 %.
+  - A5 empirical margin: same λ̂ as CRC on 08c (n 500 / stratum), D unchanged; on 08e CSF-μ̂ slip 0.0796 vs 0.075.
+  - A6 learned vs plug-in: matched slip −0.0238 [−0.0845, 0.0194] (08c), −0.061 [−0.1104, 0.0123] (08e); LTT 0.0538
+    [−0.0568, 0.1222] / −0.0042 [−0.086, 0.1069] — not shown either way.
+  - A4 losing sub-pool on CRC: **grid-dependent** — 08c grids superiority (D 0.3754), 08e refined grids inferiority
+    (D −0.3152 [−0.5231, −0.0172]); the μ-only restriction carries it (08e −0.1717), amplitude-only does not (+0.49).
+  - A7 force: F\*_mid on avoidable test rows median 3.18 N (10 % 0.95, 90 % 11.35, max 31.87), none above the 32.7 N
+    preload; hold force CertGrip-full mean 6.52 N vs CSF-1 7.61 N (excess 1.62 vs 2.71 N); shared protocol phases
+    ≈ 13.1 + 12.9 + 1.4 N·s for every arm.
+  - A3 (Holm as registered) not yet run.
+- **Next:** A3 Holm; B1 shrunk plug-in grids + replay manifest; B3 pilot; B2 controller code + pilot.
