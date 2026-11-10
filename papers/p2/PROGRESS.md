@@ -943,3 +943,17 @@ Run order when both papers are active: AUTOPILOT §7.
 - Self-check: `tools_number_audit.py` (extended to read `results/v4/v4_analysis.json`) → 0 unmatched decimals. The
   outline names v4 JSON keys from the stage-14 record; stage 17 must check sub-field names against the JSON.
 - **Next:** stage 17 PAPER_DRAFT [v4] (builder from `build_stage17_v3.py`), then 18 (two passes), 19, 20.
+
+## Stage 17. PAPER_DRAFT     [v4]
+
+- **Finished:** 2026-11-10 (run 47). Plan `plans/stage_17_paper_draft_v4.md`; template verbatim via
+  `build_stage17_v4.py`; fresh opus subagent → `paper/mypaper/draft_v4.md` (snapshot `v4/draft_v4_stage17.md`).
+- ≈ 3,530 body-prose tokens (≈ 4,580 with tables / captions; abstract 196) — at the top of the 5-page budget; stage 22
+  checks real pages. One `[NEED]` (CSF-fam μ̄ values) resolved by the main session from the committed grid file
+  `results/v4/crc_grids_11_c4.json` (`arms.CSF-fam.source`: F1 0.379, F2 0.496, F3 0.677, F4 0.852), and the
+  draft's "fitted on calibration objects" corrected to the code's actual rule (geometric mean of the 50 selection
+  objects per family, `code/crc_grids_11.py`). Number audit: 0 unmatched decimals. Figure 1 prompt saved to
+  `paper/mypaper/figures/figure1_prompt_v4.txt`.
+- The writer reported outline key names that differ from the JSON (e.g. `S1_C1@0.1`, `S7_resplits.rules`); the draft
+  uses the real keys.
+- **Next:** stage 18 PEER_REVIEW [v4] (two fresh subagents), 19, second 18/19 pass, 20.

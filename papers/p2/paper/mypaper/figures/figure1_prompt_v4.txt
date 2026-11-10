@@ -1,0 +1,30 @@
+FIGURE 1 PROMPT
+Full-width, two-panel vector figure for a robotics paper (RSS style), white background, sans-serif labels,
+colour-blind-safe palette: learned probe model = deep blue, probe plug-in = teal, friction-blind conformal
+baseline CSF-1 = orange, family friction prior CSF-fam = purple, no-probe grasp = dashed grey. Title strip above
+the panels: "Probe, then calibrate (simulation)". No insets.
+
+(a) Protocol timeline with absolute forces (schematic shape, real numbers). x-axis: time within one grasp
+episode; y-axis: grip force in N (log scale). Segments, left to right: "preload F0 = 32.7 N (same for every
+object)" as a flat line held 0.4 s; "squeeze F0 -> 1.5 F0 -> F0" as a half-sine bump over 0.3 s; "ramp-down
+probe" as a log-linear descent from F0 towards 0.005 F0 over 0.25 s, cut short by a red marker labelled
+"incipient-slip onset F_onset -> mu-hat = m g / (2 F_onset)"; a fast return to F0 (0.02 s) held 0.1 s; then
+"ramp to hold force F = F_base(x) e^lambda-hat" followed by a shaded "disturbance window (0.6 s)". Annotate each
+phase with its integrated force (N s): preload 13.08, squeeze 12.91, ramp-down 1.444, return 0.3480,
+re-hold 3.27. Draw a dashed grey alternative trace labelled "no-probe grasp" that leaves the preload directly for
+the hold force and skips squeeze, probe, return and re-hold. Over the hold segment draw a band with three tick
+lines: "learned probe model 6.115 N" (blue), "probe plug-in 6.463 N" (teal), "CSF-1 7.125 N" (orange; the
+no-probe grasp holds the same 7.125 N). Side note at right: "break-even vs no-probe grasp: 17.74 s (learned
+model), 27.07 s (plug-in); CSF-1 with probe never breaks even".
+
+(b) Confirmatory forest plot (real data). y-axis: five rows, top to bottom, grouped under two headers.
+Header "fresh pool (friction independent of appearance)": C1 probe plug-in vs CSF-1, D 0.4314 [0.3824, 0.4835];
+C2 learned model vs plug-in, D 0.01117 [-0.05552, 0.05686]; C3 learned model vs CSF-1, D 0.4135
+[0.3578, 0.4903]. Header "friction-correlated pool, vs family prior": C4 plug-in vs CSF-fam, D -0.5814
+[-0.7208, -0.4563]; C5 learned model vs CSF-fam, D -0.5461 [-0.6590, -0.4290]. x-axis: D = 1 - RE(a)/RE(b),
+range -0.8 to 0.6. Vertical solid line at 0, dashed lines at -0.10 and +0.10; shade the band [-0.10, 0.10] on
+the C2 row only. Filled markers for C1-C3 (registered prediction met), open markers for C4 and C5 (no prediction
+registered). Small grey tick on each row at its CRC-route value: C1 0.4482, C2 -0.06291, C4 -0.5166,
+C5 -0.4733 (C3 is itself the CRC route; no tick). Footer under both panels: "MuJoCo, rigid contact, modelled
+touch detector, assumed onset noise sigma = 0.2; bound marginal over the pool, in expectation, needs simulator
+replays".
