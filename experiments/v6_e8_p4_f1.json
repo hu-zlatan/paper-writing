@@ -1,0 +1,53 @@
+{
+ "purpose": "stage 13 [v6] wave-3 follow-up: time-guard stops / missing outputs of v6_e8_p4",
+ "jobs": [
+  {
+   "id": "S_k8_b_cov_480_r491",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method b_cov --split test5 --start 491 --count 1 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k8_b_cov_480_r491"
+  },
+  {
+   "id": "S_k8_b_spread_396_r401",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method b_spread --split test5 --start 401 --count 1 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k8_b_spread_396_r401"
+  },
+  {
+   "id": "S_k8_gstar_300_r314",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method gstar --split test5 --start 314 --count 8 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k8_gstar_300_r314"
+  },
+  {
+   "id": "S_k8_gstar_432_r450",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method gstar --split test5 --start 450 --count 4 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k8_gstar_432_r450"
+  },
+  {
+   "id": "S_k8_rl_s712_351_r364",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method rl --weights ../results/v5/rl/S_k8_rel_cfg6_sd712.npz --split test5 --start 364 --count 4 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k8_rl_s712_351_r364"
+  },
+  {
+   "id": "S_k8_rl_s712_385_r401",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method rl --weights ../results/v5/rl/S_k8_rel_cfg6_sd712.npz --split test5 --start 401 --count 1 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k8_rl_s712_385_r401"
+  },
+  {
+   "id": "S_k8_rl_s712_419_r433",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method rl --weights ../results/v5/rl/S_k8_rel_cfg6_sd712.npz --split test5 --start 433 --count 3 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k8_rl_s712_419_r433"
+  },
+  {
+   "id": "S_k8_rl_s713_351_r366",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method rl --weights ../results/v5/rl/S_k8_rel_cfg6_sd713.npz --split test5 --start 366 --count 2 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k8_rl_s713_351_r366"
+  },
+  {
+   "id": "S_k8_rl_s713_368_r382",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method rl --weights ../results/v5/rl/S_k8_rel_cfg6_sd713.npz --split test5 --start 382 --count 3 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k8_rl_s713_368_r382"
+  },
+  {
+   "id": "S_k8_student_s703_415_r431",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s703_r2.npz --split test5 --start 431 --count 7 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k8_student_s703_415_r431"
+  },
+  {
+   "id": "S_k8_student_s703_461_r481",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s703_r2.npz --split test5 --start 481 --count 3 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k8_student_s703_461_r481"
+  },
+  {
+   "id": "S_k8_student_s705_415_r433",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k8_s705_r2.npz --split test5 --start 433 --count 5 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k8_student_s705_415_r433"
+  }
+ ]
+}
