@@ -625,6 +625,45 @@
    "findings": "Setup-specific and generalized effects across 6 configurations; one configuration consistently best across both setups.",
    "limitations": "Simulation-only sensor layout study with no guarantee or calibration (inferred). Tangential to the conformal contribution (inferred).",
    "citation": "Birtalan et al., The impact of tactile sensor configurations on grasp learning efficiency -- a comparative evaluation in simulation, arXiv (Cornell University), 2026"
+  },
+  {
+   "card_id": "p2c53",
+   "title": "Learn then test: Calibrating predictive algorithms to achieve risk control",
+   "cite_key": "angelopoulos2025learn",
+   "problem": "Calibrating a predictive algorithm's parameters so that a risk is controlled with high probability.",
+   "method": "Learn-then-Test: risk control framed as multiple hypothesis testing over a parameter set, giving (alpha, delta) guarantees.",
+   "data": "n/a (metadata-only card)",
+   "metrics": "n/a",
+   "findings": "n/a (not read)",
+   "limitations": "n/a",
+   "citation": "Angelopoulos, Bates, Candès, Jordan, Lei, Learn then test: Calibrating predictive algorithms to achieve risk control, The Annals of Applied Statistics, 2025, DOI 10.1214/24-aoas1998 (OpenAlex W4410803261)",
+   "verification": "metadata-only card added in p2 v2 stage 16 (run 44, 2026-11-10); title / authors / venue / DOI verified via OpenAlex; abstract not read here — cite only for the generally known content named in 'method'"
+  },
+  {
+   "card_id": "p2c54",
+   "title": "Roles of glabrous skin receptors and sensorimotor memory in automatic control of precision grip when lifting rougher or more slippery objects",
+   "cite_key": "johansson1984roles",
+   "problem": "How humans set grip force relative to the friction of the grasped surface.",
+   "method": "Classic human precision-grip study (grip force adapted to surface friction, with a safety margin above the slip limit).",
+   "data": "n/a (metadata-only card)",
+   "metrics": "n/a",
+   "findings": "n/a (not read)",
+   "limitations": "n/a",
+   "citation": "R.S. Johansson, G. Westling, Roles of glabrous skin receptors and sensorimotor memory in automatic control of precision grip when lifting rougher or more slippery objects, Experimental Brain Research 56(3), 1984, DOI 10.1007/BF00237997",
+   "verification": "metadata-only card added in p2 v2 stage 16 (run 44, 2026-11-10); title / authors / venue / DOI verified via Crossref; abstract not read here — cite only for the generally known content named in 'method'"
+  },
+  {
+   "card_id": "p2c55",
+   "title": "Incipient Slip Detection and Control Using a Rubber-Based Tactile Sensor",
+   "cite_key": "marconi1996incipient",
+   "problem": "Detecting incipient slip with a tactile sensor and using it for grip control.",
+   "method": "Early robotic incipient-slip detection and control with a rubber-based tactile sensor.",
+   "data": "n/a (metadata-only card)",
+   "metrics": "n/a",
+   "findings": "n/a (not read)",
+   "limitations": "n/a",
+   "citation": "L. Marconi, C. Melchiorri, Incipient Slip Detection and Control Using a Rubber-Based Tactile Sensor, IFAC Proceedings Volumes 29(1):475-480, 1996, DOI 10.1016/s1474-6670(17)57707-1 (OpenAlex W2733484517)",
+   "verification": "metadata-only card added in p2 v2 stage 16 (run 44, 2026-11-10); title / authors / venue / DOI verified via OpenAlex; abstract not read here — cite only for the generally known content named in 'method'"
   }
  ]
 }
