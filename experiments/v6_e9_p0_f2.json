@@ -1,0 +1,21 @@
+{
+ "purpose": "v6 E9 follow-up 2: time-guard resumes of v6_e9_p0_f1",
+ "jobs": [
+  {
+   "id": "A16_k2_g125_512_16_168_r176",
+   "cmd": "python main.py eval3 --set A16 --kappa 2 --tau 3.4 --n-star 3 --method g125_512_16 --split test5 --start 176 --count 4 --sub 8 --budget-minutes 25 --out ../results/v6/test5/A16_k2_g125_512_16_168_r176"
+  },
+  {
+   "id": "A16_k2_g500_512_4_132_r136_r143",
+   "cmd": "python main.py eval3 --set A16 --kappa 2 --tau 3.4 --n-star 3 --method g500_512_4 --split test5 --start 143 --count 1 --sub 8 --budget-minutes 25 --out ../results/v6/test5/A16_k2_g500_512_4_132_r136_r143"
+  },
+  {
+   "id": "S_k4_g125_512_16_270_r275_r290",
+   "cmd": "python main.py eval3 --set S --kappa 4 --tau 4.8 --n-star 4 --method g125_512_16 --split test5 --start 290 --count 7 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k4_g125_512_16_270_r275_r290"
+  },
+  {
+   "id": "S_k8_g500_512_4_154_r162_r174",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method g500_512_4 --split test5 --start 174 --count 2 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k8_g500_512_4_154_r162_r174"
+  }
+ ]
+}
