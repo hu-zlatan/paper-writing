@@ -745,3 +745,10 @@ Run order when both papers are active: AUTOPILOT §7.
   `results/v3/crc_grids_10e.json`; replays `results/v3/crc10e/` queued in the sandbox after B3
   (`analysis_v3_b.py --edge`). σ 0.4 not on an edge (index 1).
 - **B3 running (sandbox):** 100 new streams → `results/v3/b3/`; v2 streams reused (60-step determinism check exact).
+- **B2 reactive controllers done (sandbox, run 45; addendum 10a fixed before code):** `code/react_run.py`, controller
+  hook in `Sim.run` (default path identical to the v1 replays, `tests/test_react.py`; 38 tests pass); runs
+  `results/v3/react/` (4,800 id cal + test instances; F5 has no id cal / test objects, empty file), read-out
+  `results/v3/b2_analysis.json` (test split, descriptive): REACT-blind@0.5 slip 0.765 (RE −0.173), @0.75 slip 0.463
+  (RE 0.419, 54 % at the 4-step cap); REACT-probe@0.5 0.992, @0.75 0.951 (detector rarely fires: 0.5 steps). With the
+  registered detector / thresholds no reactive variant comes near α = 0.10. Note: the 3-object timing pilot before the
+  full run printed 12 cal-instance outcomes; no parameter was changed afterwards (all fixed in 10a).

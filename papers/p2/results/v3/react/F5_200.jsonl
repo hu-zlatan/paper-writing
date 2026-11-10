@@ -1,0 +1,1 @@
+{"header": true, "cmd": "react", "argv": {"cmd": "run", "family": "F5", "start": 200, "count": 300, "budget_minutes": 150, "out": "../results/v3/react/F5_200"}, "params": {"mu_min": 0.3, "safe": 0.8, "factor": 1.25, "max_steps": 4, "w": 6, "consec": 2, "refractory_frames": 3, "cs": [0.5, 0.75]}}
