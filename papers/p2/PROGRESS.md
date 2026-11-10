@@ -646,3 +646,16 @@ Run order when both papers are active: AUTOPILOT §7.
   4 evidence-level items (reactive / tuned-margin baselines; σ grounding; direct learned-vs-plug-in at matched slip
   + conditional tables; hardware / online with intervals) for stage 20.
 - **Next:** stage 19 PAPER_REVISION [v2] (`prompts/build_stage19_v2.py`; snapshot `paper/mypaper/v2/draft_v2_stage17.md`).
+
+## Stage 19. PAPER_REVISION     [v2] — pass 1
+
+- **Finished:** 2026-11-10 (run 44). Plan `plans/stage_19_paper_revision_v2.md`; template verbatim
+  (`prompts/build_stage19_v2.py`), fresh opus subagent; snapshot after `paper/mypaper/v2/draft_v2_stage19pass1.md`.
+- All 10 must-fix items addressed (LTT sentence corrected: plug-in 0.3704 vs 0.4043 primary, 0.4040 vs 0.4015
+  refined; RAW-Qv reported, every CI contains 0; same-grid pairs; one hedge; headline conditional on σ 0.2 /
+  μ range with σ* = 0.4; title "… in Simulation", certificates scoped; hold-force vs preload / squeeze; route labels;
+  D-FID 0.7257; Holm drop stated as deviation; B2 reframed; Appendix A–F). E1–E4 as limitations only.
+- Words 9,117 → 12,155 (+33 %; main body +12.6 %, appendix 1,892); no section shorter except Experiments (moved to
+  the appendix). Number audit 0 unmatched; main session re-checked probe displacement / static-touch values against
+  `19_report_rows.json`. +33 % > 30 % → **second stage-18 pass** before stage 20 (template rule).
+- **Next:** stage 18 [v2] pass 2 on `draft_v2.md`.
