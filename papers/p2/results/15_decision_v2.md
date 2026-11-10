@@ -12,8 +12,8 @@ online, a frontier / high-probability certificate). Every registered v2 row has 
 reverses the v1 picture, and the two that bite (B1 at σ_p 0.2, no learned-model gain) sharpen the claim rather than
 call for more runs: the contribution is *a friction-onset probe whose estimate, under conformal calibration, gives a
 per-stratum slip guarantee at ≈ 40 % less excess force than the best non-tactile conformal baseline*; the learned
-tactile model and touch per se are not the source of the gain, and a non-tactile friction prior of log-error 0.2
-would do as well. That is a scoped, honest measurement claim, not a hypothesis that failed across the board → not
+tactile model and touch per se are not the source of the gain, and against a non-tactile friction prior of
+log-error 0.2 no advantage is shown (no equivalence test was run; corrected in stage 16 per the binding audit). That is a scoped, honest measurement claim, not a hypothesis that failed across the board → not
 PIVOT. The remaining gaps (hardware σ grounding, reactive controller, correlated-μ pool) cannot be closed with
 CPU simulation in this loop or are out of scope (09 §C) → REFINE would not buy evidence the paper needs; they stay
 limitations.

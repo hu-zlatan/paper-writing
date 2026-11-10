@@ -606,3 +606,18 @@ Run order when both papers are active: AUTOPILOT §7.
   calibration", with H5 at σ_p 0.2 and H2b stated as limits). REFINE rejected: remaining gaps are hardware-only or
   out of scope (09 §C). Refine cycles used 1 / 3.
 - **Next:** stage 16 PAPER_OUTLINE [v2].
+
+## Stage 16. PAPER_OUTLINE     [v2]
+
+- **Finished:** 2026-11-10 (run 44). Plan `plans/stage_16_paper_outline_v2.md`; template verbatim
+  (`paper/mypaper/prompts/build_stage16_v2.py`), fresh opus subagent → `paper/mypaper/sections/00_outline_v2.md`
+  (≈ 7,100 words of outline; body target ≈ 3,300 words for ≤ 5 pages + refs, stated deviation).
+- Title "Probe, Then Certify: A Tactile Friction-Onset Probe with Conformal Risk Control for Certified-Slip
+  Minimal-Force Grasping"; method framed as probe + force rule + CRC (learned model optional); v2 rows secondary;
+  descriptive names + hypothesis glossary; Figure 1(b) from the real frontier data. Number audit: 0 unmatched apart
+  from rounding notes in the header (0.0001 / 0.4042 / 0.0228 quoted from the stage-14 file) — main session checked
+  D_crc(CSF-μ̂) 0.4149 against `a_analysis_08e.json` point.
+- Corrected `results/15_decision_v2.md` wording ("would do as well" → "no advantage is shown"; no equivalence test).
+- Open: missing verified cite keys (Learn-then-Test; classic grip-load; early incipient slip) → add via verified
+  entries before stage 17.
+- **Next:** citations, then stage 17 PAPER_DRAFT [v2].
