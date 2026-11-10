@@ -847,3 +847,18 @@ Run order when both papers are active: AUTOPILOT §7.
   difference). Main session checked the new A7 numbers against `a7_integrated.json` and the half-sine squeeze in
   `sim.py`.
 - **Next:** stage 18 pass 2 [v3] (two fresh subagents), stage 19 pass 2, stage 20.
+
+## Stage 18. PEER_REVIEW     [v3] — pass 2
+
+- **Finished:** 2026-11-10 (run 46) on `v3/draft_v3_stage19pass1.md`; two fresh opus subagents: run 1 A 4 / B 5; run 2
+  A 4 / B 5 (mean 4.5). **CRITICAL_FABRICATION: no** (≈ 30 + 30 numbers recomputed with independent CRC
+  re-implementations). Merged record `paper/mypaper/18_peer_review_v3_pass2.md` (P1–P8 paper-level; E1–E7
+  evidence-level: correlated-friction pool / width sweep, low / adaptive preload, replay-free calibration, no-probe
+  CSF-1 run, pre-specified wide grid + fresh-object matched-slip replication, corrected REACT-probe, hardware σ).
+
+## Stage 19. PAPER_REVISION     [v3] — pass 2
+
+- **Finished:** 2026-11-10 (run 46). Fresh opus subagent, targeted edits P1–P8; snapshot
+  `paper/mypaper/v3/draft_v3_stage19pass2.md`. 11,381 words (floors kept; stage 22 compresses). Number audit: 1 flag
+  (0.0142, stated difference). E1–E7 only as Limitation 10.
+- **Next:** stage 20 QUALITY_GATE [v3].
