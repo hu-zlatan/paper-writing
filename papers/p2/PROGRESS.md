@@ -906,3 +906,19 @@ Run order when both papers are active: AUTOPILOT §7.
   behind paper 1's wave 3.
 - **Where to resume:** when the runs finish: `python analysis_v4.py --check` (counts only); time-guard stops → follow-up
   manifests (crc lines carry EARLY_STOP next_index); when complete → `python analysis_v4.py` → stage 14 [v4].
+- (run 47, ≈ 19:55 UTC) Actions runs 209–211 (f4 / c4 / np replays) all success; `analysis_v4.py --check`: 4,800
+  instances with replays per pool, 0 duplicates → complete. Read-out run once → `results/v4/v4_analysis.json`.
+
+## Stage 14. RESULT_ANALYSIS     [v4]
+
+- **Finished:** 2026-11-10 (run 47). Plan `plans/stage_14_result_analysis_v4.md`; template verbatim via
+  `docs/prompts/build_stage14_v4.py` (v4_analysis.json + v3 a7_integrated.json unaltered; amendment 11 + context).
+  Pass 1 fresh opus → `results/14_analysis_v4_pass1.md`; pass 2 area-chair prompt verbatim, fresh opus →
+  `results/14_analysis_v4_pass2.md`: 16 findings, 1 numeric (p bound), **no fabrication**; all accepted. Merged
+  `results/14_analysis_v4.md` (9 statements of record).
+- Key reading: **C1 superiority** (plug-in vs CSF-1, D 0.4314), **C2 equivalence** (learner vs plug-in, 0.01117 on the
+  matched route only), **C3 superiority** (0.4135) on fresh objects — predictions met; **C4 / C5 not superior, CI below
+  0** (−0.5814 / −0.5461): on a friction-correlated pool a family prior beats both tactile arms. Saving shrinks / flips
+  with σ 0.4 and narrow friction windows (sweep 0.4314 → −0.6967); measured break-even 17.74 s / 27.07 s; certificate
+  marginal (31.5–70 % of re-splits have a stratum above α).
+- **Next:** stage 15 RESEARCH_DECISION [v4] (refine cycles 3 / 3 used; no further loop without the owner).
