@@ -1779,3 +1779,13 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
   then `v6_e12_p0–p2`; (3) g_T: one `gt3` job per new `results/v6/test5/` file of G\*, students, RL, rl_success
   (same command as `experiments/v5_gt_r0.json`, outputs `results/v6/test5_gt/`); (4) `python code/analysis_v6.py --check`
   (counts only) until complete, then the read-out → stage 14 [v6]. Do not read any v6 outcome before `--check` is complete.
+
+## Run 45 (2026-11-10, ≈ 07:50 UTC) — stage 13 [v6] wave 2 dispatch
+
+- Wave 1 finished (Actions runs 194 E9, 195 E10, 196 E8; run 194 marked failure: one job left no output,
+  `A16_k2_g125_512_16_168`). `--check` counts only, no outcome read.
+- Follow-ups (`code/tools_resume_manifest.py`): `v6_e9_p0_f1` (96 jobs: 95 time-guard resumes + the missing one),
+  `v6_e10_p0_f1` (13), `v6_e8_p0_f1` (33). Dispatched with `v6_e8_p1`, `v6_e8_p2` → 642 jobs queued (≤ 650 rule).
+- **Where to resume:** when these finish: follow-ups for `v6_e8_p1/p2` (and `_f2` for the `_f1` manifests if any
+  stop again), then `v6_e8_p3`, `v6_e8_p4`, `v6_e11_p0–p2`, `v6_e12_p0–p2` in ≤ 650-job waves; then g_T (`gt3`)
+  jobs; then `analysis_v6.py --check` until complete → read-out → stage 14 [v6].
