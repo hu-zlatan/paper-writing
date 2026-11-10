@@ -803,3 +803,18 @@ Run order when both papers are active: AUTOPILOT §7.
   σ 0.2 holds 1.085 N less than CSF-1 → break-even hold **13.22 s** (probe phases) / 25.28 s (all phases); for shorter
   holds the probe costs more force-time than the lower hold force saves. Point values, no interval. To be stated in the
   paper's Limitations. `results_v3.json` regenerated.
+
+## Stage 16. PAPER_OUTLINE     [v3]
+
+- **Finished:** 2026-11-10 (run 46). Plan `plans/stage_16_paper_outline_v3.md`; template verbatim via
+  `paper/mypaper/prompts/build_stage16_v3.py` (v2 gate + v2 stage-18 pass-2 record + v2 outline; v3 merged analysis
+  binding + pass 1 / 2; 15_decision_v3; note that A7 integrated rows now exist). Fresh opus subagent →
+  `paper/mypaper/sections/00_outline_v3.md`.
+- Title "Probe, Then Calibrate: Conformal Slip-Risk Control of Grip Force from a Tactile Friction-Onset Probe (a
+  Simulation Study)"; learner demoted; v3 rows (A1–A7, B1–B3, Holm) secondary; abstract states σ assumption and the
+  μ ∈ [0.5, 0.8] reversal; break-even 13.22 / 25.28 s in §6.
+- Self-check: number audit (now also reads `results_v3.json`) 3 unmatched — 2 × 0.0142 (= 0.4551 − 0.4409, a stated
+  difference) and 1 × 27.429 quoted only as the forbidden pass-1 value; cite keys for LTT / Johansson / Marconi exist in
+  `docs/05_knowledge_cards.json`.
+- **Next:** stage 17 PAPER_DRAFT [v3] (template `paper_draft.md`, builder from `build_stage17_v2.py`), then 18 (two
+  passes), 19, 20.

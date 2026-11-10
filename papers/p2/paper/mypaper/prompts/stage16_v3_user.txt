@@ -1,0 +1,1355 @@
+Target: RSS 2027 Stage 1 extended abstract (deadline 2026-12-04 AoE): <= 5 content pages + 1 page of references, no supplementary; methods complete, experiments may be preliminary. The re-scoped story in the Decision below (results/15_decision_v3.md) is binding: the claim is the friction-onset probe plus conformal calibration, the learned tactile model adds no demonstrated gain (H2b), H1-M failed, H3 is inconclusive, and the H2-R scope limit must appear in abstract-level claims; the audit rewrites in the Analysis are binding. Word targets scaled to 5 pages (about 3,000-3,500 words main body), a stated deviation from the 9-page floors of hard_constraints section 3; a master draft may be longer and is condensed in stage 22. Evidence links must name blocks / keys of results/v1/results_v1.json (each block is an unchanged analysis file of results/v1/, e.g. crc_analysis.json, crc_analysis_v2.json, h2_label_rule.json, h4a_label_rule.json, h3_analysis.json, h1m_analysis.json, h1v_analysis.json, comp_selection.json, sec08f_*.json, sec08g.json, sec08h_*.json) and cite_keys from docs/05_knowledge_cards.json; the 52 available cite_keys are:
+- almohammed2022switched: A Switched Adaptive Controller for Robotic Gripping of Novel Objects With Minimal Force
+- dong2019maintaining: Maintaining Grasps within Slipping Bounds by Monitoring Incipient Slip
+- khamis2021real: Real-time Friction Estimation for Grip Force Control
+- kuo2025tracing: Tracing Energy Flow: Learning Tactile-Based Grasping Force Control to Reduce Slippage in Dynamic Object Interaction
+- boonstra2024estimate: Learning to estimate incipient slip with tactile sensing to gently grasp objects
+- niu2026synchronized: Synchronized Online Friction Estimation and Adaptive Grasp Control for Robust Gentle Grasp
+- feng2026tactilereflex: TactileReflex: Noise-Statistics-Driven Vision-Tactile Reflex Control for Force-Sensitive Manipulation
+- lach2024zero: Zero-Shot Transfer of a Tactile-based Continuous Force Control Policy from Simulation to Robot
+- veiga2020grip: Grip Stabilization through Independent Finger Tactile Feedback Control
+- shang2026exp: Exp-Force: Experience-Conditioned Pre-Grasp Force Selection with Vision-Language Models
+- chen2018tactile: Tactile Sensors for Friction Estimation and Incipient Slip Detection—Toward Dexterous Robotic Manipulation: A Review
+- romeo2020methods: Methods and Sensors for Slip Detection in Robotics: A Survey
+- james2020slip: Slip Detection for Grasp Stabilization With a Multifingered Tactile Robot Hand
+- berman2025autonomous: Autonomous Slip-Prevention Grip Force Control and Its Potential in Shared Control of Robotic Prosthetic Hands
+- ayral2026reactive: Reactive Slip Control in Multifingered Grasping: Hybrid Tactile Sensing and Internal-Force Optimization
+- grover2022detect: Learning to Detect Slip with Barometric Tactile Sensors and a Temporal Convolutional Neural Network
+- willemet2024grip: Grip force control under sudden change of friction
+- enwerem2026firmgrasp: FIRMGrasp: A Friction-Informed Risk Margin for Robust Grasp Synthesis
+- kim2024robust: Robust Adaptive Safe Robotic Grasping with Tactile Sensing
+- cortez2019control: Control Barrier Functions for Mechanical Systems: Theory and Application to Robotic Grasping
+- enwerem2026variational: Variational Neural Belief Parameterizations for Robust Dexterous Grasping under Multimodal Uncertainty
+- cloutier2018examining: Examining the Robustness of Grasping Force Optimization Methods Using Uncertainty Analysis
+- vovk2005algorithmic: Algorithmic Learning in a Random World
+- lei2017distribution: Distribution-Free Predictive Inference for Regression
+- romano2019conformalized: Conformalized Quantile Regression
+- angelopoulos2023conformal: Conformal Prediction: A Gentle Introduction
+- angelopoulos2022conformal: Conformal Risk Control
+- angelopoulos2026conformal: Conformal risk control for non-monotonic losses
+- farinhas2023non: Non-Exchangeable Conformal Risk Control
+- gibbs2021adaptive: Adaptive Conformal Inference Under Distribution Shift
+- gibbs2022conformal: Conformal Inference for Online Prediction with Arbitrary Distribution Shifts
+- angelopoulos2023conformala: Conformal PID Control for Time Series Prediction
+- angelopoulos2024online: Online conformal prediction with decaying step sizes
+- ge2024stochastic: Stochastic Online Conformal Prediction with Semi-Bandit Feedback
+- bian2023training: Training-conditional coverage for distribution-free predictive inference
+- ding2023class: Class-Conditional Conformal Prediction with Many Classes
+- lekeufack2024conformal: Conformal Decision Theory: Safe Autonomous Decisions from Imperfect Predictions
+- lindemann2025formal: Formal Verification and Control With Conformal Prediction: Practical Safety Guarantees For Autonomous Systems
+- dixit2022adaptive: Adaptive Conformal Prediction for Motion Planning among Dynamic Agents
+- marques2026particle: Particle-Based Conformal Prediction for Contact-Aware Uncertainty Calibration in Stratified Configuration Spaces
+- lindemann2023conformal: Conformal Prediction for STL Runtime Verification
+- ren2023robots: Robots That Ask For Help: Uncertainty Alignment for Large Language Model Planners
+- huang2023conformal: Conformal Policy Learning for Sensorimotor Control Under Distribution Shifts
+- strawn2023conformal: Conformal Predictive Safety Filter for RL Controllers in Dynamic Environments
+- zhang2024bayesian: Bayesian Optimization With Formal Safety Guarantees via Online Conformal Prediction
+- zhao2024conformalized: Conformalized Interactive Imitation Learning: Handling Expert Shift and Intermittent Feedback
+- kumar2026learnable: Learnable Conformal Prediction for Safe and Efficient Robotics under Perception and Planning Uncertainties
+- wang2022tacto: TACTO: A Fast, Flexible, and Open-Source Simulator for High-Resolution Vision-Based Tactile Sensors
+- akinola2025tacsl: TacSL: A Library for Visuotactile Sensor Simulation and Learning
+- leins2025hydroelastictouch: HydroelasticTouch: Simulation of Tactile Sensors with Hydroelastic Contact Surfaces
+- luu2025manifeel: ManiFeel: Benchmarking and Understanding Visuotactile Manipulation Policy Learning
+- birtalan2026impact: The impact of tactile sensor configurations on grasp learning efficiency -- a comparative evaluation in simulation
+- angelopoulos2025learn: Learn then test: Calibrating predictive algorithms to achieve risk control
+- johansson1984roles: Roles of glabrous skin receptors and sensorimotor memory in automatic control of precision grip when lifting rougher or more slippery objects
+- marconi1996incipient: Incipient Slip Detection and Control Using a Rubber-Based Tactile Sensor
+
+This is iteration v3 after a second REFINE loop (v2 gate 5.5 / 10). v2 rows keep their v2 status and link to results/v2/results_v2.json; v3 rows (amendment 10: A1 re-splits, A2 slip tables, A3 Holm, A4 losing sub-pool on CRC, A5 empirical margin, A6 direct learned vs plug-in, A7 force in newtons + integrated force, B1 shrunk plug-in, B2 reactive controllers, B3 online study 3 shifts x 20 orderings) are SECONDARY and their evidence links must name blocks / keys of results/v3/results_v3.json (blocks a3_holm.json, a7_integrated.json, a_analysis.json, a_analysis_08e.json, b1_analysis.json, b1_analysis_edge.json, b1_analysis_edge_samegrid.json, b2_analysis.json, b3_analysis.json). The statements of record in results/14_analysis_v3.md are binding. v1 primary verdicts are unchanged. A7 integrated force and break-even T were computed by code after stage 14 (code/analysis_v3_d.py -> a7_integrated.json: shared phases 27.4258 N*s, probe-specific phases 14.3458 N*s, break-even 13.22 s / 25.28 s); use those, not the pass-1 hand reconstruction. Revise the v2 outline given below rather than starting over.
+
+
+Create a detailed paper outline in markdown.
+
+Include per-section goals and evidence links.
+
+=== HARD TOPIC CONSTRAINT ===
+
+The paper MUST be about: Certified-slip tactile grip regulation: a ramp-down friction-onset probe combined with distribution-free conformal risk control so that the physical slip rate of a minimal-force grasp is <= alpha, compared against the strongest non-tactile conformal baseline, with ablations showing where the force saving comes from (the probe, not the learned tactile model) and an online binary-feedback calibration study under distribution shift
+
+PROHIBITED content (unless user explicitly specifies case-study mode):
+
+- Do NOT treat environment setup, dependency installation, or infrastructure failures as a research contribution.
+
+- Do NOT present debugging logs, system errors, or configuration issues as experimental findings.
+
+- Do NOT drift to tangential topics not directly related to the stated topic.
+
+- Every section MUST connect back to the core research question.
+
+- The Abstract and Introduction MUST clearly state the research problem derived from: Certified-slip tactile grip regulation: a ramp-down friction-onset probe combined with distribution-free conformal risk control so that the physical slip rate of a minimal-force grasp is <= alpha, compared against the strongest non-tactile conformal baseline, with ablations showing where the force saving comes from (the probe, not the learned tactile model) and an online binary-feedback calibration study under distribution shift
+
+- The Method section MUST describe a technical approach, not a workflow.
+
+- The Results section MUST report quantitative outcomes of experiments, not environment status.
+
+=== END CONSTRAINT ===
+Prior feedback (v2 stage-20 quality gate, paper/mypaper/20_quality_gate_v2.json; stage-18 records paper/mypaper/18_peer_review_v2.md and 18_peer_review_v2_pass2.md):
+
+{
+  "score_1_to_10": 5.5,
+  "verdict": "FAIL (5.5 < 7.5). The revision is unusually honest and internally consistent: spot-checked headline numbers (D = 0.4168, refined-grid D values, matched-slip interpolations, H2b, H4e, LTT) all recompute correctly from the reported arm-level RE and frontier points, and every limitation is disclosed. But the disclosures themselves expose a thin core contribution. The 'certificate' needs simulator replays and so exists only in simulation. The onset noise that sets the effect size is assumed, not measured. The validity premise failed, so the primary route was adopted after that failure. The learned model, the paper's most elaborate component, shows no demonstrated gain over a one-line plug-in. The tactile competitors that matter (reactive slip tightening, friction estimation with a tuned per-stratum margin) were not run. The 'minimal-force' saving applies only to the hold force after a fixed ~49 N peak protocol that exceeds most objects' minimal holding force. Of four pre-registered core decisions, one is confirmed. The prose is also overloaded with hedges and numbers, which makes the paper hard to read. Several gaps can be closed from existing replays without new simulation; others need new experiments.",
+  "strengths": [
+    "Exemplary transparency: pre-registration, deviations (Appendix B), a hypothesis ledger, failed and inconclusive decisions, and a sub-pool in which the method loses are all reported plainly.",
+    "Numerical internal consistency: the headline and secondary D values, matched-slip RE values and the LTT contrast recompute exactly from the reported arm-level RE and slip and the frontier points across the text, tables and Figure 1.",
+    "Sound statistical design for the main contrast: comparator chosen on a disjoint selection split before calibration/test data were read; object-cluster bootstrap that recomputes lambda-hat in every draw; Bonferroni across core decisions; SESOI and F*_lo/F*_hi sensitivity.",
+    "Clean protocol design that isolates the friction channel (friction-uninformative fixed preload; friction drawn independently of all non-tactile inputs), enabling a clear attribution: the probe carries the information and a physics plug-in on the onset captures most of the saving.",
+    "Careful scoping of the guarantee: marginal, in-expectation, per stratum, simulation-only; LTT reported as per-stratum with the union-bound caveat; online tracking's slip level correctly framed as an accounting identity rather than a finding.",
+    "Noise-sensitivity curve (sigma = 0 to 0.4) and the CSF-proxy sweep give readers the conditions under which the effect holds or vanishes."
+  ],
+  "weaknesses": [
+    "[evidence-level] Simulation only, with a modelled detector and an assumed onset noise sigma = 0.2 that sets the effect size (D falls from 0.68 to 0.14 over sigma 0 to 0.4). No sensor measurement or hardware data anchors where a real gripper sits on that curve.",
+    "[evidence-level] The offline certificate, the paper's titular contribution, needs replays of each calibration grasp at every grid force, so it cannot be used on a robot. The deployable route (online tracking with physical feedback) is descriptive only: 5 orderings, S1/S3 only, no intervals, post-shift transient window omitted.",
+    "[evidence-level] No tactile competitors. Reactive slip-detect-and-tighten controllers and friction-estimate controllers with a tuned per-stratum margin are the natural baselines, and the paper concedes it cannot claim to beat existing tactile grip control at equal slip. The only tactile stand-in (uniform fixed margin) is weak by construction.",
+    "[evidence-level] The 'minimal-force' framing is undercut by the fixed protocol: a 32.7 N preload and a ~49 N squeeze peak on every object exceed most objects' minimal holding force, and the probe induces micro-slip on every grasp. Absolute newtons, peak force, integrated force and the F* distribution are not reported, and there is no adaptive-preload variant, so the practical value of a 42% relative hold-force saving cannot be judged.",
+    "[evidence-level] The learned model's role is unresolved. The registered H2b estimate is biased by the plug-in's grid floor; TOST equivalence is met on neither CRC grid; no direct learned-vs-plug-in contrast was computed at matched slip or under LTT; and the shrunk plug-in that would test the shrinkage explanation was not run.",
+    "[evidence-level] Validity premise (H1) failed, and the CRC route and refined grid were adopted post hoc. Realised per-stratum slip exceeds alpha in several strata and for one predictor seed. The certificate was checked on a single calibration/test split, with no repeated object re-splits, even though these need no new simulation.",
+    "[evidence-level] The sub-pool reversal (D = -0.2614) rests on the label route, whose premise failed, with about 88 calibration grasps per stratum. Arm-level RE and slip are not reported, narrow friction is confounded with mid-amplitude, and a CRC re-run from existing replays was not done.",
+    "[evidence-level] Multiplicity: the registered Holm correction for secondary families was dropped, and no adjusted values are reported, so several secondary superiority labels and the reversal carry no family-wise control.",
+    "[evidence-level] The online efficiency decision (H3) is inconclusive and underpowered (realised half-widths 0.15 to 0.20 against a projected 0.12). The oracle reference itself slips above alpha in S2, and the slip-matching co-requirement fails in S1 and S2.",
+    "[paper-level] Novelty is modest as framed: probing friction from incipient slip is established, and CRC, LTT and quantile tracking are used as published. The contribution reduces to a protocol plus an attribution study in simulation, and the title's 'Certified' oversells it given the failed validity premise and simulation-only replays.",
+    "[paper-level] Readability: the abstract, contributions, Section 5 and Figure 1 are saturated with numbers, route labels and nested caveats (e.g., the Section 5.2 learned-vs-plug-in paragraph and the abstract's sub-pool sentence). The main message is hard to extract, and the headline caveats are repeated in the intro, Section 6, Section 7 and Section 8.",
+    "[paper-level] Presentation defects: Tables 4 and 5 appear before Tables 1 to 3. Figure 1 has three dense panels plus an inset and footnotes. Per-stratum refined-grid slips are described as 'not tabulated in our results index' but recomputed, a provenance remark that does not belong in a paper. Ledger codes (H2a, A1, B2) still dominate the tables even though the text says it uses descriptive names."
+  ],
+  "required_actions": [
+    "[evidence-level] Ground sigma: measure onset-detection noise on a physical gripper with a real tactile sensor (even a small object set), or at minimum calibrate the simulated detector against published incipient-slip detection error, and place the headline on the sigma curve accordingly.",
+    "[evidence-level] Add the natural tactile baselines at matched slip: a reactive slip-detect-and-tighten controller and a friction-estimate controller (e.g., the CSF-mu-hat force) with a per-stratum margin tuned on the selection split. Report whether probe + CRC beats them in force at equal realised slip.",
+    "[evidence-level] Report force accounting per arm: absolute excess hold force in N, peak force, integrated force over the protocol plus a representative hold duration, and the distribution of F*_mid relative to F0. Ideally add an adaptive or lower preload variant so the minimal-force claim is not dominated by the protocol.",
+    "[evidence-level] Resolve the learned-vs-plug-in question: run a shrunk plug-in (onset estimate shrunk towards the population friction, with shrinkage set on the selection split) and compute direct CertGrip-full vs CSF-mu-hat contrasts at matched slip and under LTT on the refined grid.",
+    "[evidence-level, no new simulation] Run repeated object-level calibration/test re-splits from the existing replays and report the distribution of realised per-stratum slip and of D. Tabulate per-stratum slip on both grids, plus conditional slip per family x stratum and per friction quintile.",
+    "[evidence-level, no new simulation] Re-run the narrow-friction sub-pool on the CRC route from the existing replays. Report arm-level RE and slip, and de-confound the narrow-friction and mid-amplitude restrictions (run each restriction separately).",
+    "[evidence-level, no new simulation] Report Holm-adjusted p-values or intervals for the secondary families as registered, alongside the unadjusted ones.",
+    "[evidence-level] Strengthen the deployable route: physical-feedback online streams with all three shifts, 20 orderings, bootstrap intervals and the post-shift transient window (steps 501 to 1,000) reported, ideally against an oracle that is itself valid in S2.",
+    "[paper-level] Reframe the title and contributions so 'certified' is visibly qualified as simulation-only and conditional. Present the contribution honestly as a probe protocol plus a calibrated plug-in plus an attribution study, and demote the learned model.",
+    "[paper-level] Cut the density: shorten the abstract to the headline, its two key conditions (sigma and friction range) and the deployability caveat. State each caveat once (Limitations), with brief pointers elsewhere. Move secondary route-by-route numbers from the Section 5.2 prose into tables.",
+    "[paper-level] Fix the presentation: number the tables in order of appearance, simplify Figure 1 (fewer annotations; move the inset or the sub-pool footnote into the caption or the text), remove the 'results index / recomputation' provenance language by tabulating the numbers, and use descriptive row names in the main-text tables."
+  ]
+}
+
+
+# p2 · Stage 18 PEER_REVIEW [v2] — pass 2, merged record (run 45, 2026-11-10)
+
+Two fresh opus subagents on the revised `paper/mypaper/draft_v2.md` (= `v2/draft_v2_stage19pass1.md`), template
+verbatim (`prompts/stage18_v2_pass2_user.txt`, builder `build_stage18_v2.py _v2_pass2`):
+- Run 1 (`18_review_v2_pass2_run1.md`): A (robotics) 4, B (conformal / methods) 5 → 4.5. ≈ 190 numbers checked
+  (abstract, all Fig. 1 values, Tables 1–3, D1, F1, F2, App. C, E), some recomputed from raw labels — all match.
+- Run 2 (`18_review_v2_pass2_run2.md`, RSS pair): A (tactile) 4, B (conformal / statistics) 5 → 4.5. ≈ 240 numbers
+  checked, ≈ 35 recomputed by an independent script from raw replays / labels (H2a D 0.416821, every λ̂ index,
+  per-stratum slips on both grids) — all match.
+- **CRITICAL_FABRICATION: no** (both runs). Mean 4.5 (pass 1: 4.75).
+
+## Paper-level must-fix (stage 19 pass 2)
+P1. **H2b equivalence test misdescribed (both runs; verified by the main session).** The draft says "no equivalence
+    test was registered" for learned vs plug-in (C3, §5.2 ×2, Table 2 caption, §6 / §8). `docs/08b_preregistration.md`
+    §4 item 3 registers a TOST at ±0.10, 0.0125 per side, and `code/analysis_crc.py` implements it (l. 16). Correct
+    account: the registered TOST was run and not met on the primary route (upper 0.1454) and on the refined grid
+    (upper 0.1001); state the label-route row as secondary. The CSF-proxy@0.2 sentence ("no equivalence test was
+    registered") must be checked against 09_amendment_v2 and kept only if true.
+P2. **RAW-Qv ledger wording:** point slip is above α at every level; only the interval contains 0. Use the file's
+    decision ("partly confirmed / not confirmed"); soften "lands near α" (§5.5, §6).
+P3. **16-cell heterogeneity "pass":** say what "pass" means (no harmful cell); report Q / df / p only if they are in
+    the results JSONs.
+P4. **Slip above α where it occurs:** per-seed slip (run 1: seed 4 0.1018) and refined-grid per-stratum slips (run 2:
+    CertGrip-full D1 0.1043, D2 0.1014; CSF-1 D3 0.1100, D4 0.1057) — print them only from the results JSONs
+    (they are there per the reviewers; check), and say the guarantee is marginal / per stratum accordingly.
+P5. **σ vs σ_p scale claim:** "never on one scale" is wrong — μ̂ = m g / (2 F_onset), so onset noise is friction-
+    estimate noise. Remove the claim; describe the relation qualitatively. Reviewer-computed error SDs / correlations
+    are NOT in the results files and must not be printed.
+P6. **Weak comparators:** CSF-proxy at σ_p 0.4 / 0.8 and the plug-in at σ 0.4 are worse than CSF-1 (RE 0.92, 2.79,
+    0.99 vs 0.78, all in results); say these superiority rows are against unshrunk noisy estimates and carry little
+    weight; the learner's σ 0.4 advantage may reflect shrinkage (stated as an untested reading).
+P7. **Force accounting:** the preload (32.7 N) and squeeze peak (49 N) are protocol constants larger than most minimal
+    hold forces; say the saving is on the post-probe holding force and is small in newtons relative to the preload;
+    no reviewer-computed N statistics. Note in §5.6 that the frozen tactile arm slips more than the frozen baseline
+    under S3 if (and as) the results file reports it.
+P8. **Narrow-friction reversal** in the abstract: label route, unadjusted, ≈ 88 calibration instances per stratum
+    (only if derivable from the design / results); the grid-floor bias makes the registered H2b estimate
+    uninformative — say so once.
+P9. **Length / redundancy:** §6 repeats §5; tighten §6 without going below the floors (main-body cut happens at
+    stage 22).
+
+## Evidence-level (stage 20; not to be simulated in text)
+E1 tactile competitors at calibration-selected matched slip (per-stratum tuned margin, reactive slip-tightening,
+friction estimate + tuned margin); E2 shrinkage plug-in / proxy; E3 narrow-friction sub-pool on the CRC route with
+existing replays; E4 repeated calibration / test re-splits (empirical certificate check), LTT at δ/4; E5 σ grounding
+from published sensor data; E6 adaptive / low preload, force–time integral; E7 online physical-feedback study with
+intervals, S2 and the post-shift transient; E8 a pool where friction correlates with non-tactile inputs.
+Several (E2–E4) need no new simulation (full-grid replays exist) — candidate v3 rows if stage 20 loops.
+
+
+v2 outline to revise (paper/mypaper/sections/00_outline_v2.md):
+
+# p2 · Stage 16 PAPER_OUTLINE [v2]: RSS 2027 Stage 1 extended abstract
+
+**Format:** at most 5 content pages plus 1 page of references, no supplementary material (deadline 2026-12-04 AoE). Methods are complete; experiments may be preliminary. Main body target is **3,300 words** (range 3,000–3,500), abstract excluded. **Stated deviation:** the 9-page word floors of hard_constraints §3 do not apply. A longer master draft is allowed, and stage 22 condenses it.
+**Binding inputs:** `results/15_decision_v2.md` (re-scoped story: the claim is *friction-onset probe + conformal calibration*; the learned tactile model adds no demonstrated gain; H1-M failed; H3 inconclusive; the H2-R scope limit appears in abstract-level claims) and the audit rewrites of `results/14_analysis_v2.md` (pass 2, findings 1–17) and `results/14_analysis.md` (Part B, findings 1–23). Where 15_decision_v2 and an audit rewrite differ in wording, the audit wording is used (see "Wording rules" below).
+**Revision of:** `sections/00_outline.md` (v1). v1 primary verdicts are unchanged. All v2 rows (amendment 09: A1 frontier, A2 Learn-then-Test, A3 extra contrasts, B1 / H5 CSF-proxy, B2 probe + fixed margin, B3 online physical feedback) are **secondary** (B2 and B3 descriptive).
+**Evidence notation:** `v1:block → key path` refers to `results/v1/results_v1.json`; `v2:block → key path` refers to `results/v2/results_v2.json`. Example: `v2:a_analysis_08e.json → point."D_match:full_rd@0.2#0"`.
+**Number convention:** every value is copied from those two JSON files (or the prompt) and **rounded** to 4 decimals, the v1 outline convention. The Stage-14 v2 tables *truncate*, so a few v2 values here are 0.0001 higher than in 14_analysis_v2.md (e.g. D_ltt 0.4043 vs 0.4042; B2 D2 slip 0.0229 vs 0.0228). The paper uses the values in this outline. No new arithmetic is introduced.
+**Naming in the paper (replaces internal pipeline codes; v1 gate action 4):**
+
+| Internal code | Name used in the paper |
+|---|---|
+| 08b | pre-registration |
+| 07 / pilot amendment | pilot amendment (introduced the probe arm) |
+| 08c grids | primary CRC grid (20 points per stratum) |
+| 08e grids | post hoc refined grid (41 points per stratum) |
+| 08d | online protocol |
+| amendment 09 / v2 | second-round analyses (all secondary) |
+| edge rule | grid-edge rule (re-run on the refined grid when λ̂ hits index 0 or 19) |
+| full_rd@0.2#0 | CertGrip-full (σ 0.2, seed 0) |
+| P_onset@0.2#0 | onset-only |
+| CSF-muhat@σ | CSF-μ̂ (physics plug-in on the same noisy onset) |
+| CSF-proxy@σ_p | CSF-proxy (physics plug-in on a non-tactile noisy friction prior) |
+| CSF-1 | COMP, the strongest non-tactile conformal baseline |
+
+*RE* = mean relative excess (F − F\*_mid)/F\*_mid. *D* = 1 − RE(target)/RE(comparator). *CI\*\** = 97.5 % two-sided object-cluster bootstrap interval, 2,000 draws, λ̂ refitted in each draw.
+
+**Wording rules (binding audit rewrites, collected once):**
+- Never: "learned tactile model improves grasping"; "matches", "as efficient as", "does as well" (no equivalence test was run for any v2 pair); "robust" / "reproduced" / "replicated" for v2 routes (they re-analyse the seed-0 replays: say "route robustness, not replication"); "confirmed" for H5 (say "held as predicted, secondary"); "calibration is necessary" (say "within B2, no single uniform margin brings every stratum near α"); "holds α" for B3 without "descriptive, 5 orderings, no interval"; "guaranteed in the real world"; "holds on every check".
+- Learned vs plug-in: "At σ 0.2, a learned model shows no demonstrated gain over a plug-in using the same onset estimate. In secondary, unadjusted analyses it is better at σ 0.4 and worse at σ 0."
+- σ (onset-detection noise) and σ_p (log-normal noise on a non-tactile friction prior) are different noise models; never put them on one scale.
+- Use the refined grid / edge-rule rows for CSF-μ̂ and CSF-proxy at σ / σ_p 0.2 (they sit at grid index 0 on the primary grid in D1/D2).
+
+---
+
+## What changed vs v1 (summary for the writer)
+1. **Identity of the method.** The contribution is restated as *probe + simple force rule + CRC*; the learner is optional. Contributions and abstract say so. A headline secondary row gives CSF-μ̂ vs CSF-1 and onset-only vs CSF-1 with their own CI\*\* (gate action 3).
+2. **Matched-risk comparison** (A1 risk-efficiency frontier) replaces the informal "unequal slip makes D conservative" argument (gate action 1).
+3. **High-probability certificate** (A2 Learn-then-Test, δ 0.1) is reported next to the in-expectation CRC result (gate action 2).
+4. **Stronger baselines:** non-tactile CSF-proxy (H5, B1) and probe + hand-set margin (B2) (gate evidence action 9, in part; the reactive slip-tightening controller and a correlated-μ pool were not run, 15_decision_v2 → limitations).
+5. **Online study with the CRC λ̂ warm start and physical feedback** on 5 orderings (B3) (gate evidence action 10, in part; H3 itself is not re-decided).
+6. **Per-stratum test slip** of the four CRC arms is now reported (`v1:19_report_rows.json`), which shows the two CSF-1 strata above α that the gate mentioned.
+7. **Readability:** descriptive names for pipeline codes, a hypothesis glossary (Table 0), each caveat stated once in full (§6) and referenced elsewhere; Table 2's label-route H2b row renamed "within ±0.10, secondary, not decision-bearing" (gate actions 4–5).
+8. **Figure 1(b)** is drawn from real data (the A1 frontier), not a schematic (gate action 7).
+9. **Related work** gains a sentence on classic incipient-slip friction reading and human grip-force regulation, and a precise novelty statement (gate action 6; see citation gap note in §2).
+10. **Not done, stated as such:** exploratory stratification of the H2-R loss by detector error / family and of D3 margins by hidden amplitude (gate action 8) — no such rows exist in either JSON; hardware σ grounding (gate action 11). Both go to §6.
+
+---
+
+## Title
+**Probe, Then Certify: A Tactile Friction-Onset Probe with Conformal Risk Control for Certified-Slip Minimal-Force Grasping**
+
+Alternative: *Certified-Slip Grip Regulation from a Friction-Onset Probe: Where the Force Saving Comes From*.
+
+---
+
+## Abstract (≈ 200 words, outside the 3,300 count)
+- **Goal:** State the problem (smallest grip force whose *physical* slip rate is ≤ α, from robot-measurable information), the method as *probe + force rule + CRC*, the one confirmed result, the attribution, the scope limit, and the online study, in one paragraph.
+- **Content, in order:**
+  1. Problem: non-tactile conformal baselines are calibrated but friction-blind, so the calibrated force must cover the whole friction range.
+  2. Method: a ramp-down friction-onset probe after a friction-free preload; any force rule fed with the onset estimate (a physics plug-in or a learned quantile model) is calibrated by conformal risk control (CRC) on the monotonised binary physical-slip loss, per disturbance stratum.
+  3. Main result (pre-registered): vs the strongest non-tactile conformal baseline, selected beforehand, at α 0.10: D = 0.4168, CI\*\* [0.3484, 0.4778]; test physical slip 0.0829 (baseline 0.1021).
+  4. Secondary support in one clause: the saving persists at matched slip (D 0.4563) and under a high-probability Learn-then-Test certificate (D 0.4043).
+  5. Attribution: the saving comes from the probe. The plug-in on the same onset reaches D 0.4149 vs the baseline (refined grid); at σ 0.2 the learned model shows no demonstrated gain over it (H2b not confirmed). Against a non-tactile friction prior of log-noise 0.2, no advantage is shown.
+  6. Scope limit (mandatory): in a narrow-friction (μ ∈ [0.5, 0.8]), mid-amplitude sub-pool the method is worse than the baseline: D −0.2614, CI\*\* [−0.5320, −0.0325].
+  7. Online: binary-feedback quantile tracking keeps window slip near α under shift while frozen calibration breaks; efficiency vs oracle recalibration is inconclusive.
+  8. Setting: simulation only (MuJoCo), modelled tactile detector, assumed onset noise.
+- **Evidence:** `v1:crc_analysis.json → contrasts.H2a.{D.mid, "CI**".mid, decision}`; `v1:crc_analysis.json → arms."full_rd@0.2#0".slip_phys`, `arms."CSF-1".slip_phys`; `v2:a_analysis.json → point."D_match:full_rd@0.2#0"`, `point."D_ltt:full_rd@0.2#0"`; `v2:a_analysis_08e.json → point."D_crc:CSF-muhat@0.2"`; `v1:crc_analysis.json → contrasts.H2b.decision`; `v2:b_analysis_edge.json → H5."H5@0.2_08e"`; `v1:sec08g.json → H2R.{D, "CI**"}`; `v1:h3_analysis.json → H3_primary`. cite: `angelopoulos2022conformal`, `angelopoulos2023conformala`.
+
+---
+
+## Table 0: Hypothesis glossary (≈ 0.12 page; the paper uses descriptive names, codes only in this table and in table rows)
+| Code | Question | Status | Outcome |
+|---|---|---|---|
+| H1 (H1-M, H1-V) | Is the simulator's slip label monotone in force and faithful to physics? | primary | not confirmed (H1-M gate failed) |
+| H2a | Probe arm vs strongest non-tactile conformal baseline (efficiency at α) | primary | superiority |
+| H2b | Learned model vs physics plug-in on the same onset (σ 0.2) | co-primary | not confirmed |
+| H3 | Online tracking vs oracle recalibration under shift (efficiency ratio R_E) | primary | inconclusive (S1, S2, S3) |
+| H4a / H4e / H4c | Feature chain: static touch, squeeze, onset; touch on top of onset; shuffled touch | secondary | see Table 2 |
+| H5 | Probe arm vs non-tactile friction prior of noise σ_p | secondary (v2) | held as predicted |
+| H2-R | Same contrast as H2a in a narrow-friction, mid-amplitude sub-pool | secondary, no prediction | reversal |
+| H1c | Do uncalibrated targeters miss α? | secondary | not confirmed (inconclusive) |
+| A1 / A2 / B2 / B3 | Matched-slip frontier / Learn-then-Test / probe + fixed margin / online physical feedback | secondary (v2); B2, B3 descriptive | see Tables 1–3 |
+
+---
+
+## 1 Introduction (≈ 500 words)
+- **Goal:** Motivate certified minimal-force grasping, name the missing ingredient (friction information read online), state the research question, and give contributions that each map to a confirmed or explicitly scoped result. Connect every paragraph to the core question: can a short tactile probe make a certified physical-slip bound cheaper in force?
+- **Paragraphs:**
+  1. **Why minimal force with a slip certificate.** Fragile objects, prosthetics, gentle grasping. Tactile grip controllers react to slip or estimate friction, but give no distribution-free slip-rate bound. Cite `dong2019maintaining`, `khamis2021real`, `boonstra2024estimate`, `niu2026synchronized`, `veiga2020grip`, `berman2025autonomous`, `willemet2024grip`.
+  2. **Why conformal methods alone are not enough.** CRC can certify any force rule (`angelopoulos2022conformal`, `lei2017distribution`); without friction information the calibrated multiplier must cover the whole μ range. Hence the comparison against the *strongest* non-tactile conformal baseline, selected on a disjoint split: CSF-1 RE_mean 0.7686 vs Mondrian-CSF 0.8294 and CertGrip-P 0.8335.
+  3. **Research question.** Can a ramp-down probe supply enough friction information to cut excess grip force at a certified physical slip rate ≤ α? Which component carries the saving? Does calibration survive shift when only binary slip feedback is available?
+  4. **Contributions (4 bullets, restated around probe + rule + CRC):**
+     - (C1) *Method.* A grasp protocol in which a friction-free preload makes a ramp-down onset probe the only friction channel, and CRC on the monotonised *physical* binary slip loss turns any probe-fed force rule into one with expected slip ≤ α per stratum. The learned quantile model is optional. CRC on the physical loss is needed because the label rule is not exactly monotone in force (8 of 800 instances).
+     - (C2) *Pre-registered evaluation* against the best non-tactile conformal comparator: D = 0.4168, CI\*\* [0.3484, 0.4778]; secondary checks at matched slip and under a high-probability certificate.
+     - (C3) *Attribution.* Ablations and stronger baselines that locate the saving in the probe: the plug-in on the same onset already captures it; static touch, squeeze and the learned model add no demonstrated gain at σ 0.2; a sufficiently good non-tactile friction prior leaves no shown advantage; and a sub-pool where the method loses.
+     - (C4) *Online calibration under shift* from binary feedback: frozen calibration breaks, quantile tracking keeps slip near α (also under physical feedback, descriptive); efficiency vs oracle recalibration is inconclusive.
+  5. **Status sentence (one line, details in §6).** Of four pre-registered core decisions one is confirmed (H2a); H1 and H2b are not; H3 is inconclusive.
+- **Evidence:** `v1:comp_selection.json → candidates.{"CSF-1","Mondrian-CSF","CertGrip-P"}.RE_mean, COMP`; `v1:h1m_analysis.json → {non_monotone, n}`; `v1:crc_analysis.json → contrasts.H2a`; `v2:a_analysis.json → point."D_match:full_rd@0.2#0"`, `point."D_ltt:full_rd@0.2#0"`; `v1:h3_analysis.json → H3_primary`.
+
+## 2 Related Work (≈ 380 words, three compact paragraphs + one novelty sentence)
+- **Goal:** Position the paper between tactile grip-force control and conformal safety in robotics; show that no prior work certifies a *physical slip rate* of a *minimal* grip force, and say precisely what is new relative to "lower the force until slip to read friction".
+  1. **Tactile slip, friction reading and grip control.** Incipient-slip sensing and friction estimation from slip onset are established (`chen2018tactile`, `romeo2020methods`, `khamis2021real`, `dong2019maintaining`); so is human grip–load coupling under friction change (`willemet2024grip`). Learned and reactive controllers: `james2020slip`, `grover2022detect`, `boonstra2024estimate`, `niu2026synchronized`, `kuo2025tracing`, `feng2026tactilereflex`, `lach2024zero`, `ayral2026reactive`, `almohammed2022switched`, `veiga2020grip`, `shang2026exp`. Gap: margins are reactive or estimated; no coverage guarantee.
+  2. **Robust and safe grasping under uncertainty.** `cloutier2018examining`, `cortez2019control`, `kim2024robust`, `enwerem2026firmgrasp`, `enwerem2026variational`: model-based margins that depend on assumed uncertainty sets.
+  3. **Conformal prediction and risk control in robotics.** Foundations `vovk2005algorithmic`, `romano2019conformalized`, `angelopoulos2023conformal`, `angelopoulos2022conformal`, `angelopoulos2026conformal`, `bian2023training` (training-conditional coverage, motivates the high-probability certificate), `ding2023class`. Shift / online: `gibbs2021adaptive`, `gibbs2022conformal`, `angelopoulos2023conformala`, `angelopoulos2024online`, `farinhas2023non`, `ge2024stochastic`. Robotics: `lekeufack2024conformal`, `lindemann2025formal`, `dixit2022adaptive`, `marques2026particle`, `lindemann2023conformal`, `ren2023robots`, `huang2023conformal`, `strawn2023conformal`, `zhang2024bayesian`, `zhao2024conformalized`, `kumar2026learnable`. Gap: none certifies a contact outcome as a binary loss in force space.
+  - **Novelty sentence:** reading friction from slip onset is not new; what is new is (i) a protocol where the onset is the *only* friction channel, so its value can be isolated, (ii) a distribution-free per-stratum bound on the *physical* slip rate of the resulting minimal force, and (iii) evidence that the calibrated saving comes from the probe, not from the learned model.
+  - Simulators (one sentence in §4): `wang2022tacto`, `akinola2025tacsl`, `leins2025hydroelastictouch`, `luu2025manifeel`, `birtalan2026impact`.
+- **Citation gap (TODO before stage 17, do not invent keys):** the 52 available cite_keys contain no Johansson/Westling-style human grip–load paper, no early incipient-slip friction paper, and no Learn-then-Test paper (Angelopoulos et al.). Add them to `docs/05_knowledge_cards.json` first; until then the text uses only the keys above and §3.4 cites LTT as "[LTT, to be added]".
+
+## 3 Problem Formulation and Method (≈ 800 words)
+- **Goal:** Self-contained technical description of the approach (not a workflow). Every symbol in Results is defined here. The method is presented as *probe → force rule → certificate*, with the learned model as one option for the force rule.
+- **3.1 Problem (≈ 130 w).** Instance x: object, pose, disturbance type D1–D4. F\*(x): minimal no-slip force under a slip criterion (2 mm tangential displacement, 3° rotation, or contact loss). Goal: choose F(x) minimising E[(F − F\*)/F\*] subject to P(slip at F(x)) ≤ α. Labels F\*_lo / F\*_hi / F\*_mid from 11-replay log-space bisection on [0.1, 100] N; they exist only in simulation (hence §3.4 and §3.5).
+- **3.2 Grasp protocol and friction-onset probe (≈ 180 w).** Fixed preload F₀ = 32.7 N for every instance (encodes neither m nor μ); lift and hold; squeeze F₀ → 1.5 F₀ → F₀. **Ramp-down probe:** decrease force at a fixed rate; a touch-only detector on the pad shear/normal ratio stops at incipient slip, giving F_onset and the Coulomb reading μ̂ = m g / (2 F_onset). Onset noise model log F_onset + σ ε, σ ∈ {0, 0.1, 0.2, 0.4}; primary σ 0.2 (assumed), σ 0 is an upper bound. Then ramp to the chosen F and run the disturbance window; a slip during the probe counts as a slip. One-line input table: which inputs each arm receives.
+- **3.3 Force rules (≈ 170 w).** All rules have the form F(x; λ) = min(F_max, F_base(x) e^λ).
+  - **Probe-fed plug-in CSF-μ̂:** F_base = m(g + a_cmd)/(2 μ̂). *This is the simplest instance of the method.*
+  - **Probe-fed learned model:** gradient-boosted quantile predictor ĝ(x) with feature sets P (proprioception) ⊂ S (+ static touch) ⊂ full (+ squeeze) ⊂ CertGrip-full (+ onset); onset-only = P + onset.
+  - **Non-tactile baselines:** CSF-1, F_base = m(g + a_cmd)/(2 μ̄); Mondrian-CSF (one λ per family × disturbance cell, privileged family ID); **CSF-proxy (new)**: the same formula with a non-tactile friction prior μ̃ = clip(μ·exp(σ_p ε_p), 0.1, 3.0), σ_p ∈ {0.2, 0.4, 0.8}; it is an oracle-side construction that asks how good a friction prior must be, not a deployable estimator.
+  - **Probe + fixed margin (new, uncalibrated):** CSF-μ̂ force with a single hand-set margin m ∈ {0, 0.25, 0.5, 1.0}, no calibration.
+  - COMP is selected on the selection split before any calibration or test access.
+- **3.4 Certificates on the physical binary loss (≈ 220 w).**
+  - Loss L_i(λ) = 1{physical slip in direct replay}; monotonised L̃_i(λ) = max_{λ' ≥ λ} L_i(λ').
+  - **In-expectation (CRC, primary):** per stratum, λ̂ = min{λ ∈ Λ : (n R̃_n(λ) + 1)/(n + 1) ≤ α} (`angelopoulos2022conformal`) ⇒ E[slip] ≤ α for an exchangeable test instance (marginal, per stratum; not per deployment).
+  - **High-probability (Learn-then-Test, secondary, new):** per stratum, choose λ so that the slip risk is ≤ α with probability ≥ 1 − δ over the calibration draw, δ = 0.1 (`bian2023training` for the training-conditional view; LTT reference to be added). The guarantee is per stratum at δ 0.1, not family-wise across strata.
+  - Λ: 20-point primary grid centred on the selection-split quantile; 41-point post hoc refined grid as a sensitivity route; grid-edge rule as registered.
+  - Motivation for the physical loss: H1-M failed (8 / 800 non-monotone, CP upper 0.02115 > 0.02, 7 of 8 in D2), so split conformal on labels is not guaranteed; the label-rule CQR route (`romano2019conformalized`) is reported as secondary.
+- **3.5 Online calibration from binary feedback (≈ 100 w).** Score-space online quantile tracking (OQT, `angelopoulos2023conformala`): q_{t+1} = q_t + η (slip_t − α), one tracker per stratum, η = 0.03412 (frozen), anti-windup at F_max. Score space rather than ACI (`gibbs2021adaptive`) because a friction drop can move scores beyond the calibration support. References: decaying step (`angelopoulos2024online`), frozen, oracle recalibration. Two feedback variants: label-rule feedback with the label-route q̂ warm start (pre-registered H3), and physical direct-replay feedback with the CRC λ̂ warm start (new, B3).
+- **Evidence:** `v1:h1m_analysis.json → {non_monotone, "cp_upper_98.75", threshold_count, by_dist}`; `v1:h3_analysis.json → eta`; `v2:b3_analysis.json → eta, purpose`; `v2:a_analysis.json → {alpha, delta, slip_match}`; `v1:crc_analysis.json → {n_cal_instances, n_test_instances, draws}`.
+
+## 4 Experimental Setup (≈ 400 words)
+- **Goal:** Enough detail to reproduce and to read the decisions: simulator, objects, shifts, splits, statistics, the pre-registration and every deviation (listed once, here).
+- **Content:**
+  - Simulator: MuJoCo 4.0.0, physics parameters identical across families and shifts; parallel-jaw gripper with pad touch grids. Families F1 boxes, F2 cylinders, F3 ellipsoids/capsules, F4 off-CoM composites; F5 thin plates/disks for shift. Static-touch consistency check: max |pad normal − F₀| 0.1597 N, preload slip count 0, so static touch carries no friction information by construction (one sentence).
+  - Ranges: μ log-uniform [0.3, 1.0], m [0.05, 1.0] kg; disturbances D1 lift acceleration, D2 shake, D3 lateral pull, D4 payload.
+  - Splits by object: n_cal 2,000, n_test 2,800 instances (700 per stratum); selection split (objects 150–199 per family) for COMP and λ grids.
+  - Shifts: S1 μ × 0.6, S1m μ × 0.9 (not primary), S3 disturbance amplitude × 1.5, S2 new family F5. Pre-registered streams T = 2,000, shift at step 501, window 1,001–2,000, 20 orderings, label-rule feedback. B3 streams: 500 in-distribution steps then 1,500 shifted steps, 5 orderings, S1 and S3 only.
+  - Statistics: Bonferroni over 4 core decisions (one-sided 0.0125, CI\*\* 97.5 %), object-cluster bootstrap with λ̂ recomputed per draw, SESOI 0.10 for D, F\*_lo / F\*_hi robustness. Secondaries (including all v2 rows) are unadjusted and labelled; the refined grid can mark a primary-grid result unreliable but cannot upgrade it. Matched slip uses one target (0.10), by linear interpolation between adjacent grid offsets k; every matched-slip CI\*\* has 2,000 / 2,000 valid draws.
+  - **Deviation list (one compact paragraph, stated once):**
+    1. The CRC route was written after the H1-M counts were seen, before any predictor existed.
+    2. The primary-grid floor defect (CSF-μ̂ λ̂ index 0 in D1/D2; CSF-1 index 1) was fixed post hoc by the refined grid.
+    3. The pre-registration text gives selection objects 200–249 in one place and 150–199 elsewhere; the JSON uses 150–199.
+    4. H3-B probe arm untested; D-μ computed on cal + test; H2-M mass noise drawn only in a later addendum; H3-L TOST computed after the read-out.
+    5. All second-round analyses (A1, A2, A3, B1–B3) were registered after the v1 read-out and review; they are secondary and cannot change a v1 decision. CSF-proxy σ_p 0.2 hit the grid edge and was re-run under the registered edge rule.
+  - Compute: 14.50 logged CPU hours for the CRC runs (one clause, if space).
+- **Evidence:** `v1:crc_analysis.json → {n_cal_instances, n_test_instances, draws}`; `v1:comp_selection.json → objects`; `v1:19_report_rows.json → static_touch_check.{max_abs_normal_minus_F0, preload_slip_count}`, `compute_logged_cpu_hours.total`, `per_stratum_test_slip_crc08c."CSF-1".D1.n`; `v1:crc_analysis.json → arms."CSF-muhat@0.2".lam_idx`, `arms."CSF-1".lam_idx`; `v2:a_analysis.json → "CI**".*.n_valid`; `v2:b_analysis.json → grid_edge_lam_idx`; `v2:b_analysis_edge.json → grid_edge_lam_idx`; `v2:b3_analysis.json → windows`.
+
+## 5 Results (≈ 950 words; Table 1, Table 2, Table 3, Fig. 1, small σ figure)
+- **Goal:** Quantitative outcomes in this order: main comparison and its certificate variants → where the saving comes from → stronger baselines → where it fails → validity of the certificate → online shift. Each subsection opens with the result sentence, then the numbers; caveats are referenced to §6, not repeated.
+
+### 5.1 Main comparison and certificate variants (≈ 260 w; Table 1, Fig. 1b–c)
+- **Primary (H2a):** D = 0.4168, CI\*\* [0.3484, 0.4778], superiority; F\*_lo / F\*_hi 0.4150 / 0.4186. Test physical slip CertGrip-full 0.0829, CSF-1 0.1021.
+- **Per-stratum test slip (new, report-only):** CertGrip-full D1–D4 0.0871 / 0.0714 / 0.0757 / 0.0971, all ≤ α; CSF-1 0.1157 / 0.0886 / 0.1057 / 0.0986, above α in D1 and D3 — consistent with an in-expectation guarantee on 700 test instances per stratum. This motivates 5.1's high-probability row.
+- **Matched-risk comparison (A1, secondary):** at matched test slip 0.10, RE CertGrip-full 0.4290 [0.4099, 0.4560] vs CSF-1 0.7891 [0.7329, 0.8422]; D_match 0.4563 [0.4096, 0.4896] (refined grid 0.4475 [0.4111, 0.4880]), superiority. This replaces the informal "D is conservative" argument: at equal slip the saving is the same size or larger than at the CRC operating points.
+- **High-probability certificate (A2, secondary):** Learn-then-Test (δ 0.1) moves CertGrip-full from test slip 0.0829 to 0.0696 and RE_mid from 0.4567 to 0.4895; CSF-1 to slip 0.0907, RE 0.8216. D_ltt 0.4043 [0.3362, 0.4561] (refined 0.4015 [0.3391, 0.4594]), superiority. No LTT stratum flag fired.
+- **Route robustness (one sentence; audit rewrite):** across the CRC, matched-slip and LTT routes on both grids, D(CertGrip-full vs CSF-1) ranges from 0.4015 to 0.4563, every CI\*\* lower bound above 0 (smallest 0.3362); these re-analyse the seed-0 replays, so they are route robustness, not replication. Replication evidence remains the per-seed rows: seeds 1–4 primary grid 0.4343 / 0.4197 / 0.3932 / 0.4494, label route 0.4145–0.4442, all superiority. Also holds for the label route (0.4292), refined grid (0.4289), all 16 family × disturbance cells (pooled 0.4388; three of the four smallest cells are D3), n_cal 50 (0.4146), and vs Mondrian-CSF (0.4381). It **reverses in H2-R** (§5.4) and its lower limit falls below 0.10 at σ 0.4.
+- Tail (one clause): P95 ratio T 0.5918 [0.5540, 0.6564]. Oracle gap closed 0.5172 (text only if space).
+
+### 5.2 Where the saving comes from (≈ 260 w; Table 2, σ figure)
+- **Headline attribution rows (gate action 3, secondary):** vs CSF-1 on the CRC route,
+  - CSF-μ̂ (plug-in on the same onset): D_crc 0.4149 [0.3322, 0.4890] on the refined grid (primary grid 0.3816 [0.2965, 0.4505], biased against CSF-μ̂ by the grid floor);
+  - onset-only: D_crc 0.4464 [0.3776, 0.4906] (refined 0.4412 [0.3846, 0.4942]);
+  - all superiority. Statement: *probe + a simple force rule + CRC already captures the saving.*
+- **Learned vs plug-in (H2b, co-primary, not confirmed):** D 0.0569 [−0.0399, 0.1454]; refined grid 0.0240 (CI\*\* upper 0.1001, misses equivalence by 0.0001); label route [−0.0850, 0.0814], "within ±0.10, secondary, not decision-bearing". Equivalence is **not** claimed. v1 point comparison mixed slip levels (CertGrip-full 0.0829 vs CSF-μ̂ 0.0657); at matched slip on the refined grid the CSF-μ̂ RE (0.4045 [0.3892, 0.4369]) is below CertGrip-full's (0.4292 [0.4074, 0.4522]) with overlapping CI\*\*, consistent with "not confirmed". Across routes CSF-μ̂'s D vs CSF-1 is larger than CertGrip-full's at matched slip (0.4690 / 0.4793 vs 0.4563 / 0.4475) but smaller on LTT (0.3704 / 0.4040 vs 0.4043 / 0.4015) and CRC (0.3816 / 0.4149 vs 0.4168 / 0.4289); no direct contrast was computed, so the ordering is unresolved.
+- **Feature chain (H4a, H4e, H4c):** static touch equivalent to P within ±0.05 (D −0.0084); no evidence the squeeze helps (D −0.0263, equivalence ±0.03 not shown); adding the onset gives D 0.4739. Full pipeline vs onset-only: no advantage shown (H4e D −0.0534 [−0.1233, 0.0508], not confirmed); onset-only's point D vs CSF-1 is the larger one on all six v2 route × grid rows (e.g. D_match 0.4736 vs 0.4563). Shuffled touch inconclusive (D −0.0253).
+- **σ dependence (small figure):** H2a D 0.6789 / 0.5825 / 0.4168 / 0.1401 at σ 0 / 0.1 / 0.2 / 0.4 (σ\* = 0.4). Learned vs plug-in, secondary label route: plug-in better at σ 0 (D −0.2022) and σ 0.1 (D −0.0753), within ±0.10 at σ 0.2, learned better at σ 0.4 (D 0.3275); refined grid agrees in direction (σ 0 −0.1522, σ 0.4 0.3315). Primary-grid σ 0 / 0.1 H2b superiority rows are unreliable (grid floor).
+- **Friction-information diagnostic (text, one sentence each):** D-μ residual R² of log μ: no-probe arms P 0.7937, CSF-1 0.6034; CertGrip-full 0.0105 / 0.0452 / 0.2142 / 0.5655 by σ; CSF-μ̂ σ 0.2 0.0054. Detector at σ 0: correlation with log μ 0.9480, bias +0.3186, SD 0.1103 (F3 SD 0.1965). Identifier control H4b: D_FID 0.4638 vs D 0.4555 (unadjusted). H2-M descriptive only (onset confounds m and μ).
+
+### 5.3 Stronger baselines (≈ 160 w; Table 2 lower block)
+- **Non-tactile friction prior (H5, B1, secondary):** consistent with the registered prediction, D(CertGrip-full vs CSF-proxy) falls from 0.8361 [0.8137, 0.8573] (σ_p 0.8) to 0.5042 [0.4362, 0.5635] (σ_p 0.4) to −0.0299 [−0.1903, 0.0816] (σ_p 0.2, edge-rule grid; primary-grid row 0.0514 superseded). The CI\*\* first includes 0 at σ_p 0.2: against a non-tactile prior of log-noise 0.2, CertGrip shows no efficiency advantage; no equivalence test was registered. σ_p 0.8 proxy RE 2.7859 [2.5273, 3.0700] vs CSF-1 0.7832 [0.6968, 0.8583]; σ_p 0.4 RE 0.9213 overlaps CSF-1; neither is a registered contrast. Interpretation (one sentence, §6): the value of the probe is that it delivers a friction estimate of this quality from touch alone; the paper does not compare against a deployable vision/category prior.
+- **Probe + hand-set margin (B2, descriptive):** with one uniform margin on the CSF-μ̂ force, no margin tested brings every stratum near α: m ≤ 0.5 under-grips (RE −0.3829, −0.2287, −0.0744; overall slip 0.9582 / 0.8257 / 0.6182); at m = 1.0 overall slip 0.3350, D1 / D2 over-protected (0.0414 / 0.0229) while D3 / D4 stay at 0.6571 / 0.6186. The calibrated arm reaches overall test slip 0.0829 (CRC) and 0.0696 (LTT). Calibration sets stratum-specific margins.
+
+### 5.4 Where it fails (≈ 80 w)
+- H2-R sub-pool (μ ∈ [0.5, 0.8] and mid-amplitude disturbances; n_cal 352, n_test 548): D −0.2614, CI\*\* [−0.5320, −0.0325]; secondary, no registered prediction. Whether the narrow friction range causes it is **not tested**; the planned stratification by detector error and family was not run (§6). H4d (CoM mechanism) inconclusive (F4 − F1 0.0342 [−0.0424, 0.1138]).
+
+### 5.5 Validity of the certificate (≈ 90 w)
+- H1 not confirmed (H1-M 8 / 800; violations small, max relative excess over F_hi 0.00904). H1-V passes for all four arm × α combinations; the label rule slightly over-counts slips (Δ −0.00429 to −0.00143). UT3: 160 / 160 cells pass, 20 degenerate (α 0.01, n 50), informative 140 / 140. H1c not confirmed (inconclusive): RAW-Q / RAW-G over-slip at every α (0.0096–0.0507 above α, every CI\*\* > 0), but at α 0.05 their CIs ([0.020, 0.045], [0.016, 0.042]) do not exclude +0.025.
+
+### 5.6 Online calibration under shift (≈ 200 w; Table 3)
+- **Pre-registered (label-rule feedback, 20 orderings):** OQT-CertGrip window label slip 0.0999–0.1016 (physical, ordering 0: 0.092–0.103); Frozen-CertGrip 0.3056 (S1) and 0.2461 (S3), Frozen-COMP 0.5101 (S1); neither frozen arm breaks in S2. **H3 inconclusive** in S1 / S2 / S3: R_E 0.8778 / 1.1739 / 0.9629, realised half-widths 0.15–0.20 vs projected ≈ 0.12. Matched-rate co-requirement fails in S1 (0.032) and S2 (−0.035); the R_E direction is consistent with the slip mismatch, so R_E is not like-for-like there. S1m: R_E upper < 1.10 but label slip difference 0.0248 > 0.02. OQT-CertGrip lower window RE than OQT-COMP in every shift (S1 0.4763 vs 0.8087). H3-L not confirmed (S1 +0.0857 [−0.0444, 0.1859]). H3-S (unadjusted): constant η beats decaying η (ΔC 58.15 S1, 42.40 S3). capped_window 0.0 everywhere.
+- **Physical feedback with CRC warm start (B3, descriptive, new):** in the shifted windows (1,001–2,000 and 1,501–2,000), mean physical slip over 5 orderings lies between 0.0936 and 0.1032 for CertGrip and CSF-1 on S1 and S3 (per-ordering 0.082–0.112); D_RE (CertGrip vs CSF-1) 0.4115–0.4216 in those windows. Steps 1–500 are pre-shift. Physical- and label-feedback trackers give close window means (S1 CertGrip 1,001–2,000: slip 0.1002 vs 0.1008, RE 0.4633 vs 0.4729). No interval was registered; this is the online analogue of H2a, not a test of H3.
+
+## 6 Discussion and Limitations (≈ 250 words; each caveat stated here once in full)
+- **What the evidence licenses:** the friction information comes from the probe, and CRC makes the saving certifiable; a plain physics plug-in on the onset already captures it (D_crc 0.4149 refined grid). At σ 0.2 the learned model shows no demonstrated gain; in secondary, unadjusted analyses it is better at σ 0.4 and worse at σ 0. The saving survives at matched slip and under a high-probability certificate (secondary). Against a non-tactile friction prior of log-noise 0.2 no advantage is shown: the probe's contribution is a friction estimate of that quality obtained from touch.
+- **Limits (full statements, referenced from elsewhere):**
+  - Simulation only, one simulator, rigid contact, 5 families; modelled detector; σ 0.2 is assumed and the effect's lower limit falls below the SESOI at σ 0.4 (D 0.1401). Hardware σ grounding not done.
+  - Friction is drawn independently of all non-tactile inputs; the ≈ 42 % figure is tied to this distribution. CSF-proxy is an oracle-side construction; no correlated-μ pool, deployable vision/category prior, or reactive slip-tightening controller was evaluated.
+  - F\* labels exist only in simulation: offline CRC is not deployable as is; online tracking with physical feedback is the hardware route (B3: 5 orderings, S1 / S3, no interval).
+  - H1 failed; validity rests on the post-failure CRC route, and the grid fix is post hoc. Certificates are marginal per stratum; LTT holds per stratum at δ 0.1, not family-wise.
+  - H2b unresolved; no direct CertGrip vs CSF-μ̂ contrast at matched slip or under LTT. H3 underpowered; its 20-ordering feedback is the label rule with label-route warm start.
+  - H2-R is a regime where the method loses; its cause, the D2 concentration of non-monotone instances and the weak D3 cells are untested (the exploratory stratifications requested in review were not run).
+  - All secondaries, including all v2 rows, are unadjusted.
+- **Future work (one line):** hardware probe-noise measurement and online physical-feedback calibration on a real gripper.
+
+## 7 Conclusion (≈ 80 words)
+- **Goal:** Restate the one confirmed claim with its number (D 0.4168 [0.3484, 0.4778]) and its scope limit (H2-R D −0.2614), the method identity (probe + simple rule + CRC; learner optional), and the online finding with its inconclusive efficiency verdict. Evidence: as in the Abstract.
+
+---
+
+## Figure 1 plan (full width, three panels, ≈ 0.33 page; rendered from data, gate action 7)
+- **Story:** "Probe, then certify." The probe turns a friction-blind grasp into one with friction information; CRC turns any probe-fed force rule into one whose physical slip rate is ≤ α; at equal slip the probe arms need far less excess force.
+- **(a) Protocol timeline** (schematic, the only schematic panel): grip force vs time — preload F₀ = 32.7 N, lift-and-hold, squeeze to 1.5 F₀, **ramp-down probe** with F_onset marked (inset: shear/normal ratio crossing the detector rule), ramp to F = F_base · e^λ̂, disturbance window (D1–D4 icons). Shade the probe as "only friction channel".
+- **(b) Risk-efficiency frontier (real data, replaces v1's schematic risk curve):** test physical slip (x) vs RE_mid (y) over grid offsets k = −4 … +4 for CertGrip-full, onset-only, CSF-μ̂ (refined grid) and CSF-1; vertical dashed line at α = 0.10; mark the CRC operating point (k = 0) of each arm. Data: primary grid for CertGrip-full, onset-only, CSF-1 (e.g. CertGrip-full k = 0: 0.0829 / 0.4567; CSF-1 k = 0: 0.1021 / 0.7832); refined grid for CSF-μ̂ (k = 0: 0.0750 / 0.4551; k = −4: 0.2414 / 0.2399). Annotate "D_match = 0.4563".
+- **(c) Result bars** (primary CRC route, test set, α 0.10): RE_mid with CI\*\* for CSF-1 0.7832, CSF-μ̂ σ 0.2 0.4843, CertGrip-full 0.4567, onset-only 0.4336; dots for physical slip (0.1021 / 0.0657 / 0.0829 / 0.0857) against a dashed α line; annotation "D = 0.4168 [0.3484, 0.4778]"; grey footnote marker "narrow-μ sub-pool: D −0.2614".
+- **Evidence:** `v2:a_analysis.json → frontier.{"full_rd@0.2#0","P_onset@0.2#0","CSF-1"}[k].{slip_phys, RE_mid}`; `v2:a_analysis_08e.json → frontier."CSF-muhat@0.2"[k]`; `v2:a_analysis.json → point."D_match:full_rd@0.2#0"`; `v1:crc_analysis.json → arms.{"CSF-1","CSF-muhat@0.2","full_rd@0.2#0","P_onset@0.2#0"}.{RE_mid, RE_mid_CI, slip_phys}`; `v1:crc_analysis.json → contrasts.H2a`; `v1:sec08g.json → H2R.D`.
+- **Draft caption:** *Probe, then certify. (a) Every grasp starts from the same 32.7 N preload, so only the ramp-down probe's incipient-slip onset carries friction information. (b) Test physical slip vs relative excess force over the calibration grid: at matched slip 0.10 the probe-fed arms need far less excess force than the strongest non-tactile conformal baseline CSF-1 (D_match 0.4563). (c) Conformal risk control at α = 0.10: D = 0.4168, CI\*\* [0.3484, 0.4778], test physical slip 0.0829. A physics plug-in on the same onset (CSF-μ̂) is not distinguishable from the learned model (H2b not confirmed). In a narrow-friction, mid-amplitude sub-pool the probe arm is worse (D −0.2614). Simulation (MuJoCo), modelled detector, onset noise σ = 0.2.*
+
+## Secondary figure (small, half column): σ curve
+- H2a D (primary grid) at σ 0 / 0.1 / 0.2 / 0.4: 0.6789 / 0.5825 / 0.4168 / 0.1401 with CI\*\*, SESOI 0.10 line, σ\* = 0.4 marked; overlay H2b label route −0.2022 / −0.0753 / 0.0134 / 0.3275. Optional third series (if legible): H5 D vs σ_p 0.2 / 0.4 / 0.8 on a separate inset axis (never on the σ axis).
+- **Evidence:** `v1:crc_analysis.json → contrasts."H2a_sigma@{0.0,0.1,0.2,0.4}"`, `sigma_star`; `v1:h2_label_rule.json → contrasts."H2b_sigma@{0.0,0.1,0.2,0.4}"`; `v2:b_analysis.json → H5."H5@0.4", H5."H5@0.8"`; `v2:b_analysis_edge.json → H5."H5@0.2_08e"`.
+
+---
+
+## Every comparison / ablation row in Results → evidence path
+
+### Table 1: Main comparison, certificate variants and robustness (primary CRC route unless stated)
+| # | Row | Value(s) | Evidence |
+|---|---|---|---|
+| 1 | COMP selection | CSF-1 0.7686, Mondrian-CSF 0.8294, CertGrip-P 0.8335 → CSF-1 | `v1:comp_selection.json → candidates.*.RE_mean, COMP` |
+| 2 | CertGrip-full arm | RE 0.4567 [0.4079, 0.5033]; slip_phys 0.0829; λ̂ idx 10/10/11/10 | `v1:crc_analysis.json → arms."full_rd@0.2#0"` |
+| 3 | CSF-1 arm | RE 0.7832 [0.6968, 0.8583]; slip_phys 0.1021; λ̂ idx 1/1/15/14 | `v1:crc_analysis.json → arms."CSF-1"` |
+| 4 | **H2a (primary)** | D 0.4168 [0.3484, 0.4778], superiority | `v1:crc_analysis.json → contrasts.H2a.{D.mid,"CI**".mid,decision}` |
+| 5 | H2a F\*_lo / F\*_hi | 0.4150 / 0.4186 | `v1:crc_analysis.json → contrasts.H2a.D.{lo,hi}` |
+| 6 | Per-stratum test slip (report-only) | CertGrip-full 0.0871/0.0714/0.0757/0.0971; CSF-1 0.1157/0.0886/0.1057/0.0986; CSF-μ̂ 0.0586/0.0386/0.0800/0.0857; onset-only 0.0914/0.0871/0.0714/0.0929 | `v1:19_report_rows.json → per_stratum_test_slip_crc08c.*.{D1..D4}.slip_phys` |
+| 7 | A1 RE at matched slip 0.10 (primary grid) | CertGrip-full 0.4290 [0.4099, 0.4560]; onset-only 0.4154 [0.3969, 0.4375]; CSF-1 0.7891 [0.7329, 0.8422] | `v2:a_analysis.json → point."RE_match@*"`, `"CI**"."RE_match@*".ci` |
+| 8 | A1 RE at matched slip (refined grid) | CertGrip-full 0.4292 [0.4074, 0.4522]; onset-only 0.4173 [0.3968, 0.4393]; CSF-μ̂ 0.4045 [0.3892, 0.4369]; CSF-1 0.7769 [0.7305, 0.8363] | `v2:a_analysis_08e.json → point."RE_match@*"`, `"CI**"."RE_match@*".ci` |
+| 9 | **A1 D_match CertGrip-full vs CSF-1** | 0.4563 [0.4096, 0.4896]; refined 0.4475 [0.4111, 0.4880]; superiority | `v2:a_analysis.json → point."D_match:full_rd@0.2#0"`, `"CI**"."D_match:full_rd@0.2#0"`; same in `v2:a_analysis_08e.json` |
+| 10 | A2 LTT arms (primary grid) | CertGrip-full slip 0.0696, RE 0.4895, λ̂ 10/10/12/11; onset-only 0.0639 / 0.4808; CSF-μ̂ 0.0529 / 0.5173 (λ̂ 0/0/15/13); CSF-1 0.0907 / 0.8216 | `v2:a_analysis.json → ltt_arms.*.{lam,slip_phys,RE_mid}` |
+| 11 | A2 LTT arms (refined grid) | CertGrip-full 0.0707 / 0.4879; onset-only 0.0743 / 0.4643; CSF-μ̂ 0.0654 / 0.4858; CSF-1 0.0911 / 0.8151 | `v2:a_analysis_08e.json → ltt_arms.*.{slip_phys,RE_mid}` |
+| 12 | **A2 D_ltt CertGrip-full vs CSF-1** | 0.4043 [0.3362, 0.4561]; refined 0.4015 [0.3391, 0.4594]; superiority; no LTT flag | `v2:a_analysis.json → point."D_ltt:full_rd@0.2#0"`, `"CI**"."D_ltt:full_rd@0.2#0"`, `ltt_arms.*.lam.*[1]`; same in `v2:a_analysis_08e.json` |
+| 13 | A3 refined-grid CRC D CertGrip-full | 0.4289 [0.3577, 0.4770] | `v2:a_analysis_08e.json → point."D_crc:full_rd@0.2#0"`; = `v1:crc_analysis_v2.json → contrasts.H2a` |
+| 14 | H2a label route | 0.4292 [0.3654, 0.4822] | `v1:h2_label_rule.json → contrasts.H2a` |
+| 15 | H2a seeds 1–4 (replication) | primary grid 0.4343 / 0.4197 / 0.3932 / 0.4494; label 0.4145–0.4442; all superiority | `v1:crc_analysis.json → contrasts.H2a_seed{1..4}`; `v1:h2_label_rule.json → contrasts.H2a_seed{1..4}` |
+| 16 | H2-C vs Mondrian-CSF | 0.4381 [0.3733, 0.4872] | `v1:sec08g.json → H2C_vs_Mondrian` |
+| 17 | H2-H 16 cells | pooled 0.4388, τ 0.0511; smallest F1D3 0.2979, F3D3 0.3115, F4D3 0.3348, F1D4 0.3753; every cell CI\*\* lower > 0.16 | `v1:sec08g.json → H2H.{pooled_D_RE,tau,cells}` |
+| 18 | H2-n (n_cal 50) | α 0.10 0.4146; α 0.20 0.4654 | `v1:sec08g.json → H2n` (values as in 14_analysis.md §1.3) |
+| 19 | H2-T tail | T 0.5918 [0.5540, 0.6564] | `v1:sec08f_tail.json → routes.crc_08c` |
+| 20 | Oracle gap closed | 0.5172 [0.4489, 0.5762] | `v1:sec08g.json → oracle_decomposition` |
+| 21 | **H2-R (scope limit)** | D −0.2614 [−0.5320, −0.0325]; n_cal 352, n_test 548 | `v1:sec08g.json → H2R` |
+
+### Table 2: Attribution and stronger baselines
+| # | Row | Value(s) | Evidence |
+|---|---|---|---|
+| 22 | **A3 CSF-μ̂ vs CSF-1 (headline secondary)** | refined 0.4149 [0.3322, 0.4890]; primary grid 0.3816 [0.2965, 0.4505] (grid-floor biased); superiority | `v2:a_analysis_08e.json → point."D_crc:CSF-muhat@0.2"`, `"CI**"."D_crc:CSF-muhat@0.2"`; same in `v2:a_analysis.json` |
+| 23 | **A3 onset-only vs CSF-1** | 0.4464 [0.3776, 0.4906]; refined 0.4412 [0.3846, 0.4942]; superiority | `v2:a_analysis.json → point."D_crc:P_onset@0.2#0"`; `v2:a_analysis_08e.json` same key |
+| 24 | A1 / A2 D for CSF-μ̂ and onset-only vs CSF-1 | D_match CSF-μ̂ 0.4690 / 0.4793, onset-only 0.4736 / 0.4629; D_ltt CSF-μ̂ 0.3704 / 0.4040, onset-only 0.4148 / 0.4303 (primary / refined) | `v2:a_analysis.json`, `v2:a_analysis_08e.json → point."D_match:*"`, `point."D_ltt:*"` |
+| 25 | H4a S vs P (±0.05) | D −0.0084, equivalence | `v1:h4a_label_rule.json → contrasts.H4a_S_vs_P` |
+| 26 | H4a squeeze: full vs S (±0.03) | D −0.0263 [−0.0558, 0.0149], not confirmed | `v1:h4a_label_rule.json → contrasts.H4a_squeeze_full_vs_S` |
+| 27 | H4a + onset: full_rd vs full | D 0.4739 [0.4148, 0.5229] | `v1:h4a_label_rule.json → contrasts.H4a_onset_full_rd_vs_full` |
+| 28 | H4e full vs onset-only | CRC D −0.0534 [−0.1233, 0.0508], not confirmed; refined −0.0219; label −0.0417 "within ±0.05, secondary" | `v1:crc_analysis.json → contrasts.H4e_vs_onset_only`; `v1:crc_analysis_v2.json`, `v1:h2_label_rule.json` same key |
+| 29 | Onset-only arm | RE 0.4336; slip_phys 0.0857 | `v1:crc_analysis.json → arms."P_onset@0.2#0"` |
+| 30 | **H2b (co-primary)** | D 0.0569 [−0.0399, 0.1454], not confirmed | `v1:crc_analysis.json → contrasts.H2b` |
+| 31 | H2b refined / label | 0.0240 (upper 0.1001) / 0.0134 [−0.0850, 0.0814], **"within ±0.10, secondary, not decision-bearing"** | `v1:crc_analysis_v2.json → contrasts.H2b`; `v1:h2_label_rule.json → contrasts.H2b` |
+| 32 | CSF-μ̂ arm | RE 0.4843; slip_phys 0.0657; λ̂ idx 0/0/14/12 | `v1:crc_analysis.json → arms."CSF-muhat@0.2"` |
+| 33 | H2a σ curve | 0.6789 / 0.5825 / 0.4168 / 0.1401; σ\* 0.4 | `v1:crc_analysis.json → contrasts."H2a_sigma@*"`, `sigma_star` |
+| 34 | H2b σ curve (label; refined) | −0.2022 / −0.0753 / 0.0134 / 0.3275; refined σ0 −0.1522, σ0.4 0.3315 | `v1:h2_label_rule.json → contrasts."H2b_sigma@*"`; `v1:crc_analysis_v2.json → contrasts."H2b_sigma@*"` |
+| 35 | H4c shuffled touch vs P | D −0.0253 [−0.0526, 0.0085], inconclusive | `v1:sec08f_label.json → contrasts.H4c_shuf_vs_P` |
+| 36 | H4b identifier control | D_FID 0.4638 vs D 0.4555 (unadjusted) | `v1:sec08h_h4b.json → results.{D_FID,D}` |
+| 37 | D-μ residual R² | P 0.7937, CSF-1 0.6034; CertGrip-full 0.0105/0.0452/0.2142/0.5655; CSF-μ̂ σ0.2 0.0054 | `v1:sec08f_dmu.json → results.*.cvR2` |
+| 38 | Detector error at σ 0 (text) | r 0.9480, bias 0.3186, SD 0.1103; F3 SD 0.1965; r(err, log μ) −0.2529 | `v1:19_report_rows.json → detector_id_sigma0`, `detector_error_structure` |
+| 39 | H2-M (descriptive) | D_nm 0.4598, change 0.0042 [−0.0446, 0.0399]; mass noise D_mn 0.4603, COMP_mn RE 0.7991, change +0.0312 | `v1:sec08f_label.json → contrasts.H2M_*`; `v1:sec08h_massnoise.json → results` |
+| 40 | **H5 vs CSF-proxy σ_p 0.2 (edge rule, row of record)** | D −0.0299 [−0.1903, 0.0816], not shown | `v2:b_analysis_edge.json → H5."H5@0.2_08e".{D.mid,"CI**".mid,decision_09}` |
+| 41 | H5 σ_p 0.2 primary grid (superseded) | 0.0514 [−0.0673, 0.1660] | `v2:b_analysis.json → H5."H5@0.2"` |
+| 42 | H5 σ_p 0.4 / 0.8 | 0.5042 [0.4362, 0.5635] / 0.8361 [0.8137, 0.8573], superiority | `v2:b_analysis.json → H5."H5@0.4"`, `H5."H5@0.8"` |
+| 43 | CSF-proxy arms | σ_p 0.2 edge: RE 0.4312 [0.3906, 0.4759], slip 0.0825, λ̂ 20/21/20/20; σ_p 0.4: 0.9213 [0.8423, 1.0024], slip 0.0911; σ_p 0.8: 2.7859 [2.5273, 3.0700], slip 0.0971 | `v2:b_analysis_edge.json → arms."CSF-proxy@0.2"`; `v2:b_analysis.json → arms."CSF-proxy@0.4"`, `arms."CSF-proxy@0.8"` |
+| 44 | Edge-rule target arm | CertGrip-full λ̂ 20/20/21/21, slip 0.0900, RE 0.4442 [0.4064, 0.4973] | `v2:b_analysis_edge.json → arms."full_rd@0.2#0"` |
+| 45 | **B2 probe + fixed margin (test)** | m 0 / 0.25 / 0.5 / 1.0: slip 0.9582 / 0.8257 / 0.6182 / 0.3350; RE −0.3829 / −0.2287 / −0.0744 / 0.2341; m 1.0 strata 0.0414 / 0.0229 / 0.6571 / 0.6186 | `v2:b_analysis.json → B2_margin."{0.0,0.25,0.5,1.0}".test.{slip_phys,RE_mid,by_stratum_slip}` |
+| 46 | H4d F4 − F1 | 0.0342 [−0.0424, 0.1138], inconclusive | `v1:sec08g.json → H4d.full_rd` |
+
+### Validity rows (text, §5.5)
+| # | Row | Value(s) | Evidence |
+|---|---|---|---|
+| 47 | H1-M gate | 8 / 800, CP upper 0.02115 > 0.02, D2 7; max rel. above F_hi 0.00904 | `v1:h1m_analysis.json → {non_monotone,"cp_upper_98.75",by_dist,max_rel_above_F_hi}` |
+| 48 | H1-V | Δ −0.00429 … −0.00143, all pass | `v1:h1v_analysis.json → {"CertGrip@0.1","CertGrip@0.05","CSF-1@0.1","CSF-1@0.05"}.Delta` |
+| 49 | UT3 | 160/160; informative 140/140; worst CSF-1 D3 0.01034 | `v1:sec08f_ut3.json → n_pass, worst_cell, cells` |
+| 50 | H1c raw targeters | RAW-Q / RAW-G over-slip; miss_at_0.05 false | `v1:sec08h_h1c.json → results, "miss_at_0.05"` |
+
+### Table 3: Online calibration under shift
+| # | Row | Value(s) | Evidence |
+|---|---|---|---|
+| 51 | OQT-CertGrip window slip / RE (label feedback) | S1 0.1016 / 0.4763, S2 0.0999 / 0.4262, S3 0.1000 / 0.5067 | `v1:h3_analysis.json → shifts.{S1,S2,S3}.arms."OQT-CertGrip"` |
+| 52 | OQT-COMP RE | S1 0.8087, S2 0.7398, S3 0.8635 | `v1:h3_analysis.json → shifts.*.arms."OQT-COMP".RE_window` |
+| 53 | Frozen-CertGrip / Frozen-COMP slip | S1 0.3056 / 0.5101; S2 0.1017 / 0.1051; S3 0.2461 / 0.1910 | `v1:h3_analysis.json → shifts.*.arms."Frozen-*".slip_label_window` |
+| 54 | Oracle-CertGrip RE / slip | S1 0.5426 / 0.0751; S2 0.3631 / 0.1346; S3 0.5262 / 0.0863 | `v1:h3_analysis.json → shifts.*.arms."Oracle-CertGrip"` |
+| 55 | **H3 R_E** | 0.8778 [0.7404, 1.1204]; 1.1739 [1.0234, 1.4283]; 0.9629 [0.8363, 1.1449]: all inconclusive | `v1:h3_analysis.json → shifts.*.{R_E,"R_E_CI**"}`, `H3_primary` |
+| 56 | Matched-rate (physical) | S1 0.032, S2 −0.035 (fail), S3 0.009 | `v1:h3_analysis.json → audit."{S1,S2,S3}|matched_physical"` |
+| 57 | Physical audit OQT-CertGrip 1,001–2,000 (ordering 0) | S1 0.103, S2 0.092, S3 0.101 | `v1:h3_analysis.json → audit."*|OQT-CertGrip|1001-2000".slip_direct` |
+| 58 | S1m (not primary) | R_E 0.8871 [0.7723, 1.0265]; label diff 0.0248 > 0.02 | `v1:h3_analysis.json → shifts.S1m.{R_E,"R_E_CI**",matched_label_window_diff}` |
+| 59 | H3-L | S1 +0.0857 [−0.0444, 0.1859] (TOST ±0.05 not met); S2 +0.0637; S3 +0.0820 | `v1:h3_analysis.json → shifts.*.{rho_minus_rhoID,"rho_minus_rhoID_CI**"}` |
+| 60 | H3-S decay − constant η | ΔC S1 58.15 [48.20, 70.20], S3 42.40 [32.40, 49.35]; S2 / S1m inconclusive | `v1:sec08h_h3s.json → results.*` |
+| 61 | Anti-windup | capped_window 0.0 everywhere | `v1:h3_analysis.json → shifts.*.arms.*.capped_window` |
+| 62 | **B3 physical feedback, shifted windows (descriptive)** | S1 CertGrip 1,001–2,000 0.1002 / RE 0.4633, 1,501–2,000 0.1032 / 0.4626; S1 CSF-1 0.1016 / 0.7915, 0.0988 / 0.7998; S3 CertGrip 0.1010 / 0.5127, 0.0992 / 0.5135; S3 CSF-1 0.1010 / 0.8719, 0.0936 / 0.8726; per-ordering range 0.082–0.112 | `v2:b3_analysis.json → shifts.{S1,S3}.physical_feedback.{CertGrip,CSF1}."{1001-2000,1501-2000}".{slip_phys,RE_mid}.{mean,min,max}` |
+| 63 | B3 D_RE (CertGrip vs CSF-1) | S1 0.4387 / 0.4146 / 0.4216; S3 0.4438 / 0.4120 / 0.4115 (windows 1–500 pre-shift / 1,001–2,000 / 1,501–2,000) | `v2:b3_analysis.json → shifts.{S1,S3}.D_RE` |
+| 64 | B3 physical vs label feedback | S1 CertGrip 1,001–2,000 slip 0.1002 vs 0.1008, RE 0.4633 vs 0.4729 | `v2:b3_analysis.json → shifts.S1.{physical_feedback,label_feedback_08d}.CertGrip."1001-2000"` |
+
+**Space plan (5 pages):**
+- Fig. 1 ≈ 0.33 page; σ figure ≈ 0.18 page.
+- Table 0 (glossary) ≈ 0.12 page.
+- Tables 1 + 2 merged into one three-block table (main / certificate variants; attribution; stronger baselines) ≈ 0.5 page. In the printed table keep rows 4, 6, 9, 12, 21, 22, 23, 27, 28, 30, 31, 40, 42, 45; rows 1–3, 5, 7, 8, 10, 11, 13–20, 24–26, 29, 32–39, 41, 43, 44, 46 go to text or are dropped if space is short.
+- Table 3 ≈ 0.25 page: rows 51, 53, 55, 56, 62, 63; the rest to text.
+- Text ≈ 3,300 words (Intro 500, Related 380, Method 800, Setup 400, Results 950, Discussion 250, Conclusion 80, ≈ 3,360).
+
+
+Analysis:
+
+# p2 · Stage 14 RESULT_ANALYSIS [v3] — merged (run 46, 2026-11-10)
+
+Pass 1 (fresh opus subagent, template verbatim via `docs/prompts/build_stage14_v3.py`): `14_analysis_v3_pass1.md`.
+Pass 2 (fresh opus subagent, area-chair prompt verbatim): `14_analysis_v3_pass2.md` — 15 findings, 3 numeric (B3 D_RE
+range, phase total 27.4258 not 27.429, p bound < 0.001 not < 0.0005), no fabricated number.
+**Main-session adjudication: all 15 accepted; the pass-2 rewrites are binding where they differ from pass 1.**
+One pass-1 statement is corrected by the main session: the B3 oracle reference is not missing — `b3_analysis.json`
+carries the 08d label-route rows (Oracle-CertGrip / Oracle-COMP) as its reference, as the B3 code's docstring states;
+what is absent is a physical-replay oracle. A7's integrated-force / break-even quantities registered in amendment A7
+were **not produced by code**; pass 1 reconstructed them by hand → they must not enter the paper until computed by a
+script (stage 16/17 rows, or stated as not produced).
+
+Statements of record for stages 15–19 (all v3 rows secondary / descriptive; v1 / v2 verdicts not re-decided):
+1. H2a (CertGrip-full σ 0.2 vs CSF-1) holds at pool level in every v3 row (CRC, empirical margin, refined grid, B3
+   windows), but reverses to **inferiority inside the 08e μ ∈ [0.5, 0.8] sub-pools** (A4: μ ∧ amp −0.3152 [−0.5231,
+   −0.0172]; μ only −0.1717 [−0.4275, −0.01539], which contains it) at a higher CSF-1 slip (0.1004 vs 0.08394); on
+   08c the same sub-pool shows superiority (0.3754). Grid-dependent; mechanism not established.
+2. B3 D_RE 0.3107–0.4432 across shifts and windows (0.4152–0.4432 outside the S1 transient); late-window slip
+   0.1001 / 0.1008 / 0.1018 (S1 / S2 / S3) with ordering-only intervals containing α → "consistent with convergence".
+3. Learned vs plug-in: none of the 8 new σ 0.2 contrasts is shown (points −0.06463 to 0.05379). At σ 0.4 a **shrunk
+   one-line plug-in beats the learned arm** (B1 −0.1395 [−0.1832, −0.01264]); the registered prediction was wrong in
+   direction. The v1 σ-curve is qualified, not overturned. Same-grid σ 0.2 row: −0.0353 [−0.1688, 0.0103] not shown.
+4. Certificate: mean re-split slip ≤ α; per-stratum exceedance frequent (A1); empirical margin = CRC on 08c, costs
+   0.0142 RE for plug-in 0.2 on 08e.
+5. B2 registered reactive designs fail (slip ≥ 0.3086 in every arm and stratum); detection timing not reported → no
+   mechanism claim.
+6. A3 Holm (v1 secondaries, 52 rows, all reproduced exactly): no v1 verdict changes; v3 rows carry no adjusted p.
+7. Force: on the 08c test split CertGrip-full mean hold force is 1.085 N below CSF-1 (6.521 vs 7.606 N), no interval.
+
+
+=== v3 pass-1 analysis (tables; superseded by the merged record and the pass-2 audit where they differ) ===
+
+# p2 CertGrip: Stage-14 analysis of iteration v3 (pass 1)
+
+Scope: every v3 row is **secondary** (amendment 10 + addendum 10a). The v1 primary read-outs (H2a / H2b on the CRC route, `results/v1/crc_analysis.json`; H3 on label-rule feedback, `results/v1/h3_analysis.json`) and the v2 verdicts are **not re-decided**. The v3 rows are read against them. α = 0.1 throughout. CI** = 97.5 % object-cluster bootstrap, 2,000 draws, with λ̂ refitted on each draw. B3 intervals are 95 % intervals over orderings only.
+
+Notation: "full σ" = CertGrip-full (`full_rd@σ#seed`); "plug-in σ" = CSF-μ̂ σ; "shrunk σ" = CSF-shrunk σ (B1); RE = RE_mid. D is the relative RE reduction of the target against the comparator. Arithmetic check: H2a gives 1 − 0.4567 / 0.7832 = 1 − 0.5831 = 0.4169 ≈ 0.4168, and B1 σ 0.4 gives 1 − 0.6735 / 0.591 = −0.1396 ≈ −0.1395. Numbers are quoted to the precision of the data files, rounded to 4 significant digits. The text names any grid other than 08c.
+
+---
+
+## 1. Metrics Summary
+
+### 1.1 v1 primary anchors (unchanged)
+
+| Read-out | Target vs comparator | D (mid) | CI** (mid) | v1 decision |
+|---|---|---|---|---|
+| H2a | full 0.2 #0 vs CSF-1 | 0.4168 | [0.3484, 0.4778] | superiority |
+| H2b | full 0.2 #0 vs plug-in 0.2 | 0.05692 | [−0.03992, 0.1454] | not confirmed |
+| H4e | full 0.2 #0 vs P_onset 0.2 | −0.05341 | [−0.1233, 0.05081] | not confirmed |
+| H2b σ 0.0 / 0.1 / 0.4 | full σ vs plug-in σ | 0.246 / 0.1072 / 0.3182 | [0.1617, 0.2953] / [0.03332, 0.1919] / [0.2287, 0.406] | superiority (all three) |
+| H3 S1 / S2 / S3 | OQT-CertGrip, R_E | 0.8778 / 1.174 / 0.9629 | [0.7404, 1.12] / [1.023, 1.428] / [0.8363, 1.145] | inconclusive (all three) |
+
+v1 arm-level values (08c, test, n = 2,800): full 0.2 #0 slip 0.08286 and RE 0.4567; CSF-1 slip 0.1021 and RE 0.7832; plug-in 0.2 slip 0.06571 and RE 0.4843.
+
+### 1.2 A1: repeated object re-splits (R = 200, seed 3031)
+
+| Rule / grid | Arm | mean slip | share splits > α | q90 | min–max | share any stratum > α |
+|---|---|---|---|---|---|---|
+| CRC 08c | full 0.2 | 0.08469 | 0.05 | 0.09682 | 0.05857–0.1211 | 0.57 |
+| CRC 08c | plug-in 0.2 | 0.07121 | 0.0 | 0.07932 | 0.05071–0.09143 | 0.405 |
+| CRC 08c | CSF-1 | 0.08514 | 0.12 | 0.1011 | 0.045–0.1429 | 0.41 |
+| CRC 08e | full 0.2 | 0.08516 | 0.09 | 0.09861 | 0.06107–0.1164 | 0.69 |
+| CRC 08e | plug-in 0.2 | 0.08466 | 0.035 | 0.09679 | 0.0625–0.1157 | 0.475 |
+| CRC 08e | CSF-1 | 0.08646 | 0.075 | 0.09893 | 0.04714–0.1382 | 0.615 |
+| LTT 08c | full / plug-in / CSF-1 | 0.06826 / 0.06199 / 0.0685 | 0.005 / 0.0 / 0.005 | 0.07964 / 0.07179 / 0.08682 | — | 0.07 / 0.075 / 0.105 |
+| LTT 08e | full / plug-in / CSF-1 | 0.07045 / 0.07102 / 0.0673 | 0.0 / 0.0 / 0.015 | 0.08107 / 0.08182 / 0.08793 | — | 0.105 / 0.13 / 0.06 |
+
+Per-stratum CRC: no per-stratum mean slip exceeds α. The largest are 0.0913 (CSF-1 D3, 08c) and 0.09143 (CSF-1 D3, 08e). Per-split exceedance shares within a single stratum reach 0.305 (full D2, 08c), 0.445 (full D2, 08e), 0.435 (CSF-1 D4, 08e) and 0.335 (plug-in D3, 08c).
+
+### 1.3 A2: slip tables (08c, test)
+
+Per-seed results for full 0.2, seeds 0–4: slip 0.08286 / 0.09 / 0.08357 / 0.07929 / 0.1018; RE 0.4567 / 0.443 / 0.4545 / 0.4752 / 0.4313. Seed 4 lies above α on this single split.
+
+Slip by friction quintile of true μ (edges 0.3732 / 0.4731 / 0.614 / 0.7822), lowest to highest μ:
+
+| Arm (08c) | Q1 | Q2 | Q3 | Q4 | Q5 |
+|---|---|---|---|---|---|
+| full 0.2 #0 | 0.2161 | 0.1179 | 0.05893 | 0.01786 | 0.003571 |
+| full 0.4 #0 | 0.3196 | 0.075 | 0.01429 | 0.001786 | 0.0 |
+| plug-in 0.2 | 0.08571 | 0.0875 | 0.07321 | 0.05357 | 0.02857 |
+| CSF-1 | 0.4804 | 0.02857 | 0.001786 | 0.0 | 0.0 |
+
+The 08e grid gives the same pattern: full 0.2 Q1 0.2464 and CSF-1 Q1 0.4607. The largest family × stratum cells (n = 175) are full 0.2 #0 F1D1 0.1257 and F2D4 0.1143, CSF-1 F4D4 0.1371, and plug-in 0.2 F4D4 0.12.
+
+08e versus 08c arm-level values (test): full 0.2 slip 0.09 and RE 0.4442 (08c: 0.08286 and 0.4567); CSF-1 0.09964 and 0.7778 (0.1021 and 0.7832); plug-in 0.2 0.075 and 0.4551 (0.06571 and 0.4843); plug-in 0.0 0.07821 and 0.208 (0.02679 and 0.3335); plug-in 0.1 0.07607 and 0.2915 (0.0425 and 0.3662).
+
+### 1.4 A3: Holm as registered
+
+| Family | m | rejected at 5 % (Holm within family) |
+|---|---|---|
+| H1c | 12 | 8 |
+| H2-x | 29 | 27 |
+| H3-x | 4 | 2 |
+| H4-x | 6 | 3 |
+| All v1 secondary rows | 52 | 40 |
+
+Arithmetic: 12 + 29 + 4 + 6 = 51, and the 52nd row is `sec08g/oracle_decomposition`, which has no family. Exactly one row changes status between the family-wise and the all-rows Holm: **08g H2-R** (CI [−0.532, −0.03249], p 0.01). Its Holm p-value is 0.03 within the family (rejected) and 0.12 over all rows (not rejected). The rows that are not rejected are H4c (p 0.119), H2M change (p 0.943), H4d full_rd and full (p 0.316, 0.804), all four H1c RAW-Qv rows (p 0.438, 0.159, 0.435, 0.11), H3s S2 (p 0.997), H3s S1m (p 0.101) and massnoise change (p 0.079).
+
+### 1.5 A4: losing sub-pool on the CRC route
+
+Sub-pool sizes (cal / test): μ and amplitude 352 / 548; μ only 724 / 1,060; amplitude only 983 / 1,417.
+
+| Sub-pool | Grid | D full 0.2 vs CSF-1 [CI**] | decision | D plug-in 0.2 vs CSF-1 [CI**] | decision | CSF-1 slip / RE | full slip / RE |
+|---|---|---|---|---|---|---|---|
+| μ and amp | 08c | 0.3754 [0.2648, 0.4823] | superiority | 0.2492 [0.09255, 0.3541] | superiority | 0.03285 / 0.566 | 0.08759 / 0.3535 |
+| μ and amp | **08e** | **−0.3152 [−0.5231, −0.0172]** | **inferiority** | −0.6804 [−0.9734, −0.2175] | inferiority | 0.1004 / 0.2633 | 0.08394 / 0.3463 |
+| μ only | 08c | 0.3387 [0.2423, 0.4278] | superiority | 0.2011 [0.1054, 0.3115] | superiority | 0.03396 / 0.6167 | 0.07264 / 0.4078 |
+| μ only | **08e** | **−0.1717 [−0.4275, −0.01539]** | **inferiority** | −0.3705 [−0.6279, −0.1119] | inferiority | 0.08208 / 0.3281 | 0.08585 / 0.3844 |
+| amp only | 08c | 0.5004 [0.4237, 0.5516] | superiority | 0.4751 [0.3877, 0.5327] | superiority | 0.09951 / 0.786 | 0.09174 / 0.3927 |
+| amp only | 08e | 0.4929 [0.4251, 0.5537] | superiority | 0.4869 [0.394, 0.5508] | superiority | 0.0988 / 0.7822 | 0.09174 / 0.3966 |
+
+### 1.6 A5: empirical margin without the (n+1) correction
+
+On 08c, the empirical λ̂ reproduces the CRC point values for all three arms: full 0.2 slip 0.08286 and RE 0.4567; plug-in 0.2 0.06571 and 0.4843; CSF-1 0.1021 and 0.7832. Only the CIs differ, for example full RE emp [0.4054, 0.4996] against CRC [0.4079, 0.5033]. D_emp(full vs CSF-1) = 0.4168, with CI [0.3514, 0.4817] against CSF-1 CRC and [0.3481, 0.4789] against CSF-1 emp (superiority). D_emp(plug-in vs CSF-1) = 0.3816 [0.3014, 0.4517] (superiority).
+
+On 08e, full and CSF-1 again match CRC. Plug-in 0.2 moves from slip 0.075 and RE 0.4551 (CRC) to 0.07964 and 0.4409 (emp). D_emp(full vs CSF-1) = 0.4289 [0.3606, 0.4787] and D_emp(plug-in vs CSF-1) = 0.4331 [0.3344, 0.4956], both superiority.
+
+### 1.7 A6: direct learned vs plug-in (full 0.2 vs plug-in 0.2)
+
+| Contrast | 08c point [CI**] | 08e point [CI**] | decision |
+|---|---|---|---|
+| CRC | 0.05692 [−0.03992, 0.1454] | 0.02397 [−0.09487, 0.1001] | not shown / not shown |
+| LTT | 0.05379 [−0.0568, 0.1222] | −0.004233 [−0.08602, 0.1069] | not shown / not shown |
+| matched slip | −0.02384 [−0.08446, 0.01937] | −0.06104 [−0.1104, 0.01228] | not shown / not shown |
+
+LTT arm values (08c): full slip 0.06964 and RE 0.4895; plug-in 0.05286 and 0.5173; CSF-1 0.09071 and 0.8216.
+
+### 1.8 A7: force in newtons (08c, avoidable test rows, n = 2,800)
+
+F*_mid has quantiles 10 / 50 / 90 % of 0.9549 / 3.184 / 11.35 N, a mean of 4.898 N and a maximum of 31.87 N. The share of rows with F*_mid above the preload (32.7 N) is 0.0, and the share above the squeeze peak is also 0.0.
+
+| Arm | hold F mean / median (N) | excess mean / median (N) |
+|---|---|---|
+| full 0.2 #0 | 6.521 / 4.473 | 1.623 / 0.99 |
+| full 0.4 #0 | 7.21 / 5.191 | 2.312 / 1.41 |
+| plug-in 0.2 | 7.062 / 4.556 | 2.164 / 1.128 |
+| plug-in 0.4 | 9.442 / 5.677 | 4.544 / 2.168 |
+| CSF-1 | 7.606 / 5.476 | 2.708 / 1.64 |
+| P_onset 0.2 #0 | 6.519 / 4.423 | 1.621 / 0.9498 |
+
+Shared phase force-time, common to every arm in these replays: preload 13.08, squeeze 12.91 and ramp-down 1.439 N·s, which sum to 27.429 N·s.
+
+Worked arithmetic, using the mean hold F and the definition integrated = phases + F·T. The full 0.2 saving against CSF-1 is 7.606 − 6.521 = 1.085 N, so 1.085 N·s at T = 1 s, 5.425 N·s at T = 5 s and 32.55 N·s at T = 30 s. Against the phase total of 27.429 N·s, the saving is 1.085 / (27.429 + 7.606) = 1.085 / 35.035 ≈ 3.1 % of CSF-1's total at T = 1 s, and 32.55 / (27.429 + 228.18) = 32.55 / 255.609 ≈ 12.7 % at T = 30 s.
+
+### 1.9 B1: shrunk plug-in
+
+The OLS fit of log μ on log μ̂ over the selection split (n_sel 800) gives a = −0.3858 and b = 0.7397 at σ 0.2, and a = −0.4738 and b = 0.4044 at σ 0.4.
+
+| Contrast | Grid | D [CI**] | decision |
+|---|---|---|---|
+| full 0.2 vs shrunk 0.2 | 08c (shrunk λ̂ at index 0 in D1 and D2) | −0.03216 [−0.09825, 0.07434] | not shown |
+| full 0.2 vs shrunk 0.2 | edge rule (shrunk 08e, full 08c) | −0.06463 [−0.1851, 0.008734] | not shown |
+| full 0.2 vs shrunk 0.2 | same grid (08e recipe) | −0.03532 [−0.1688, 0.01035] | not shown |
+| **full 0.4 vs shrunk 0.4** | 08c | **−0.1395 [−0.1832, −0.01264]** | **inferiority** |
+| shrunk 0.2 vs CSF-1 | 08c / edge / same grid | 0.435 / 0.4522 / 0.4484 | superiority (all three) |
+| shrunk 0.4 vs CSF-1 | 08c | 0.2454 [0.1679, 0.2989] | superiority |
+
+Arm values: shrunk 0.2 slip 0.07179 and RE 0.4425 (08c), 0.07714 and 0.429 (08e); shrunk 0.4 slip 0.09286 and RE 0.591; full 0.4 slip 0.08214 and RE 0.6735.
+
+### 1.10 B2: reactive slip-tightening (test, n = 2,800)
+
+| Arm | slip | RE (final F) | mean steps | share at 4-step cap | F_end mean (N) |
+|---|---|---|---|---|---|
+| REACT-blind c 0.5 | 0.765 | −0.1731 | 2.501 | 0.2446 | 3.367 |
+| REACT-blind c 0.75 | 0.4632 | 0.4185 | 3.099 | 0.5425 | 5.75 |
+| REACT-probe c 0.5 | 0.9921 | −0.6358 | 0.4964 | 0.007857 | 1.766 |
+| REACT-probe c 0.75 | 0.9514 | −0.4534 | 0.5079 | 0.02 | 2.596 |
+
+Per stratum, REACT-blind c 0.75 has slip 0.3414 / 0.3086 / 0.6057 / 0.5971 in D1–D4. Every B2 arm and stratum lies well above α.
+
+### 1.11 B3: online OQT with physical feedback (20 orderings, 95 % ordering intervals)
+
+| Shift | Window | CertGrip slip | CertGrip RE | CSF1 slip | CSF1 RE | D_RE [CI95] |
+|---|---|---|---|---|---|---|
+| S1 | 1–500 | 0.0997 | 0.419 | 0.1058 | 0.7524 | 0.4432 [0.4357, 0.451] |
+| S1 | 501–1000 | **0.1389** [0.1365, 0.1413] | 0.3936 | **0.2087** | 0.571 | 0.3107 [0.2893, 0.3293] |
+| S1 | 1501–2000 | 0.1001 | 0.4746 | 0.0993 | 0.8115 | 0.4152 [0.4025, 0.4275] |
+| S2 | 1–500 | 0.0981 | 0.4204 | 0.1039 | 0.7517 | 0.4408 [0.4306, 0.4493] |
+| S2 | 501–1000 | 0.0981 | 0.4359 | 0.0938 | 0.7577 | 0.4247 [0.4172, 0.4327] |
+| S2 | 1501–2000 | 0.1008 | 0.4144 | 0.1025 | 0.7325 | 0.4342 [0.4203, 0.4491] |
+| S3 | 1–500 | 0.0988 | 0.4178 | 0.1044 | 0.7474 | 0.441 [0.4311, 0.4503] |
+| S3 | 501–1000 | **0.1368** [0.1337, 0.14] | 0.435 | **0.126** | 0.773 | 0.4373 [0.4252, 0.4508] |
+| S3 | 1501–2000 | 0.1018 | 0.4999 | 0.0999 | 0.8684 | 0.4243 [0.4129, 0.4355] |
+
+Arithmetic check of D_RE for S1 1–500: 1 − 0.419 / 0.7524 = 1 − 0.5569 = 0.4431 ≈ 0.4432.
+
+---
+
+## 2. Comparative Findings
+
+**F1. H2a (learned against friction-blind CSF-1) survives every v3 robustness row.**
+- The v1 D of 0.4168 [0.3484, 0.4778] reappears on the refined grid as D_emp 0.4289 [0.3606, 0.4787].
+- It is unchanged under the uncorrected empirical margin (0.4168 [0.3514, 0.4817]).
+- In the online physical-feedback study, CertGrip against CSF1 gives D_RE between 0.3107 and 0.4432 in every shift and window. The ordering intervals are all far from 0.
+- In newtons, the mean hold-force saving against CSF-1 is 1.085 N (6.521 against 7.606 N), and the median saving is 5.476 − 4.473 = 1.003 N.
+
+**F2. The losing sub-pool result (08g H2-R) depends on the grid on the CRC route.**
+- On the 08c grid, CertGrip-full beats CSF-1 inside the μ ∈ [0.5, 0.8] × mid-amplitude sub-pool (0.3754 [0.2648, 0.4823]).
+- On the refined 08e grid it **loses** (−0.3152 [−0.5231, −0.0172], inferiority). This reproduces the sign of the label-route 08g H2-R row (CI [−0.532, −0.03249]).
+- The mechanism shows in the comparator's slip. On 08c, CSF-1 sits far below α inside the sub-pool (0.03285), so it is over-conservative because the coarse grid cannot tighten. On 08e it reaches 0.1004 and its RE falls from 0.566 to 0.2633.
+- The μ-only restriction behaves the same way (08c 0.3387 superiority; 08e −0.1717 inferiority). The amplitude-only restriction does not: 0.5004 on 08c and 0.4929 on 08e.
+- Reading: the loss is driven by friction. Where true μ is narrow and moderate, a friction-blind constant with a fine enough margin grid beats the learned rule.
+- A3 places H2-R on the boundary of multiplicity. It is rejected after Holm within H2-x (0.03) but not after Holm over all 52 rows (0.12).
+
+**F3. H2b ("learned beats plug-in") stays not confirmed, and the v3 rows push the point estimates towards zero or below.**
+- At σ 0.2, none of the 9 direct learned-against-plug-in contrasts reaches a decision. These are A6 (CRC, LTT and matched slip on 08c and 08e) and B1 (three grid variants).
+- The matched-slip contrasts have negative points: −0.02384 on 08c and −0.06104 on 08e.
+- Against the shrunk plug-in, all three σ 0.2 points are negative (−0.03216, −0.06463, −0.03532).
+
+**F4. The v1 σ-curve superiority of learned over plug-in does not survive v3, for two different reasons.**
+- (a) **σ 0.4: shrinkage over-explains the gap.** The v1 H2b σ 0.4 row was superiority (0.3182 [0.2287, 0.406]). Against the shrunk plug-in (OLS slope b = 0.4044), CertGrip-full is now **inferior** (−0.1395 [−0.1832, −0.01264]).
+  - The registered prediction ("advantage shrinks, CI** includes 0") is right in direction but wrong in its second clause: the CI excludes 0 on the negative side.
+  - Caveat: shrunk 0.4 runs at higher slip than full 0.4 (0.09286 against 0.08214), so part of its RE advantage is bought with slip budget. No matched-slip B1 row exists.
+- (b) **σ 0.0 and 0.1: the plug-in comparator is at the edge of the 08c grid.** On 08c, plug-in 0.0 and 0.1 have λ̂ index 0 in D1 and D2, with test slip 0.007143 / 0.002857 (σ 0.0) and 0.01571 / 0.007143 (σ 0.1), far below α.
+  - On the 08e grid, the arm-level RE of the plug-in falls below the learned arm: σ 0.0 gives 0.208 against 0.2397, and σ 0.1 gives 0.2915 against 0.3212.
+  - The v3 files contain **no** D with CI** for σ 0.0 or 0.1 on 08e, so this is an arm-level observation, not a contrast. It does, however, indicate that the v1 σ 0.0 and 0.1 superiorities (0.246 and 0.1072) rest on a comparator held at the grid floor.
+
+**F5. The certificate holds in expectation but not per stratum, and not conditionally on friction.**
+- A1 matches the pre-stated expectation. The CRC mean slip over 200 re-splits is 0.07121–0.08646, all ≤ α, and the overall exceedance share is a minority (0.0–0.12).
+- However, in 0.57 (08c) and 0.69 (08e) of re-splits at least one stratum of CertGrip-full exceeds α on test, against 0.41 and 0.615 for CSF-1. Single-stratum exceedance reaches 0.445.
+- This is consistent with a marginal (expected-risk) CRC guarantee and a 700-row test stratum. It does not support any reading of "per-split" or "per-stratum realised" slip control.
+- LTT is tighter. Its mean slip is 0.06199–0.07102, and its any-stratum exceedance is 0.06–0.13. Three entries, 0.105, 0.105 and 0.13, sit slightly above δ = 0.10, but those are empirical test rates, not the true risk that LTT bounds.
+- Conditionally on friction (A2), CertGrip-full slips 0.2161 in the lowest μ quintile and 0.003571 in the highest. CSF-1 is more extreme (0.4804 against 0.0). The plug-in is flatter (0.08571 → 0.02857). The guarantee is therefore marginal over the friction distribution. Low-friction objects get about twice α under the learned rule (0.2161 / 0.1 ≈ 2.2).
+
+**F6. The finite-sample correction costs essentially nothing here (A5).** The empirical λ̂ equals the CRC λ̂ for all arms on 08c, and for full and CSF-1 on 08e. The one difference is plug-in 0.2 on 08e, where RE goes from 0.4551 to 0.4409 (Δ = 0.0142) and slip from 0.075 to 0.07964. With 500 calibration rows per stratum, the (n+1) correction is smaller than one grid step. A "hand-tuned" margin therefore also holds α on this split. The certificate's added value over plain empirical tuning is the guarantee, not a different operating point.
+
+**F7. The reactive controllers are not a competitive tactile baseline under the v1 slip criterion (B2).**
+- The best reactive arm (REACT-blind c 0.75) has slip 0.4632, 4.6× α, at RE 0.4185, which is comparable to CertGrip's 0.4567 at slip 0.08286.
+- The probe-informed variants slip in 0.9514–0.9921 of instances, with mean steps around 0.5. With r_safe = 0.8 μ̂ the detector rarely fires before slip has already counted.
+- Because slip before tightening counts, a purely reactive scheme fails by construction at these starting forces (c ∈ {0.5, 0.75}). B2 does not show that reactive control is worse in general, only that this registered design is not a viable substitute.
+
+**F8. Physical-feedback online calibration (B3) behaves like the v1 label-feedback study, but the H3 question stays open.**
+- Long-run windows return to α. For CertGrip, 1501–2000 slip is 0.1001 / 0.1008 / 0.1018 in S1 / S2 / S3. The RE agrees with the 08d label route; for example, S1 RE is 0.4746 (physical) against 0.4763 (label).
+- The transient window 501–1000 overshoots α in S1 (0.1389) and S3 (0.1368). This agrees with the v1 direct-replay audit (S1 OQT-CertGrip 501–1000 slip_direct 0.134; S3 0.128). CertGrip's overshoot is smaller than CSF1's in S1 (0.2087).
+- The v1 H3 metric R_E is OQT RE / oracle RE (check: 0.4763 / 0.5426 = 0.8778). It needs the oracle reference that amendment §B3 promised, "recalibrated on the post-shift pool… reported with its own slip". **That oracle row is absent from `b3_analysis.json`.** v3 therefore cannot update H3 (inconclusive in S1 / S2 / S3).
+
+**F9. The force-time benefit is real but modest in absolute terms (A7).**
+- The typical required force is small: median F*_mid is 3.184 N against a 32.7 N preload, and no test row needs more than the preload.
+- The shared preload, squeeze and ramp-down phases cost 27.429 N·s per grasp. The learned arm's hold saving of 1.085 N against CSF-1 needs about 25 s of hold to equal those phases (27.429 / 1.085 ≈ 25.3 s), and amounts to about 12.7 % of total force-time at T = 30 s.
+- The plug-in 0.2 is 0.541 N (7.062 − 6.521) above the learned arm in mean hold F, but its median is only 0.083 N higher (4.556 − 4.473).
+
+---
+
+## 3. Statistical Checks
+
+1. **Definitions.** D reproduces as 1 − RE_target / RE_comparator from the arm values: H2a gives 0.4169 against 0.4168, B1 σ 0.4 gives −0.1396 against −0.1395, and B3 S1 1–500 gives 0.4431 against 0.4432. R_E reproduces as OQT RE / oracle RE (0.8778).
+2. **A3 bookkeeping.** The family sizes sum to 51, plus 1 unassigned row, giving 52. The rejections are 8 + 27 + 2 + 3 = 40, plus the oracle decomposition, which is rejected in "all", giving 41. Since "all" reports 40 rejected, the all-rows Holm drops exactly one family-wise rejection, which is H2-R (0.03 → 0.12). This is consistent with the row list.
+3. **p-value resolution.** The bootstrap resolution is 1 / 2,000. The reported p = 0.0 means no draw crossed 0, so p < 0.0005, not 0. Five rows (three 08f_tail routes, H4c and the oracle decomposition) carry `null_not_registered_threshold: true`. Their p-values against 0 do not test their registered thresholds and should not be quoted as tests of those hypotheses.
+4. **v3 rows are not multiplicity-adjusted.** The decision-labelled v3 rows number 13 (A, 08c) + 13 (A, 08e) + 4 (B1) + 2 (B1 edge) + 2 (B1 same grid) = 34. Two of the decisive v3 reversals have CI bounds close to 0: A4 08e μ and amplitude (upper bound −0.0172) and B1 σ 0.4 (upper bound −0.01264). Under any Holm-type adjustment across these 34 rows, they are at risk, as H2-R was in A3.
+5. **Grid sensitivity is first order.** Same-arm differences between 08c and 08e (full 0.2 RE 0.4567 against 0.4442; plug-in 0.0 RE 0.3335 against 0.208) are comparable to or larger than several contrasts being interpreted. λ̂ at index 0 occurs for plug-in 0.0 / 0.1 / 0.2 in D1 and D2 and for shrunk 0.2 in D1 and D2 on 08c. Every learned-against-plug-in conclusion should be read from 08e or same-grid rows.
+6. **Sub-pool power.** A4 recalibrates on 352 calibration objects-instances across four strata in the μ and amplitude pool. The 08e CI for D(full vs CSF-1) spans 0.5059 (−0.5231 to −0.0172), and the CSF-1 slip CI is [0.03025, 0.1356].
+7. **Slip is not matched across arms** in B1 (shrunk 0.4 at 0.09286 against full 0.4 at 0.08214) or A4 08e (CSF-1 0.1004 against full 0.08394). Only A6 provides a matched-slip contrast, and it is not shown in both grids.
+8. **A1 re-splits are not independent replications.** All 200 splits re-partition the same 4,800 instances, so the exceedance shares describe split-to-split variability, not sampling of new objects.
+9. **B3 intervals cover orderings only.** Object pools are fixed, so intervals such as [0.4357, 0.451] understate uncertainty relative to the CI** used elsewhere.
+
+---
+
+## 4. Limitations
+
+- **All v3 rows are secondary and are not adjusted for multiplicity** (see check 4). None changes a v1 primary or v2 verdict.
+- **Missing registered outputs.**
+  - The B3 oracle reference (needed for R_E and the H3 question) is not in `b3_analysis.json`.
+  - A7's integrated force over T ∈ {1, 5, 30} s and the break-even T are not in the files. The arithmetic in §1.8 is a reconstruction from mean hold force and the shared phases. The file notes that the phases are "common to every arm in these replays", so the probe's arm-specific extra force-time is not separable here.
+  - A6 matched-slip and LTT rows, and B1 rows, exist only for σ 0.2 (B1 also for σ 0.4). No 08e direct contrasts exist for σ 0.0, 0.1 or 0.4.
+- **No matched-slip version of B1.** The σ 0.4 inferiority confounds RE with a slip difference of 0.09286 − 0.08214 = 0.01072.
+- **B2 tests one registered reactive design** with c ∈ {0.5, 0.75}, a 25 % step and at most 4 steps. A 3-object timing pilot printed 12 calibration-instance outcomes before the full run. No parameter was changed, but this is disclosed. The optional CRC variant was dropped.
+- **Marginal guarantee only.** Per-stratum and per-friction-quintile slip can exceed α substantially (lowest-μ quintile 0.2161 for full 0.2). This must be stated wherever the certificate is described.
+- **Simulation only** (MuJoCo 4.0.0). σ is not grounded on hardware. There is no adaptive or low preload, and no pool where friction correlates with non-tactile inputs (amendment §C).
+- **Single calibration / test split for all non-A1 rows.** The per-seed spread of full 0.2 (slip 0.07929–0.1018; RE 0.4313–0.4752) gives a sense of training variability that the bootstrap CIs do not include.
+
+---
+
+## 5. Conclusion
+
+1. **H2a is robust.** Learned CertGrip against friction-blind CSF-1 gives D ≈ 0.42–0.43 across the CRC, empirical and refined-grid rows, about 0.41–0.44 in online physical feedback, and about 1.1 N lower mean hold force.
+2. **The case for a learned force head over a calibrated friction plug-in is not supported by v3.** All 9 σ 0.2 direct contrasts are "not shown", with matched-slip points negative (−0.02384, −0.06104). At σ 0.4, a shrunk plug-in beats the learned arm (−0.1395 [−0.1832, −0.01264]), contrary to the second clause of the registered B1 prediction. The v1 σ 0.0 and 0.1 superiorities rest on a plug-in held at the 08c grid floor, and on 08e the plug-in has the lower arm-level RE. The paper should present CertGrip's value as **conformal calibration of a tactile friction estimate**, not as learning beating plug-in.
+3. **The H2-R losing sub-pool reappears on the CRC route once the grid is refined** (−0.3152, inferiority). It is driven by friction (μ-only −0.1717; amplitude-only +0.4929), and survives Holm only within its family (0.03, against 0.12 overall).
+4. **The certificate is empirically sound in expectation.** A1 mean slip is ≤ α for every rule, arm and grid, and A5 shows the (n+1) correction is free at this calibration size. But it is marginal: per-stratum exceedance occurs in a majority of re-splits (0.57–0.69 for the learned arm), and low-friction objects slip at about 2× α.
+5. **B2 reactive controllers are not viable under the v1 slip criterion** (slip 0.4632–0.9921). **B3 confirms that physical feedback converges to α**, with a transient overshoot to 0.1389 / 0.1368 in S1 / S3, but it cannot update H3 because the registered oracle reference is missing.
+
+
+=== v3 pass-2 audit (binding) ===
+
+# p2 CertGrip: Stage-14 analysis v3, pass 2 (area-chair audit of pass 1)
+
+Scope: `results/14_analysis_v3_pass1.md`, checked number by number against the JSON blocks and the run context in `docs/prompts/stage14_v3_user.txt` (v1 `crc_analysis.json` and `h3_analysis.json`, v3 `a3_holm.json`, `a_analysis.json`, `a_analysis_08e.json`, `b1_analysis*.json`, `b2_analysis.json`, `b3_analysis.json`, amendment 10 / addendum 10a).
+
+Every table value in §1 (A1–A7, B1–B3, the v1 anchors) matches the files at the stated precision. So do the derived quantities: the D re-derivations, 1.085 N, 1.003 N, 0.541 N, 0.083 N, 25.3 s, 3.1 %, 12.7 %, 0.5059, 4.6×, 2.2 and Δ 0.0142. The findings below are claims that go beyond, or disagree with, what those numbers support.
+
+---
+
+## Findings
+
+**1. "H2a … survives every v3 robustness row" (F1) / "H2a is robust" (Conclusion 1).**
+- *Evidence:* A4 is the H2a contrast itself (CertGrip-full σ 0.2 vs CSF-1), re-run inside sub-pools. On 08e it gives **inferiority** for μ ∧ amp (−0.3152 [−0.5231, −0.0172]) and for μ only (−0.1717 [−0.4275, −0.01539]). Not every v3 row survives. The analysis reports these rows itself in F2, but it does not reconcile them with F1.
+- *Supported rewrite:* "H2a holds at the pool level in every v3 row (CRC, empirical margin, refined grid, B3 windows), but it reverses to inferiority inside the 08e μ ∈ [0.5, 0.8] sub-pools (A4)."
+
+**2. "about 0.41–0.44 in online physical feedback" (Conclusion 1). Numeric error.**
+- *Evidence:* the B3 D_RE points span 0.3107 (S1 501–1000) to 0.4432 (S1 1–500). F1 itself quotes 0.3107–0.4432. The S1 transient window [0.2893, 0.3293] lies wholly outside 0.41–0.44.
+- *Supported rewrite:* "B3 gives D_RE between 0.3107 and 0.4432 across shifts and windows (0.4152–0.4432 outside the S1 transient)."
+
+**3. "CSF-1 … is over-conservative because the coarse grid cannot tighten" (F2, mechanism).**
+- *Evidence:* no sub-pool λ̂ index or edge flag is reported for A4. The only λ̂ data for CSF-1 on 08c are pool-level (indices 1 / 1 / 15 / 14), and none of them is at the edge. The files show only the outcome (sub-pool slip 0.03285 on 08c, 0.1004 on 08e), not the grid-resolution cause.
+- *Supported rewrite:* "Inside the sub-pool, CSF-1 runs far below α on 08c (slip 0.03285, RE 0.566) and near α on 08e (0.1004, RE 0.2633). This is consistent with grid coarseness, but no sub-pool λ̂ is reported to confirm it."
+
+**4. "the loss is driven by friction … a friction-blind constant with a fine enough margin grid beats the learned rule" (F2; Conclusion 3).**
+- *Evidence:* (a) Slip is not matched. On 08e, CSF-1 slips 0.1004 (above α) against full 0.08394, so part of CSF-1's RE advantage is bought with slip budget. The analysis's own check 7 flags this, but F2 and Conclusion 3 omit it. (b) The μ-only pool (cal 724) is the μ restriction without the amplitude restriction, so it contains the μ ∧ amp cells (cal 352). Its inferiority is not independent evidence. (c) No row tests "friction causes" directly.
+- *Supported rewrite:* "On 08e, CSF-1 has lower RE than CertGrip-full in the μ ∈ [0.5, 0.8] sub-pools (−0.3152 μ ∧ amp; −0.1717 μ only, which contains it) but not in the amplitude-only pool (+0.4929), at a higher CSF-1 slip (0.1004 vs 0.08394)."
+
+**5. "none of the 9 direct learned-against-plug-in contrasts …" and "the v3 rows push the point estimates towards zero or below" (F3); "decision-labelled v3 rows number … 34" (check 4).**
+- *Evidence:* the A6 CRC 08c row (`D_crc:full_vs_muhat`, 0.05692 [−0.03992, 0.1454]) is the v1 H2b row reproduced exactly, not a new v3 estimate. That leaves 8 new σ 0.2 contrasts and 33 new decision rows. Also, the LTT 08c point (0.05379) is essentially the v1 value (0.05692), not pushed towards zero.
+- *Supported rewrite:* "None of the 8 new σ 0.2 learned-vs-plug-in contrasts (A6 LTT and matched-slip on both grids, A6 CRC on 08e, three B1 variants) is shown. Their points range from −0.06463 to 0.05379, and 6 of the 8 are below the v1 H2b point of 0.05692."
+
+**6. "The v1 σ-curve superiority of learned over plug-in does not survive v3" (F4 headline).**
+- *Evidence:* σ 0.4: the v1 H2b row (vs the unshrunk CSF-μ̂ 0.4, 0.3182 [0.2287, 0.406]) is not re-estimated. B1 introduces a *different* comparator (shrunk plug-in), which beats the learned arm (−0.1395 [−0.1832, −0.01264]). σ 0.0 / 0.1: the analysis states itself that no D with CI** exists on 08e. Amendment 10 also says v3 does not re-decide v1 rows.
+- *Supported rewrite:* "v3 qualifies the v1 σ-curve rather than overturning it. At σ 0.4 a shrunk plug-in beats the learned arm (−0.1395, inferiority). At σ 0.0 / 0.1 the v1 comparator sat at λ̂ index 0 in D1–D2 on 08c, and on 08e its arm-level RE (0.208, 0.2915) is below the learned arm's (0.2397, 0.3212), with no contrast CI."
+
+**7. "The v1 σ 0.0 and 0.1 superiorities rest on a plug-in held at the 08c grid floor, and on 08e the plug-in has the lower arm-level RE" (Conclusion 2; F4(b) says "indicate").**
+- *Evidence:* the files show λ̂ index 0 in D1 and D2 and test slip 0.007143 / 0.002857 (σ 0.0) and 0.01571 / 0.007143 (σ 0.1) for that comparator. "Rest on" is a causal claim that would need an 08e D with CI**, and none exists. Conclusion 2 states as fact what F4(b) correctly hedged.
+- *Supported rewrite:* "The v1 σ 0.0 / 0.1 comparator was at the 08c grid edge in D1 and D2 (slip ≤ 0.01571 there), and its 08e arm-level RE is lower than the learned arm's, which suggests, without testing it, that those superiorities depend on the grid."
+
+**8. "With 500 calibration rows per stratum, the (n+1) correction is smaller than one grid step" (F6) / "A5 shows the (n+1) correction is free at this calibration size" (Conclusion 4); "the empirical λ̂ equals the CRC λ̂ for all arms on 08c".**
+- *Evidence:* on 08e, plug-in 0.2 changes operating point under the empirical margin (slip 0.075 → 0.07964; RE 0.4551 → 0.4409). So for that arm the correction is at least one grid step, and it costs 0.0142 RE. Also, no λ̂_emp indices are reported. λ̂ equality on 08c is inferred from identical test points, not read from the files.
+- *Supported rewrite:* "On 08c the empirical margin reproduces the CRC test points for all three arms, and on 08e for full and CSF-1. For plug-in 0.2 on 08e the correction costs 0.0142 RE (0.4551 vs 0.4409) at 0.075 vs 0.07964 slip."
+
+**9. "With r_safe = 0.8 μ̂ the detector rarely fires before slip has already counted" and "a purely reactive scheme fails by construction" (F7).**
+- *Evidence:* B2 reports only slip, RE, mean steps, cap share and F_end. It has no detection timing relative to slip onset. The data show that the probe variants trigger about 0.5 times per instance (0.4964, 0.5079) while 95–99 % of instances slip. That is consistent with the detector firing rarely, not with an established before/after ordering. "By construction" is also contradicted by REACT-blind c 0.75 reaching 0.3086 in D2: the data show failure at these settings, not an inevitability.
+- *Supported rewrite:* "The probe variants step up only about 0.5 times per instance yet slip in 0.9514–0.9921 of instances. Detection timing is not reported, so B2 shows that this registered design fails (slip ≥ 0.3086 in every arm and stratum), not why."
+
+**10. "The force-time benefit is real but modest" (F9); "the mean hold-force saving against CSF-1 is 1.085 N" presented as an H2a robustness row (F1).**
+- *Evidence:* A7 reports point means and medians only, with no CI** for any newton difference. "Real" (that is, distinguishable from zero) is therefore not supported by A7. The integrated-force and break-even numbers are reconstructions, as Limitations admits.
+- *Supported rewrite:* "On the single 08c test split, CertGrip-full's mean hold force is 1.085 N below CSF-1's (6.521 vs 7.606 N; medians 4.473 vs 5.476 N). No interval is reported."
+
+**11. "preload 13.08, squeeze 12.91 and ramp-down 1.439 N·s, which sum to 27.429 N·s" (§1.8, F9). Numeric error, minor.**
+- *Evidence:* the unrounded file values are 13.08 + 12.906776 + 1.438997 = 27.4258 N·s. 27.429 is the sum of the rounded parts, and the analysis quotes it to five significant figures as if exact. The downstream ratios change only in the 4th digit (25.28 s; 3.10 %; 12.73 %).
+- *Supported rewrite:* "The shared phases total 27.43 N·s (13.08 + 12.91 + 1.439, unrounded 27.4258)."
+
+**12. "The reported p = 0.0 means no draw crossed 0, so p < 0.0005" (check 3). Numeric error.**
+- *Evidence:* amendment A3 defines p = min(1, 2 · min(share ≤ 0, share ≥ 0)) over 2,000 draws. The smallest non-zero p is therefore 2 / 2,000 = 0.001, and every reported non-zero p is a multiple of 0.001 (0.01, 0.079, 0.101, 0.11, 0.119, …). The 1 / 2,000 resolution applies to the share, not to p.
+- *Supported rewrite:* "p = 0.0 means no draw fell on the far side of 0. Given the two-sided doubling, this implies p < 0.001, not p = 0."
+
+**13. "The RE agrees with the 08d label route; for example, S1 RE is 0.4746 (physical) against 0.4763 (label)" (F8).**
+- *Evidence:* the files do not say which window `RE_window` in `h3_analysis.json` covers, so the like-for-like window is not established. The B3 table in §1.11 also omits the 1001–2000 window, which the file reports (S1 CertGrip RE 0.4702, slip 0.1015; D_RE 0.4154). The claim holds for either window, but the specific pairing is asserted, not shown.
+- *Supported rewrite:* "For S1 the physical-feedback RE in the late windows (1001–2000: 0.4702; 1501–2000: 0.4746) is within 0.007 of the 08d label-route RE_window (0.4763), whose window the files do not state."
+
+**14. "B3 confirms that physical feedback converges to α" (Conclusion 5).**
+- *Evidence:* B3 is registered as descriptive. Its 95 % intervals cover orderings only, over fixed object pools, as the analysis's own check 9 notes. The late-window CIs contain 0.10 (S1 [0.0969, 0.1033]; S2 [0.0974, 0.1043]; S3 [0.098, 0.1055]), which is consistency, not confirmation.
+- *Supported rewrite:* "In B3 the 1501–2000 CertGrip slip is 0.1001 / 0.1008 / 0.1018 (S1 / S2 / S3), with ordering-only intervals that contain α, which is consistent with convergence to α."
+
+**15. "Two of the decisive v3 reversals have CI bounds close to 0 … Under any Holm-type adjustment across these 34 rows, they are at risk" (check 4).**
+- *Evidence:* a third reversal is equally close to 0 and is omitted: A4 08e μ-only, upper bound −0.01539. No p-values are computed for any v3 row, so "at risk" is not quantified (and the 34 includes the v1 H2b row; see finding 5).
+- *Supported rewrite:* "Three v3 inferiority rows have upper CI** bounds within 0.02 of 0 (A4 08e μ ∧ amp −0.0172, μ-only −0.01539; B1 σ 0.4 −0.01264). v3 rows carry no multiplicity-adjusted p-values, so whether they survive adjustment is not known."
+
+---
+
+## Verdict
+
+- 15 findings. Three are numeric errors (#2 the B3 range in Conclusion 1; #11 the phase total 27.429 vs 27.4258; #12 the p-value bound). One is a labelling and count error (#5: a v1 row counted as a v3 contrast). The remaining 11 are causal or strength-of-claim overreach: unsupported mechanisms (#3, #9), headline claims contradicted by rows reported elsewhere in the same analysis (#1, #6, #8), and hedges dropped between Findings and Conclusion (#7, #14).
+- **No fabricated number was found.** Every quoted value is present in the files at the stated precision or is a correct derivation from them. The one inexact derived value (#11) comes from summing rounded parts, not from invention. The most consequential problems are #1 and #2, because Conclusion 1 ("H2a is robust", "0.41–0.44") is the analysis's headline and is directly contradicted by A4 08e and by the B3 S1 transient window.
+
+
+=== v2 merged analysis (results/14_analysis_v2.md) ===
+
+# p2 · Stage 14 RESULT_ANALYSIS [v2] — merged (run 44, 2026-11-10)
+
+Pass 1 (fresh opus subagent, template verbatim): `14_analysis_v2_pass1.md`. Pass 2 (fresh opus subagent, area-chair
+prompt verbatim): `14_analysis_v2_pass2.md`, 17 findings, 1 numeric (truncation of 0.0976 / 0.0936 to 0.0975 / 0.0935),
+no fabricated number. **Main-session adjudication: all 17 accepted.** The pass-2 rewrites are binding where they
+differ from pass 1. Statements of record for stages 15–19 (all v2 rows secondary / descriptive):
+
+1. vs CSF-1, CertGrip-full σ 0.2 is superior on every v2 route (matched slip 0.10, LTT δ 0.10, CRC) on both the 08c
+   and 08e grids; these re-use the seed-0 replays, so they are route / grid sensitivity rows, not new replication
+   (the v1 per-seed rows remain the seed evidence).
+2. CertGrip-full vs CSF-μ̂ (the same noisy onset probe in the physics formula): no v2 contrast shows a difference
+   either way and no equivalence test was run; say "no demonstrated gain of the learned model", not "matches".
+   v1 H2b (σ 0.2) was not shown; the v1 08c rows show CertGrip superior to CSF-μ̂ at σ 0.0 / 0.1 / 0.4, but on the
+   08c grids CSF-μ̂ sits at grid index 0 (biased against it, 08e), so those rows are not evidence of a learned gain.
+3. H5 (CSF-proxy): superiority at σ_p 0.8 and 0.4; at σ_p 0.2 the value of record is the edge-rule row
+   D −0.0299 [−0.1903, 0.0816] (not shown). The registered prediction's direction held; wording "held as predicted
+   (secondary)", not "confirmed". No proxy-vs-CSF-1 contrast was computed, so no claim that a poor prior is worse
+   than none beyond the point RE values with their slip levels.
+4. Onset-only vs CertGrip-full: no direct v2 test; v1 H4e interval [−0.1233, 0.0508] → "not distinguishable".
+5. B2: with one uniform margin, per-stratum test slip is far from α in some strata at every m tested (at m 1.0,
+   D1 0.0414 / D2 0.0228 are below α while D3 / D4 are far above); calibration sets stratum-specific margins.
+   Descriptive.
+6. B3: window slip under physical feedback stayed between 0.0936 and 0.1052 (means over 5 orderings) and D_RE
+   0.41–0.44; steps 1–500 are pre-shift. Descriptive, 5 orderings, no interval; not comparable one-to-one with the
+   v1 label-rule audit.
+
+---
+
+## Pass 1 (superseded where items 1–6 above differ)
+
+# p2 (CertGrip) · Stage 14 [v2] analysis, pass 1
+
+Scope: every v2 row is **secondary** under amendment 09. The v1 primary verdicts (H2a superiority, H2b not confirmed,
+H3 inconclusive on S1 / S2 / S3) are quoted below and are **not re-decided**.
+
+Number convention: every value is copied from the JSON in the prompt. Long decimals are **truncated** (not rounded) to
+4 decimals, so each printed value is a prefix of the stored value. No new arithmetic (differences, ratios) is
+reported. When a comparison is made, both source values are given side by side.
+
+Common settings (from the files): α = 0.1, δ = 0.1, matched slip = 0.1, draws = 2000, n_cal_instances = 2000,
+n_test_instances = 2800, CI\*\* = 97.5 % object-cluster bootstrap with λ̂ refitted inside each draw.
+
+---
+
+## 1. Metrics Summary
+
+### 1.1 v1 reference read-outs (results/v1/crc_analysis.json, 08c CRC route)
+
+| Arm | lam_idx D1/D2/D3/D4 | test slip_phys | slip_label | RE_mid | RE_mid_CI |
+|---|---|---|---|---|---|
+| full_rd@0.2#0 (CertGrip) | 10/10/11/10 | 0.0828 | 0.0846 | 0.4567 | [0.4079, 0.5033] |
+| P_onset@0.2#0 (onset-only) | 10/10/11/10 | 0.0857 | 0.0896 | 0.4335 | [0.3982, 0.4832] |
+| CSF-muhat@0.2 | 0/0/14/12 | 0.0657 | 0.0678 | 0.4842 | [0.4435, 0.5219] |
+| CSF-1 | 1/1/15/14 | 0.1021 | 0.1035 | 0.7831 | [0.6967, 0.8582] |
+
+| v1 contrast | D mid | CI\*\* mid | decision |
+|---|---|---|---|
+| H2a (full_rd@0.2#0 vs CSF-1) | 0.4168 | [0.3483, 0.4777] | superiority |
+| H2b (full_rd@0.2#0 vs CSF-muhat@0.2) | 0.0569 | [-0.0399, 0.1453] | not confirmed |
+| H4e (full_rd@0.2#0 vs P_onset@0.2#0) | -0.0534 | [-0.1233, 0.0508] | not confirmed |
+
+v1 H3 (results/v1/h3_analysis.json): H3_primary S1 / S2 / S3 = inconclusive / inconclusive / inconclusive
+(R_E S1 0.8778 [0.7404, 1.1203]; S2 1.1738 [1.0233, 1.4283]; S3 0.9629 [0.8363, 1.1449]).
+
+### 1.2 A1 — risk–efficiency frontier, matched test slip 0.1
+
+| Arm | RE_match 08c | CI\*\* 08c | RE_match 08e | CI\*\* 08e |
+|---|---|---|---|---|
+| full_rd@0.2#0 | 0.4290 | [0.4099, 0.4559] | 0.4292 | [0.4074, 0.4521] |
+| P_onset@0.2#0 | 0.4153 | [0.3968, 0.4374] | 0.4173 | [0.3967, 0.4392] |
+| CSF-muhat@0.2 | 0.4190 | [0.4005, 0.4410] | 0.4045 | [0.3891, 0.4369] |
+| CSF-1 | 0.7890 | [0.7329, 0.8422] | 0.7769 | [0.7304, 0.8362] |
+
+| D_match (arm vs CSF-1) | 08c D | 08c CI\*\* | 08e D | 08e CI\*\* | decision (both) |
+|---|---|---|---|---|---|
+| full_rd@0.2#0 | 0.4563 | [0.4095, 0.4896] | 0.4475 | [0.4110, 0.4879] | superiority |
+| P_onset@0.2#0 | 0.4735 | [0.4309, 0.5041] | 0.4628 | [0.4273, 0.5013] | superiority |
+| CSF-muhat@0.2 | 0.4689 | [0.4173, 0.5096] | 0.4793 | [0.4240, 0.5189] | superiority |
+
+Selected frontier points (08c grids, test slip_phys / RE_mid):
+
+| k | full_rd@0.2#0 | P_onset@0.2#0 | CSF-muhat@0.2 | CSF-1 |
+|---|---|---|---|---|
+| -4 | 0.2660 / 0.2309 | 0.2785 / 0.2113 | 0.1417 / 0.3654 | 0.1710 / 0.6036 |
+| -1 | 0.12 / 0.3966 | 0.1321 / 0.3744 | 0.0778 / 0.4526 | 0.1292 / 0.7096 |
+| 0 | 0.0828 / 0.4567 | 0.0857 / 0.4335 | 0.0657 / 0.4842 | 0.1021 / 0.7831 |
+| +1 | 0.0567 / 0.5193 | 0.0567 / 0.4952 | 0.045 / 0.5481 | 0.0742 / 0.8598 |
+| +4 | 0.0135 / 0.7239 | 0.0157 / 0.6965 | 0.0171 / 0.7565 | 0.01 / 1.1102 |
+
+On the 08e grids the CSF-muhat@0.2 frontier at k = -4 reaches slip 0.2414 (RE 0.2399), against 0.1417 (RE 0.3654) on
+the 08c grids, consistent with the 08c CSF-muhat λ̂ sitting at grid index 0 in D1 / D2 (clipping blocks k < 0 there).
+
+### 1.3 A2 — Learn-then-Test (δ = 0.1) high-probability certificate
+
+| Arm | 08c λ̂_LTT D1/D2/D3/D4 | 08c slip_phys | 08c RE_mid | 08e λ̂_LTT | 08e slip_phys | 08e RE_mid |
+|---|---|---|---|---|---|---|
+| full_rd@0.2#0 | 10/10/12/11 | 0.0696 | 0.4894 | 21/21/22/21 | 0.0707 | 0.4878 |
+| P_onset@0.2#0 | 11/10/12/11 | 0.0639 | 0.4807 | 21/21/22/21 | 0.0742 | 0.4643 |
+| CSF-muhat@0.2 | 0/0/15/13 | 0.0528 | 0.5172 | 20/22/22/21 | 0.0653 | 0.4857 |
+| CSF-1 | 2/1/16/14 | 0.0907 | 0.8216 | 21/21/21/22 | 0.0910 | 0.8150 |
+
+No stratum was flagged (every LTT flag is `false`).
+
+| D_ltt (arm vs CSF-1) | 08c D | 08c CI\*\* | 08e D | 08e CI\*\* | decision (both) |
+|---|---|---|---|---|---|
+| full_rd@0.2#0 | 0.4042 | [0.3361, 0.4561] | 0.4014 | [0.3390, 0.4594] | superiority |
+| P_onset@0.2#0 | 0.4148 | [0.3619, 0.4737] | 0.4303 | [0.3726, 0.4856] | superiority |
+| CSF-muhat@0.2 | 0.3704 | [0.2952, 0.4425] | 0.4039 | [0.3111, 0.4630] | superiority |
+
+### 1.4 A3 — extra CRC-route contrasts vs CSF-1
+
+| D_crc (arm vs CSF-1) | 08c D | 08c CI\*\* | 08e D | 08e CI\*\* | decision (both) |
+|---|---|---|---|---|---|
+| full_rd@0.2#0 | 0.4168 | [0.3483, 0.4777] | 0.4289 | [0.3576, 0.4770] | superiority |
+| P_onset@0.2#0 | 0.4463 | [0.3776, 0.4905] | 0.4411 | [0.3845, 0.4942] | superiority |
+| CSF-muhat@0.2 | 0.3816 | [0.2965, 0.4504] | 0.4148 | [0.3321, 0.4889] | superiority |
+
+### 1.5 B1 — H5, CertGrip-full σ 0.2 vs CSF-proxy σ_p
+
+| Read-out | D mid | CI\*\* mid | D lo / hi | decision_09 |
+|---|---|---|---|---|
+| H5@0.2 (08c grid) | 0.0514 | [-0.0673, 0.1659] | 0.0510 / 0.0518 | not shown |
+| H5@0.2_08e (edge rule) | -0.0299 | [-0.1903, 0.0815] | -0.0297 / -0.0301 | not shown |
+| H5@0.4 | 0.5042 | [0.4361, 0.5635] | 0.5024 / 0.5061 | superiority |
+| H5@0.8 | 0.8360 | [0.8136, 0.8572] | 0.8350 / 0.8370 | superiority |
+
+| CSF-proxy arm | lam_idx | slip_phys | RE_mid | RE_mid_CI |
+|---|---|---|---|---|
+| σ_p 0.2 (08c) | 0/0/13/12 (grid edge D1, D2) | 0.0617 | 0.4815 | [0.4427, 0.5219] |
+| σ_p 0.2 (08e edge rule) | 20/21/20/20 | 0.0825 | 0.4312 | [0.3905, 0.4758] |
+| σ_p 0.4 | 1/1/15/13 | 0.0910 | 0.9212 | [0.8422, 1.0023] |
+| σ_p 0.8 | 2/2/14/13 | 0.0971 | 2.7858 | [2.5273, 3.0700] |
+
+Target in the edge-rule run (08e recipe): full_rd@0.2#0 lam_idx 20/20/21/21, slip_phys 0.09, RE_mid 0.4441
+[0.4063, 0.4973]. After the edge rule no arm is at a grid edge (`grid_edge_lam_idx` empty).
+
+### 1.6 B2 — probe + fixed margin, no calibration (test split)
+
+| m | slip_phys | RE_mid | D1 | D2 | D3 | D4 |
+|---|---|---|---|---|---|---|
+| 0.0 | 0.9582 | -0.3829 | 0.9271 | 0.9128 | 0.9957 | 0.9971 |
+| 0.25 | 0.8257 | -0.2286 | 0.7114 | 0.6257 | 0.9771 | 0.9885 |
+| 0.5 | 0.6182 | -0.0744 | 0.3685 | 0.2657 | 0.9114 | 0.9271 |
+| 1.0 | 0.335 | 0.2341 | 0.0414 | 0.0228 | 0.6571 | 0.6185 |
+
+Calibration-split values track the test values (e.g. m = 1.0: cal slip 0.3395, RE 0.2472).
+
+### 1.7 B3 — online OQT with physical slip feedback (5 orderings, descriptive)
+
+| Shift / arm | window | phys. feedback slip mean [min, max] | phys. RE_mid mean | label (08d) slip mean | label RE_mid mean |
+|---|---|---|---|---|---|
+| S1 CertGrip | 1-500 | 0.0984 [0.092, 0.104] | 0.4273 | 0.1048 | 0.4223 |
+| S1 CertGrip | 1001-2000 | 0.1002 [0.096, 0.105] | 0.4633 | 0.1008 | 0.4728 |
+| S1 CertGrip | 1501-2000 | 0.1032 [0.1, 0.106] | 0.4626 | 0.1012 | 0.4722 |
+| S1 CSF1 | 1-500 | 0.1052 [0.1, 0.11] | 0.7614 | 0.1096 | 0.7478 |
+| S1 CSF1 | 1001-2000 | 0.1016 [0.096, 0.105] | 0.7914 | 0.1014 | 0.7946 |
+| S1 CSF1 | 1501-2000 | 0.0988 [0.082, 0.11] | 0.7997 | 0.0984 | 0.8042 |
+| S3 CertGrip | 1-500 | 0.0975 [0.092, 0.102] | 0.4191 | 0.1044 | 0.4150 |
+| S3 CertGrip | 1001-2000 | 0.101 [0.095, 0.106] | 0.5127 | 0.1012 | 0.5145 |
+| S3 CertGrip | 1501-2000 | 0.0992 [0.09, 0.112] | 0.5134 | 0.1008 | 0.5150 |
+| S3 CSF1 | 1-500 | 0.1032 [0.098, 0.106] | 0.7536 | 0.1080 | 0.7418 |
+| S3 CSF1 | 1001-2000 | 0.101 [0.094, 0.11] | 0.8719 | 0.1006 | 0.8796 |
+| S3 CSF1 | 1501-2000 | 0.0935 [0.088, 0.1] | 0.8725 | 0.094 | 0.8801 |
+
+D_RE = 1 − RE_CertGrip / RE_CSF1 (physical feedback): S1 0.4387 / 0.4146 / 0.4215; S3 0.4438 / 0.4119 / 0.4115
+for windows 1-500 / 1001-2000 / 1501-2000.
+
+---
+
+## 2. Comparative Findings
+
+1. **CertGrip vs the friction-blind baseline (CSF-1) is robust across every v2 route.** The v1 H2a superiority
+   (D 0.4168, CI\*\* [0.3483, 0.4777]) is reproduced by the matched-slip frontier (0.4563 on 08c, 0.4475 on 08e), by
+   the high-probability LTT certificate (0.4042 / 0.4014) and by the 08e CRC route (0.4289). Every CI\*\* lower bound
+   is above 0; the smallest across all A rows is 0.2952 (D_ltt CSF-muhat, 08c).
+
+2. **CertGrip vs friction-informed baselines: no advantage is shown, in v1 or v2.** v1 H2b was not confirmed
+   (D 0.0569, CI\*\* [-0.0399, 0.1453]). In v2, at matched slip 0.1 the CSF-muhat@0.2 RE (0.4190 on 08c, 0.4045 on 08e)
+   is at or below the CertGrip RE (0.4290 / 0.4292), with overlapping intervals, and D_match vs CSF-1 is 0.4689 /
+   0.4793 for CSF-muhat against 0.4563 / 0.4475 for CertGrip. B1 tells the same story with a non-tactile friction
+   proxy: at σ_p 0.2 the H5 contrast is not shown on either grid (0.0514, CI\*\* [-0.0673, 0.1659]; edge rule -0.0299,
+   CI\*\* [-0.1903, 0.0815]). No direct matched-slip or LTT contrast CertGrip vs CSF-muhat was computed, so this is
+   a reading of separate intervals, not a test.
+
+3. **The v1 H2b point comparison mixed slip levels.** At k = 0 on the 08c grids CertGrip ran at test slip 0.0828 and
+   CSF-muhat@0.2 at 0.0657 (λ̂ at grid index 0 in D1 / D2). Matching slip removes the apparent 0.0569 CertGrip edge:
+   the two RE_match values are close (0.4290 vs 0.4190) with overlapping CI\*\* ([0.4099, 0.4559] vs [0.4005, 0.4410]).
+
+4. **Onset-only matches or beats the full tactile pipeline.** v1 H4e was not confirmed (D -0.0534). In v2 the onset-only
+   arm has RE_match 0.4153 / 0.4173 against 0.4290 / 0.4292 for CertGrip-full, and its D vs CSF-1 is the larger one
+   on every route (D_match 0.4735 / 0.4628, D_ltt 0.4148 / 0.4303, D_crc 0.4463 / 0.4411). The extra tactile
+   features beyond onset carry no measurable efficiency gain here.
+
+5. **H5 prediction confirmed in direction.** Registered prediction: superiority at σ_p 0.8, margin shrinking as σ_p
+   falls. Observed D: 0.8360 (σ_p 0.8) → 0.5042 (σ_p 0.4) → 0.0514 (σ_p 0.2). The CI\*\* first includes 0 at
+   **σ_p 0.2**, on both the 08c grid and the edge-rule grid. Note that the σ_p 0.4 proxy (RE 0.9212) and σ_p 0.8 proxy
+   (RE 2.7858) are less efficient than CSF-1 itself (RE 0.7831): a poor friction prior is worse than none.
+
+6. **Cost of the high-probability certificate is modest.** Moving CertGrip from CRC (slip 0.0828, RE 0.4567) to LTT
+   (slip 0.0696, RE 0.4894) lowers test slip and raises force; D vs CSF-1 goes from 0.4168 to 0.4042 and stays
+   superiority.
+
+7. **Calibration is necessary (B2).** No fixed margin brings all strata to α = 0.1: at m = 1.0 overall slip is 0.335,
+   with D1 / D2 already below α (0.0414 / 0.0228) while D3 / D4 stay at 0.6571 / 0.6185. For m ≤ 0.5 RE is negative
+   (-0.3829, -0.2286, -0.0744), i.e. under-gripping. Calibrated arms reach slip 0.0828 at RE 0.4567 (CertGrip CRC).
+
+8. **Online physical feedback holds slip near α (B3).** Window slip means under physical feedback lie between 0.0935
+   and 0.1052 for both arms and both shifts; per-ordering values span 0.082 to 0.112. Physical and label-rule
+   feedback give close values (e.g. S1 CertGrip 1001-2000: 0.1002 vs 0.1008 slip, 0.4633 vs 0.4728 RE), in line
+   with the v1 audit, where slip_direct and slip_label differ by Delta between -0.008 and 0.0. CertGrip keeps a
+   D_RE vs CSF1 of 0.4115 to 0.4438 in every window. This is the online analogue of H2a, not a test of v1 H3, which
+   used a different read-out (R_E, 20 orderings).
+
+---
+
+## 3. Statistical Checks
+
+- **Reproduction / internal consistency (pass).** D_crc:full_rd@0.2#0 on 08c (0.4168210498118554, CI\*\*
+  [0.3483925859894733, 0.4777919839082863]) equals v1 H2a exactly. The B1 file's full_rd@0.2#0 arm equals the v1 arm
+  (lam_idx 10/10/11/10, slip_phys 0.08285714285714285, RE_mid 0.4567326634839066). Frontier k = 0 points equal the
+  CRC arms for all four arms on 08c. On 08e the full_rd k = 0 point (slip 0.09, RE 0.44415834262450105) equals the
+  full_rd arm of b_analysis_edge.json.
+- **Bootstrap validity.** Every A-part CI\*\* has n_valid = 2000 of 2000 draws, so the matched-slip interpolation
+  never failed inside a draw.
+- **lo / hi sensitivity (F\* bounds).** For every H5 row the lo and hi D values bracket mid closely
+  (e.g. H5@0.4: lo 0.5024 / mid 0.5042 / hi 0.5061), and the lo and hi CI\*\* give the same decision as mid.
+- **Grid edges.** CSF-muhat@0.2 on 08c has λ̂ index 0 in D1 / D2 (CRC and LTT); its 08c frontier is clipped for k < 0,
+  so the 08e rows are the fair ones for that arm. CSF-proxy@0.2 hit index 0 in D1 / D2 and was re-run under the
+  registered edge rule; afterwards no edge remains. `at_max` is false for every stratum of every arm.
+- **Risk control at the operating point.** CRC test slip: CertGrip 0.0828, onset-only 0.0857, CSF-muhat 0.0657,
+  CSF-1 0.1021 (slightly above α = 0.1; label slip 0.1035). LTT test slip: 0.0696 / 0.0639 / 0.0528 / 0.0907 on 08c,
+  all ≤ α.
+- **Multiplicity.** All v2 rows are secondary; no correction across the A, B1 rows was registered, and the 97.5 %
+  intervals are the only error control. Read the decisions as descriptive support, not as new confirmatory claims.
+- **B3** has no registered interval or test; only means and min / max over 5 orderings are reported.
+
+---
+
+## 4. Limitations
+
+- Simulation only (MuJoCo 4.0.0); the onset-noise σ is not grounded on hardware (amendment C).
+- All v2 results are secondary; they cannot overturn v1 H2b (not confirmed) or v1 H3 (inconclusive).
+- No direct CertGrip vs CSF-muhat contrast at matched slip or under LTT was registered or computed; the "no tactile
+  advantage" reading rests on overlapping separate intervals plus v1 H2b and H5@0.2.
+- Matched slip uses one target (0.1) by linear interpolation between adjacent k; shape of the frontier away from that
+  point is only described.
+- CSF-proxy is an oracle-side construction (uses true μ through a noisy proxy), so H5 calibrates "how good a friction
+  prior must be" rather than comparing against a deployable estimator.
+- LTT guarantees hold per stratum at δ = 0.1, not family-wise across strata.
+- B2 is one replay per instance per margin, with no interval.
+- B3: 5 orderings (v1 H3 used 20), S1 and S3 only, no interval; window slip ranges overlap α, so "holds α" is a
+  descriptive statement.
+- 08c and 08e grids give slightly different point values (e.g. CSF-muhat RE_match 0.4190 vs 0.4045); conclusions are
+  stated only where both agree.
+
+---
+
+## 5. Conclusion
+
+- The efficiency gain of calibrated tactile grip selection over a friction-blind CSF-1 is robust: superiority on the
+  CRC, matched-slip and LTT routes, on both grid recipes (D from 0.4014 to 0.4563 for CertGrip-full).
+- The gain is not specific to tactile sensing: a friction estimate of σ 0.2 quality (CSF-muhat, or the non-tactile
+  CSF-proxy at σ_p 0.2) matches CertGrip at matched slip (RE 0.4190 vs 0.4290) and H5@0.2 is not shown
+  (CI\*\* [-0.0673, 0.1659]; edge rule [-0.1903, 0.0815]). CertGrip is superior only to proxies of σ_p 0.4 or worse
+  (D 0.5042, 0.8360).
+- Onset-only is as efficient as the full pipeline (RE_match 0.4153 vs 0.4290).
+- Calibration itself is what delivers per-stratum risk control: fixed margins miss α in every stratum
+  (B2), while CRC / LTT and the online physical-feedback tracker keep slip near 0.1.
+- Recommended framing for the paper: CertGrip as a calibration layer that turns any friction signal (tactile onset
+  included) into a slip-rate guarantee, not as evidence that tactile features beat a good friction prior.
+
+
+---
+
+## Pass 2 audit (binding)
+
+# p2 (CertGrip) · Stage 14 [v2] analysis, pass 2: area-chair audit of pass 1
+
+Source checked: `results/14_analysis_v2_pass1.md`, against the JSON and amendment 09 in
+`docs/prompts/stage14_v2_user.txt` (v1 `crc_analysis.json`, `h3_analysis.json`; v2 `a_analysis.json`,
+`a_analysis_08e.json`, `b_analysis.json`, `b_analysis_edge.json`, `b3_analysis.json`; `docs/09_amendment_v2.md`;
+B3 plan).
+
+## Number audit (summary)
+
+I checked every table cell and every number in the text against the JSON. Every value is a correct 4-decimal
+truncation of the stored value, with two exceptions caused by floating-point artifacts (finding 16). No value is
+mistranscribed. The problems are in interpretation: claims that go beyond the numbers, routes reported selectively,
+and secondary or descriptive rows described in confirmatory language.
+
+## Findings
+
+Ordered by severity. Each finding gives (a) the unsupported claim, (b) the contradicting or missing evidence, and
+(c) a rewrite that the numbers support.
+
+### 1. Section 5, bullet 2: "The gain is not specific to tactile sensing: a friction estimate of σ 0.2 quality (CSF-muhat, or the non-tactile CSF-proxy at σ_p 0.2) matches CertGrip"
+- **Evidence.** The files never describe CSF-muhat as non-tactile. It is indexed by the onset-noise σ, which is the tactile
+  noise parameter shared with CertGrip ("CSF-μ̂ σ 0.2"), and amendment B2 calls its force the "Probe" force. Only CSF-proxy
+  is described as non-tactile. Also, "σ 0.2 quality" treats two different noise models as one scale: σ is onset-detection
+  noise, while σ_p is the log-normal noise on μ̃ = clip(μ·exp(σ_p ε_p), 0.1, 3.0). For the non-tactile arm, the only
+  evidence is H5@0.2 = not shown (registered edge-rule row D −0.0299, CI\*\* [−0.1903, 0.0815]). That is a failure to show
+  a difference. It does not show that the two arms are equivalent.
+- **Rewrite.** "Against a non-tactile friction proxy with σ_p 0.2, CertGrip shows no efficiency advantage (H5@0.2, edge
+  rule: D −0.0299, CI\*\* [−0.1903, 0.0815], not shown). No equivalence test was registered, so this does not establish that
+  the two are equally efficient."
+
+### 2. Section 2.2: "CertGrip vs friction-informed baselines: no advantage is shown, in v1 or v2"
+- **Evidence.** v1 does show an advantage over CSF-muhat at the other σ levels. In `crc_analysis.json`, H2b_sigma@0.0 has
+  D 0.2460, CI\*\* [0.1617, 0.2952]; H2b_sigma@0.1 has D 0.1071, CI\*\* [0.0333, 0.1919]; and H2b_sigma@0.4 has D 0.3181,
+  CI\*\* [0.2286, 0.4059]. All three are labelled superiority. Only σ 0.2 (the primary row, plus per-seed rows 1–4) is
+  not confirmed.
+- **Rewrite.** "At onset noise σ 0.2, v1 H2b was not confirmed (D 0.0569, CI\*\* [−0.0399, 0.1453]) and no v2 row shows
+  a CertGrip advantage over CSF-muhat@0.2. v1 did label CertGrip superior to CSF-muhat at the same σ for σ 0.0, 0.1
+  and 0.4 (σ-curve rows)."
+
+### 3. Section 2.2 and Section 5, bullet 2: the CertGrip vs CSF-muhat reading cites only the matched-slip route
+- **Evidence.** On the other two A routes, the point values favour CertGrip:
+  - LTT 08c: RE 0.4894 for CertGrip vs 0.5172 for CSF-muhat; D_ltt 0.4042 vs 0.3704.
+  - LTT 08e: RE 0.4878 vs 0.4857 (about level).
+  - CRC: D_crc 0.4168 / 0.4289 for CertGrip vs 0.3816 / 0.4148 for CSF-muhat.
+
+  Section 2.2 leaves all of these out, and they weaken "matches / at or below".
+- **Rewrite.** "CSF-muhat@0.2's D vs CSF-1 is larger than CertGrip's on the matched-slip route (0.4689 / 0.4793 vs 0.4563 /
+  0.4475) but smaller on the LTT (0.3704 / 0.4039 vs 0.4042 / 0.4014) and CRC (0.3816 / 0.4148 vs 0.4168 / 0.4289)
+  routes. No direct contrast was computed, so the ordering is unresolved."
+
+### 4. Section 5, bullet 2: "CSF-muhat ... matches CertGrip at matched slip (RE 0.4190 vs 0.4290)"
+- **Evidence.** "Matches" is a claim of equivalence, but no equivalence margin or test was registered. No paired CertGrip
+  vs CSF-muhat contrast at matched slip was computed (pass 1, Section 4, says so itself). Overlapping marginal intervals
+  of paired arms say little about their difference. The value also comes from the 08c grid, which pass 1 and the run
+  context both call unfair for CSF-muhat.
+- **Rewrite.** "At matched slip 0.1 the CSF-muhat@0.2 RE (08e 0.4045, CI\*\* [0.3891, 0.4369]) and the CertGrip RE (08e
+  0.4292, CI\*\* [0.4074, 0.4521]) have overlapping intervals. No direct contrast was computed."
+
+### 5. Section 2.3: "Matching slip removes the apparent 0.0569 CertGrip edge"
+- **Evidence.** There are three problems:
+  - (a) v1 never showed an edge. H2b CI\*\* [−0.0399, 0.1453] already contains 0, so there was nothing for matching to
+    remove.
+  - (b) The support is 08c-only (0.4290 vs 0.4190). For CSF-muhat, the 08c matched point falls between k = −3 (slip
+    0.1192) and k = −2 (slip 0.0975). That is exactly the region where D1 and D2 are clipped at grid index 0, which pass 1
+    itself says makes the 08e rows the fair ones.
+  - (c) No matched contrast or interval exists for this pair.
+- **Rewrite.** "The v1 H2b point comparison was made at different test slips (CertGrip 0.0828, CSF-muhat@0.2 0.0657).
+  At matched slip 0.1 on the fair 08e grids, the CSF-muhat RE (0.4045) is below the CertGrip RE (0.4292) with overlapping
+  CI\*\*, which is consistent with the v1 not-confirmed verdict."
+
+### 6. Section 4, last bullet: "conclusions are stated only where both [08c and 08e] agree"
+- **Evidence.** This rule is broken in three places:
+  - Section 2.3 uses 08c values only.
+  - Section 5, bullet 2 quotes 08c RE_match only (0.4190 vs 0.4290).
+  - Section 2.5 builds the H5 sequence on the 08c σ_p 0.2 row (D +0.0514), while the edge-rule row has the opposite sign
+    (−0.0299).
+- **Rewrite.** "08c and 08e give slightly different point values (e.g. CSF-muhat RE_match 0.4190 vs 0.4045). For
+  CSF-muhat and CSF-proxy@0.2, which sit at a grid edge on 08c, only the 08e / edge-rule values are used."
+
+### 7. Section 2.5: "H5 prediction confirmed in direction. Observed D: 0.8360 → 0.5042 → 0.0514 (σ_p 0.2)"
+- **Evidence.** Amendment B1 says that when a stratum's λ̂ lands on grid index 0 or 19, the 08e recipe "is used for that
+  arm". CSF-proxy@0.2 hit index 0 in D1 and D2, so the registered σ_p 0.2 read-out is H5@0.2_08e: D −0.0299, CI\*\*
+  [−0.1903, 0.0815]. The 08c value 0.0514 is superseded. "Confirmed" is confirmatory language for a row that amendment 09
+  makes secondary, which pass 1, Section 3, Multiplicity, also says. The same applies to "CertGrip is superior only to
+  proxies of σ_p 0.4 or worse" (Section 5): "or worse" extrapolates beyond the largest σ_p tested (0.8).
+- **Rewrite.** "Consistent with the registered (secondary) prediction, D falls from 0.8360 (σ_p 0.8) to 0.5042 (σ_p
+  0.4) to −0.0299 (σ_p 0.2, edge-rule grid). The CI\*\* first includes 0 at σ_p 0.2."
+
+### 8. Section 2.5: "the σ_p 0.4 proxy (RE 0.9212) and σ_p 0.8 proxy (RE 2.7858) are less efficient than CSF-1 itself (RE 0.7831): a poor friction prior is worse than none"
+- **Evidence.**
+  - No proxy-vs-CSF-1 contrast was registered or computed.
+  - At σ_p 0.4 the RE_mid_CI [0.8422, 1.0023] overlaps CSF-1's [0.6967, 0.8582].
+  - The arms run at different test slips (0.0910 / 0.0971 vs 0.1021). Pass 1 itself (Section 2.3) flags this mixed-slip
+    confound.
+  - Only σ_p 0.8 is clearly separated ([2.5273, 3.0700]).
+- **Rewrite.** "The σ_p 0.8 proxy has a much higher RE than CSF-1 (2.7858, CI [2.5273, 3.0700] vs 0.7831, CI [0.6967,
+  0.8582]). The σ_p 0.4 proxy's RE (0.9212) has an interval that overlaps CSF-1's. Neither comparison was a registered
+  contrast."
+
+### 9. Section 2.4 and Section 5, bullet 3: "Onset-only matches or beats the full tactile pipeline"; "The extra tactile features beyond onset carry no measurable efficiency gain"; "Onset-only is as efficient as the full pipeline"
+- **Evidence.** The only direct test is v1 H4e, which was not confirmed (D −0.0534, CI\*\* [−0.1233, 0.0508]). An interval
+  that wide rules out neither "beats" nor a CertGrip advantage of up to 0.0508. The v2 statements come from comparing
+  separate D-vs-CSF-1 point values. No v2 onset-only vs full contrast exists, and there is no equivalence test.
+- **Rewrite.** "No efficiency advantage of the full pipeline over onset-only is shown. v1 H4e was not confirmed (D −0.0534,
+  CI\*\* [−0.1233, 0.0508]), and onset-only's point D vs CSF-1 is the larger one on all six v2 route × grid rows (e.g.
+  D_match 0.4735 vs 0.4563)."
+
+### 10. Section 2.1: "CertGrip vs ... CSF-1 is robust across every v2 route. The v1 H2a superiority ... is reproduced by ..."
+- **Evidence.** The 08c D_crc (0.4168210498118554) is the same calculation as v1 H2a. It is an internal-consistency check,
+  not a reproduction. All v2 A routes re-analyse the same seed-0 replays and the same test split, so they show robustness
+  to the analysis route, not replication. The A rows are secondary. The only independent replication available is the v1
+  per-seed H2a rows: seeds 1–4 give D 0.4343, 0.4196, 0.3932 and 0.4493, all superiority. Pass 1 does not cite them.
+- **Rewrite.** "Across the CRC, matched-slip and LTT routes on both grid recipes (secondary), D(CertGrip vs CSF-1) ranges
+  from 0.4014 to 0.4563, with every CI\*\* lower bound above 0 (smallest 0.3361, D_ltt 08c). These rows re-analyse the v1
+  seed-0 replays and so show route robustness, not new replication."
+
+### 11. Section 5, bullet 4: "Calibration itself is what delivers per-stratum risk control: fixed margins miss α in every stratum (B2), while CRC / LTT and the online physical-feedback tracker keep slip near 0.1"
+- **Evidence.**
+  - "Every stratum" is contradicted by B2 at m = 1.0, where D1 is 0.0414 and D2 is 0.0228, both ≤ α. Pass 1's own Section
+    2.7 says so.
+  - No per-stratum test slip is reported for any CRC or LTT arm, or for B3: the JSON gives only overall `slip_phys` and
+    window means. Per-stratum control by the calibrated arms is therefore not shown by any cited number.
+  - The LTT per-stratum statement is a design guarantee, not an observed result.
+- **Rewrite.** "None of the four uniform margins tested brings every stratum near α. At m = 1.0, D1 and D2 are
+  over-protected (0.0414 / 0.0228) while D3 and D4 remain at 0.6571 / 0.6185. The calibrated CertGrip arm reaches
+  overall test slip 0.0828 (CRC) and 0.0696 (LTT)."
+
+### 12. Section 2.7: "Calibration is necessary (B2). No fixed margin brings all strata to α"
+- **Evidence.** B2 tests one uniform margin on one base force (f_nom_muhat) at four values (0, 0.25, 0.5, 1.0). It says
+  nothing about per-stratum hand-set margins or about other values of m. The amendment registers B2 as "Descriptive".
+- **Rewrite.** "Within B2 (a single uniform margin m ∈ {0, 0.25, 0.5, 1.0} on the CSF-μ̂ force), no margin brings all
+  four strata near α. m ≤ 0.5 under-grips (RE −0.3829, −0.2286, −0.0744), and m = 1.0 leaves overall slip at 0.335."
+
+### 13. Section 2.8: physical vs label feedback are "in line with the v1 audit, where slip_direct and slip_label differ by Delta between −0.008 and 0.0"
+- **Evidence.** The two comparisons measure different things:
+  - The v1 audit compares the physical and label slip of the same forces in one stream.
+  - B3 compares two different trackers, each fed a different signal (physical feedback vs the 08d label-rule OQT with its
+    own offline q̂ start).
+
+  The agreement of one does not follow from the other. One audit Delta also has an interval that excludes 0: S2
+  OQT-CertGrip 1001-2000, Delta −0.008, CI\*\* [−0.0149, −0.0028].
+- **Rewrite.** "Physical- and label-feedback trackers give close window means (e.g. S1 CertGrip 1001-2000: slip 0.1002 vs
+  0.1008, RE 0.4633 vs 0.4728; 5 orderings, no interval)."
+
+### 14. Section 2.8: "Online physical feedback holds slip near α ... for both arms and both shifts"
+- **Evidence.** Under the B3 plan, the stream is T = 2,000, with 500 id steps followed by 1,500 shifted steps. The 1-500
+  window is therefore the pre-shift in-distribution segment, and only 1001-2000 and 1501-2000 measure behaviour under
+  shift. "Holds α" has no registered tolerance, test or interval, and it rests on 5 orderings.
+- **Rewrite.** "In the shifted windows (1001-2000, 1501-2000), mean physical slip over 5 orderings lies between 0.0936 and
+  0.1032 for both arms on S1 and S3 (per-ordering 0.082–0.112). This is descriptive; no interval was registered."
+
+### 15. Section 2.6: "Cost of the high-probability certificate is modest"
+- **Evidence.** "Modest" is a judgement. No CRC-vs-LTT contrast or interval was computed, and the LTT RE has no CI in
+  the JSON.
+- **Rewrite.** "Moving CertGrip from CRC to LTT lowers test slip from 0.0828 to 0.0696 and raises RE_mid from 0.4567 to
+  0.4894. D vs CSF-1 goes from 0.4168 to 0.4042 and stays superiority (secondary)."
+
+### 16. Sections 1.7 and 2.8, numeric: "0.0975" (S3 CertGrip 1-500) and "0.0935" (S3 CSF1 1501-2000; also the lower end of the Section 2.8 range)
+- **Evidence.** The stored values are 0.09759999999999999 and 0.09359999999999999. These are floating-point
+  representations of 0.0976 and 0.0936: means of 5 values recorded to 3 decimals, e.g. (0.098 + 0.1 + 0.092 + 0.088 +
+  0.09) / 5 = 0.0936. Truncating the float understates both values by 0.0001. The other float-artifact values
+  (0.09880000000000001 → 0.0988, 0.10800000000000001 → 0.1080, 0.09840000000000002 → 0.0984) are not affected.
+- **Rewrite.** "S3 CertGrip 1-500 physical slip mean 0.0976; S3 CSF1 1501-2000 0.0936; window means lie between 0.0936
+  and 0.1052."
+
+### 17. Section 3, Grid edges: "`at_max` is false for every stratum of every arm"
+- **Evidence.** `at_max` appears only in v1 `crc_analysis.json` and the B1 files. The A-part files (frontier and LTT arms,
+  08c and 08e) have no `at_max` field. They carry only the LTT flag, which is `false` everywhere and is a different
+  property. So the claim cannot be checked for the A arms.
+- **Rewrite.** "`at_max` is false for every stratum of every arm in the v1 CRC and B1 files. Every LTT flag in the A files
+  is false."
+
+## Secondary / descriptive vs confirmatory: summary
+
+Pass 1, Section 3 correctly says that all v2 rows are secondary and should be read as descriptive support. Sections 2
+and 5 then use confirmatory language that conflicts with this:
+- "robust" (finding 10);
+- "confirmed" (finding 7);
+- "superior only to" (finding 7);
+- "necessary" (finding 12);
+- "matches" and "as efficient" (findings 4 and 9).
+
+B2 and B3 are registered as descriptive, with no test. Every claim built on them (findings 11–14) should be worded
+descriptively.
+
+
+
+Decision:
+
+# p2 · Stage 15 RESEARCH_DECISION [v3] (run 46, 2026-11-10)
+
+Prompt: template `research_decision.md` with the REFINE augmentation; `{analysis}` = `results/14_analysis_v3.md`.
+
+## Decision
+**PROCEED** → stage 16 [v3] (revise the v2 outline / draft with the v3 rows as secondary evidence). v1 primary
+verdicts unchanged (H2a superiority, H2b not confirmed, H1-M failed, H3 inconclusive); v2 statements of record stand.
+
+## Justification
+v3 was opened for the v2 gate's evidence-level actions (re-splits, per-stratum tables, Holm, losing sub-pool on CRC,
+shrunk plug-in, tuned margin, force in N, reactive baseline, stronger online study). Every registered row was run
+except the A7 integrated-force arithmetic (see Next actions). The claim of record since v2 — *a friction-onset probe
+plus per-stratum conformal calibration gives the slip guarantee at substantially less excess force than the
+friction-blind conformal baseline; the learned model is not the source of the gain* — is confirmed at pool level on
+every route and grid, and v3 sharpens it in two honest directions: (i) a shrunk one-line plug-in of the same probe
+estimate does as well or better than the learned model (σ 0.4 −0.1395 [−0.1832, −0.01264]); (ii) the saving is not
+uniform — inside the 08e μ ∈ [0.5, 0.8] sub-pools CSF-1 is better (−0.3152 [−0.5231, −0.0172]), grid-dependent.
+Neither contradicts the scoped claim (both B1 arms use the probe), so not PIVOT. The remaining gaps (hardware σ,
+adaptive preload, correlated-μ pool, detection timing) are out of scope for CPU simulation in this loop (10 §C) or
+would not change the claim → REFINE (last available cycle) would not buy evidence the paper needs before 12-04.
+
+## Hard rules
+- Primary metric difference meaningful: H2a D 0.4168, CI\*\* [0.3484, 0.4778] (v1, 97.5 % object-cluster bootstrap),
+  superiority; v3 pool-level rows (CRC, empirical margin, 08e) keep superiority; A3 Holm keeps every v1 verdict. ✔
+- Claimed effective components have non-degenerate ablations: probe (CSF-1 vs CSF-μ̂, v2 A3 D 0.3816 [0.2965,
+  0.4505]); calibration (v2 B2 fixed margins; v3 A5 empirical margin, A1 re-splits). The learned model is not claimed.
+  ✔
+- No CRITICAL FABRICATION in stage 14 (pass 2: 15 findings, 3 numeric wording errors, no fabricated number). ✔
+
+## Evidence (from `results/14_analysis_v3.md`)
+- B3: D_RE 0.3107–0.4432; late-window slip 0.1001 / 0.1008 / 0.1018 (ordering-only intervals contain α).
+- A1: mean re-split slip ≤ α; per-stratum exceedance frequent → the paper states the guarantee is marginal per
+  stratum, not per split.
+- B2: registered reactive designs slip ≥ 0.3086 everywhere.
+- Force: mean hold force 6.521 vs 7.606 N (CertGrip-full vs CSF-1, 08c test split, no interval).
+
+## Next actions
+- Before stage 17 uses them: compute A7's registered integrated force (T ∈ {1, 5, 30} s) and break-even T **by a
+  script** from `a_analysis.json` (arithmetic only, no new run), or state them as not produced; pass 1's hand
+  reconstruction is not citable.
+- Stage 16 [v3]: outline update — Limitations add the sub-pool reversal, the shrunk plug-in result, per-stratum
+  exceedance, reactive-baseline failure; Results add B3 (3 shifts × 20 orderings) and A3 Holm; keep the scoped claim.
+- Stages 17–20 again (RSS 2027 Stage 1 format) by ≈ 11-24; if the stage-20 gate fails again with evidence-level
+  weaknesses, the last refine cycle (3 / 3) is available but likely not before 12-04 → then retarget per AUTOPILOT §1.
+

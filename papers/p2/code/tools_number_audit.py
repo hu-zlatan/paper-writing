@@ -1,5 +1,5 @@
 """Number audit for a paper draft (stage 17/18/19 red line): every decimal number in the draft must match a value in
-papers/p2/results/v1/results_v1.json or results/v2/results_v2.json (as written, x100 for percentages, sign-flipped, rounded to the shown precision) or appear
+papers/p2/results/v1/results_v1.json or results/v2/results_v2.json or results/v3/results_v3.json (as written, x100 for percentages, sign-flipped, rounded to the shown precision) or appear
 verbatim in a frozen design document. Usage: python tools_number_audit.py <draft.md> [<design doc> ...]
 Prints the numbers that match neither; exit code 1 if any."""
 import json
@@ -45,6 +45,9 @@ def main():
     v2 = os.path.join(root, "results/v2/results_v2.json")                     # v2 evidence index (secondary rows)
     if os.path.exists(v2):
         vals = flat(json.load(open(v2)), vals)
+    v3 = os.path.join(root, "results/v3/results_v3.json")                     # v3 evidence index (secondary rows)
+    if os.path.exists(v3):
+        vals = flat(json.load(open(v3)), vals)
     design = " ".join(open(p).read() for p in sys.argv[2:])
     bad = []
     for m in re.finditer(r"(?<![\w.\[])[−-]?\d[\d,]*\.\d+", draft):          # decimals only; integers are counts/consts
