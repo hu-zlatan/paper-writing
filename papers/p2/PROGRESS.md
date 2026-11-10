@@ -598,3 +598,11 @@ Run order when both papers are active: AUTOPILOT §7.
   no demonstrated gain of the learned model over the probe-in-physics formula; a non-tactile friction prior of
   log-error 0.2 is not distinguishable from the probe; uncalibrated margins miss α per stratum.
 - **Next:** stage 15 RESEARCH_DECISION [v2].
+
+## Stage 15. RESEARCH_DECISION     [v2]
+
+- **Finished:** 2026-11-10 (run 44). Plan `plans/stage_15_research_decision_v2.md`; `results/15_decision_v2.md`.
+  **Decision: PROCEED** (all three hard rules met; the claim is re-scoped to "friction-onset probe + conformal
+  calibration", with H5 at σ_p 0.2 and H2b stated as limits). REFINE rejected: remaining gaps are hardware-only or
+  out of scope (09 §C). Refine cycles used 1 / 3.
+- **Next:** stage 16 PAPER_OUTLINE [v2].
