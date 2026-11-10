@@ -1,0 +1,57 @@
+{
+ "purpose": "v6 follow-up of v6_e10_p0 (time-guard stops / missing outputs)",
+ "jobs": [
+  {
+   "id": "A16_k2_gstar2_036_r46",
+   "cmd": "python main.py eval3 --set A16 --kappa 2 --tau 3.4 --n-star 3 --method gstar --split test5 --run-salt r1 --start 46 --count 2 --sub 8 --budget-minutes 25 --out ../results/v6/test5/A16_k2_gstar2_036_r46"
+  },
+  {
+   "id": "A16_k2_gstar2_048_r59",
+   "cmd": "python main.py eval3 --set A16 --kappa 2 --tau 3.4 --n-star 3 --method gstar --split test5 --run-salt r1 --start 59 --count 1 --sub 8 --budget-minutes 25 --out ../results/v6/test5/A16_k2_gstar2_048_r59"
+  },
+  {
+   "id": "A16_k2_gstar2_252_r260",
+   "cmd": "python main.py eval3 --set A16 --kappa 2 --tau 3.4 --n-star 3 --method gstar --split test5 --run-salt r1 --start 260 --count 4 --sub 8 --budget-minutes 25 --out ../results/v6/test5/A16_k2_gstar2_252_r260"
+  },
+  {
+   "id": "A16_k2_gstar2_456_r465",
+   "cmd": "python main.py eval3 --set A16 --kappa 2 --tau 3.4 --n-star 3 --method gstar --split test5 --run-salt r1 --start 465 --count 3 --sub 8 --budget-minutes 25 --out ../results/v6/test5/A16_k2_gstar2_456_r465"
+  },
+  {
+   "id": "S_k12_gstar2_046_r64",
+   "cmd": "python main.py eval3 --set S --kappa 12 --tau 4.9 --n-star 4 --method gstar --split test5 --run-salt r1 --start 64 --count 5 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k12_gstar2_046_r64"
+  },
+  {
+   "id": "S_k12_gstar2_161_r182",
+   "cmd": "python main.py eval3 --set S --kappa 12 --tau 4.9 --n-star 4 --method gstar --split test5 --run-salt r1 --start 182 --count 2 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k12_gstar2_161_r182"
+  },
+  {
+   "id": "S_k12_gstar2_437_r453",
+   "cmd": "python main.py eval3 --set S --kappa 12 --tau 4.9 --n-star 4 --method gstar --split test5 --run-salt r1 --start 453 --count 7 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k12_gstar2_437_r453"
+  },
+  {
+   "id": "S_k2_gstar2_000_r22",
+   "cmd": "python main.py eval3 --set S --kappa 2 --tau 4.7 --n-star 4 --method gstar --split test5 --run-salt r1 --start 22 --count 5 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k2_gstar2_000_r22"
+  },
+  {
+   "id": "S_k2_gstar2_027_r51",
+   "cmd": "python main.py eval3 --set S --kappa 2 --tau 4.7 --n-star 4 --method gstar --split test5 --run-salt r1 --start 51 --count 3 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k2_gstar2_027_r51"
+  },
+  {
+   "id": "S_k2_gstar2_459_r479",
+   "cmd": "python main.py eval3 --set S --kappa 2 --tau 4.7 --n-star 4 --method gstar --split test5 --run-salt r1 --start 479 --count 7 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k2_gstar2_459_r479"
+  },
+  {
+   "id": "S_k4_gstar2_054_r80",
+   "cmd": "python main.py eval3 --set S --kappa 4 --tau 4.8 --n-star 4 --method gstar --split test5 --run-salt r1 --start 80 --count 1 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k4_gstar2_054_r80"
+  },
+  {
+   "id": "S_k4_gstar2_432_r458",
+   "cmd": "python main.py eval3 --set S --kappa 4 --tau 4.8 --n-star 4 --method gstar --split test5 --run-salt r1 --start 458 --count 1 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k4_gstar2_432_r458"
+  },
+  {
+   "id": "S_k8_gstar2_462_r481",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method gstar --split test5 --run-salt r1 --start 481 --count 3 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k8_gstar2_462_r481"
+  }
+ ]
+}
