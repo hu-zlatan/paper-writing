@@ -1,0 +1,505 @@
+{
+ "purpose": "v6 E10 (docs/07c_amendment_v6_0.md, addendum v6.1), part 0",
+ "jobs": [
+  {
+   "id": "A16_k2_gstar2_000",
+   "cmd": "python main.py eval3 --set A16 --kappa 2 --tau 3.4 --n-star 3 --method gstar --split test5 --run-salt r1 --start 0 --count 12 --sub 8 --budget-minutes 25 --out ../results/v6/test5/A16_k2_gstar2_000"
+  },
+  {
+   "id": "A16_k2_gstar2_012",
+   "cmd": "python main.py eval3 --set A16 --kappa 2 --tau 3.4 --n-star 3 --method gstar --split test5 --run-salt r1 --start 12 --count 12 --sub 8 --budget-minutes 25 --out ../results/v6/test5/A16_k2_gstar2_012"
+  },
+  {
+   "id": "A16_k2_gstar2_024",
+   "cmd": "python main.py eval3 --set A16 --kappa 2 --tau 3.4 --n-star 3 --method gstar --split test5 --run-salt r1 --start 24 --count 12 --sub 8 --budget-minutes 25 --out ../results/v6/test5/A16_k2_gstar2_024"
+  },
+  {
+   "id": "A16_k2_gstar2_036",
+   "cmd": "python main.py eval3 --set A16 --kappa 2 --tau 3.4 --n-star 3 --method gstar --split test5 --run-salt r1 --start 36 --count 12 --sub 8 --budget-minutes 25 --out ../results/v6/test5/A16_k2_gstar2_036"
+  },
+  {
+   "id": "A16_k2_gstar2_048",
+   "cmd": "python main.py eval3 --set A16 --kappa 2 --tau 3.4 --n-star 3 --method gstar --split test5 --run-salt r1 --start 48 --count 12 --sub 8 --budget-minutes 25 --out ../results/v6/test5/A16_k2_gstar2_048"
+  },
+  {
+   "id": "A16_k2_gstar2_060",
+   "cmd": "python main.py eval3 --set A16 --kappa 2 --tau 3.4 --n-star 3 --method gstar --split test5 --run-salt r1 --start 60 --count 12 --sub 8 --budget-minutes 25 --out ../results/v6/test5/A16_k2_gstar2_060"
+  },
+  {
+   "id": "A16_k2_gstar2_072",
+   "cmd": "python main.py eval3 --set A16 --kappa 2 --tau 3.4 --n-star 3 --method gstar --split test5 --run-salt r1 --start 72 --count 12 --sub 8 --budget-minutes 25 --out ../results/v6/test5/A16_k2_gstar2_072"
+  },
+  {
+   "id": "A16_k2_gstar2_084",
+   "cmd": "python main.py eval3 --set A16 --kappa 2 --tau 3.4 --n-star 3 --method gstar --split test5 --run-salt r1 --start 84 --count 12 --sub 8 --budget-minutes 25 --out ../results/v6/test5/A16_k2_gstar2_084"
+  },
+  {
+   "id": "A16_k2_gstar2_096",
+   "cmd": "python main.py eval3 --set A16 --kappa 2 --tau 3.4 --n-star 3 --method gstar --split test5 --run-salt r1 --start 96 --count 12 --sub 8 --budget-minutes 25 --out ../results/v6/test5/A16_k2_gstar2_096"
+  },
+  {
+   "id": "A16_k2_gstar2_108",
+   "cmd": "python main.py eval3 --set A16 --kappa 2 --tau 3.4 --n-star 3 --method gstar --split test5 --run-salt r1 --start 108 --count 12 --sub 8 --budget-minutes 25 --out ../results/v6/test5/A16_k2_gstar2_108"
+  },
+  {
+   "id": "A16_k2_gstar2_120",
+   "cmd": "python main.py eval3 --set A16 --kappa 2 --tau 3.4 --n-star 3 --method gstar --split test5 --run-salt r1 --start 120 --count 12 --sub 8 --budget-minutes 25 --out ../results/v6/test5/A16_k2_gstar2_120"
+  },
+  {
+   "id": "A16_k2_gstar2_132",
+   "cmd": "python main.py eval3 --set A16 --kappa 2 --tau 3.4 --n-star 3 --method gstar --split test5 --run-salt r1 --start 132 --count 12 --sub 8 --budget-minutes 25 --out ../results/v6/test5/A16_k2_gstar2_132"
+  },
+  {
+   "id": "A16_k2_gstar2_144",
+   "cmd": "python main.py eval3 --set A16 --kappa 2 --tau 3.4 --n-star 3 --method gstar --split test5 --run-salt r1 --start 144 --count 12 --sub 8 --budget-minutes 25 --out ../results/v6/test5/A16_k2_gstar2_144"
+  },
+  {
+   "id": "A16_k2_gstar2_156",
+   "cmd": "python main.py eval3 --set A16 --kappa 2 --tau 3.4 --n-star 3 --method gstar --split test5 --run-salt r1 --start 156 --count 12 --sub 8 --budget-minutes 25 --out ../results/v6/test5/A16_k2_gstar2_156"
+  },
+  {
+   "id": "A16_k2_gstar2_168",
+   "cmd": "python main.py eval3 --set A16 --kappa 2 --tau 3.4 --n-star 3 --method gstar --split test5 --run-salt r1 --start 168 --count 12 --sub 8 --budget-minutes 25 --out ../results/v6/test5/A16_k2_gstar2_168"
+  },
+  {
+   "id": "A16_k2_gstar2_180",
+   "cmd": "python main.py eval3 --set A16 --kappa 2 --tau 3.4 --n-star 3 --method gstar --split test5 --run-salt r1 --start 180 --count 12 --sub 8 --budget-minutes 25 --out ../results/v6/test5/A16_k2_gstar2_180"
+  },
+  {
+   "id": "A16_k2_gstar2_192",
+   "cmd": "python main.py eval3 --set A16 --kappa 2 --tau 3.4 --n-star 3 --method gstar --split test5 --run-salt r1 --start 192 --count 12 --sub 8 --budget-minutes 25 --out ../results/v6/test5/A16_k2_gstar2_192"
+  },
+  {
+   "id": "A16_k2_gstar2_204",
+   "cmd": "python main.py eval3 --set A16 --kappa 2 --tau 3.4 --n-star 3 --method gstar --split test5 --run-salt r1 --start 204 --count 12 --sub 8 --budget-minutes 25 --out ../results/v6/test5/A16_k2_gstar2_204"
+  },
+  {
+   "id": "A16_k2_gstar2_216",
+   "cmd": "python main.py eval3 --set A16 --kappa 2 --tau 3.4 --n-star 3 --method gstar --split test5 --run-salt r1 --start 216 --count 12 --sub 8 --budget-minutes 25 --out ../results/v6/test5/A16_k2_gstar2_216"
+  },
+  {
+   "id": "A16_k2_gstar2_228",
+   "cmd": "python main.py eval3 --set A16 --kappa 2 --tau 3.4 --n-star 3 --method gstar --split test5 --run-salt r1 --start 228 --count 12 --sub 8 --budget-minutes 25 --out ../results/v6/test5/A16_k2_gstar2_228"
+  },
+  {
+   "id": "A16_k2_gstar2_240",
+   "cmd": "python main.py eval3 --set A16 --kappa 2 --tau 3.4 --n-star 3 --method gstar --split test5 --run-salt r1 --start 240 --count 12 --sub 8 --budget-minutes 25 --out ../results/v6/test5/A16_k2_gstar2_240"
+  },
+  {
+   "id": "A16_k2_gstar2_252",
+   "cmd": "python main.py eval3 --set A16 --kappa 2 --tau 3.4 --n-star 3 --method gstar --split test5 --run-salt r1 --start 252 --count 12 --sub 8 --budget-minutes 25 --out ../results/v6/test5/A16_k2_gstar2_252"
+  },
+  {
+   "id": "A16_k2_gstar2_264",
+   "cmd": "python main.py eval3 --set A16 --kappa 2 --tau 3.4 --n-star 3 --method gstar --split test5 --run-salt r1 --start 264 --count 12 --sub 8 --budget-minutes 25 --out ../results/v6/test5/A16_k2_gstar2_264"
+  },
+  {
+   "id": "A16_k2_gstar2_276",
+   "cmd": "python main.py eval3 --set A16 --kappa 2 --tau 3.4 --n-star 3 --method gstar --split test5 --run-salt r1 --start 276 --count 12 --sub 8 --budget-minutes 25 --out ../results/v6/test5/A16_k2_gstar2_276"
+  },
+  {
+   "id": "A16_k2_gstar2_288",
+   "cmd": "python main.py eval3 --set A16 --kappa 2 --tau 3.4 --n-star 3 --method gstar --split test5 --run-salt r1 --start 288 --count 12 --sub 8 --budget-minutes 25 --out ../results/v6/test5/A16_k2_gstar2_288"
+  },
+  {
+   "id": "A16_k2_gstar2_300",
+   "cmd": "python main.py eval3 --set A16 --kappa 2 --tau 3.4 --n-star 3 --method gstar --split test5 --run-salt r1 --start 300 --count 12 --sub 8 --budget-minutes 25 --out ../results/v6/test5/A16_k2_gstar2_300"
+  },
+  {
+   "id": "A16_k2_gstar2_312",
+   "cmd": "python main.py eval3 --set A16 --kappa 2 --tau 3.4 --n-star 3 --method gstar --split test5 --run-salt r1 --start 312 --count 12 --sub 8 --budget-minutes 25 --out ../results/v6/test5/A16_k2_gstar2_312"
+  },
+  {
+   "id": "A16_k2_gstar2_324",
+   "cmd": "python main.py eval3 --set A16 --kappa 2 --tau 3.4 --n-star 3 --method gstar --split test5 --run-salt r1 --start 324 --count 12 --sub 8 --budget-minutes 25 --out ../results/v6/test5/A16_k2_gstar2_324"
+  },
+  {
+   "id": "A16_k2_gstar2_336",
+   "cmd": "python main.py eval3 --set A16 --kappa 2 --tau 3.4 --n-star 3 --method gstar --split test5 --run-salt r1 --start 336 --count 12 --sub 8 --budget-minutes 25 --out ../results/v6/test5/A16_k2_gstar2_336"
+  },
+  {
+   "id": "A16_k2_gstar2_348",
+   "cmd": "python main.py eval3 --set A16 --kappa 2 --tau 3.4 --n-star 3 --method gstar --split test5 --run-salt r1 --start 348 --count 12 --sub 8 --budget-minutes 25 --out ../results/v6/test5/A16_k2_gstar2_348"
+  },
+  {
+   "id": "A16_k2_gstar2_360",
+   "cmd": "python main.py eval3 --set A16 --kappa 2 --tau 3.4 --n-star 3 --method gstar --split test5 --run-salt r1 --start 360 --count 12 --sub 8 --budget-minutes 25 --out ../results/v6/test5/A16_k2_gstar2_360"
+  },
+  {
+   "id": "A16_k2_gstar2_372",
+   "cmd": "python main.py eval3 --set A16 --kappa 2 --tau 3.4 --n-star 3 --method gstar --split test5 --run-salt r1 --start 372 --count 12 --sub 8 --budget-minutes 25 --out ../results/v6/test5/A16_k2_gstar2_372"
+  },
+  {
+   "id": "A16_k2_gstar2_384",
+   "cmd": "python main.py eval3 --set A16 --kappa 2 --tau 3.4 --n-star 3 --method gstar --split test5 --run-salt r1 --start 384 --count 12 --sub 8 --budget-minutes 25 --out ../results/v6/test5/A16_k2_gstar2_384"
+  },
+  {
+   "id": "A16_k2_gstar2_396",
+   "cmd": "python main.py eval3 --set A16 --kappa 2 --tau 3.4 --n-star 3 --method gstar --split test5 --run-salt r1 --start 396 --count 12 --sub 8 --budget-minutes 25 --out ../results/v6/test5/A16_k2_gstar2_396"
+  },
+  {
+   "id": "A16_k2_gstar2_408",
+   "cmd": "python main.py eval3 --set A16 --kappa 2 --tau 3.4 --n-star 3 --method gstar --split test5 --run-salt r1 --start 408 --count 12 --sub 8 --budget-minutes 25 --out ../results/v6/test5/A16_k2_gstar2_408"
+  },
+  {
+   "id": "A16_k2_gstar2_420",
+   "cmd": "python main.py eval3 --set A16 --kappa 2 --tau 3.4 --n-star 3 --method gstar --split test5 --run-salt r1 --start 420 --count 12 --sub 8 --budget-minutes 25 --out ../results/v6/test5/A16_k2_gstar2_420"
+  },
+  {
+   "id": "A16_k2_gstar2_432",
+   "cmd": "python main.py eval3 --set A16 --kappa 2 --tau 3.4 --n-star 3 --method gstar --split test5 --run-salt r1 --start 432 --count 12 --sub 8 --budget-minutes 25 --out ../results/v6/test5/A16_k2_gstar2_432"
+  },
+  {
+   "id": "A16_k2_gstar2_444",
+   "cmd": "python main.py eval3 --set A16 --kappa 2 --tau 3.4 --n-star 3 --method gstar --split test5 --run-salt r1 --start 444 --count 12 --sub 8 --budget-minutes 25 --out ../results/v6/test5/A16_k2_gstar2_444"
+  },
+  {
+   "id": "A16_k2_gstar2_456",
+   "cmd": "python main.py eval3 --set A16 --kappa 2 --tau 3.4 --n-star 3 --method gstar --split test5 --run-salt r1 --start 456 --count 12 --sub 8 --budget-minutes 25 --out ../results/v6/test5/A16_k2_gstar2_456"
+  },
+  {
+   "id": "A16_k2_gstar2_468",
+   "cmd": "python main.py eval3 --set A16 --kappa 2 --tau 3.4 --n-star 3 --method gstar --split test5 --run-salt r1 --start 468 --count 12 --sub 8 --budget-minutes 25 --out ../results/v6/test5/A16_k2_gstar2_468"
+  },
+  {
+   "id": "A16_k2_gstar2_480",
+   "cmd": "python main.py eval3 --set A16 --kappa 2 --tau 3.4 --n-star 3 --method gstar --split test5 --run-salt r1 --start 480 --count 12 --sub 8 --budget-minutes 25 --out ../results/v6/test5/A16_k2_gstar2_480"
+  },
+  {
+   "id": "A16_k2_gstar2_492",
+   "cmd": "python main.py eval3 --set A16 --kappa 2 --tau 3.4 --n-star 3 --method gstar --split test5 --run-salt r1 --start 492 --count 8 --sub 8 --budget-minutes 25 --out ../results/v6/test5/A16_k2_gstar2_492"
+  },
+  {
+   "id": "S_k12_gstar2_000",
+   "cmd": "python main.py eval3 --set S --kappa 12 --tau 4.9 --n-star 4 --method gstar --split test5 --run-salt r1 --start 0 --count 23 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k12_gstar2_000"
+  },
+  {
+   "id": "S_k12_gstar2_023",
+   "cmd": "python main.py eval3 --set S --kappa 12 --tau 4.9 --n-star 4 --method gstar --split test5 --run-salt r1 --start 23 --count 23 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k12_gstar2_023"
+  },
+  {
+   "id": "S_k12_gstar2_046",
+   "cmd": "python main.py eval3 --set S --kappa 12 --tau 4.9 --n-star 4 --method gstar --split test5 --run-salt r1 --start 46 --count 23 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k12_gstar2_046"
+  },
+  {
+   "id": "S_k12_gstar2_069",
+   "cmd": "python main.py eval3 --set S --kappa 12 --tau 4.9 --n-star 4 --method gstar --split test5 --run-salt r1 --start 69 --count 23 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k12_gstar2_069"
+  },
+  {
+   "id": "S_k12_gstar2_092",
+   "cmd": "python main.py eval3 --set S --kappa 12 --tau 4.9 --n-star 4 --method gstar --split test5 --run-salt r1 --start 92 --count 23 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k12_gstar2_092"
+  },
+  {
+   "id": "S_k12_gstar2_115",
+   "cmd": "python main.py eval3 --set S --kappa 12 --tau 4.9 --n-star 4 --method gstar --split test5 --run-salt r1 --start 115 --count 23 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k12_gstar2_115"
+  },
+  {
+   "id": "S_k12_gstar2_138",
+   "cmd": "python main.py eval3 --set S --kappa 12 --tau 4.9 --n-star 4 --method gstar --split test5 --run-salt r1 --start 138 --count 23 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k12_gstar2_138"
+  },
+  {
+   "id": "S_k12_gstar2_161",
+   "cmd": "python main.py eval3 --set S --kappa 12 --tau 4.9 --n-star 4 --method gstar --split test5 --run-salt r1 --start 161 --count 23 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k12_gstar2_161"
+  },
+  {
+   "id": "S_k12_gstar2_184",
+   "cmd": "python main.py eval3 --set S --kappa 12 --tau 4.9 --n-star 4 --method gstar --split test5 --run-salt r1 --start 184 --count 23 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k12_gstar2_184"
+  },
+  {
+   "id": "S_k12_gstar2_207",
+   "cmd": "python main.py eval3 --set S --kappa 12 --tau 4.9 --n-star 4 --method gstar --split test5 --run-salt r1 --start 207 --count 23 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k12_gstar2_207"
+  },
+  {
+   "id": "S_k12_gstar2_230",
+   "cmd": "python main.py eval3 --set S --kappa 12 --tau 4.9 --n-star 4 --method gstar --split test5 --run-salt r1 --start 230 --count 23 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k12_gstar2_230"
+  },
+  {
+   "id": "S_k12_gstar2_253",
+   "cmd": "python main.py eval3 --set S --kappa 12 --tau 4.9 --n-star 4 --method gstar --split test5 --run-salt r1 --start 253 --count 23 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k12_gstar2_253"
+  },
+  {
+   "id": "S_k12_gstar2_276",
+   "cmd": "python main.py eval3 --set S --kappa 12 --tau 4.9 --n-star 4 --method gstar --split test5 --run-salt r1 --start 276 --count 23 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k12_gstar2_276"
+  },
+  {
+   "id": "S_k12_gstar2_299",
+   "cmd": "python main.py eval3 --set S --kappa 12 --tau 4.9 --n-star 4 --method gstar --split test5 --run-salt r1 --start 299 --count 23 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k12_gstar2_299"
+  },
+  {
+   "id": "S_k12_gstar2_322",
+   "cmd": "python main.py eval3 --set S --kappa 12 --tau 4.9 --n-star 4 --method gstar --split test5 --run-salt r1 --start 322 --count 23 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k12_gstar2_322"
+  },
+  {
+   "id": "S_k12_gstar2_345",
+   "cmd": "python main.py eval3 --set S --kappa 12 --tau 4.9 --n-star 4 --method gstar --split test5 --run-salt r1 --start 345 --count 23 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k12_gstar2_345"
+  },
+  {
+   "id": "S_k12_gstar2_368",
+   "cmd": "python main.py eval3 --set S --kappa 12 --tau 4.9 --n-star 4 --method gstar --split test5 --run-salt r1 --start 368 --count 23 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k12_gstar2_368"
+  },
+  {
+   "id": "S_k12_gstar2_391",
+   "cmd": "python main.py eval3 --set S --kappa 12 --tau 4.9 --n-star 4 --method gstar --split test5 --run-salt r1 --start 391 --count 23 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k12_gstar2_391"
+  },
+  {
+   "id": "S_k12_gstar2_414",
+   "cmd": "python main.py eval3 --set S --kappa 12 --tau 4.9 --n-star 4 --method gstar --split test5 --run-salt r1 --start 414 --count 23 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k12_gstar2_414"
+  },
+  {
+   "id": "S_k12_gstar2_437",
+   "cmd": "python main.py eval3 --set S --kappa 12 --tau 4.9 --n-star 4 --method gstar --split test5 --run-salt r1 --start 437 --count 23 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k12_gstar2_437"
+  },
+  {
+   "id": "S_k12_gstar2_460",
+   "cmd": "python main.py eval3 --set S --kappa 12 --tau 4.9 --n-star 4 --method gstar --split test5 --run-salt r1 --start 460 --count 23 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k12_gstar2_460"
+  },
+  {
+   "id": "S_k12_gstar2_483",
+   "cmd": "python main.py eval3 --set S --kappa 12 --tau 4.9 --n-star 4 --method gstar --split test5 --run-salt r1 --start 483 --count 17 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k12_gstar2_483"
+  },
+  {
+   "id": "S_k2_gstar2_000",
+   "cmd": "python main.py eval3 --set S --kappa 2 --tau 4.7 --n-star 4 --method gstar --split test5 --run-salt r1 --start 0 --count 27 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k2_gstar2_000"
+  },
+  {
+   "id": "S_k2_gstar2_027",
+   "cmd": "python main.py eval3 --set S --kappa 2 --tau 4.7 --n-star 4 --method gstar --split test5 --run-salt r1 --start 27 --count 27 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k2_gstar2_027"
+  },
+  {
+   "id": "S_k2_gstar2_054",
+   "cmd": "python main.py eval3 --set S --kappa 2 --tau 4.7 --n-star 4 --method gstar --split test5 --run-salt r1 --start 54 --count 27 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k2_gstar2_054"
+  },
+  {
+   "id": "S_k2_gstar2_081",
+   "cmd": "python main.py eval3 --set S --kappa 2 --tau 4.7 --n-star 4 --method gstar --split test5 --run-salt r1 --start 81 --count 27 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k2_gstar2_081"
+  },
+  {
+   "id": "S_k2_gstar2_108",
+   "cmd": "python main.py eval3 --set S --kappa 2 --tau 4.7 --n-star 4 --method gstar --split test5 --run-salt r1 --start 108 --count 27 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k2_gstar2_108"
+  },
+  {
+   "id": "S_k2_gstar2_135",
+   "cmd": "python main.py eval3 --set S --kappa 2 --tau 4.7 --n-star 4 --method gstar --split test5 --run-salt r1 --start 135 --count 27 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k2_gstar2_135"
+  },
+  {
+   "id": "S_k2_gstar2_162",
+   "cmd": "python main.py eval3 --set S --kappa 2 --tau 4.7 --n-star 4 --method gstar --split test5 --run-salt r1 --start 162 --count 27 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k2_gstar2_162"
+  },
+  {
+   "id": "S_k2_gstar2_189",
+   "cmd": "python main.py eval3 --set S --kappa 2 --tau 4.7 --n-star 4 --method gstar --split test5 --run-salt r1 --start 189 --count 27 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k2_gstar2_189"
+  },
+  {
+   "id": "S_k2_gstar2_216",
+   "cmd": "python main.py eval3 --set S --kappa 2 --tau 4.7 --n-star 4 --method gstar --split test5 --run-salt r1 --start 216 --count 27 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k2_gstar2_216"
+  },
+  {
+   "id": "S_k2_gstar2_243",
+   "cmd": "python main.py eval3 --set S --kappa 2 --tau 4.7 --n-star 4 --method gstar --split test5 --run-salt r1 --start 243 --count 27 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k2_gstar2_243"
+  },
+  {
+   "id": "S_k2_gstar2_270",
+   "cmd": "python main.py eval3 --set S --kappa 2 --tau 4.7 --n-star 4 --method gstar --split test5 --run-salt r1 --start 270 --count 27 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k2_gstar2_270"
+  },
+  {
+   "id": "S_k2_gstar2_297",
+   "cmd": "python main.py eval3 --set S --kappa 2 --tau 4.7 --n-star 4 --method gstar --split test5 --run-salt r1 --start 297 --count 27 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k2_gstar2_297"
+  },
+  {
+   "id": "S_k2_gstar2_324",
+   "cmd": "python main.py eval3 --set S --kappa 2 --tau 4.7 --n-star 4 --method gstar --split test5 --run-salt r1 --start 324 --count 27 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k2_gstar2_324"
+  },
+  {
+   "id": "S_k2_gstar2_351",
+   "cmd": "python main.py eval3 --set S --kappa 2 --tau 4.7 --n-star 4 --method gstar --split test5 --run-salt r1 --start 351 --count 27 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k2_gstar2_351"
+  },
+  {
+   "id": "S_k2_gstar2_378",
+   "cmd": "python main.py eval3 --set S --kappa 2 --tau 4.7 --n-star 4 --method gstar --split test5 --run-salt r1 --start 378 --count 27 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k2_gstar2_378"
+  },
+  {
+   "id": "S_k2_gstar2_405",
+   "cmd": "python main.py eval3 --set S --kappa 2 --tau 4.7 --n-star 4 --method gstar --split test5 --run-salt r1 --start 405 --count 27 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k2_gstar2_405"
+  },
+  {
+   "id": "S_k2_gstar2_432",
+   "cmd": "python main.py eval3 --set S --kappa 2 --tau 4.7 --n-star 4 --method gstar --split test5 --run-salt r1 --start 432 --count 27 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k2_gstar2_432"
+  },
+  {
+   "id": "S_k2_gstar2_459",
+   "cmd": "python main.py eval3 --set S --kappa 2 --tau 4.7 --n-star 4 --method gstar --split test5 --run-salt r1 --start 459 --count 27 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k2_gstar2_459"
+  },
+  {
+   "id": "S_k2_gstar2_486",
+   "cmd": "python main.py eval3 --set S --kappa 2 --tau 4.7 --n-star 4 --method gstar --split test5 --run-salt r1 --start 486 --count 14 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k2_gstar2_486"
+  },
+  {
+   "id": "S_k4_gstar2_000",
+   "cmd": "python main.py eval3 --set S --kappa 4 --tau 4.8 --n-star 4 --method gstar --split test5 --run-salt r1 --start 0 --count 27 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k4_gstar2_000"
+  },
+  {
+   "id": "S_k4_gstar2_027",
+   "cmd": "python main.py eval3 --set S --kappa 4 --tau 4.8 --n-star 4 --method gstar --split test5 --run-salt r1 --start 27 --count 27 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k4_gstar2_027"
+  },
+  {
+   "id": "S_k4_gstar2_054",
+   "cmd": "python main.py eval3 --set S --kappa 4 --tau 4.8 --n-star 4 --method gstar --split test5 --run-salt r1 --start 54 --count 27 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k4_gstar2_054"
+  },
+  {
+   "id": "S_k4_gstar2_081",
+   "cmd": "python main.py eval3 --set S --kappa 4 --tau 4.8 --n-star 4 --method gstar --split test5 --run-salt r1 --start 81 --count 27 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k4_gstar2_081"
+  },
+  {
+   "id": "S_k4_gstar2_108",
+   "cmd": "python main.py eval3 --set S --kappa 4 --tau 4.8 --n-star 4 --method gstar --split test5 --run-salt r1 --start 108 --count 27 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k4_gstar2_108"
+  },
+  {
+   "id": "S_k4_gstar2_135",
+   "cmd": "python main.py eval3 --set S --kappa 4 --tau 4.8 --n-star 4 --method gstar --split test5 --run-salt r1 --start 135 --count 27 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k4_gstar2_135"
+  },
+  {
+   "id": "S_k4_gstar2_162",
+   "cmd": "python main.py eval3 --set S --kappa 4 --tau 4.8 --n-star 4 --method gstar --split test5 --run-salt r1 --start 162 --count 27 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k4_gstar2_162"
+  },
+  {
+   "id": "S_k4_gstar2_189",
+   "cmd": "python main.py eval3 --set S --kappa 4 --tau 4.8 --n-star 4 --method gstar --split test5 --run-salt r1 --start 189 --count 27 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k4_gstar2_189"
+  },
+  {
+   "id": "S_k4_gstar2_216",
+   "cmd": "python main.py eval3 --set S --kappa 4 --tau 4.8 --n-star 4 --method gstar --split test5 --run-salt r1 --start 216 --count 27 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k4_gstar2_216"
+  },
+  {
+   "id": "S_k4_gstar2_243",
+   "cmd": "python main.py eval3 --set S --kappa 4 --tau 4.8 --n-star 4 --method gstar --split test5 --run-salt r1 --start 243 --count 27 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k4_gstar2_243"
+  },
+  {
+   "id": "S_k4_gstar2_270",
+   "cmd": "python main.py eval3 --set S --kappa 4 --tau 4.8 --n-star 4 --method gstar --split test5 --run-salt r1 --start 270 --count 27 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k4_gstar2_270"
+  },
+  {
+   "id": "S_k4_gstar2_297",
+   "cmd": "python main.py eval3 --set S --kappa 4 --tau 4.8 --n-star 4 --method gstar --split test5 --run-salt r1 --start 297 --count 27 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k4_gstar2_297"
+  },
+  {
+   "id": "S_k4_gstar2_324",
+   "cmd": "python main.py eval3 --set S --kappa 4 --tau 4.8 --n-star 4 --method gstar --split test5 --run-salt r1 --start 324 --count 27 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k4_gstar2_324"
+  },
+  {
+   "id": "S_k4_gstar2_351",
+   "cmd": "python main.py eval3 --set S --kappa 4 --tau 4.8 --n-star 4 --method gstar --split test5 --run-salt r1 --start 351 --count 27 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k4_gstar2_351"
+  },
+  {
+   "id": "S_k4_gstar2_378",
+   "cmd": "python main.py eval3 --set S --kappa 4 --tau 4.8 --n-star 4 --method gstar --split test5 --run-salt r1 --start 378 --count 27 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k4_gstar2_378"
+  },
+  {
+   "id": "S_k4_gstar2_405",
+   "cmd": "python main.py eval3 --set S --kappa 4 --tau 4.8 --n-star 4 --method gstar --split test5 --run-salt r1 --start 405 --count 27 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k4_gstar2_405"
+  },
+  {
+   "id": "S_k4_gstar2_432",
+   "cmd": "python main.py eval3 --set S --kappa 4 --tau 4.8 --n-star 4 --method gstar --split test5 --run-salt r1 --start 432 --count 27 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k4_gstar2_432"
+  },
+  {
+   "id": "S_k4_gstar2_459",
+   "cmd": "python main.py eval3 --set S --kappa 4 --tau 4.8 --n-star 4 --method gstar --split test5 --run-salt r1 --start 459 --count 27 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k4_gstar2_459"
+  },
+  {
+   "id": "S_k4_gstar2_486",
+   "cmd": "python main.py eval3 --set S --kappa 4 --tau 4.8 --n-star 4 --method gstar --split test5 --run-salt r1 --start 486 --count 14 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k4_gstar2_486"
+  },
+  {
+   "id": "S_k8_gstar2_000",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method gstar --split test5 --run-salt r1 --start 0 --count 22 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k8_gstar2_000"
+  },
+  {
+   "id": "S_k8_gstar2_022",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method gstar --split test5 --run-salt r1 --start 22 --count 22 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k8_gstar2_022"
+  },
+  {
+   "id": "S_k8_gstar2_044",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method gstar --split test5 --run-salt r1 --start 44 --count 22 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k8_gstar2_044"
+  },
+  {
+   "id": "S_k8_gstar2_066",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method gstar --split test5 --run-salt r1 --start 66 --count 22 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k8_gstar2_066"
+  },
+  {
+   "id": "S_k8_gstar2_088",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method gstar --split test5 --run-salt r1 --start 88 --count 22 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k8_gstar2_088"
+  },
+  {
+   "id": "S_k8_gstar2_110",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method gstar --split test5 --run-salt r1 --start 110 --count 22 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k8_gstar2_110"
+  },
+  {
+   "id": "S_k8_gstar2_132",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method gstar --split test5 --run-salt r1 --start 132 --count 22 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k8_gstar2_132"
+  },
+  {
+   "id": "S_k8_gstar2_154",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method gstar --split test5 --run-salt r1 --start 154 --count 22 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k8_gstar2_154"
+  },
+  {
+   "id": "S_k8_gstar2_176",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method gstar --split test5 --run-salt r1 --start 176 --count 22 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k8_gstar2_176"
+  },
+  {
+   "id": "S_k8_gstar2_198",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method gstar --split test5 --run-salt r1 --start 198 --count 22 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k8_gstar2_198"
+  },
+  {
+   "id": "S_k8_gstar2_220",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method gstar --split test5 --run-salt r1 --start 220 --count 22 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k8_gstar2_220"
+  },
+  {
+   "id": "S_k8_gstar2_242",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method gstar --split test5 --run-salt r1 --start 242 --count 22 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k8_gstar2_242"
+  },
+  {
+   "id": "S_k8_gstar2_264",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method gstar --split test5 --run-salt r1 --start 264 --count 22 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k8_gstar2_264"
+  },
+  {
+   "id": "S_k8_gstar2_286",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method gstar --split test5 --run-salt r1 --start 286 --count 22 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k8_gstar2_286"
+  },
+  {
+   "id": "S_k8_gstar2_308",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method gstar --split test5 --run-salt r1 --start 308 --count 22 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k8_gstar2_308"
+  },
+  {
+   "id": "S_k8_gstar2_330",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method gstar --split test5 --run-salt r1 --start 330 --count 22 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k8_gstar2_330"
+  },
+  {
+   "id": "S_k8_gstar2_352",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method gstar --split test5 --run-salt r1 --start 352 --count 22 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k8_gstar2_352"
+  },
+  {
+   "id": "S_k8_gstar2_374",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method gstar --split test5 --run-salt r1 --start 374 --count 22 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k8_gstar2_374"
+  },
+  {
+   "id": "S_k8_gstar2_396",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method gstar --split test5 --run-salt r1 --start 396 --count 22 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k8_gstar2_396"
+  },
+  {
+   "id": "S_k8_gstar2_418",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method gstar --split test5 --run-salt r1 --start 418 --count 22 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k8_gstar2_418"
+  },
+  {
+   "id": "S_k8_gstar2_440",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method gstar --split test5 --run-salt r1 --start 440 --count 22 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k8_gstar2_440"
+  },
+  {
+   "id": "S_k8_gstar2_462",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method gstar --split test5 --run-salt r1 --start 462 --count 22 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k8_gstar2_462"
+  },
+  {
+   "id": "S_k8_gstar2_484",
+   "cmd": "python main.py eval3 --set S --kappa 8 --tau 4.8 --n-star 4 --method gstar --split test5 --run-salt r1 --start 484 --count 16 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k8_gstar2_484"
+  }
+ ]
+}

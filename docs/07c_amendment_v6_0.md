@@ -70,3 +70,17 @@ Not reducible: E8 for G\* / students / RL, E10.
 ## Order
 P6 → addendum v6.1 (sizes) → E8–E12 in parallel → freeze note (no training, so the freeze is the set of files) →
 `code/analysis_v6.py` (written and committed before the first E8–E12 record is read) → stage 14 v6.
+
+## Addendum v6.1 — sizes after P6 (2026-11-10, before any E8–E12 job)
+- **P6** (`experiments/v6_p6.json`, Actions run 193; `results/v6/p6/`): pilot3 episodes 0–2 on single runners. Wall
+  per episode (s): S2 g125_512_16 21 / 25 / 27, g500_512_4 33 / 12 / 76, G\* --run-salt 24 / 21 / 91, round-0 student
+  9 / 13 / 51; A16-2 g500_512_4 91 / 78 / 47, G\* --run-salt 46 / 133 / 34; sub-16 re-read (S2, 3 v5 G\* episodes)
+  226 / 59 / 25. Consistent with the v5 test5 means (grid read-out dominates), so the estimate uses the v5 per-method
+  means and 245 s per sub-16 episode (v5 E5).
+- **TIME_ESTIMATE:** E8 302 · E9 67 · E10 33 · E11 154 · E12 177 → **≈ 733 CPU-h ≤ 800 → no reduction step applies**;
+  all rows at the v6.0 sizes. Over the 12-h wall reading of `RESTRICTS.yaml`, as in v5; the owner chose this loop.
+- **Manifests** (`code/tools_v6_manifests.py`; v5 test5 commands with new ranges / methods / outputs, ≈ 17-min jobs):
+  E8 1,169 jobs (`v6_e8_p0–p4`), E9 250 (`v6_e9_p0`), E10 125 (`v6_e10_p0`), E11 590 (`v6_e11_p0–p2`), E12 650
+  (`v6_e12_p0–p2`). Dispatched in waves (the shared 20-runner cap; GitHub drops jobs queued > 24 h), in this order:
+  E9, E10, E8, E11, E12. Time-guard stops are resumed with the same commands on the remaining episodes.
+- g_T (`gt3`) on every new E8 record of G\*, students, RL, rl_success, one job per file after they land.
