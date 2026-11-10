@@ -862,3 +862,31 @@ Run order when both papers are active: AUTOPILOT §7.
   `paper/mypaper/v3/draft_v3_stage19pass2.md`. 11,381 words (floors kept; stage 22 compresses). Number audit: 1 flag
   (0.0142, stated difference). E1–E7 only as Limitation 10.
 - **Next:** stage 20 QUALITY_GATE [v3].
+
+## Stage 20. QUALITY_GATE     [v3]
+
+- **Finished:** 2026-11-10 (run 46). Plan `plans/stage_20_quality_gate_v3.md`; template verbatim (threshold 7.5) via
+  `build_stage20.py paper/mypaper/draft_v3.md _v3`; fresh opus subagent, paper only → `paper/mypaper/20_quality_gate_v3.json`.
+- **Score 6.8 / 10 (v1 6.5, v2 5.5) → FAIL; not auto-approved** (below threshold). Numbers found internally
+  consistent. Required actions: 4 evidence-level (confirmatory fresh-object replication of the attribution on a
+  pre-specified wide grid at matched slip; friction-correlated pool + deployable prior + width sweep; simulate the
+  no-probe CSF-1 grasp; ground σ or report a σ band) and 4 paper-level (abstract / contributions readability; one
+  evidence-status legend instead of repeated hedges; reframe motivation / title; remove the Figure 1 prompt from the
+  body and supply a real Figure 2).
+- **Decision (template table):** below threshold with evidence-level weaknesses → **stage 13** (refine cycle 3 / 3,
+  the last).
+
+## LOOP MARKER — REFINE from stage 20 → stage 13     [version v3 → v4]
+
+- **Reason:** gate 6.8 < 7.5 with evidence-level required actions (`paper/mypaper/20_quality_gate_v3.json`; stage-18
+  v3 pass-2 E1–E7).
+- **Snapshot taken:** `paper/mypaper/v3/` (draft after stage 17, 19 pass 1, 19 pass 2); `results/v1–v3/` frozen;
+  v4 writes to `results/v4/`.
+- **Refine cycles used:** 3 / 3 (last). **Next stage:** 13 ITERATIVE_REFINE [v4]: amendment `docs/11_amendment_v4.md`
+  (committed now, before any v4 code / run): fresh pool `f4` + correlated pool `c4`, wide pre-specified 81-point grid,
+  confirmatory C1–C5 (Holm), σ band, friction-width sweep, no-probe CSF-1 grasp.
+- **Next steps (stage 13 [v4]):** code — pools `f4` / `c4` in `certgrip/data.py` (default paths unchanged + test),
+  protocol `noprobe` in `sim.py` (default unchanged + test), grid builder `crc_grids_11.py`, `CSF-fam` arm, manifests;
+  2-object-per-family timing pilot; then labels → grids → replays; read-out `analysis_v4.py` committed before the
+  first replay result.
+- **Resuming under version:** v4. If the v4 gate fails again → owner decision (no further loop).
