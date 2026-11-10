@@ -659,3 +659,16 @@ Run order when both papers are active: AUTOPILOT §7.
   the appendix). Number audit 0 unmatched; main session re-checked probe displacement / static-touch values against
   `19_report_rows.json`. +33 % > 30 % → **second stage-18 pass** before stage 20 (template rule).
 - **Next:** stage 18 [v2] pass 2 on `draft_v2.md`.
+
+## Stage 18. PEER_REVIEW     [v2] — pass 2
+
+- **Finished:** 2026-11-10 (run 45) on `v2/draft_v2_stage19pass1.md`. Plan `plans/stage_18_peer_review_v2_pass2.md`;
+  template verbatim (`prompts/stage18_v2_pass2_user.txt`); two fresh opus subagents. Run 1 A 4 / B 5, run 2 (RSS pair)
+  A 4 / B 5 (mean 4.5). **CRITICAL_FABRICATION: no** (≈ 190 + ≈ 240 numbers checked, ≈ 35 recomputed from raw
+  replays / labels by an independent script — all match).
+- Merged record `paper/mypaper/18_peer_review_v2_pass2.md` (P1–P9, E1–E8). Main one, verified by the main session:
+  the draft says "no equivalence test was registered" for H2b, but `docs/08b_preregistration.md` §4 item 3 registers
+  a TOST at ±0.10 (implemented in `code/analysis_crc.py`) → "registered TOST not met". Others: RAW-Qv wording, slip
+  above α per seed / refined-grid stratum, σ vs σ_p scale claim wrong, weak unshrunk comparators, force accounting
+  vs preload, §6 redundancy.
+- **Next:** stage 19 pass 2 (`prompts/stage19_v2_pass2_user.txt`, builder `build_stage19_v2.py --pass2`), then stage 20.
