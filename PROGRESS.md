@@ -1791,3 +1791,18 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
   jobs; then `analysis_v6.py --check` until complete → read-out → stage 14 [v6].
 - (run 45, 09:35 UTC) `v6_e10_p0_f1` complete (0 left); `v6_e8_p0_f1` left 2 time-guard stops → `v6_e8_p0_f2` (2 jobs)
   dispatched. `v6_e9_p0_f1`, `v6_e8_p1`, `v6_e8_p2` still queued / running.
+
+## Run 46 (2026-11-10, ≈ 14:00 UTC) — stage 13 [v6] wave 3 dispatch
+
+- Wave 2 finished (Actions runs 197–202, all success; runners idle since ≈ 11:45 UTC). `--check` counts only, no outcome read.
+- Follow-ups (`tools_resume_manifest.py`): `v6_e9_p0_f2` (4), `v6_e8_p1_f1` (33), `v6_e8_p2_f1` (33); `v6_e8_p0_f2` and
+  `v6_e10_p0_f1` left 0 → E10 and E8 p0 complete.
+- **Wave 3 dispatched:** the three follow-ups + `v6_e8_p3` (250) + `v6_e8_p4` (169) + `v6_e11_p0` (250) = 739 jobs.
+  Decision: slightly above the ≈ 650 guideline, because wave 2 (642 jobs) cleared in < 4 h, so 739 is far from GitHub's
+  24 h queue limit, and without `e11_p0` the runners would sit idle ≈ 3 h before the next scheduled run. Paper 2 is
+  currently sandbox-only (no queued paper-2 jobs).
+- g_T: `code/tools_v6_gt.py` (copy of `tools_v5_gt.py` with v6 paths; gt3 ≈ 1–2 s per file) runs in the sandbox on
+  committed v6 test5 files of G\*, students, RL, rl_success → `results/v6/test5_gt/`; re-run it each run for new files.
+- **Where to resume:** when wave 3 finishes: follow-ups for `v6_e8_p3`, `v6_e8_p4`, `v6_e11_p0` (and `_f3` / `_f2` for
+  the follow-up manifests if any stop again), then `v6_e11_p1`, `v6_e11_p2`, `v6_e12_p0–p2`; `tools_v6_gt.py` for new
+  files; then `analysis_v6.py --check` until complete → read-out → stage 14 [v6].
