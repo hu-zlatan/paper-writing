@@ -1,0 +1,101 @@
+{
+ "purpose": "p2 amendment 11 W-grid replays (c4)",
+ "jobs": [
+  {
+   "id": "p2v4_c4_F1_050",
+   "cmd": "python main.py crc --grids ../v4/crc_grids_11_c4.json --pool c4 --family F1 --start 50 --count 50 --budget-minutes 60 --out ../results/v4/crc_c4/F1_050"
+  },
+  {
+   "id": "p2v4_c4_F1_100",
+   "cmd": "python main.py crc --grids ../v4/crc_grids_11_c4.json --pool c4 --family F1 --start 100 --count 50 --budget-minutes 60 --out ../results/v4/crc_c4/F1_100"
+  },
+  {
+   "id": "p2v4_c4_F1_150",
+   "cmd": "python main.py crc --grids ../v4/crc_grids_11_c4.json --pool c4 --family F1 --start 150 --count 50 --budget-minutes 60 --out ../results/v4/crc_c4/F1_150"
+  },
+  {
+   "id": "p2v4_c4_F1_200",
+   "cmd": "python main.py crc --grids ../v4/crc_grids_11_c4.json --pool c4 --family F1 --start 200 --count 50 --budget-minutes 60 --out ../results/v4/crc_c4/F1_200"
+  },
+  {
+   "id": "p2v4_c4_F1_250",
+   "cmd": "python main.py crc --grids ../v4/crc_grids_11_c4.json --pool c4 --family F1 --start 250 --count 50 --budget-minutes 60 --out ../results/v4/crc_c4/F1_250"
+  },
+  {
+   "id": "p2v4_c4_F1_300",
+   "cmd": "python main.py crc --grids ../v4/crc_grids_11_c4.json --pool c4 --family F1 --start 300 --count 50 --budget-minutes 60 --out ../results/v4/crc_c4/F1_300"
+  },
+  {
+   "id": "p2v4_c4_F2_050",
+   "cmd": "python main.py crc --grids ../v4/crc_grids_11_c4.json --pool c4 --family F2 --start 50 --count 50 --budget-minutes 60 --out ../results/v4/crc_c4/F2_050"
+  },
+  {
+   "id": "p2v4_c4_F2_100",
+   "cmd": "python main.py crc --grids ../v4/crc_grids_11_c4.json --pool c4 --family F2 --start 100 --count 50 --budget-minutes 60 --out ../results/v4/crc_c4/F2_100"
+  },
+  {
+   "id": "p2v4_c4_F2_150",
+   "cmd": "python main.py crc --grids ../v4/crc_grids_11_c4.json --pool c4 --family F2 --start 150 --count 50 --budget-minutes 60 --out ../results/v4/crc_c4/F2_150"
+  },
+  {
+   "id": "p2v4_c4_F2_200",
+   "cmd": "python main.py crc --grids ../v4/crc_grids_11_c4.json --pool c4 --family F2 --start 200 --count 50 --budget-minutes 60 --out ../results/v4/crc_c4/F2_200"
+  },
+  {
+   "id": "p2v4_c4_F2_250",
+   "cmd": "python main.py crc --grids ../v4/crc_grids_11_c4.json --pool c4 --family F2 --start 250 --count 50 --budget-minutes 60 --out ../results/v4/crc_c4/F2_250"
+  },
+  {
+   "id": "p2v4_c4_F2_300",
+   "cmd": "python main.py crc --grids ../v4/crc_grids_11_c4.json --pool c4 --family F2 --start 300 --count 50 --budget-minutes 60 --out ../results/v4/crc_c4/F2_300"
+  },
+  {
+   "id": "p2v4_c4_F3_050",
+   "cmd": "python main.py crc --grids ../v4/crc_grids_11_c4.json --pool c4 --family F3 --start 50 --count 50 --budget-minutes 60 --out ../results/v4/crc_c4/F3_050"
+  },
+  {
+   "id": "p2v4_c4_F3_100",
+   "cmd": "python main.py crc --grids ../v4/crc_grids_11_c4.json --pool c4 --family F3 --start 100 --count 50 --budget-minutes 60 --out ../results/v4/crc_c4/F3_100"
+  },
+  {
+   "id": "p2v4_c4_F3_150",
+   "cmd": "python main.py crc --grids ../v4/crc_grids_11_c4.json --pool c4 --family F3 --start 150 --count 50 --budget-minutes 60 --out ../results/v4/crc_c4/F3_150"
+  },
+  {
+   "id": "p2v4_c4_F3_200",
+   "cmd": "python main.py crc --grids ../v4/crc_grids_11_c4.json --pool c4 --family F3 --start 200 --count 50 --budget-minutes 60 --out ../results/v4/crc_c4/F3_200"
+  },
+  {
+   "id": "p2v4_c4_F3_250",
+   "cmd": "python main.py crc --grids ../v4/crc_grids_11_c4.json --pool c4 --family F3 --start 250 --count 50 --budget-minutes 60 --out ../results/v4/crc_c4/F3_250"
+  },
+  {
+   "id": "p2v4_c4_F3_300",
+   "cmd": "python main.py crc --grids ../v4/crc_grids_11_c4.json --pool c4 --family F3 --start 300 --count 50 --budget-minutes 60 --out ../results/v4/crc_c4/F3_300"
+  },
+  {
+   "id": "p2v4_c4_F4_050",
+   "cmd": "python main.py crc --grids ../v4/crc_grids_11_c4.json --pool c4 --family F4 --start 50 --count 50 --budget-minutes 60 --out ../results/v4/crc_c4/F4_050"
+  },
+  {
+   "id": "p2v4_c4_F4_100",
+   "cmd": "python main.py crc --grids ../v4/crc_grids_11_c4.json --pool c4 --family F4 --start 100 --count 50 --budget-minutes 60 --out ../results/v4/crc_c4/F4_100"
+  },
+  {
+   "id": "p2v4_c4_F4_150",
+   "cmd": "python main.py crc --grids ../v4/crc_grids_11_c4.json --pool c4 --family F4 --start 150 --count 50 --budget-minutes 60 --out ../results/v4/crc_c4/F4_150"
+  },
+  {
+   "id": "p2v4_c4_F4_200",
+   "cmd": "python main.py crc --grids ../v4/crc_grids_11_c4.json --pool c4 --family F4 --start 200 --count 50 --budget-minutes 60 --out ../results/v4/crc_c4/F4_200"
+  },
+  {
+   "id": "p2v4_c4_F4_250",
+   "cmd": "python main.py crc --grids ../v4/crc_grids_11_c4.json --pool c4 --family F4 --start 250 --count 50 --budget-minutes 60 --out ../results/v4/crc_c4/F4_250"
+  },
+  {
+   "id": "p2v4_c4_F4_300",
+   "cmd": "python main.py crc --grids ../v4/crc_grids_11_c4.json --pool c4 --family F4 --start 300 --count 50 --budget-minutes 60 --out ../results/v4/crc_c4/F4_300"
+  }
+ ]
+}

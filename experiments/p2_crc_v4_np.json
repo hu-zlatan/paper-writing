@@ -1,0 +1,37 @@
+{
+ "purpose": "p2 amendment 11 W-grid replays (np)",
+ "jobs": [
+  {
+   "id": "p2v4_np_F1_000",
+   "cmd": "python main.py crc --grids ../v4/crc_grids_11_np.json --pool f4 --rep-protocol noprobe --family F1 --start 0 --count 150 --budget-minutes 60 --out ../results/v4/crc_np/F1_000"
+  },
+  {
+   "id": "p2v4_np_F1_150",
+   "cmd": "python main.py crc --grids ../v4/crc_grids_11_np.json --pool f4 --rep-protocol noprobe --family F1 --start 150 --count 150 --budget-minutes 60 --out ../results/v4/crc_np/F1_150"
+  },
+  {
+   "id": "p2v4_np_F2_000",
+   "cmd": "python main.py crc --grids ../v4/crc_grids_11_np.json --pool f4 --rep-protocol noprobe --family F2 --start 0 --count 150 --budget-minutes 60 --out ../results/v4/crc_np/F2_000"
+  },
+  {
+   "id": "p2v4_np_F2_150",
+   "cmd": "python main.py crc --grids ../v4/crc_grids_11_np.json --pool f4 --rep-protocol noprobe --family F2 --start 150 --count 150 --budget-minutes 60 --out ../results/v4/crc_np/F2_150"
+  },
+  {
+   "id": "p2v4_np_F3_000",
+   "cmd": "python main.py crc --grids ../v4/crc_grids_11_np.json --pool f4 --rep-protocol noprobe --family F3 --start 0 --count 150 --budget-minutes 60 --out ../results/v4/crc_np/F3_000"
+  },
+  {
+   "id": "p2v4_np_F3_150",
+   "cmd": "python main.py crc --grids ../v4/crc_grids_11_np.json --pool f4 --rep-protocol noprobe --family F3 --start 150 --count 150 --budget-minutes 60 --out ../results/v4/crc_np/F3_150"
+  },
+  {
+   "id": "p2v4_np_F4_000",
+   "cmd": "python main.py crc --grids ../v4/crc_grids_11_np.json --pool f4 --rep-protocol noprobe --family F4 --start 0 --count 150 --budget-minutes 60 --out ../results/v4/crc_np/F4_000"
+  },
+  {
+   "id": "p2v4_np_F4_150",
+   "cmd": "python main.py crc --grids ../v4/crc_grids_11_np.json --pool f4 --rep-protocol noprobe --family F4 --start 150 --count 150 --budget-minutes 60 --out ../results/v4/crc_np/F4_150"
+  }
+ ]
+}

@@ -890,3 +890,19 @@ Run order when both papers are active: AUTOPILOT §7.
   2-object-per-family timing pilot; then labels → grids → replays; read-out `analysis_v4.py` committed before the
   first replay result.
 - **Resuming under version:** v4. If the v4 gate fails again → owner decision (no further loop).
+
+## Stage 13. ITERATIVE_REFINE     [v4] (in progress)
+
+- **Started:** 2026-11-10 (run 46). Amendment `docs/11_amendment_v4.md` committed before any v4 code.
+- Code (each committed before use, defaults reproduce v1 — 46 tests pass): pools `f4` / `c4` + protocol `noprobe`
+  (`certgrip/data.py`, `sim.py`, `tests/test_v4.py`); `main.py crc --pool / --rep-protocol`; `predict_v4.py` (frozen
+  v1 seed-0 fits re-fitted with the stored best config; reproduce all 18,600 stored v1 predictions to 5e-7);
+  `crc_grids_11.py` (W grids, selection rows only); read-out `analysis_v4.py` + synthetic test, committed **before any
+  v4 replay**.
+- Timing pilot `results/v4/pilot/` → ≈ 15 CPU-h, no reduction. Labels `results/v4/labels/` (f4 4,800, c4 5,600
+  instances, sandbox). Preds `results/v4/preds/`; grids `results/v4/crc_grids_11_{f4,c4,np}.json` (CSF-fam μ̄ from c4
+  selection objects: F1 0.379, F2 0.496, F3 0.677, F4 0.852).
+- **Dispatched:** `experiments/p2_crc_v4_{f4,c4,np}.json` (48 + 24 + 8 jobs, workdir `papers/p2/code`); they queue
+  behind paper 1's wave 3.
+- **Where to resume:** when the runs finish: `python analysis_v4.py --check` (counts only); time-guard stops → follow-up
+  manifests (crc lines carry EARLY_STOP next_index); when complete → `python analysis_v4.py` → stage 14 [v4].
