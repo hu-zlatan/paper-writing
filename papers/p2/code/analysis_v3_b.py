@@ -4,7 +4,7 @@ v1 08c replays (results/v1/crc/*.jsonl). Same instances, same v1 cal / test spli
 Registered read-out: D(full_rd@s#0 vs CSF-shrunk@s) with CI** (s 0.2, 0.4); also D(CSF-shrunk@s vs CSF-1) and arm
 slip / RE / lambda-hat index (edge flag if a stratum's lambda-hat is on grid index 0 or 19 -> 08e recipe per the
 amendment, reported). Refuses to compute unless every instance has exactly one v3 replay line.
-CI** as code/analysis_crc.py.  Writes results/v3/b1_analysis.json.  usage: python analysis_v3_b.py [--check]"""
+CI** as code/analysis_crc.py.  Writes results/v3/b1_analysis.json.  usage: python analysis_v3_b.py [--check] [--edge [--samegrid]]"""
 import argparse
 import glob
 import json
@@ -40,7 +40,10 @@ def main():
     ap.add_argument("--check", action="store_true")
     ap.add_argument("--draws", type=int, default=2000)
     ap.add_argument("--edge", action="store_true")
+    ap.add_argument("--samegrid", action="store_true",
+                    help="with --edge: full_rd / CSF-1 from their 08e-recipe replays (v1/crc_v2) instead of 08c")
     a = ap.parse_args()
+    assert not a.samegrid or a.edge
     global EDGE
     EDGE = a.edge
     G3, keys3, rep3, missing, dup = load_v3()
@@ -49,7 +52,7 @@ def main():
         if (missing or dup) and not a.check:
             print("incomplete: refusing to analyse")
         return
-    A.V2 = False
+    A.V2 = a.samegrid
     G, keys, idx, rep, miss1, _ = A.load_real()
     assert not miss1 and keys == keys3
     D = A.build(G, keys, rep)
@@ -98,7 +101,8 @@ def main():
            "rows": {k: {"point": point[k], "CI**": V.ci_of(boot[k]),
                         **({"decision": V.label(V.ci_of(boot[k]))} if k.startswith("D:") else {})} for k in point}}
     os.makedirs(os.path.join(A.ROOT, "v3"), exist_ok=True)
-    name = "b1_analysis_edge.json" if EDGE else "b1_analysis.json"
+    name = ("b1_analysis_edge_samegrid.json" if a.samegrid else "b1_analysis_edge.json") if EDGE else "b1_analysis.json"
+    res["comparator_grids"] = "08e recipe (v1/crc_v2)" if a.samegrid else "08c recipe (v1/crc)"
     json.dump(res, open(os.path.join(A.ROOT, "v3", name), "w"), indent=1)
     print("wrote results/v3/" + name)
 
