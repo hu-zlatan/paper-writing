@@ -1806,3 +1806,7 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
 - **Where to resume:** when wave 3 finishes: follow-ups for `v6_e8_p3`, `v6_e8_p4`, `v6_e11_p0` (and `_f3` / `_f2` for
   the follow-up manifests if any stop again), then `v6_e11_p1`, `v6_e11_p2`, `v6_e12_p0–p2`; `tools_v6_gt.py` for new
   files; then `analysis_v6.py --check` until complete → read-out → stage 14 [v6].
+- (run 46, ≈ 15:45 UTC) `v6_e9_p0_f2`, `v6_e8_p1_f1`, `v6_e8_p2_f1` complete (0 left) → **E9, E10, E8 p0–p2
+  complete**. `v6_e8_p3`, `v6_e8_p4`, `v6_e11_p0` running. g_T: `tools_v6_gt.py` ran in the sandbox on all v6 test5
+  files committed before ≈ 14:00 (533+ outputs committed; files landing later need a re-run). Paper 2's 80 v4 replay
+  jobs were dispatched behind these.
