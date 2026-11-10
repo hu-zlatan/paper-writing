@@ -16,9 +16,11 @@ from .sim import Instance
 
 FAMILIES = ("F1", "F2", "F3", "F4")
 DISTS = ("D1", "D2", "D3", "D4")
-SALT = {"id": 1001, "s2": 2002, "pilot": 3003}       # pool -> salt (disjoint objects across pools)
-N_OBJ = {"id": 500, "s2": 550, "pilot": 225}   # pilot 0-24 first pilot / detector tuning; 25-124 attempt 1 (discarded);
+SALT = {"id": 1001, "s2": 2002, "pilot": 3003,      # pool -> salt (disjoint objects across pools)
+        "f4": 4004, "c4": 5005}                      # amendment 11: fresh pool f4, friction-correlated pool c4
+N_OBJ = {"id": 500, "s2": 550, "pilot": 225, "f4": 300, "c4": 350}   # pilot 0-24 first pilot / detector tuning; 25-124 attempt 1 (discarded);
 #                                               125-224 re-pilot under the frozen 08a protocol
+MU_BAND = {"F1": (0.30, 0.45), "F2": (0.40, 0.60), "F3": (0.55, 0.80), "F4": (0.70, 1.00)}   # c4 (amendment 11)
 SHIFTS = {None: {}, "S1": {"mu": 0.6}, "S1m": {"mu": 0.9}, "S3": {"amp": 1.5}}
 
 
@@ -30,6 +32,10 @@ def split_of(pool: str, obj: int) -> str:
         return "train" if obj < 150 else "select" if obj < 200 else "cal" if obj < 325 else "test"
     if pool == "s2":
         return "oracle" if obj < 175 else "stream"
+    if pool == "f4":      # amendment 11: 0-124 cal, 125-299 test
+        return "cal" if obj < 125 else "test"
+    if pool == "c4":      # amendment 11: 0-49 selection, 50-174 cal, 175-349 test
+        return "select" if obj < 50 else "cal" if obj < 175 else "test"
     return "pilot"
 
 
@@ -50,7 +56,8 @@ def _fam_index(family: str) -> int:
 
 def sample_object(pool: str, family: str, obj: int) -> dict:
     rng = np.random.default_rng([SALT[pool], _fam_index(family), obj])
-    mu = float(np.exp(rng.uniform(np.log(0.3), np.log(1.0))))
+    lo, hi = MU_BAND[family] if pool == "c4" else (0.3, 1.0)       # one draw either way (draw order unchanged)
+    mu = float(np.exp(rng.uniform(np.log(lo), np.log(hi))))
     mass = float(np.exp(rng.uniform(np.log(0.05), np.log(1.0))))
     if family in ("F1", "F4"):
         size = (rng.uniform(0.015, 0.035), rng.uniform(0.015, 0.035), rng.uniform(0.02, 0.05))

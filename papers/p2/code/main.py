@@ -304,7 +304,7 @@ def main(argv=None):
     sub = ap.add_subparsers(dest="cmd", required=True)
     for name in ("label", "mono", "timing"):
         p = sub.add_parser(name)
-        p.add_argument("--pool", default="pilot", choices=["id", "s2", "pilot"])
+        p.add_argument("--pool", default="pilot", choices=["id", "s2", "pilot", "f4", "c4"])
         p.add_argument("--family", default="F1", choices=["F1", "F2", "F3", "F4", "F5"])
         p.add_argument("--start", type=int, default=0)
         p.add_argument("--count", type=int, default=1)
@@ -317,7 +317,7 @@ def main(argv=None):
         p.add_argument("--grid", type=int, default=35)
         p.add_argument("--design", default="grid", choices=["grid", "h1m"], help="mono only: pilot grid or frozen H1-M design")
         p.add_argument("--budget-minutes", type=float, default=25.0)
-        p.add_argument("--protocol", default="squeeze", choices=["squeeze", "rd"],
+        p.add_argument("--protocol", default="squeeze", choices=["squeeze", "rd", "noprobe"],
                        help="squeeze = stage-9 design; rd = amendment 08a ramp-down probe (the frozen study uses rd)")
         p.add_argument("--out", required=True)
     fi = sub.add_parser("fit", help="stage 12: train one arm on the id train objects; predict log F for every row")

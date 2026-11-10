@@ -139,8 +139,10 @@ class Sim:
     def __init__(self, inst: Instance, F0: float, delta_t: float = 0.002, rot_t_deg: float = 3.0,
                  rampdown: bool = False, protocol: str = "squeeze"):
         """protocol "squeeze" = original design (stage 9); "rd" = amendment 08a (squeeze, then ramp-down probe with
-        the touch-only detector; slip measured from the pose before the probe, so probe slip counts)."""
-        assert protocol in ("squeeze", "rd")
+        the touch-only detector; slip measured from the pose before the probe, so probe slip counts); "noprobe" =
+        amendment 11 S6: preload, then directly the ramp to F (no squeeze, no ramp-down; slip from the post-preload
+        pose)."""
+        assert protocol in ("squeeze", "rd", "noprobe")
         self.inst, self.F0, self.rampdown, self.protocol = inst, F0, rampdown, protocol
         self.delta_t, self.rot_t = delta_t, math.radians(rot_t_deg)
         self.m = mujoco.MjModel.from_xml_string(build_xml(inst))
@@ -300,20 +302,23 @@ class Sim:
             feats["touch_preload"] = self._touch()
             feats["aperture"] = float(d.qpos[m.joint("jR").qposadr[0]] - d.qpos[m.joint("jL").qposadr[0]])
         pre_slip = False
-        # 2. probe squeeze F0 -> 1.5F0 -> F0
-        n_probe = int(T_PROBE / DT)
-        probe = []
-        for k in range(n_probe):
-            s = k / n_probe
-            self._set_force(self.F0 * (1 + 0.5 * math.sin(math.pi * s)))
-            self._step()
-            if record and k % 15 == 0:
-                probe.append(self._touch())
-        if record:
-            feats["touch_probe"] = np.array(probe)
-            feats["aperture_probe"] = float(d.qpos[m.joint("jR").qposadr[0]] - d.qpos[m.joint("jL").qposadr[0]])
-        p1, a1 = self._rel_pose()
-        pre_slip = bool(tangential_disp(p1 - p0) > self.delta_t)
+        if self.protocol == "noprobe":   # amendment 11 S6: no squeeze, no ramp-down
+            p1, a1 = p0, a0
+        else:
+            # 2. probe squeeze F0 -> 1.5F0 -> F0
+            n_probe = int(T_PROBE / DT)
+            probe = []
+            for k in range(n_probe):
+                s = k / n_probe
+                self._set_force(self.F0 * (1 + 0.5 * math.sin(math.pi * s)))
+                self._step()
+                if record and k % 15 == 0:
+                    probe.append(self._touch())
+            if record:
+                feats["touch_probe"] = np.array(probe)
+                feats["aperture_probe"] = float(d.qpos[m.joint("jR").qposadr[0]] - d.qpos[m.joint("jL").qposadr[0]])
+            p1, a1 = self._rel_pose()
+            pre_slip = bool(tangential_disp(p1 - p0) > self.delta_t)
         if self.protocol == "rd":   # 2b'. amendment 08a probe; the slip reference stays at the pre-probe pose
             rdt = self._rd_touch_probe(record)
             if record:
