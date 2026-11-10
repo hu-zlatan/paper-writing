@@ -1810,3 +1810,17 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
   complete**. `v6_e8_p3`, `v6_e8_p4`, `v6_e11_p0` running. g_T: `tools_v6_gt.py` ran in the sandbox on all v6 test5
   files committed before ≈ 14:00 (533+ outputs committed; files landing later need a re-run). Paper 2's 80 v4 replay
   jobs were dispatched behind these.
+
+## Run 47 (2026-11-10, ≈ 19:50 UTC) — stage 13 [v6] wave 4 dispatch
+
+- Wave 3 finished (Actions runs 203–208, all success; paper 2's v4 runs 209–211 also done; runners idle).
+  `--check` counts only, no outcome read.
+- Follow-ups (`tools_resume_manifest.py`): `v6_e8_p3_f1` (27), `v6_e8_p4_f1` (12), `v6_e11_p0_f1` (36).
+- **Wave 4 dispatched:** the three follow-ups + `v6_e11_p1` (250) + `v6_e11_p2` (90) + `v6_e12_p0` (250) = 665 jobs
+  (≈ the 650 guideline; `v6_e12_p1`, `v6_e12_p2` held for the next wave).
+- g_T: `tools_v6_gt.py` on all newly committed test5 files → 886 outputs in `results/v6/test5_gt/`.
+- `--check` now: test5 0–499 rows S2 10,972 / 13,500, S4 8,466 / 11,000, S8 8,485 / 11,000, S12 12,430 / 13,500,
+  A16-2 10,924 / 11,000 (rest = E11 students, in this wave); E12 started (S2 / S12 gstar + s701 100 each).
+- **Where to resume:** when wave 4 finishes: follow-ups for `v6_e11_p1`, `v6_e11_p2`, `v6_e12_p0` and `_f2` for the
+  three `_f1` manifests; then `v6_e12_p1`, `v6_e12_p2`; `tools_v6_gt.py` for new files; `analysis_v6.py --check`
+  until complete → read-out → stage 14 [v6].
