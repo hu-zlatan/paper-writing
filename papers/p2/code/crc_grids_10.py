@@ -57,5 +57,34 @@ def main():
     print(f"instances: {len(ct)}")
 
 
+def main_edge(s=0.2):
+    """Amendment 10 B1 edge rule: CSF-shrunk@0.2 put lambda-hat on grid index 0 in D1 / D2 (results/v3/b1_analysis.json),
+    so that arm is re-gridded with the 08e recipe (per-stratum q_sel on the selection split, +-0.8, 41 points), same
+    (a, b) as in crc_grids_10.json. Writes results/v3/crc_grids_10e.json."""
+    rows = load_rows("v1/labels/*.jsonl")
+    ks = hashlib.sha256(json.dumps([list(key(r)) for r in rows]).encode()).hexdigest()
+    G10 = json.load(open(os.path.join(ROOT, "v3/crc_grids_10.json")))
+    ols = G10["arms"][f"CSF-shrunk@{s}"]["ols"]
+    unshift_id = [r["pool"] == "id" and r["shift"] is None for r in rows]
+    sel = np.array([u and r["split"] == "select" and not r["unavoidable"] for u, r in zip(unshift_id, rows)])
+    ct = [i for i, (u, r) in enumerate(zip(unshift_id, rows)) if u and r["split"] in ("cal", "test")]
+    dist = np.array([r["dist"] for r in rows])
+    log_fhi = np.log([r["F_hi"] if r["F_hi"] else 1.0 for r in rows])
+    lg = np.log([f_shrunk(r, s, ols["a"], ols["b"]) for r in rows])
+    grids, qs = {}, {}
+    for d in ("D1", "D2", "D3", "D4"):
+        m = sel & (dist == d)
+        qs[d] = qhat(log_fhi[m] - lg[m], ALPHA)
+        grids[d] = [round(float(x), 6) for x in qs[d] + np.linspace(-0.8, 0.8, 41)]
+    out = {"purpose": f"p2 amendment 10 B1 edge rule: CSF-shrunk@{s} on 08e-recipe grids", "alpha": ALPHA,
+           "n_grid": 41, "half_width": 0.8, "F_max": 100.0, "keys_sha256": ks,
+           "instances": [list(key(rows[i])) for i in ct],
+           "arms": {f"CSF-shrunk@{s}": {"kind": "shrunk", "source": s, "ols": ols, "q_sel": qs, "grids": grids,
+                                        "log_g": [round(float(lg[i]), 6) for i in ct]}}}
+    json.dump(out, open(os.path.join(ROOT, "v3/crc_grids_10e.json"), "w"))
+    print(qs)
+
+
 if __name__ == "__main__":
-    main()
+    import sys
+    main_edge() if "--edge" in sys.argv else main()

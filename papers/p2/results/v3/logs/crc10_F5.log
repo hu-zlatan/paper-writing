@@ -1,0 +1,3 @@
+usage: main.py crc [-h] --family {F1,F2,F3,F4} --start START --count COUNT
+                   [--budget-minutes BUDGET_MINUTES] [--grids GRIDS] --out OUT
+main.py crc: error: argument --family: invalid choice: 'F5' (choose from 'F1', 'F2', 'F3', 'F4')

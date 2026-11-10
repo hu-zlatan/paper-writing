@@ -735,3 +735,13 @@ Run order when both papers are active: AUTOPILOT §7.
     ≈ 13.1 + 12.9 + 1.4 N·s for every arm.
   - A3 (Holm as registered) not yet run.
 - **Next:** A3 Holm; B1 shrunk plug-in grids + replay manifest; B3 pilot; B2 controller code + pilot.
+- **B1 shrunk plug-in done (sandbox, run 45):** grids `results/v3/crc_grids_10.json` (OLS on 800 selection rows:
+  σ 0.2 a −0.386 b 0.740; σ 0.4 a −0.474 b 0.404), replays `results/v3/crc10/` (4,800 instances, protocol rd),
+  read-out `results/v3/b1_analysis.json` (`code/analysis_v3_b.py`, committed before the replays finished):
+  D(CertGrip-full vs shrunk plug-in) σ 0.2 −0.0322 [−0.0982, 0.0743] not shown; **σ 0.4 −0.1395 [−0.1832, −0.0126]
+  inferiority** (the registered prediction "advantage shrinks, CI includes 0" was wrong in direction: a shrunk
+  one-line plug-in beats the learned model at σ 0.4). Shrunk plug-in vs CSF-1: 0.435 (σ 0.2), 0.2454 (σ 0.4), both
+  superiority. **Edge rule triggered** for CSF-shrunk@0.2 (λ̂ at index 0 in D1 / D2) → 08e-recipe grids
+  `results/v3/crc_grids_10e.json`; replays `results/v3/crc10e/` queued in the sandbox after B3
+  (`analysis_v3_b.py --edge`). σ 0.4 not on an edge (index 1).
+- **B3 running (sandbox):** 100 new streams → `results/v3/b3/`; v2 streams reused (60-step determinism check exact).

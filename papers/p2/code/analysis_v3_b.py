@@ -18,11 +18,14 @@ import analysis_v3_a as V
 SIG = (0.2, 0.4)
 
 
+EDGE = False   # --edge: CSF-shrunk@0.2 on the 08e-recipe grids (results/v3/crc_grids_10e.json, replays v3/crc10e/)
+
+
 def load_v3():
-    G = json.load(open(os.path.join(A.ROOT, "v3/crc_grids_10.json")))
+    G = json.load(open(os.path.join(A.ROOT, "v3/crc_grids_10e.json" if EDGE else "v3/crc_grids_10.json")))
     keys = [tuple(k) for k in G["instances"]]
     rep = {}
-    for f in sorted(glob.glob(os.path.join(A.ROOT, "v3/crc10/*.jsonl"))):
+    for f in sorted(glob.glob(os.path.join(A.ROOT, "v3/crc10e/*.jsonl" if EDGE else "v3/crc10/*.jsonl"))):
         for line in open(f):
             r = json.loads(line)
             if "key" in r:
@@ -36,7 +39,10 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--check", action="store_true")
     ap.add_argument("--draws", type=int, default=2000)
+    ap.add_argument("--edge", action="store_true")
     a = ap.parse_args()
+    global EDGE
+    EDGE = a.edge
     G3, keys3, rep3, missing, dup = load_v3()
     print(f"v3 instances {len(keys3)}, with replays {len(keys3) - len(missing)}, duplicates {dup}")
     if a.check or missing or dup:
@@ -64,6 +70,8 @@ def main():
         m = {arm: V.metrics(D, arm, ci, ti, "crc") for arm in D["L"]}
         v = {}
         for s in SIG:
+            if f"CSF-shrunk@{s}" not in m:
+                continue
             sh, fu = f"CSF-shrunk@{s}", f"full_rd@{s}#0"
             v[f"D:{fu}_vs_{sh}"] = 1 - m[fu]["RE_mid"] / m[sh]["RE_mid"]
             v[f"D:{sh}_vs_CSF-1"] = 1 - m[sh]["RE_mid"] / m["CSF-1"]["RE_mid"]
@@ -90,8 +98,9 @@ def main():
            "rows": {k: {"point": point[k], "CI**": V.ci_of(boot[k]),
                         **({"decision": V.label(V.ci_of(boot[k]))} if k.startswith("D:") else {})} for k in point}}
     os.makedirs(os.path.join(A.ROOT, "v3"), exist_ok=True)
-    json.dump(res, open(os.path.join(A.ROOT, "v3/b1_analysis.json"), "w"), indent=1)
-    print("wrote results/v3/b1_analysis.json")
+    name = "b1_analysis_edge.json" if EDGE else "b1_analysis.json"
+    json.dump(res, open(os.path.join(A.ROOT, "v3", name), "w"), indent=1)
+    print("wrote results/v3/" + name)
 
 
 if __name__ == "__main__":
