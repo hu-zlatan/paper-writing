@@ -20,8 +20,8 @@ if PASS2:
                + "\n\n=== Full review pass 2 run 2 (paper/mypaper/18_review_v3_pass2_run2.md) ===\n"
                + rd("paper/mypaper/18_review_v3_pass2_run2.md")
                + "\n\n=== BINDING for this revision (main session) ===\n"
-               "- Address must-fix items P1-P9 of the merged record with targeted edits; do not rewrite sections that "
-               "the record does not touch. E1-E8 need new experiments or analyses and are NOT to be simulated in text: "
+               "- Address must-fix items P1-P8 of the merged record with targeted edits; do not rewrite sections that "
+               "the record does not touch. E1-E7 need new experiments or analyses and are NOT to be simulated in text: "
                "only as limitations / future work. No citations outside docs/05_knowledge_cards.json.\n"
                "- New numbers only from results/v1/results_v1.json or results/v2/results_v2.json or results/v3/results_v3.json (open them under "
                "/home/claude/paper-writing/papers/p2) or constants quoted from the design docs (docs/07*, 08a-08h, 09, 10). "
