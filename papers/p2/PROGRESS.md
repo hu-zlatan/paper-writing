@@ -790,3 +790,11 @@ Run order when both papers are active: AUTOPILOT §7.
   μ ∈ [0.5, 0.8] sub-pools; a shrunk plug-in beats the learned model at σ 0.4; reactive controllers fail; Holm changes
   no v1 verdict. Gap found: A7 integrated force / break-even (registered) not produced by code.
 - **Next:** stage 15 RESEARCH_DECISION [v3] (refine cycles 2 / 3 used).
+
+## Stage 15. RESEARCH_DECISION     [v3]
+
+- **Finished:** 2026-11-10 (run 46). Plan `plans/stage_15_research_decision_v3.md`; `results/15_decision_v3.md`.
+- **Decision: PROCEED** → stage 16 [v3]. Hard rules met (H2a superiority kept at pool level on all v3 routes; Holm
+  changes no v1 verdict; ablations for probe and calibration; no fabrication). Refine cycles stay 2 / 3.
+- **Next:** A7 integrated-force / break-even by script (or state not produced); stage 16 PAPER_OUTLINE [v3] (revise
+  `paper/mypaper/` outline with v3 rows), then 17–20 by ≈ 11-24.
