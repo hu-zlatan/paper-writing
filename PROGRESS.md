@@ -8,8 +8,8 @@
 **Target venue:** RSS 2027 — Stage 1 extended abstract 2026-12-04 23:59 AoE; Stage 2 full paper (invited) 2027-04-16 23:59 AoE (verified 2026-10-28 at https://roboticsconference.org/information/cfp/)
 **Topic:** Amortized, non-myopic active tactile localization (TouchBED)
 **Initialised:** 2026-10-28T07:56:44Z
-**Current version:** v5
-**Latest stage:** Stage 20 QUALITY_GATE [v5] = 5.5 / 10, FAIL (evidence-level), refine cap 4 / 4 used → STOPPED, waiting for the owner's direction (OWNER_TODO run 41); only low-risk paper-level work meanwhile; see run 41 at the end of this file
+**Current version:** v6
+**Latest stage:** LOOP MARKER v5 → v6 (owner, 2026-11-10) → stage 13 ITERATIVE_REFINE [v6]: amendment v6.0 written, P6 timing pilot next
 
 ---
 
@@ -1745,3 +1745,19 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
   before this run); the run reset its local copy to origin/main and pushed only fast-forward commits.
 - **Where to resume (run 44):** paper 1 — owner decision; meanwhile the low-risk items (3 [CITE-MISSING], Figure 1
   panel D, internal identifiers). Paper 2 — `papers/p2/PROGRESS.md` (v2 stage 13: B3 pilot, then 14–20).
+
+## LOOP MARKER — REFINE from stage 20 → stage 13     [version v5 → v6]
+
+- **Reason:** stage 20 [v5] 5.5 / 10 < 7.5 with evidence-level required actions (`paper/mypaper/v5/20_quality_gate.json`).
+  The refine cap was used (4 / 4); on 2026-11-10 the owner chose, in chat, to open v6 for new experiments ("开 v6") and
+  raised `max_refine_cycles` to 5 (AUTOPILOT §1, RESTRICTS.yaml, OWNER_TODO). Refine cycle 5.
+- **Snapshot taken:** `results/v5/` stays as is (v6 writes to `results/v6/`); paper → `paper/mypaper/v5/`
+  (`draft_v5_final.md`, `00_outline_v5.md`, `18_peer_review.md`, `20_quality_gate.json`, plus the stage-17/19 drafts).
+- **Design (written before any v6 run):** `docs/07c_amendment_v6_0.md` — E8 test5 300–499 (fresh), E9 reduced G\* on
+  test5 0–499, E10 second G\* run (`eval3 --run-salt`, new opt-in flag, default reproduces v5 exactly:
+  `code/tests/test_v6.py`, 2 passed; `test_v5.py` + `test_v3_streams.py` 10 passed), E11 round-0 (BC) students, E12
+  sub-16 check in all cells; rules H6a (student vs G\* with both G\* runs, difference + TOST at 4 pp, Holm), H6b
+  (student vs reduced planners, Holm over 10), H6c (r2 vs r0, Holm over 5). ≈ 645 CPU-h estimate; P6 timing pilot and
+  a frozen reduction order before the main dispatch.
+- **Next stage:** 13 ITERATIVE_REFINE [v6] (P6 pilot → addendum v6.1 → dispatch).
+- **Resuming under version:** v6

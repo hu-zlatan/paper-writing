@@ -86,13 +86,15 @@ class History:
 
 
 def run_episode_v3(policy, lib, prior, om, s0, phi0, kappa, tau, ep_key, needs_belief=True, n_dec=2000,
-                   teacher=None, beta=0.0, mix_rng=None, evaluate=True, grid_sub=4):
+                   teacher=None, beta=0.0, mix_rng=None, evaluate=True, grid_sub=4, run_salt=None):
     """One v3 episode. The policy acts on the decision PF (needs_belief) or on the touch history. Observations come from
     stream('obs', *ep_key), so histories are rebuilt exactly by gridpost.rebuild_history.
 
     teacher: optional GStar; if given, the decision PF is always run and every visited decision is labelled with
     teacher.score_vector (amendment v3.0 C7). beta: probability that the teacher's action is executed instead of the
-    policy's (DAgger mixing, v3.0 C7); mix_rng draws that coin. evaluate: grid-evaluator read-out (v3.0 C2)."""
+    policy's (DAgger mixing, v3.0 C7); mix_rng draws that coin. evaluate: grid-evaluator read-out (v3.0 C2).
+    run_salt (amendment v6.0 E10): if given, the decision PF stream is salted, giving an independent re-run of the
+    policy's own randomness on the same episode (same state, start angle and observation stream); None = unchanged."""
     import time
 
     import numpy as np
@@ -105,7 +107,8 @@ def run_episode_v3(policy, lib, prior, om, s0, phi0, kappa, tau, ep_key, needs_b
 
     obs_rng = stream("obs", *ep_key)
     run_pf = needs_belief or teacher is not None
-    pf = ParticleFilter(lib, om, prior, n_dec, stream("pf_dec", *ep_key)) if run_pf else None
+    pf_key = ("pf_dec", *ep_key) if run_salt is None else ("pf_dec", *ep_key, "run", run_salt)
+    pf = ParticleFilter(lib, om, prior, n_dec, stream(*pf_key)) if run_pf else None
     hview = History()
     ts = TravelState(phi0, kappa, tau)
     k0, x0, y0, t0 = s0

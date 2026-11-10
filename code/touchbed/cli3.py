@@ -116,10 +116,12 @@ def cmd_eval3(a):
                 f.write(json.dumps({"EARLY_STOP_AT_80_PCT_BUDGET": True, "next_index": i}) + "\n")
                 break
             key = ep_key_v3(a.set, a.split, a.kappa, a.tau, i)
-            pol, needs, n_dec = make_policy(a.method, stream("policy", *key), a.n_star, a.weights)
+            salt = getattr(a, "run_salt", None)
+            prng = stream("policy", *key) if salt is None else stream("policy", *key, "run", salt)
+            pol, needs, n_dec = make_policy(a.method, prng, a.n_star, a.weights)
             t1 = time.time()
             r = run_episode_v3(pol, lib, prior, om, s0, phi0, a.kappa, a.tau, key, needs_belief=needs, n_dec=n_dec,
-                               evaluate=not a.no_grid, grid_sub=a.sub)
+                               evaluate=not a.no_grid, grid_sub=a.sub, run_salt=salt)
             r.pop("history")
             r.update({"episode": i, "set": a.set, "split": a.split, "kappa": a.kappa, "tau": a.tau, "method": a.method,
                       "action_set": f"{N_PHI}x8", "wall_s": time.time() - t1,
@@ -438,6 +440,8 @@ def register(sub):
     e.add_argument("--method", required=True); e.add_argument("--weights", default=None)
     e.add_argument("--n-star", type=int, default=4); e.add_argument("--sub", type=int, default=4)
     e.add_argument("--no-grid", action="store_true")
+    e.add_argument("--run-salt", default=None, help="amendment v6.0 E10: independent re-run of the policy's own "
+                   "randomness (policy + decision-PF streams salted); default None leaves every stream unchanged")
     c = sub.add_parser("calib3"); common(c, split=False); c.add_argument("--n-star", type=int, default=4)
     lb = sub.add_parser("label3"); common(lb, split=False)
     dg = sub.add_parser("dagger3"); common(dg, split=False)
