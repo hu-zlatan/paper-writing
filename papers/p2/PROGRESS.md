@@ -828,3 +828,22 @@ Run order when both papers are active: AUTOPILOT §7.
   marker (third-round CPU-hours) replaced by the truth: those sandbox runs were not logged as CPU-hours.
 - **Next:** stage 18 PEER_REVIEW [v3] (two fresh subagents, builder from `build_stage18_v2.py`), 19, second
   18/19 pass, 20.
+
+## Stage 18. PEER_REVIEW     [v3]
+
+- **Finished:** 2026-11-10 (run 46). Plan `plans/stage_18_peer_review_v3.md`; template verbatim via
+  `build_stage18_v3.py`; two fresh opus subagents. Scores: run 1 A 5 / B 4; run 2 A 4 / B 5 (mean 4.5; v2 4.75).
+  **CRITICAL_FABRICATION: no** (≈ 40 + many numbers recomputed from raw replays, all match).
+- **Code-level finding (both runs), fixed by code:** A7 omitted the probe's 0.02 s return and 0.1 s re-hold at F₀
+  (`certgrip/sim.py`). `analysis_v3_a.py::a7_force` fixed, A re-run on both grids (all other values identical),
+  `a7_integrated.json`: shared 31.0448 / probe 17.9648 N·s, break-even **16.56 s / 28.61 s** (were 13.22 / 25.28).
+- Merged record `paper/mypaper/18_peer_review_v3.md` (must-fix 1–10, E1–E6 evidence-level).
+
+## Stage 19. PAPER_REVISION     [v3] — pass 1
+
+- **Finished:** 2026-11-10 (run 46). Template verbatim via `build_stage19_v3.py`, fresh opus subagent, targeted edits;
+  snapshot `paper/mypaper/v3/draft_v3_stage19pass1.md`. All 10 items addressed (item 10 length only partly:
+  10,186 → 10,743 words; stage 22 will make the 5-page version). Floors kept. Number audit: 1 flag (0.0142, stated
+  difference). Main session checked the new A7 numbers against `a7_integrated.json` and the half-sine squeeze in
+  `sim.py`.
+- **Next:** stage 18 pass 2 [v3] (two fresh subagents), stage 19 pass 2, stage 20.
