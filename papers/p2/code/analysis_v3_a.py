@@ -230,7 +230,7 @@ def a7_force(D, cal_idx, test_idx, labs, keys):
         out["arms"][a] = {"hold_F_N_mean": float(F.mean()), "hold_F_N_median": float(np.median(F)),
                           "excess_N_mean": float(np.mean(F - fmid)), "excess_N_median": float(np.median(F - fmid))}
     # shared protocol phases (all arms are replayed with the same protocol before the hold)
-    pre, sq, rd = [], [], []
+    pre, sq, rd, ret, reh = [], [], [], [], []
     floor, T = RD2["floor"], RD2["T"]
     for i in test_idx[av]:
         rec = labs[keys[i]]["rec"]
@@ -241,8 +241,14 @@ def a7_force(D, cal_idx, test_idx, labs, keys):
         t_on = (on.get("frames") or int(T / DT)) * DT * RD2["frame_steps"] if on.get("found") else T
         t_on = min(t_on, T)
         rd.append(F0 * T / math.log(floor) * (floor ** (t_on / T) - 1))
+        # sim.py::_rd_touch_probe after the ramp-down: linear return F_end -> F0 over t_up, then F0 held 0.1 s
+        # (added run 46 after stage-18 v3 review: these segments were omitted from the first A7 read-out)
+        f_end = F0 * floor ** (t_on / T)
+        ret.append(0.5 * (f_end + F0) * RD2["t_up"])
+        reh.append(F0 * 0.1)
     out["shared_phase_force_time_Ns"] = {"preload_mean": float(np.mean(pre)), "squeeze_mean": float(np.mean(sq)),
-                                         "rampdown_mean": float(np.mean(rd)),
+                                         "rampdown_mean": float(np.mean(rd)), "return_mean": float(np.mean(ret)),
+                                         "rehold_mean": float(np.mean(reh)),
                                          "note": "common to every arm in these replays; arms differ only in the hold"}
     return out
 
