@@ -69,3 +69,22 @@ B3 **Online study with physical feedback, stronger.** As 09 B3 but S1, S2 and S3
 A: minutes (bootstrap-heavy A1: 200 splits × 3 arms × 2 grids, no replays). B1: 2 arms × 4,800 × 20 replays ≈ 0.8
 CPU-h. B2: 2 × 4,800 closed-loop replays, pilot-timed. B3: ≤ 8 CPU-h by its pilot rule. Total ≲ 12 CPU-h on GitHub
 Actions / the sandbox. Order: A (sandbox) → B1 → B3 → B2.
+
+## Addendum 10a (run 45, 2026-11-10) — B2 detector and controller fixed before any B2 code
+Written after the A1–A7 and B1 read-outs and before any B2 code or replay; it specifies only what §B2 left open
+(the hold-phase detector — the 08a onset detector works on a falling force and cannot be reused during a constant
+hold). No B2 number exists when this is committed.
+- **Observable:** the 08a noisy taxel model (`_noisy_ratio`: per-taxel multiplicative 0.05 / additive 0.002 N noise,
+  per-instance channel gain), read every 5 steps (10 ms) during settle + disturbance; r_t = T / N, smoothed over the
+  last 6 frames.
+- **Trigger:** r̄_t > r_safe on 2 consecutive frames (as the 08a `consec`), then a 30 ms refractory period.
+  Two variants, both registered: **REACT-blind** r_safe = 0.8 · μ_min (μ_min = 0.3, the pool's lower friction bound;
+  no probe, friction-blind like CSF-1) with F₀ = c · (CSF-1 nominal force); **REACT-probe** r_safe = 0.8 · μ̂ (the
+  CSF-μ̂ σ 0.2 onset estimate) with F₀ = c · (CSF-μ̂ σ 0.2 force). c ∈ {0.5, 0.75}.
+- **Action:** on each trigger F ← min(F_max, 1.25 F), ramped over 20 ms, at most 4 steps.
+- **Outcome:** the v1 slip criterion over ramp + settle + disturbance (slip before tightening counts); RE uses the
+  force at the end of the hold. Report per stratum and overall test slip, RE, mean steps and the share of instances at
+  the 4-step cap. Descriptive; no CRC variant in this loop (§B2's optional CRC arm is dropped: its λ would need a
+  grid over c × replays, beyond this loop's budget).
+- **Code:** a controller hook in `Sim.run` that is a no-op by default; a test that the default replays are
+  bit-identical to the v1 crc replays on a sample of instances, before any B2 replay.
