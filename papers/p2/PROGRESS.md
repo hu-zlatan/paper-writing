@@ -922,3 +922,12 @@ Run order when both papers are active: AUTOPILOT §7.
   with σ 0.4 and narrow friction windows (sweep 0.4314 → −0.6967); measured break-even 17.74 s / 27.07 s; certificate
   marginal (31.5–70 % of re-splits have a stratum above α).
 - **Next:** stage 15 RESEARCH_DECISION [v4] (refine cycles 3 / 3 used; no further loop without the owner).
+
+## Stage 15. RESEARCH_DECISION     [v4]
+
+- **Finished:** 2026-11-10 (run 47). Plan `plans/stage_15_research_decision_v4.md`; `results/15_decision_v4.md`.
+- **Decision: PROCEED** → stage 16 [v4]. Hard rules met (C1 / C3 superiority, Holm p < 0.005, fresh objects; ablations
+  for probe and calibration; no fabrication). Scope fixed by C4 / C5, the σ band, the width sweep and the break-even:
+  the saving holds against a friction-blind prior, with low probe noise, a wide friction range and long holds.
+  Refine cycles 3 / 3 (no further loop without the owner).
+- **Next:** stage 16 PAPER_OUTLINE [v4] (fresh subagent, template verbatim), then 17–20 by ≈ 11-24.
