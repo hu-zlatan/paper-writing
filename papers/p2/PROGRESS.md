@@ -758,5 +758,9 @@ Run order when both papers are active: AUTOPILOT §7.
   0.137 vs CSF-1 0.209 / 0.094 / 0.126 (S1 / S2 / S3). D_RE 0.31–0.44 in every window and shift (CertGrip lower force).
   Caveat for the paper: the 95 % intervals are over orderings only (fixed object pools), so they are narrow and do not
   cover object-sampling uncertainty.
-- **Pending:** B1 edge-rule replays (`results/v3/crc10e/`, running) → `analysis_v3_b.py --edge`; A3 Holm (re-draw the
-  v1 secondaries' bootstraps) — next run; then `tools_results_v3.py` and stage 14 [v3].
+- **B1 edge rule done:** replays `results/v3/crc10e/`, read-out `results/v3/b1_analysis_edge.json`: CSF-shrunk@0.2 λ̂
+  indices 20–22 of 41 (no edge), slip 0.0771, RE 0.429; D(CertGrip-full vs shrunk plug-in) σ 0.2 −0.0646 [−0.1851,
+  0.0087] not shown (this row supersedes the 08c-grid σ 0.2 row; caveat: CertGrip-full is on its 08c grid here — a
+  same-grid row against CertGrip-full's 08e replays (`results/v1/crc_v2/`) is to be added at stage 14).
+- **Pending (next run):** A3 Holm (re-draw the v1 secondaries' bootstraps per 07 §4 families); the same-grid σ 0.2
+  shrunk row; `tools_results_v3.py` → `results/v3/results_v3.json`; then stage 14 [v3] → 15 → 16–20.
