@@ -1,0 +1,13 @@
+{
+ "purpose": "v6 second follow-up of v6_e8_p0 (time-guard stops in _f1)",
+ "jobs": [
+  {
+   "id": "A16_k2_gstar_300_r301_r310",
+   "cmd": "python main.py eval3 --set A16 --kappa 2 --tau 3.4 --n-star 3 --method gstar --split test5 --start 310 --count 2 --sub 8 --budget-minutes 25 --out ../results/v6/test5/A16_k2_gstar_300_r301_r310"
+  },
+  {
+   "id": "A16_k2_rl_s711_360_r363_r365",
+   "cmd": "python main.py eval3 --set A16 --kappa 2 --tau 3.4 --n-star 3 --method rl --weights ../results/v5/rl/A16_k2_rel_cfg6_sd711.npz --split test5 --start 365 --count 1 --sub 8 --budget-minutes 25 --out ../results/v6/test5/A16_k2_rl_s711_360_r363_r365"
+  }
+ ]
+}

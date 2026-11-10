@@ -1789,3 +1789,5 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
 - **Where to resume:** when these finish: follow-ups for `v6_e8_p1/p2` (and `_f2` for the `_f1` manifests if any
   stop again), then `v6_e8_p3`, `v6_e8_p4`, `v6_e11_p0–p2`, `v6_e12_p0–p2` in ≤ 650-job waves; then g_T (`gt3`)
   jobs; then `analysis_v6.py --check` until complete → read-out → stage 14 [v6].
+- (run 45, 09:35 UTC) `v6_e10_p0_f1` complete (0 left); `v6_e8_p0_f1` left 2 time-guard stops → `v6_e8_p0_f2` (2 jobs)
+  dispatched. `v6_e9_p0_f1`, `v6_e8_p1`, `v6_e8_p2` still queued / running.
