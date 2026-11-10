@@ -621,3 +621,15 @@ Run order when both papers are active: AUTOPILOT §7.
 - Open: missing verified cite keys (Learn-then-Test; classic grip-load; early incipient slip) → add via verified
   entries before stage 17.
 - **Next:** citations, then stage 17 PAPER_DRAFT [v2].
+
+## Stage 17. PAPER_DRAFT     [v2]
+
+- **Finished:** 2026-11-10 (run 44). Plan `plans/stage_17_paper_draft_v2.md`; template verbatim
+  (`paper/mypaper/prompts/build_stage17_v2.py`), fresh opus subagent → `paper/mypaper/draft_v2.md` (≈ 7,440 words
+  main body; every RESTRICTS floor met; condensed to 5 pages at stage 22) + `figures/figure1_prompt_v2.txt`
+  (panel b from the 36 real frontier points).
+- The one [NEED] (v2 compute) filled by the main session from logs: `code/tools_compute_v2.py` →
+  `results/v2/compute_v2.json` (2.357 CPU-h: 1.347 B1/B2, 0.868 edge rule, 0.142 B3; CPU model not logged).
+- Number audit 0 unmatched; 55 / 55 cite keys in cards. Draft deviations from the outline noted by the drafter
+  (onset-only label-route row not claimed within ±0.05; Discussion / Limitations split).
+- **Next:** stage 18 PEER_REVIEW [v2] (two fresh subagents, evidence audit).

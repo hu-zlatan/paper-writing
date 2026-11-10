@@ -1841,5 +1841,76 @@
    "CSF-proxy@0.2": {},
    "full_rd@0.2#0": {}
   }
+ },
+ "compute_v2.json": {
+  "note": "logged 'seconds:' of each job (wall clock of one single-threaded process); CPU model not recorded (platform.processor() is empty on these hosts)",
+  "groups": {
+   "B1_B2_crc09_replays_actions": {
+    "n_jobs": 12,
+    "seconds_total": 4847.9,
+    "cpu_hours": 1.347,
+    "per_job": {
+     "p2_crc09_F1_200.log": 524.7,
+     "p2_crc09_F1_300.log": 537.9,
+     "p2_crc09_F1_400.log": 228.7,
+     "p2_crc09_F2_200.log": 354.9,
+     "p2_crc09_F2_300.log": 340.2,
+     "p2_crc09_F2_400.log": 330.2,
+     "p2_crc09_F3_200.log": 197.8,
+     "p2_crc09_F3_300.log": 432.7,
+     "p2_crc09_F3_400.log": 307.9,
+     "p2_crc09_F4_200.log": 519.8,
+     "p2_crc09_F4_300.log": 540.7,
+     "p2_crc09_F4_400.log": 532.4
+    }
+   },
+   "B1_edge_crc09e_replays_actions": {
+    "n_jobs": 12,
+    "seconds_total": 3123.3,
+    "cpu_hours": 0.868,
+    "per_job": {
+     "p2_crc09e_F1_200.log": 315.2,
+     "p2_crc09e_F1_300.log": 320.9,
+     "p2_crc09e_F1_400.log": 270.9,
+     "p2_crc09e_F2_200.log": 316.6,
+     "p2_crc09e_F2_300.log": 147.9,
+     "p2_crc09e_F2_400.log": 204.0,
+     "p2_crc09e_F3_200.log": 187.1,
+     "p2_crc09e_F3_300.log": 224.1,
+     "p2_crc09e_F3_400.log": 268.1,
+     "p2_crc09e_F4_200.log": 212.9,
+     "p2_crc09e_F4_300.log": 325.4,
+     "p2_crc09e_F4_400.log": 330.2
+    }
+   },
+   "B3_streams_sandbox": {
+    "n_jobs": 20,
+    "seconds_total": 512.5,
+    "cpu_hours": 0.142,
+    "per_job": {
+     "b3_S1_o0_CSF1.log": 25.1,
+     "b3_S1_o0_CertGrip.log": 25.6,
+     "b3_S1_o1_CSF1.log": 25.3,
+     "b3_S1_o1_CertGrip.log": 26.9,
+     "b3_S1_o2_CSF1.log": 26.1,
+     "b3_S1_o2_CertGrip.log": 25.7,
+     "b3_S1_o3_CSF1.log": 26.0,
+     "b3_S1_o3_CertGrip.log": 25.3,
+     "b3_S1_o4_CSF1.log": 25.1,
+     "b3_S1_o4_CertGrip.log": 25.0,
+     "b3_S3_o0_CSF1.log": 25.0,
+     "b3_S3_o0_CertGrip.log": 25.6,
+     "b3_S3_o1_CSF1.log": 24.9,
+     "b3_S3_o1_CertGrip.log": 24.9,
+     "b3_S3_o2_CSF1.log": 25.0,
+     "b3_S3_o2_CertGrip.log": 25.5,
+     "b3_S3_o3_CSF1.log": 26.0,
+     "b3_S3_o3_CertGrip.log": 25.2,
+     "b3_S3_o4_CSF1.log": 26.7,
+     "b3_S3_o4_CertGrip.log": 27.6
+    }
+   }
+  },
+  "total_cpu_hours": 2.357
  }
 }
