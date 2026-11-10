@@ -9,7 +9,7 @@
 **Topic:** Amortized, non-myopic active tactile localization (TouchBED)
 **Initialised:** 2026-10-28T07:56:44Z
 **Current version:** v6
-**Latest stage:** LOOP MARKER v5 → v6 (owner, 2026-11-10) → stage 13 ITERATIVE_REFINE [v6]: amendment v6.0 written, P6 timing pilot next
+**Latest stage:** Stage 13 ITERATIVE_REFINE [v6] — wave 1 dispatched (E9, E10, E8 part 0); see the v6 entry at the end of this file
 
 ---
 
@@ -1761,3 +1761,21 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
   a frozen reduction order before the main dispatch.
 - **Next stage:** 13 ITERATIVE_REFINE [v6] (P6 pilot → addendum v6.1 → dispatch).
 - **Resuming under version:** v6
+
+## Stage 13. ITERATIVE_REFINE     [v6]
+
+- **Started:** 2026-11-10 (owner's chat session, right after the owner chose v6). Plan
+  `plans/stage_13_v6_p6_and_dispatch.md`.
+- **P6 timing pilot** (Actions run 193, `results/v6/p6/`, pilot3 only) → addendum v6.1 in `docs/07c_amendment_v6_0.md`:
+  ≈ 733 CPU-h ≤ 800, no reduction. Read-out code `code/analysis_v6.py` + `code/tests/test_analysis_v6.py` (2 passed)
+  committed before any E8–E12 record existed.
+- **Manifests** (`code/tools_v6_manifests.py`): E8 `v6_e8_p0–p4` (1,169 jobs), E9 `v6_e9_p0` (250), E10 `v6_e10_p0` (125),
+  E11 `v6_e11_p0–p2` (590), E12 `v6_e12_p0–p2` (650).
+- **Wave 1 dispatched (2026-11-10 ≈ 02:10 UTC):** `v6_e9_p0`, `v6_e10_p0`, `v6_e8_p0` (625 jobs, ≈ 9 h at 20 runners).
+- **Where to resume (next run):** when wave 1 has finished, (1) `python code/tools_resume_manifest.py
+  experiments/<m>.json experiments/<m>_f1.json "<purpose>"` for each finished manifest (time-guard stops / failures)
+  and dispatch the follow-ups; (2) dispatch the next wave in this order, keeping ≤ ~650 queued jobs (GitHub drops jobs
+  queued > 24 h; paper 2 shares the runners): `v6_e8_p1`, `v6_e8_p2`, `v6_e8_p3`, `v6_e8_p4`, then `v6_e11_p0–p2`,
+  then `v6_e12_p0–p2`; (3) g_T: one `gt3` job per new `results/v6/test5/` file of G\*, students, RL, rl_success
+  (same command as `experiments/v5_gt_r0.json`, outputs `results/v6/test5_gt/`); (4) `python code/analysis_v6.py --check`
+  (counts only) until complete, then the read-out → stage 14 [v6]. Do not read any v6 outcome before `--check` is complete.
