@@ -1,0 +1,12 @@
+{"header": true, "args": {"cmd": "gt3", "src": ["/home/claude/paper-writing/code/../results/v6/test5/S_k12_rl_s714_465.jsonl"], "J": 16, "L": 4095, "out": "/home/claude/paper-writing/code/../results/v6/test5_gt/.S_k12_rl_s714_465"}, "env": {"TOUCHBED_NPHI": "64", "action_set": "64x8", "A": 512, "numpy": "2.5.3", "python": "3.13.18", "threads": {"OMP_NUM_THREADS": "1", "OPENBLAS_NUM_THREADS": "1", "MKL_NUM_THREADS": "1"}}}
+{"episode": 465, "set": "S", "split": "test5", "kappa": 12.0, "tau": 4.9, "method": "rl", "g_T": 6.858077611846976, "n_probes": 3, "J": 16, "L": 4095}
+{"episode": 466, "set": "S", "split": "test5", "kappa": 12.0, "tau": 4.9, "method": "rl", "g_T": 3.8366632667882232, "n_probes": 3, "J": 16, "L": 4095}
+{"episode": 467, "set": "S", "split": "test5", "kappa": 12.0, "tau": 4.9, "method": "rl", "g_T": 7.438490908669056, "n_probes": 3, "J": 16, "L": 4095}
+{"episode": 468, "set": "S", "split": "test5", "kappa": 12.0, "tau": 4.9, "method": "rl", "g_T": 7.494897351325042, "n_probes": 3, "J": 16, "L": 4095}
+{"episode": 469, "set": "S", "split": "test5", "kappa": 12.0, "tau": 4.9, "method": "rl", "g_T": 4.560094385270791, "n_probes": 3, "J": 16, "L": 4095}
+{"episode": 470, "set": "S", "split": "test5", "kappa": 12.0, "tau": 4.9, "method": "rl", "g_T": 7.9213797706573965, "n_probes": 3, "J": 16, "L": 4095}
+{"episode": 471, "set": "S", "split": "test5", "kappa": 12.0, "tau": 4.9, "method": "rl", "g_T": 3.0059783421532114, "n_probes": 3, "J": 16, "L": 4095}
+{"episode": 472, "set": "S", "split": "test5", "kappa": 12.0, "tau": 4.9, "method": "rl", "g_T": 6.030663667587682, "n_probes": 3, "J": 16, "L": 4095}
+{"episode": 473, "set": "S", "split": "test5", "kappa": 12.0, "tau": 4.9, "method": "rl", "g_T": 4.641565437157659, "n_probes": 3, "J": 16, "L": 4095}
+{"episode": 474, "set": "S", "split": "test5", "kappa": 12.0, "tau": 4.9, "method": "rl", "g_T": 5.375208143117152, "n_probes": 3, "J": 16, "L": 4095}
+{"episode": 475, "set": "S", "split": "test5", "kappa": 12.0, "tau": 4.9, "method": "rl", "g_T": 5.335378234456904, "n_probes": 3, "J": 16, "L": 4095}
