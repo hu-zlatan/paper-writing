@@ -72,3 +72,9 @@ committed before the first replay result → read-out.
 
 ## Timeline
 Stages 13–14 by ≈ 11-15, 15–20 by ≈ 11-24; if the gate fails again the paper goes to the owner (no further loop).
+
+## Status notes
+- (run 46) Code: pools `f4` / `c4` and protocol `noprobe` committed with tests before any v4 run (41 tests pass; rd
+  default replays identical to v1, `tests/test_react.py`). **Timing pilot** (labels, 2 objects × 4 families of `f4`,
+  `results/v4/pilot/`): 0.0088–0.0114 s per replay in the sandbox → labels ≈ 0.3 CPU-h, W replays ≈ 15 CPU-h in total
+  ≤ 60 → no reduction. Labels for `f4` / `c4` run in the sandbox (`results/v4/labels/`).
