@@ -752,3 +752,11 @@ Run order when both papers are active: AUTOPILOT §7.
   (RE 0.419, 54 % at the 4-step cap); REACT-probe@0.5 0.992, @0.75 0.951 (detector rarely fires: 0.5 steps). With the
   registered detector / thresholds no reactive variant comes near α = 0.10. Note: the 3-object timing pilot before the
   full run printed 12 cal-instance outcomes; no parameter was changed afterwards (all fixed in 10a).
+- **B3 done (sandbox, run 45):** 100 new streams `results/v3/b3/` + 20 reused v2 streams; read-out
+  `results/v3/b3_analysis.json` (`b3v3_online.py analyse`). Physical slip over the 20 orderings: steady windows
+  0.098–0.102 for both arms in S1 / S2 / S3; **post-shift transient (steps 501–1,000)** CertGrip 0.139 / 0.098 /
+  0.137 vs CSF-1 0.209 / 0.094 / 0.126 (S1 / S2 / S3). D_RE 0.31–0.44 in every window and shift (CertGrip lower force).
+  Caveat for the paper: the 95 % intervals are over orderings only (fixed object pools), so they are narrow and do not
+  cover object-sampling uncertainty.
+- **Pending:** B1 edge-rule replays (`results/v3/crc10e/`, running) → `analysis_v3_b.py --edge`; A3 Holm (re-draw the
+  v1 secondaries' bootstraps) — next run; then `tools_results_v3.py` and stage 14 [v3].
