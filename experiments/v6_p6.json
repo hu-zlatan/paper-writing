@@ -1,0 +1,45 @@
+{
+ "purpose": "v6 P6 timing pilot (amendment v6.0): pilot3 episodes 0-2 for E9/E10/E11 commands; sub-16 re-read timing on 3 already-seen v5 test5 G* episodes (timing only). No test5 300-499 episode is used.",
+ "jobs": [
+  {
+   "id": "v6_p6_S_k2_g125",
+   "cmd": "python main.py eval3 --set S --kappa 2 --tau 4.7 --n-star 4 --method g125_512_16 --split pilot3 --start 0 --count 3 --sub 8 --budget-minutes 25 --out ../results/v6/p6/S_k2_g125"
+  },
+  {
+   "id": "v6_p6_S_k2_g500",
+   "cmd": "python main.py eval3 --set S --kappa 2 --tau 4.7 --n-star 4 --method g500_512_4 --split pilot3 --start 0 --count 3 --sub 8 --budget-minutes 25 --out ../results/v6/p6/S_k2_g500"
+  },
+  {
+   "id": "v6_p6_S_k2_gstar_r1",
+   "cmd": "python main.py eval3 --set S --kappa 2 --tau 4.7 --n-star 4 --method gstar --run-salt r1 --split pilot3 --start 0 --count 3 --sub 8 --budget-minutes 25 --out ../results/v6/p6/S_k2_gstar_r1"
+  },
+  {
+   "id": "v6_p6_S_k2_r0_s701",
+   "cmd": "python main.py eval3 --set S --kappa 2 --tau 4.7 --n-star 4 --method student --weights ../results/v5/d5/S_k2_s701_r0.npz --split pilot3 --start 0 --count 3 --sub 8 --budget-minutes 25 --out ../results/v6/p6/S_k2_r0_s701"
+  },
+  {
+   "id": "v6_p6_S_k2_sub16",
+   "cmd": "python main.py regrid3 --src ../results/v5/test5/S_k2_gstar_000.jsonl --episodes 0 1 2 --sub 16 --budget-minutes 25 --out ../results/v6/p6/S_k2_gstar_sub16_timing"
+  },
+  {
+   "id": "v6_p6_A16_k2_g125",
+   "cmd": "python main.py eval3 --set A16 --kappa 2 --tau 3.4 --n-star 3 --method g125_512_16 --split pilot3 --start 0 --count 3 --sub 8 --budget-minutes 25 --out ../results/v6/p6/A16_k2_g125"
+  },
+  {
+   "id": "v6_p6_A16_k2_g500",
+   "cmd": "python main.py eval3 --set A16 --kappa 2 --tau 3.4 --n-star 3 --method g500_512_4 --split pilot3 --start 0 --count 3 --sub 8 --budget-minutes 25 --out ../results/v6/p6/A16_k2_g500"
+  },
+  {
+   "id": "v6_p6_A16_k2_gstar_r1",
+   "cmd": "python main.py eval3 --set A16 --kappa 2 --tau 3.4 --n-star 3 --method gstar --run-salt r1 --split pilot3 --start 0 --count 3 --sub 8 --budget-minutes 25 --out ../results/v6/p6/A16_k2_gstar_r1"
+  },
+  {
+   "id": "v6_p6_A16_k2_r0_s701",
+   "cmd": "python main.py eval3 --set A16 --kappa 2 --tau 3.4 --n-star 3 --method student --weights ../results/v5/d5/A16_k2_s701_r0.npz --split pilot3 --start 0 --count 3 --sub 8 --budget-minutes 25 --out ../results/v6/p6/A16_k2_r0_s701"
+  },
+  {
+   "id": "v6_p6_A16_k2_sub16",
+   "cmd": "python main.py regrid3 --src ../results/v5/test5/A16_k2_gstar_000.jsonl --episodes 0 1 2 --sub 16 --budget-minutes 25 --out ../results/v6/p6/A16_k2_gstar_sub16_timing"
+  }
+ ]
+}
