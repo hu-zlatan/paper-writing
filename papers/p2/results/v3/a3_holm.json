@@ -1,0 +1,805 @@
+{
+ "note": "Amendment 10 A3. p two-sided vs 0 from the re-drawn bootstrap (recorded seeds / draws); Holm 5 % within 07 \u00a74 families and over all v1 secondary CI** rows. v2 rows: their bootstraps are not re-drawn here (sensitivity over v1 rows only; stated).",
+ "families": {
+  "H1c": {
+   "m": 12,
+   "rejected": 8
+  },
+  "H2-x": {
+   "m": 29,
+   "rejected": 27
+  },
+  "H3-x": {
+   "m": 4,
+   "rejected": 2
+  },
+  "H4-x": {
+   "m": 6,
+   "rejected": 3
+  }
+ },
+ "all": {
+  "m": 52,
+  "rejected": 40
+ },
+ "rows": [
+  {
+   "row": "sec08f_tail/routes/label/CI**",
+   "family": "H2-x",
+   "CI": [
+    0.5520648618388807,
+    0.6459262373651764
+   ],
+   "null_not_registered_threshold": true,
+   "p": 0.0,
+   "draws": 2000,
+   "p_holm_family": 0.0,
+   "reject_family_5pct": true,
+   "p_holm_all": 0.0,
+   "reject_all_5pct": true
+  },
+  {
+   "row": "sec08f_tail/routes/crc_08c/CI**",
+   "family": "H2-x",
+   "CI": [
+    0.5539865944233735,
+    0.6563629522397967
+   ],
+   "null_not_registered_threshold": true,
+   "p": 0.0,
+   "draws": 2000,
+   "p_holm_family": 0.0,
+   "reject_family_5pct": true,
+   "p_holm_all": 0.0,
+   "reject_all_5pct": true
+  },
+  {
+   "row": "sec08f_tail/routes/crc_08e/CI**",
+   "family": "H2-x",
+   "CI": [
+    0.5486235989643082,
+    0.6485061351505771
+   ],
+   "null_not_registered_threshold": true,
+   "p": 0.0,
+   "draws": 2000,
+   "p_holm_family": 0.0,
+   "reject_family_5pct": true,
+   "p_holm_all": 0.0,
+   "reject_all_5pct": true
+  },
+  {
+   "row": "sec08f_label/contrasts/H4c_shuf_vs_P/CI**",
+   "family": "H4-x",
+   "CI": [
+    -0.05258564565157986,
+    0.008517042300417717
+   ],
+   "null_not_registered_threshold": true,
+   "p": 0.119,
+   "draws": 2000,
+   "p_holm_family": 0.357,
+   "reject_family_5pct": false,
+   "p_holm_all": 1.0,
+   "reject_all_5pct": false
+  },
+  {
+   "row": "sec08f_label/contrasts/H2M_nomass_full_rd_vs_P/CI**",
+   "family": "H2-x",
+   "CI": [
+    0.39684035127556366,
+    0.5060974788127627
+   ],
+   "null_not_registered_threshold": false,
+   "p": 0.0,
+   "draws": 2000,
+   "p_holm_family": 0.0,
+   "reject_family_5pct": true,
+   "p_holm_all": 0.0,
+   "reject_all_5pct": true
+  },
+  {
+   "row": "sec08f_label/contrasts/H2M_ref_withmass_full_rd_vs_P/CI**",
+   "family": "H2-x",
+   "CI": [
+    0.40183000911728084,
+    0.5071802903324323
+   ],
+   "null_not_registered_threshold": false,
+   "p": 0.0,
+   "draws": 2000,
+   "p_holm_family": 0.0,
+   "reject_family_5pct": true,
+   "p_holm_all": 0.0,
+   "reject_all_5pct": true
+  },
+  {
+   "row": "sec08f_label/contrasts/H2M_change_nomass_minus_withmass/CI**",
+   "family": "H2-x",
+   "CI": [
+    -0.04462346756767428,
+    0.039910085018008
+   ],
+   "null_not_registered_threshold": false,
+   "p": 0.943,
+   "draws": 2000,
+   "p_holm_family": 0.943,
+   "reject_family_5pct": false,
+   "p_holm_all": 1.0,
+   "reject_all_5pct": false
+  },
+  {
+   "row": "sec08g/H2C_vs_Mondrian/CI**",
+   "family": "H2-x",
+   "CI": [
+    0.3732981115147013,
+    0.4871632897542735
+   ],
+   "null_not_registered_threshold": false,
+   "p": 0.0,
+   "draws": 2000,
+   "p_holm_family": 0.0,
+   "reject_family_5pct": true,
+   "p_holm_all": 0.0,
+   "reject_all_5pct": true
+  },
+  {
+   "row": "sec08g/oracle_decomposition/CI**",
+   "family": null,
+   "CI": [
+    0.4489396984944918,
+    0.5762178135728712
+   ],
+   "null_not_registered_threshold": true,
+   "p": 0.0,
+   "draws": 2000,
+   "p_holm_all": 0.0,
+   "reject_all_5pct": true
+  },
+  {
+   "row": "sec08g/H4d/full_rd/CI**",
+   "family": "H4-x",
+   "CI": [
+    -0.042437854521420265,
+    0.11383337229213611
+   ],
+   "null_not_registered_threshold": false,
+   "p": 0.316,
+   "draws": 2000,
+   "p_holm_family": 0.632,
+   "reject_family_5pct": false,
+   "p_holm_all": 1.0,
+   "reject_all_5pct": false
+  },
+  {
+   "row": "sec08g/H4d/full/CI**",
+   "family": "H4-x",
+   "CI": [
+    -0.017419434219134552,
+    0.02128178766603432
+   ],
+   "null_not_registered_threshold": false,
+   "p": 0.804,
+   "draws": 2000,
+   "p_holm_family": 0.804,
+   "reject_family_5pct": false,
+   "p_holm_all": 1.0,
+   "reject_all_5pct": false
+  },
+  {
+   "row": "sec08g/H2R/CI**",
+   "family": "H2-x",
+   "CI": [
+    -0.5319827124055064,
+    -0.03248535965457069
+   ],
+   "null_not_registered_threshold": false,
+   "p": 0.01,
+   "draws": 2000,
+   "p_holm_family": 0.03,
+   "reject_family_5pct": true,
+   "p_holm_all": 0.12,
+   "reject_all_5pct": false
+  },
+  {
+   "row": "sec08g/H2H/cells/F1D1/CI**",
+   "family": "H2-x",
+   "CI": [
+    0.3502842147677596,
+    0.5802827483571029
+   ],
+   "null_not_registered_threshold": false,
+   "p": 0.0,
+   "draws": 2000,
+   "p_holm_family": 0.0,
+   "reject_family_5pct": true,
+   "p_holm_all": 0.0,
+   "reject_all_5pct": true
+  },
+  {
+   "row": "sec08g/H2H/cells/F1D2/CI**",
+   "family": "H2-x",
+   "CI": [
+    0.32504569587025106,
+    0.569216163055664
+   ],
+   "null_not_registered_threshold": false,
+   "p": 0.0,
+   "draws": 2000,
+   "p_holm_family": 0.0,
+   "reject_family_5pct": true,
+   "p_holm_all": 0.0,
+   "reject_all_5pct": true
+  },
+  {
+   "row": "sec08g/H2H/cells/F1D3/CI**",
+   "family": "H2-x",
+   "CI": [
+    0.1718858557267994,
+    0.42379848930789826
+   ],
+   "null_not_registered_threshold": false,
+   "p": 0.0,
+   "draws": 2000,
+   "p_holm_family": 0.0,
+   "reject_family_5pct": true,
+   "p_holm_all": 0.0,
+   "reject_all_5pct": true
+  },
+  {
+   "row": "sec08g/H2H/cells/F1D4/CI**",
+   "family": "H2-x",
+   "CI": [
+    0.2506458392334,
+    0.4712311686067977
+   ],
+   "null_not_registered_threshold": false,
+   "p": 0.0,
+   "draws": 2000,
+   "p_holm_family": 0.0,
+   "reject_family_5pct": true,
+   "p_holm_all": 0.0,
+   "reject_all_5pct": true
+  },
+  {
+   "row": "sec08g/H2H/cells/F2D1/CI**",
+   "family": "H2-x",
+   "CI": [
+    0.4213268631194489,
+    0.6168284531328264
+   ],
+   "null_not_registered_threshold": false,
+   "p": 0.0,
+   "draws": 2000,
+   "p_holm_family": 0.0,
+   "reject_family_5pct": true,
+   "p_holm_all": 0.0,
+   "reject_all_5pct": true
+  },
+  {
+   "row": "sec08g/H2H/cells/F2D2/CI**",
+   "family": "H2-x",
+   "CI": [
+    0.4081688785820611,
+    0.6140755869339224
+   ],
+   "null_not_registered_threshold": false,
+   "p": 0.0,
+   "draws": 2000,
+   "p_holm_family": 0.0,
+   "reject_family_5pct": true,
+   "p_holm_all": 0.0,
+   "reject_all_5pct": true
+  },
+  {
+   "row": "sec08g/H2H/cells/F2D3/CI**",
+   "family": "H2-x",
+   "CI": [
+    0.26721137924064053,
+    0.497159055628759
+   ],
+   "null_not_registered_threshold": false,
+   "p": 0.0,
+   "draws": 2000,
+   "p_holm_family": 0.0,
+   "reject_family_5pct": true,
+   "p_holm_all": 0.0,
+   "reject_all_5pct": true
+  },
+  {
+   "row": "sec08g/H2H/cells/F2D4/CI**",
+   "family": "H2-x",
+   "CI": [
+    0.3508406631816356,
+    0.524304872220233
+   ],
+   "null_not_registered_threshold": false,
+   "p": 0.0,
+   "draws": 2000,
+   "p_holm_family": 0.0,
+   "reject_family_5pct": true,
+   "p_holm_all": 0.0,
+   "reject_all_5pct": true
+  },
+  {
+   "row": "sec08g/H2H/cells/F3D1/CI**",
+   "family": "H2-x",
+   "CI": [
+    0.41321602373983285,
+    0.610526860466252
+   ],
+   "null_not_registered_threshold": false,
+   "p": 0.0,
+   "draws": 2000,
+   "p_holm_family": 0.0,
+   "reject_family_5pct": true,
+   "p_holm_all": 0.0,
+   "reject_all_5pct": true
+  },
+  {
+   "row": "sec08g/H2H/cells/F3D2/CI**",
+   "family": "H2-x",
+   "CI": [
+    0.21098369947930765,
+    0.5939281720088866
+   ],
+   "null_not_registered_threshold": false,
+   "p": 0.0,
+   "draws": 2000,
+   "p_holm_family": 0.0,
+   "reject_family_5pct": true,
+   "p_holm_all": 0.0,
+   "reject_all_5pct": true
+  },
+  {
+   "row": "sec08g/H2H/cells/F3D3/CI**",
+   "family": "H2-x",
+   "CI": [
+    0.16016150721888964,
+    0.445098570055302
+   ],
+   "null_not_registered_threshold": false,
+   "p": 0.0,
+   "draws": 2000,
+   "p_holm_family": 0.0,
+   "reject_family_5pct": true,
+   "p_holm_all": 0.0,
+   "reject_all_5pct": true
+  },
+  {
+   "row": "sec08g/H2H/cells/F3D4/CI**",
+   "family": "H2-x",
+   "CI": [
+    0.3113927684248409,
+    0.4901444809940522
+   ],
+   "null_not_registered_threshold": false,
+   "p": 0.0,
+   "draws": 2000,
+   "p_holm_family": 0.0,
+   "reject_family_5pct": true,
+   "p_holm_all": 0.0,
+   "reject_all_5pct": true
+  },
+  {
+   "row": "sec08g/H2H/cells/F4D1/CI**",
+   "family": "H2-x",
+   "CI": [
+    0.3697486343968586,
+    0.5864010838964067
+   ],
+   "null_not_registered_threshold": false,
+   "p": 0.0,
+   "draws": 2000,
+   "p_holm_family": 0.0,
+   "reject_family_5pct": true,
+   "p_holm_all": 0.0,
+   "reject_all_5pct": true
+  },
+  {
+   "row": "sec08g/H2H/cells/F4D2/CI**",
+   "family": "H2-x",
+   "CI": [
+    0.3278798591750272,
+    0.5629974521840162
+   ],
+   "null_not_registered_threshold": false,
+   "p": 0.0,
+   "draws": 2000,
+   "p_holm_family": 0.0,
+   "reject_family_5pct": true,
+   "p_holm_all": 0.0,
+   "reject_all_5pct": true
+  },
+  {
+   "row": "sec08g/H2H/cells/F4D3/CI**",
+   "family": "H2-x",
+   "CI": [
+    0.20138864629594821,
+    0.462809228998695
+   ],
+   "null_not_registered_threshold": false,
+   "p": 0.0,
+   "draws": 2000,
+   "p_holm_family": 0.0,
+   "reject_family_5pct": true,
+   "p_holm_all": 0.0,
+   "reject_all_5pct": true
+  },
+  {
+   "row": "sec08g/H2H/cells/F4D4/CI**",
+   "family": "H2-x",
+   "CI": [
+    0.3363516510460673,
+    0.5230355850304245
+   ],
+   "null_not_registered_threshold": false,
+   "p": 0.0,
+   "draws": 2000,
+   "p_holm_family": 0.0,
+   "reject_family_5pct": true,
+   "p_holm_all": 0.0,
+   "reject_all_5pct": true
+  },
+  {
+   "row": "sec08g/H2n/alpha_0.1/interval",
+   "family": "H2-x",
+   "CI": [
+    0.2585147702224499,
+    0.5477153880729282
+   ],
+   "null_not_registered_threshold": false,
+   "p": 0.0,
+   "draws": 2000,
+   "p_holm_family": 0.0,
+   "reject_family_5pct": true,
+   "p_holm_all": 0.0,
+   "reject_all_5pct": true
+  },
+  {
+   "row": "sec08g/H2n/alpha_0.2/interval",
+   "family": "H2-x",
+   "CI": [
+    0.27864175060393026,
+    0.598432638159404
+   ],
+   "null_not_registered_threshold": false,
+   "p": 0.0,
+   "draws": 2000,
+   "p_holm_family": 0.0,
+   "reject_family_5pct": true,
+   "p_holm_all": 0.0,
+   "reject_all_5pct": true
+  },
+  {
+   "row": "sec08h_h1c/results/alpha_0.01/RAW-Q/CI**",
+   "family": "H1c",
+   "CI": [
+    0.015714285714285715,
+    0.03214285714285714
+   ],
+   "null_not_registered_threshold": false,
+   "p": 0.0,
+   "draws": 2000,
+   "p_holm_family": 0.0,
+   "reject_family_5pct": true,
+   "p_holm_all": 0.0,
+   "reject_all_5pct": true
+  },
+  {
+   "row": "sec08h_h1c/results/alpha_0.01/RAW-G/CI**",
+   "family": "H1c",
+   "CI": [
+    0.003571428571428571,
+    0.01607142857142857
+   ],
+   "null_not_registered_threshold": false,
+   "p": 0.0,
+   "draws": 2000,
+   "p_holm_family": 0.0,
+   "reject_family_5pct": true,
+   "p_holm_all": 0.0,
+   "reject_all_5pct": true
+  },
+  {
+   "row": "sec08h_h1c/results/alpha_0.01/RAW-Qv/CI**",
+   "family": "H1c",
+   "CI": [
+    -0.0067857142857142855,
+    0.024290178571428588
+   ],
+   "null_not_registered_threshold": false,
+   "p": 0.438,
+   "draws": 2000,
+   "p_holm_family": 0.87,
+   "reject_family_5pct": false,
+   "p_holm_all": 1.0,
+   "reject_all_5pct": false
+  },
+  {
+   "row": "sec08h_h1c/results/alpha_0.05/RAW-Q/CI**",
+   "family": "H1c",
+   "CI": [
+    0.020000000000000004,
+    0.0450044642857143
+   ],
+   "null_not_registered_threshold": false,
+   "p": 0.0,
+   "draws": 2000,
+   "p_holm_family": 0.0,
+   "reject_family_5pct": true,
+   "p_holm_all": 0.0,
+   "reject_all_5pct": true
+  },
+  {
+   "row": "sec08h_h1c/results/alpha_0.05/RAW-G/CI**",
+   "family": "H1c",
+   "CI": [
+    0.01607142857142857,
+    0.042142857142857135
+   ],
+   "null_not_registered_threshold": false,
+   "p": 0.0,
+   "draws": 2000,
+   "p_holm_family": 0.0,
+   "reject_family_5pct": true,
+   "p_holm_all": 0.0,
+   "reject_all_5pct": true
+  },
+  {
+   "row": "sec08h_h1c/results/alpha_0.05/RAW-Qv/CI**",
+   "family": "H1c",
+   "CI": [
+    -0.008928571428571432,
+    0.04643303571428573
+   ],
+   "null_not_registered_threshold": false,
+   "p": 0.159,
+   "draws": 2000,
+   "p_holm_family": 0.477,
+   "reject_family_5pct": false,
+   "p_holm_all": 1.0,
+   "reject_all_5pct": false
+  },
+  {
+   "row": "sec08h_h1c/results/alpha_0.1/RAW-Q/CI**",
+   "family": "H1c",
+   "CI": [
+    0.01678571428571428,
+    0.05035714285714285
+   ],
+   "null_not_registered_threshold": false,
+   "p": 0.0,
+   "draws": 2000,
+   "p_holm_family": 0.0,
+   "reject_family_5pct": true,
+   "p_holm_all": 0.0,
+   "reject_all_5pct": true
+  },
+  {
+   "row": "sec08h_h1c/results/alpha_0.1/RAW-G/CI**",
+   "family": "H1c",
+   "CI": [
+    0.03142857142857142,
+    0.06857142857142856
+   ],
+   "null_not_registered_threshold": false,
+   "p": 0.0,
+   "draws": 2000,
+   "p_holm_family": 0.0,
+   "reject_family_5pct": true,
+   "p_holm_all": 0.0,
+   "reject_all_5pct": true
+  },
+  {
+   "row": "sec08h_h1c/results/alpha_0.1/RAW-Qv/CI**",
+   "family": "H1c",
+   "CI": [
+    -0.022151785714285714,
+    0.058575892857142854
+   ],
+   "null_not_registered_threshold": false,
+   "p": 0.435,
+   "draws": 2000,
+   "p_holm_family": 0.87,
+   "reject_family_5pct": false,
+   "p_holm_all": 1.0,
+   "reject_all_5pct": false
+  },
+  {
+   "row": "sec08h_h1c/results/alpha_0.2/RAW-Q/CI**",
+   "family": "H1c",
+   "CI": [
+    0.012857142857142845,
+    0.057499999999999996
+   ],
+   "null_not_registered_threshold": false,
+   "p": 0.0,
+   "draws": 2000,
+   "p_holm_family": 0.0,
+   "reject_family_5pct": true,
+   "p_holm_all": 0.0,
+   "reject_all_5pct": true
+  },
+  {
+   "row": "sec08h_h1c/results/alpha_0.2/RAW-G/CI**",
+   "family": "H1c",
+   "CI": [
+    0.027142857142857135,
+    0.07500000000000001
+   ],
+   "null_not_registered_threshold": false,
+   "p": 0.0,
+   "draws": 2000,
+   "p_holm_family": 0.0,
+   "reject_family_5pct": true,
+   "p_holm_all": 0.0,
+   "reject_all_5pct": true
+  },
+  {
+   "row": "sec08h_h1c/results/alpha_0.2/RAW-Qv/CI**",
+   "family": "H1c",
+   "CI": [
+    -0.012500000000000011,
+    0.08892857142857141
+   ],
+   "null_not_registered_threshold": false,
+   "p": 0.11,
+   "draws": 2000,
+   "p_holm_family": 0.44,
+   "reject_family_5pct": false,
+   "p_holm_all": 1.0,
+   "reject_all_5pct": false
+  },
+  {
+   "row": "sec08h_h3s/results/S1/CI**",
+   "family": "H3-x",
+   "CI": [
+    48.20000000000001,
+    70.20062500000002
+   ],
+   "null_not_registered_threshold": false,
+   "p": 0.0,
+   "draws": 2000,
+   "p_holm_family": 0.0,
+   "reject_family_5pct": true,
+   "p_holm_all": 0.0,
+   "reject_all_5pct": true
+  },
+  {
+   "row": "sec08h_h3s/results/S2/CI**",
+   "family": "H3-x",
+   "CI": [
+    -6.650624999999999,
+    7.000625000000004
+   ],
+   "null_not_registered_threshold": false,
+   "p": 0.997,
+   "draws": 2000,
+   "p_holm_family": 0.997,
+   "reject_family_5pct": false,
+   "p_holm_all": 1.0,
+   "reject_all_5pct": false
+  },
+  {
+   "row": "sec08h_h3s/results/S3/CI**",
+   "family": "H3-x",
+   "CI": [
+    32.400000000000006,
+    49.35
+   ],
+   "null_not_registered_threshold": false,
+   "p": 0.0,
+   "draws": 2000,
+   "p_holm_family": 0.0,
+   "reject_family_5pct": true,
+   "p_holm_all": 0.0,
+   "reject_all_5pct": true
+  },
+  {
+   "row": "sec08h_h3s/results/S1m/CI**",
+   "family": "H3-x",
+   "CI": [
+    -2.0506249999999993,
+    11.85
+   ],
+   "null_not_registered_threshold": false,
+   "p": 0.101,
+   "draws": 2000,
+   "p_holm_family": 0.202,
+   "reject_family_5pct": false,
+   "p_holm_all": 1.0,
+   "reject_all_5pct": false
+  },
+  {
+   "row": "sec08h_h4b/results/D_FID/CI**",
+   "family": "H4-x",
+   "CI": [
+    0.3940268940067174,
+    0.5135189083204742
+   ],
+   "null_not_registered_threshold": false,
+   "p": 0.0,
+   "draws": 2000,
+   "p_holm_family": 0.0,
+   "reject_family_5pct": true,
+   "p_holm_all": 0.0,
+   "reject_all_5pct": true
+  },
+  {
+   "row": "sec08h_h4b/results/D/CI**",
+   "family": "H4-x",
+   "CI": [
+    0.3930135934404065,
+    0.5132744166901483
+   ],
+   "null_not_registered_threshold": false,
+   "p": 0.0,
+   "draws": 2000,
+   "p_holm_family": 0.0,
+   "reject_family_5pct": true,
+   "p_holm_all": 0.0,
+   "reject_all_5pct": true
+  },
+  {
+   "row": "sec08h_h4b/results/D_FID_minus_half_D/CI**",
+   "family": "H4-x",
+   "CI": [
+    0.19574653766052566,
+    0.26067192009701173
+   ],
+   "null_not_registered_threshold": false,
+   "p": 0.0,
+   "draws": 2000,
+   "p_holm_family": 0.0,
+   "reject_family_5pct": true,
+   "p_holm_all": 0.0,
+   "reject_all_5pct": true
+  },
+  {
+   "row": "sec08h_massnoise/results/D_mn/CI**",
+   "family": "H2-x",
+   "CI": [
+    0.4105563246105922,
+    0.5050343289687103
+   ],
+   "null_not_registered_threshold": false,
+   "p": 0.0,
+   "draws": 2000,
+   "p_holm_family": 0.0,
+   "reject_family_5pct": true,
+   "p_holm_all": 0.0,
+   "reject_all_5pct": true
+  },
+  {
+   "row": "sec08h_massnoise/results/D_H2a/CI**",
+   "family": "H2-x",
+   "CI": [
+    0.3733204496825495,
+    0.48198921617006146
+   ],
+   "null_not_registered_threshold": false,
+   "p": 0.0,
+   "draws": 2000,
+   "p_holm_family": 0.0,
+   "reject_family_5pct": true,
+   "p_holm_all": 0.0,
+   "reject_all_5pct": true
+  },
+  {
+   "row": "sec08h_massnoise/results/change/CI**",
+   "family": "H2-x",
+   "CI": [
+    -0.007679754329767921,
+    0.07069514860113443
+   ],
+   "null_not_registered_threshold": false,
+   "p": 0.079,
+   "draws": 2000,
+   "p_holm_family": 0.158,
+   "reject_family_5pct": false,
+   "p_holm_all": 0.869,
+   "reject_all_5pct": false
+  }
+ ]
+}

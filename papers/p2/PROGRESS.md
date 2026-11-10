@@ -764,3 +764,17 @@ Run order when both papers are active: AUTOPILOT §7.
   same-grid row against CertGrip-full's 08e replays (`results/v1/crc_v2/`) is to be added at stage 14).
 - **Pending (next run):** A3 Holm (re-draw the v1 secondaries' bootstraps per 07 §4 families); the same-grid σ 0.2
   shrunk row; `tools_results_v3.py` → `results/v3/results_v3.json`; then stage 14 [v3] → 15 → 16–20.
+- **A3 Holm done (sandbox, run 46):** `code/analysis_v3_c.py` (plan + code committed before running) re-ran the v1
+  secondary parts in memory with their recorded seeds / 2,000 draws; **52 / 52 CI\*\* rows reproduced exactly** (none
+  "not adjusted"). `results/v3/a3_holm.json`: Holm 5 % within 07 §4 families — H1c 8 / 12 rejected, H2-x 27 / 29,
+  H3-x 2 / 4, H4-x 3 / 6; over all 52 rows 40 rejected. Every row not rejected after Holm already had a v1 decision
+  of "inconclusive" / CI covering 0 (H4c, H4d, RAW-Qv ×4, H3-S S2 / S1m, H2-M change, mass-noise change), so **Holm
+  changes no v1 verdict**. Caveats kept in the file: p is vs 0 as registered, which is not the own threshold for H2-T
+  (ratio vs 1.10), H4c (margin) and the oracle share (flagged `null_not_registered_threshold`); p resolution 1 / 2,000;
+  v2 rows not re-drawn (sensitivity over v1 rows only).
+- **Same-grid σ 0.2 shrunk row done:** `analysis_v3_b.py --edge --samegrid` (flag committed before running) →
+  `results/v3/b1_analysis_edge_samegrid.json`: CertGrip-full and CSF-1 from their 08e-recipe replays vs CSF-shrunk@0.2 on
+  its 08e-recipe grid: D(CertGrip-full vs shrunk) −0.0353 [−0.1688, 0.0103] **not shown** (same reading as the
+  mixed-grid edge row −0.0646); shrunk vs CSF-1 0.4484 [0.4015, 0.5146] superiority; slips 0.090 / 0.077 / 0.0996.
+- `code/tools_results_v3.py` → `results/v3/results_v3.json` (8 analysis files, unchanged content).
+- **Stage 13 [v3] complete. Next: stage 14 RESULT_ANALYSIS [v3]** (fresh subagent, template `result_analysis.md`).
