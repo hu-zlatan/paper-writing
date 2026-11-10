@@ -282,8 +282,11 @@ class Sim:
                 "frames": len(hist), "disp_at_onset_mm": 1000 * tangential_disp(p - p_ref)}
 
     # ------------------------------------------------------------------ protocol
-    def run(self, F: float, record: bool = False):
-        """Replay the instance at grip force F. Returns dict(slip, reason, features?)."""
+    def run(self, F: float, record: bool = False, controller=None):
+        """Replay the instance at grip force F. Returns dict(slip, reason, features?).
+        controller (amendment 10a, default None = the unchanged protocol): an object with .step(sim) called every 5
+        steps during settle + disturbance, returning a new force target or None; the force is ramped to it over
+        20 ms. With a controller the final force is returned as out["F_end"]."""
         m, d = self.m, self.d
         mujoco.mj_resetData(m, d)
         mujoco.mj_forward(m, d)
@@ -326,7 +329,13 @@ class Sim:
         for k in range(n_r):
             self._set_force(Fs + (F - Fs) * (k + 1) / n_r)
             self._step()
-        self._step(int(T_SETTLE / DT))
+        ctl = _CtlState(controller, F) if controller is not None else None
+        if ctl is None:
+            self._step(int(T_SETTLE / DT))
+        else:
+            for k in range(int(T_SETTLE / DT)):
+                ctl.tick(self, k)
+                self._step()
         pr, ar = self._rel_pose()
         # 4. disturbance window; slip measured relative to the pose at the start of the ramp (p1)
         n_d = int(T_DIST / DT)
@@ -334,6 +343,8 @@ class Sim:
         ref_p, ref_a = p1, a1
         for k in range(n_d):
             self._dist_apply((k + 1) * DT)
+            if ctl is not None:
+                ctl.tick(self, k)
             self._step()
             if k % 5 == 4:
                 p, a = self._rel_pose()
@@ -351,9 +362,31 @@ class Sim:
                 slip, reason = True, "translation_settle"
         self.d.xfrc_applied[self.obj] = 0.0
         out = {"slip": slip, "reason": reason, "preload_slip": pre_slip}
+        if ctl is not None:
+            out["F_end"], out["n_steps"] = ctl.F, ctl.controller.n_steps
         if record:
             out["features"] = feats
         return out
+
+
+class _CtlState:
+    """Amendment 10a: force ramp state for a hold-phase controller (every 5 steps ask for a new target; ramp 20 ms)."""
+    RAMP = int(0.02 / DT)
+
+    def __init__(self, controller, F):
+        self.controller, self.F, self.target, self.from_F, self.k_ramp = controller, F, F, F, None
+
+    def tick(self, sim, k):
+        if k % 5 == 0:
+            t = self.controller.step(sim)
+            if t is not None and t > self.target:
+                self.from_F, self.target, self.k_ramp = self.F, t, 0
+        if self.k_ramp is not None:
+            self.k_ramp += 1
+            self.F = self.from_F + (self.target - self.from_F) * min(1.0, self.k_ramp / self.RAMP)
+            sim._set_force(self.F)
+            if self.k_ramp >= self.RAMP:
+                self.k_ramp = None
 
 
 def bisect_fstar(sim: Sim, f_min=0.1, f_max=100.0, halvings=10):
