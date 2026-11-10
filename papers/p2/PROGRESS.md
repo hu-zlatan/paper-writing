@@ -818,3 +818,13 @@ Run order when both papers are active: AUTOPILOT §7.
   `docs/05_knowledge_cards.json`.
 - **Next:** stage 17 PAPER_DRAFT [v3] (template `paper_draft.md`, builder from `build_stage17_v2.py`), then 18 (two
   passes), 19, 20.
+
+## Stage 17. PAPER_DRAFT     [v3]
+
+- **Finished:** 2026-11-10 (run 46). Plan `plans/stage_17_paper_draft_v3.md`; template verbatim via
+  `build_stage17_v3.py`; fresh opus subagent → `paper/mypaper/draft_v3.md` (snapshot `v3/draft_v3_stage17.md`).
+- ≈ 7,440 body words (abstract 236) — above the RSS Stage 1 target; stage 22 must cut to 5 pages. §6 split into
+  Discussion / Limitations. Number audit: 1 unmatched (0.0142, stated difference 0.4551 − 0.4409). One `[NEED]`
+  marker (third-round CPU-hours) replaced by the truth: those sandbox runs were not logged as CPU-hours.
+- **Next:** stage 18 PEER_REVIEW [v3] (two fresh subagents, builder from `build_stage18_v2.py`), 19, second
+  18/19 pass, 20.
