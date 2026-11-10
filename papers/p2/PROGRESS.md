@@ -931,3 +931,15 @@ Run order when both papers are active: AUTOPILOT §7.
   the saving holds against a friction-blind prior, with low probe noise, a wide friction range and long holds.
   Refine cycles 3 / 3 (no further loop without the owner).
 - **Next:** stage 16 PAPER_OUTLINE [v4] (fresh subagent, template verbatim), then 17–20 by ≈ 11-24.
+
+## Stage 16. PAPER_OUTLINE     [v4]
+
+- **Finished:** 2026-11-10 (run 47). Plan `plans/stage_16_paper_outline_v4.md`; template verbatim via
+  `paper/mypaper/prompts/build_stage16_v4.py`; fresh opus subagent → `paper/mypaper/sections/00_outline_v4.md`.
+- Title "When Does a Friction-Onset Probe Pay Off? Conformal Slip-Risk Control of Grip Hold Force, Mapped in
+  Simulation"; §5.1 confirmatory C1–C5 table + forest plot (Fig. 1b), §5.2 boundary map (σ band, friction width,
+  measured break-even; Fig. 2), §5.3 certificate (marginal), v1–v3 rows supporting; one status legend; ≈ 3,350 body
+  words for 5 pages.
+- Self-check: `tools_number_audit.py` (extended to read `results/v4/v4_analysis.json`) → 0 unmatched decimals. The
+  outline names v4 JSON keys from the stage-14 record; stage 17 must check sub-field names against the JSON.
+- **Next:** stage 17 PAPER_DRAFT [v4] (builder from `build_stage17_v3.py`), then 18 (two passes), 19, 20.

@@ -48,6 +48,9 @@ def main():
     v3 = os.path.join(root, "results/v3/results_v3.json")                     # v3 evidence index (secondary rows)
     if os.path.exists(v3):
         vals = flat(json.load(open(v3)), vals)
+    v4 = os.path.join(root, "results/v4/v4_analysis.json")                    # v4 read-out (C1-C5 confirmatory, S1-S7)
+    if os.path.exists(v4):
+        vals = flat(json.load(open(v4)), vals)
     design = " ".join(open(p).read() for p in sys.argv[2:])
     bad = []
     for m in re.finditer(r"(?<![\w.\[])[−-]?\d[\d,]*\.\d+", draft):          # decimals only; integers are counts/consts
