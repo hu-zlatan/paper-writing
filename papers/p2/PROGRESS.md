@@ -687,3 +687,31 @@ Run order when both papers are active: AUTOPILOT §7.
 - Words 12,155 → 13,155 (+8 %); floors met; number audit 0 unmatched with design docs; main session spot-checked
   0.1018, 0.2461, 0.1910, 0.9877, n_cal 352 in the results JSONs.
 - **Next:** stage 20 QUALITY_GATE [v2].
+
+## Stage 20. QUALITY_GATE     [v2]
+
+- **Finished:** 2026-11-10 (run 45). Plan `plans/stage_20_quality_gate_v2.md`; template verbatim (threshold 7.5),
+  builder `build_stage20.py paper/mypaper/draft_v2.md _v2`, fresh opus subagent, paper only →
+  `paper/mypaper/20_quality_gate_v2.json`.
+- **Score 5.5 / 10 (v1 6.5) → FAIL; not auto-approved** (below threshold — no evidence for approval). The gate found
+  the numbers internally consistent (recomputed headline / refined-grid / matched-slip / H2b / H4e / LTT contrasts).
+  12 weaknesses (9 evidence-level), 11 required actions: σ grounding; reactive and estimate + per-stratum-margin
+  tactile baselines at matched slip; force in newtons (absolute / peak / integrated, minimal-force distribution vs
+  preload, adaptive preload); shrunk plug-in + direct learned-vs-plug-in at matched slip / LTT; repeated object
+  re-splits + per-stratum / cell / friction-quintile slip tables (existing replays); losing sub-pool on the CRC route
+  (existing replays); Holm for secondaries as registered; stronger online physical-feedback study; title / density /
+  table-order fixes (paper-level).
+- **Decision (template table):** below threshold with evidence-level weaknesses → **stage 13** (refine cycles 1 / 3
+  used → loop available). Second full loop of paper 2.
+
+## LOOP MARKER — REFINE from stage 20 → stage 13     [version v2 → v3]
+
+- **Reason:** gate 5.5 < 7.5 with evidence-level required actions (`paper/mypaper/20_quality_gate_v2.json`; also
+  stage-18 pass-2 E1–E8 in `paper/mypaper/18_peer_review_v2_pass2.md`).
+- **Snapshot taken:** `paper/mypaper/v2/` (draft after stage 17, 19 pass 1, 19 pass 2; reviews and gates stay in
+  `paper/mypaper/`); `results/v1/`, `results/v2/` frozen; v3 writes to `results/v3/`.
+- **Refine cycles used:** 2 / 3. **Next stage:** 13 ITERATIVE_REFINE [v3]: amendment `docs/10_amendment_v3.md`
+  written and committed before any v3 code / run (rows from existing replays first: re-splits, per-stratum tables,
+  Holm, sub-pool on CRC, shrunk plug-in, per-stratum tuned margin, force in N; then new replays: reactive baseline,
+  adaptive preload, online study at 20 orderings × 3 shifts).
+- **Resuming under version:** v3. Deadline 12-04 AoE; stages 16–20 again by ≈ 11-24, else retarget (AUTOPILOT §1).
