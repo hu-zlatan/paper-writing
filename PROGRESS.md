@@ -9,7 +9,7 @@
 **Topic:** Amortized, non-myopic active tactile localization (TouchBED)
 **Initialised:** 2026-10-28T07:56:44Z
 **Current version:** v6
-**Latest stage:** Stage 13 ITERATIVE_REFINE [v6] — wave 1 dispatched (E9, E10, E8 part 0); see the v6 entry at the end of this file
+**Latest stage:** Stage 13 ITERATIVE_REFINE [v6] — wave 5 dispatched (run 48, 2026-11-12); see the end of this file
 
 ---
 
@@ -1824,3 +1824,19 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
 - **Where to resume:** when wave 4 finishes: follow-ups for `v6_e11_p1`, `v6_e11_p2`, `v6_e12_p0` and `_f2` for the
   three `_f1` manifests; then `v6_e12_p1`, `v6_e12_p2`; `tools_v6_gt.py` for new files; `analysis_v6.py --check`
   until complete → read-out → stage 14 [v6].
+
+## Run 48 (2026-11-12, ≈ 14:00 UTC) — stage 13 [v6] wave 5 dispatch
+
+- No open issues, no new owner directive. Wave 4 (Actions runs 212–217) finished 2026-11-11 01:48 UTC, all success;
+  the runners then sat idle ≈ 36 h (no scheduled run between run 47 and this one). `--check` counts only, no outcome read.
+- Follow-ups: `v6_e11_p1_f1` (35), `v6_e11_p2_f1` (10); `v6_e8_p3_f1`, `v6_e8_p4_f1`, `v6_e11_p0_f1` left 0 → **E8 and
+  E11 p0 complete**. E12 p0: 118 / 250 regrid3 jobs stopped at the 25-min guard (≈ 2.9 of 4 episodes per job); new
+  helper `code/tools_resume_regrid.py` (same command, `--episodes` = the guard's `remaining`, `--out …_r<first>`) →
+  `v6_e12_p0_f1` (118). Plan `plans/stage_13_v6_wave5.md`.
+- **Wave 5 dispatched:** the three follow-ups + `v6_e12_p1` (250) + `v6_e12_p2` (150) = 563 jobs.
+- g_T: `tools_v6_gt.py` on 32 new test5 files → 918 outputs.
+- `--check`: test5 0–499 S2 13,409 / 13,500, S4 10,916 / 11,000, S8 10,920 / 11,000, S12 13,467 / 13,500, A16-2
+  11,000 / 11,000; E12 S12 / A16-2 partial, S4 / S8 not started (p1 / p2), S2 students 702–705 not started.
+- **Where to resume:** when wave 5 finishes: `tools_resume_manifest.py` for the two E11 `_f1` manifests (→ `_f2`),
+  `tools_resume_regrid.py` for `v6_e12_p0_f1` (→ `_f2`), `v6_e12_p1`, `v6_e12_p2` (→ `_f1`); `tools_v6_gt.py`;
+  `analysis_v6.py --check` until complete → read-out → stage 14 [v6].
