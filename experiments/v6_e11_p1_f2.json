@@ -1,0 +1,9 @@
+{
+ "purpose": "v6 stage 13 second follow-up for v6_e11_p1",
+ "jobs": [
+  {
+   "id": "S_k4_r0student_s703_468_r478_r490",
+   "cmd": "python main.py eval3 --set S --kappa 4 --tau 4.8 --n-star 4 --method student --weights ../results/v5/d5/S_k4_s703_r0.npz --split test5 --start 490 --count 4 --sub 8 --budget-minutes 25 --out ../results/v6/test5/S_k4_r0student_s703_468_r478_r490"
+  }
+ ]
+}
