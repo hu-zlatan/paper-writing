@@ -1847,3 +1847,12 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
   (`papers/p2/PROGRESS.md`, `papers/p2/OWNER_TODO.md`).
 - **Where to resume (run 49):** paper 1 as in the run-48 entry above (E12 follow-ups via `tools_resume_regrid.py`, then
   `--check` → read-out → stage 14 [v6]); paper 2 waits for the owner (meanwhile paper-level text only).
+
+## Run 49 (2026-11-12, ≈ 19:50 UTC) — stage 13 [v6] wave 6 dispatch
+
+- No open issues, no new owner directive. Wave 5 done except one `v6_e12_p1` job stuck ≈ 2 h in one episode → run 221
+  cancelled so its partial output (2 / 4 episodes) was committed. `v6_e11_p1_f2` left 0 → **E8–E11 complete**; g_T
+  complete (`tools_v6_gt.py`: 0 new files). Counts only, no outcome read. Plan `plans/stage_13_v6_wave6.md`.
+- **Wave 6 dispatched:** `v6_e12_p0_f2` (20), `v6_e12_p1_f1` (32), `v6_e12_p2_f1` (26) = 78 regrid3 jobs.
+- **Where to resume:** when wave 6 finishes: `tools_resume_regrid.py` on the three manifests (→ `_f3` / `_f2`) until
+  0 left; `analysis_v6.py --check` complete → read-out → stage 14 [v6]. Paper 2 waits for the owner.
