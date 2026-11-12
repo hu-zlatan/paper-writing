@@ -24,7 +24,8 @@ reviews = (rd("paper/mypaper/" + rec)
            "- Address the must-fix items of the merged record with targeted edits; do not rewrite sections the record does "
            "not touch. The 'Deferred' items need new experiments and are NOT to be simulated in text: only as limitations / "
            "future work. No citations outside docs/05_knowledge_cards.json.\n"
-           "- New numbers only from results/v4/v4_analysis.json, results/v3/a7_integrated.json, results/v3/results_v3.json, "
+           "- New numbers only from results/v4/v4_analysis.json, results/v4/v4_posthoc.json (post-hoc, report-only: label every "
+           "number from it as post hoc / not pre-registered), results/v3/a7_integrated.json, results/v3/results_v3.json, "
            "results/v2/results_v2.json or results/v1/results_v1.json (open them under /home/claude/paper-writing/papers/p2), "
            "or constants read from code/ (e.g. CSF-1's mu) or the design docs (docs/07*, 08a-08h, 09, 10, 11). "
            "Reviewer-computed numbers that are in none of these must not be printed. Check every value you change against "
@@ -35,6 +36,7 @@ reviews = (rd("paper/mypaper/" + rec)
            ">= 600, Results >= 500, total >= 4,000 words. Bring Introduction, Related Work and Setup up to their floors; "
            "the template's rule applies: no section gets shorter (Limitations must not be shortened or softened). Page fit "
            "is handled at stage 22 on the real PDF, not here.\n")
+user_t = user_t
 user = (user_t.replace("{topic_constraint}", block).replace("{draft}", rd("paper/mypaper/draft_v4.md"))
         .replace("{reviews}", reviews))
 d = os.path.dirname(os.path.abspath(__file__))

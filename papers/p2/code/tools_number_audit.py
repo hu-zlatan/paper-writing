@@ -51,6 +51,9 @@ def main():
     v4 = os.path.join(root, "results/v4/v4_analysis.json")                    # v4 read-out (C1-C5 confirmatory, S1-S7)
     if os.path.exists(v4):
         vals = flat(json.load(open(v4)), vals)
+    v4p = os.path.join(root, "results/v4/v4_posthoc.json")                     # v4p post-hoc report-only rows (run 48)
+    if os.path.exists(v4p):
+        vals = flat(json.load(open(v4p)), vals)
     design = " ".join(open(p).read() for p in sys.argv[2:])
     bad = []
     for m in re.finditer(r"(?<![\w.\[])[−-]?\d[\d,]*\.\d+", draft):          # decimals only; integers are counts/consts
