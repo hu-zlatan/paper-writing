@@ -1856,3 +1856,8 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
 - **Wave 6 dispatched:** `v6_e12_p0_f2` (20), `v6_e12_p1_f1` (32), `v6_e12_p2_f1` (26) = 78 regrid3 jobs.
 - **Where to resume:** when wave 6 finishes: `tools_resume_regrid.py` on the three manifests (→ `_f3` / `_f2`) until
   0 left; `analysis_v6.py --check` complete → read-out → stage 14 [v6]. Paper 2 waits for the owner.
+- (run 49, ≈ 21:00 UTC) Wave 6 mostly landed: E12 now 100 / 100 in S12 and for G\* in every cell; 11 student episodes
+  left in 6 jobs (S2 s702 ep 85–87, S4 s702 / s705 ep 93+, S8 s703 / s705, A16-2 s702 ep 99), some still running in
+  Actions runs 224 / 225 (long single episodes). **Where to resume (run 50):** once runs 224–226 are complete,
+  `tools_resume_regrid.py` on `v6_e12_p0_f2`, `v6_e12_p1_f1`, `v6_e12_p2_f1` (→ `_f3`, `_f2`, `_f2`) and dispatch;
+  when `--check` shows E12 100 everywhere → `python code/analysis_v6.py` read-out → stage 14 [v6] (fresh subagent).
