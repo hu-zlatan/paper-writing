@@ -1840,3 +1840,10 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
 - **Where to resume:** when wave 5 finishes: `tools_resume_manifest.py` for the two E11 `_f1` manifests (→ `_f2`),
   `tools_resume_regrid.py` for `v6_e12_p0_f1` (→ `_f2`), `v6_e12_p1`, `v6_e12_p2` (→ `_f1`); `tools_v6_gt.py`;
   `analysis_v6.py --check` until complete → read-out → stage 14 [v6].
+- (run 48, ≈ 14:45 UTC) `v6_e11_p1_f1`, `v6_e11_p2_f1` finished (runs 218–219); `v6_e11_p2_f1` left 0, `v6_e11_p1_f1`
+  left 1 time-guard stop (4 episodes) → `v6_e11_p1_f2` (1 job) dispatched. **test5 0–499 complete in every cell except
+  S4 (10,996 / 11,000, the 4 episodes above); g_T complete.** E12 waves (`v6_e12_p0_f1`, `p1`, `p2`) running.
+- Paper 2 this run: stages 18 → 19 → 18 / 19 pass 2 → 20 [v4]; gate 6.5 / 10 FAIL, refine cap 3 / 3 → owner decision
+  (`papers/p2/PROGRESS.md`, `papers/p2/OWNER_TODO.md`).
+- **Where to resume (run 49):** paper 1 as in the run-48 entry above (E12 follow-ups via `tools_resume_regrid.py`, then
+  `--check` → read-out → stage 14 [v6]); paper 2 waits for the owner (meanwhile paper-level text only).
