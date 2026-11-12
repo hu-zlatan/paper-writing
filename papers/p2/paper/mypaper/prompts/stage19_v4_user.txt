@@ -1,0 +1,621 @@
+Revise the paper draft to address all review comments.
+
+CRITICAL: Maintain or INCREASE the paper length. Each section must meet its minimum word count:
+Abstract (150-250), Introduction (800-1000), Related Work (600-800), Method (1000-1500),
+Experiments (800-1200), Results (600-800), Discussion (400-600), Limitations (200-300), Conclusion (200-300).
+
+Return revised markdown only.
+
+=== HARD TOPIC CONSTRAINT ===
+
+The paper MUST be about: Certified-slip tactile grip regulation: a ramp-down friction-onset probe combined with distribution-free conformal risk control so that the physical slip rate of a minimal-force grasp is <= alpha, compared against the strongest non-tactile conformal baseline, with ablations showing where the force saving comes from (the probe, not the learned tactile model) and an online binary-feedback calibration study under distribution shift
+
+PROHIBITED content (unless user explicitly specifies case-study mode):
+
+- Do NOT treat environment setup, dependency installation, or infrastructure failures as a research contribution.
+
+- Do NOT present debugging logs, system errors, or configuration issues as experimental findings.
+
+- Do NOT drift to tangential topics not directly related to the stated topic.
+
+- Every section MUST connect back to the core research question.
+
+- The Abstract and Introduction MUST clearly state the research problem derived from: Certified-slip tactile grip regulation: a ramp-down friction-onset probe combined with distribution-free conformal risk control so that the physical slip rate of a minimal-force grasp is <= alpha, compared against the strongest non-tactile conformal baseline, with ablations showing where the force saving comes from (the probe, not the learned tactile model) and an online binary-feedback calibration study under distribution shift
+
+- The Method section MUST describe a technical approach, not a workflow.
+
+- The Results section MUST report quantitative outcomes of experiments, not environment status.
+
+=== END CONSTRAINT ===
+Draft:
+
+<!--
+FIGURE 1 PROMPT
+Full-width, two-panel vector figure for a robotics paper (RSS style), white background, sans-serif labels,
+colour-blind-safe palette: learned probe model = deep blue, probe plug-in = teal, friction-blind conformal
+baseline CSF-1 = orange, family friction prior CSF-fam = purple, no-probe grasp = dashed grey. Title strip above
+the panels: "Probe, then calibrate (simulation)". No insets.
+
+(a) Protocol timeline with absolute forces (schematic shape, real numbers). x-axis: time within one grasp
+episode; y-axis: grip force in N (log scale). Segments, left to right: "preload F0 = 32.7 N (same for every
+object)" as a flat line held 0.4 s; "squeeze F0 -> 1.5 F0 -> F0" as a half-sine bump over 0.3 s; "ramp-down
+probe" as a log-linear descent from F0 towards 0.005 F0 over 0.25 s, cut short by a red marker labelled
+"incipient-slip onset F_onset -> mu-hat = m g / (2 F_onset)"; a fast return to F0 (0.02 s) held 0.1 s; then
+"ramp to hold force F = F_base(x) e^lambda-hat" followed by a shaded "disturbance window (0.6 s)". Annotate each
+phase with its integrated force (N s): preload 13.08, squeeze 12.91, ramp-down 1.444, return 0.3480,
+re-hold 3.27. Draw a dashed grey alternative trace labelled "no-probe grasp" that leaves the preload directly for
+the hold force and skips squeeze, probe, return and re-hold. Over the hold segment draw a band with three tick
+lines: "learned probe model 6.115 N" (blue), "probe plug-in 6.463 N" (teal), "CSF-1 7.125 N" (orange; the
+no-probe grasp holds the same 7.125 N). Side note at right: "break-even vs no-probe grasp: 17.74 s (learned
+model), 27.07 s (plug-in); CSF-1 with probe never breaks even".
+
+(b) Confirmatory forest plot (real data). y-axis: five rows, top to bottom, grouped under two headers.
+Header "fresh pool (friction independent of appearance)": C1 probe plug-in vs CSF-1, D 0.4314 [0.3824, 0.4835];
+C2 learned model vs plug-in, D 0.01117 [-0.05552, 0.05686]; C3 learned model vs CSF-1, D 0.4135
+[0.3578, 0.4903]. Header "friction-correlated pool, vs family prior": C4 plug-in vs CSF-fam, D -0.5814
+[-0.7208, -0.4563]; C5 learned model vs CSF-fam, D -0.5461 [-0.6590, -0.4290]. x-axis: D = 1 - RE(a)/RE(b),
+range -0.8 to 0.6. Vertical solid line at 0, dashed lines at -0.10 and +0.10; shade the band [-0.10, 0.10] on
+the C2 row only. Filled markers for C1-C3 (registered prediction met), open markers for C4 and C5 (no prediction
+registered). Small grey tick on each row at its CRC-route value: C1 0.4482, C2 -0.06291, C4 -0.5166,
+C5 -0.4733 (C3 is itself the CRC route; no tick). Footer under both panels: "MuJoCo, rigid contact, modelled
+touch detector, assumed onset noise sigma = 0.2; bound marginal over the pool, in expectation, needs simulator
+replays".
+-->
+
+# When Does a Friction-Onset Probe Pay Off? Conformal Slip-Risk Control of Grip Hold Force, Mapped in Simulation
+
+## Abstract
+
+We choose a grip *hold* force whose physical slip rate is at most α; without friction information, a conformal rule must cover the whole friction range. After a fixed preload, a ramp-down probe reads friction from the incipient-slip onset, a one-line Coulomb plug-in (or a learned model) turns it into a force, and conformal risk control on the binary physical-slip loss calibrates it per disturbance stratum: certified slip as a marginal, in-expectation bound, in simulation. In pre-registered tests on fresh objects, the plug-in lowers relative excess hold force against the strongest friction-blind conformal baseline by D = 0.4314 (CI [0.3824, 0.4835]); a learned model adds nothing at the assumed onset noise (equivalent within ±0.10). The saving reverses when friction is predictable from the visible object family (a family prior wins, D −0.5814), at high probe noise (−0.2065) and as the friction range narrows; it repays the probe's force-time only for holds beyond 17.74 s. The bound is marginal (single strata exceed α in up to 70 % of re-splits); in a narrow mid-friction band the baseline was better in earlier rounds. Online, binary-feedback tracking returns slip near α after shift; efficiency versus oracle recalibration is inconclusive.
+
+## 1 Introduction
+
+A robot holding an object must choose a grip force. Force above need wastes actuation and loads the object for the whole hold; force below need lets it slip. Humans scale grip to friction after brief contact \cite{johansson1984roles} and re-regulate when friction changes \cite{willemet2024grip}. Tactile controllers react to incipient slip \cite{dong2019maintaining, veiga2020grip, berman2025autonomous}, estimate friction online \cite{khamis2021real, niu2026synchronized} or learn a gentle-grasp margin \cite{boonstra2024estimate}, but none states a distribution-free bound on the resulting slip rate. We study a narrower problem than minimal-force grasping: choosing the *hold* force after a fixed, high-force probe protocol.
+
+Conformal risk control certifies any force rule from a held-out calibration set \cite{angelopoulos2022conformal, lei2017distribution}. A rule that cannot see friction, however, must cover the whole friction range with one calibrated multiplier. The fair comparator for a tactile method is therefore the *strongest* friction-blind conformal baseline, chosen beforehand on a disjoint selection split: CSF-1 (mean relative excess 0.7686) beat a Mondrian variant (0.8294) and a learned proprioceptive model (0.8335). Where friction is predictable from the visible object family, we also compare against a deployable family prior.
+
+We ask *when a short tactile probe makes a distribution-free physical-slip bound cheaper in hold force, and which component carries the saving*: (i) does the probe lower hold force at certified physical slip ≤ α (in simulation, marginal over the pool, in expectation), and is a learned model needed? (ii) Under which conditions (probe noise, friction range, friction-informative prior, hold duration) does the saving hold or disappear? (iii) Does calibration recover under shift when the only feedback is whether the object slipped?
+
+**Contributions.**
+- **(C-i) Method.** A protocol in which a friction-uninformative preload leaves the ramp-down onset as the only friction channel; per-stratum CRC on the monotonised physical binary slip loss (the label rule is not exactly monotone, 8 of 800) turns a one-line Coulomb plug-in on that onset into a rule with marginal expected slip ≤ α in simulation.
+- **(C-ii) Confirmatory evaluation on fresh objects.** Five pre-registered, Holm-corrected decisions: the plug-in beats the baseline (C1); the learned model is equivalent to the plug-in at onset noise σ 0.2 on the registered matched-slip route (C2); the earlier result replicates (C3); on a friction-correlated pool a family prior beats both tactile arms (C4, C5).
+- **(C-iii) Boundary map.** A σ band, a friction-width sweep, a break-even against a simulated no-probe grasp, a 200-re-split check of the certificate, and an online binary-feedback study under three shifts.
+
+Three of five confirmatory predictions are met; the two unpredicted rows (C4, C5) are not superior, with intervals below 0. The earlier pre-registered learned-versus-plug-in and label-validity decisions were not confirmed, and online efficiency is inconclusive.
+
+## 2 Related Work
+
+**Friction reading and tactile grip control.** Reading friction from incipient slip is established \cite{marconi1996incipient}; reviews treat incipient slip as the key friction cue \cite{chen2018tactile, romeo2020methods}, and human grip adapts to friction \cite{johansson1984roles, willemet2024grip}. Robotic controllers detect slip and tighten \cite{james2020slip, grover2022detect, ayral2026reactive}, keep grasps within slipping bounds \cite{dong2019maintaining}, estimate friction with a safety margin \cite{khamis2021real, niu2026synchronized}, learn incipient-slip margins or force policies \cite{boonstra2024estimate, kuo2025tracing, feng2026tactilereflex, lach2024zero}, or stabilise grasps with adaptive or independent-finger control \cite{almohammed2022switched, veiga2020grip}. Pre-grasp force can also be chosen from prior experience \cite{shang2026exp}, which relates to our family-prior result. None of these gives a coverage guarantee on slip rate.
+
+**Robust grasping under uncertainty.** Force optimisation under parameter uncertainty \cite{cloutier2018examining}, control barrier functions \cite{cortez2019control, kim2024robust}, friction-informed risk margins \cite{enwerem2026firmgrasp} and belief parameterisations \cite{enwerem2026variational} bound grasp risk relative to a model and its assumed uncertainty set. Our bound needs no friction model but is marginal and needs calibration data.
+
+**Conformal prediction and risk control.** Conformal methods give finite-sample guarantees under exchangeability \cite{vovk2005algorithmic, romano2019conformalized, angelopoulos2023conformal, bian2023training, ding2023class}; CRC extends them to monotone losses \cite{angelopoulos2022conformal}, non-monotone losses \cite{angelopoulos2026conformal} and high-probability control \cite{angelopoulos2025learn}. Online variants track coverage under shift \cite{gibbs2021adaptive, gibbs2022conformal, angelopoulos2023conformala, angelopoulos2024online, farinhas2023non, ge2024stochastic}. In robotics they certify decisions, planning, verification and perception \cite{lekeufack2024conformal, lindemann2025formal, dixit2022adaptive, marques2026particle, lindemann2023conformal, ren2023robots, huang2023conformal, strawn2023conformal, zhang2024bayesian, zhao2024conformalized, kumar2026learnable}. None calibrates a contact outcome as a binary loss in force space.
+
+**Novelty.** Onset-based friction reading, CRC, Learn-then-Test (LTT) and quantile tracking are used as published. What is new is (i) a protocol in which the onset is the only friction channel, so that its value can be isolated; (ii) a marginal bound on the *physical* slip rate of the resulting hold force, in simulation; and (iii) confirmatory tests that locate the saving in the probe and map where it disappears.
+
+## 3 Problem Formulation and Method
+
+### 3.1 Problem
+
+An instance x comprises an object (family, geometry, mass m, friction μ), a pose offset and a disturbance stratum d ∈ {D1, …, D4}. Slip is a tangential displacement above 2 mm, a rotation above 3° or loss of contact. The minimal no-slip hold force F\*(x) is bracketed by 11-replay log-space bisection on [0.1, 100] N into F\*_lo, F\*_hi and F\*_mid = √(F\*_lo F\*_hi), labels that exist only in simulation. With relative excess RE(F) = E_x[(F(x) − F\*_mid(x))/F\*_mid(x)] of the hold force, the task is
+
+$$\min_F \ \mathrm{RE}(F) \quad \text{s.t.} \quad \mathbb{P}(\mathrm{slip\ at\ } F(x)) \le \alpha .$$
+
+Two rules are compared by D(a vs b) = 1 − RE(a)/RE(b); D > 0 means that a needs less excess force than b.
+
+### 3.2 Grasp protocol and friction-onset probe
+
+Every instance receives the same preload F₀ = 32.7 N, which encodes neither m nor μ. The gripper lifts and holds, squeezes F₀ → 1.5 F₀ → F₀, and runs the **ramp-down probe**: the force falls at a fixed rate until a touch-only detector on the pad shear/normal ratio reports incipient slip, giving F_onset and μ̂ = m g/(2 F_onset). Simulated touch is clean, so we add onset noise, log F_onset + σε with ε ~ N(0, 1), σ ∈ {0.1, 0.2, 0.4}; σ 0.2 is primary and assumed. The grip then ramps to the chosen hold force F; a slip during the probe counts. The protocol is fixed: preload and squeeze exceed every test instance's F\*_mid, the probe induces micro-slip by design, and the method chooses only the hold force. The **no-probe grasp** uses the same preload and skips the squeeze and probe phases.
+
+### 3.3 Force rules
+
+Every rule has the form F(x; λ) = min(F_max, F_base(x) e^λ), with λ set by calibration.
+- **Probe plug-in:** F_base = m(g + a_cmd)/(2μ̂).
+- **Shrunk plug-in:** log μ̂_s = a + b log μ̂, with ordinary least squares on the selection split only, frozen from the previous round; at σ 0.2, a = −0.3858 and b = 0.7397.
+- **Learned probe model (option):** a gradient-boosted quantile predictor on proprioception, static touch, squeeze and onset features.
+- **Friction-blind baseline CSF-1:** F_base = m(g + a_cmd)/(2μ̄) with one friction value μ̄, selected on the selection split before any calibration or test access.
+- **Family prior CSF-fam (deployable, non-tactile):** the same formula with one μ̄ per visible family, the geometric-mean true μ of the family's 50 selection objects of the correlated pool (disjoint from calibration and test): F1 0.379, F2 0.496, F3 0.677, F4 0.852.
+- **Earlier-round supporting arms:** onset-only learner; oracle-side friction prior μ̃ = clip(μ e^{σ_p ε_p}, 0.1, 3.0); probe + tuned per-stratum margin; reactive slip-tightening (registered negative control).
+
+### 3.4 Calibration on the physical binary loss
+
+For calibration instance i, the loss is L_i(λ) = 𝟙{physical slip in a direct replay at F(x_i; λ)}, monotonised on the grid Λ as L̃_i(λ) = max_{λ′ ≥ λ} L_i(λ′). Since L̃_i ≥ L_i, a bound on L̃ bounds physical slip.
+
+**CRC (primary).** Per stratum, with R̃_n(λ) the mean of L̃_i over n calibration instances,
+
+$$\hat\lambda = \min\Big\{\lambda \in \Lambda : \frac{n \tilde R_n(\lambda) + 1}{n + 1} \le \alpha\Big\}.$$
+
+By \cite{angelopoulos2022conformal}, an exchangeable test instance then has E[slip] ≤ α. The bound is marginal over instances and friction and holds in expectation over the calibration draw; it is not conditional on a stratum realisation or object family.
+
+**LTT (secondary).** λ is chosen so that the slip risk is ≤ α with probability ≥ 1 − δ, δ = 0.1, per stratum \cite{angelopoulos2025learn, bian2023training}.
+
+**Why the physical loss.** The label route (split conformal on bisection labels \cite{romano2019conformalized}) transfers to physical slip only if slip is monotone in F. The monotonicity gate failed: 8 of 800 instances were non-monotone (Clopper–Pearson upper limit 0.02115 > 0.02; 7 of 8 in D2), so the label route is secondary.
+
+**Deployability.** Offline CRC needs a replay of each calibration grasp at every grid force, so it is a simulation procedure; the online tracker needs one binary outcome per grasp.
+
+```
+Algorithm 1: probe, then calibrate (per arm, per stratum d)
+1  every instance: preload F0, squeeze, ramp-down probe -> F_onset (+ noise sigma); F_base(x) uses it
+2  for calibration i, lambda in Lambda: L[i,lambda] <- slip of replay at min(F_max, F_base(x_i) e^lambda)
+3  Ltilde[i,lambda] <- max_{lambda' >= lambda} L[i,lambda']
+4  lambda_hat <- first lambda with (sum_i Ltilde[i,lambda] + 1)/(n + 1) <= alpha
+5  deploy: probe, then command F = min(F_max, F_base(x) e^lambda_hat)
+```
+
+### 3.5 Online calibration from binary feedback
+
+Score-space quantile tracking \cite{angelopoulos2023conformala} updates one log-force offset per stratum, q_{t+1} = q_t + η(slip_t − α), with η = 0.03412 (frozen) and anti-windup at F_max; score space, rather than the level update of \cite{gibbs2021adaptive}, tolerates scores beyond the calibration support after a friction drop. References: a decaying step \cite{angelopoulos2024online}, frozen calibration, oracle recalibration.
+
+## 4 Experimental Setup
+
+**Simulator and objects.** MuJoCo 4.0.0, a parallel-jaw gripper and one touch grid per pad (on tactile simulation see \cite{wang2022tacto, akinola2025tacsl, leins2025hydroelastictouch, luu2025manifeel, birtalan2026impact}). Families: F1 boxes, F2 cylinders, F3 ellipsoids / capsules, F4 off-centre-of-mass composites; F5 thin plates / disks only under shift. The summed pad normal reading differs from F₀ by at most 0.1597 N, and no instance slipped during the preload.
+
+**Pools.** The first-round pool draws μ log-uniform on [0.3, 1.0], independently of every non-tactile input, and m on [0.05, 1.0] kg (2,000 calibration / 2,800 test instances). The **fresh pool (independent friction)** repeats this design with new objects (500 calibration / 700 test objects) and carries C1–C3, S1–S3, S6 and S7. The **friction-correlated pool** draws friction in narrow, mostly non-overlapping family bands (500 / 700 objects) and carries C4, C5 and S4.
+
+**Strata and shifts.** Strata: D1 lift acceleration, D2 shake, D3 lateral pull, D4 payload. Online shifts: friction (μ × 0.6), family (new F5) and amplitude (× 1.5), on streams of T = 2,000 steps, shift from step 501, 20 orderings.
+
+**Statistics.** CI\*\* is a two-sided 97.5 % object-cluster bootstrap interval (2,000 draws, all valid, λ̂ refitted in each). Matched-slip RE is interpolated at slip 0.10, the registered route for C1, C2, C4 and C5; the smallest effect size of interest (SESOI) is 0.10. C1–C5 use Holm at 5 % over five p: superiority if the CI\*\* lower limit exceeds 0, equivalence (C2) by TOST within ±0.10. Every v4 row has `edge: false`, which we take, per the read-out code's flag, as no λ̂ at grid index 0 or 80. First-round core decisions used Bonferroni over 4, its 52 secondaries Holm within family (no verdict changes); S1–S7 and later-round rows are unadjusted.
+
+**Deviations.** (1) The CRC route was written after the monotonicity counts were seen, before any predictor existed. (2) A first-round grid floor was handled by a post hoc refined grid (earlier-round rows only). (3) The first-round pre-registration misstates the selection objects once; the code uses 150–199. (4) Later-round analyses were registered after earlier read-outs and cannot change a first-round decision. (5) The registered physical-replay online oracle was not produced. (6) The confirmatory amendment was registered before any v4 code or run; its read-out code was committed before any v4 replay and run once. (7) C4 / C5 had no registered prediction; the rule defines only superiority there.
+
+## 5 Results
+
+Status codes (CONF, PRE, SEC, DESC) are defined under Table 1; α = 0.10 and σ 0.2 unless stated.
+
+### 5.1 Confirmatory tests on fresh objects
+
+**On 700 fresh test objects at σ 0.2, all three registered predictions hold. On the friction-correlated pool, the family prior beats both tactile arms.**
+
+*C1 (CONF).* The plug-in needs less excess hold force than CSF-1 at matched slip: D = 0.4314 [0.3824, 0.4835], superiority. *C2 (CONF).* The learned model is equivalent to the plug-in within ±0.10 at σ 0.2 on the registered matched-slip route, D = 0.01117 [−0.05552, 0.05686]; the two-sided p of 0.915 is consistent with equivalence. On the CRC route equivalence is not shown (−0.06291 [−0.1226, 0.08396]). *C3 (CONF).* The learned model beats CSF-1 on the CRC route, D = 0.4135 [0.3578, 0.4903], replicating the first-round pre-registered result (0.4168 [0.3484, 0.4778]; seeds 1–4: 0.4343 / 0.4197 / 0.3932 / 0.4494).
+
+*C4 / C5 (CONF, no prediction registered).* On the friction-correlated pool, the plug-in against CSF-fam gives −0.5814 [−0.7208, −0.4563] and the learned model −0.5461 [−0.6590, −0.4290]: not superior under the registered rule, with each CI\*\* wholly below 0 (the read-out code labels this "inferiority"). CSF-fam reaches matched RE 0.2674 at slip 0.05929. The tactile arms still beat CSF-1 on this pool (0.4285, 0.4412), and the CRC-route rows agree in sign (−0.5166 / −0.4733).
+
+Mean hold force on the fresh pool is 6.115 N (learned), 6.463 N (plug-in) and 7.125 N (CSF-1); CSF-fam holds 5.933 N on the correlated pool. The confirmed saving is against a friction-blind prior: when friction class is visible, a one-number family prior beats a σ 0.2 probe (no hybrid prior + probe arm was tested).
+
+| Row | Pool | Value [CI\*\*] | Status |
+|---|---|---|---|
+| C1 plug-in vs CSF-1, matched | fresh | 0.4314 [0.3824, 0.4835], superiority; CRC 0.4482 | CONF |
+| C2 learned vs plug-in, matched | fresh | 0.01117 [−0.05552, 0.05686], equivalent ±0.10; CRC −0.06291 [−0.1226, 0.08396], not shown | CONF |
+| C3 learned vs CSF-1, CRC | fresh | 0.4135 [0.3578, 0.4903], superiority | CONF |
+| C4 plug-in vs CSF-fam, matched | correlated | −0.5814 [−0.7208, −0.4563], not superior (CI\*\* < 0); CRC −0.5166 [−0.7461, −0.3859] | CONF |
+| C5 learned vs CSF-fam, matched | correlated | −0.5461 [−0.6590, −0.4290], not superior (CI\*\* < 0); CRC −0.4733 [−0.6822, −0.3683] | CONF |
+| Plug-in / learned vs CSF-1; CSF-fam vs CSF-1 | correlated | 0.4285 [0.3648, 0.4741] / 0.4412 [0.3876, 0.4817]; 0.6386 [0.6043, 0.6620] | SEC |
+| Arms: slip / matched RE / hold N | fresh | CSF-1 0.08786 / 0.7518 / 7.125; plug-in 0.09786 / 0.4275 / 6.463; shrunk 0.08321 / 0.3797 / 6.181; learned 0.08107 / 0.4227 / 6.115 | DESC |
+| Arms: slip / matched RE / hold N | correlated | CSF-1 0.08214 / 0.7399 / 7.506; plug-in 0.08607 / 0.4229 / 6.646; learned 0.08821 / 0.4134 / 6.256; CSF-fam 0.05929 / 0.2674 / 5.933 | DESC |
+
+*Table 1. Confirmatory tests and arm-level operating points. A reported p = 0.0 means two-sided p < 0.001 (C2: one-sided TOST p < 0.0005), so the largest Holm-adjusted bound over the five rows is ≤ 0.005; 2,000 valid draws. Status: **CONF** confirmatory, pre-registered before any v4 code or run, fresh objects, Holm at 5 % over five p; **PRE** pre-registered first-round core decision (Bonferroni over 4), not re-decided; **SEC** secondary, unadjusted (first-round secondaries: Holm within family); **DESC** descriptive point values, no test.*
+
+**Figure 1.** *Probe, then calibrate (simulation). (a) Every grasp starts from the same 32.7 N preload, so only the ramp-down probe's onset carries friction information. The method chooses the hold force (mean 6.115 N for the learned model vs 7.125 N for the friction-blind baseline on fresh objects). Against a simulated grasp that skips the probe, the probe's force-time is repaid after a 17.74 s hold. (b) Pre-registered tests on fresh objects: the probe plug-in beats the friction-blind conformal baseline (C1), a learned model is equivalent to the plug-in within ±0.10 (C2), and the earlier result replicates (C3). On a pool where friction follows the visible object family, a family prior beats both tactile arms (C4, C5). Bars are 97.5 % object-cluster bootstrap intervals; grey ticks show the unmatched-slip CRC route.*
+
+### 5.2 Boundary map: noise, friction range, hold time
+
+**The saving shrinks and then reverses as probe noise rises or the friction range narrows, and it repays the probe's force-time only for longer holds.**
+
+*σ band (S1, SEC; Fig. 2a).* D(plug-in vs CSF-1) is 0.6486 [0.6100, 0.6733] / 0.4314 / −0.2065 [−0.3280, −0.1112] at σ 0.1 / 0.2 / 0.4; at σ 0.4 the plug-in's test slip is 0.1014, above α. Learned versus plug-in is −0.1076 [−0.1819, −0.02922] at σ 0.1 (learned worse; TOST p 0.5445) and 0.3238 [0.2778, 0.3817] at σ 0.4 (learned better), so C2's equivalence is a σ 0.2 result. An earlier round found the opposite at σ 0.4 on the first-round pool, where a shrunk plug-in beat the learned model (−0.1395 [−0.1832, −0.01264]); the cause of the difference is not tested.
+
+*Friction-width sweep (S3, SEC, descriptive; Fig. 2b).* Restricting the fresh pool to centred friction windows of relative log-width w, D(plug-in vs CSF-1) runs 0.4314 → 0.2414 → −0.1094 → −0.6967 for w = 1.0 → 0.75 → 0.5 → 0.25 (CI\*\* [−0.2383, 0.01393] at w 0.5; [−0.9507, −0.4238] at w 0.25, with 134 calibration / 179 test objects); the learned model gives 0.4377 / 0.2793 / −0.01792 / −0.5039. The sweep crosses 0 between w 0.75 and w 0.5. CSF-1's matched RE falls from 0.7518 to 0.2307 while the plug-in stays between 0.3915 and 0.4275, so the decline is driven mainly by CSF-1 improving. We hypothesise, but did not test, that this reflects friction spread relative to probe noise; the trend matches the direction of the earlier mid-friction sub-pool (Section 5.4), with no mechanism claimed.
+
+*Measured break-even (S6, DESC; Fig. 2c).* Measured against a simulated no-probe grasp (point values, no interval): that grasp slips at 0.08714 and holds 7.125 N (λ̂ at grid index 41 in all strata). Integrated force-time at T = 1 / 5 / 30 s is 22.20 / 50.70 / 228.8 N·s without the probe, 39.10 / 63.57 / 216.4 for the learned model, 39.47 / 65.32 / 226.9 for the plug-in and 40.17 / 68.67 / 246.8 for CSF-1 with the probe. Break-even is 17.74 s (learned) and 27.07 s (plug-in); CSF-1 with the probe never breaks even. Phase integrals are 13.08 (preload), 12.91 (squeeze), 1.444 (ramp-down), 0.3480 (return) and 3.27 N·s (re-hold): for 1 s and 5 s holds the no-probe grasp uses the least force-time, and the fixed preload and squeeze dominate.
+
+**Figure 2.** *Boundary map (fresh pool, simulation; secondary rows). (a) The probe's advantage over the friction-blind baseline shrinks with onset noise and reverses at σ 0.4 (plug-in 0.6486 / 0.4314 / −0.2065; learned 0.5683 / 0.4135 / 0.1675; learned vs plug-in −0.1076 / 0.01117 / 0.3238); the learned model is equivalent to the plug-in only at σ 0.2. (b) As the friction range narrows (μ windows [0.3, 1.0], [0.3487, 0.8603], [0.4054, 0.7401], [0.4712, 0.6367]), the baseline improves and the advantage reverses between w 0.75 and 0.5 (descriptive, σ 0.2). (c) Integrated grip force over the whole grasp, measured at three T: skipping the probe is cheapest for holds of 1–5 s; the probe-fed arms pull ahead only for longer holds (break-even 17.74 s and 27.07 s).*
+
+### 5.3 How the certificate behaves
+
+**Over 200 re-splits of the fresh pool, mean slip stays below α for every arm, but the bound is marginal: single strata and one object family often exceed α.**
+
+Under CRC (S7, SEC), across 200 fresh-pool re-splits, 31.5–70 % have at least one stratum above α (Table 2); LTT is more conservative. On the single correlated-pool split (S4, DESC, no intervals), family F1 exceeds α for three of four arms (CSF-1 0.3157, learned 0.2014, plug-in 0.1143); in F2–F4 all arms are ≤ 0.09, and only CSF-fam stays ≤ α in every family. Per family, the plug-in against CSF-fam gives −0.4441 / −0.3420 / −0.5557 / −0.7373 (F1–F4); the learned model's F1 value of 0.1102 comes at slip 0.2014, not a like-for-like gain. The first-round label monotonicity gate failed (8 / 800), but the label-versus-physical check passed in all four arm × α combinations. The shrunk plug-in (S2, SEC) improves on the raw plug-in; whether the gain exceeds the SESOI is unresolved.
+
+| Row | Value | Status |
+|---|---|---|
+| CRC, 200 re-splits: mean slip / share > α / any stratum > α / max | learned 0.08360 / 0.095 / 0.7 / 0.1146; plug-in 0.08513 / 0.08 / 0.645 / 0.1104 (D1 share 0.47); CSF-1 0.08670 / 0.145 / 0.315 / 0.1271 | SEC |
+| LTT, 200 re-splits: mean slip / share > α / any stratum > α | learned 0.06818 / 0.0 / 0.16; plug-in 0.07141 / 0.0 / 0.07; CSF-1 0.06929 / 0.01 / 0.08 | SEC |
+| Correlated pool, F1 slip | CSF-1 0.3157; learned 0.2014; plug-in 0.1143; CSF-fam max over families 0.09286 | DESC |
+| Shrunk vs raw plug-in; vs CSF-1 (matched) | 0.1119 [0.04864, 0.1449] (TOST p 0.477); 0.4950 [0.4514, 0.5273] | SEC |
+| Plug-in + tuned per-stratum margin (first-round pool) | slip 0.06571, RE 0.4843 (= CRC) | SEC |
+| Reactive slip-tightening, all arms (first-round pool) | slip ≥ 0.3086 in every arm and stratum; REACT-probe 0.9921 / 0.9514 | DESC |
+| Mid-friction sub-pool μ ∈ [0.5, 0.8] (first-round pool) | label route −0.2614 [−0.5320, −0.0325] (Holm 0.03 family / 0.12 all); refined CRC −0.3152 [−0.5231, −0.0172]; primary +0.3754 | SEC |
+
+*Table 2. Certificate behaviour (upper block, Section 5.3) and supporting rows from earlier rounds (lower block, Section 5.4). CSF-muhat at σ 0.4 was not re-split.*
+
+### 5.4 Supporting attribution and competitors from earlier rounds
+
+**On the first-round pool the same picture appears: a tuned margin lands where CRC does, the registered reactive design fails, and in a mid-friction band the baseline wins.**
+
+The pre-registered learned-versus-plug-in contrast (H2b, PRE) was D 0.0569 [−0.0399, 0.1454], not confirmed (TOST not met); C2 now answers it at σ 0.2 on the matched route. In the feature chain (SEC), adding the onset gives D 0.4739 [0.4148, 0.5229], the full model against the onset-only model −0.0534 [−0.1233, 0.0508], and there is no evidence that the squeeze helps (−0.0263). Against an oracle-side friction prior of log-noise σ_p 0.2, no advantage is shown (−0.0299 [−0.1903, 0.0816]), consistent in direction with C4 / C5. A per-stratum margin tuned on calibration data (SEC) reproduces the plug-in's CRC test point: at 500 calibration grasps per stratum, CRC adds the finite-sample guarantee, not a different operating point. The registered reactive slip-tightening design (DESC, negative control) fails, slipping at ≥ 0.3086 in every arm and stratum; its probe variant uses a raw μ̂ with log bias +0.3186, so the failure is at least partly a design artefact, and we make no claim against reactive control in general. In the mid-friction sub-pool μ ∈ [0.5, 0.8] (H2-R, SEC), D = −0.2614 (Holm p 0.03 within its family, 0.12 over all 52 first-round secondaries); −0.3152 on the refined CRC grid, +0.3754 on the primary grid. The result is grid-dependent, slip is unmatched, and no mechanism is claimed.
+
+### 5.5 Online calibration under shift
+
+**Frozen calibration breaks under friction and amplitude shift. Binary-feedback tracking returns slip near α after a transient, and the probe arm keeps its force advantage; efficiency against oracle recalibration stays inconclusive.**
+
+With label feedback (PRE, 20 orderings), the frozen probe arm slips at 0.3056 (friction shift) and 0.2461 (amplitude shift), the frozen baseline at 0.5101 (friction shift); tracking holds label slip at 0.0999–0.1016. H3 is inconclusive, and the matched-rate co-requirement fails in the friction and family shifts (0.032 / −0.035). With physical feedback (SEC, intervals over orderings only), the probe arm overshoots in steps 501–1,000 (up to 0.1389); in steps 1,501–2,000 its slip is 0.1001 / 0.1008 / 0.1018 with intervals containing α, consistent with convergence to α. D_RE against CSF-1 is 0.3107–0.4432 across shifts and windows. No physical-replay oracle was produced; the label-route oracle itself slips at 0.1346 in the family shift.
+
+| Row | Friction shift (μ × 0.6) | Family shift (F5) | Amplitude shift (× 1.5) | Status |
+|---|---|---|---|---|
+| Frozen probe arm / frozen baseline, label slip | 0.3056 / 0.5101 | 0.1017 / 0.1051 | 0.2461 / 0.1910 | PRE |
+| Tracking probe arm, label feedback: slip / RE | 0.1016 / 0.4763 | 0.0999 / 0.4262 | 0.1000 / 0.5067 | PRE |
+| H3 efficiency R_E [CI\*\*], inconclusive | 0.8778 [0.7404, 1.1204] | 1.1739 [1.0234, 1.4283] | 0.9629 [0.8363, 1.1449] | PRE |
+| Physical feedback 501–1,000: probe [CI95] / CSF-1 slip | 0.1389 [0.1365, 0.1413] / 0.2087 | 0.0981 / 0.0938 | 0.1368 [0.1337, 0.14] / 0.126 | SEC |
+| Physical feedback 1,501–2,000: probe slip [CI95] / RE | 0.1001 [0.0969, 0.1033] / 0.4746 | 0.1008 [0.0974, 0.1043] / 0.4144 | 0.1018 [0.098, 0.1055] / 0.4999 | SEC |
+| Label-route oracle slip (reference) | 0.0751 | 0.1346 | 0.0863 | PRE |
+
+*Table 3. Online calibration under shift, α = 0.10, 20 orderings per shift. Physical-feedback intervals are over orderings only.*
+
+## 6 Limitations and Discussion
+
+**What the evidence licenses.** In simulation, with friction independent of what the robot can see and at σ 0.2, a ramp-down probe plus a CRC-calibrated one-line plug-in lowers relative excess hold force against a friction-blind conformal baseline, with pooled slip near α on average; a learned model is not needed on the registered route. The saving disappears when friction is family-predictable, at σ 0.4, as the friction range narrows, and for holds shorter than 17.74–27.07 s. Hence: probe when friction is not predictable from appearance and holds are long.
+
+**Limits.** (1) *Simulation only; σ assumed:* one simulator, rigid contact, a modelled detector; the sign changes across σ 0.1 → 0.4 (0.6486 → −0.2065), and σ was not grounded on hardware or published detector error. (2) *Stylised correlated pool:* one band layout, one σ, and no hybrid prior + probe arm, so C4 / C5 do not show that touch is useless where a prior exists. (3) *Width sweep descriptive:* one σ, no family prior, small samples at w 0.25. (4) *Marginal guarantee:* over the pool, in expectation; 31.5–70 % of re-splits have a stratum above α, and on the single correlated-pool split F1 exceeds α for three of four arms; LTT is the conservative alternative. (5) *Deployability:* offline CRC needs replays at every grid force; the online route has ordering-only intervals, overshoot to 0.1389 and no physical-replay oracle. (6) *Fixed high-force protocol:* the 32.7 N preload and squeeze exceed every instance's F\*_mid and dominate force-time; no adaptive preload was run, so the work concerns hold force, not first-contact force. (7) *Competitors:* published controllers \cite{khamis2021real, dong2019maintaining, boonstra2024estimate, niu2026synchronized} were not reproduced; the reactive design is a negative control, not re-designed. (8) *Multiplicity:* Holm covers C1–C5 and the first-round secondaries; S1–S7 and later-round rows are unadjusted, and the break-even has no interval and depends on commanded profiles.
+
+**Future work.** A hybrid family prior + probe rule, probe-noise measurement on hardware with an adaptive preload, and replay-free online calibration.
+
+## 7 Conclusion
+
+In simulation, a friction-onset probe with conformal risk control on physical slip lowers relative excess hold force against the strongest friction-blind conformal baseline (C1 D 0.4314 [0.3824, 0.4835]; C3 0.4135) under a marginal, in-expectation bound. The probe, not the learner, carries the saving (C2 equivalent at σ 0.2, matched route). A family prior wins when friction is visible (C4 −0.5814); the saving reverses at σ 0.4 (−0.2065) and as friction narrows, and breaks even after 17.74 s. Online tracking is consistent with convergence to α; efficiency is inconclusive.
+
+
+
+Reviews:
+
+# Stage 18 PEER_REVIEW [v4] — merged record (run 48, 2026-11-12)
+
+Inputs: `prompts/stage18_v4_system.txt`, `prompts/stage18_v4_user.txt` (template `peer_review.md` verbatim via
+`build_stage18_v4.py`). Two fresh opus subagents, no main-session reasoning given:
+`18_review_v4_run1.md` (A 5 / B 4), `18_review_v4_run2.md` (RSS lens; A 4 / B 5). Mean 4.5.
+
+## Evidence audit
+
+- **No CRITICAL FABRICATION** in either run. Both reviewers re-implemented CRC independently and recomputed C1–C5,
+  S1, S3, the σ band, the width sweep, the no-probe grasp and the CSF-fam μ̄ from the raw v4 replays: exact match.
+  Run 1 traced all 283 decimals; run 2 checked > 120 earlier-round values. Counts (700 test objects / 2,800 instances,
+  500 calibration objects, 2,000 bootstrap draws, 200 re-splits, 20 orderings) match. Git order (amendment → code →
+  read-out → labels → replays) confirmed.
+- Reporting discrepancies (no fabrication) → must-fix list below.
+
+## Must-fix for stage 19 (merged, both runs)
+
+1. **Break-even attribution** (run 1 #1; run 2 E6): 17.74 s is the learned arm, 27.07 s the plug-in; the abstract /
+   conclusion attribute 17.74 s to the plug-in. Drop "measured": it is a closed-form computation from commanded force
+   profiles; holds longer than the 0.6 s disturbance window are not simulated — say so.
+2. **σ 0.4 / "probe, not learner" overclaim** (run 2 E3; run 1 #2): the reversal at σ 0.4 holds for the plug-in only;
+   the learned arm still beats CSF-1 there and beats the plug-in. Restrict "the probe, not the learner, carries the
+   saving" to σ 0.2 and to the relative-excess metric of the matched route. Run 1's own absolute-force recomputation is
+   not in the repo's results, so it is not cited as a number; the text instead states that C2 is on relative excess only.
+3. **Route mixing** (run 1 #4/#5; run 2 E2, E8): Fig. 2a and the feature-chain sentence mix matched-route and CRC-route
+   (and label-route) values; label each value's route or use one route per comparison.
+4. **CSF-fam sentence** (run 2 E1; run 1 #6): matched RE 0.2674 is at slip 0.10, not 0.05929; at its CRC point
+   (slip 0.05929) RE is 0.2995 — check both against `v4_analysis.json` before editing.
+5. **Decision rule as registered** (run 2 E4; run 1 #6): Holm-adjusted bootstrap p < 0.05 with a positive point
+   estimate, not "CI lower limit > 0". **C2 CRC-route row** (run 2 E5): use the same TOST criterion as the other rows
+   (code reports p 0.037 there). **"p 0.915 consistent with equivalence"** → remove (a non-significant difference test
+   is not evidence of equivalence; the TOST is).
+6. **Method facts** (run 1 #3, #7; run 2 E10): σ is noise added on top of the simulator's taxel model (detector bias
+   +0.32, SD 0.11 at σ 0) — "simulated touch is clean" is wrong; CSF-1's μ is the hard-coded geometric mean
+   √(0.3·1.0), the selection split only picked the baseline type; all rules get the true mass and the disturbance
+   stratum; mass is log-uniform; all v4 learned rows use one training seed (seed 0).
+7. **Mid-friction sub-pool** (run 1 #4; run 2 E7): also restricted to mid amplitude, compares learned vs CSF-1, and its
+   sign is grid-dependent — state all three; no flat claim in the abstract.
+8. **Length / presentation**: Introduction 441, Related Work 298, Setup 397 words — expand within the 5-page budget;
+   replace pipeline jargon ("v4 row", "edge: false", "read-out code"). Figures are prompts / captions only (stage 22
+   renders data figures).
+
+## Deferred (need new experiments; not done in stage 19)
+
+Learned seeds 1–4 on the fresh pool; per-μ / per-family slip tables; a family-prior + probe hybrid arm; a probe-only
+(no squeeze) protocol; long-hold simulation at the certified force; a hardware-grounded σ. These are evidence-level
+items for stage 20 to weigh; p2's refine cycles are 3 / 3, so they go to the owner if the gate asks for them.
+
+
+=== Full review run 1 (paper/mypaper/18_review_v4_run1.md) ===
+# Stage 18 peer review, draft v4, run 1 (independent reviewer, fresh context)
+
+**Inputs read:** `prompts/stage18_v4_system.txt`; `prompts/stage18_v4_user.txt` in full (paper draft v4 with the Figure 1 prompt, evidence blocks (a) `results/v1/results_v1.json`, (a4) `results/v4/v4_analysis.json`, (a5) `results/v3/a7_integrated.json`, (b) timing log, (c) statistics grep, (d) pre-registration pointers); `docs/11_amendment_v4.md`; `code/analysis_v4.py`, `code/crc_grids_11.py`, `code/certgrip/baselines.py`, `code/certgrip/featsets.py`, `code/certgrip/sim.py` (constants), `code/analysis_v3_a.py` (split / sub-pool helpers); `results/v3/{b1,b2,b3,a_analysis,a_analysis_08e,a3_holm}.json`, `results/v2/b_analysis_edge.json`; git history of `analysis_v4.py`, `docs/11_amendment_v4.md` and `results/v4/crc_f4/`. I did not open earlier review files.
+
+**Recomputed (scripts in `/tmp/rev1/`, outside the repo):**
+1. `numcheck.py`: every one of the 283 decimal numbers in the paper body matches some value in a results JSON (no orphan numbers). I then traced the load-bearing ones to their specific keys (about 60 traced).
+2. `recompute_v4.py`: my own implementation (no repo code imported) of per-stratum CRC on the monotonised physical loss, RE on avoidable rows, the matched-slip recipe (k = -8..+8, interpolation at test slip 0.10) and the friction-width windows, run on the raw v4 replays (`results/v4/crc_{f4,c4,np}/*.jsonl`, 4,800 instances each, all replayed) and labels. **C1 0.43137, C2 0.01117, C3 0.41348, C4 -0.58143, C5 -0.54606, S1 0.64863 / -0.20648, S3 0.24139 / -0.10944 / -0.69667, every arm's slip, RE, matched RE and hold force: all reproduced exactly.**
+3. `boot_check.py`: an independent 300-draw object-cluster bootstrap within family, with lambda-hat refitted in each draw. C1 [0.376, 0.482], C2 [-0.052, 0.065] (0 % of draws outside ±0.10), C3 [0.366, 0.481]. These agree with the reported 2,000-draw CI\*\* to within resampling error.
+4. `absforce.py`: absolute hold force and absolute excess force (N) at the CRC point and at matched slip. These are new numbers, not in the paper. They are used in the reviews below.
+5. Break-even arithmetic from the S6 integrals, plus a variant that drops the squeeze phase (my own derivation).
+
+---
+
+## Part 0. Checks the user prompt requires
+
+### 0.1 Topic adherence
+The paper stays on topic: a ramp-down friction-onset probe, CRC on the binary physical-slip loss, comparison with the strongest friction-blind conformal baseline (CSF-1, chosen on a selection split), attribution of the saving to the probe rather than the learner (C2), and an online binary-feedback study under three shifts (Sec. 5.5). No environment or infrastructure issue is presented as a contribution. One scope note: the topic says "minimal-force grasp", but the paper narrows this to the *hold* force after a fixed 32.7 N preload and a 1.5x squeeze, both of which exceed every instance's F\*_mid. The paper says so openly (Sec. 1 and Limit 6), so this is a framing issue rather than drift. Still, the title and abstract should not leave readers thinking the grasp as a whole uses minimal force.
+
+### 0.2 Methodology-evidence consistency
+
+| # | Paper claim | Evidence | Verdict |
+|---|---|---|---|
+| 1 | C1-C5 values, CI\*\*, decisions, Holm over five p | `v4_analysis.json` rows and `confirmatory`; recomputed exactly | **Consistent** |
+| 2 | 500 cal / 700 test objects per pool; 2,000 draws, all valid; 97.5 % CI | `n_cal_objects` 500, `n_test_objects` 700, `valid_draws` 2000; code uses the 1.25 / 98.75 percentiles | Consistent |
+| 3 | Read-out code committed before any v4 replay, run once | git: amendment 15:08, `analysis_v4.py` 15:18 (only commit), first replay 15:54, read-out 20:02 (2026-11-10) | Consistent |
+| 4 | `edge: false` for every v4 row = no lambda-hat at index 0 / 80 | `arm_eval`: `edge \|= j in (0, J-1)` on the point fit | Consistent |
+| 5 | CSF-fam mu-bar F1 0.379 / F2 0.496 / F3 0.677 / F4 0.852 from 50 selection objects | `crc_grids_11_c4.json` source; 800 selection instances = 200 objects | Consistent |
+| 6 | Shrunk plug-in a -0.3858, b 0.7397 frozen | `v3/b1_analysis.json` ols | Consistent |
+| 7 | eta 0.03412; T 2,000; 20 orderings; physical-feedback slips 0.1389 / 0.1001 / 0.1008 / 0.1018; D_RE 0.3107-0.4432 | `h3_analysis.json`, `v3/b3_analysis.json` | Consistent. The 0.4432 upper end is the *pre-shift* window 1-500, so "across shifts and windows" includes a window that is not post-shift. |
+| 8 | Monotonicity gate 8 / 800, CP upper 0.02115, 7 of 8 in D2 | `h1m_analysis.json` (one-sided 98.75 % CP) | Consistent |
+| 9 | Comparator selection 0.7686 / 0.8294 / 0.8335 | `comp_selection.json` | Consistent |
+| 10 | S6 integrals, phase integrals, break-even 17.74 / 27.07 s | `S6_noprobe`; slope / intercept check reproduces both | Consistent |
+| 11 | "CSF-1: one friction value mu-bar, **selected on the selection split** before any calibration or test access" (Sec. 3.3) | `certgrip/baselines.py`: `MU_BAR = sqrt(0.3 * 1.0)`, hard-coded as the geometric mean of the generator's design range. The selection split chose the comparator *type* (CSF-1 vs Mondrian vs CertGrip-P), not mu-bar. | **Discrepancy (description).** The outcome is unaffected because e^lambda absorbs mu-bar, but the sentence is inaccurate. |
+| 12 | "Simulated touch is clean, so we add onset noise" (Sec. 3.2) | `sim.py` `TAXEL_NOISE = {mult 0.05, add 0.002 N, gain 0.10}`. At sigma = 0 the detector already has log error bias +0.3186 and SD 0.110 (F3 SD 0.196) (`19_report_rows.detector_id_sigma0`). The added sigma sits on top: `log F_onset + sigma*eps`. | **Discrepancy (description).** The nominal sigma is not the total onset noise; the effective log SD is about 0.15 / 0.23 / 0.41. |
+| 13 | Mid-friction sub-pool "mu in [0.5, 0.8]" (Sec. 5.4, Table 2): -0.2614, refined -0.3152, primary +0.3754 | `docs/08g` H2-R and `analysis_v3_a.py`: the sub-pool is mu in [0.5, 0.8] **and** amplitude inside the per-stratum inter-quartile range (`mu_and_amp`). The -0.3152 / +0.3754 rows are `sub:mu_and_amp:D:full_vs_CSF-1` (learned vs CSF-1). | **Discrepancy (definition omitted).** The amplitude condition and the arm (learned, not plug-in) are not stated. On the refined grid the plug-in row is -0.680, and the mu-only row is also negative (-0.172). |
+| 14 | Feature chain: "adding the onset gives D 0.4739 ..., squeeze -0.0263", "full vs onset-only -0.0534" | 0.4739 and -0.0263 are from `h4a_label_rule.json` (**label route**); -0.0534 is from `crc_analysis.json` (CRC route) | **Mixed routes, not disclosed** |
+| 15 | Fig. 2a: "plug-in 0.6486 / 0.4314 / -0.2065; learned 0.5683 / 0.4135 / 0.1675" | Plug-in values are matched-route (S1_C1, C1). Learned values are **CRC-route** (S1_C3, C3); the learned matched values at sigma 0.2 vs CSF-1 would be 0.4377. | **Mixed routes in one panel, not disclosed** |
+| 16 | Abstract: "the plug-in lowers ... D = 0.4314 ...; it repays the probe's force-time only for holds beyond 17.74 s"; Conclusion: "breaks even after 17.74 s" | 17.74 s is the **learned** model. The plug-in, the subject of both sentences, breaks even at **27.07 s**. | **Discrepancy (misattribution in the headline)** |
+| 17 | C1 decision: "superiority if the CI\*\* lower limit exceeds 0" (Sec. 4) | Registered rule (`11_amendment_v4.md`, code): Holm-adjusted p < 0.05 and point > 0 | Restated rule differs from the registered one; outcome unchanged |
+| 18 | C2: "the two-sided p of 0.915 is consistent with equivalence" | A non-significant difference test is not evidence of equivalence. The decision correctly rests on TOST p (0.0). | Statistical misstatement; delete the sentence |
+| 19 | "CSF-fam reaches matched RE 0.2674 at slip 0.05929" | 0.2674 is RE interpolated at slip 0.10; 0.05929 is the CRC-route slip | Conflates two routes |
+| 20 | Mass | Every rule receives the **true mass** (`i["mass"]`) and the commanded acceleration. The paper never says so. For the plug-in, mass cancels exactly: F_base = F_onset (1 + a_cmd/g), up to the mu-hat clip. CSF-1 depends on mass. A 10 % mass-noise check exists (`sec08h_massnoise.json`) but is not reported. | Undisclosed assumption (it favours the baseline, if anything) |
+| 21 | Learned model | v4 uses only the frozen v1 **seed-0** fit (`full_rd@σ#0`). v1 seed spread on H2a is 0.393-0.449. | Not stated in Sec. 3.3 / 4; matters for C2 |
+| 22 | First-round secondaries "Holm within family (no verdict changes)" | `a3_holm.json`: no change within family. Over all 52, H2-R loses significance (0.12), and the paper reports that. | Consistent |
+| 23 | MuJoCo 4.0.0 | `requirements.txt` and replay headers: `mujoco 4.0.0`, numpy 2.5.3 | Consistent |
+| 24 | Statistical procedures | Bootstrap CI, TOST, Holm, CP / beta present in `code/` (evidence c); no ANOVA or t-test is claimed | Consistent |
+
+### 0.3 Trial count
+The paper makes no claim of N independent trials or seeds that the evidence contradicts. Its replication units are objects (500 / 700 per pool, 4 strata each = 4,800 instances, every one replayed once on an 81-point grid; replays are deterministic, `all_within_identical: True`), 2,000 bootstrap draws, 200 re-splits, 20 stream orderings, and v1 seeds 1-4 for the H2a replication (verified in `crc_analysis.json`). **No CRITICAL trial-count fabrication.** The one omission is that every v4 learned-model row uses a single training seed (seed 0); see item 21.
+
+### 0.4 Paper length (word counts from my script; tables excluded where noted)
+
+| Section | Words | Threshold | Status |
+|---|---|---|---|
+| Abstract | 198 | ≥ 150 | OK |
+| Introduction | 441 | ≥ 700 | **Too short** |
+| Related Work | 298 | ≥ 500 | **Too short** |
+| Method (Sec. 3) | 814 | ≥ 800 | Borderline (includes the algorithm box) |
+| Experimental Setup (Sec. 4) | 397 | ≥ 600 | **Too short** |
+| Results (Sec. 5) | 2,217 (1,630 without tables) | ≥ 500 | OK |
+| Total | ≈ 4,800 | ≥ 4,000 | Not critically under-length |
+
+The density is very high. Sec. 4 and Sec. 5 read like a ledger of codes (CONF / PRE / SEC / DESC, S1-S7, H2b, H2-R) and lack explanatory prose.
+
+### 0.5 Fabrication flags
+**No CRITICAL FABRICATION found.** All headline numbers were recomputed exactly from raw replays, and every decimal in the paper traces to a results file. The flagged items are **reporting discrepancies**: #16 (misattributed break-even in the abstract and conclusion), #13 (sub-pool definition), #12 (the "clean touch" / sigma meaning), #11 (CSF-1 mu-bar provenance), #14 and #15 (undisclosed route mixing), #18 and #19 (statistical wording), #20 and #21 (undisclosed assumptions).
+
+---
+
+## Reviewer A (methodology, statistics and certification)
+
+**Summary.** After a fixed preload and squeeze, the paper reads a friction estimate from the incipient-slip onset of a ramp-down. It maps that estimate to a hold force with a Coulomb plug-in or a learned quantile model, and calibrates a per-stratum log-multiplier by CRC on the monotonised physical slip loss. Five pre-registered, Holm-corrected tests on a fresh object pool show that:
+- the plug-in beats the friction-blind conformal baseline (D 0.43);
+- the learned model is equivalent to the plug-in within ±0.10 on relative excess;
+- the earlier result replicates;
+- a family friction prior beats both tactile arms when friction follows the visible family.
+
+Secondary analyses map a noise band, a friction-width sweep, a measured break-even, re-split certificate behaviour and online tracking.
+
+**Strengths.**
+1. The confirmatory design is exemplary for this literature. The amendment was committed before the code, and the code before the replays (I checked the git timestamps). The decision rules are written in code. C4 / C5 are reported honestly even though they go against the method. I reproduced every C1-C5 point estimate exactly with an independent implementation, and a fresh bootstrap gives matching intervals.
+2. The CRC route is correctly applied to a loss that is not monotone, via the max-over-larger-lambda monotonisation (L-tilde ≥ L). The paper states that the bound is marginal, in expectation, and requires simulator replays. The S7 re-splits (31.5-70 % of splits have some stratum above alpha) make the marginal character concrete, which is rare and valuable.
+3. Negative and boundary results are prominent: sigma 0.4 reversal, width-sweep crossover, family-prior loss, break-even, the reactive design flagged as a negative control with a known artefact, and online efficiency inconclusive.
+4. The comparator was chosen on a disjoint selection split among three friction-blind conformal candidates.
+
+**Weaknesses.**
+1. **The "learner adds nothing" conclusion depends on the metric.** C2 is equivalence on *relative* excess (D 0.011). On the CRC route the learned model is not shown to be equivalent (-0.063 [-0.123, 0.084]), yet it holds less absolute force (6.115 vs 6.463 N) *and* slips less (0.081 vs 0.098). My recomputation on absolute excess force at matched slip 0.10 gives 1.320 N for the learned model vs 1.800 N for the plug-in. That is a point D_abs of about 0.27, well beyond the SESOI. The 2-parameter shrunk plug-in reaches 1.386 N. So the defensible statement is "a learner is not needed *once the onset estimate is shrunk*; the raw plug-in leaves about 0.5 N on the table". The paper's own Figure 1 and break-even use absolute force, and on that scale the learned model is the best arm. The conclusion "the probe, not the learner, carries the saving" should be qualified accordingly.
+2. **The matched-slip route uses test outcomes.** RE is interpolated at the *test* slip of 0.10 by shifting lambda-hat indices. This makes the route a frontier comparison, not a comparison of deployable certified rules. C1, C2, C4 and C5 all rest on it. That is acceptable as registered, but Sec. 4 should say "test-slip-matched" explicitly. The CRC-route rows (deployable) should be shown alongside in the main table, not only as grey ticks.
+3. **Route mixing goes undisclosed** (items 14, 15, 19): Fig. 2a puts matched plug-in values next to CRC-route learned values, the feature chain mixes label-route and CRC-route numbers, and the CSF-fam sentence conflates two operating points.
+4. **What sigma means is misdescribed** (item 12). Touch is not clean (taxel noise is modelled), and the sigma-0 detector already has log-error SD 0.11 with bias +0.32. A reader will take "sigma 0.2" as the total probe error, but the effective error is about 0.23. Because the main boundary claim is about noise, this needs correcting.
+5. **C4 / C5 are largely predictable by construction.** The within-family log-friction SD of the c4 bands is about 0.10-0.12 (log-uniform over ratios of 1.43-1.5), below the probe's effective log-error of about 0.23. The width sweep is consistent with the same rule: the full-range log-SD is 0.35, and windows w 0.75 / 0.5 give SD 0.26 / 0.17, so the crossover sits where the friction spread falls to the probe error. The paper "hypothesises but did not test" this. A one-paragraph variance argument, or a plot of D against spread/error, would turn a set of disconnected boundary facts into a single explanation, and would show readers that C4 / C5 follow from the design.
+6. **Single learned seed in v4** (item 21). The v1 seed spread of H2a (0.39-0.45, range 0.056) is more than half the SESOI, so an equivalence claim based on one fitted model should state that and ideally re-run seeds 1-4 (they already exist in `results/v1/preds/`).
+7. **Statistical wording.** "p 0.915 is consistent with equivalence" should be removed. The restated C1 rule should match the registered rule. "D_RE 0.3107-0.4432 across shifts and windows" includes the pre-shift window.
+8. **Undisclosed oracle inputs.** True mass and commanded acceleration are given to every rule. For the plug-in, mass cancels (F_base = F_onset (1 + a/g)), which is worth stating: it shows the "friction reading" is really a direct measurement of the static holding force, and that CSF-1 depends on an oracle mass.
+
+**Actionable revisions.**
+- A1. Report D on absolute excess force (N) alongside RE for C1, C2, C4 and S2, with CI\*\*. Rephrase C2's conclusion to "equivalent on relative excess; on absolute excess the learned and shrunk arms save more than the raw plug-in".
+- A2. Label the matched route as test-slip-matched in Sec. 4. Give a CRC-route column for every confirmatory row in Table 1.
+- A3. Fix Fig. 2a (one route per panel, or mark the routes) and the feature-chain sentence (state the label route).
+- A4. Rewrite the sigma paragraph: modelled taxel noise, intrinsic detector error (bias 0.32, SD 0.11), and sigma as *added* noise; give the effective total.
+- A5. Add the spread-versus-probe-error explanation (analytic or a plot) for C4 / C5 and S3.
+- A6. State "single training seed (v1 seed 0), frozen" in Sec. 3.3. If possible, report C2 for seeds 1-4 as a secondary result.
+- A7. Remove the p-0.915 sentence, align the C1 rule text with the amendment, and restrict the D_RE range to post-shift windows.
+- A8. State that true mass and commanded acceleration are given to every rule, note the mass cancellation for the plug-in, and report the existing 10 % mass-noise row.
+
+**Questions for authors.** (i) What is D(learned vs shrunk) on absolute excess? (ii) Does C2 hold for seeds 1-4? (iii) Could the per-stratum conditional failures (D1 47 % of splits for the plug-in) be removed with Mondrian-by-family CRC at a quantified force cost?
+
+**Score: 5 / 10 (Borderline).** The statistics are unusually careful and the honesty is commendable. Against that, the attribution claim depends on the metric, the confirmatory route relies on test outcomes, and the main tested regime (sigma, correlated pool) is stylised enough that several conclusions follow from the design.
+
+---
+
+## Reviewer B (robotics significance, novelty and practicality)
+
+**Summary.** See Reviewer A. My focus is on whether the result changes how a roboticist would choose grip force.
+
+**Strengths.**
+1. A clear, well-posed question ("when does a short probe pay off?") with an honest answer that includes the conditions under which it does not.
+2. The measured break-even against a no-probe grasp is the right practical yardstick, and few tactile-grasping papers report one.
+3. The protocol is designed so that the onset is the *only* friction channel (preload encodes neither m nor mu; 0 preload slips and 0 missed onsets in 10,400 v4 instances, verified). This isolates the probe's value cleanly.
+4. The online study shows binary-feedback quantile tracking returning slip to α after friction and amplitude shifts (1,501-2,000 window intervals contain 0.10), using only the one bit a real robot would observe.
+
+**Weaknesses.**
+1. **Limited novelty.** The components (onset-based friction reading, Coulomb force, CRC, LTT, quantile tracking) are used as published, as the paper says. Once mass cancels, the plug-in is "hold at a calibrated multiple of the measured slip-onset force times (1 + a/g)". That is essentially the classical slip-margin rule (Johansson-style grip scaling, robotic safety-margin controllers), with the margin set by CRC instead of by hand. The paper's own Sec. 5.4 finds that a per-stratum margin tuned on calibration data lands on the same operating point as CRC. So what is new is the *certificate* and the *confirmatory map*, not the controller. That is a modest contribution for NeurIPS/ICML.
+2. **The practical saving is small, and negative for typical holds.** D 0.43 on relative excess corresponds to 7.125 → 6.463 N mean hold force (-9 %) for the plug-in, and -14 % for the learned model. The protocol's preload and squeeze (13.08 + 12.91 N·s) are about 5x the hold force. For 1-5 s holds the no-probe grasp uses the least force-time, and the plug-in needs holds longer than 27 s to break even. The abstract's "beyond 17.74 s" quotes the learned model's figure for the plug-in (item 16).
+3. **The squeeze inflates the break-even and is not needed by the plug-in.** The plug-in does not use squeeze features, and the paper finds no evidence that the squeeze helps the learner (-0.0263). Removing the squeeze phase (12.91 N·s) from the S6 intercepts gives break-evens of about **5.0 s (learned) and 7.6 s (plug-in)**. This is my arithmetic and would need replays of a probe-only protocol, since removing the squeeze changes the contact state. Even so, it suggests the paper understates the probe's practical value under a leaner protocol, and that "probe-only (no squeeze)" is the obvious missing arm.
+4. **Simulation only, with an assumed noise model.** The sign of the main effect flips between sigma 0.1 and 0.4, and sigma is not grounded on hardware or on published detector error. The deployable story therefore hinges on an unmeasured quantity. Offline CRC also needs replays at every grid force, which cannot be done on a real robot (acknowledged). For a robotics-heavy claim at an ML venue, at least a small hardware sigma measurement, or a citation-grounded sigma, is expected.
+5. **The comparators are weak or not reproduced.** No published tactile controller (Khamis 2021, Dong 2019, Boonstra 2024) is reproduced. The only reactive design is a negative control with a known artefact (raw mu-hat with log bias +0.32). The family prior that wins C4 / C5 is built from *true* friction of selection objects, and no hybrid prior + probe arm was run, so the most useful practical question (does a probe help on top of a prior?) is unanswered.
+6. **The marginal guarantee is weak in practice.** One object family (F1, low friction) slips at 0.11-0.32 for three of four arms on the correlated pool, and 31.5-70 % of re-splits have a stratum above α. A practitioner usually needs per-object-class guarantees. LTT helps (0.07-0.16), and its force cost should be reported next to the CRC operating point.
+7. **Presentation.** Intro, Related Work and Setup fall below the length targets. Sec. 5 is a ledger of status codes (CONF / PRE / SEC / DESC, S1-S7, H2b, H2-R, C-i...) that is hard for a reader outside the project to follow. The mid-friction sub-pool omits its amplitude condition (item 13). The CSF-1 mu-bar provenance is misdescribed (item 11).
+
+**Actionable revisions.**
+- B1. Correct the abstract and conclusion: plug-in 27.07 s, learned 17.74 s. Lead with absolute hold-force numbers next to D.
+- B2. Add a probe-only protocol arm (preload → ramp-down → hold, no squeeze), or at least report the S6 break-even with the squeeze phase excluded, labelled as an estimate.
+- B3. Add a hybrid family-prior + probe rule (for example, shrink mu-hat toward the family mu-bar) on the correlated pool. That is the arm that decides practical value.
+- B4. Ground sigma: cite measured onset-detection error from tactile hardware, or run a small hardware calibration. Report the total, not the added, noise.
+- B5. Report per-family (Mondrian) CRC and LTT operating points with their force cost, so that readers can pay for conditional coverage.
+- B6. State the mid-friction sub-pool definition fully (mu in [0.5, 0.8] and mid-IQR amplitude; learned vs CSF-1) and the CSF-1 mu-bar source (geometric mean of the design range, not selected on the split).
+- B7. Expand the Introduction (motivation, a worked example of the force-time trade-off), Related Work (classical slip-margin control, Mondrian / conditional conformal, safe-grasp CBFs in more depth) and Setup (gripper, detector, strata parameters, label procedure) to the target lengths. Replace most status codes with plain-language labels.
+
+**Would I recommend presentation at NeurIPS/ICML?** Not in its current form. The work is rigorous and honest, but the contribution is a careful empirical map of a known controller with a standard certificate, in simulation, with a small and conditional practical gain. A version with a probe-only protocol, a hybrid prior arm and a grounded sigma would be a solid workshop or RSS/CoRL-track paper.
+
+**Score: 4 / 10 (Borderline, leaning reject).**
+
+---
+
+## Consolidated must-fix list (ranked)
+1. **Abstract and conclusion break-even misattribution** (17.74 s is the learned model; the plug-in is 27.07 s).
+2. **Qualify C2 / "the probe, not the learner"**: on absolute excess force at matched slip, learned 1.320 N vs plug-in 1.800 N (point D about 0.27 > SESOI; shrunk 1.386 N). Report the absolute-force D with CIs and rephrase.
+3. **Correct the method descriptions**: touch is not clean (taxel noise; sigma-0 detector bias 0.32, SD 0.11; sigma is added noise); CSF-1 mu-bar = √(0.3·1.0), fixed by design; true mass is given to all rules (it cancels for the plug-in); single learned seed in v4.
+4. **Disclose route mixing**: Fig. 2a (matched plug-in vs CRC learned), the feature chain (label route vs CRC), "CSF-fam matched RE at slip 0.05929". Label the matched route as test-slip-matched, and add CRC-route columns to Table 1.
+5. **Fix the sub-pool and statistics wording**: the mid-friction sub-pool also restricts amplitude (and the reported rows are learned vs CSF-1); delete "p 0.915 consistent with equivalence"; align the C1 rule text with the registered rule; then expand Intro, Related Work and Setup to the length targets.
+
+Recommended additions (not blocking): a probe-only protocol and break-even (estimated about 5.0 / 7.6 s without the squeeze), a hybrid prior + probe arm, a spread-versus-probe-error explanation for C4 / C5 / S3, and per-family CRC / LTT force costs.
+
+## Memory note
+No user memory was consulted or needed for this review.
+
+
+=== Full review run 2 (paper/mypaper/18_review_v4_run2.md) ===
+# Stage 18 peer review (v4 draft, run 2): independent reviewer pair (RSS lens)
+
+**Inputs read:** `prompts/stage18_v4_system.txt` (role), `prompts/stage18_v4_user.txt` (all 7,560 lines: task, draft v4, evidence blocks (a) v1 results, (a4) `results/v4/v4_analysis.json`, (a5) `results/v3/a7_integrated.json`, (b) log, (c) stats grep, (d) pointers); `docs/11_amendment_v4.md` and its git history; `code/analysis_v4.py`, `code/analysis_crc.py` (`lam_index`), `code/analysis_v3_a.py` (bootstrap, re-splits), `code/crc_grids_11.py`, `code/certgrip/{sim,baselines,data}.py`, `code/h3_streams.py`, `code/requirements.txt`; `docs/08b_preregistration.md`; `results/v1/{h1m_analysis,19_report_rows,sec08g,h3_analysis,comp_selection,crc_analysis}.json`, `results/v2/b_analysis_edge.json`, `results/v3/{a_analysis,a_analysis_08e,a3_holm,b1_analysis,b2_analysis,b3_analysis,a7_integrated}.json`, `results/v4/crc_grids_11_c4.json`; git log of the v4 commits.
+**Recomputed (scripts in `/tmp/rev2/`, no repository file touched):** (1) all v4 arm operating points (slip, RE, matched RE, hold force, per-stratum λ̂ index) on `f4` and `c4` from the raw replays `results/v4/crc_{f4,c4,np}/*.jsonl` with an independently written CRC λ̂ routine; (2) point values of C1–C5, S1 (σ 0.1 / 0.4), S3 width sweep (all four w, object counts), S6 no-probe slip / hold force / λ̂; (3) the 2,000-draw object-cluster bootstrap (seed 2027) for C1, C2 and the CRC-route C2 row, including both p-values; (4) the CSF-fam μ̄ values from the `c4` selection labels; (5) a number search of every earlier-round figure quoted in Sections 1, 3, 4, 5.3–5.5 against `results/v1–v3/*.json`; (6) section word counts; (7) cite-key presence in `docs/0{2,3,4,5}_*`; (8) commit order amendment → code → read-out → labels → replays.
+
+---
+
+## 0. Joint pre-review checks (both reviewers agree on these facts)
+
+### 0.1 Topic adherence
+The paper stays on the registered topic: a ramp-down friction-onset probe, per-stratum CRC on the physical binary slip loss, comparison against the strongest friction-blind conformal baseline (CSF-1, selected on a disjoint split), an attribution test locating the saving in the probe rather than the learner (C2, S1, feature chain), and an online binary-feedback study under three shifts. No section drifts to an unrelated topic and no environment problem is presented as a contribution.
+One presentation problem comes close: the text is full of pipeline language that belongs in a lab notebook, not a paper: "every v4 row has `edge: false`, which we take, per the read-out code's flag", "first-round / later-round / earlier rounds", "read-out code committed before any v4 replay and run once", seven numbered "Deviations". The content is honest, but at RSS it reads as process logging rather than as part of the scientific argument.
+
+### 0.2 Methodology-evidence consistency (verified against code and raw results)
+
+**Matches (verified exactly):**
+| Paper claim | Evidence | Status |
+|---|---|---|
+| C1 0.4314 [0.3824, 0.4835]; C2 0.01117 [−0.05552, 0.05686]; C3 0.4135 [0.3578, 0.4903]; C4 −0.5814 [−0.7208, −0.4563]; C5 −0.5461 [−0.6590, −0.4290] | `v4_analysis.json`; my independent CRC recomputation reproduces every point to machine precision; my rerun of the 2,000-draw bootstrap reproduces the C1/C2 CI** and p exactly | ✔ |
+| 500 cal / 700 test objects per pool, 2,800 test instances, 2,000 valid draws | grids and labels: 4,800 instances per pool, 0 missing / 0 duplicate replays; `valid_draws` 2000 on every row | ✔ |
+| `edge: false` on every v4 row, i.e. no λ̂ at index 0 or 80 | code `edge |= j in (0, J-1)`; recomputed λ̂ indices are 38–42 for every arm and stratum, so the ±8 matched-slip shifts are never clipped either | ✔ |
+| Holm over five p; Table 1 caption "p = 0.0 means < 0.001 (TOST < 0.0005)" | `analysis_v4.py` `holm()`, `p_two`, `p_tost`; 2,000 draws ⇒ resolution 1/2000 | ✔ |
+| CSF-fam μ̄ F1 0.379, F2 0.496, F3 0.677, F4 0.852 from 50 selection objects/family | recomputed 0.3790 / 0.4965 / 0.6768 / 0.8523 (n = 50 each); same values in `crc_grids_11_c4.json` | ✔ |
+| Shrunk plug-in a −0.3858, b 0.7397 frozen | amendment and `crc_grids_10e.json` | ✔ |
+| S1 σ band, S2, S3 sweep (windows, 386/532, 262/361, 134/179 objects), S6 phases (13.08 / 12.91 / 1.444 / 0.348 / 3.27 N·s), break-even 17.74 / 27.07 s, S7 re-split statistics, S4 per-family slips | `v4_analysis.json`; S3 and S6 recomputed | ✔ |
+| Pre-registration order | amendment commit 29b05b0 15:08:45 → first v4 code 15:11 → `analysis_v4.py` 9a67492 15:18 (only commit touching it) → labels / grids 15:27 → first replay 15:54 → read-out d7a197f 20:02; amendment later received only an appended status note | ✔ |
+| Earlier-round numbers (0.7686 / 0.8294 / 0.8335; 0.1597 N; 8/800, CP 0.02115, 7 of 8 in D2; η 0.03412; H2a 0.4168 [0.3484, 0.4778] and seeds 0.4343/0.4197/0.3932/0.4494; H2b 0.0569 [−0.0399, 0.1454]; −0.0534; −0.0263; 0.4739; −0.0299; tuned-margin 0.06571 / 0.4843; reactive ≥ 0.3086, 0.9921 / 0.9514; H2-R −0.2614 [−0.5320, −0.0325], Holm 0.03 / 0.12 over 52; −0.3152 / +0.3754; −0.1395 [·, −0.01264]; all of Table 3) | located in `results/v1–v3/*.json` | ✔ |
+| Streams T = 2,000, shift from step 501, 20 orderings | `h3_streams.py`: T_PRE 500, T_SHIFT 1500, N_ORD 20 | ✔ |
+| Bonferroni over 4 (first round) | `08b_preregistration.md` §4 | ✔ |
+| MuJoCo 4.0.0 | `code/requirements.txt` | ✔ |
+| All 55 cite keys | present in the literature records of `docs/` | ✔ (existence of the works not checked here) |
+
+**Discrepancies (the paper says something the evidence does not support, or describes it differently):**
+
+| # | Severity | Paper says | Evidence shows |
+|---|---|---|---|
+| E1 | **Moderate (factual error)** | §5.1: "CSF-fam reaches matched RE 0.2674 at slip 0.05929." | Matched RE is by definition interpolated at test slip **0.10** (`SLIP_MATCH = 0.10`). 0.05929 is CSF-fam's slip at its *CRC* operating point, where its RE is **0.2995**, not 0.2674. The sentence attaches one route's RE to the other route's slip. |
+| E2 | **Moderate (route mixing in a figure)** | Fig. 2a: "plug-in 0.6486 / 0.4314 / −0.2065; learned 0.5683 / 0.4135 / 0.1675" as one noise curve. | The plug-in values are **matched-slip** D vs CSF-1 (S1_C1); the learned values are **CRC-route** D vs CSF-1 (S1_C3). Plotting them together compares two different estimands. My matched-route recomputation for the learned arm, from the same file's `RE_match`: 0.611 (σ 0.1), 0.438 (σ 0.2), **0.184 (σ 0.4)**. |
+| E3 | **Moderate (overclaim)** | Abstract "the saving reverses … at high probe noise (−0.2065)"; §6 "The saving disappears … at σ 0.4"; §7 "the saving reverses at σ 0.4"; §6 "a learned model is not needed". | Only the **plug-in** reverses at σ 0.4. The learned arm keeps a significant saving vs CSF-1 (CRC 0.1675 [0.1064, 0.2560]; matched ≈ 0.184) and beats the plug-in by **0.3238 [0.2778, 0.3817]**. The paper's own §5.2 says so, but the abstract, discussion and conclusion generalise a plug-in result to "the saving". "The probe, not the learner, carries the saving" holds at σ 0.2 only; at σ 0.1 the learner is worse (−0.1076) and at σ 0.4 it is needed. |
+| E4 | Minor (rule misdescribed) | §4: "superiority if the CI\*\* lower limit exceeds 0". | The registered and coded rule is: **Holm-adjusted bootstrap p < 0.05 and point > 0** (`analysis_v4.py` docstring and `dec` block; amendment §Confirmatory). The verdicts are the same here (all p = 0), but the rule as written is not the one that was registered. |
+| E5 | Minor (inconsistent criterion) | §5.1 / Table 1: CRC-route C2 "−0.06291 [−0.1226, 0.08396], equivalence not shown". | The same row in the file has **TOST p = 0.037** (unadjusted), which passes a 5 % TOST. The paper uses the 97.5 % CI for this row and the TOST p for S1_C2@0.1 (0.5445). Use one criterion. The conservative reading is defensible, but it should be stated as the criterion. |
+| E6 | Minor (wording) | §5.2 "Measured break-even"; Fig. 2c "measured at three T". | `analysis_v4.py` computes force-time from the **commanded** profile in closed form (preload F₀·0.4 = 13.08, re-hold F₀·0.1 = 3.27 exactly; hold = F·T; break-even = gap / ΔF). Only the no-probe slip and λ̂ come from a replay. Also, no hold longer than the 0.6 s disturbance window is simulated, so slip ≤ α over a 17–27 s hold is **not** evidenced. Limit (8) mentions the commanded profiles, but the "measured" label remains. |
+| E7 | Minor (scope of a quoted sub-pool) | Table 2 / §5.4: "Mid-friction sub-pool μ ∈ [0.5, 0.8] … refined CRC −0.3152, primary +0.3754"; Abstract: "in a narrow mid-friction band the baseline was better in earlier rounds". | In `v3/a_analysis*.json` the row is `sub:mu_and_amp` (μ ∈ [0.5, 0.8] **and** mid-half amplitude), and the arm is the **learned** model (`full_vs_CSF-1`), which the table does not name. The primary-grid value has the opposite sign (+0.3754), so the abstract's flat statement that "the baseline was better" overstates a grid-dependent result. |
+| E8 | Minor (route mixing in the feature chain) | §5.4 feature chain: "adding the onset gives D 0.4739 …, full vs onset-only −0.0534, squeeze −0.0263". | 0.4739 and −0.0263 come from `h4a_label_rule.json` (label route); −0.0534 comes from `crc_analysis.json` (CRC route). The routes are not stated. |
+| E9 | Minor (statistical phrasing) | C2: "the two-sided p of 0.915 is consistent with equivalence". | A non-significant difference test is not evidence of equivalence. The evidence is the TOST p (< 0.0005). Drop the 0.915 sentence or reword it. |
+| E10 | Minor (unstated assumptions) | §3.3 formulae use m; §3.4 calibrates per stratum. | `baselines.py` uses the **true mass** for every arm (the plug-in's m cancels except through the μ̂ clip), and λ̂ is selected **by known disturbance stratum**. Both are deployment assumptions the paper never states. The pool draws m **log-uniform** (`data.py`), not just "on [0.05, 1.0]". |
+| E11 | Trivial | Table 3 family-shift frozen probe slip 0.1017. | The file has 0.10165 (a rounding-boundary value; 0.1016 is the nearer printed value). |
+
+**Trial count check (item 3).** I found **no fabricated trial count**. Every count in the paper matches the evidence: 700 fresh test objects / 2,800 instances; 500 calibration objects; 2,000 bootstrap draws (all valid); 200 re-splits (`R: 200`, seed 3031); 20 orderings; first-round seeds 1–4. One caveat: every v4 learned arm is the single frozen seed-0 fit (`full_rd@σ#0`). The paper does not claim otherwise, but it also never says that C2, C3 and C5 rest on **one** trained model, while the first round shows a seed spread of 0.39–0.45 on C3 and 15.2–18.0 s on the probe-phase break-even (`v3/a7_integrated.json`). This must be stated.
+**CRITICAL FABRICATION flags: none.**
+
+### 0.3 Length check (item 4)
+| Section | Words | Threshold | Flag |
+|---|---|---|---|
+| Abstract | 198 | ≥ 150 | ok |
+| 1 Introduction | 441 | ≥ 700 | **short** |
+| 2 Related Work | 298 | ≥ 500 | **short** |
+| 3 Method | 814 | ≥ 800 | ok (barely; counts the algorithm block) |
+| 4 Experimental Setup | 397 | ≥ 600 | **short** |
+| 5 Results | 2,217 | ≥ 500 | ok (table-heavy) |
+| 6 Limitations + 7 Conclusion | 331 + 91 | — | — |
+| **Total** | ≈ 4,805 | ≥ 4,000 | not critically under-length |
+
+For RSS (8 pages plus references) the total is about right. The density is the problem: Sections 1, 2 and 4 are compressed lists of numbers and citations, while Results carries most of the prose. Neither figure exists as an image: Figure 1 is a generation prompt and Figure 2 has only a caption.
+
+---
+
+## Reviewer A (robotics systems and grasping; RSS area chair perspective)
+
+**Summary.** The paper asks when a short tactile probe (a ramp-down from a fixed 32.7 N preload until a modelled touch detector flags incipient slip) makes a conformal physical-slip bound cheaper in hold force. In MuJoCo, with friction independent of appearance and onset noise σ = 0.2 assumed, a Coulomb plug-in on the onset, calibrated by per-stratum CRC, needs about 43 % less relative excess hold force than the best friction-blind conformal rule (6.46 N vs 7.13 N mean). A learned model adds nothing at σ 0.2. The saving vanishes when friction is predictable from the object family, for the plug-in at σ 0.4, as the friction range narrows, and for holds shorter than about 18–27 s.
+
+**Strengths.**
+1. The framing is unusually honest for this area. The paper's headline result includes its negative boundary conditions (family prior wins; break-even ≥ 17.7 s; σ 0.4 reversal), and the limitations section is concrete.
+2. The comparator is chosen properly: CSF-1 was selected on a disjoint split against a Mondrian variant and a learned proprioceptive model, so the tactile gain is not measured against a straw man.
+3. The confirmatory round is clean. I verified that the amendment, the read-out code, the labels and the replays were committed in that order, and that every C1–C5 number reproduces exactly from the raw replays.
+4. Calibrating on the physical binary loss, rather than on bisection labels, is justified by a failed monotonicity gate (8/800). This is the right choice and is rarely made.
+5. The force-time accounting against a no-probe grasp is the question a practitioner would ask, and the answer (no gain for 1–5 s holds) is reported rather than buried.
+
+**Weaknesses.**
+1. **No hardware, and σ is assumed.** The central effect changes sign across σ ∈ [0.1, 0.4] (0.65 → −0.21 for the plug-in), and σ is not grounded in any measured detector. For RSS this is the decisive weakness. The result is a map conditional on an unknown parameter, and the paper cannot say where on that map a real GelSight- or BioTac-class sensor sits. Even the simulator's own clean detector has a log bias of +0.32 and an SD of 0.11 (`19_report_rows`), and the paper does not relate that SD to σ.
+2. **The force saving is about 1 N on a protocol that applies 32.7–49 N first.** The preload and squeeze exceed every object's F\*_mid, which defeats the usual motivation for minimal-force grasping (fragile objects). The paper acknowledges this (Limit 6), but then the practical claim reduces to actuator effort during long holds, which leads to weakness 3.
+3. **Break-even beyond 17.7 s is not backed by long-hold physics (E6).** Slip is certified over a 0.6 s disturbance window. A 17–27 s hold at the lower force, with creep, repeated disturbances or thermal and viscoelastic effects, is never simulated, yet the paper's practical recommendation ("probe when … holds are long") depends on exactly that regime. The break-even is also a closed-form calculation from commanded profiles, not a measurement.
+4. **The σ 0.4 statements overreach (E3, E2).** At σ 0.4 the learned model still saves force and beats the plug-in by 0.32, so for a noisy real sensor the learner may be what matters. The abstract and conclusion say the opposite. Figure 2a plots matched-route plug-in values next to CRC-route learned values.
+5. **C4/C5 are close to built in.** The correlated pool's family bands are about 0.3 of the full log-width. The width sweep already shows that CSF-1 wins at w ≤ 0.5, so a per-family prior that reduces each family to a narrow band will beat a σ 0.2 probe almost by construction. The interesting experiment, a prior + probe hybrid, is missing. Without it, C4/C5 do not tell a practitioner whether to add touch to a perception prior.
+6. **Deployability of the certificate.** Offline CRC needs a replay of every calibration grasp at 81 forces, which is impossible on hardware. The online tracker is the deployable piece, but its physical-feedback evaluation has ordering-only intervals and no oracle. The rules also use the **true mass** and a **known disturbance stratum** (E10), neither of which is stated.
+7. **Competitors.** No published tactile grip controller is reproduced. The only reactive baseline is a registered design with a known biased μ̂ (+0.32 log), and it fails at slip ≥ 0.31. The paper is right to call it a negative control, but then the paper has no competitive tactile baseline.
+8. **Presentation.** Neither figure exists. The prose is number-dense, with five-to-ten four-significant-figure values per sentence, and pipeline jargon ("v4 row", "read-out code", "first round") pervades the text. Sections 1, 2 and 4 are under-developed (§0.3).
+
+**Actionable revisions.**
+- A1. Either ground σ (a bench measurement of onset-force repeatability on one real sensor, or a published incipient-slip detector error converted to log F_onset noise) or recast the title and abstract explicitly as a conditional map. At minimum, report the simulator's own detector SD (0.11) next to σ.
+- A2. Rewrite the abstract, §6 and §7 so that "reverses at σ 0.4" names the **plug-in**, and add that the learned model retains a saving (0.1675 CRC; matched value from `RE_match`) and beats the plug-in at σ 0.4. Make Figure 2a single-route (matched for both arms, with CRC as ticks).
+- A3. Simulate at least one long hold (e.g. 20–30 s, with repeated disturbances) at the certified force, or state plainly that slip over long holds is untested and that the break-even is computed, not measured. Report the first-round seed range of the break-even.
+- A4. Add a hybrid arm (family prior as F_base centre, probe as a correction, for instance a shrinkage of log μ̂ toward the family μ̄) on the correlated pool, or remove the practical recommendation that depends on its absence.
+- A5. State the known-mass and known-stratum assumptions, and add the existing noisy-mass variant (`_mn` features, 08h) as a robustness row if it was run.
+- A6. Produce both figures, expand Introduction / Related Work / Setup to the thresholds, move the Deviations list to an appendix, and replace pipeline terms with scientific ones ("pre-registered confirmatory round", "grid-boundary check").
+
+**Questions to authors.** (i) What σ does your own simulated detector imply after bias removal, and is σ 0.2 added on top of it? (ii) Why is CSF-fam's CRC slip so low (0.059) compared with every other arm (0.08–0.10)? (iii) On `c4` F1, the tactile arms slip at 0.20 (learned) and 0.11 (plug-in). Is low-friction under-coverage systematic on the fresh pool too (per-μ-quintile slip)?
+
+**Recommendation.** Weak reject at RSS. The experimental hygiene is excellent, but there is no hardware, the effect depends on an ungrounded σ, the protocol undercuts the minimal-force motivation, and the practical break-even claim lacks long-hold evidence. A workshop or a robotics-learning venue with a simulation track would be a better fit as it stands.
+**Score: 4 / 10** (borderline, significant weaknesses).
+
+---
+
+## Reviewer B (conformal / statistical methodology; methodology-evidence consistency)
+
+**Summary.** The paper applies standard CRC (Angelopoulos et al.) per disturbance stratum to a monotonised binary physical-slip loss on an 81-point log-force grid, with LTT as a high-probability alternative and quantile tracking for online shift. Its contribution is an evaluation design: pre-registered confirmatory tests on fresh objects, a matched-slip comparison route, and a boundary map.
+
+**Strengths.**
+1. The CRC construction is correct. L̃_i(λ) = max_{λ′≥λ} L_i(λ′) is non-increasing and dominates L, and the threshold (n R̃ + 1)/(n+1) ≤ α is the B = 1 CRC rule. Per-stratum calibration uses one instance per object per stratum, so within-stratum exchangeability holds. I re-implemented λ̂ independently and obtained identical indices.
+2. The paper is candid about what the guarantee is: marginal, in expectation over the calibration draw, not stratum- or family-conditional. The 200-re-split check (mean slip 0.084–0.087 < α; LTT 0.068–0.071) is the right sanity check and matches the theory.
+3. The registered decision code is real and was frozen before the data existed. Holm, TOST and the bootstrap p are implemented as described in the amendment, and the 2,000-draw intervals reproduce exactly (seed 2027).
+4. Multiplicity is tracked honestly. Unadjusted rows are labelled, and first-round secondaries carry family-wise and global Holm values (e.g. H2-R 0.03 / 0.12).
+
+**Weaknesses.**
+1. **The confirmatory estimand is not the certified rule.** C1, C2, C4 and C5 are on the matched-slip route, which shifts each stratum's λ̂ index by up to ±8 using **test-set** slip and interpolates RE at slip 0.10. That is a test-tuned operating point, not something the CRC certificate covers. It is a legitimate comparison device, but the conclusions should be stated as "at equal realised slip", and route sensitivity matters: C2's equivalence holds on the matched route but not on the certified CRC route at the 97.5 % level (−0.063 [−0.123, 0.084]). The paper's own TOST p for that row is 0.037 (E5), so the CRC-route C2 status depends on which criterion is applied. Report both criteria explicitly.
+2. **Factual and route-mixing errors in the results text (E1, E2, E7, E8).** "Matched RE 0.2674 at slip 0.05929" pairs one route's RE with the other route's slip (the CRC-point RE is 0.2995). Figure 2a mixes matched and CRC routes. The feature chain mixes label and CRC routes. The mid-friction sub-pool omits its amplitude restriction and its arm. None of these changes a confirmatory verdict, but in a paper whose selling point is methodological care, each one undermines the reader's trust.
+3. **Decision rule misdescribed (E4).** §4 states a CI-based superiority rule. The registered and coded rule is Holm-adjusted bootstrap p < 0.05 with a positive point. Note also that a 97.5 % CI is the Bonferroni-4 interval of the first round and is not Holm-calibrated for five tests. Say what the CI\*\* is for (display) and what decides (p).
+4. **"Equivalence" phrasing (E9).** Quoting the two-sided p = 0.915 as "consistent with equivalence" is a textbook error. Keep only the TOST evidence.
+5. **Single learned-model seed.** C2, C3 and C5 rest on the frozen seed-0 fit. The first round's seed spread on C3 (0.39–0.45) is comparable to the C2 SESOI band. An equivalence claim within ±0.10 for "a learned model" in general needs at least the existing seeds 1–4 replayed on `f4`, or it should be scoped to "this fitted model".
+6. **Conditional coverage is where the safety question lives, and it is under-analysed.** The "single strata exceed α in up to 70 % of re-splits" statistic is largely expected binomial noise (about 700 test instances per stratum, SD ≈ 0.011 around a mean of about 0.085). Presented as a worrying failure, it is misleading in the opposite direction. The informative failure is systematic: on `c4` the low-friction family F1 slips at 0.20 (learned) and 0.11 (plug-in) and CSF-1 at 0.32, while F2–F4 sit far below α. That points to friction-dependent miscoverage that the marginal bound hides. Report slip by true-μ quintile on the fresh pool and consider Mondrian CRC by family (on `c4`) or by μ̂ bin. This is a natural, cheap extension and it bears directly on the claimed safety.
+7. **σ 0.4 conclusion (E3).** As Reviewer A notes, the attribution "probe, not learner" is a σ 0.2 result. At σ 0.4 the data say the learner matters (+0.32 vs plug-in). The abstract and conclusion must be scoped accordingly.
+8. **Novelty is incremental methodologically.** CRC, LTT and score-space quantile tracking are used off the shelf, and the paper says so (§2 Novelty). The contribution is therefore the empirical protocol and boundary map, which raises the bar on robustness: more than one simulator or contact model, more than one σ on the correlated pool, and more than one model seed. Most of these are absent.
+
+**Methodology-evidence consistency verdict.** The paper is high-fidelity to its evidence: every number I checked (more than 120 values across v1–v4) is present in the result files, and every count matches. There is **no fabrication and no trial-count inflation**. The defects are one factual mis-pairing (E1), route-mixing in a figure and two text passages (E2, E7, E8), a scope overclaim on σ 0.4 (E3), and a misdescribed decision rule (E4), all listed in §0.2.
+
+**Actionable revisions.**
+- B1. Correct E1 (CSF-fam: matched RE 0.2674 at slip 0.10; CRC point slip 0.0593 / RE 0.2995), E2 (single-route Figure 2a), E7 (name the arm and the amplitude restriction; soften the abstract sentence), E8 (label each feature-chain row's route), E9.
+- B2. Restate the confirmatory rule as registered (Holm-adjusted bootstrap p, point sign). For the CRC-route C2, state the criterion and report the TOST p = 0.037 alongside the CI.
+- B3. Replay seeds 1–4 of the learned model on `f4` for C2 and C3 (labels and grids exist; this is replay-only compute), or scope C2 to the fitted model.
+- B4. Add per-μ-quintile slip on `f4` and a Mondrian-by-family CRC row on `c4`, and reframe the "70 % of re-splits" sentence with its binomial expectation.
+- B5. Scope the abstract, discussion and conclusion attribution to σ 0.2, and add the σ 0.4 learned-arm saving.
+- B6. State that mass is known and that the stratum is known at deployment (E10), and state that the m draw is log-uniform.
+
+**Recommendation.** Borderline. The statistical machinery is sound and verifiably pre-registered, and the results reproduce exactly. The paper falls short of a strong methods contribution because the method is off the shelf, the confirmatory estimand is a test-matched route, the attribution claim rests on one seed and one σ, and several route-mixing slips sit in a paper whose main asset is rigour.
+**Score: 5 / 10** (borderline, significant weaknesses).
+
+---
+
+## Consolidated must-fix list (both reviewers)
+
+1. **Scope the σ 0.4 / "probe, not learner" claims (E3) and make Figure 2a single-route (E2).** At σ 0.4 the learned arm still saves force (CRC 0.1675 [0.106, 0.256]) and beats the plug-in by 0.3238. The abstract, §6 and §7 currently say the saving reverses or disappears.
+2. **Correct the factual and route errors:** CSF-fam "matched RE 0.2674 at slip 0.05929" (E1); mid-friction sub-pool arm, amplitude restriction and grid-dependence, plus the abstract sentence (E7); feature-chain routes (E8); "p 0.915 consistent with equivalence" (E9); the decision rule as registered (E4); the CRC-route C2 criterion versus TOST p 0.037 (E5).
+3. **Break-even and long-hold validity (E6):** rename "measured" to "computed from commanded profiles", report the seed spread, and either simulate long holds at the certified force or state that slip over 17–27 s holds is untested.
+4. **Ground or bound σ and state the deployment assumptions:** relate σ to the simulator's own detector SD (0.11) or to a real-sensor figure, and state that true mass and known stratum are used (E10).
+5. **Strengthen attribution and safety evidence cheaply:** replay learned-model seeds 1–4 on `f4` (C2 currently rests on one fit), add per-μ / per-family conditional slip (the `c4` F1 slip is 0.20 / 0.11 for the tactile arms) and, if possible, a prior + probe hybrid arm on `c4`. Then render both figures, bring Introduction / Related Work / Setup up to length, and remove the pipeline jargon.
+
+**Scores:** Reviewer A 4 / 10; Reviewer B 5 / 10 (mean 4.5). **CRITICAL FABRICATION:** none found. **Trial-count discrepancy:** none (single learned-model seed in v4 must be stated).
+
+
+=== BINDING for this revision (main session) ===
+- Address the must-fix items of the merged record with targeted edits; do not rewrite sections the record does not touch. The 'Deferred' items need new experiments and are NOT to be simulated in text: only as limitations / future work. No citations outside docs/05_knowledge_cards.json.
+- New numbers only from results/v4/v4_analysis.json, results/v3/a7_integrated.json, results/v3/results_v3.json, results/v2/results_v2.json or results/v1/results_v1.json (open them under /home/claude/paper-writing/papers/p2), or constants read from code/ (e.g. CSF-1's mu) or the design docs (docs/07*, 08a-08h, 09, 10, 11). Reviewer-computed numbers that are in none of these must not be printed. Check every value you change against the JSON (e.g. the CSF-fam RE at slip 0.10 vs at its CRC point).
+- Keep the FIGURE 1 PROMPT block first.
+- Length: this is the RSS 2027 Stage 1 extended abstract (5 pages body, checked on the real PDF in stage 22). RESTRICTS floors: Abstract 150-250, Introduction >= 700, Related Work >= 500, Method >= 800, Experiments/Setup >= 600, Results >= 500, total >= 4,000 words. Bring Introduction, Related Work and Setup up to their floors; the template's rule applies: no section gets shorter (Limitations must not be shortened or softened). Page fit is handled at stage 22 on the real PDF, not here.

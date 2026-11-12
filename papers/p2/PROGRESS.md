@@ -957,3 +957,18 @@ Run order when both papers are active: AUTOPILOT §7.
 - The writer reported outline key names that differ from the JSON (e.g. `S1_C1@0.1`, `S7_resplits.rules`); the draft
   uses the real keys.
 - **Next:** stage 18 PEER_REVIEW [v4] (two fresh subagents), 19, second 18/19 pass, 20.
+
+## Stage 18. PEER_REVIEW     [v4]
+
+- **Finished:** 2026-11-12 (run 48). Plan `plans/stage_18_peer_review_v4.md`; template verbatim via
+  `paper/mypaper/prompts/build_stage18_v4.py`; two fresh opus subagents → `paper/mypaper/18_review_v4_run1.md` (5 / 4),
+  `18_review_v4_run2.md` (RSS lens, 4 / 5); merged record `paper/mypaper/18_peer_review_v4.md`.
+- **No CRITICAL FABRICATION**: both reviewers re-implemented CRC and recomputed C1–C5, S1, S3, σ band, width sweep,
+  no-probe grasp and CSF-fam μ̄ from the raw v4 replays — exact match; git order of pre-registration → code → read-out
+  → replays confirmed.
+- Must-fix 1–8 (reporting, not data): break-even attribution (17.74 s learned / 27.07 s plug-in) and "measured";
+  σ 0.4 reversal holds for the plug-in only; route mixing in Fig. 2a / feature chain; CSF-fam RE operating point;
+  decision rule as registered + one TOST criterion for C2; method facts (σ added on the simulator's taxel model,
+  CSF-1 μ = √(0.3·1.0), true mass / stratum known, single learned seed 0); mid-friction sub-pool definition; length
+  of Intro / Related / Setup. Deferred (new experiments): learned seeds 1–4, hybrid arm, probe-only protocol, long holds.
+- **Next:** stage 19 [v4] (`build_stage19_v4.py`), then 18 / 19 pass 2, 20.
