@@ -985,3 +985,19 @@ Run order when both papers are active: AUTOPILOT §7.
   conclusion floor). **Page risk:** 7,000 words is well above a 5-page RSS Stage 1 body; stage 22 decides on the real PDF
   and will likely need a condensed Stage-1 version (the full text then serves Stage 2 / an 8-page venue).
 - > 30 % added words → second stage-18 pass (template rule). **Next:** stage 18 pass 2 [v4], 19 pass 2, 20.
+
+## Stage 18 / 19. PEER_REVIEW + PAPER_REVISION     [v4] — pass 2
+
+- **Finished:** 2026-11-12 (run 48). Stage 18 pass 2: two fresh opus subagents on the pass-1 draft
+  (`18_review_v4_pass2_run1.md` 4 / 5, `_run2.md` RSS lens 4 / 5), merged record `18_peer_review_v4_pass2.md` P1–P8.
+  **No fabrication**; all v4 numbers re-derived exactly.
+- **Post-hoc report-only analysis (main session):** three of four v4 reviews asked for absolute-force and per-friction
+  numbers that exist only in the raw replays → `code/analysis_v4_posthoc.py` → `results/v4/v4_posthoc.json` (not
+  pre-registered, no decision; same split / CRC / matched recipe; arm slips reproduce `v4_analysis.json` exactly).
+  D_abs at matched slip: plug-in vs CSF-1 0.2372 [0.1401, 0.3328]; learned vs plug-in 0.2667 [0.198, 0.3196]. So "the
+  probe, not the learner" holds on relative excess only; on absolute newtons the learner adds about as much as the probe.
+  Slip by friction tercile: concentrated on low-μ objects for every arm. `tools_number_audit.py` now also reads this file.
+- Stage 19 pass 2 (`build_stage19_v4.py --pass2`, fresh opus): P1–P8 addressed, PH status code for post-hoc rows,
+  Figure 2 data spec, deviations 8–10, H3 family-shift R_E 1.1739 [1.0234, 1.4283] reported. Audit 0 unmatched.
+  Words 6,999 → 9,075. Snapshot `v4/draft_v4_stage19pass2.md`.
+- **Next:** stage 20 [v4] (plan `plans/stage_20_quality_gate_v4.md`).
