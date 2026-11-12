@@ -972,3 +972,16 @@ Run order when both papers are active: AUTOPILOT §7.
   CSF-1 μ = √(0.3·1.0), true mass / stratum known, single learned seed 0); mid-friction sub-pool definition; length
   of Intro / Related / Setup. Deferred (new experiments): learned seeds 1–4, hybrid arm, probe-only protocol, long holds.
 - **Next:** stage 19 [v4] (`build_stage19_v4.py`), then 18 / 19 pass 2, 20.
+
+## Stage 19. PAPER_REVISION     [v4] — pass 1
+
+- **Finished:** 2026-11-12 (run 48). Plan `plans/stage_19_paper_revision_v4.md`; template `paper_revision.md` verbatim
+  via `build_stage19_v4.py`; fresh opus subagent, targeted edits for must-fix 1–8. Snapshots
+  `v4/draft_v4_stage18in.md` (before), `v4/draft_v4_stage19pass1.md` (after).
+- All 8 items addressed; reviewer-computed numbers (absolute excess N, effective σ, no-squeeze break-even) not printed.
+  Main session spot-checked new values against the JSON (detector bias 0.3186 / SD 0.1103 in `19_report_rows`; hold
+  forces 6.115 / 6.463 N and CSF-fam CRC-point RE 0.2995 in `v4_analysis.json`). Number audit 0 unmatched.
+- Words 4,805 → 7,047 (all RESTRICTS floors met; Conclusion 142 is below the template's 200 but RESTRICTS has no
+  conclusion floor). **Page risk:** 7,000 words is well above a 5-page RSS Stage 1 body; stage 22 decides on the real PDF
+  and will likely need a condensed Stage-1 version (the full text then serves Stage 2 / an 8-page venue).
+- > 30 % added words → second stage-18 pass (template rule). **Next:** stage 18 pass 2 [v4], 19 pass 2, 20.
