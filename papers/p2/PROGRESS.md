@@ -1001,3 +1001,19 @@ Run order when both papers are active: AUTOPILOT §7.
   Figure 2 data spec, deviations 8–10, H3 family-shift R_E 1.1739 [1.0234, 1.4283] reported. Audit 0 unmatched.
   Words 6,999 → 9,075. Snapshot `v4/draft_v4_stage19pass2.md`.
 - **Next:** stage 20 [v4] (plan `plans/stage_20_quality_gate_v4.md`).
+
+## Stage 20. QUALITY_GATE     [v4]
+
+- **Finished:** 2026-11-12 (run 48). Plan `plans/stage_20_quality_gate_v4.md`; template `quality_gate.md` verbatim
+  (threshold 7.5) via `build_stage20.py paper/mypaper/draft_v4.md _v4`; fresh opus subagent, paper only →
+  `paper/mypaper/20_quality_gate_v4.json`.
+- **Score 6.5 / 10 (v1 6.5, v2 5.5, v3 6.8) → FAIL; not auto-approved** (a below-threshold score is not evidence for
+  approval). The gate found the numbers internally consistent and the reporting honest. 8 evidence-level weaknesses
+  (long holds not simulated vs 17.7–27.1 s break-even; σ assumed, effect changes sign over σ 0.1–0.4; small absolute
+  saving 0.66 / 1.01 N; one learned seed; matched route uses test outcomes; marginal guarantee fails on the low-μ third;
+  no published controller / hybrid arm; offline calibration not deployable) and 4 paper-level (crowded numbers, answer
+  to the title not stated up front, rounds mixed, figures unrendered).
+- **Decision (template table):** below threshold with evidence-level actions → stage 13, unavailable (refine cycles
+  3 / 3). → **Stop the loop and ask the owner** (`papers/p2/OWNER_TODO.md`, run 48).
+- **Meanwhile (no reply):** paper-level items only (one clear conditional answer up front, one cost picture, caveats
+  once, 2–3 significant figures, earlier rounds to an appendix); no new experiments, no LaTeX export.
