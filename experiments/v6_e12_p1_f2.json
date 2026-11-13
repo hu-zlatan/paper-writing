@@ -1,0 +1,25 @@
+{
+ "purpose": "E12 p1 second follow-up (remaining episodes); one episode per job (long single episodes)",
+ "jobs": [
+  {
+   "id": "S_k2_student_s702_sub16_084_r85_r87",
+   "cmd": "python main.py regrid3 --src ../results/v5/test5/S_k2_student_s702_000.jsonl ../results/v5/test5/S_k2_student_s702_025.jsonl ../results/v5/test5/S_k2_student_s702_050.jsonl ../results/v5/test5/S_k2_student_s702_075.jsonl ../results/v5/test5/S_k2_student_s702_100.jsonl ../results/v5/test5/S_k2_student_s702_125.jsonl ../results/v5/test5/S_k2_student_s702_150.jsonl ../results/v5/test5/S_k2_student_s702_175.jsonl ../results/v5/test5/S_k2_student_s702_200.jsonl ../results/v5/test5/S_k2_student_s702_225.jsonl ../results/v5/test5/S_k2_student_s702_250.jsonl ../results/v5/test5/S_k2_student_s702_275.jsonl --episodes 87 --sub 16 --budget-minutes 25 --out ../results/v6/e12/S_k2_student_s702_sub16_084_r85_r87"
+  },
+  {
+   "id": "S_k4_student_s702_sub16_092_r93_r94",
+   "cmd": "python main.py regrid3 --src ../results/v5/test5/S_k4_student_s702_000.jsonl ../results/v5/test5/S_k4_student_s702_025.jsonl ../results/v5/test5/S_k4_student_s702_050.jsonl ../results/v5/test5/S_k4_student_s702_050_r71.jsonl ../results/v5/test5/S_k4_student_s702_075.jsonl ../results/v5/test5/S_k4_student_s702_075_r94.jsonl ../results/v5/test5/S_k4_student_s702_100.jsonl ../results/v5/test5/S_k4_student_s702_125.jsonl ../results/v5/test5/S_k4_student_s702_150.jsonl ../results/v5/test5/S_k4_student_s702_175.jsonl ../results/v5/test5/S_k4_student_s702_200.jsonl ../results/v5/test5/S_k4_student_s702_225.jsonl ../results/v5/test5/S_k4_student_s702_250.jsonl ../results/v5/test5/S_k4_student_s702_275.jsonl --episodes 94 --sub 16 --budget-minutes 25 --out ../results/v6/e12/S_k4_student_s702_sub16_092_r93_r94"
+  },
+  {
+   "id": "S_k4_student_s702_sub16_092_r93_r95",
+   "cmd": "python main.py regrid3 --src ../results/v5/test5/S_k4_student_s702_000.jsonl ../results/v5/test5/S_k4_student_s702_025.jsonl ../results/v5/test5/S_k4_student_s702_050.jsonl ../results/v5/test5/S_k4_student_s702_050_r71.jsonl ../results/v5/test5/S_k4_student_s702_075.jsonl ../results/v5/test5/S_k4_student_s702_075_r94.jsonl ../results/v5/test5/S_k4_student_s702_100.jsonl ../results/v5/test5/S_k4_student_s702_125.jsonl ../results/v5/test5/S_k4_student_s702_150.jsonl ../results/v5/test5/S_k4_student_s702_175.jsonl ../results/v5/test5/S_k4_student_s702_200.jsonl ../results/v5/test5/S_k4_student_s702_225.jsonl ../results/v5/test5/S_k4_student_s702_250.jsonl ../results/v5/test5/S_k4_student_s702_275.jsonl --episodes 95 --sub 16 --budget-minutes 25 --out ../results/v6/e12/S_k4_student_s702_sub16_092_r93_r95"
+  },
+  {
+   "id": "S_k4_student_s705_sub16_092_r93_r94",
+   "cmd": "python main.py regrid3 --src ../results/v5/test5/S_k4_student_s705_000.jsonl ../results/v5/test5/S_k4_student_s705_025.jsonl ../results/v5/test5/S_k4_student_s705_050.jsonl ../results/v5/test5/S_k4_student_s705_075.jsonl ../results/v5/test5/S_k4_student_s705_075_r94.jsonl ../results/v5/test5/S_k4_student_s705_100.jsonl ../results/v5/test5/S_k4_student_s705_125.jsonl ../results/v5/test5/S_k4_student_s705_150.jsonl ../results/v5/test5/S_k4_student_s705_175.jsonl ../results/v5/test5/S_k4_student_s705_200.jsonl ../results/v5/test5/S_k4_student_s705_225.jsonl ../results/v5/test5/S_k4_student_s705_250.jsonl ../results/v5/test5/S_k4_student_s705_250_r274.jsonl ../results/v5/test5/S_k4_student_s705_275.jsonl --episodes 94 --sub 16 --budget-minutes 25 --out ../results/v6/e12/S_k4_student_s705_sub16_092_r93_r94"
+  },
+  {
+   "id": "S_k4_student_s705_sub16_092_r93_r95",
+   "cmd": "python main.py regrid3 --src ../results/v5/test5/S_k4_student_s705_000.jsonl ../results/v5/test5/S_k4_student_s705_025.jsonl ../results/v5/test5/S_k4_student_s705_050.jsonl ../results/v5/test5/S_k4_student_s705_075.jsonl ../results/v5/test5/S_k4_student_s705_075_r94.jsonl ../results/v5/test5/S_k4_student_s705_100.jsonl ../results/v5/test5/S_k4_student_s705_125.jsonl ../results/v5/test5/S_k4_student_s705_150.jsonl ../results/v5/test5/S_k4_student_s705_175.jsonl ../results/v5/test5/S_k4_student_s705_200.jsonl ../results/v5/test5/S_k4_student_s705_225.jsonl ../results/v5/test5/S_k4_student_s705_250.jsonl ../results/v5/test5/S_k4_student_s705_250_r274.jsonl ../results/v5/test5/S_k4_student_s705_275.jsonl --episodes 95 --sub 16 --budget-minutes 25 --out ../results/v6/e12/S_k4_student_s705_sub16_092_r93_r95"
+  }
+ ]
+}

@@ -1,0 +1,9 @@
+{
+ "purpose": "E12 p0 third follow-up (remaining episodes); one episode per job (long single episodes)",
+ "jobs": [
+  {
+   "id": "A16_k2_student_s702_sub16_096_r97_r98_r99",
+   "cmd": "python main.py regrid3 --src ../results/v5/test5/A16_k2_student_s702_000.jsonl ../results/v5/test5/A16_k2_student_s702_013.jsonl ../results/v5/test5/A16_k2_student_s702_026.jsonl ../results/v5/test5/A16_k2_student_s702_039.jsonl ../results/v5/test5/A16_k2_student_s702_052.jsonl ../results/v5/test5/A16_k2_student_s702_065.jsonl ../results/v5/test5/A16_k2_student_s702_078.jsonl ../results/v5/test5/A16_k2_student_s702_091.jsonl ../results/v5/test5/A16_k2_student_s702_091_r103.jsonl ../results/v5/test5/A16_k2_student_s702_104.jsonl ../results/v5/test5/A16_k2_student_s702_117.jsonl ../results/v5/test5/A16_k2_student_s702_130.jsonl ../results/v5/test5/A16_k2_student_s702_143.jsonl ../results/v5/test5/A16_k2_student_s702_156.jsonl ../results/v5/test5/A16_k2_student_s702_169.jsonl ../results/v5/test5/A16_k2_student_s702_182.jsonl ../results/v5/test5/A16_k2_student_s702_195.jsonl ../results/v5/test5/A16_k2_student_s702_208.jsonl ../results/v5/test5/A16_k2_student_s702_221.jsonl ../results/v5/test5/A16_k2_student_s702_234.jsonl ../results/v5/test5/A16_k2_student_s702_247.jsonl ../results/v5/test5/A16_k2_student_s702_260.jsonl ../results/v5/test5/A16_k2_student_s702_273.jsonl ../results/v5/test5/A16_k2_student_s702_286.jsonl ../results/v5/test5/A16_k2_student_s702_299.jsonl --episodes 99 --sub 16 --budget-minutes 25 --out ../results/v6/e12/A16_k2_student_s702_sub16_096_r97_r98_r99"
+  }
+ ]
+}

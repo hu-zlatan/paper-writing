@@ -1,0 +1,17 @@
+{
+ "purpose": "E12 p2 second follow-up (remaining episodes); one episode per job (long single episodes)",
+ "jobs": [
+  {
+   "id": "S_k8_student_s703_sub16_028_r29_r30",
+   "cmd": "python main.py regrid3 --src ../results/v5/test5/S_k8_student_s703_000.jsonl ../results/v5/test5/S_k8_student_s703_022.jsonl ../results/v5/test5/S_k8_student_s703_044.jsonl ../results/v5/test5/S_k8_student_s703_066.jsonl ../results/v5/test5/S_k8_student_s703_088.jsonl ../results/v5/test5/S_k8_student_s703_110.jsonl ../results/v5/test5/S_k8_student_s703_132.jsonl ../results/v5/test5/S_k8_student_s703_154.jsonl ../results/v5/test5/S_k8_student_s703_176.jsonl ../results/v5/test5/S_k8_student_s703_198.jsonl ../results/v5/test5/S_k8_student_s703_220.jsonl ../results/v5/test5/S_k8_student_s703_242.jsonl ../results/v5/test5/S_k8_student_s703_264.jsonl ../results/v5/test5/S_k8_student_s703_264_r283.jsonl ../results/v5/test5/S_k8_student_s703_286.jsonl --episodes 30 --sub 16 --budget-minutes 25 --out ../results/v6/e12/S_k8_student_s703_sub16_028_r29_r30"
+  },
+  {
+   "id": "S_k8_student_s703_sub16_028_r29_r31",
+   "cmd": "python main.py regrid3 --src ../results/v5/test5/S_k8_student_s703_000.jsonl ../results/v5/test5/S_k8_student_s703_022.jsonl ../results/v5/test5/S_k8_student_s703_044.jsonl ../results/v5/test5/S_k8_student_s703_066.jsonl ../results/v5/test5/S_k8_student_s703_088.jsonl ../results/v5/test5/S_k8_student_s703_110.jsonl ../results/v5/test5/S_k8_student_s703_132.jsonl ../results/v5/test5/S_k8_student_s703_154.jsonl ../results/v5/test5/S_k8_student_s703_176.jsonl ../results/v5/test5/S_k8_student_s703_198.jsonl ../results/v5/test5/S_k8_student_s703_220.jsonl ../results/v5/test5/S_k8_student_s703_242.jsonl ../results/v5/test5/S_k8_student_s703_264.jsonl ../results/v5/test5/S_k8_student_s703_264_r283.jsonl ../results/v5/test5/S_k8_student_s703_286.jsonl --episodes 31 --sub 16 --budget-minutes 25 --out ../results/v6/e12/S_k8_student_s703_sub16_028_r29_r31"
+  },
+  {
+   "id": "S_k8_student_s705_sub16_072_r73_r75",
+   "cmd": "python main.py regrid3 --src ../results/v5/test5/S_k8_student_s705_000.jsonl ../results/v5/test5/S_k8_student_s705_022.jsonl ../results/v5/test5/S_k8_student_s705_044.jsonl ../results/v5/test5/S_k8_student_s705_044_r57.jsonl ../results/v5/test5/S_k8_student_s705_066.jsonl ../results/v5/test5/S_k8_student_s705_088.jsonl ../results/v5/test5/S_k8_student_s705_110.jsonl ../results/v5/test5/S_k8_student_s705_132.jsonl ../results/v5/test5/S_k8_student_s705_154.jsonl ../results/v5/test5/S_k8_student_s705_176.jsonl ../results/v5/test5/S_k8_student_s705_198.jsonl ../results/v5/test5/S_k8_student_s705_220.jsonl ../results/v5/test5/S_k8_student_s705_242.jsonl ../results/v5/test5/S_k8_student_s705_264.jsonl ../results/v5/test5/S_k8_student_s705_286.jsonl --episodes 75 --sub 16 --budget-minutes 25 --out ../results/v6/e12/S_k8_student_s705_sub16_072_r73_r75"
+  }
+ ]
+}
