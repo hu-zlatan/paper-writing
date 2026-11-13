@@ -1028,3 +1028,19 @@ Run order when both papers are active: AUTOPILOT §7.
   because the closed-form accounting is linear in T (slope = mean hold force), so the straight segments are exact.
   No new experiment, no LaTeX export, no change to the draft's numbers.
 - **Next:** still waits for the owner's (a)/(b)/… decision.
+
+## Run 51 (2026-11-13) — paper-level revision of draft_v4 while waiting for the owner
+
+- No open issues, no owner reply on the run-48 decision. Paper-level work only (plan `plans/run51_gate_paper_level_v4.md`).
+- Template `paper_revision.md` verbatim via `paper/mypaper/prompts/build_gatefix_v4.py`; reviews slot = the 4 paper-level
+  weaknesses + 4 paper-level actions of `20_quality_gate_v4.json` (evidence-level items listed as limitations only);
+  fresh opus subagent → `paper/mypaper/draft_v4.md` (snapshot `v4/draft_v4_pre_run51.md`).
+- Changes: one conditional answer to the title question first in Abstract / Introduction; new §5.2 + table putting
+  relative excess, absolute excess and force-time together, attribution stated as unresolved across metrics; caveats
+  consolidated as Limitations L1–L11 (all old items kept; Discussion + Limitations 834 → 1,214 words) with
+  cross-references elsewhere; 2–3 significant figures in prose, full precision in tables; old §5.4 + mid-friction
+  sub-pool moved to Appendix A / Table A1.
+- Checks (main session): `tools_number_audit.py` 0 unmatched; new decimals are roundings of draft values (e.g. 0.7686 →
+  0.769, 22.20 → 22.2); words 9,815 → 11,197, all section floors met; both FIGURE prompts kept.
+- Stage 20 status unchanged (FAIL 6.5, cap 3 / 3); no gate rerun, no LaTeX, no new experiment.
+- **Next:** still waits for the owner's (a)/(b)/… decision.
