@@ -1044,3 +1044,13 @@ Run order when both papers are active: AUTOPILOT §7.
   0.769, 22.20 → 22.2); words 9,815 → 11,197, all section floors met; both FIGURE prompts kept.
 - Stage 20 status unchanged (FAIL 6.5, cap 3 / 3); no gate rerun, no LaTeX, no new experiment.
 - **Next:** still waits for the owner's (a)/(b)/… decision.
+
+## Run 52 (2026-11-13, ≈ 15:50 UTC) — Figure 1(b) data panel while waiting for the owner
+
+- No open issues, no owner reply on the run-48 decision. Paper-level work only (gate item "figures unrendered").
+- `code/make_figure1b_v4.py` renders Figure 1(b) of `draft_v4.md` (confirmatory forest plot) to
+  `paper/mypaper/figures/figure1b_v4.{pdf,png}`, reading C1–C3 from `results/v4/v4_analysis.json` f4/rows, C4–C5 from
+  c4/rows, CRC-route ticks from f4/rows/S5_C{1,2}_crc and c4/rows/S5_C{4,5}_crc; the prompt's copied numbers are
+  assertion guards only (all pass; C3 confirmed as the CRC route, C1/C2/C4/C5 as matched). Visual check done.
+  Panel (a) stays a schematic prompt. Draft unchanged; no new experiment, no LaTeX, no gate rerun.
+- **Next:** still waits for the owner's (a)/(b)/… decision; all figure data panels of draft_v4 are now rendered.

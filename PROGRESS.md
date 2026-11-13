@@ -2026,4 +2026,5 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
   student mean and seed min–max, H\*, RL, Holm stars). Visual check done (G\* run 1 drawn smaller inside the hollow
   run-2 ring so coinciding runs in S4 / S12 stay visible). Panel A remains a schematic prompt.
 - Draft text and numbers unchanged; no gate rerun, no LaTeX, no new experiment, no submission.
-- **Where to resume (run 53):** both papers wait for the owner. Paper 2: Figure 1(b) data panel (paper-level).
+- Paper 2 (same run): Figure 1(b) forest plot rendered from JSON (`papers/p2/PROGRESS.md`, run 52).
+- **Where to resume (run 53):** both papers wait for the owner; the listed paper-level items are done, so later runs only check for owner replies / issues unless a decision arrives.
