@@ -1994,3 +1994,23 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
 - **Where to resume (run 51):** paper 1 — owner decision; meanwhile verify the 3 citations (WebFetch / an Actions
   workflow writing Crossref JSON to the repo) and tighten abstract / C1 (paper-level only). Paper 2 — owner decision;
   paper-level text only.
+
+## Run 51 (2026-11-13, ≈ 08:00 UTC) — paper-level items while waiting for the owner
+
+- No open issues; no owner reply on the run-50 decision (a)–(d). Default applied: paper-level text only.
+- **[CITE-MISSING] resolved** (plan `plans/run51_cite_missing.md`): dispatched `literature-supplement` (Actions run
+  43388998106) with 3 title queries; OpenAlex records match title / first author / year / venue / DOI →
+  cards C61 zaheer2017deep, C62 efron1979bootstrap, C63 holm1979simple in `docs/05_knowledge_cards.json`; the three
+  markers in `sections/draft_v6.md` replaced by \cite keys (0 markers left).
+- **Gate paper-level revision**: template `paper_revision.md` verbatim via `paper/mypaper/prompts/build_gatefix_v6.py`
+  (reviews slot = paper-level items of `20_quality_gate.json` + binding), fresh opus subagent → `sections/draft_v6.md`
+  (snapshot `v6/draft_v6_pre_run51.md`). Abstract 258 → 248 words: one result sentence + one qualification, and
+  "not shown to be the best non-oracle policy in four of five cells" stated in abstract, C1 and Conclusion;
+  bootstrap-seed / 100k-resample detail left in §5.1 / Appendix B; repeated latency, E12, Holm-count and TOST-power
+  caveats replaced by cross-references. Limitations unchanged (860 words).
+- Checks: `tools_number_audit.py` 0 unmatched; no number added (set difference of numbers empty); no table changed.
+  Sections shrank only where repeats were moved to cross-references (Intro 1,217 → 1,096, Results 2,641 → 2,551,
+  Discussion 1,225 → 1,175), as the gate's required action asks; all above RESTRICTS floors.
+- Stage 20 status unchanged (FAIL 5.2, cap 5 / 5); no gate rerun, no LaTeX, no new experiment, no submission.
+- **Where to resume (run 52):** both papers wait for the owner. Remaining paper-level item for paper 1: render Figure 1
+  data panels from JSON (as done for p2 Figure 2). Paper 2: Figure 1(b) data panel.

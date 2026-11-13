@@ -1,4 +1,4 @@
-<!-- Stage 17 PAPER_DRAFT [v6], 2026-11-13; revised in stage 19 [v6] pass 1; revised in stage 19 [v6] pass 2; fresh-context subagent; prompts paper/mypaper/prompts/stage17_v6_{system,user}.txt and stage19_v6_{system,user}.txt; outline paper/mypaper/sections/00_outline.md (stage 16 v6). Sources of numbers: A = results/v6/14_v6_analysis.json, D = results/v6/15_derived_v6.json (post hoc, no CI), P = results/v6/18_posthoc_v6.json (post hoc, report-only, not pre-registered), v5 = results/v5/results_v5.json; E6 = results/v5/14_e6_analysis.json (registered latency statistic, G*/student median per-decision ratio with ci95, copied and rounded to integers); "(derived)" = arithmetic printed in results/v6/14_analysis.md; method constants carried from paper/mypaper/v5/draft_v5_final.md §3 (code and amendments, not a results field); DAgger warm start from code/tools_v5_manifests.py (--init). -->
+<!-- Stage 17 PAPER_DRAFT [v6], 2026-11-13; revised in stage 19 [v6] pass 1; revised in stage 19 [v6] pass 2; revised run 51 (gate paper-level items); fresh-context subagent; prompts paper/mypaper/prompts/stage17_v6_{system,user}.txt and stage19_v6_{system,user}.txt; outline paper/mypaper/sections/00_outline.md (stage 16 v6). Sources of numbers: A = results/v6/14_v6_analysis.json, D = results/v6/15_derived_v6.json (post hoc, no CI), P = results/v6/18_posthoc_v6.json (post hoc, report-only, not pre-registered), v5 = results/v5/results_v5.json; E6 = results/v5/14_e6_analysis.json (registered latency statistic, G*/student median per-decision ratio with ci95, copied and rounded to integers); "(derived)" = arithmetic printed in results/v6/14_analysis.md; method constants carried from paper/mypaper/v5/draft_v5_final.md §3 (code and amendments, not a results field); DAgger warm start from code/tools_v5_manifests.py (--init). -->
 
 ```
 FIGURE 1 PROMPT (v6; panel A generated as a schematic, panels B-F plotted from JSON with matplotlib following the dataviz skill)
@@ -78,19 +78,21 @@ Simulation; preliminary.
 ## Abstract
 
 A cost-aware greedy information-gain touch planner (G\*) for active tactile localization under travel cost chooses
-each probe by expected information per unit of travel, at up to several seconds of computation per decision. We ask
+each probe by expected information per unit of travel, at up to several seconds per decision. We ask
 whether distilling or shrinking the planner buys more accuracy per millisecond, and whether DAgger adds anything over
 behaviour cloning (BC). In a pre-registered five-cell planar simulation study (travel cost κ = 2/4/8/12 on one shape
-library, κ = 2 on a second, A16), every compared method (all but a random baseline) runs the same 500 test episodes,
-200 fresh, with two G\* runs.
-By Holm, the student is more accurate than the smaller of two single-run, same-budget reduced planners in all five
-cells and than the larger in two (7/10 contrasts; 5/10 under one of 11 bootstrap seeds, post hoc), at 62–389× lower
-per-decision latency (point ratios of medians; a computational gain only, with no task-time or hardware model). On the fresh episodes only 2/10 survive Holm, so only the direction replicates.
+library, κ = 2 on a second, A16), all compared methods share 500 paired test episodes (200 fresh), and G\* is run
+twice.
+By Holm, the student is more accurate than the smaller of two reduced planners in all five cells and than the larger in
+two (7/10 contrasts), at 62–389× lower computation per decision.
+This result is narrow: both reduced planners are single, same-budget runs, two rejections sit near
+the Holm threshold, the fresh episodes replicate only the direction, and the student is not shown to be the best
+non-oracle policy in four of five cells.
 Parity with G\* is neither shown nor refuted at a 4 pp margin, a test with little power by design: point estimates are
 0.3–3.7 pp below G\*, and deficits of about 5–8 pp are not excluded. Under our recipe (warm-started rounds,
-lowest-held-out-regret checkpoints) no DAgger benefit over BC is detected. Changing only the evaluator grid shifts the
-student − G\* contrast by point values of up to 5 pp (post hoc ci95 excludes 0 in one cell), and two G\* runs agree on
-only 25–45 % of first decisions. Simulation; preliminary.
+lowest-held-out-regret checkpoints), no DAgger benefit over BC is detected. Changing only the evaluator grid shifts the
+student − G\* contrast by point values of up to 5 pp, and two G\* runs agree on only 25–45 % of first decisions.
+Simulation; preliminary.
 
 ## 1 Introduction
 
@@ -139,18 +141,12 @@ second library, A16, at κ = 2.
 We make one narrow positive claim and three qualified ones, in decision order.
 
 - **C1. Frontier against two reduced planners.** By Holm, the student is more accurate than the smaller reduced planner
-  (R-125) in all 5 cells and than the larger one (R-500) in S4 and A16-2; against R-500 in S2, S8 and S12 no accuracy
-  difference is shown. This is 7/10 registered contrasts on episodes 0–499 at the registered bootstrap seed; under one
-  of 11 bootstrap seeds (post hoc) it is 5/10, because two contrasts sit near the Holm threshold; at 100,000 resamples
-  (post hoc) it is again 7/10, with S12 − R-125 just inside its Holm cut (Appendix B). On the fresh window only 2/10
-  contrasts survive Holm under every one of the 11 seeds and at 100,000 resamples, so the fresh window replicates the
-  direction, not the significance. Both reduced planners have the same Monte Carlo budget and were run once each, and
-  the evaluator-grid check did not re-read them, so this one positive claim, unlike the null ones, has no evaluator
-  check. The student is 62–389× faster per decision than both (point ratios of medians), while the reduced planners
-  themselves are 19–47× faster than G\*; these are gains in computation per decision only, since no task-time or
-  hardware model is applied. Taking post hoc, in each cell, the strongest non-oracle comparator, the registered H6b
-  contrast against it is Holm-rejected in 1/5 cells (A16-2, where it is R-500); in the other cells it is either not
-  rejected or not covered by any registered test.
+  (R-125) in all 5 cells and than the larger one (R-500) in S4 and A16-2 (7/10 registered contrasts on episodes 0–499;
+  against R-500 in S2, S8 and S12 no difference is shown), at 62–389× lower computation per decision than both. The
+  qualification is that both reduced planners share one Monte Carlo budget and were run once each without an evaluator
+  check, two of the seven rejections sit within bootstrap error of the Holm threshold, the fresh window replicates only
+  the direction (Section 5.1, Appendix B), and the student is not shown to be the best non-oracle policy in four of
+  five cells (Section 5.1).
 - **C2. Parity is not established.** With G\*'s two runs in the contrast, the student's success point estimate is
   0.3–3.7 pp below G\* in every cell, with no registered difference and no registered equivalence; deficits of about
   5–8 pp, depending on the cell, cannot be excluded. The TOST had little power by design. On the primary window the
@@ -511,15 +507,10 @@ field.
 and the student 0.326–0.500 ms (medians from the earlier phase, plotted in Figure 1 without their intervals). The
 reduced planners are therefore 19–47× faster than G\* (derived), and the student is 62–389× faster again than both
 reduced planners (post hoc, no CI; point ratios of medians; last column of Table 2). Full G\* is about 2,544–9,767×
-slower per decision than the student as a ratio of medians (post hoc, no CI). The registered statistic for this
-comparison is instead the median per-decision G\*/student ratio, with its ci95: 9,933 [8,179, 10,224] (S2), 6,990
-[4,747, 7,270] (S4), 3,463 [2,680, 3,645] (S8), 2,523 [2,068, 2,675] (S12) and 8,301 [8,080, 8,472] (A16-2), copied
-from the earlier phase's latency read-out (Section 4). Its pre-registered half-width rule is met only in A16-2, and the
-same rule also fails for the G\* medians of the S cells and for some reduced-planner medians. All of these ratios rest on
-one student seed and on runners that differ between cells, and no task-time or hardware model is applied, so they are
-statements about computation per decision, not about the duration of a probing episode: whether a 48–194 ms or even a
-multi-second decision would lengthen an episode depends on probe and travel durations and on whether planning can
-overlap with motion, none of which is modelled here. No reduced planner
+slower per decision than the student as a ratio of medians (post hoc, no CI). The registered statistic, the
+median per-decision G\*/student ratio with its ci95, is given in Section 4, together with the caveats that apply to
+every latency figure here (one student seed, runners that differ between cells, the half-width rule, and computation
+per decision only, with no task-time or hardware model; see also Limitation 6). No reduced planner
 sits near the student's latency: the gap between the student and the faster reduced planner is still more than an
 order of magnitude in every cell.
 
@@ -548,8 +539,8 @@ report-only; 100,000 resamples at the registered seed) gives the same seven reje
 300–499, but it does not remove the fragility: S12 − R-125 has p = 0.00968 against its rank-6 Holm cut of α/5 with
 α = 0.05, and S4 − R-125 has p = 0.0105 against its rank-7 cut of α/4, while the next contrast, S8 − R-500, has
 p = 0.03238 and is not rejected. The registered seed gives the result of record, but the 7/10 rests on two contrasts
-that sit within bootstrap error of the threshold. E12 did not re-read the reduced
-planners, so H6b's sensitivity to the evaluator grid is unknown.
+that sit within bootstrap error of the threshold. H6b's sensitivity to the evaluator grid is unknown, because E12
+did not cover the reduced planners (Section 4, Limitation 5).
 
 **Table 2. H6b: student (5 seeds) − reduced planner, success.** Δ [ci95], two-sided p, Holm over 10 contrasts per
 window (registered bootstrap seed). Latency ratios are post hoc point ratios of medians, no CI. Each reduced planner is
@@ -687,7 +678,7 @@ contrast changes in 3/5 cells, and the shifts do not favour either policy system
 much of each shift comes from the teacher's own flips. This is a *sensitivity* of the read-out: a thresholded success
 computed from a finite-resolution posterior grid, applied to near-tied posteriors, decides a non-trivial fraction of
 outcomes, and the decision falls differently for different policies. Re-deciding H6a on sub 16 would be post hoc and was
-not done; E12 covers only 100 episodes and G\* run 1, and it cannot correct the primary contrasts.
+not done; the scope of E12 is stated in Section 4 and Limitation 5.
 
 **Teacher stochasticity.** First-decision agreement between two G\* runs from the same state is 0.25–0.45 across cells
 and windows; no run-2 − run-1 success difference is significant (Section 5.2). The teacher is thus a distribution over
@@ -709,19 +700,16 @@ faster per decision, the registered evidence favours distillation over the two r
 contrasts, and in none does a reduced planner come out significantly ahead. The advantage is clearest against R-125 and
 in A16-2, and it is unresolved against R-500 in three S cells. Shrinking the planner already costs 4.4–14.4 pp against
 G\* run 1 for a 19–47× speed-up, whereas the student pays a further 62–389× less per decision. These speed-ups are
-computational: R-500 already decides in 48–194 ms, and without a task-time model of probing and travel we cannot say
-whether any of them would shorten a physical episode. The frontier is,
+computational only (Section 4, Limitation 6): R-500 already decides in 48–194 ms. The frontier is,
 however, drawn from one run of each reduced planner, from latency medians of the earlier phase, and from only two
 reduced configurations, both with the same $N \cdot M$ budget and all 512 candidates; no shrunken or accelerated planner
-sits near the student's latency. Two of the seven rejections are within bootstrap Monte Carlo error of the Holm
-threshold. A reduced planner with a better split of its budget, candidate subsampling, an accelerated implementation of
+sits near the student's latency, and two of the seven rejections are fragile (Section 5.1). A reduced planner with a better split of its budget, candidate subsampling, an accelerated implementation of
 G\*, or a cheap information-based heuristic could move the frontier. The fresh window confirms the direction in nine of
 ten point estimates but not the significance, which is what 200 episodes can deliver at this effect size. The claim is
 therefore "distillation was more accurate than these two reduced planners", not "distillation beats shrinking".
 
-**What parity says.** The TOST at a 4 pp margin had little power by design (Section 4): with observed 90 % half-widths
-of 2.84–3.85 pp, equivalence was reachable only for point gaps well under about 1 pp unadjusted, and under Holm not even
-then in every cell. That the study shows neither a difference nor equivalence is therefore the expected outcome, and
+**What parity says.** The TOST at a 4 pp margin had little power by design (Section 4 gives the reachable point
+gaps). That the study shows neither a difference nor equivalence is therefore the expected outcome, and
 the informative content is the interval: per cell, the data could certify equivalence only at margins between about
 4.1 and 7.2 pp (the deficit-side ci90 bounds of Table 1, unadjusted). The point estimates are all on the student's
 deficit side on the primary window, S4 shows a one-sided indication of a deficit, and the student's ball information is
@@ -810,10 +798,9 @@ replacement, with simply shrinking the planner, whether it matches the full plan
 counted, and whether the DAgger rounds of distillation add anything over behaviour cloning. An internally
 pre-registered study (timestamped repository commits) in five cells, four travel costs on one shape library and a second library at one travel cost, gives four answers. First,
 as a fast policy, distilling G\* gave more accuracy than shrinking it in 7 of 10 registered contrasts against two
-single-run, same-budget reduced planners, at 62–389× lower per-decision latency (point ratios of medians, a
-computational gain with no task-time model); two of the seven are within bootstrap error of the threshold (5/10 under
-one of 11 bootstrap seeds, 7/10 at 100,000 resamples, both post hoc), and on fresh episodes only the direction held
-(2/10). Second, parity with G\* is neither shown nor refuted by a test that had little power by design, and deficits of
+single-run, same-budget reduced planners, at 62–389× lower computation per decision; two of the seven sit near the Holm threshold
+(Section 5.1, Appendix B), on fresh episodes only the direction held, and the student is not shown to be the best
+non-oracle policy in four of five cells. Second, parity with G\* is neither shown nor refuted by a test that had little power by design, and deficits of
 about 5–8 pp are not excluded. Third, under our recipe of warm-started rounds and lowest-regret checkpoints, the DAgger
 rounds added no detectable accuracy over behaviour cloning. Fourth, evaluator choice and teacher stochasticity move the
 contrasts by point values as large as the margin, with intervals that exclude zero in one cell, so few-pp claims about
