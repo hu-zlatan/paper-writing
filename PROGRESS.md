@@ -1861,3 +1861,25 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
   Actions runs 224 / 225 (long single episodes). **Where to resume (run 50):** once runs 224–226 are complete,
   `tools_resume_regrid.py` on `v6_e12_p0_f2`, `v6_e12_p1_f1`, `v6_e12_p2_f1` (→ `_f3`, `_f2`, `_f2`) and dispatch;
   when `--check` shows E12 100 everywhere → `python code/analysis_v6.py` read-out → stage 14 [v6] (fresh subagent).
+
+## Run 50 (2026-11-13, ≈ 00:00–03:00 UTC) — stage 13 [v6] complete → stage 14 [v6]
+
+- No open issues, no new owner directive. Wave 6 (runs 224–226) all success; last 9 E12 episodes re-run one episode per
+  job (`v6_e12_p0_f3`, `v6_e12_p1_f2`, `v6_e12_p2_f2`; job split only, no setting changed; plan
+  `plans/stage_13_v6_wave7.md`). `--check` complete: test5 0–499 + g_T + E12 100 / 100 in every cell. **Stage 13 [v6]
+  done.**
+
+## Stage 14. RESULT_ANALYSIS     [v6]
+
+- **Finished:** 2026-11-13 (run 50). Plan `plans/stage_14_result_analysis_v6.md` (written before the read-out).
+- Frozen read-out `code/analysis_v6.py` → `results/v6/14_v6_analysis.json` (committed unaltered).
+- Pass 1 (fresh opus subagent, template verbatim, data = amendment v6.0 rules + unaltered JSON) →
+  `results/v6/14_analysis_pass1.md`; pass 2 (fresh opus subagent, adversarial area-chair prompt) →
+  `14_analysis_pass2.md` (2 S / 11 M / 8 m; no pre-registered verdict misreported); merged `results/v6/14_analysis.md`
+  (binding summary + pass-1 body + pass 2 as binding appendix). Prompts in `results/v6/prompts/`.
+- **Pre-registered results:** H6a — no difference and no equivalence within 4 pp in any cell or window; student point
+  estimate 0.3–3.7 pp below G\* (both G\* runs) in all 5 cells on 0–499; S4 ci90 entirely below 0. H6b — student beats
+  g125_512_16 in 5 / 5 cells and g500_512_4 in S4 / A16-2 (7 / 10 Holm on 0–499; 2 / 10 on fresh 300–499), 62–389×
+  faster. H6c — DAgger vs BC: no difference detected. E12 (report-only): sub 8 → 16 flips 4–13 % of S-cell outcomes and
+  moves student − G\* by ≈ 4 pp or more in 3 / 4 S cells.
+- **Next:** stage 15 [v6] (fresh subagent; refine cap 5 / 5 used).
