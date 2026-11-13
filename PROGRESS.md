@@ -9,7 +9,7 @@
 **Topic:** Amortized, non-myopic active tactile localization (TouchBED)
 **Initialised:** 2026-10-28T07:56:44Z
 **Current version:** v6
-**Latest stage:** Stage 20 QUALITY_GATE [v6] — 5.2 / 10 FAIL, refine cap 5 / 5 → owner decision (run 50, 2026-11-13)
+**Latest stage:** Stage 20 QUALITY_GATE [v6] — 5.2 / 10 FAIL, refine cap 5 / 5 → owner decision (run 50, 2026-11-13); runs 51–52 paper-level only
 
 ---
 
@@ -2014,3 +2014,16 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
 - Stage 20 status unchanged (FAIL 5.2, cap 5 / 5); no gate rerun, no LaTeX, no new experiment, no submission.
 - **Where to resume (run 52):** both papers wait for the owner. Remaining paper-level item for paper 1: render Figure 1
   data panels from JSON (as done for p2 Figure 2). Paper 2: Figure 1(b) data panel.
+
+## Run 52 (2026-11-13, ≈ 15:40 UTC) — Figure 1 data panels while waiting for the owner
+
+- No open issues; no owner reply on the run-50 (paper 1) or run-48 (paper 2) decisions; owner directives unchanged.
+  Default applied: paper-level work only (plan `plans/run52_figure1_panels_v6.md`).
+- Gate item "figures unrendered" (paper 1): `code/plot_figure1_v6.py` renders Figure 1 panels B–F of
+  `sections/draft_v6.md` to `paper/mypaper/figures/figure1_v6_panelsBF.{pdf,png}`, reading every value from
+  `results/v6/14_v6_analysis.json` / `results/v6/15_derived_v6.json` under the keys named in the FIGURE 1 PROMPT; the
+  prompt's copied table and star set are assertion guards only (all pass: latencies, G\* runs 1–2, R-500, R-125,
+  student mean and seed min–max, H\*, RL, Holm stars). Visual check done (G\* run 1 drawn smaller inside the hollow
+  run-2 ring so coinciding runs in S4 / S12 stay visible). Panel A remains a schematic prompt.
+- Draft text and numbers unchanged; no gate rerun, no LaTeX, no new experiment, no submission.
+- **Where to resume (run 53):** both papers wait for the owner. Paper 2: Figure 1(b) data panel (paper-level).
