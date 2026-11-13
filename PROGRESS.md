@@ -1980,3 +1980,17 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
   directive's fallback (Stage 2 / CoRL 2027) needs new evidence, i.e. an owner-authorised v7.
 - **Meanwhile (no reply):** paper-level items only (resolve the 3 [CITE-MISSING] with verified identifiers, tighten
   abstract / C1 wording); no new experiments, no LaTeX export, no submission.
+
+## Run 50 wrap-up (2026-11-13, ≈ 04:30 UTC)
+
+- Paper 1: stages 13 (complete) → 14 → 15 → 16 → 17 → 18 → 19 → 18 / 19 pass 2 → 20 [v6] done this run; gate 5.2 / 10
+  FAIL, cap 5 / 5 → owner decision (`OWNER_TODO.md`). The full loop has now run six times (v1–v6).
+- [CITE-MISSING] attempt: web search found candidate identifiers (DeepSets arXiv 1703.06114 / NeurIPS 2017; Efron 1979
+  Ann. Statist., Project Euclid aos/1176344552; Holm 1979 Scand. J. Statist.), but WebFetch of Crossref / arXiv /
+  OpenAlex records was refused in this run, so the metadata is not verified and the markers stay (no unverified
+  citation added).
+- Paper 2: rendered Figure 2 of `draft_v4.md` from `results/v4/v4_analysis.json` (`papers/p2/PROGRESS.md`); still waits
+  for the owner's run-48 decision.
+- **Where to resume (run 51):** paper 1 — owner decision; meanwhile verify the 3 citations (WebFetch / an Actions
+  workflow writing Crossref JSON to the repo) and tighten abstract / C1 (paper-level only). Paper 2 — owner decision;
+  paper-level text only.
