@@ -9,7 +9,7 @@
 **Topic:** Amortized, non-myopic active tactile localization (TouchBED)
 **Initialised:** 2026-10-28T07:56:44Z
 **Current version:** v6
-**Latest stage:** Stage 15 RESEARCH_DECISION [v6] — PROCEED (run 50, 2026-11-13); next stage 16 [v6]
+**Latest stage:** Stage 16 PAPER_OUTLINE [v6] (run 50, 2026-11-13); next stage 17 [v6]
 
 ---
 
@@ -1899,3 +1899,17 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
 - Gate note: stage 15 is not an owner gate; no gate was auto-approved this run.
 - **Next:** stage 16 PAPER_OUTLINE [v6] (RSS 2027 Stage 1 extended abstract, 5 pages body); stage 20 by 12-01 or the
   target becomes Stage 2 / CoRL 2027 (owner directive 2026-11-10).
+
+## Stage 16. PAPER_OUTLINE     [v6]
+
+- **Finished:** 2026-11-13 (run 50). Plan `plans/stage_16_paper_outline_v6.md`; template verbatim via
+  `paper/mypaper/prompts/build_stage16_v6.py`, fresh opus subagent → `paper/mypaper/sections/00_outline.md`
+  (v5 outline kept at `paper/mypaper/v5/00_outline_v5.md`).
+- RSS Stage 1 frame (≈ 3,350 body words, Figure 1 = schematic + five accuracy–log-latency small multiples, Table 1 H6a
+  both windows, Table 2 H6b with Holm flags, H6c rows); contribution order C1 frontier (H6b), C2 parity not established
+  (H6a), C3 DAgger ≈ BC not detected (H6c), C4 evaluator / teacher note. Every row mapped to keys of
+  `results/v6/14_v6_analysis.json`, `15_derived_v6.json` (post hoc, no CI) or `results_v5.json`.
+- Self-check: `code/tools_number_audit.py` (now also reads the v6 read-out and derived JSON) on the outline with only
+  the amendment as design doc → **0 unmatched**; no §4.5 disallowed claim. Open: 3 [CITE-MISSING] (DeepSets, Holm,
+  bootstrap) for stage 23.
+- **Next:** stage 17 PAPER_DRAFT [v6].

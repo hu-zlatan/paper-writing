@@ -1,260 +1,268 @@
-<!-- Stage 16 PAPER_OUTLINE [v5], run 41, 2026-11-09; fresh-context subagent; template paper_outline.md verbatim; prompts paper/mypaper/prompts/stage16_v5_*.txt -->
+<!-- Stage 16 PAPER_OUTLINE [v6], 2026-11-13; fresh-context subagent; template paper_outline.md verbatim; prompts paper/mypaper/prompts/stage16_v6_{system,user}.txt. Previous version: paper/mypaper/v5/00_outline_v5.md -->
 
-# Paper outline (stage 16, v5): pre-registered five-cell characterisation of amortizing G\*
+# Paper outline (stage 16, v6): amortizing a cost-aware touch planner, a pre-registered accuracy–latency study
 
-**Venue (default until the owner decides; `results/v5/15_decision.md` §4.2, §4.5 c).** RSS 2027 Stage 1 extended
-abstract (deadline 2026-12-04 AoE): ≤ 5 content pages + 1 page of references. Methods complete, experiments may be
-preliminary. **Main body target ≈ 3,400 words** (abstract not counted), 2 tables, 2 figures. This is a stated deviation
-from the 9-page floors of `hard_constraints` §3. The master draft may be longer and is condensed in stage 22.
+**Venue.** RSS 2027 Stage 1 extended abstract (deadline 2026-12-04 AoE): ≤ 5 content pages + 1 page of references.
+Methods must be complete; experiments may be preliminary. **Main body target ≈ 3,350 words** (abstract not counted),
+1 figure, 2 tables, plus an optional second figure that is cut first. Floors are scaled to 5 pages, a stated deviation
+from the 9-page floors of `hard_constraints.md` §3. The master draft may be longer and is condensed in stage 22.
 
-**Paper type (binding, `15_decision.md` §1, §4.2–§4.4).** Measurement / characterisation paper only. Headline: the
-distilled student is **not shown to match G\***. No method claim, no "effective component".
+**Paper type (binding: `results/v6/15_decision.md` §1, §4.3–§4.5).** A pre-registered measurement paper with **one
+narrow positive claim**: the H6b frontier, i.e. the distilled student against shrunken planners. There is no parity
+claim, no method-superiority claim and no "effective component" claim. Contribution order: C1 frontier (H6b), C2 parity
+not established (H6a), C3 DAgger adds nothing detectable over BC (H6c), C4 methods note (evaluator-grid sensitivity and
+teacher stochasticity).
 
-**Base.** v4 outline (`paper/mypaper/v4/00_outline_v4.md`) and v4 final draft (`paper/mypaper/v4/draft_v4_final.md`).
-What changes against v4:
-- one cell per regime → five cells (S2, S4, S8, S12 on set S; A16-2 on set A16);
-- 3 → 5 seeds per learner;
-- fresh test split test5;
-- RL swept on S2, then fixed;
-- all three heuristics in every cell, with a pilot-chosen H\*;
-- best-held-out-checkpoint student recipe (pre-declared answer to the v4 P8 over-fitting item);
-- E5 at sub 16, E6 latency, E7 512-action screen with an independent re-estimate.
+**What changes against v5** (the v5 outline and `draft_v5_final.md` are the base):
+- The v5 test contrasts on episodes 0–299 are superseded by **0–499 (primary)** and **300–499 (fresh check)**.
+- A second, independent G\* run (run 2) enters every student − G\* interval.
+- A registered TOST at δ = 4 pp is added.
+- The two reduced planners are evaluated for accuracy in all five cells (H6b).
+- The round-0 (behaviour-cloning) students are evaluated (H6c).
+- The evaluator-grid check E12 now covers all cells and all five student seeds, on episodes 0–99.
+- The v5 D5 gate, H5a, student − H\*, RL and H5b rows become history or report-only "v6 updates of v5 rows".
 
-The v3 S12 D3 and v4 S2 D4 results enter as **prior cells**. The v3 H3 headroom result is cited only as background to
-E7. It is not a v5 contribution.
-
-**Sources (only these may supply numbers).**
-- v5: `results/v5/results_v5.json`. Paths are written `<block> > <key> > …`, where `<block>` is the literal top-level
-  key: `12_d5_analysis.json`, `14_test5_analysis.json`, `14_e5_analysis.json`, `14_e6_analysis.json`,
-  `12_e7_analysis.json`, `12_base_hstar.json`, `12_rl_sweep_selection.json`, `12_cal_analysis.json`,
-  `13_freeze.json`, `15_posthoc_derived.json`. `<cell>` ∈ {S2, S4, S8, S12, A16-2}.
-- **Every value from `15_posthoc_derived.json` is printed with the label "post hoc, no CI"** (its own `provenance`
-  field). These values are: the student and RL means recovered from the diffs, the best-test5-heuristic margins, the
-  job-2 latency ratios, and the H5b span translation.
-- v4 / v3: `results/v4/results_v4.json` (cited `v4:`), `results/v3/results_v3.json` (cited `v3:`).
-- Binding wording: `results/v5/14_analysis.md` (pass 2 S1–S3, M1–M8, m1–m8 replace the pass-1 sentences they cite) and
-  `results/v5/15_decision.md` §4.3 / §4.4.
-- Citations: `cite_key` from `docs/05_knowledge_cards.json` only. Every key below was checked against the 60 cards.
-  Missing items are marked `[CITE-MISSING: …]`.
+**Sources (only these may supply numbers).** Key prefixes used below:
+- `A:` = `results/v6/14_v6_analysis.json`. Paths are written `cells.<cell>.<window>.…`, with `<cell>` ∈ {S2, S4, S8,
+  S12, A16-2} and `<window>` ∈ {0-499, 300-499}. Also `cells.<cell>.frontier.…`, `cells.<cell>.E12.…` and
+  `H5b_update_0_499.…`.
+- `D:` = `results/v6/15_derived_v6.json`. **Every `D:` value is printed "post hoc, no CI"**, as its `note` field requires.
+- `v5:` = `results/v5/results_v5.json`, written `v5:<block> > <key> > …`. Its blocks are `14_e6_analysis.json` (latency),
+  `12_d5_analysis.json` (validation gate), `12_rl_sweep_selection.json`, `12_e7_analysis.json`, `12_cal_analysis.json`,
+  `12_base_hstar.json`, `13_freeze.json` and `16_report_rows.json`.
+- **Analysis-derived values** (arithmetic printed in `results/v6/14_analysis.md`, Appendix A binding) are tagged
+  "(derived)" and have no CI. Examples: latency ratios G\*/reduced, reduced-planner loss vs G\* run 1, ci90 half-widths,
+  E12 shifts.
+- **Citations:** `cite_key` values from `docs/05_knowledge_cards.json` only (60 cards; every key below was checked against
+  the list). DeepSets, Holm (1979) and the bootstrap (Efron) have **no card** and stay `[CITE-MISSING]` for the
+  stage-23 lookup.
+- **Method constants** that no results field holds (particle counts, stand-off geometry, cost formula, label/round sizes,
+  bootstrap resamples) are carried over **verbatim from `draft_v5_final.md` §3 and its provenance table**, keeping the
+  provenance note there ("taken from the code and the amendments, not from a results field"). They are not new numbers
+  and are not re-derived here.
 
 ---
 
 ## 0. Global constraints
 
 ### 0.1 Title
-**Proposed:** *Amortizing a Cost-Aware Information-Gain Touch Planner under Travel Cost: A Pre-Registered Five-Cell
-Characterisation*
-- The title names the question and the design and promises no answer: no "near-optimal", no "matches", no "Can … ?".
-- **Fallback (shorter):** *Distilling a Cost-Aware Touch Planner across Travel Costs: A Pre-Registered Characterisation*.
+**Proposed:** *Amortizing a Cost-Aware Information-Gain Touch Planner: A Pre-Registered Accuracy–Latency Study in
+TouchBED* (the frame from `15_decision.md` §4.3).
+- **Fallback:** *Distilled Policy or Smaller Planner? A Pre-Registered Accuracy–Latency Study of Cost-Aware Touch
+  Planning*.
+- Neither title promises parity.
 
-### 0.2 Labels of every decision-bearing item (`15_decision.md` §2.1 list)
+### 0.2 Naming map for an external reader (v5 gate weakness: "reads like an internal lab record")
+Main-text names are on the left. Internal identifiers appear only in the provenance table of the appendix.
+
+| Paper name | Internal identifier |
+|---|---|
+| planner G\*, runs 1 and 2 | `gstar`, `gstar2` (`--run-salt r1`) |
+| reduced planners R-125 and R-500 | `g125_512_16`, `g500_512_4` (`g`N`_`C`_`M = particles, candidates scored, outcome samples; v5 draft provenance table) |
+| student (DAgger round 2) / BC student (round 0) | `student_s701..705` / `r0student_s701..705` |
+| RL (PPO, configuration selected on S2) | `rl_s711..715`, cfg 6 |
+| success-reward RL control | `rlsucc_s711..715` (S2, S12 only) |
+| primary test episodes 0–499 / fresh episodes 300–499 | test5 0–499 / 300–499 |
+| evaluator-grid check | E12 (sub 8 → sub 16) |
+| pilot-chosen heuristic H\* | `v5_row_updates.H_star` |
+
+### 0.3 Labels of every decision-bearing item
 | Item | Label for the paper | Key |
 |---|---|---|
-| D5 (validation gate, per cell) | **fails in 5 / 5 cells, m = 0**; no remedy step (pre-registered) | `12_d5_analysis.json > H5a_validation > cells_pass` = [] ; `12_d5_analysis.json > <cell> > passes` = false |
-| H5a (test5 student − G\*, Holm over 5) | 0 / 5 Holm rejections; equivalence not shown | `14_test5_analysis.json > <cell> > student_minus_gstar > success > holm_reject_5cells` |
-| Student − H\* (pilot-chosen, Holm over 5) | 4 / 5 Holm rejections (S2 not) | `14_test5_analysis.json > <cell> > student_minus_hstar > success > holm_reject_5cells` |
-| H2-v5 (g_T, LB > +0.10 nats) | met only in A16-2, where cfg-6 RL collapses | `14_test5_analysis.json > <cell> > H2_v5 > claim_student_higher_on_rl_objective` |
-| Inversion (g_T vs posterior ordering) | false in every cell, incl. both `rl_success` checks | `14_test5_analysis.json > <cell> > H2_v5 > inversion`, `… > H2_v5 > check_rlsucc > inversion` (S2, S12) |
-| H5b (trend of Δsucc on G\* travel) | "no trend detected over 5 cells" | `14_test5_analysis.json > H5b > verdict` |
-| E5, E6, E7 | report-only, no verdict | `14_e5_analysis.json`, `14_e6_analysis.json`, `12_e7_analysis.json` |
-| Prior: v3 S12 D3 (twice) | failed | `v3:12_d3_analysis.passes`, `v3:12_d3_analysis_rem.passes` = false |
-| Prior: v4 S2 D4 | failed | `v4:12_d4_analysis.json.passes` = false |
+| H6a difference (Holm over 5) | 0 / 5 rejected, both windows | `A:cells.<cell>.<window>.holm.H6a_difference` (all false) |
+| H6a TOST, δ = 4 pp (Holm over 5) | 0 / 5 rejected, both windows | `A:cells.<cell>.<window>.holm.H6a_tost` (all false); `….H6a.success.tost.{delta, p_tost}` |
+| H6a verdict | "neither a difference nor equivalence shown", every cell, both windows | as above |
+| H6b (Holm over 10) | 7 / 10 rejected on 0–499, all positive; 2 / 10 on 300–499 | `A:cells.<cell>.<window>.holm.{H6b_g125_512_16, H6b_g500_512_4}` |
+| H6c (Holm over 5) | 0 / 5, "not detected" | `A:cells.<cell>.<window>.holm.H6c` |
+| E12 | report-only | `A:cells.<cell>.E12` |
+| v5 row updates (student − H\*, − RL, − rl_success, H2-v5 g_T, inversion, student − G\* run 1) | report-only, labelled "v6 update of a v5 row" | `A:cells.<cell>.<window>.v5_row_updates.*` |
+| H5b update | "no trend detected over 5 cells", which is uninformative (CI spans about 26 pp per 100°) | `A:H5b_update_0_499.{slope_per_100deg, ci95_per_100deg, verdict}` |
+| History: v5 validation gate D5 | failed in 5 / 5 cells | `v5:12_d5_analysis.json > H5a_validation > cells_pass` = [] |
+| Completeness | 500 / 200 / 100 episodes; g_T complete | `A:cells.<cell>.<window>.{n_required, complete, gt_complete}`; `A:cells.<cell>.E12.complete` |
 
-### 0.3 Binding sentences (from `15_decision.md` §4.3; use verbatim or tighter)
-- **D5 / headline (S1).** "The pre-registered gate failed in all five cells (m = 0). The student is below G\* in every
-  cell on both splits (validation 3.2–6.0 pp, with S4 and A16-2 beyond the 4 pp margin; test5 0.2–2.5 pp, CIs down to
-  −8.3 pp), so matching G\* is not supported."
-- **Splits (S2).** "Validation point gaps are 3.2–6.0 pp and test5 point gaps are 0.2–2.5 pp (test5 95% CIs from −8.3 to
-  +6.1 pp); no pooled estimate was computed." Always report both splits separately, each with its interval.
-- **D5 on test5 (M1).** "Test5 point gaps are smaller than the validation gaps in every cell, but applying the D5 rule
-  to test5 would still fail in about 4 of 5 cells, so test5 does not contradict the D5 verdict."
-- **Shortfall (M3).** "A shortfall of up to 6.1 pp (the tightest lower bound, S8) is consistent with the data in every
-  cell, and up to 8.3 pp in S4."
-- **Heuristics (M2).** "The student beats the pilot-chosen H\* in 4/5 cells after Holm (+6.1 to +16.8 pp). In 4/5 cells,
-  though, H\* is not the best heuristic on test5, and against the best test5 heuristic the post-hoc margin falls to
-  +3.5 to +14.5 pp, with no CI."
-- **RL (m7).** "Without multiplicity correction, the student beats cfg-6 RL on success with CIs excluding 0 in S2, S12
-  and A16-2 (A16-2 confounded by RL collapse)."
-- **H2-v5 (M7).** "H2-v5 is met only in A16-2 (LB 0.596 > 0.10), where cfg-6 RL collapses to 2 of 3 probes in 4/5 seeds
-  and G\* also beats RL by 0.85 nats, so the result reflects RL failing to transfer rather than a student advantage."
-- **RL tuning (m6).** "One RL configuration chosen on S2 was reused everywhere; it visibly fails in A16-2, and whether
-  it is under-tuned in S4, S8 or S12 was not tested."
-- **H5b (S3).** "H5b detects no trend of Δsucc on G\* travel over 5 cells (slope −0.0157/rad, ci95 [−0.104, 0.073]), but a
-  change of up to about 7 pp across the observed travel range cannot be excluded."
-- **Latency (M4, m2).** "With seed-701 timings, full G\* is 2,523–9,933× slower per decision (median paired ratio, CI
-  rule met only in A16-2). Other seeds' student medians (0.36–0.51 ms) differ by up to about 24% within a cell, so each
-  per-cell ratio is uncertain at about that level." Only S2 (9,933×) and A16-2 (8,301×) lie in the 7,000–10,000× band.
-- **G\* run once (M5).** "G\* was run once per cell (n_seeds = [5, 1]), so any run-to-run variability of G\* (E7 shows
-  noisy, upward-biased value estimates in S2) is missing from the student−G\* CIs, and those CIs may be too narrow."
-- **E7 (M6).** "In S2 and S12, a 512-candidate G\* setting gives a larger independent-estimate gap than a 32-candidate
-  setting (+0.048 and +0.018 nats per belief, n = 32). Whether the deployed G\* has headroom in success terms was not
-  measured."
-- **E5 (M8, m5).** "Re-reading at sub-16 flips 6.5–8% of single-seed outcomes and shifts the seed-701 student−G\*
-  contrast by +0.02 (S2) and −0.03 (S12) on 200 episodes; its effect on the 5-seed test5 contrast was not measured."
-  The change is about 0.8× the test5 gap in S2 and about 2× in S12.
-- **v4 comparison (m8).** "v4's test3 gap (−10.2 pp, run context only) lies outside the v5 S2 test5 ci95 [−7.6, +2.7]
-  pp, but without v4's interval the two cannot be formally compared."
-  - **Flag for the main session.** `results_v4.json` does hold the v4 interval:
-    `v4:14_s2_analysis.json.test3_sub8.diffs["student-gstar:success"]` = −0.1022, ci95 [−0.1656, −0.0433]. The premise
-    "without v4's interval" is therefore stale.
-  - **Proposed text, same claim scope:** "v4's test3 gap (−10.2 pp, ci95 [−16.6, −4.3]; different split, 3 seeds,
-    last-checkpoint recipe) lies outside the v5 S2 test5 ci95 [−7.6, +2.7] pp; the two were not formally compared."
-  - Use the proposed text only if the main session approves it. Otherwise drop the v4 comparison from the abstract-length
-    paper.
-  - **Main-session ruling (run 41):** approved, verified against `results/v4/results_v4.json` (diff −0.10222, ci95
-    [−0.16556, −0.04333]); erratum to binding item m8 logged in `PROGRESS.md`. Use this wording (the seed-count and
-    recipe qualifiers are trimmed until stage 17 checks them against the v4 amendment): "v4's test3 gap (−10.2 pp, ci95
-    [−16.6, −4.3]; different test split and training recipe) lies outside the v5 S2 test5 ci95 [−7.6, +2.7] pp; the two
-    were not formally compared." Row X10 is therefore in.
-- **Bootstrap resolution (m3).** "p = 0.0" is printed as "p < 0.0002".
-- **Freeze (m4).** `13_freeze.json` records 15 (S2, S12) or 10 (S4, S8, A16-2) weight hashes per cell. The statement
-  that they were recorded before test5 comes from the run context.
+### 0.4 Binding sentences (from `15_decision.md` §4.4 and analysis Appendix A; use verbatim or tighter)
+- **H6b (C1).** "By Holm, the student is more accurate than R-125 in all 5 cells and than R-500 in S4 and A16-2; against
+  R-500 in S2/S8/S12 no accuracy difference is shown. It is 62–389× faster than both reduced planners (v5 point
+  medians)." It is **always** followed by: "on the fresh 300–499 window only 2/10 contrasts survive Holm (S4 and A16-2
+  vs R-125), so the fresh window replicates the direction, not the significance."
+- **H6a (C2).** "The student's success point estimate is 0.3–3.7 pp below G\* in every cell on 0–499, with no registered
+  difference and no registered equivalence; deficits of up to about 7–8 pp (ci95) cannot be excluded; in S4 the ci90
+  lies below 0 on both windows; ball-info is significantly lower in S4 and S8." This is always paired with G\*'s
+  run-to-run difference (up to 3.2 pp on 0–499, 5 pp on 300–499).
+- **Upper margin.** "On 0–499 the student is not more than 4 pp better than G\* in any cell (unadjusted, per cell,
+  p_upper ≤ 0.0348); on 300–499 this fails in A16-2 (p = 0.1557)."
+- **Why TOST fails.** "Equivalence required |gap| ≤ 0.15–1.16 pp depending on the cell; no cell met its own threshold,
+  with A16-2 closest (0.28 vs 0.15 pp)." (derived, pass 2 item 15)
+- **H6c (C3).** "Round-0 (BC-only) students already reach the round-2 success level (|r2 − r0| ≤ 1.3 pp); DAgger adds no
+  detectable accuracy (95 % upper bounds ≤ 4.8 pp on 0–499, ≤ 7.1 pp fresh; no equivalence test)."
+- **E12 (C4).** "Changing only the read-out grid moves student − G\* by 4.6–5.0 pp in S4/S8/S12, comparable to the 4 pp
+  margin; in S2 (1.6 pp) and A16-2 (0.6 pp) the shift is small." Flip rates: "4–13 % of episode outcomes in the S
+  cells and 0–1 % in A16-2." It is described as *sensitivity* of the read-out (pass 2 item 19).
+- **Teacher stochasticity (C4).** "First-decision agreement between two G\* runs from the same state is 0.25–0.45
+  across cells and windows; no run-2 − run-1 success difference is significant."
+- **Latency.** "Full G\* is about 2,500–9,800× slower per decision than the student (v5 point medians, no dispersion);
+  the reduced planners are 19–47× faster than G\* and lose 4.4–14.4 pp of success against G\* run 1 (point values)."
+  No physical task-time model is used.
+- **Heuristics (report-only).** "The student is above the pilot-chosen H\* in all cells on 0–499 (ci95 excludes 0), but
+  H\* is not the best test heuristic in S4, S8 and S12; against the best heuristic the untested point margins are about
+  +4.2 / +5.1 / +2.4 pp (post hoc, no CI)."
+- **RL (report-only).** "The student is significantly above the S2-tuned RL configuration in 4/5 cells on 0–499 (S8
+  not) and in 3/5 on the fresh window." In A16-2 that configuration uses 2 of 3 probes in 4/5 seeds. In S2/S4 RL is
+  ahead on its own objective g_T while the student is ahead on success (inversion flag true).
+- **H5b.** "Slope −0.0070 per 100° (ci95 [−0.137, 0.124]); the CI spans about 26 pp, so the test is uninformative."
+- **Bootstrap resolution.** A reported `p_two_sided` of 0.0 is printed "p < 1e-4" (B = 10,000).
 
-### 0.4 Never write (`15_decision.md` §4.4, plus the v4 items still in force)
-- That the student "matches", "reaches" or "is equivalent to" G\*, or that its gap is "small" or "negligible".
-- A pooled "true gap of 1–5 pp".
-- "Consistently 3–6 pp behind" as a headline.
-- That test5 "contradicts" or "overturns" D5.
-- "No dependence on travel cost".
-- "The student beats the best heuristic" without the pilot-choice qualifier and the post-hoc margins.
-- "Distillation beats RL", or "the student beats RL" without the multiplicity and A16-2 caveats.
-- The A16-2 H2-v5 result framed as a student advantage.
-- "G\* is deterministic", "G\* is sub-optimal", or "G\* has headroom in success terms".
-- A blanket "~7,000–10,000× faster".
-- "A 6–8 pp shortfall is consistent in every cell".
-- "RL is under-tuned in S4/S8/S12".
-- "p = 0".
-- Any effective-component claim.
-- Any cross-cell comparison worded as a finding beyond H5b.
-- Any claim that v4's −10.2 pp was formally refuted.
-- Carried from v4: "near-optimal"; "the student imitates G\*'s travel"; latency ratios without "per decision";
-  infrastructure events (label packing failure, time-guard stops, re-dispatches) as findings.
-- **Number homes (v4 gate weakness "numbers repeated across sections").** Each number has one home: Table 1, Table 2 or
-  its Results paragraph. The abstract, introduction and conclusion use only the §0.3 ranges, and never a new split of
-  them.
+### 0.5 Never write (`15_decision.md` §4.5 applies in full; summarised by category here)
+The writer reads §4.5 itself. The categories are:
+1. Any wording that the student is at, near, close to or equivalent with G\*, or that the gap is minor or costless.
+2. Any wording that the student is uniformly superior to the reduced planners, or "beats the reduced planners" without
+   the per-planner, per-cell Holm qualifier.
+3. "Best non-oracle / best fast policy" in general (licensed in 1/5 cells only).
+4. "Beats the best heuristic" without the pilot-choice qualifier.
+5. That H6b replicates on fresh episodes. Only the direction replicates.
+6. Any positive DAgger claim, any attribution of accuracy to BC, any DAgger/BC equivalence, or any "effective component".
+7. Any travel-cost independence claim (H5b is uninformative).
+8. The upper-margin result on the fresh window, or S2 BI as a finding.
+9. "Noise" for the evaluator-grid result (write "sensitivity").
+10. "p = 0".
+11. Fresh-window numbers or latency ratios without their caveats.
+12. Any hardware or real-robot claim.
+
+Carried from v5:
+- "near-optimal";
+- G\* is deterministic or sub-optimal;
+- G\* has success headroom;
+- latency without "per decision";
+- infrastructure events (time-guard stops, resumptions) as findings;
+- E7 described as noise or bias of G\*'s own value estimates (v5 review item 1).
+
+**Number homes.** Each number lives in exactly one of Table 1, Table 2, Figure 1, or its Results paragraph. The
+abstract, introduction and conclusion use only the §0.4 ranges.
+
+### 0.6 Response to the v5 review and gate (for the writer; the paper states what was and was not done)
+| v5 required action | v6 status | Where |
+|---|---|---|
+| Evaluate the reduced planners on test in all cells; draw the frontier | done (H6b, frontier) | §4.1, Fig. 1, Table 2 |
+| Restore 500 episodes; run TOST | done (0–499, δ = 4 pp) | §3, Table 1 |
+| Rerun G\* with an independent seed | done (run 2) | Table 1, §4.4 |
+| r0 (BC) vs deployed student on success | done (H6c) | §4.3 |
+| Evaluator check in all cells and all seeds | done on episodes 0–99, G\* run 1 only | §4.4 |
+| Gate-calibration discussion | superseded: TOST replaces the v5 gate; the v5 gate's clause-(i) thresholds of −1.23 to −1.72 pp are stated once in the history sentence | §1, §3 |
+| Resolve [CITE-MISSING] ×3 | open (no cards) | stage 23 |
+| Real Figure 1 | planned and plotted from JSON (§9) | §9 |
+| Rewrite for an external reader | naming map §0.2 | all |
+| Per-cell RL tuning; a cheap information heuristic; A16 at more κ; student-visited regret | **not done** (`15_decision.md` §4.1 item 3) | Limitations |
 
 ---
 
-## 1. Abstract (≈ 190 words, not counted)
-**Goal.** State the research problem in the words of the topic constraint, give the design once, and give the outcomes
-once in their §0.3 forms.
+## 1. Abstract (≈ 170 words, not counted)
+**Goal.** State the research problem in the topic's words, give the design once, and give the C1–C4 outcomes once, in
+their §0.4 short forms.
 
 **Order.**
-1. **Problem.** Online cost-aware greedy information-gain touch planning (G\*) is slow per decision. Can a policy
-   distilled from it match it? How does it compare with RL on the same objective and with hand-designed probing
-   heuristics? Does the gap change with travel cost?
-2. **Design.** A pre-registered five-cell study: travel cost κ = 2/4/8/12 on one shape library, plus a second library
-   A16 at κ = 2. It uses 5 seeds per learner and a fresh test split, with the earlier S12 and S2 cells as prior
-   evidence.
-3. **Primary result.** The D5 gate fails in all five cells. Use the S1 sentence, short form.
-4. **Heuristics.** The student beats the pilot-chosen heuristic in 4/5 cells (Holm). Use the M2 short form with the
-   post-hoc margin range.
-5. **RL.** Distillation scores higher on RL's own objective only in A16-2, where RL collapses. No g_T/posterior
-   inversion is detected.
-6. **Travel cost.** No trend detected; about 7 pp is not excluded.
-7. **Latency.** 2,523–9,933× faster per decision, seed-701 timings.
-8. **Scope.** "Simulation, planar shapes, preliminary."
-
-**Evidence links.** The same keys as the §0.3 sentences:
-- `12_d5_analysis.json > H5a_validation > cells_pass`; `12_d5_analysis.json > <cell> > succ > delta_hat`;
-- `14_test5_analysis.json > <cell> > student_minus_gstar > success > {diff, ci95}`;
-- `14_test5_analysis.json > <cell> > student_minus_hstar > success > holm_reject_5cells`;
-- `15_posthoc_derived.json > cells > <cell> > margin_student_minus_best_test5_heuristic` (post hoc, no CI);
-- `14_test5_analysis.json > <cell> > H2_v5 > {claim_student_higher_on_rl_objective, inversion}`;
-- `14_test5_analysis.json > H5b > {slope_per_rad, ci95_per_rad, verdict}`;
-- `15_posthoc_derived.json > H5b_span_translation > ci95_times_span` (post hoc);
-- `14_e6_analysis.json > <cell> > job1 > ratio_full_gstar_over_student > median`.
-
-**Cards.** None in the abstract.
-
----
-
-## 2. Introduction (480 words)
-**Goal.** Motivate amortization of a cost-aware information-gain touch planner. Say why one cell per regime (v4) could
-not answer the regime question. State the findings once and list C1–C5 in the decision's order.
-
-1. **(110 w) Active tactile localization under travel cost.** Particle belief over identity and planar pose. Next touch
-   chosen by expected information gain per unit cost. Each decision is expensive.
-   Cards: `petrovskaya2011global`, `hebert2013next`, `javdani2012efficient`, `zheng2024bayesian`, `zheng2026bayesian`,
-   `ottenhaus2018active`, `seminara2019active`.
-2. **(100 w) Amortization.** Policy-based BED learns a fast policy from a contrastive bound; tactile RL; imitation of
-   information-gathering oracles. The open question is whether distilling a cost-aware greedy planner keeps its quality
-   when travel cost changes, compared with RL trained on the same objective.
-   Cards: `foster2021deep`, `ivanova2021implicit`, `blau2022optimizing`, `hedman2025step`, `rainforth2024modern`,
-   `riou2024reinforcement`, `niemann2024when`, `ross2011reduction`, `choudhury2017adaptive`, `nguyen2024amortized`.
-3. **(90 w) Why five cells.** Earlier gates failed in one cell per regime: S12 D3 (twice) and S2 D4. The v4 review asked
-   for "more cells per regime (several kappa values and at least one more shape library) and more learner seeds" and
-   for a fresh test split, S2-tuned RL, all heuristics and an evaluator check (prior-feedback required actions). v5
-   pre-registered all of these before any run (amendments v5.0 / v5.1), including the gate D5 with no remedy step.
-   No numbers here.
-4. **(110 w) Findings, once each.**
-   - S1 sentence.
-   - M2 sentence, short form.
-   - H2-v5 / inversion, one clause each.
-   - H5b (S3 short form).
-   - Latency range (M4 short form).
-5. **(70 w) Contributions (order from `15_decision.md` §4.2).**
-   - **C1. Learnability across five cells.** D5 fails 5/5. The student is below G\* in every cell on both splits and is
-     not shown within δ. Paired with the v3/v4 gate failures.
-   - **C2. A cheap policy that beats pilot-chosen heuristics.** 4/5 cells under Holm, with the post-hoc best-heuristic
-     margins and the latency range beside it.
-   - **C3. Distillation vs RL.** H2-v5 holds only in A16-2 (RL collapse). The inversion is false everywhere. The
-     student−RL success rows are uncorrected.
-   - **C4. Travel cost and behaviour.** H5b: no trend detected, about 7 pp not excluded. The student travels less than G\*
-     in every cell.
-   - **C5. Methods note.** E5 evaluator resolution, E7 selection bias, the g_T / BI ordering, and reporting the two
-     splits separately. Placed in §4–§5 and §7, not in Results (decision §4.2 "C5 goes into methods and limitations").
+1. **Problem (2 sentences).** A cost-aware greedy information-gain touch planner (G\*) for active tactile localization
+   under travel cost is accurate but costs seconds per decision. Should one distil it into a policy, or shrink the
+   planner?
+2. **Design (1 sentence).**
+   - A pre-registered five-cell study: travel cost κ = 2/4/8/12 on one shape library and a second library A16 at κ = 2.
+   - 500 test episodes per method (200 of them fresh).
+   - Two independent G\* runs, two reduced planners, BC and DAgger students (5 seeds), and an evaluator-grid check.
+3. **C1.** The H6b sentence in short form, with the fresh-window qualifier.
+4. **C2.** "Not shown to differ from G\*, and not shown equivalent within 4 pp". Point estimates 0.3–3.7 pp below; ~7–8 pp
+   deficits not excluded.
+5. **C3.** DAgger adds no detectable accuracy over BC.
+6. **C4.** The read-out grid alone moves student − G\* by up to 5 pp, and two planner runs agree on only 25–45 % of first
+   decisions.
+7. **Scope.** "Simulation; planar shapes; preliminary."
 
 **Evidence links.**
-- `v3:12_d3_analysis.passes`, `v3:12_d3_analysis_rem.passes`, `v4:12_d4_analysis.json.passes`;
-- `12_d5_analysis.json > H5a_validation > cells_pass`;
-- the abstract keys above.
+- `A:cells.<cell>.0-499.holm.*` and `A:cells.<cell>.300-499.holm.H6b_*`;
+- `A:cells.<cell>.0-499.H6a.success.{diff, ci95}`;
+- `A:cells.<cell>.0-499.H6c.success.ci95`;
+- `A:cells.<cell>.E12.{student_minus_gstar_success_sub8, student_minus_gstar_success_sub16}.diff`;
+- `A:cells.<cell>.<window>.gstar_first_decision_agreement_run2_vs_run1`;
+- `D:cells.<cell>.latency_ratio.*` (post hoc).
+
+**Cards.** None.
 
 ---
 
-## 3. Related work (260 words, three paragraphs, each ending with the gap)
-1. **Tactile localization and next-best touch** (90 w).
-   Cards: `petrovskaya2011global`, `koval2015pose`, `bauza2023tac2pose`, `hebert2013next`, `zheng2024bayesian`,
-   `zheng2026bayesian`, `gordon2026active`, `kamtikar2026tactful`, `ottenhaus2018active`, `seminara2019active`.
-   Gap: cost-aware greedy selection is common but runs online. How well it can be amortized, and how that changes with
-   travel cost, is rarely measured.
-2. **Greedy information gathering and its guarantees** (70 w).
-   Cards: `javdani2012efficient`, `vien2015touch`, `chen2015submodular`, `esfandiari2019adaptivity`.
-   Gap: the guarantees concern the greedy planner itself, not a learned copy of it. We treat G\* as the reference, not as
-   an optimum (M6).
-3. **Amortized and learned active sensing** (100 w).
+## 2. Introduction and related work (≈ 650 words; decision budget ~0.75 p)
+
+### 2.1 Introduction (≈ 420 words)
+**Goal.** Motivate the amortization question as a practical choice (learn a policy vs shrink the planner). Say why
+parity is the wrong headline at this power. State C1–C4 once each.
+
+1. **(100 w) Active tactile localization under travel cost.**
+   - Particle belief over identity and planar pose.
+   - The next touch maximises expected information gain per unit cost.
+   - Every decision costs seconds of planner time.
+   - Cards: `petrovskaya2011global`, `hebert2013next`, `javdani2012efficient`, `zheng2024bayesian`, `ottenhaus2018active`,
+     `seminara2019active`.
+2. **(100 w) Two ways to make it fast.**
+   - (a) Amortize. Learn a policy, either by imitating the planner (DAgger/BC) or by policy-based experimental design
+     on an information bound.
+   - (b) Shrink the planner: fewer particles and samples.
+   - The practitioner's question is which of the two buys more accuracy per millisecond, and whether the DAgger rounds
+     matter.
+   - Cards: `ross2011reduction`, `choudhury2017adaptive`, `foster2021deep`, `blau2022optimizing`, `rainforth2024modern`,
+     `riou2024reinforcement`.
+3. **(90 w) Why a pre-registered frontier, not a parity test.**
+   - The previous round's gate against G\* failed in 5/5 cells, as did earlier single-cell gates. Its test contrasts
+     could not decide (v5 review S1).
+   - v6 pre-registers three families before any run: the frontier (H6b), parity with teacher variance via TOST (H6a),
+     and DAgger vs BC (H6c).
+   - It also adds a fresh window and an evaluator-grid check.
+   - Numbers: only "5/5" (`v5:12_d5_analysis.json > H5a_validation > cells_pass` = []).
+4. **(130 w) Contributions, decision order.**
+   - **C1. Frontier.** The H6b sentence plus the fresh qualifier, with the latency ratios.
+   - **C2. Parity not established.** H6a short form, with teacher variance included and the upper margin rejected on
+     0–499.
+   - **C3. DAgger.** H6c short form.
+   - **C4. Methods note.** The E12 short form and the teacher-agreement range. Contrasts of a few pp in this setting
+     depend on the read-out grid and on teacher stochasticity, which is a reporting lesson for amortized-BED evaluations.
+
+**Evidence links.** The abstract keys above.
+
+### 2.2 Related work (≈ 230 words, three short paragraphs, each ending with the gap)
+1. **Tactile localization and next-best touch (80 w).**
+   - Cards: `petrovskaya2011global`, `koval2015pose`, `bauza2023tac2pose`, `hebert2013next`, `zheng2024bayesian`,
+     `zheng2026bayesian`, `gordon2026active`, `kamtikar2026tactful`, `ottenhaus2018active`.
+   - Gap: cost-aware selection runs online, and its amortization is rarely measured against cheaper planners.
+2. **Greedy information gathering (50 w).**
+   - Cards: `javdani2012efficient`, `chen2015submodular`, `esfandiari2019adaptivity`, `vien2015touch`.
+   - Gap: the guarantees concern the planner, not a learned copy. G\* is our reference, not an optimum.
+3. **Amortized active sensing (100 w).**
    - BED policies: `foster2021deep`, `ivanova2021implicit`, `blau2022optimizing`, `hedman2025step`,
-     `iqbal2024recursive`, `huang2026aline`, `rainforth2024modern`, `shen2023reinforcement`, `asano2022sequential`.
-   - Tactile RL: `riou2021seeing`, `riou2024reinforcement`, `niemann2024when`, `xu2023tandem3d`, `fleer2020efficient`,
-     `schneider2025tactile`.
+     `iqbal2024recursive`, `huang2026aline`.
+   - Tactile RL: `riou2021seeing`, `riou2024reinforcement`, `niemann2024when`, `xu2023tandem3d`.
    - Imitation of information-gathering oracles: `choudhury2017adaptive`, `nguyen2024amortized`, `ross2011reduction`.
-   - Gap: no pre-registered, multi-cell comparison of planner distillation and RL on the same head and the RL objective,
-     with the posterior-success read-out reported next to the contrastive bound.
+   - Gap: no pre-registered comparison of a distilled policy against reduced versions of its own teacher on an
+     accuracy–latency frontier, with teacher variance and evaluator sensitivity reported.
 
 **Evidence links.** Cards only.
 
 ---
 
-## 4. Problem and methods (750 words; a technical approach, with constants from JSON or marked)
-**Goal.** Give a complete description of the task, the planner G\*, the shared head and the two learners, the
-heuristics, and the five cells.
+## 3. Setup and method (≈ 650 words; decision budget ~1.0 p; a technical approach, not a workflow)
+**Goal.** Give a complete, reproducible description of the task, G\*, the reduced planners, the shared head, the
+BC/DAgger rounds, the RL comparator, the heuristics and the five cells.
 
-### 4.1 Task, belief, cost, metrics (190 w)
-- State s = (identity k, x, y, θ). The finger sits on a stand-off circle at angle φ_t. An action is (φ′, ψ), drawn from a
-  discrete grid.
-  [NEED: action-grid size and stand-off geometry, copied from the frozen design doc into a citable source; the v4
-  outline states the grid, but no v5 JSON field holds it.]
-- Travel cost c(a) = 1 + κ|Δφ|/π (the v4 definition) [NEED: cite the frozen design-doc line for the cost formula].
-  Feasibility c(a) ≤ τ_rem. Probe budget n\*. Particle-filter belief.
-- **Metrics.**
-  - Success (sub-8 grid posterior read-out).
-  - Ball information BI (nats).
-  - g_T (ball-sPCE, the RL objective, computed without the grid).
-  - Travel: `travel_rad`, also `travel_deg`. Define travel as in v4 M4, including the initial snap.
-  - Probe count.
-- Shape library S has K = 8 identities (4 base/variant pairs) (v4 review M1). A16 is set A with K = [NEED: A16 identity count in a citable
-  results/doc field; it is stated in `docs/07c_amendment_v5_0.md` P0, not in JSON].
-- **Table 0 (in-text): the five cells**, with κ / n\* / τ.
+### 3.1 Task, belief, cost, metrics (180 w)
+- State (identity k, x, y, θ); stand-off circle; action (φ′, ψ).
+- Action set A = 512 = 64 × 8 (`v5:16_report_rows.json > student_env` = {"64x8/A=512": 75}).
+- Travel cost c(a) = 1 + κ|Δφ|/π, budget τ, probe budget n\*. Text and geometry carried from `draft_v5_final.md` §3.
+- Metrics:
+  - **success** (posterior read-out on the sub-8 grid, the registered evaluator);
+  - **ball information BI** (nats);
+  - **g_T** (ball-sPCE, the RL objective);
+  - travel (rad);
+  - probes.
+- Libraries:
+  - S: K = 8 identities, as base/variant pairs.
+  - A16: K = 16 irregular asymmetric polygons. It changes family, K and n\* at once (v5 review item 6), and shares 8
+    identities with the earlier library A. Description text from `draft_v5_final.md` §3.
+- **Table 0 (in text): cells.**
 
   | Cell | κ | n\* | τ |
   |---|---|---|---|
@@ -264,432 +272,428 @@ heuristics, and the five cells.
   | S12 | 12 | 4 | 4.9 |
   | A16-2 | 2 | 3 | 3.4 |
 
-  - A16 n\* = 3, with A16 keep-check G\* success 0.8 inside the pre-registered keep range:
-    `12_cal_analysis.json > keep > A16 > gstar_success_sub8_at_nstar` = 0.8.
-  - [NEED: the keep range, stated in amendment v5.0 P0, in a citable field.]
-- **Evidence.**
-  - `v3:12_cal_analysis.tau.S_k2_nstar4.tau` (4.7), `v3:12_cal_analysis.tau.S_k12_nstar4.tau` (4.9);
-  - `12_cal_analysis.json > tau > S_k4 > tau` (4.8), `… > tau > S_k8 > tau` (4.8), `… > tau > A16_k2 > {n_star, tau}`
-    (3, 3.4);
-  - `12_cal_analysis.json > n_star > A16 > {n_star, gstar_success_sub8}` (3, 0.975);
-  - `12_cal_analysis.json > keep > A16 > {gstar_success_sub8_at_nstar, keep}` (0.8, true).
+  Keys: `v5:12_cal_analysis.json > tau > {S_k4, S_k8, A16_k2} > {n_star, tau}` and `v5:12_cal_analysis.json > n_star > A16`.
+  S2 and S12 τ (4.7, 4.9) are carried from the v5 Table 0 (v3 calibration, cited there).
 - Cards: `petrovskaya2011global`, `koval2015pose`.
 
-### 4.2 Planner G\* (100 w)
-- G\* takes the argmax of expected information gain over cost, over the feasible candidates. It is deployed as
-  configuration `g2000_512_64` (the E6 key). Its exported per-action score vector is the distillation label.
-- The reduced configurations `g125_512_16` and `g500_512_4` are named here because they are timed in E6.
-- Say once that G\* is a greedy reference, not an optimum (M6 scope). E7 is described in §5.
-- [NEED: meaning of the three numbers in `g2000_512_64` (particles / candidates / inner samples), from the frozen design
-  doc.]
-- Cards: `ottenhaus2018active`, `javdani2012efficient`.
+### 3.2 Planner G\* and the reduced planners (120 w)
+- G\* takes the argmax of expected information gain per unit cost over the feasible candidates. Deployed as
+  `g2000_512_64`; the configuration meaning is in the v5 provenance table.
+- **Run-to-run stochasticity.** G\* is Monte Carlo, so v6 runs it twice with independent seeds (run 1 = v5 record plus
+  the 300–499 extension; run 2 = `--run-salt r1`). Both runs enter H6a.
+- **Reduced planners** R-125 (`g125_512_16`) and R-500 (`g500_512_4`) keep the 512 candidates and cut particles and
+  outcome samples. Each is run once per cell.
+- G\* is a reference, not an optimum.
+- Cards: `javdani2012efficient`, `ottenhaus2018active`.
 
-### 4.3 Shared head and learners (330 w)
-- **Head.** A belief-free, finger-relative DeepSets head over the touch history, with masked logits over the action set.
-  It is the same for both learners, so the training signal is the isolated variable (a v4 strength).
-  [CITE-MISSING: DeepSets (Zaheer et al. 2017).]
-- **Distillation (E2).**
-  - Soft cross-entropy to the tempered G\* scores plus a CE term to the argmax.
-  - DAgger rounds with a decaying mixing coefficient β.
-  - Every round trains a fixed number of epochs and **keeps the checkpoint with the lowest held-out label regret R̄**.
-    This is the pre-declared answer to the v4 over-fitting finding (prior feedback P8).
-  - Seeds 701–705, the same hyper-parameters (hp 0) in every cell.
-  - [NEED: label episodes per cell, number of DAgger rounds and β schedule, episodes per round and epochs per round,
-    from `docs/07c_amendment_v5_0.md` E2, in a citable field.]
-  - [NEED: the last-checkpoint sensitivity row, pre-declared in amendment v5.0 E2, is not in `results_v5.json` or the
-    analysis. Cite it only if it is added; otherwise say "logged, not analysed".]
-  - Cards: `ross2011reduction`, `choudhury2017adaptive`.
-- **RL (E3).**
-  - PPO on the same head, with a reward that telescopes to g_T.
-  - Sweep on S2 only: 8 configurations, selected by the v3 D9 rule (highest final trainer-validation ball-sPCE; ties
-    within 0.02 nats go to the lower index).
-  - Selected **cfg 6** (6.300 vs 6.241 for cfg 0, the v3/v4 configuration). On the sampled-policy metric cfg 1 scores
-    higher (6.316 vs 6.205). State this, as in analysis §4 item 7.
-  - cfg 6 is reused in every cell with seeds 711–715.
-  - Control arm `rl_success`: terminal-success reward, S2 and S12 only.
-  - [NEED: RL episodes per seed and the per-seed `rl_success` episode counts; amendment v5.1c requires the latter next
-    to every `rl_success` number (it records time-guard truncation), and neither is in `results_v5.json`.]
-  - **Evidence.**
-    - `12_rl_sweep_selection.json > {rule, selected_cfg, validation_stream}`;
-    - `12_rl_sweep_selection.json > rows[6] > {lr, ent_coef, batch, critic_lr, final_val_ball_spce, final_val_ball_spce_sampled}`;
-    - `12_rl_sweep_selection.json > rows[0] > final_val_ball_spce`;
-    - `12_rl_sweep_selection.json > rows[1] > final_val_ball_spce_sampled`.
-  - Cards: `schulman2017proximal`, `blau2022optimizing`, `foster2021deep`.
+### 3.3 Student: shared head, BC round and DAgger rounds (200 w)
+- **Head.** A belief-free, finger-frame DeepSets head over the touch history, with masked logits over A. It is the same
+  head for RL. [CITE-MISSING: DeepSets (Zaheer et al. 2017)]
+- **Loss.** Soft cross-entropy to tempered G\* scores plus CE to the argmax. Hyper-parameters (one setting, 75 runs):
+  `v5:16_report_rows.json > student_distill_configs` (batch 256, β_T 4.0, hidden 128, λ 0.5, lr 0.001, max_epochs 200).
+- **Rounds.**
+  - Round 0 = behaviour cloning on G\*-visited states.
+  - Rounds 1–2 = DAgger with decaying mixing.
+  - Training episodes per round: 2,700 / 3,500 / 4,300 (`v5:16_report_rows.json > student_train_episodes > <cell>_s70x_r{0,1,2}`).
+  - Each round keeps the checkpoint with the lowest held-out label regret R̄
+    (`v5:16_report_rows.json > student_checkpoint_sensitivity > <cell> > <seed> > r{0,1,2} > {R_bar_kept, R_bar_last}`).
+  - Seeds 701–705, frozen before any test episode (`v5:13_freeze.json > rule`).
+  - The deployed student is round 2. The **BC student is round 0 of the same seeds**: the H6c ablation row.
+  - The β schedule and label sizes are carried from the v5 provenance table.
+- Cards: `ross2011reduction`, `choudhury2017adaptive`.
 
-### 4.4 Heuristics (80 w)
-- **Random** (masked).
-- **B-spread.**
-- **B-fan**: travel-nearest stay-and-fan.
-- **B-cov.**
-- **H\*** in each cell is the best of the three on pilot3 0–199 (sub 8; ties B-spread < B-fan < B-cov). The pilot picks
-  b_cov for S2 and S8 and b_fan for S4, S12 and A16-2.
-- **Evidence.**
-  - `12_base_hstar.json > rule`;
-  - `12_base_hstar.json > cells > <cell> > {H_star, H_star_success, b_fan, b_spread, b_cov}`;
-  - `14_test5_analysis.json > <cell> > H_star`.
-
-### 4.5 Decision rules (50 w; full statement in §5)
-- D5, H5a, H5b, H2-v5, inversion and Holm are named here, with a pointer to Table 1.
+### 3.4 Comparators (150 w)
+- **RL.**
+  - PPO on the same head, with reward telescoping to g_T.
+  - One configuration selected on S2 by a pre-registered rule from 8 candidates (`v5:12_rl_sweep_selection.json > {rule, selected_cfg, validation_stream}`). Single sweep seed 719 (v5 draft).
+  - Reused in every cell: 200,000-episode cap, clip 0.2, 4 epochs, hidden 128 (`v5:16_report_rows.json > rl_main_cfg6 > <run> > {max_episodes, clip, epochs, hidden}`).
+- **Success-reward RL control** (S2, S12). 9 of 10 runs stopped at the 80 % wall-clock guard
+  (`v5:16_report_rows.json > rl_success > <run> > {status, episodes_trained}`). State it as a disclosure, not a finding.
+- **Heuristics.**
+  - Random, B-spread, B-fan (travel-nearest stay-and-fan) and B-cov.
+  - H\* is the best of the three on a 200-episode pilot (`v5:12_base_hstar.json > {rule, cells > <cell> > H_star}`).
+  - H\* is b_cov in S2 and S8, and b_fan in S4, S12 and A16-2 (`A:cells.<cell>.0-499.v5_row_updates.H_star`).
+- Cards: `schulman2017proximal`, `blau2022optimizing`, `foster2021deep`.
 
 ---
 
-## 5. Experimental protocol (330 words)
-**Goal.** Every claim traces to a frozen rule. The section also carries the C5 methods notes on the evaluator and on the
-planner estimate.
+## 4. Pre-registration and statistics (≈ 320 words; decision budget ~0.5 p)
+**Goal.** Make every claim traceable to a frozen rule, and state the deviations.
 
-- **Pre-registration (60 w).**
-  - Amendment v5.0, written before any v5 run, fixes the cells, seeds, test5, D5, H5a, H5b, H2-v5, H\* selection and Holm.
-  - Amendment v5.1 fills in values the rules produce: τ, A16 n\*, cfg 6.
-  - Addendum v5.1e cuts test5 from 500 to 300 episodes under the frozen reduction order, before any test5 episode.
-  - No number here except the 500 → 300 cut (analysis §4 item 1).
-- **Splits (60 w).**
-  - val3 0–499 for D5 (`12_d5_analysis.json > <cell> > n_episodes` = 500).
-  - test5 0–299, 300 episodes per method per cell (`14_test5_analysis.json > <cell> > {n_required, episodes_per_method, complete, gt_complete}`).
-  - pilot3 0–199 for H\*.
-  - The G\* validation sources differ: S2 from v4 files, S12 from v3 files, the other cells from v5
-    (`12_d5_analysis.json > <cell> > gstar_source`). State this in the same sentence as the D5 result.
-  - Freeze: m4 wording (`13_freeze.json > rule`, `13_freeze.json > cells > <cell> > sha256`).
-- **D5 rule (60 w).**
-  - Pass iff three clauses hold:
-    1. Δ̂_succ ≥ the SE-dependent threshold, −0.04 + 1.163·se, e.g. S2 −0.01454 (analysis pass 2 M1);
-    2. Δ̂_BI ≥ −0.15;
-    3. enough seeds pass the per-seed clause, δ = 0.04.
-  - Evidence: `12_d5_analysis.json > <cell> > {delta, succ > {se, threshold}, bi > threshold, seeds_ok}`.
-  - [NEED: the per-seed clause count and the lower floor of clause 1 in a citable field; they are stated in amendment
-    v5.0, not in JSON.]
-- **Statistics (70 w).**
-  - Crossed episode × seed bootstrap ci95 and two-sided p, with `n_seeds` [5, 1] vs G\*/H\* and [5, 5] vs RL.
-  - The p-values resolve to 0.0002 (m3). [NEED: resample count; not in JSON.]
-  - Holm over 5 cells, for student−G\* and student−H\* success only.
-  - One-sided 95 % LB for H2-v5 against +0.10.
-  - WLS slope for H5b, with weights fixed (`14_test5_analysis.json > H5b > weights`).
-  - BI, RL, `rl_success` and g_T contrasts are uncorrected (analysis §4 item 9).
-  - [CITE-MISSING: Holm (1979) step-down procedure.] [CITE-MISSING: bootstrap confidence intervals (Efron).]
-- **C5 notes (80 w).**
-  - **E5 (evaluator resolution).** M8 + m5 sentence. Evidence: `14_e5_analysis.json > <S2|S12> > <gstar|student_s701> > {flip_rate, flips_8to16_gain, flips_8to16_loss, success_sub8, success_sub16, mean_abs_dBI}`, `… > contrast_change_student_minus_gstar`, `… > n_episodes`.
-  - **E7 (planner estimate).** M6 sentence plus the analysis §2.6 selection-bias clause: positive with a CI excluding 0 in
-    S2, null in S12. Evidence: `12_e7_analysis.json > design`, `12_e7_analysis.json > cells > <S2|S12> > paired_indep_gap_512_minus_32 > {est, ci95, n}`, `… > <C1_32|C1_512> > selection_bias_nats`.
-  - **E6 protocol.** Job 1 times student 701, full G\* and the two reduced G\* configurations interleaved on the same
-    states: n = 1000 in the S cells and 500 in A16-2. Job 2 times students 702–705, n = 500. Evidence:
-    `14_e6_analysis.json > <cell> > {job1_source, job1 > * > n, job1_complete}`.
-- **Table 1 is placed here** (rows in §9).
+- **Pre-registration (70 w).**
+  - Amendment v6.0 (`A:amendment` = `docs/07c_amendment_v6_0.md`) plus addendum v6.1 were written before any v6
+    episode. They fix the windows, H6a/H6b/H6c, δ, the Holm families and E12.
+  - The read-out script was committed first, and no outcome was read before 100 % completeness (analysis §3).
+  - Policies are frozen v5 weights.
+- **Windows (60 w).**
+  - **0–499 primary.** Episodes 0–299 were already seen in v5.
+  - **300–499 fresh.**
+  - Both are reported side by side.
+  - 500 / 200 episodes per method (`A:cells.<cell>.<window>.{n_required, complete, gt_complete}`).
+- **Tests (130 w).**
+  - Paired episodes across methods; crossed episode × seed bootstrap, B = 10,000 (`n_seeds` per contrast, e.g.
+    `A:cells.<cell>.0-499.H6a.success.n_seeds` = [5, 2]); two-sided p.
+    [CITE-MISSING: bootstrap CI (Efron)]
+  - **H6a.** Student (5 seeds) − G\* (runs 1 + 2). Difference test, plus TOST with δ = 0.04
+    (`….H6a.success.tost.{delta, p_lower_margin, p_upper_margin, p_tost, ci90}`), with p_TOST = max of the two one-sided
+    p-values.
+  - **H6b.** Student − R-125 and student − R-500.
+  - **H6c.** Round 2 − round 0.
+  - **Holm.** Over 5 cells for the H6a difference test, the H6a TOST and H6c; over 10 contrasts for H6b. [CITE-MISSING:
+    Holm (1979)]
+  - Not Holm-controlled: BI, g_T, the fresh-window replications, E12 and the v5 row updates.
+- **Power (30 w).** "The design expected 90 % half-widths of about 3.5–4 pp; the observed half-widths were 2.84–3.85 pp"
+  (derived, pass 2 item 14). Failing to show equivalence is therefore largely a power outcome.
+- **History (30 w).** One sentence: the v5 validation gate failed in 5/5 cells. Its clause-(i) thresholds were −1.23 to
+  −1.72 pp against a nominal δ = 4 pp (`v5:12_d5_analysis.json > <cell> > succ > threshold`). This is why v6 adopts TOST.
+- **Deviations.**
+  - Latency is not re-timed (v5 E6 job-1 medians).
+  - E12 uses G\* run 1 and episodes 0–99 only.
+  - Each reduced planner and H\* is run once.
 
 ---
 
-## 6. Results (1,100 words; C1 and C2 lead, C3 and C4 one paragraph each, per `15_decision.md` §4.2)
+## 5. Results (≈ 1,150 words; decision budget ~2.0 p incl. Fig. 1, Tables 1–2)
 
-### 6.1 C1. Does the student match G\*? (400 w)
-**Goal.** Answer the primary question with the registered decision first, then the test5 description. Report the two
-splits separately.
+### 5.1 C1. Distilled student vs shrunken planner: the frontier (≈ 400 w; Fig. 1, Table 2)
+**Goal.** Present the one positive registered result, with every qualifier attached.
 
-1. **(120 w) D5 on validation.**
-   - S1 sentence.
-   - Per-cell Δ̂_succ vs threshold, from Table 1.
-   - BI passes in 5/5.
-   - All 25 per-seed differences are negative, from −0.068 to −0.01. No A16-2 seed passes.
-   - The G\* sources differ (§5).
-   - Evidence: `12_d5_analysis.json > <cell> > succ > {student_mean, gstar_mean, delta_hat, se, threshold, passes, per_seed}`, `… > bi > {delta_hat, passes}`, `… > seeds_ok`, `… > passes`, `12_d5_analysis.json > H5a_validation`.
-2. **(130 w) H5a on test5.**
-   - Student − G\* success in every cell: Table 2, with the per-cell diff, ci95, p and Holm flag.
-   - "0/5 Holm; equivalence not shown."
-   - CI widths are 9.6–12.3 pp (m1).
-   - M3 sentence.
-   - M1 sentence: test5 does not contradict D5.
-   - Evidence: `14_test5_analysis.json > <cell> > student_minus_gstar > success > {diff, ci95, p_two_sided, n_seeds, holm_reject_5cells}`, `14_test5_analysis.json > H5a`.
-3. **(70 w) BI on test5 (uncorrected).**
-   - The ci95 excludes 0 in S4 (−0.1314) and S12 (−0.0910).
-   - A16-2 is +0.08477, with a CI that includes 0.
-   - Evidence: `14_test5_analysis.json > <cell> > student_minus_gstar > ball_info > {diff, ci95, p_two_sided}`.
-4. **(80 w) Prior cells and the v4 split gap.**
-   - v3 S12 D3 failed twice: `v3:12_d3_analysis.succ.delta_hat` (−0.0587), `v3:12_d3_analysis_rem.succ.delta_hat`
-     (−0.044).
-   - v4 S2 D4 failed: `v4:12_d4_analysis.json.succ.{delta_hat, threshold}` (−0.0280 vs −0.01464).
-   - v4 comparison: §0.3 m8 item, with the main-session flag.
-   - Close with: "the amortization hypothesis has now failed its pre-registered gate in every cell tested across three
-     rounds" (decision §2.2 scope; no new number).
-   - G\* run once (M5) goes here as one sentence.
+1. **(120 w) Latency axis.**
+   - Per cell (v5 point medians, no dispersion): G\* 0.910–4.880 s, R-500 0.048–0.194 s, R-125 0.022–0.116 s, student
+     0.326–0.500 ms (`A:cells.<cell>.frontier.latency_median_s.*`).
+   - The reduced planners are 19–47× faster than G\* (derived).
+   - The student is 62–389× faster than both reduced planners (`D:cells.<cell>.latency_ratio.{g125_512_16_over_student, g500_512_4_over_student}`, post hoc, no CI).
+   - Full G\* is ≈ 2,544–9,767× slower (`D:…gstar_over_student`).
+   - The v5 CI half-width rule for the G\*/student ratio is met only in A16-2
+     (`v5:14_e6_analysis.json > <cell> > job1 > ratio_full_gstar_over_student > half_width_ok`).
+   - Runners differ across cells, and there is no task-time model.
+2. **(80 w) Cost of shrinking.**
+   - The reduced planners lose 4.4–14.4 pp against G\* run 1 (point values, derived; smallest S12 R-500, largest A16-2
+     R-125).
+   - In S4, R-500 (0.390) is below R-125 (0.402).
+   - Keys: `A:cells.<cell>.frontier.success_0_499.*`.
+3. **(150 w) H6b (Table 2).**
+   - Binding H6b sentence.
+   - 7/10 rejected on 0–499, all positive. The largest rejected p is 0.0098 (S12 R-125); the next, S8 R-500
+     (p = 0.0314), is not rejected.
+   - R-500 in S2 (p 0.1378), S8 (p 0.0314) and S12 (p 0.2688) is not shown different.
+   - Fresh window: 2/10 survive (S4 R-125 +0.112, p 0.0002; A16-2 R-125 +0.136, p 0.0012). S12 R-500 has a negative
+     point estimate, −0.011 [−0.072, 0.051].
+   - Single-run reduced planners: their variance is missing from these CIs, and the marginal rejections (S12 R-125, S4
+     R-125, lower bounds ≈ +1.3/+1.4 pp) could be sensitive to it.
+4. **(50 w) Strongest comparator per cell.** One sentence (post hoc, no CI):
+   - The student clears the strongest non-oracle comparator at the registered level in 1/5 cells (A16-2).
+   - Otherwise the strongest comparator is R-500 (S2), b_cov (S4, S12) or RL (S8).
+   - Keys: `D:cells.<cell>.0-499.{strongest_non_oracle, strongest_value, margin_vs_strongest}`.
 
-### 6.2 C2. Against heuristics, and at what cost (300 w)
-**Goal.** Give the one positive pre-registered result together with its qualifiers.
+### 5.2 C2. Parity with G\* is not established (≈ 400 w; Table 1)
+**Goal.** Answer the parity question honestly with teacher variance included. The E12 caveat sits beside every
+number.
 
-1. **(150 w) Student − H\* (Holm).**
-   - Table 2 row: diff, ci95, Holm.
-   - S2 is the exception: lower bound −0.001333, p 0.0558.
-   - M2 sentence.
-   - Next to it, the post-hoc best-test5 heuristic and margin per cell (labelled post hoc, no CI):
-     S2 b_cov +0.0587 (= H\*); S4 b_cov +0.0513; S8 b_fan +0.0607; S12 b_cov +0.0347; A16-2 b_cov +0.1447.
-   - BI vs H\*: ci95 excludes 0 in all 5 cells (uncorrected).
-   - Evidence:
-     - `14_test5_analysis.json > <cell> > student_minus_hstar > {success, ball_info} > {diff, ci95, p_two_sided, holm_reject_5cells}`;
-     - `15_posthoc_derived.json > cells > <cell> > {best_test5_heuristic, margin_student_minus_best_test5_heuristic, margin_student_minus_H_star, heuristic_success}` (post hoc, no CI);
-     - `14_test5_analysis.json > <cell> > means > {b_fan, b_spread, b_cov, random} > success`.
-2. **(150 w) Latency (E6, report-only).**
-   - M4 sentence.
-   - Per-cell ratios with ci95 and `half_width_ok`: S2 9,933× [8,179, 10,224]; S4 6,990× [4,747, 7,270]; S8 3,463×
-     [2,680, 3,645]; S12 2,523× [2,068, 2,675]; A16-2 8,301× [8,080, 8,472]. Only A16-2 meets the rule.
-   - Student medians 0.326–0.500 ms (seed 701). Full G\* 0.910–4.880 s. Most of the cross-cell spread comes from G\*
-     time (M4).
-   - The job-2 ratios as a sensitivity column (post hoc, no CI, "ratio of medians, not paired").
-   - Reduced G\* medians (`g125_512_16`, `g500_512_4`) in one clause as timings only. No accuracy was measured for them on
-     test5, so no frontier claim and no "matched-accuracy" claim.
-   - Hardware: 2-core runners (analysis §4 item 8).
-   - Never use the blanket "7,000–10,000×".
-   - Evidence:
-     - `14_e6_analysis.json > <cell> > job1 > {student, g2000_512_64, g125_512_16, g500_512_4} > {median, ci95, n, half_width_ok}`;
-     - `14_e6_analysis.json > <cell> > job1 > ratio_full_gstar_over_student > {median, ci95, half_width_ok}`;
-     - `14_e6_analysis.json > <cell> > job2 > <702..705> > median`;
-     - `15_posthoc_derived.json > cells > <cell> > latency > ratio_full_gstar_median_over_job2_student_medians` (post hoc).
+1. **(150 w) H6a.**
+   - Binding H6a sentence.
+   - All five 0–499 point estimates are negative, from −0.28 pp (A16-2) to −3.74 pp (S4). On 300–499, 4/5 are negative
+     and A16-2 is +0.1 pp.
+   - No pooled estimate (rule).
+   - Upper-margin sentence.
+   - Why-TOST-fails sentence.
+   - A16-2 comes closest (p_TOST 0.0548, ci90 lower bound −4.12 pp). S4 is the weakest cell (ci90 [−0.0716, −0.0036];
+     fresh [−0.106, −0.0005]), an unregistered one-sided indication of a deficit.
+2. **(80 w) Ball-info.**
+   - S4 −0.138 [−0.202, −0.075], p < 1e-4; S8 −0.103 [−0.172, −0.033], p 0.0048.
+   - Both survive an unregistered Holm over the 5 BI p-values, and both are below 0.05 on the fresh window (S4 p 0.0206,
+     S8 p 0.0354).
+   - S2 is nominally lower on 0–499 only (p 0.0206), not a finding.
+   - Keys: `A:cells.<cell>.<window>.H6a.ball_info.{diff, ci95, p_two_sided}`.
+3. **(100 w) Teacher variance.**
+   - G\* run 2 − run 1: +0.014 / −0.002 / +0.032 / 0.000 / +0.024 on 0–499, none significant (half-widths ≈ 4–5 pp).
+   - Up to +5 pp fresh (S2, A16-2).
+   - First-decision agreement 0.25–0.45.
+   - Student seed spread 2.8–6.2 pp (derived).
+   - Point gaps are therefore of the same magnitude as the teacher's own run-to-run variation.
+   - Keys: `A:cells.<cell>.<window>.H6a.gstar_run2_minus_run1_success.{diff, ci95, p_two_sided}`;
+     `A:cells.<cell>.<window>.gstar_first_decision_agreement_run2_vs_run1`.
+4. **(70 w) v6 update of the v5 run-1 row.**
+   - "Against G\* run 1 alone the gaps are −1.92, −3.84, −1.32, −1.96 and +0.92 pp (none significant); S4 now exceeds
+     v5's 0.2–2.5 pp range and A16-2 has changed sign" (pass 2 item 6).
+   - Key: `A:cells.<cell>.0-499.v5_row_updates.student_minus_gstar_run1_success`.
 
-### 6.3 C3. Distillation vs RL on the same objective (200 w)
-**Goal.** Report H2-v5 and the inversion check as registered, and keep the RL-collapse caveat attached.
+### 5.3 C3. DAgger vs behaviour cloning, and the baseline rows (≈ 350 w)
+**Goal.** Report the one component ablation and the report-only baselines in one paragraph each.
 
-- H2-v5 per cell: LB vs +0.10 (Table 1). M7 sentence for A16-2.
-- In S2/S4/S8, RL has the higher g_T as a point estimate while the student has the higher success. No RL-higher CI
-  excludes 0, so the inversion is false everywhere (analysis §2.4). The `rl_success` check is also false in S2 and S12.
-- Student − RL success, uncorrected: m7 sentence. Values in Table 2.
-- Student − `rl_success`: S2 +0.1087 [0.0593, 0.158]; S12 +0.0793 [0.022, 0.134]. Attach the [NEED] on `rl_success`
-  episode counts.
-- RL behaviour in A16-2: seeds 712–715 use 2.0 probes against n\* = 3, success 0.1833–0.2267. m6 sentence.
-- Evidence:
-  - `14_test5_analysis.json > <cell> > H2_v5 > {student_minus_rl_gT > {diff, lower_one_sided_95}, claim_student_higher_on_rl_objective, rl_minus_student_gT, gstar_minus_rl_gT, gstar_minus_student_gT, means_gT, inversion}`;
-  - `… > H2_v5 > check_rlsucc` (S2, S12);
-  - `14_test5_analysis.json > <cell> > student_minus_rl > {success, ball_info}`;
-  - `14_test5_analysis.json > <S2|S12> > student_minus_rlsucc > success`;
-  - `14_test5_analysis.json > A16-2 > means > <rl_s711..rl_s715> > {n_probes, success}`;
-  - `12_cal_analysis.json > n_star > A16 > n_star`.
-- Cards: `blau2022optimizing`, `foster2021deep`.
-
-### 6.4 C4. Travel cost and behaviour (200 w)
-**Goal.** Give the one cross-cell test, H5b, and the behavioural description. No other cross-cell finding.
-
-- **H5b (S3 sentence).**
-  - Slope −0.01571 per rad, ci95 [−0.1041, 0.07277], or per 100°.
-  - The span translation is −7.4 to +5.2 pp (post hoc, no CI).
-  - State that the regressor is G\* mean test5 travel, not κ, and that A16-2 is one of the 5 points.
-  - Evidence: `14_test5_analysis.json > H5b > {cells, delta_succ, gstar_mean_travel_rad, weights, slope_per_rad, ci95_per_rad, slope_per_100deg, ci95_per_100deg, verdict}`; `15_posthoc_derived.json > H5b_span_translation`.
-- **Behaviour (descriptive).**
-  - In every cell the student travels less than G\*, and RL travels more than both.
-  - G\* travel ranges from 0.1112 rad (S12) to 0.8213 rad (S2).
-  - Probe counts: student 2.9–4.0, G\* 2.93–3.97, RL near 3 in the S cells.
-  - No mechanism is claimed. "Why the student travels less" is posed as an open question (decision §2.3).
-  - Evidence: `14_test5_analysis.json > <cell> > means > <method> > {travel_rad, travel_deg, n_probes}`.
+1. **(130 w) H6c (ablation row).**
+   - Binding H6c sentence.
+   - Diffs +0.0132 / +0.0084 / +0.0072 / +0.0004 / −0.0052, p 0.453–0.997; fresh p 0.5372–0.9208.
+   - BI r2 − r0 is not significant either (p 0.0564–0.8056).
+   - Held-out regret of the kept checkpoints r0 vs r2, report-only, one clause:
+     `v5:16_report_rows.json > student_checkpoint_sensitivity > <cell> > <seed> > {r0, r2} > R_bar_kept`.
+   - Regret on student-visited states was not measured.
+   - Keys: `A:cells.<cell>.<window>.H6c.{success, ball_info}`; r0 means `D:cells.<cell>.<window>.r0student_mean`
+     (post hoc).
+2. **(220 w) Baseline rows (report-only, "v6 update of a v5 row").**
+   - **H\*.** Student − H\* +6.68 / +8.96 / +7.48 / +5.64 / +17.12 pp, all ci95 excluding 0. Fresh: S2 (p 0.0694) and S12
+     (p 0.0672) are not < 0.05. Then the heuristics binding sentence, with best-heuristic margins from
+     `D:cells.<cell>.0-499.{best_heuristic, registered_H_star, margin_vs_best_heuristic}` (S4 +0.0416, S8 +0.0508, S12
+     +0.0244; post hoc, no CI).
+   - **B-spread** is near zero everywhere (0.006–0.074).
+   - **RL.**
+     - RL binding sentence. Student − RL: S2 +0.0856, S4 +0.0612, S8 +0.0256 [−0.010, 0.062], S12 +0.0568, A16-2 +0.2688.
+     - Student − success-reward RL: S2 +0.1096 [0.066, 0.153], S12 +0.0708 [0.024, 0.116], with the time-guard
+       disclosure.
+     - H2-v5 g_T: "student higher on the RL objective" holds only in A16-2 (+0.709, one-sided LB 0.479), where RL uses
+       2.0 of 3 probes in 4/5 seeds (`A:cells.A16-2.0-499.means.rl_s71{2..5}.n_probes`).
+     - RL − student g_T is significantly positive in S2 / S4 / S8, and the inversion flag is true in S2 and S4.
+     - The RL configuration was tuned once on S2. Whether it is under-tuned elsewhere was not tested.
+   - **Behaviour (descriptive).** The student travels less than G\* in every cell (e.g. S2 0.487–0.674 vs 0.820 rad;
+     S12 0.044–0.056 vs 0.110). RL travels the most. No mechanism is claimed.
+   - Keys: `A:cells.<cell>.<window>.v5_row_updates.{student_minus_hstar_success, student_minus_rl_success, student_minus_rlsucc_success, H2_v5_update.*}`;
+     `A:cells.<cell>.0-499.means.<method>.{success, travel_rad, n_probes}`.
 
 ---
 
-## 7. Discussion and limitations (420 words)
-**Discussion (150 w).**
-- Across five travel costs and two libraries, a cheap distilled policy sits below its teacher in every cell and is
-  not shown within the 4 pp margin. Validation and test5 are reported separately, with no pooled estimate.
-- Against the hand-designed heuristics chosen on a pilot, it wins in 4/5 cells, with the margin over the best test5
-  heuristic stated beside it.
-- RL on the same objective, tuned once on S2, does not transfer to A16-2.
-- **C5 g_T / BI note.** On test5 point estimates G\* has the lowest mean g_T of the three policies in all four S cells,
-  while it has the highest success. Every G\*−learner g_T CI includes 0 in the S cells. The observation is that the
-  contrastive bound and the posterior read-out can rank policies differently. It is not a finding (inversion false; no
-  interval excludes 0).
-  Evidence: `14_test5_analysis.json > <cell> > H2_v5 > {means_gT, gstar_minus_rl_gT, gstar_minus_student_gT}`.
-  Cards: `foster2021deep`, `hedman2025step`, `iqbal2024recursive`.
-- Close with next steps phrased as questions: student-visited regret, per-cell RL tuning, a G\* rerun for seed variance.
+## 6. Limitations and evaluator note (≈ 480 words; decision budget ~0.75 p)
 
-**Limitations (270 w, one sentence each).**
-1. **Power and equivalence.** test5 has 300 episodes (cut from 500, addendum v5.1e). The CIs are 9.6–12.3 pp wide. No
-   equivalence test was run.
-2. **G\* run once** (M5). E7 is in nats and is not linked to the deployed G\* or to success (M6).
-3. **Evaluator** (M8). E5 covers 2 cells, 200 episodes and one seed.
-4. **Heuristic selection** came from a 200-episode pilot (M2).
-5. **RL** (m6, M7). `rl_success` exists only in S2/S12, and its runs were budget-truncated
-   (`[NEED: episode counts]`).
-6. **Multiplicity.** More than 30 uncorrected BI, RL and g_T contrasts (analysis §4 item 9).
-7. **Latency.** The CI rule is met in 1/5 cells, the ratios rest on one seed, and the runners differ across cells
-   (M4, m2).
-8. **Validation G\* sources** are heterogeneous (S2 v4, S12 v3).
-9. **Scope.** Simulation only (TouchBED), planar shapes, two shape sets, one κ for A16, sub-8 read-out, H5b on 5 points.
-10. **Not run, by decision §4.1 item 3** (each stated here): retraining or remedy rounds, per-cell RL re-tuning, more
-    test5 episodes, a G\* rerun, latency re-timing, a test of the post-hoc margins, any new BI or g_T test.
+### 6.1 C4. Methods note: evaluator-grid sensitivity and teacher stochasticity (≈ 200 w)
+**Goal.** Give the reporting lesson. It sits here, not in Results, per the decision's page budget, but it is named as
+C4.
+
+- **E12 (episodes 0–99, G\* run 1, all 5 student seeds).**
+  - Binding E12 sentence.
+  - Per-cell student − G\* on sub 8 vs sub 16: S2 −0.026 → −0.042, S4 −0.036 → +0.010, S8 −0.020 → +0.030, S12
+    +0.008 → −0.038, A16-2 +0.050 → +0.044. Neither grid shows a significant difference (100-episode ci95 half-widths
+    7–10 pp).
+  - The sign changes in 3/5 cells, and the shifts do not favour either policy systematically.
+  - Flip rates: G\* 0.10 / 0.08 / 0.07 / 0.07 / 0.01.
+  - Keys: `A:cells.<cell>.E12.{flip_rate.*, student_minus_gstar_success_sub8, student_minus_gstar_success_sub16, episodes_per_method, complete}`.
+- **Teacher stochasticity.** Binding sentence, referring back to §5.2.3.
+- **Lesson.** In this setting, success contrasts of a few pp depend on the read-out grid and on the teacher's own
+  Monte Carlo variation at the size of the equivalence margin. Parity claims for amortized planners therefore need
+  teacher reruns and an evaluator check registered in advance. Re-deciding H6a on sub 16 would be post hoc and was not
+  done.
+- Cards: `foster2021deep`, `rainforth2024modern` (bound vs read-out evaluation in BED).
+
+### 6.2 Limitations (≈ 280 w, one sentence each)
+1. **Teacher variance.** It comes from only two G\* runs, so the G\* bootstrap component is poorly estimated.
+2. **Single runs.** The reduced planners and H\* are run once each, so their variance is missing from the H6b CIs.
+3. **Evaluator.** E12 covers 100 episodes and G\* run 1 only, and cannot correct the 0–499 contrasts.
+4. **Latency.** Point medians from v5 job 1, without dispersion. The CI rule is met in 1/5 cells, the runners differ,
+   and there is no task-time model.
+5. **Windows.** Episodes 0–299 were seen in v5. The fresh window (200 episodes) has CIs about 1.6× wider (derived).
+6. **Multiplicity.** BI, g_T, the fresh replications and the baseline rows are not Holm-controlled. For example, S8
+   fresh G\* − student g_T, p = 0.0068, should not be read as a finding.
+7. **DAgger.** Regret on student-visited states was not measured, and no equivalence test was registered for H6c.
+8. **Comparators.**
+   - The RL configuration was tuned once on S2 with one sweep seed.
+   - Success-reward RL was time-guard truncated.
+   - H\* is stale.
+   - No cheap information-based heuristic was included.
+9. **A16-2.** It confounds family, K and n\*, sits at one κ, and shares 8 identities with library A. H5b is
+   uninformative: H5b binding sentence (`A:H5b_update_0_499.*`).
+10. **G\* is a greedy reference.** A one-step look-ahead screen shows report-only headroom in nats at 512 candidates (S2
+    +0.0658 [0.0297, 0.1084], S12 +0.0422 [0.0250, 0.0614]; `v5:12_e7_analysis.json > cells > <S2|S12> > C1_512 > indep_gap_nats`).
+    Success-terms headroom was not measured.
+11. **Scope.** Planar simulation (TouchBED), 5 cells, frozen v5 policies, no hardware. Jobs were time-guarded and
+    resumed with identical commands; resumption is assumed outcome-neutral.
+12. **Not run** (decision §4.1 item 3): extra G\* or reduced-planner runs, a sub-16 re-read of H6a, latency re-timing,
+    RL re-tuning, retraining, new BI/g_T tests.
 
 ---
 
-## 8. Conclusion (90 words)
-Four clauses, no new numbers:
-1. The pre-registered gate fails in all five cells, so matching G\* is not supported.
-2. The student beats pilot-chosen heuristics in 4/5 cells and decides 2,523–9,933× faster per decision (seed-701
-   timings). Use the M4 range only, no blanket band.
-3. Distillation scores higher on RL's objective only where RL collapses.
-4. No travel-cost trend is detected, and about 7 pp is not excluded.
-
-Close with "pre-registered; simulation; preliminary".
+## 7. Conclusion (≈ 100 words)
+Four clauses with no new numbers. Then: "pre-registered; simulation; preliminary".
+1. As a fast policy, distilling G\* gave more accuracy than shrinking it in 7/10 registered contrasts, at 62–389× lower
+   per-decision latency; on fresh episodes only the direction held.
+2. Parity with G\* is neither shown nor refuted, and deficits of ~7–8 pp are not excluded.
+3. The DAgger rounds added no detectable accuracy over BC.
+4. Evaluator choice and teacher stochasticity move the contrasts by as much as the margin.
 
 ---
 
-## 9. Every results row, mapped to results-JSON keys
+## 8. Every results row and ablation row, mapped to JSON keys
 **Tags.**
-- DEC: pre-registered decision.
-- GATE: calibration or completeness gate.
+- DEC: pre-registered decision (Holm).
+- GATE: completeness or calibration.
 - REP: reported, no test.
-- EXPL: exploratory (ci95, uncorrected).
-- PH: post hoc, from `15_posthoc_derived.json`, no CI.
-- PRIOR: v3/v4 cell.
+- EXPL: ci95, not multiplicity-controlled.
+- PH: `15_derived_v6.json` or analysis-derived, post hoc, no CI.
+- HIST: v5 record.
 
-### Table 1: decisions and gates (Section 5)
-| Row | Item (values as printed) | Keys | Tag |
-|---|---|---|---|
-| T1.1 | Cells: κ, n\*, τ; A16 keep (0.8) | `v3:12_cal_analysis.tau.{S_k2_nstar4,S_k12_nstar4}.tau`; `12_cal_analysis.json > tau > {S_k4,S_k8,A16_k2} > {n_star,tau}`; `12_cal_analysis.json > n_star > A16`; `12_cal_analysis.json > keep > A16` | GATE |
-| T1.2 | RL selection: cfg 6, 6.300 vs 6.241 (cfg 0); sampled metric cfg 1 6.316 vs 6.205 | `12_rl_sweep_selection.json > {rule, selected_cfg, validation_stream}`, `> rows[0] > final_val_ball_spce`, `> rows[1] > final_val_ball_spce_sampled`, `> rows[6] > {final_val_ball_spce, final_val_ball_spce_sampled}` | GATE |
-| T1.3 | H\* per cell (S2 b_cov, S4 b_fan, S8 b_cov, S12 b_fan, A16-2 b_fan) | `12_base_hstar.json > cells > <cell> > {H_star, H_star_success}` | GATE |
-| T1.4a–e | D5 per cell: student, G\*, Δ̂_succ, threshold, Δ̂_BI, seeds, pass. S2 0.4812 / 0.514 / −0.0328 / −0.01454 / −0.0682; S4 0.4492 / 0.504 / −0.0548 / −0.01503 / −0.1334; S8 0.4116 / 0.448 / −0.0364 / −0.01639 / −0.0465; S12 0.4136 / 0.446 / −0.0324 / −0.01722 / −0.0635; A16-2 0.4124 / 0.472 / −0.0596 / −0.01229 / −0.0629; all fail | `12_d5_analysis.json > <cell> > succ > {student_mean, gstar_mean, delta_hat, se, threshold, passes, per_seed}`, `> bi > {delta_hat, threshold, passes}`, `> seeds_ok`, `> passes`, `> gstar_source` | DEC |
-| T1.5 | H5a validation: m = 0 of 5 | `12_d5_analysis.json > H5a_validation > {cells_complete, cells_pass}`; `14_test5_analysis.json > H5a > validation_cells_within_delta` | DEC |
-| T1.6 | H5a test5 Holm: 0/5 | `14_test5_analysis.json > <cell> > student_minus_gstar > success > holm_reject_5cells` | DEC |
-| T1.7 | Student − H\* Holm: 4/5 (S2 not) | `14_test5_analysis.json > <cell> > student_minus_hstar > success > holm_reject_5cells` | DEC |
-| T1.8a–e | H2-v5 LB: S2 −0.4971, S4 −0.6555, S8 −0.4861, S12 −0.3044, A16-2 +0.5964 (met) | `14_test5_analysis.json > <cell> > H2_v5 > {student_minus_rl_gT > lower_one_sided_95, claim_student_higher_on_rl_objective}` | DEC |
-| T1.9 | Inversion: false in 5/5; rl_success check false in S2, S12 | `14_test5_analysis.json > <cell> > H2_v5 > inversion`; `> H2_v5 > check_rlsucc > inversion` | DEC |
-| T1.10 | H5b: slope −0.01571 /rad, ci95 [−0.1041, 0.07277]; "no trend detected over 5 cells" | `14_test5_analysis.json > H5b > {slope_per_rad, ci95_per_rad, verdict}` | DEC |
-| T1.11 | Prior S12 D3: first attempt −0.0587, remedy −0.044; both fail | `v3:12_d3_analysis.{succ,passes}`, `v3:12_d3_analysis_rem.{succ,passes}` | PRIOR DEC |
-| T1.12 | Prior S2 D4: −0.0280 vs −0.01464; fail | `v4:12_d4_analysis.json.{succ,bi,seeds_ok,passes}` | PRIOR DEC |
-| T1.13 | Freeze: 15 / 10 hashes per cell | `13_freeze.json > {rule, cells > <cell> > sha256}` | GATE |
-| T1.14 | test5 completeness (300 per method; g_T complete) | `14_test5_analysis.json > <cell> > {n_required, episodes_per_method, complete, gt_episodes_per_method, gt_complete}` | GATE |
+### Table 1: H6a, student (5 seeds) − G\* (runs 1 + 2), success, both windows (§5.2)
+Columns: Δ 0–499 [ci95] · ci90 · p_TOST · Holm · Δ 300–499 [ci95] · ci90 fresh · p_TOST fresh · G\* run 2 − run 1
+(0–499) · E12 shift (derived).
 
-### Table 2: test5 per cell (Section 6), 300 episodes per method
+| Row | Cell | Values (copied) | Keys | Tag |
+|---|---|---|---|---|
+| T1.1 | S2 | −0.0262 [−0.0688, 0.0168] · [−0.0616, 0.0092] · 0.2621 · no · −0.036 [−0.114, 0.042] · [−0.102, 0.029] · 0.4524 · +0.014 · −1.6 pp | `A:cells.S2.{0-499,300-499}.H6a.success.{diff, ci95, tost.ci90, tost.p_tost}`; `….holm.{H6a_difference, H6a_tost}`; `A:cells.S2.0-499.H6a.gstar_run2_minus_run1_success.diff`; `A:cells.S2.E12.*` | DEC / REP |
+| T1.2 | S4 | −0.0374 [−0.0784, 0.0024] · [−0.0716, −0.0036] · 0.4559 · no · −0.053 [−0.1165, 0.0095] · [−0.106, −0.0005] · 0.6561 · −0.002 · +4.6 pp | same paths, S4 | DEC / REP |
+| T1.3 | S8 | −0.0292 [−0.0704, 0.0136] · [−0.0640, 0.0060] · 0.2908 · no · −0.034 [−0.095, 0.028] · [−0.085, 0.017] · 0.4211 · +0.032 · +5.0 pp | same paths, S8 | DEC / REP |
+| T1.4 | S12 | −0.0196 [−0.0532, 0.0148] · [−0.0480, 0.0088] · 0.1157 · no · −0.016 [−0.067, 0.035] · [−0.0585, 0.026] · 0.1659 · 0.000 · −4.6 pp | same paths, S12 | DEC / REP |
+| T1.5 | A16-2 | −0.0028 [−0.0496, 0.0436] · [−0.0412, 0.0358] · 0.0548 · no · +0.001 [−0.077, 0.080] · [−0.064, 0.0665] · 0.1557 · +0.024 · −0.6 pp | same paths, A16-2 | DEC / REP |
+| T1.6 | all | upper-margin p (0–499): 0.0014 / 0.0003 / 0.0004 / 0.0009 / 0.0348; fresh A16-2 0.1557 | `A:cells.<cell>.<window>.H6a.success.tost.p_upper_margin` | EXPL (per cell, unadjusted) |
+| T1.7 | all | BI diff (0–499): −0.093 / −0.138 / −0.103 / −0.055 / +0.024 (p 0.0206 / < 1e-4 / 0.0048 / 0.0664 / 0.638) | `A:cells.<cell>.<window>.H6a.ball_info.*` | EXPL |
+| T1.8 | all | first-decision agreement 0–499: 0.274 / 0.402 / 0.452 / 0.426 / 0.314; fresh 0.245 / 0.415 / 0.445 / 0.420 / 0.305 | `A:cells.<cell>.<window>.gstar_first_decision_agreement_run2_vs_run1` | REP |
+| T1.9 | all | student − G\* run 1 (0–499): −0.0192 / −0.0384 / −0.0132 / −0.0196 / +0.0092 | `A:cells.<cell>.0-499.v5_row_updates.student_minus_gstar_run1_success` | REP (v5 row update) |
+
+### Table 2: H6b, student − reduced planners, success (§5.1)
+Columns: R-125 Δ [ci95], p, Holm · R-500 Δ [ci95], p, Holm · fresh R-125 Δ, p, Holm · fresh R-500 Δ, p, Holm · latency
+R-125/student, R-500/student (PH).
+
+| Row | Cell | Values (copied) | Keys | Tag |
+|---|---|---|---|---|
+| T2.1 | S2 | +0.0928 [0.044, 0.140], p < 1e-4, yes · +0.0368 [−0.012, 0.087], 0.1378, no · +0.094, 0.0198, no · +0.004, 0.9268, no · 231×, 389× | `A:cells.S2.{0-499,300-499}.H6b.{g125_512_16, g500_512_4}.{diff, ci95, p_two_sided}`; `….holm.{H6b_g125_512_16, H6b_g500_512_4}`; `D:cells.S2.latency_ratio.*` | DEC / PH |
+| T2.2 | S4 | +0.0556 [0.014, 0.098], 0.0072, yes · +0.0676 [0.024, 0.112], 0.0016, yes · +0.112, 0.0002, yes · +0.077, 0.0198, no · 163×, 285× | same paths, S4 | DEC / PH |
+| T2.3 | S8 | +0.0628 [0.022, 0.104], 0.0022, yes · +0.0468 [0.004, 0.090], 0.0314, no · +0.066, 0.055, no · +0.026, 0.4638, no · 84×, 171× | same paths, S8 | DEC / PH |
+| T2.4 | S12 | +0.0564 [0.013, 0.099], 0.0098, yes · +0.0244 [−0.018, 0.067], 0.2688, no · +0.019, 0.5484, no · −0.011, 0.7368, no · 62×, 134× | same paths, S12 | DEC / PH |
+| T2.5 | A16-2 | +0.1532 [0.102, 0.204], p < 1e-4, yes · +0.1092 [0.058, 0.159], p < 1e-4, yes · +0.136, 0.0012, yes · +0.086, 0.032, no · 176×, 299× | same paths, A16-2 | DEC / PH |
+| T2.6 | all | success 0–499 of G\* r1 / G\* r2 / R-500 / R-125 / student (frontier points, Fig. 1) | `A:cells.<cell>.frontier.success_0_499.*`; `A:cells.<cell>.0-499.means.gstar2.success` | REP |
+| T2.7 | all | latency medians (s) of G\*, R-500, R-125, student | `A:cells.<cell>.frontier.latency_median_s.*` (= `v5:14_e6_analysis.json > <cell> > job1 > * > median`) | REP |
+| T2.8 | all | G\*/student 9,767 / 6,829 / 3,450 / 2,544 / 8,284× | `D:cells.<cell>.latency_ratio.gstar_over_student` | PH |
+
+### Ablation row (the only one; §5.3)
+| Row | Item | Values | Keys | Tag |
+|---|---|---|---|---|
+| AB.1 | H6c: DAgger round 2 − BC round 0, success, 0–499 | +0.0132 [−0.0224, 0.0480] / +0.0084 [−0.0228, 0.0400] / +0.0072 [−0.0196, 0.0336] / +0.0004 [−0.0280, 0.0304] / −0.0052 [−0.0316, 0.0208]; Holm 0/5 | `A:cells.<cell>.0-499.H6c.success.*`; `….holm.H6c` | DEC |
+| AB.2 | H6c fresh window | p 0.715 / 0.9206 / 0.9208 / 0.5372 / 0.7826; S2 ci95 upper 0.071 | `A:cells.<cell>.300-499.H6c.success.*` | DEC (replication) |
+| AB.3 | H6c BI | p 0.0564 / 0.1764 / 0.3078 / 0.6188 / 0.8056 | `A:cells.<cell>.0-499.H6c.ball_info.*` | EXPL |
+| AB.4 | r0 and r2 5-seed means | e.g. S2 0.4856 vs 0.4988 | `D:cells.<cell>.<window>.{r0student_mean, student_mean}` | PH |
+| AB.5 | kept-checkpoint held-out regret per round | as logged | `v5:16_report_rows.json > student_checkpoint_sensitivity > <cell> > <seed> > r{0,1,2} > R_bar_kept` | REP |
+
+No other component is claimed effective, so no other ablation row is required (`hard_constraints.md` §3 "Mandatory
+ablations"; decision §2.1 rule 2).
+
+### In-text rows (report-only)
 | Row | Item | Keys | Tag |
 |---|---|---|---|
-| T2.1 | G\* success / BI / travel / probes (S2 0.5333; S4 0.4967; S8 0.4567; S12 0.4567; A16-2 0.49) | `14_test5_analysis.json > <cell> > means > gstar > {success, ball_info, travel_rad, n_probes}` | REP |
-| T2.2 | Student seed range (min–max of 701–705) | `14_test5_analysis.json > <cell> > means > student_s70{1..5} > {success, travel_rad, n_probes}` | REP |
-| T2.3 | Student 5-seed mean (S2 0.5087; S4 0.4713; S8 0.444; S12 0.4413; A16-2 0.488) | `15_posthoc_derived.json > cells > <cell> > student_success_mean_from_diff` | PH |
-| T2.4 | RL seed range and 5-seed mean (S2 0.424; S4 0.4167; S8 0.412; S12 0.3687; A16-2 0.222) | `14_test5_analysis.json > <cell> > means > rl_s71{1..5}`; `15_posthoc_derived.json > cells > <cell> > {rl_success_mean_from_diff, rl_seed_means_listed}` | REP / PH |
-| T2.5 | Heuristics: random, b_fan, b_spread, b_cov success | `14_test5_analysis.json > <cell> > means > {random, b_fan, b_spread, b_cov} > success` | REP |
-| T2.6 | Student − G\* success: diff, ci95, p, Holm (see §0.3) | `14_test5_analysis.json > <cell> > student_minus_gstar > success > *` | DEC (H5a) |
-| T2.7 | Student − G\* BI | `14_test5_analysis.json > <cell> > student_minus_gstar > ball_info > {diff, ci95, p_two_sided}` | EXPL |
-| T2.8 | Student − H\* success, Holm; BI | `14_test5_analysis.json > <cell> > student_minus_hstar > {success, ball_info} > *` | DEC / EXPL |
-| T2.9 | Student − best test5 heuristic (S2 +0.0587, S4 +0.0513, S8 +0.0607, S12 +0.0347, A16-2 +0.1447) | `15_posthoc_derived.json > cells > <cell> > {best_test5_heuristic, margin_student_minus_best_test5_heuristic}` | PH |
-| T2.10 | Student − RL success and BI (S2 +0.08467, S4 +0.05467, S8 +0.032, S12 +0.07267, A16-2 +0.266) | `14_test5_analysis.json > <cell> > student_minus_rl > {success, ball_info} > {diff, ci95, p_two_sided}` | EXPL |
-| T2.11 | Student − rl_success (S2, S12) | `14_test5_analysis.json > <S2\|S12> > student_minus_rlsucc > {success, ball_info}` | EXPL |
-| T2.12 | g_T means: student / RL / G\* | `14_test5_analysis.json > <cell> > H2_v5 > means_gT > {student, rl, gstar}`; `> check_rlsucc > means_gT_rlsucc` | DEC input / REP |
-| T2.13 | g_T contrasts: RL − student, G\* − RL, G\* − student (ci95) | `14_test5_analysis.json > <cell> > H2_v5 > {rl_minus_student_gT, gstar_minus_rl_gT, gstar_minus_student_gT}` | EXPL |
+| X1 | E12 flip rates and sub-8/sub-16 contrasts (§6.1) | `A:cells.<cell>.E12.*` | REP |
+| X2 | Student − H\*, both windows | `A:cells.<cell>.<window>.v5_row_updates.{H_star, student_minus_hstar_success}` | EXPL (v5 row update) |
+| X3 | Best-heuristic and strongest-comparator margins | `D:cells.<cell>.<window>.{best_heuristic, registered_H_star, margin_vs_best_heuristic, strongest_non_oracle, strongest_value, margin_vs_strongest}` | PH |
+| X4 | Student − RL; student − success-reward RL | `A:cells.<cell>.<window>.v5_row_updates.{student_minus_rl_success, student_minus_rlsucc_success}`; RL means `D:cells.<cell>.<window>.rl_mean` | EXPL / PH |
+| X5 | H2-v5 g_T update and inversion | `A:cells.<cell>.<window>.v5_row_updates.H2_v5_update.{student_minus_rl_gT, claim_student_higher_on_rl_objective, rl_minus_student_gT, gstar_minus_student_gT, inversion}` | EXPL |
+| X6 | Heuristic, B-spread and Random successes | `A:cells.<cell>.<window>.means.{b_fan, b_spread, b_cov}.success` | REP |
+| X7 | Behaviour: travel and probes per method | `A:cells.<cell>.<window>.means.<method>.{travel_rad, n_probes}` | REP |
+| X8 | RL probe collapse in A16-2 | `A:cells.A16-2.0-499.means.rl_s71{1..5}.n_probes` | REP |
+| X9 | H5b update | `A:H5b_update_0_499.{cells, delta_succ, gstar_mean_travel_rad, weights, slope_per_rad, ci95_per_rad, slope_per_100deg, ci95_per_100deg, verdict}` | REP (v5 row update) |
+| X10 | Completeness | `A:cells.<cell>.<window>.{n_required, episodes_per_method, complete, gt_episodes_per_method, gt_complete}` | GATE |
+| X11 | History: v5 validation gate | `v5:12_d5_analysis.json > H5a_validation > cells_pass`; `v5:12_d5_analysis.json > <cell> > succ > {delta_hat, threshold}` | HIST |
+| X12 | RL selection and training caps; success-reward RL truncation | `v5:12_rl_sweep_selection.json > {rule, selected_cfg}`; `v5:16_report_rows.json > {rl_main_cfg6, rl_success}` | GATE / REP |
+| X13 | Look-ahead headroom in nats (Limitation 10) | `v5:12_e7_analysis.json > cells > <S2\|S12> > C1_512 > indep_gap_nats` | REP |
+| X14 | Latency CI rule | `v5:14_e6_analysis.json > <cell> > job1 > ratio_full_gstar_over_student > {median, ci95, half_width_ok}` | REP |
 
-### In-text rows (diagnostics and report-only items; no ablation is claimed, decision §4.4)
-| Row | Item | Keys | Tag |
-|---|---|---|---|
-| X1 | E5 sub 8 → sub 16: flip rates 0.065–0.08; G\* 0.54 → 0.54 (S2), 0.48 → 0.505 (S12); student 701 0.465 → 0.485, 0.455 → 0.45; contrast change +0.02 / −0.03; gains/losses; mean \|ΔBI\| ≤ 0.004034 | `14_e5_analysis.json > <S2\|S12> > {n_episodes, complete, gstar, student_s701, contrast_change_student_minus_gstar}` | REP |
-| X2 | E7: paired 512 − 32 independent gap S2 0.04838 [0.01681, 0.08697], S12 0.01830 [0.004013, 0.03652]; selection bias S2 0.01926 [0.001030, 0.04193] (C1_32), 0.02179 [0.004270, 0.04013] (C1_512); S12 0.004470 [−0.007718, 0.01884], −0.002040 [−0.01574, 0.01258] | `12_e7_analysis.json > design`; `12_e7_analysis.json > cells > <S2\|S12> > {paired_indep_gap_512_minus_32, C1_32 > selection_bias_nats, C1_512 > selection_bias_nats}` | REP |
-| X3 | E6 latency (§6.2 values) | `14_e6_analysis.json > <cell> > {job1_source, job1 > *, job1_complete, job2 > *}` | REP |
-| X4 | E6 job-2 ratio sensitivity | `15_posthoc_derived.json > cells > <cell> > latency > ratio_full_gstar_median_over_job2_student_medians` | PH |
-| X5 | H5b span translation (−0.0739, +0.0517) | `15_posthoc_derived.json > H5b_span_translation > {travel_span_rad, span_rad, ci95_times_span}` | PH |
-| X6 | Behaviour: travel and probes, all methods | `14_test5_analysis.json > <cell> > means > <method> > {travel_rad, travel_deg, n_probes}` | REP |
-| X7 | RL collapse in A16-2 (2.0 probes, seeds 712–715) | `14_test5_analysis.json > A16-2 > means > rl_s71{2..5} > {n_probes, success}`; `12_cal_analysis.json > n_star > A16 > n_star` | REP |
-| X8 | D5 per-seed differences (25, all negative) | `12_d5_analysis.json > <cell> > succ > per_seed` | DEC input |
-| X9 | H\* pilot values (200 episodes per heuristic) | `12_base_hstar.json > cells > <cell> > {b_fan, b_spread, b_cov} > {n, success, se_success}` | GATE input |
-| X10 | v4 test3 S2 gap −0.1022 [−0.1656, −0.0433] (only if the main session approves the §0.3 m8 proposal) | `v4:14_s2_analysis.json.test3_sub8.diffs["student-gstar:success"]` | PRIOR REP |
-
-**Not in any results JSON. Do not cite as numbers until added:**
-- the last-checkpoint sensitivity row;
-- per-seed `rl_success` episode counts;
-- RL / DAgger / label budgets;
-- the bootstrap resample count.
+**Optional, master draft only:** `v5:19_lat_agreement.json > cells > <cell> > {student, g125_512_16, g500_512_4}`
+(agreement with G\* on the latency states). It uses a different state set from T1.8, so the two are not compared.
 
 ---
 
-## 10. Figure plan
+## 9. Figure plan
 
-### Figure 1 (full width, top of page 1, ≈ 1/3 page; schematic panels A–C plus a JSON-plotted panel D)
-**Story.** One planner, one learned head, five travel regimes. As travel cost falls, G\* travels more, from a few
-degrees per episode at κ = 12 to tens of degrees at κ = 2. Across all five cells the distilled student stays below G\*
-on success on both splits, without a detectable trend in travel. The pre-registered gate fails everywhere, so the
-figure shows a measured gap, not a match.
+### Figure 1 (full width, top of page 2, ≈ 0.4 page): "Distil or shrink? The accuracy–latency frontier in five cells"
+**Story.** The reader should see three things without the prose:
+1. Shrinking the planner buys speed (19–47×) at a visible accuracy cost.
+2. The distilled student is 62–389× faster still, and on 0–499 sits above both reduced planners in every cell as a
+   point estimate. Stars mark only the Holm-confirmed contrasts.
+3. Its vertical position relative to G\* is undecided, because the two G\* runs bracket a band as wide as the
+   student–G\* gap.
+
+The figure therefore carries C1 and shows the limit of C2.
 
 **Visual elements.**
-- **Panel A, task (schematic).**
-  - Top-down grey polygon in a dashed uncertainty box, with faint ghost outlines for the particle belief over identity
-    × pose.
-  - Stand-off circle, fingertip at φ_t.
-  - Orange travel arrow to φ′, labelled "c(a) = 1 + κ|Δφ|/π".
-  - Blue probe arrow tilted by ψ, ending at a contact marker.
-- **Panel B, five cells ordered by G\* test5 travel (JSON-labelled schematic).**
-  - A row of five small circles, each with schematic probe marks. Fanned probes with little orange arc at the right
-    (S12); probes spread around the circle and joined by orange arcs at the left (S2). A16-2 is marked with a different
-    outline colour (second library).
-  - Label under each circle, from `14_test5_analysis.json > <cell> > means > gstar > travel_deg`: S12 6.37°, S8 9.40°,
-    A16-2 21.22°, S4 23.18°, S2 47.06°.
-  - Traces are labelled "schematic".
-- **Panel C, the comparison (schematic).** Belief → three branches:
-  - (i) G\*: EIG/c over the feasible actions, argmax;
-  - (ii) the DeepSets head on the finger-frame touch history → masked logits, with a solid arrow "DAgger on G\* scores (best held-out checkpoint)" and a dashed arrow "PPO, reward = ball-sPCE (g_T)";
-  - (iii) heuristics B-fan / B-spread / B-cov, with "H\* chosen on pilot".
-  - No timing or ratio is printed on the panel. They live in §6.2.
-- **Panel D, headline (plotted from JSON with the dataviz skill; not generated).**
-  - x axis: G\* mean test5 travel (rad), from `14_test5_analysis.json > H5b > gstar_mean_travel_rad`.
-  - y axis: student − G\* success (pp).
-  - Filled points with ci95 whiskers: test5 diffs (`14_test5_analysis.json > <cell> > student_minus_gstar > success > {diff, ci95}`).
-  - Hollow points at the same x: validation Δ̂_succ (`12_d5_analysis.json > <cell> > succ > delta_hat`). They have no
-    whiskers, because the D5 SE is a gate input, not a CI.
-  - Horizontal dashed lines at 0 and at −δ = −4 pp.
-  - Point labels: S2 / S4 / S8 / S12 / A16-2, with A16-2 in the second-library colour.
-  - Corner text: "D5: 0/5 pass · H5b slope −0.0157/rad, ci95 [−0.104, 0.073], no trend detected".
-  - No fitted line: the WLS intercept is not in the JSON. [NEED: WLS intercept, only if a fitted line is wanted.]
+- **Panel A (left, ≈ 20 % width; schematic, image-generator prompt in a LaTeX comment).**
+  - Top-down planar polygon with a ghost-outline particle belief; a stand-off circle with the fingertip at φ_t; an
+    orange travel arc labelled "cost 1 + κ|Δφ|/π"; a blue probe arrow.
+  - Below it, three arrows leave a box "G\* (EIG / cost, argmax)":
+    - "shrink → R-500, R-125" (grey);
+    - "distil (BC round 0 → DAgger rounds 1–2) → student" (blue);
+    - "PPO on g_T → RL" (dashed).
+  - No numbers on this panel.
+- **Panels B–F (right, five small multiples, one per cell, ordered S2, S4, S8, S12, A16-2; plotted from JSON with the
+  dataviz skill).**
+  - x axis: median per-decision latency, log10 seconds, shared range 1e-4 to 1e1.
+  - y axis: success on test episodes 0–499, shared range 0.20–0.56.
+  - Markers:
+    - G\* run 1 (filled black circle) and run 2 (hollow black circle), at the same x and joined by a thin vertical
+      segment labelled "teacher run-to-run";
+    - R-500 (grey square) and R-125 (grey triangle);
+    - student 5-seed mean (blue diamond), with a vertical bar for the min–max over seeds.
+  - Thin grey arrows from R-125 and R-500 to the student, with a star where Holm rejects (S2: R-125; S4: both; S8:
+    R-125; S12: R-125; A16-2: both).
+  - H\* and RL as horizontal dashed lines labelled "H\* (latency not timed)" and "RL (latency not timed)". **No latency
+    is plotted for them** because none was measured.
+  - A16-2 panel title in the second-library colour.
+- **Data (all copied).**
+
+  | Cell | x: G\* / R-500 / R-125 / student (s) | y: G\* r1 / G\* r2 / R-500 / R-125 / student [seed min–max] | H\* / RL (lines) |
+  |---|---|---|---|
+  | S2 | 4.880 / 0.194 / 0.116 / 0.000500 | 0.518 / 0.532 / 0.462 / 0.406 / 0.4988 [0.464–0.526] | 0.432 / 0.4132 |
+  | S4 | 3.375 / 0.141 / 0.080 / 0.000494 | 0.496 / 0.494 / 0.390 / 0.402 / 0.4576 [0.432–0.482] | 0.368 / 0.3964 |
+  | S8 | 1.234 / 0.061 / 0.030 / 0.000358 | 0.432 / 0.464 / 0.372 / 0.356 / 0.4188 [0.408–0.436] | 0.344 / 0.3932 |
+  | S12 | 0.910 / 0.048 / 0.022 / 0.000358 | 0.434 / 0.434 / 0.390 / 0.358 / 0.4144 [0.398–0.428] | 0.358 / 0.3576 |
+  | A16-2 | 2.702 / 0.098 / 0.058 / 0.000326 | 0.474 / 0.498 / 0.374 / 0.330 / 0.4832 [0.464–0.496] | 0.312 / 0.2144 |
+
+  Keys:
+  - x: `A:cells.<cell>.frontier.latency_median_s.*`;
+  - y: `A:cells.<cell>.frontier.success_0_499.*`, `A:cells.<cell>.0-499.means.gstar2.success`;
+  - seed range: `A:cells.<cell>.0-499.means.student_s70{1..5}.success`;
+  - H\*: `A:cells.<cell>.0-499.means.<H_star>.success`;
+  - RL: `D:cells.<cell>.0-499.rl_mean` (post hoc);
+  - stars: `A:cells.<cell>.0-499.holm.H6b_*`.
+- **Not on the figure:** fresh-window points (Table 2 carries them), the CIs of the contrasts (Tables 1–2), and any
+  fitted frontier curve.
 
 **Draft caption.**
-> **Figure 1.** *Amortizing a cost-aware touch planner across travel costs.* (A) A finger on a stand-off circle chooses
-> where to move, paying travel cost proportional to |Δφ|, and which way to probe; the belief is a particle set over
-> identity and planar pose. (B) The five pre-registered cells, ordered by the planner G\*'s mean travel per test
-> episode (6.37° at κ = 12 to 47.06° at κ = 2 on shape set S; A16-2 is a second shape set at κ = 2); traces are
-> schematic. (C) One belief-free DeepSets policy is trained by DAgger on G\*'s scores or by PPO on G\*'s
-> information objective, and is compared with hand-designed probing heuristics. (D) Student − G\* success: test5 mean
-> with paired 95 % CI (filled; 300 episodes, 5 student seeds) and validation point estimate (hollow; 500 episodes). The
-> student is below G\* in every cell on both splits, and the pre-registered gate fails in all five cells, so a match
-> within δ = 4 pp (dashed) is not supported; no trend with travel is detected. Simulation; preliminary.
+> **Figure 1.** *Distil or shrink a cost-aware touch planner?* (A) Task and the three ways to make the planner G\*
+> fast: shrink it (reduced planners R-500, R-125), distil it into a belief-free policy (behaviour cloning, then DAgger),
+> or train the same policy with RL. (B–F) Success on 500 test episodes against median per-decision latency (log scale;
+> timings from the previous round, point medians without dispersion) for travel cost κ = 2, 4, 8, 12 on shape library S
+> and κ = 2 on library A16. Filled and hollow circles are two independent G\* runs. Diamonds are the 5-seed student mean,
+> with the seed range. Stars mark student-vs-reduced-planner contrasts confirmed by Holm (7 of 10; 2 of 10 on the 200
+> fresh episodes). Dashed lines show the pilot-chosen heuristic H\* and RL, whose latency was not timed. The student's
+> position relative to G\* is undecided: neither a difference nor equivalence within 4 pp is shown (Table 1), and
+> changing the evaluator grid alone moves that contrast by up to 5 pp. Simulation; preliminary.
 
-(Caption numbers: `14_test5_analysis.json > S12 > means > gstar > travel_deg` and `… > S2 > means > gstar > travel_deg`.)
-
-### Figure 2 (one column, two stacked panels; dataviz skill)
-- **(a) Comparator forest plot, success (pp).** For each cell (5 rows), plot:
-  - student − H\* with ci95 (filled; Holm-significant marked);
-  - student − best test5 heuristic as a hollow diamond with no whisker, labelled "post hoc";
-  - student − RL with ci95 (grey, "uncorrected");
-  - in S2 and S12, student − `rl_success`.
-  A16-2 RL is annotated "RL collapse: 2 of 3 probes, 4/5 seeds".
-  Keys: T2.8, T2.9, T2.10, T2.11, X7.
-- **(b) g_T vs success ordering (C5 note).** Per cell, plot:
-  - g_T(student) − g_T(RL) with its one-sided LB and the +0.10 line;
-  - g_T(G\*) − g_T(RL) with ci95.
-  Caption: "inversion not detected in any cell; uncorrected". Keys: T1.8, T2.13.
+### Figure 2 (optional, one column; cut first in stage 22): "How large is a few pp here?"
+- Per cell, three horizontal bars (pp):
+  - |student − G\*| on 0–499 (`A:…H6a.success.diff`);
+  - |G\* run 2 − run 1| on 0–499 (`A:…H6a.gstar_run2_minus_run1_success.diff`);
+  - |E12 shift| (derived, from `A:cells.<cell>.E12.*`).
+- A vertical line at δ = 4 pp.
+- Caption: "Point magnitudes only; no CIs; E12 is on 100 episodes."
+- This carries C4 visually.
 
 ### Tables
-- **Table 1:** §9 Table 1, condensed to one row per cell plus a decision column.
-- **Table 2:** §9 Table 2, condensed to G\*, student, RL, b_fan, b_cov, random success per cell, plus the student − G\*
-  and student − H\* contrasts. BI goes to the master draft appendix if space is short.
+- **Table 1** = §8 Table 1 rows T1.1–T1.5, with T1.6–T1.7 as footnotes.
+- **Table 2** = §8 Table 2 rows T2.1–T2.5.
+- Table 0 (cells) stays in-text in §3.1.
 
 ---
 
-## 11. Word budget
+## 10. Word budget
 | Section | Words |
 |---|---|
-| Abstract | 190 (not counted) |
-| 1 Introduction | 480 |
-| 2 Related work | 260 |
-| 3 Problem and methods | 750 |
-| 4 Experimental protocol | 330 |
-| 5 Results (C1 400, C2 300, C3 200, C4 200) | 1,100 |
-| 6 Discussion and limitations | 420 |
-| 7 Conclusion | 90 |
-| **Body total** | **3,430** |
+| Abstract | 170 (not counted) |
+| 1 Introduction + related work | 650 |
+| 2 Setup and method | 650 |
+| 3 Pre-registration and statistics | 320 |
+| 4 Results (C1 400, C2 400, C3 350) | 1,150 |
+| 5 Limitations and evaluator note (C4 200, limitations 280) | 480 |
+| 6 Conclusion | 100 |
+| **Body total** | **3,350** |
 
-Outline sections 2–8 are paper sections 1–7. The full gate record (E6 500-decision records, pilot tables,
-amendment-by-amendment log) is kept only in the master draft appendix and cut in stage 22.
+Outline sections 2–7 are paper sections 1–6. The provenance table (internal identifiers, amendment labels, file paths)
+goes to the master-draft appendix and is cut or moved to supplementary material in stage 22.
 
-## 12. Open markers
-**[NEED] markers (12).** Each one is an item the analysis, the decision and the JSONs do not hold. None blocks drafting.
-1. Action-grid size and geometry (§4.1).
-2. Cost-formula source line (§4.1).
-3. A16 identity count in a citable field (§4.1).
-4. The A16 keep range in a citable field (§4.1).
-5. The meaning of `g2000_512_64` (§4.2).
-6. Label, DAgger and epoch budgets (§4.3).
-7. The last-checkpoint sensitivity row (§4.3).
-8. RL episodes per seed and `rl_success` episode counts (§4.3; referred to again in §6.3).
-9. The D5 per-seed count and floor (§5).
-10. The bootstrap resample count (§5).
-11. The `rl_success` episode counts, in the limitations (§7).
-12. The WLS intercept, optional (§10).
+## 11. Open markers
+**[CITE-MISSING] (3, no card in `05_knowledge_cards.json`):**
+1. DeepSets (Zaheer et al. 2017), §3.3.
+2. Holm (1979), §4.
+3. Bootstrap CIs (Efron), §4.
 
-**[CITE-MISSING] markers (3).**
-1. DeepSets.
-2. Holm step-down.
-3. Bootstrap CIs.
+**Carried constants.** The following are carried verbatim from `draft_v5_final.md` (code and amendment provenance, not
+a results field), and stage 17 keeps that provenance note:
+- the cost formula and geometry;
+- the S2/S12 τ;
+- the `g`N`_`C`_`M meaning;
+- the label size and β schedule;
+- B = 10,000;
+- the RL sweep seed 719.
+
+No other [NEED] marker remains. Every other constant has a JSON key above.
