@@ -1934,3 +1934,14 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
   ci95 excludes 0 only in S12; H6b Holm count 7 / 10 under bootstrap seeds 0–9 but 5 / 10 under seed 10 (fresh window
   2 / 10 under all); DAgger warm start confirmed.
 - **Next:** stage 19 PAPER_REVISION [v6] with the 7-item paper-level triage; evidence-level requests deferred (cap).
+
+## Stage 19. PAPER_REVISION     [v6] — pass 1
+
+- **Finished:** 2026-11-13 (run 50). Plan `plans/stage_19_paper_revision_v6.md`; template verbatim via
+  `build_stage19_v6.py`, fresh opus subagent → `paper/mypaper/sections/draft_v6.md` (snapshots
+  `paper/mypaper/v6/draft_v6_stage17.md`, `draft_v6_stage19pass1.md`).
+- All 7 triage items addressed: H6b stated as 7 / 10 (5 / 10 under one of 11 bootstrap seeds, post hoc; 2 / 10 fresh);
+  DAgger warm start + kept epochs table (r0 39–187, r1 2–92, r2 0–126; checked against the file), C3 softened; E12
+  shift ci95 (only S12 excludes 0); TOST power framing fixed; wording fixes; history → Appendix A; Limitations 15 items.
+- Checks: audit 0 unmatched; no §4.5 claim by grep. Body ≈ 10,580 words (cut to 5 pages in stage 22).
+- **Next:** stage 18 pass 2 on this draft → stage 19 pass 2 → stage 20.
