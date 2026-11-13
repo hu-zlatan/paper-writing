@@ -49,7 +49,8 @@ def main():
     v5 = os.path.join(root, "results/v5/results_v5.json")
     if os.path.exists(v5):                                                      # v5 five-cell study
         vals = flat(json.load(open(v5)), vals)
-    for f in ("results/v6/14_v6_analysis.json", "results/v6/15_derived_v6.json"):   # v6 read-out + post-hoc arithmetic
+    for f in ("results/v6/14_v6_analysis.json", "results/v6/15_derived_v6.json",
+              "results/v6/18_posthoc_v6.json"):   # v6 read-out + post-hoc arithmetic
         f = os.path.join(root, f)
         if os.path.exists(f):
             vals = flat(json.load(open(f)), vals)
