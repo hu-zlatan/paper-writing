@@ -9,7 +9,7 @@
 **Topic:** Amortized, non-myopic active tactile localization (TouchBED)
 **Initialised:** 2026-10-28T07:56:44Z
 **Current version:** v6
-**Latest stage:** Stage 16 PAPER_OUTLINE [v6] (run 50, 2026-11-13); next stage 17 [v6]
+**Latest stage:** Stage 17 PAPER_DRAFT [v6] (run 50, 2026-11-13); next stage 18 [v6]
 
 ---
 
@@ -1913,3 +1913,13 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
   the amendment as design doc → **0 unmatched**; no §4.5 disallowed claim. Open: 3 [CITE-MISSING] (DeepSets, Holm,
   bootstrap) for stage 23.
 - **Next:** stage 17 PAPER_DRAFT [v6].
+
+## Stage 17. PAPER_DRAFT     [v6]
+
+- **Finished:** 2026-11-13 (run 50). Plan `plans/stage_17_paper_draft_v6.md`; template verbatim via
+  `paper/mypaper/prompts/build_stage17_v6.py`, fresh opus subagent → `paper/mypaper/sections/draft_v6.md`
+  (Figure 1 prompt with JSON keys per data panel; Tables 1 H6a, 2 H6b, 3 H6c; ≈ 7,700 body words incl. tables, abstract
+  246 → condensed to 5 pages in stage 22).
+- Checks: number audit 0 unmatched (design doc = amendment v6.0 only); 29 cite keys used, all in the 60 cards;
+  3 [CITE-MISSING] (DeepSets, Holm, bootstrap) left for stage 23; no §4.5 disallowed claim found by grep.
+- **Next:** stage 18 PEER_REVIEW [v6] (two fresh reviewers, two passes).
