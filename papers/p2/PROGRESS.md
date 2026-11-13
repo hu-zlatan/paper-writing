@@ -1017,3 +1017,14 @@ Run order when both papers are active: AUTOPILOT §7.
   3 / 3). → **Stop the loop and ask the owner** (`papers/p2/OWNER_TODO.md`, run 48).
 - **Meanwhile (no reply):** paper-level items only (one clear conditional answer up front, one cost picture, caveats
   once, 2–3 significant figures, earlier rounds to an appendix); no new experiments, no LaTeX export.
+
+## Run 50 (2026-11-13) — paper-level item while waiting for the owner
+
+- No open issues, no owner reply on the run-48 decision (`papers/p2/OWNER_TODO.md`). Paper-level work only.
+- Gate item "figures unrendered": `code/make_figure2_v4.py` renders Figure 2 of `draft_v4.md` (boundary map) to
+  `paper/mypaper/figures/figure2_v4.{pdf,png}`, reading every value from `results/v4/v4_analysis.json` under the keys
+  named in the FIGURE 2 PROMPT (no typed-in numbers). Plotted values checked against the caption: matched RE, D rows,
+  width-sweep D with CI\*\*, force-time 1/5/30 s, break-even 17.74 / 27.07 s — all match. Panel (c) uses a linear T axis
+  because the closed-form accounting is linear in T (slope = mean hold force), so the straight segments are exact.
+  No new experiment, no LaTeX export, no change to the draft's numbers.
+- **Next:** still waits for the owner's (a)/(b)/… decision.
