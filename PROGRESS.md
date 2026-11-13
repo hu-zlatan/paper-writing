@@ -9,7 +9,7 @@
 **Topic:** Amortized, non-myopic active tactile localization (TouchBED)
 **Initialised:** 2026-10-28T07:56:44Z
 **Current version:** v6
-**Latest stage:** Stage 17 PAPER_DRAFT [v6] (run 50, 2026-11-13); next stage 18 [v6]
+**Latest stage:** Stage 20 QUALITY_GATE [v6] — 5.2 / 10 FAIL, refine cap 5 / 5 → owner decision (run 50, 2026-11-13)
 
 ---
 
@@ -1963,3 +1963,20 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
   labelled point ratios, gain called computation-only; Appendix B P4 (100k resamples); internal pre-registration
   wording + Limitation 16; run-1-only parity row Table A1. Audit 0 unmatched. Body ≈ 11,850 words (cut in stage 22).
 - **Next:** stage 20 QUALITY_GATE [v6].
+
+## Stage 20. QUALITY_GATE     [v6]
+
+- **Finished:** 2026-11-13 (run 50). Plan `plans/stage_20_quality_gate_v6.md`; template verbatim (threshold 7.5), fresh
+  opus subagent, paper only → `paper/mypaper/20_quality_gate.json` (copy `paper/mypaper/v6/20_quality_gate.json`).
+- **Score 5.2 / 10 (v3 5.5, v4 5.0, v5 5.5) → FAIL; not auto-approved** (a below-threshold score is not evidence for
+  approval). The gate found the paper honest and internally consistent; 5 of 10 weaknesses and 7 of 10 required actions
+  are evidence-level: C1 rests on two reduced planners of one shrink family, single runs, two Holm rejections near the
+  Monte-Carlo cut, 2 / 10 on fresh episodes; no comparator near the student's latency; no task-time / hardware
+  grounding; DAgger ablation confounded by the recipe; RL tuned once on S2. Paper-level: 3 [CITE-MISSING], heavy hedging,
+  internal-only pre-registration, contribution thin for a top venue.
+- **Decision (template table):** below threshold with evidence-level actions → stage 13, **unavailable** (refine cycles
+  5 / 5, owner-authorised maximum). → **Stop the experiment loop and ask the owner** (`OWNER_TODO.md`, run 50). Per the
+  owner's 11-10 directive, RSS 2027 Stage 1 is off unless the owner chooses to submit a gate-failing abstract; the
+  directive's fallback (Stage 2 / CoRL 2027) needs new evidence, i.e. an owner-authorised v7.
+- **Meanwhile (no reply):** paper-level items only (resolve the 3 [CITE-MISSING] with verified identifiers, tighten
+  abstract / C1 wording); no new experiments, no LaTeX export, no submission.
