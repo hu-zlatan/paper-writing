@@ -2028,3 +2028,12 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
 - Draft text and numbers unchanged; no gate rerun, no LaTeX, no new experiment, no submission.
 - Paper 2 (same run): Figure 1(b) forest plot rendered from JSON (`papers/p2/PROGRESS.md`, run 52).
 - **Where to resume (run 53):** both papers wait for the owner; the listed paper-level items are done, so later runs only check for owner replies / issues unless a decision arrives.
+
+## Run 53 (2026-11-13, ≈ 21:50 UTC+8 slot) — check only, waiting for the owner
+
+- No open issues; AUTOPILOT owner directives unchanged since 2026-11-10; no reply on the run-50 decision (paper 1) or
+  the run-48 decision (paper 2). All listed paper-level items are done (citations, gate-text revision, Figure 1 data
+  panels), so per the default no further work was started: no new experiment, no LaTeX, no gate rerun, no submission.
+- Reminder (pipeline estimate, not an official date): an RSS 2027 Stage 1 extended abstract (12-04 AoE) needs the
+  owner's choice by about 11-20 to leave time for compression to 5 pages and stages 22–25.
+- **Where to resume (run 54):** both papers wait for the owner; check AUTOPILOT §1 and issues first.
