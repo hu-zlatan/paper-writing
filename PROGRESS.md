@@ -1923,3 +1923,14 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
 - Checks: number audit 0 unmatched (design doc = amendment v6.0 only); 29 cite keys used, all in the 60 cards;
   3 [CITE-MISSING] (DeepSets, Holm, bootstrap) left for stage 23; no §4.5 disallowed claim found by grep.
 - **Next:** stage 18 PEER_REVIEW [v6] (two fresh reviewers, two passes).
+
+## Stage 18. PEER_REVIEW     [v6]
+
+- **Finished:** 2026-11-13 (run 50). Plan `plans/stage_18_peer_review_v6.md`; two fresh opus subagents →
+  `paper/mypaper/18_review_v6_run1.md` (5 / 4), `18_review_v6_run2.md` (RSS/CoRL pair, 3 / 4). **No fabrication**;
+  headline H6a / H6b / H6c recomputed from raw jsonl, exact. Merged record + triage `paper/mypaper/18_peer_review.md`.
+- Main-session checks: analysis script committed (ae3c3899, 01:47 UTC 11-10) before the first v6 record (02:06 UTC),
+  unchanged since. Post-hoc (report-only) `code/analysis_v6_posthoc.py` → `results/v6/18_posthoc_v6.json`: E12 shift
+  ci95 excludes 0 only in S12; H6b Holm count 7 / 10 under bootstrap seeds 0–9 but 5 / 10 under seed 10 (fresh window
+  2 / 10 under all); DAgger warm start confirmed.
+- **Next:** stage 19 PAPER_REVISION [v6] with the 7-item paper-level triage; evidence-level requests deferred (cap).
