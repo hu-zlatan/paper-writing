@@ -1,0 +1,170 @@
+{
+ "note": "derived arithmetic on results/v6/14_v6_analysis.json; not pre-registered; no CI",
+ "cells": {
+  "S2": {
+   "0-499": {
+    "student_mean": 0.49879999999999997,
+    "r0student_mean": 0.4856,
+    "rl_mean": 0.41320000000000007,
+    "gstar_run1": 0.518,
+    "gstar_run2": 0.532,
+    "strongest_non_oracle": "g500_512_4",
+    "strongest_value": 0.462,
+    "margin_vs_strongest": 0.036799999999999944,
+    "best_heuristic": "b_cov",
+    "registered_H_star": "b_cov",
+    "margin_vs_best_heuristic": 0.06679999999999997
+   },
+   "300-499": {
+    "student_mean": 0.484,
+    "r0student_mean": 0.47300000000000003,
+    "rl_mean": 0.39699999999999996,
+    "gstar_run1": 0.495,
+    "gstar_run2": 0.545,
+    "strongest_non_oracle": "g500_512_4",
+    "strongest_value": 0.48,
+    "margin_vs_strongest": 0.0040000000000000036,
+    "best_heuristic": "b_cov",
+    "registered_H_star": "b_cov",
+    "margin_vs_best_heuristic": 0.07899999999999996
+   },
+   "latency_ratio": {
+    "gstar_over_student": 9767.2440155914,
+    "g125_512_16_over_student": 231.45710374442294,
+    "g500_512_4_over_student": 388.93720173041504
+   }
+  },
+  "S4": {
+   "0-499": {
+    "student_mean": 0.45759999999999995,
+    "r0student_mean": 0.4492,
+    "rl_mean": 0.3964,
+    "gstar_run1": 0.496,
+    "gstar_run2": 0.494,
+    "strongest_non_oracle": "b_cov",
+    "strongest_value": 0.416,
+    "margin_vs_strongest": 0.04159999999999997,
+    "best_heuristic": "b_cov",
+    "registered_H_star": "b_fan",
+    "margin_vs_best_heuristic": 0.04159999999999997
+   },
+   "300-499": {
+    "student_mean": 0.437,
+    "r0student_mean": 0.43499999999999994,
+    "rl_mean": 0.366,
+    "gstar_run1": 0.495,
+    "gstar_run2": 0.485,
+    "strongest_non_oracle": "b_cov",
+    "strongest_value": 0.41,
+    "margin_vs_strongest": 0.027000000000000024,
+    "best_heuristic": "b_cov",
+    "registered_H_star": "b_fan",
+    "margin_vs_best_heuristic": 0.027000000000000024
+   },
+   "latency_ratio": {
+    "gstar_over_student": 6828.682528460863,
+    "g125_512_16_over_student": 162.65691203186898,
+    "g500_512_4_over_student": 285.025774151792
+   }
+  },
+  "S8": {
+   "0-499": {
+    "student_mean": 0.41879999999999995,
+    "r0student_mean": 0.41159999999999997,
+    "rl_mean": 0.39319999999999994,
+    "gstar_run1": 0.432,
+    "gstar_run2": 0.464,
+    "strongest_non_oracle": "rl_mean",
+    "strongest_value": 0.39319999999999994,
+    "margin_vs_strongest": 0.02560000000000001,
+    "best_heuristic": "b_fan",
+    "registered_H_star": "b_cov",
+    "margin_vs_best_heuristic": 0.050799999999999956
+   },
+   "300-499": {
+    "student_mean": 0.381,
+    "r0student_mean": 0.379,
+    "rl_mean": 0.365,
+    "gstar_run1": 0.395,
+    "gstar_run2": 0.435,
+    "strongest_non_oracle": "rl_mean",
+    "strongest_value": 0.365,
+    "margin_vs_strongest": 0.016000000000000014,
+    "best_heuristic": "b_fan",
+    "registered_H_star": "b_cov",
+    "margin_vs_best_heuristic": 0.03600000000000003
+   },
+   "latency_ratio": {
+    "gstar_over_student": 3449.9946677056787,
+    "g125_512_16_over_student": 84.3407604206523,
+    "g500_512_4_over_student": 171.03457936779924
+   }
+  },
+  "S12": {
+   "0-499": {
+    "student_mean": 0.4144,
+    "r0student_mean": 0.414,
+    "rl_mean": 0.35760000000000003,
+    "gstar_run1": 0.434,
+    "gstar_run2": 0.434,
+    "strongest_non_oracle": "b_cov",
+    "strongest_value": 0.39,
+    "margin_vs_strongest": 0.024399999999999977,
+    "best_heuristic": "b_cov",
+    "registered_H_star": "b_fan",
+    "margin_vs_best_heuristic": 0.024399999999999977
+   },
+   "300-499": {
+    "student_mean": 0.374,
+    "r0student_mean": 0.386,
+    "rl_mean": 0.341,
+    "gstar_run1": 0.4,
+    "gstar_run2": 0.38,
+    "strongest_non_oracle": "g500_512_4",
+    "strongest_value": 0.385,
+    "margin_vs_strongest": -0.01100000000000001,
+    "best_heuristic": "b_cov",
+    "registered_H_star": "b_fan",
+    "margin_vs_best_heuristic": 0.009000000000000008
+   },
+   "latency_ratio": {
+    "gstar_over_student": 2543.8321821754266,
+    "g125_512_16_over_student": 61.61543479440988,
+    "g500_512_4_over_student": 134.23432211677326
+   }
+  },
+  "A16-2": {
+   "0-499": {
+    "student_mean": 0.48319999999999996,
+    "r0student_mean": 0.48840000000000006,
+    "rl_mean": 0.21439999999999998,
+    "gstar_run1": 0.474,
+    "gstar_run2": 0.498,
+    "strongest_non_oracle": "g500_512_4",
+    "strongest_value": 0.374,
+    "margin_vs_strongest": 0.10919999999999996,
+    "best_heuristic": "b_cov",
+    "registered_H_star": "b_fan",
+    "margin_vs_best_heuristic": 0.16919999999999996
+   },
+   "300-499": {
+    "student_mean": 0.476,
+    "r0student_mean": 0.481,
+    "rl_mean": 0.203,
+    "gstar_run1": 0.45,
+    "gstar_run2": 0.5,
+    "strongest_non_oracle": "g500_512_4",
+    "strongest_value": 0.39,
+    "margin_vs_strongest": 0.08599999999999997,
+    "best_heuristic": "b_fan",
+    "registered_H_star": "b_fan",
+    "margin_vs_best_heuristic": 0.176
+   },
+   "latency_ratio": {
+    "gstar_over_student": 8283.642836889656,
+    "g125_512_16_over_student": 176.41049223907063,
+    "g500_512_4_over_student": 299.4234856313793
+   }
+  }
+ }
+}

@@ -9,7 +9,7 @@
 **Topic:** Amortized, non-myopic active tactile localization (TouchBED)
 **Initialised:** 2026-10-28T07:56:44Z
 **Current version:** v6
-**Latest stage:** Stage 13 ITERATIVE_REFINE [v6] — wave 5 dispatched (run 48, 2026-11-12); see the end of this file
+**Latest stage:** Stage 15 RESEARCH_DECISION [v6] — PROCEED (run 50, 2026-11-13); next stage 16 [v6]
 
 ---
 
@@ -1883,3 +1883,19 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
   faster. H6c — DAgger vs BC: no difference detected. E12 (report-only): sub 8 → 16 flips 4–13 % of S-cell outcomes and
   moves student − G\* by ≈ 4 pp or more in 3 / 4 S cells.
 - **Next:** stage 15 [v6] (fresh subagent; refine cap 5 / 5 used).
+
+## Stage 15. RESEARCH_DECISION     [v6]
+
+- **Finished:** 2026-11-13 (run 50). Plan `plans/stage_15_research_decision_v6.md`; template with REFINE augmentation
+  verbatim (`results/v6/prompts/stage15_*.txt`), fresh opus subagent → `results/v6/15_decision.md`.
+- **Decision: PROCEED → stage 16, as a pre-registered measurement paper with one narrow positive claim (H6b frontier:
+  student vs reduced planners, Holm-qualified per planner and cell).** Not a parity or method paper: H6a shows neither
+  difference nor equivalence; H6c licenses no "effective component"; against the strongest non-oracle comparator the
+  student clears the registered bar only in A16-2. REFINE / PIVOT not executable (refine cap 5 / 5) and not recommended
+  before Stage 1. §4.4 / §4.5 list exactly what the paper may / may not claim.
+- §4.1 derived values: `code/tools_results_v6.py` → `results/v6/15_derived_v6.json` (arithmetic on the read-out only,
+  not pre-registered, no CI); reproduces the decision's margins (+3.68 / +4.16 / +2.56 / +2.44 / +10.92 pp vs the
+  strongest comparator) and latency ratios (G\* 2,544–9,767×; reduced planners 62–389× slower than the student).
+- Gate note: stage 15 is not an owner gate; no gate was auto-approved this run.
+- **Next:** stage 16 PAPER_OUTLINE [v6] (RSS 2027 Stage 1 extended abstract, 5 pages body); stage 20 by 12-01 or the
+  target becomes Stage 2 / CoRL 2027 (owner directive 2026-11-10).
