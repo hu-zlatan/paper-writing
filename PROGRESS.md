@@ -1945,3 +1945,12 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
   shift ci95 (only S12 excludes 0); TOST power framing fixed; wording fixes; history → Appendix A; Limitations 15 items.
 - Checks: audit 0 unmatched; no §4.5 claim by grep. Body ≈ 10,580 words (cut to 5 pages in stage 22).
 - **Next:** stage 18 pass 2 on this draft → stage 19 pass 2 → stage 20.
+
+## Stage 18. PEER_REVIEW     [v6] — pass 2
+
+- **Finished:** 2026-11-13 (run 50). Two fresh opus reviewers on the stage-19 pass-1 draft →
+  `paper/mypaper/18_review_v6_pass2_run1.md` (5 / 4), `_run2.md` (RSS/CoRL, 4 / 5). **No fabrication** (Tables 1–3
+  recomputed exactly). Triage items 1–5, 7 fixed; 6 partly (length / abstract / figure / citations → stages 22–23).
+- Reviewers' 100,000-resample H6b reproduced in-repo (`analysis_v6_posthoc.py` P4): 7 / 10 on 0–499 (same set as the
+  registered read-out), 2 / 10 fresh. Merged record `paper/mypaper/18_peer_review_v6_pass2.md`.
+- **Next:** stage 19 pass 2 → stage 20.
