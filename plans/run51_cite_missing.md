@@ -7,3 +7,9 @@
 - Acceptance: a marker is replaced only when the returned record's title, first author and year match the intended work
   (Zaheer et al. 2017; Efron 1979; Holm 1979) and carries a DOI or OpenAlex ID. Otherwise the marker stays.
 - No new experiments, no number changes, no LaTeX export.
+
+## Outcome (run 51)
+- Actions run 43388998106 returned OpenAlex records matching all three (title, first author, year, venue, DOI):
+  zaheer2017deep (W4299457904, 10.48550/arxiv.1703.06114), efron1979bootstrap (W2117897510, 10.1214/aos/1176344552),
+  holm1979simple (W2121044470, 10.2307/4615733). Added as knowledge cards C61–C63; markers replaced in draft_v6.md.
+  Two extra hits (shaffer1986modified, bretz2008graphical) stay in the supplement jsonl, not carded, not cited.

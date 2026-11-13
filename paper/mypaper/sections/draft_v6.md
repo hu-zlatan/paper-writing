@@ -316,7 +316,7 @@ G\*. G\* is a greedy reference: we measure faster policies against it and make n
 
 ### 3.3 Student: shared head, behaviour-cloning round and DAgger rounds
 
-**Head.** The student is a belief-free DeepSets head [CITE-MISSING: DeepSets (Zaheer et al. 2017)]. Each touch in the
+**Head.** The student is a belief-free DeepSets head \cite{zaheer2017deep}. Each touch in the
 history is encoded in the finger frame (contact indicator, contact point, normal and the action that produced it),
 summed, and concatenated with a context of the relative angle, the remaining-budget fraction $\tau_{\mathrm{rem}}/\tau$
 and the absolute finger angle $\phi_t$. The head outputs one logit per action, masked to $-\infty$ outside
@@ -429,7 +429,7 @@ extended to the new episodes and enters no contrast. In total there are 27 evalu
 in S2 and S12 and 22 in the other cells.
 
 **Statistics.** Contrasts are paired over episodes and use a crossed episode × seed bootstrap with B = 10,000 resamples
-for the two-sided ci95 and p-value [CITE-MISSING: bootstrap CI (Efron)]. Seeds enter as one bootstrap factor: five for
+for the two-sided ci95 and p-value \cite{efron1979bootstrap}. Seeds enter as one bootstrap factor: five for
 the students, RL and BC students, two for G\* in the parity contrast (runs 1 and 2 as two "seeds"), and one for the
 reduced planners and heuristics, which were run once. With two G\* runs resampled with replacement, about half of the
 resamples draw the same run twice, so the teacher component of the interval rests on two values and is poorly
@@ -443,7 +443,7 @@ estimated (Limitation 1). A p-value of 0 at this resolution is printed p < 1e-4.
   planner" is licensed only where Holm rejects with a positive sign.
 - **H6c (DAgger vs BC).** Round-2 student − round-0 student, success, five seeds each. "DAgger improves success" is
   licensed only where Holm rejects with a positive sign; otherwise "not detected".
-- **Holm** \[CITE-MISSING: Holm (1979)\] is applied over the 5 cells for the H6a difference test, the H6a TOST and H6c,
+- **Holm** \cite{holm1979simple} is applied over the 5 cells for the H6a difference test, the H6a TOST and H6c,
   and over the 10 contrasts for H6b, separately per window. BI, $g_T$, E12, the fresh-window replications and the
   report-only baseline rows are not multiplicity-controlled.
 

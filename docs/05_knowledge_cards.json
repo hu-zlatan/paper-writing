@@ -725,6 +725,45 @@
    "limitations": "Venue unverified; cite as arXiv preprint. Content beyond the title not verified in this repo.",
    "citation": "Quan Nguyen, Anindya Sarkar, Roman Garnett. Amortized nonmyopic active search via deep imitation learning. arXiv:2405.15031, 2024.",
    "verified": "docs/07d_reference_check_v3.md #3 (PDF + HTML fetched run 5); run-8 re-fetch blocked"
+  },
+  {
+   "card_id": "C61",
+   "title": "Deep Sets",
+   "cite_key": "zaheer2017deep",
+   "problem": "Permutation-invariant functions on sets.",
+   "method": "Sum-decomposition architecture for set inputs (DeepSets).",
+   "data": "n/a (method reference)",
+   "metrics": "n/a",
+   "findings": "cite only for the DeepSets architecture used as the student head.",
+   "limitations": "Method-level citation; metadata verified via OpenAlex, full text not re-read in this repo.",
+   "citation": "Manzil Zaheer, Satwik Kottur, Siamak Ravanbakhsh, Barnabás Póczos, Ruslan Salakhutdinov, Alexander J. Smola. Deep Sets. NeurIPS 2017; arXiv:1703.06114.",
+   "verified": "docs/03_supplement.jsonl (OpenAlex record, Actions run 43388998106, run 51): title, authors, year, venue, DOI match; OpenAlex W4299457904"
+  },
+  {
+   "card_id": "C62",
+   "title": "Bootstrap Methods: Another Look at the Jackknife",
+   "cite_key": "efron1979bootstrap",
+   "problem": "Estimating sampling distributions of statistics.",
+   "method": "The bootstrap (resampling the data with replacement).",
+   "data": "n/a (method reference)",
+   "metrics": "n/a",
+   "findings": "cite only for the bootstrap as the CI / p-value method.",
+   "limitations": "Method-level citation; metadata verified via OpenAlex, full text not re-read in this repo.",
+   "citation": "Bradley Efron. Bootstrap Methods: Another Look at the Jackknife. The Annals of Statistics 7(1), 1979. doi:10.1214/aos/1176344552.",
+   "verified": "docs/03_supplement.jsonl (OpenAlex record, Actions run 43388998106, run 51): title, authors, year, venue, DOI match; OpenAlex W2117897510"
+  },
+  {
+   "card_id": "C63",
+   "title": "A Simple Sequentially Rejective Multiple Test Procedure",
+   "cite_key": "holm1979simple",
+   "problem": "Family-wise error control over several tests.",
+   "method": "Sequentially rejective (step-down) Bonferroni procedure.",
+   "data": "n/a (method reference)",
+   "metrics": "n/a",
+   "findings": "cite only for the Holm correction.",
+   "limitations": "Method-level citation; metadata verified via OpenAlex, full text not re-read in this repo.",
+   "citation": "Sture Holm. A Simple Sequentially Rejective Multiple Test Procedure. Scandinavian Journal of Statistics 6(2), 1979. doi:10.2307/4615733.",
+   "verified": "docs/03_supplement.jsonl (OpenAlex record, Actions run 43388998106, run 51): title, authors, year, venue, DOI match; OpenAlex W2121044470"
   }
  ]
 }
