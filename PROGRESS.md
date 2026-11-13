@@ -1954,3 +1954,12 @@ Milestones: v1 experiments ≈ 2026-11-20; extended-abstract-ready draft (5 page
 - Reviewers' 100,000-resample H6b reproduced in-repo (`analysis_v6_posthoc.py` P4): 7 / 10 on 0–499 (same set as the
   registered read-out), 2 / 10 fresh. Merged record `paper/mypaper/18_peer_review_v6_pass2.md`.
 - **Next:** stage 19 pass 2 → stage 20.
+
+## Stage 19. PAPER_REVISION     [v6] — pass 2
+
+- **Finished:** 2026-11-13 (run 50). `build_stage19_v6.py --pass2`, fresh opus subagent → `sections/draft_v6.md`
+  (snapshot `v6/draft_v6_stage19pass2.md`). Pass-2 items: "every compared method (all but Random)"; registered latency
+  ratio with ci95 copied from `results/v5/14_e6_analysis.json` (e.g. S2 9,933 [8,179, 10,224]; checked), other ratios
+  labelled point ratios, gain called computation-only; Appendix B P4 (100k resamples); internal pre-registration
+  wording + Limitation 16; run-1-only parity row Table A1. Audit 0 unmatched. Body ≈ 11,850 words (cut in stage 22).
+- **Next:** stage 20 QUALITY_GATE [v6].
