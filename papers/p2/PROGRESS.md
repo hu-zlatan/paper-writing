@@ -1059,3 +1059,8 @@ Run order when both papers are active: AUTOPILOT §7.
 
 - No open issues, no owner reply on the run-48 decision; all figure / paper-level items already done. No work started.
 - **Next:** still waits for the owner's decision.
+
+## Run 54 (2026-11-14) — check only
+
+- No open issues, no owner reply on the run-48 decision; all paper-level items already done. No work started.
+- **Next:** still waits for the owner's decision (suggested by about 11-18 if (a) or (b)).
